@@ -1,0 +1,19 @@
+{
+  "pod": {
+    "name": "mypod"
+  },
+  "containers": [
+    {
+      "name": "mycontainer1",
+      "usage": {
+            "cpu": "50"
+          }
+    },
+    {
+      "name": "mycontainer2",
+      "usage": {
+            "cpu": "100"
+          }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+https://qiita.com/advent-calendar/2019/trdsql
+
+$trdsql -config ${HOME}/.config/trdsql/config.json -ijson "SELECT * FROM test.json"
+
+[kuraine❤2c820966e052 (火 12月 31 20:58:31) ~]$cat ${HOME}/.config/trdsql/config.json
+{
+  "db": "sdb",
+  "database": {
+    "sdb": {
+      "driver": "sqlite3",
+      "dsn": ""
+    },
+    "pdb": {
+      "driver": "postgres",
+      "dsn": "user=test dbname=test"
+    },
+    "mdb": {
+      "driver": "mysql",
+      "dsn": "user:password@/dbname"
+    }
+  }
+}
+
+[kuraine❤2c820966e052 (火 12月 31 20:59:49) ~]$sqlite3 --version
+-- Loading resources from /home/kuraine/.sqliterc
+3.30.0 2019-10-04 15:03:17 c20a35336432025445f9f7e289d0cc3e4003fb17f45a4ce74c6269c407c6e09f
+
+$trdsql -driver sqlite3 -ijson "SELECT * FROM test.json order by 1 desc"
+
+[kuraine❤2c820966e052 (火 12月 31 21:14:47) ~]$trdsql -driver sqlite3 -dsn "testdb" -ijson "create table test_tbl as SELECT * FROM test.json"
+[kuraine❤2c820966e052 (火 12月 31 21:15:08) ~]$ll
+total 20
+drwxrwxr-x. 4 kuraine kuraine 4096 12月 31 21:05 go
+-rw-r--r--. 1 root    root     195 12月 31 20:57 test.json
+-rw-r--r--. 1 kuraine kuraine 8192 12月 31 21:15 testdb
+[kuraine❤2c820966e052 (火 12月 31 21:15:11) ~]$trdsql -driver sqlite3 -dsn "testdb" "SELECT * FROM test_tbl"
+1,Orange,50
+2,Melon,500
+3,Apple,100
+
+[kuraine❤2c820966e052 (火 12月 31 21:15:16) ~]$trdsql -driver sqlite3 -dsn "testdb" "with sub as(SELECT * FROM test_tbl)select * from sub"
+1,Orange,50
+2,Melon,500
+3,Apple,100

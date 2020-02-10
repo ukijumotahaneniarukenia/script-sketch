@@ -1,0 +1,1 @@
+echo yum install -y $(cat list-puppeteer-depended-pkg) | sh

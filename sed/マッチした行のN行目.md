@@ -1,0 +1,57 @@
+```
+$seq -w 01 10 | tac | sed --debug -n '/05/{n;n;p}'
+SED PROGRAM:
+  /05/ {
+    n
+    n
+    p
+  }
+INPUT:   'STDIN' line 1
+PATTERN: 10
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 2
+PATTERN: 09
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 3
+PATTERN: 08
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 4
+PATTERN: 07
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 5
+PATTERN: 06
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 6
+PATTERN: 05
+COMMAND: /05/ {
+COMMAND:   n
+PATTERN: 04
+COMMAND:   n
+PATTERN: 03
+COMMAND:   p
+03
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 9
+PATTERN: 02
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+INPUT:   'STDIN' line 10
+PATTERN: 01
+COMMAND: /05/ {
+COMMAND: }
+END-OF-CYCLE:
+$seq -w 01 10 | tac | sed -n '/05/{n;n;p}'
+03
+```

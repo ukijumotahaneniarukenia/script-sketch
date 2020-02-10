@@ -1,0 +1,14 @@
+//https://www.npmjs.com/package/jquery
+
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const dom = new JSDOM(`<html><body><div id="aaa">AAA<div></body></html>`);
+
+const dom = new JSDOM(``, {
+  url: "https://example.org/",
+  contentType: "text/html",
+  includeNodeLocations: true,
+  storageQuota: 10000000
+});
+
+console.log(dom);

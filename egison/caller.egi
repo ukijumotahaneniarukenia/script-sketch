@@ -1,0 +1,16 @@
+#!/usr/bin/egison
+(load-file "./callee.egi")
+
+;;#必ずmain関数は書く必要がある
+;;ダブってもおｋ
+;;#[egison💜fa1af7f688b9 (木 11月 21 00:01:28) ~/script_scratch/egison]$egison caller.egi
+;;#Egison Error: to use undefined functions, you have to use ScalarData args
+;;#  stack trace: <stdin>
+;;#
+;;(define $main
+;;  (lambda [$args]
+;;    (write "Hello, World!\n")))
+;;
+(define $main
+  (lambda [$args]
+    (write string-append x "\n")))

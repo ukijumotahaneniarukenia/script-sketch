@@ -1,0 +1,5 @@
+/.idea/*
+/JAR-INF/lib/*
+/JAR-INF/app/*
+/*.iml
+/*.jar

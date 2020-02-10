@@ -1,0 +1,57 @@
+#!/bin/bash
+
+echo "" | awk -i "$(pwd)/func/util/awk/compose.awk" '
+  BEGIN{
+    _def_clr()
+    _def_ascii_code()
+    _systime(FG_GREEN)
+    RET=_emoji("U1F4A9")
+    _clr(RET,FG_GREEN)
+    _clr(RET,FG_CYAN)
+    _clr(RET,FG_RED)
+    _clr(RET,FG_MAGENTA)
+    _clr(RET,FG_WHITE)
+    _clr(RET,FG_YELLOW)
+    _clr(RET,FG_BLUE)
+    _clr(RET,BG_GREEN)
+    _clr(RET,BG_CYAN)
+    _clr(RET,BG_RED)
+    _clr(RET,BG_MAGENTA)
+    _clr(RET,BG_WHITE)
+    _clr(RET,BG_YELLOW)
+    _clr(RET,BG_BLUE)
+    RET=_emoji("U1F47B")
+    _clr(RET,FG_GREEN)
+    _clr(RET,FG_CYAN)
+    _clr(RET,FG_RED)
+    _clr(RET,FG_MAGENTA)
+    _clr(RET,FG_WHITE)
+    _clr(RET,FG_YELLOW)
+    _clr(RET,FG_BLUE)
+    _clr(RET,BG_GREEN)
+    _clr(RET,BG_CYAN)
+    _clr(RET,BG_RED)
+    _clr(RET,BG_MAGENTA)
+    _clr(RET,BG_WHITE)
+    _clr(RET,BG_YELLOW)
+    _clr(RET,BG_BLUE)
+  }
+'
+
+echo "" | awk -i "$(pwd)/func/util/awk/compose.awk" '
+  BEGIN{
+    _def_clr()
+    _info_msg_l("UNKOO",30,"#",10,FG_GREEN)
+    _warn_msg_l("UNKOO",30,"#",10,FG_YELLOW)
+    _errr_msg_l("UNKOO",30,"#",10,FG_RED)
+    _finn_msg_l("UNKOO",30,"#",10,FG_CYAN)
+    _info_msg_r("UNKOO",30,"#",10,FG_GREEN)
+    _warn_msg_r("UNKOO",30,"#",10,FG_YELLOW)
+    _errr_msg_r("UNKOO",30,"#",10,FG_RED)
+    _finn_msg_r("UNKOO",30,"#",10,FG_CYAN)
+    _info_msg_c("UNKO",15,"#",10,FG_GREEN)
+    _warn_msg_c("UNKO",15,"#",10,FG_YELLOW)
+    _errr_msg_c("UNKOO",15,"#",10,FG_RED)
+    _finn_msg_c("UNKOO",15,"#",10,FG_CYAN)
+  }
+'

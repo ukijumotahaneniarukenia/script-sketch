@@ -1,0 +1,3 @@
+Main-Class: app.DetectEnc
+Class-Path: ./JAR-INF/lib/icu4j-65.1.jar
+

@@ -1,0 +1,5 @@
+(define $main
+  (lambda [$args]
+    (write "HEllo,World!\n")
+  )
+)

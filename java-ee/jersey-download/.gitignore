@@ -1,0 +1,7 @@
+/build/*
+/WebContent/WEB-INF/lib/*
+/.project
+/.settings/*
+/.idea/*
+/.classpath
+/src/main/java/resource

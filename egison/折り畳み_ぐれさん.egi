@@ -1,0 +1,19 @@
+(define $filter-conv-each
+  (lambda [$num $line]
+    (filter-conv [(min [num (length line)]) line])))
+
+(define $filter-conv
+  (lambda [$num $line]
+    (match-all line (list string)
+      [<join _ (loop $i [1 num] <cons $a_i ...> _) >
+             (map (1#a_%1 $) (between 1 num))])))
+
+(define $main
+  (lambda [$args]
+    (do{
+        ;;[(print(show(filter-conv 1 {a b c d})))]
+        [(print(show(filter-conv-each 1 {a b c d})))]
+      }
+    )
+  )
+)

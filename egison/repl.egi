@@ -1,0 +1,13 @@
+(define $repl
+  (lambda []
+    (do {(write "input: ")
+         (flush)
+         [$input (read-line)]
+         (write input)
+         (print "")}
+      (repl))))
+
+(define $main
+  (lambda [$args]
+    (do {[(repl)]}
+      [])))

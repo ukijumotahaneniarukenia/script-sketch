@@ -1,0 +1,31 @@
+//https://www.npmjs.com/package/xml2json
+let fs=require('fs')
+let parser=require('xml2json');
+
+//http://akasingo.com/492
+//https://qiita.com/ConquestArrow/items/1311a2e6429e495a9d9c
+function usage(){
+  console.log(`
+    usage:
+  
+  `);
+}
+
+if(typeof process.argv[2] === "undefined"){
+  console.log("via pipe stdin");
+  process.stdout.write(fs.readFileSync('/dev/stdin','utf8'));
+}else{
+  console.log("via cmdline stdin");
+}
+
+//http://yohshiy.blog.fc2.com/blog-entry-315.html
+process.on('SIGINT', ()=>{
+   //終了処理…
+  console.log("ユーザーの操作により処理が中断されました。");
+});
+
+//https://qiita.com/furusin_oriver/items/f030d1eaa9e7b54233c3
+//console.log(process.argv.length);
+//console.log(process.argv[2]);
+
+//process.stdout.write(fs.readFileSync('/dev/stdin','utf8'));

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+unko(){
+UNKO
+}
+
+anko(){
+ANKO
+}
+
+unko
+anko
+echo
