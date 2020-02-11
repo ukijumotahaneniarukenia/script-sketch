@@ -11,9 +11,16 @@ MX_CNT=$(echo $RT | grep -Po '[0-9]+')
 [ -z $(echo $RT | grep -P 'M$') ] || MX_CNT=$(bc<<<"$(echo $RT | grep -Po '[0-9]+')*1000000")
 [ -z $(echo $RT | grep -P 'K$') ] || MX_CNT=$(bc<<<"$(echo $RT | grep -Po '[0-9]+')*1000")
 
+echo hitting cnt $MX_CNT
+
 for (( CNT=1;$CNT<=$MX_CNT;CNT++ ));do
   echo trying $CNT round...
   curl -s "https://github.com/search?p=$CNT&q=$Q" | grep -oPi 'https?://github\.com(/[0-9a-z\-]{1,}){1,}' | \
-  grep -vP '(about|contact|events|fluidicon|pricing|search|search/count|security|site/privacy|site/terms)$'
+  grep -vP '(about|contact|events|fluidicon|pricing|search|search/count|security|site/privacy|site/terms)$' | \
+  while read tgt;do
+    STAR_CNT=$(curl -s $tgt | grep -Po "[0-9]+(?= users starred this repository)")
+    printf "%s\t%s\n" $tgt ${STAR_CNT:-0}
+  done
   sleep 2
+  echo
 done
