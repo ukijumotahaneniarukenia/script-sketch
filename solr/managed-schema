@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema name="wiki" version="1.6">
 
-  <field name="id"        type="pint"      indexed="true"  stored="true" required="true" />
+  <field name="id"        type="string"      indexed="true"  stored="true" required="true" />
   <field name="title"     type="string"   indexed="true"  stored="true" required="true" />
   <field name="revision"  type="pint"      indexed="false" stored="true" />
   <field name="user"      type="string"   indexed="true"  stored="true" />
