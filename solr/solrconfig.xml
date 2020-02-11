@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+  <luceneMatchVersion>8.4.1</luceneMatchVersion>
+
+  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-dataimporthandler-.*\.jar"/>
+
+  <requestHandler name="/select" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <str name="df">text</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="/dataimport" class="solr.DataImportHandler">
+    <lst name="defaults">
+      <str name="config">wikipedia-article-config.xml</str>
+      <str name="processor">trim_text</str>
+    </lst>
+  </requestHandler>
+
+  <updateProcessor class="solr.processor.TrimFieldUpdateProcessorFactory" name="trim_text">
+    <str name="typeName">text_en_splitting</str>
+  </updateProcessor>
+
+</config>
