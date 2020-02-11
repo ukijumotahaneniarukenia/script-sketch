@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-#Q="$@"
-Q=Dockerfile
-#
-#curl -s "https://github.com/search?p=1&q=$Q" | grep -oPi 'https?://github\.com(/[0-9a-z\-]{1,}){1,}' | \
-#grep -vP '(about|contact|events|fluidicon|pricing|search|search/count|security|site/privacy|site/terms)$'
+Q="$@"
+
+[ -z "$Q" ] && exit 1
 
 RT=$(curl -s "https://github.com/search?p=1&q=$Q" | grep -Po '(?<=data-search-type="Repositories">)[0-9]+[KMG]' | head -n1)
 MX_CNT=0
