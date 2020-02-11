@@ -1,4 +1,6 @@
 #!/bin/bash
 while read tgt;do
-  echo "alias XXX="$tgt
-done < <(find ~/script-sketch -name "*" | grep -vP '.git') #>>~/.bashrc
+  LFT=$(echo $tgt)
+  RGT="/usr/local/bin/"$(echo $tgt | perl -pe 's;\..*$;;g;' | perl -pe 's;.*-;;g')
+  printf "ln -fsr %s %s\n" $LFT $RGT
+done < <(find ~/script-sketch -name "*" | grep -vP '.git') | sort #>>~/.bashrc
