@@ -1,39 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema name="wiki" version="1.6">
 
-   <field name="id"        type="pint"      indexed="true"  stored="true" required="true" />
-   <field name="title"     type="string"   indexed="true"  stored="true" required="true" />
-   <field name="revision"  type="pint"      indexed="false" stored="true" />
-   <field name="user"      type="string"   indexed="true"  stored="true" />
-   <field name="userId"    type="pint"      indexed="false" stored="true" />
-   <field name="text"      type="text_cjk" indexed="true"  stored="true" required="true" />
-   <field name="timestamp" type="pdate"     indexed="true"  stored="true" default="NOW" multiValued="false"/>
-   <field name="titleText" type="text_cjk" indexed="true"  stored="true"/>
- <uniqueKey>id</uniqueKey>
+  <field name="id"        type="pint"      indexed="true"  stored="true" required="true" />
+  <field name="title"     type="string"   indexed="true"  stored="true" required="true" />
+  <field name="revision"  type="pint"      indexed="false" stored="true" />
+  <field name="user"      type="string"   indexed="true"  stored="true" />
+  <field name="userId"    type="pint"      indexed="false" stored="true" />
+  <field name="text"      type="text_cjk" indexed="true"  stored="true" required="true" />
+  <field name="timestamp" type="pdate"     indexed="true"  stored="true" default="NOW" multiValued="false"/>
+  <field name="titleText" type="text_cjk" indexed="true"  stored="true"/>
 
-    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
-    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
-    <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
-    <fieldType name="pfloat" class="solr.FloatPointField" docValues="true"/>
-    <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
-    <fieldType name="pdouble" class="solr.DoublePointField" docValues="true"/>
-    <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
-    <fieldType name="pfloats" class="solr.FloatPointField" docValues="true" multiValued="true"/>
-    <fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
-    <fieldType name="pdoubles" class="solr.DoublePointField" docValues="true" multiValued="true"/>
-    <fieldType name="pdate" class="solr.DatePointField" docValues="true"/>
-    <fieldType name="pdates" class="solr.DatePointField" docValues="true" multiValued="true"/>
-    <fieldType name="binary" class="solr.BinaryField"/>
-    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+  <uniqueKey>id</uniqueKey>
 
-    <fieldType name="text_cjk" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
-        <tokenizer class="solr.StandardTokenizerFactory"/>
-        <!-- normalize width before bigram, as e.g. half-width dakuten combine  -->
-        <filter class="solr.CJKWidthFilterFactory"/>
-        <!-- for any non-CJK -->
-        <filter class="solr.LowerCaseFilterFactory"/>
-        <filter class="solr.CJKBigramFilterFactory"/>
-      </analyzer>
-    </fieldType>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+  <fieldType name="pfloat" class="solr.FloatPointField" docValues="true"/>
+  <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+  <fieldType name="pdouble" class="solr.DoublePointField" docValues="true"/>
+  <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
+  <fieldType name="pfloats" class="solr.FloatPointField" docValues="true" multiValued="true"/>
+  <fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
+  <fieldType name="pdoubles" class="solr.DoublePointField" docValues="true" multiValued="true"/>
+  <fieldType name="pdate" class="solr.DatePointField" docValues="true"/>
+  <fieldType name="pdates" class="solr.DatePointField" docValues="true" multiValued="true"/>
+  <fieldType name="binary" class="solr.BinaryField"/>
+  <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+
+  <fieldType name="text_cjk" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <!-- normalize width before bigram, as e.g. half-width dakuten combine  -->
+      <filter class="solr.CJKWidthFilterFactory"/>
+      <!-- for any non-CJK -->
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.CJKBigramFilterFactory"/>
+    </analyzer>
+  </fieldType>
+
+  <fieldType name="text_en_splitting" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
+    <analyzer type="index">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <!-- in this example, we will only use synonyms at query time
+      <filter class="solr.SynonymGraphFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
+      -->
+      <!-- Case insensitive stop word removal.
+      -->
+      <filter class="solr.StopFilterFactory"
+              ignoreCase="true"
+              words="lang/stopwords_en.txt"
+              />
+      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+      <filter class="solr.FlattenGraphFilterFactory" />
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.SynonymGraphFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+      <filter class="solr.StopFilterFactory"
+              ignoreCase="true"
+              words="lang/stopwords_en.txt"
+              />
+      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0" splitOnCaseChange="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+
 </schema>

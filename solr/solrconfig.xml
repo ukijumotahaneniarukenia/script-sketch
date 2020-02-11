@@ -14,7 +14,7 @@
 
   <requestHandler name="/dataimport" class="solr.DataImportHandler">
     <lst name="defaults">
-      <str name="config">wikipedia-article-config.xml</str>
+      <str name="config">wiki-data-config.xml</str>
       <str name="processor">trim_text</str>
     </lst>
   </requestHandler>
