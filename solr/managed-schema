@@ -45,7 +45,7 @@
     that avoids logging every request
 -->
 
-<schema name="example-DIH-db" version="1.6">
+<schema name="wiki" version="1.6">
   <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and 
        semantics.  It should not normally be changed by applications.
@@ -110,32 +110,26 @@
    <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
       or Solr won't start. _version_ and update log are required for SolrCloud
    --> 
-   <field name="_version_" type="plong" indexed="true" stored="true"/>
    
    <!-- points to the root document of a block of nested documents. Required for nested
       document support, may be removed otherwise
    -->
-   <field name="_root_" type="string" indexed="true" stored="false"/>
 
    <!-- Only remove the "id" field if you have a very good reason to. While not strictly
      required, it is highly recommended. A <uniqueKey> is present in almost all Solr 
      installations. See the <uniqueKey> declaration below where <uniqueKey> is set to "id".
    -->   
-   <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
         
-   <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
-   <field name="name" type="text_general" indexed="true" stored="true"/>
-   <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
-   <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="features" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="includes" type="text_general" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true" />
 
-   <field name="weight" type="pfloat" indexed="true" stored="true"/>
-   <field name="price"  type="pfloat" indexed="true" stored="true"/>
-   <field name="popularity" type="pint" indexed="true" stored="true" />
-   <field name="inStock" type="boolean" indexed="true" stored="true" />
+   <field name="id"        type="pint"      indexed="true"  stored="true" required="true" /> 
+   <field name="title"     type="string"   indexed="true"  stored="true" required="true" />
+   <field name="revision"  type="pint"      indexed="false" stored="true" />
+   <field name="user"      type="string"   indexed="true"  stored="true" />
+   <field name="userId"    type="pint"      indexed="false" stored="true" />
+   <field name="text"      type="text_cjk" indexed="true"  stored="true" required="true" />
+   <field name="timestamp" type="pdate"     indexed="true"  stored="true" default="NOW" multiValued="false"/>
+   <field name="titleText" type="text_cjk" indexed="true"  stored="true"/>
 
-   <field name="store" type="location" indexed="true" stored="true"/>
 
    <!-- Common metadata fields, named specifically to match up with
      SolrCell metadata when parsing rich documents such as Word, PDF.
@@ -145,47 +139,27 @@
        "content_type": From the HTTP headers of incoming stream
        "resourcename": From SolrCell request param resource.name
    -->
-   <field name="title" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="subject" type="text_general" indexed="true" stored="true"/>
-   <field name="description" type="text_general" indexed="true" stored="true"/>
-   <field name="comments" type="text_general" indexed="true" stored="true"/>
-   <field name="author" type="text_general" indexed="true" stored="true"/>
-   <field name="keywords" type="text_general" indexed="true" stored="true"/>
-   <field name="category" type="text_general" indexed="true" stored="true"/>
-   <field name="resourcename" type="text_general" indexed="true" stored="true"/>
-   <field name="url" type="text_general" indexed="true" stored="true"/>
-   <field name="content_type" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="last_modified" type="pdate" indexed="true" stored="true"/>
-   <field name="links" type="string" indexed="true" stored="true" multiValued="true"/>
 
    <!-- Main body of document extracted by SolrCell.
         NOTE: This field is not indexed by default, since it is also copied to "text"
         using copyField below. This is to save space. Use this field for returning and
         highlighting document content. Use the "text" field to search the content. -->
-   <field name="content" type="text_general" indexed="false" stored="true" multiValued="true"/>
    
 
    <!-- catchall field, containing all other searchable text fields (implemented
         via copyField further on in this schema  -->
-   <field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
 
    <!-- catchall text field that indexes tokens both normally and in reverse for efficient
         leading wildcard queries. -->
-   <field name="text_rev" type="text_general_rev" indexed="true" stored="false" multiValued="true"/>
 
    <!-- non-tokenized version of manufacturer to make it easier to sort or group
         results by manufacturer.  copied from "manu" via copyField -->
-   <field name="manu_exact" type="string" indexed="true" stored="false"/>
 
-   <field name="payloads" type="payloads" indexed="true" stored="true"/>
 
 
    <!--
      Some fields such as popularity and manu_exact could be modified to
      leverage doc values:
-     <field name="popularity" type="pint" indexed="true" stored="true" docValues="true" />
-     <field name="manu_exact" type="string" indexed="false" stored="false" docValues="true" />
-     <field name="cat" type="string" indexed="true" stored="true" docValues="true" multiValued="true"/>
 
 
      Although it would make indexing slightly slower and the index bigger, it
