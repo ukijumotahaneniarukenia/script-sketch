@@ -23,11 +23,3 @@ https://inductor.hatenablog.com/entry/2019/10/15/165014
 めちゃめちゃ面白い！
 https://www.slideshare.net/mobile/rakutentech/egison-44189985
 
-
-Vim script入門記事
-
-https://www.slideshare.net/rbtnn/vimconf2015-55367256
-
-
-Vim scriptをパイプとして扱う
-http://auewe.hatenablog.com/entry/2016/12/03/001000
