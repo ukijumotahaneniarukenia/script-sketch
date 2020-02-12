@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/env perl
 
 #https://perlmaven.com/factorial-in-perl
 $n=5;
