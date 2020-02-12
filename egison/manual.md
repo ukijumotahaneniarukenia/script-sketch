@@ -1,3 +1,10 @@
+
+https://inductor.hatenablog.com/entry/2019/10/15/165014
+
+
+めちゃめちゃ面白い！
+https://www.slideshare.net/mobile/rakutentech/egison-44189985
+
 # 参考文献
 
 部分集合
