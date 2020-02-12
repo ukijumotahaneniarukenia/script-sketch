@@ -17,9 +17,3 @@ http://userguide.icu-project.org/collation/examples
 Kubeローカル環境開発
 https://blog.apar.jp/linux/13034/?amp=1
 
-https://inductor.hatenablog.com/entry/2019/10/15/165014
-
-
-めちゃめちゃ面白い！
-https://www.slideshare.net/mobile/rakutentech/egison-44189985
-
