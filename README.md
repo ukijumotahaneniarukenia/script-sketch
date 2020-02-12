@@ -1,9 +1,15 @@
+# フォルダ構成
 
-迷路tlokwengさんの解読への足掛かり
+- 各プログラムディレクトリに以下のフォルダを作成
 
-http://www.nuis.ac.jp/~nakada/MazeLearning/
+  - web
 
+    - lib
 
-Kubeローカル環境開発
-https://blog.apar.jp/linux/13034/?amp=1
+    - out
 
+  - non-web
+
+    - lib
+
+    - out
