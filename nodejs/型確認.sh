@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[sqlite💖ceacf3fb0808 (日 11月 10 19:31:13) ~/script_scratch/node]$echo {a..c} | xargs -I@ node -e 'a="@";console.log("ele:"+a);console.log("len:"+a.length);console.log(Object.prototype.toString.call(a));'
+$echo {a..c} | xargs -I@ node -e 'a="@";console.log("ele:"+a);console.log("len:"+a.length);console.log(Object.prototype.toString.call(a));'
 ele:a b c
 len:5
 [object String]
