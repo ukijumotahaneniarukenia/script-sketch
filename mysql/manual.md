@@ -2,6 +2,10 @@ Mysqlユーザー定義関数
 
 https://blog.kamipo.net/entry/20111208/1323356185
 
+Wikiデータ投入
+
+- https://qiita.com/dcm_shiramizu/items/881f9faf6c515c621308
+
 
 C言語から外部コマンド呼び出し。
 jqコマンド呼び出す。
