@@ -13,14 +13,9 @@ const usage = async (status) =>{
 const mock = async(args,status) => new Promise((resolve,reject) => {
     try {
         let db = { items: [] };
-        //console.log(Object.prototype.toString.call(args));//confirm type
-
-        //console.log(args.split(" "));
         let rcv_args=args.split(" ").map(function(ele,idx,ary){
             return ele.replace('\n','');
         });
-
-        // console.log(tmp);
         let dtm = new Date();
         //https://www.webprofessional.jp/mock-rest-apis-using-json-server/
         for (let i=1; i<=rcv_args[0]; i++) {
