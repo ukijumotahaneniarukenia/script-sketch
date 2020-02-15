@@ -6,7 +6,7 @@ const usage = async (status) =>{
     console.log("please stdin via pipe only.");
     console.log("Usage:");
     let file_name=process.argv[1].replace(/.*\//, '');
-    console.log("echo 3 | ./" + file_name + "| jq '.[\"items\"]|map(.updated|=(./1000|todate))|map(.crawled|=(./1000|todate))|map(.published|=(./1000|todate))'");
+    console.log("echo 3 | ./" + file_name + "| jq '.[\"items\"]|tojson'>$HOME/script-sketch/groonga/test.json");
     process.exit(status);
 }
 
@@ -20,6 +20,7 @@ const mock = async(args,status) => new Promise((resolve,reject) => {
         //https://www.webprofessional.jp/mock-rest-apis-using-json-server/
         for (let i=1; i<=rcv_args[0]; i++) {
             db.items.push({
+              _key: i,
               id: i,
               title: faker.random.words(),
               tag: faker.random.words(),
