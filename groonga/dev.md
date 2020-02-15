@@ -70,3 +70,12 @@ jqコマンドでtojson関数でエスケープしてからファイルに出力
 ```
 groonga testdb load --table test_tbl $(cat test.json)
 ```
+
+```
+ls test-*
+test-1.json  test-2.json  test-3.json
+ls test-* | xargs -I@ bash -c 'groonga testdb load --table test_tbl $(cat @)'
+[[0,1581764505.768111,0.01661229133605957],100]
+[[0,1581764505.840506,0.005586147308349609],100]
+[[0,1581764505.866024,0.002432823181152344],100]
+```
