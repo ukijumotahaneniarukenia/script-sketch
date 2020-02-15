@@ -6,13 +6,13 @@ const usage = async (status) =>{
     console.log("please stdin via pipe only.");
     console.log("Usage:");
     let file_name=process.argv[1].replace(/.*\//, '');
-    console.log("echo 3 | ./" + file_name + "| jq ");
+    console.log("echo 3 | ./" + file_name + "| jq '[.items[]]'");
     process.exit(status);
 }
 
 const mock = async(args,status) => new Promise((resolve,reject) => {
     try {
-        let db = { dat: [] };
+        let db = { items: [] };
         //console.log(Object.prototype.toString.call(args));//confirm type
 
         //console.log(args.split(" "));
@@ -21,13 +21,17 @@ const mock = async(args,status) => new Promise((resolve,reject) => {
         });
 
         // console.log(tmp);
-        
+        let dtm = new Date();
+        //https://www.webprofessional.jp/mock-rest-apis-using-json-server/
         for (let i=1; i<=rcv_args[0]; i++) {
-            db.dat.push({
+            db.items.push({
               id: i,
-              name: faker.random.words(),
-              director: faker.name.firstName() + ' ' + faker.name.lastName(),
-              rating: Math.floor(Math.random()*100+1)/10
+              title: faker.random.words(),
+              tag: faker.random.words(),
+              updated:dtm.getTime()+faker.random.number(1,1000000),
+              crawled:dtm.getTime()+faker.random.number(1000001,10000000),
+              published:dtm.getTime(),
+              url: "https://"+faker.random.words().replace(/\s{1,}/g,'-')
             });
         }
         console.log(JSON.stringify(db));
