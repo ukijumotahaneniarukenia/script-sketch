@@ -6,7 +6,7 @@ const usage = async (status) =>{
     console.log("please stdin via pipe only.");
     console.log("Usage:");
     let file_name=process.argv[1].replace(/.*\//, '');
-    console.log("echo 3 | ./" + file_name + "| jq '[.items[]]'");
+    console.log("echo 3 | ./" + file_name + "| jq '.[\"items\"]|map(.updated|=(./1000|todate))|map(.crawled|=(./1000|todate))|map(.published|=(./1000|todate))'");
     process.exit(status);
 }
 
