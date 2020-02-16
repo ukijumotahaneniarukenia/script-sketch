@@ -1,0 +1,160 @@
+[
+  {
+    "key": [
+      "items",
+      "0",
+      "id"
+    ],
+    "value": "o4c78CJ7GRAjsoP/B6cRtDxUlCNgoXrxoDqXv9xTIBc=_17048fcbb4a:c598b0f:31d4c877"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "title"
+    ],
+    "value": "Androidスマホでホーム画面の左にあるGoogle Discoverを非表示にする方法"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "summary",
+      "content"
+    ],
+    "value": "比較的に新しい機種のホーム画面には、メインとなるホーム画面の左側（一番左）に “Google（Discover/フィード）” が表示されていることがありますが、これは好みに応じて非表示にすることも可能です。"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "alternate",
+      "0",
+      "href"
+    ],
+    "value": "https://novlog.me/android/apk-google-disable/"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "crawled"
+    ],
+    "value": 1581772487498
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "published"
+    ],
+    "value": 1581771762000
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "origin",
+      "title"
+    ],
+    "value": "Menthas #all"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "origin",
+      "htmlUrl"
+    ],
+    "value": "https://menthas.com"
+  },
+  {
+    "key": [
+      "items",
+      "0",
+      "categories",
+      "0",
+      "id"
+    ],
+    "value": "user/26c34d27-f858-40be-89a3-527fa5cb76ef/category/Programming"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "id"
+    ],
+    "value": "o4c78CJ7GRAjsoP/B6cRtDxUlCNgoXrxoDqXv9xTIBc=_17048fcbb4a:c598b0e:31d4c877"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "title"
+    ],
+    "value": "Open RadarのようにAppleへのフィードバックを公開できるGitHubリポジトリ「Open Feedback Assistant」が公開。"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "summary",
+      "content"
+    ],
+    "value": "Open Radarのように、Appleに投稿したバグレポートを公開するためのGitHubリポジトリ「Open Feedback Assistant」を元Googleのエンジニアで現在フルタイムでオープンソースに貢献しているSindre Sorhusさんが公開しています。"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "alternate",
+      "0",
+      "href"
+    ],
+    "value": "https://applech2.com/archives/20200215-open-feedback-assistant-for-apple.html"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "crawled"
+    ],
+    "value": 1581772487498
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "published"
+    ],
+    "value": 1581771758000
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "origin",
+      "title"
+    ],
+    "value": "Menthas #all"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "origin",
+      "htmlUrl"
+    ],
+    "value": "https://menthas.com"
+  },
+  {
+    "key": [
+      "items",
+      "1",
+      "categories",
+      "0",
+      "id"
+    ],
+    "value": "user/26c34d27-f858-40be-89a3-527fa5cb76ef/category/Programming"
+  }
+]
