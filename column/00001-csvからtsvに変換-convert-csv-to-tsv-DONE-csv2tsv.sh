@@ -17,16 +17,16 @@ chk_args(){
 }
 
 mock(){
-  declare -a rsv_args=($(echo -e "$@"))
-  for((ind=0;ind<${#rsv_args[@]};ind++)){
-    cat "${rsv_args[@]:$ind:1}" | column -t -s,
+  declare -a rcv_args=($(echo -e "$@"))
+  for((idx=0;idx<${#rcv_args[@]};idx++)){
+    cat "${rcv_args[@]:$idx:1}" | column -t -s,
   }
 }
 
 main(){
-  local init_args="$(cat -)";
-  chk_args ${init_args}
-  mock ${init_args}
+  local stdin="$(cat -)";
+  chk_args ${stdin}
+  mock ${stdin}
 }
 
 [ -p /dev/stdin ] && cat - | main
