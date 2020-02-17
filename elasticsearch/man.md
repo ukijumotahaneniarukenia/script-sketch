@@ -14,3 +14,4 @@ Elasticsearchとkibanaの連携
 ログ収集との連携
 
 - https://knowledge.sakura.ad.jp/2736/
+- https://qiita.com/kenichi_nakamura/items/c29e9a099ea9b3dd0bf8
