@@ -167,7 +167,6 @@ select 'test_2020_02_17_011_chunk' as tbl ,count(*) as cnt from test_2020_02_17_
 ```
 
 ヘッダ行を考慮している模様
-```
 |tbl|cnt|
 |:-:|:-:|
 |test_2020_02_17_001_chunk|99,999|
@@ -181,7 +180,6 @@ select 'test_2020_02_17_011_chunk' as tbl ,count(*) as cnt from test_2020_02_17_
 |test_2020_02_17_009_chunk|100,000|
 |test_2020_02_17_010_chunk|100,000|
 |test_2020_02_17_011_chunk|1|
-```
 
 テーブル一括削除
 ```
