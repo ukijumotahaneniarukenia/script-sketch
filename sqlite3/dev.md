@@ -3,6 +3,13 @@
 コマンドライン上で操作する際、インポートファイルが存在しない作業ディレクトリへ移動すると、テーブルメモリから消去されるので、
 インポートしてゴニョゴニョしたらエクスポートするのを忘れずに。
 
+dbeaver上でインポート後操作する際には、移動する危惧はしなくてすむが、どちらにせよ、
+インポートしてゴニョゴニョしたらエクスポートするのを忘れずに。
+
+# インポート
+
+## csvファイルの場合
+
 100万件のデータ
 
 ダミーデータではダブルクヲートとシングルクヲートを排除しておく
@@ -10,10 +17,6 @@
 ```
 echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste -d',' $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1","col2","col3"'>test.csv
 ```
-
-# インポート
-
-## csvファイルの場合
 
 ### 単一ファイル
 
@@ -41,7 +44,6 @@ $sqlite3 testdb -separator , ".import test.csv test_tbl"
 確認
 
 ```
-
 $sqlite3 testdb
 -- Loading resources from /home/kuraine/.sqliterc
 SQLite version 3.30.0 2019-10-04 15:03:17
@@ -70,14 +72,24 @@ Run Time: real 0.001 user 0.000963 sys 0.000000
 
 ### 複数ファイル
 
+分割後ファイル削除
 ```
 $rm *chunk
+```
 
+分割対象ファイル
+```
 $ls -lh test.csv
 -rw-rw-r--. 1 kuraine kuraine 33M  2月 17 22:23 test.csv
+```
 
+10万行単位で分割
+```
 $cat test.csv | split -l 100000 --numeric-suffixes=1 --suffix-length=3 --additional-suffix=.chunk - test-"$(date "+%Y-%m-%d")"-
+```
 
+分割後ファイル
+```
 $ls -lh *chunk
 -rw-rw-r--. 1 kuraine kuraine 3.3M  2月 17 22:51 test-2020-02-17-001.chunk
 -rw-rw-r--. 1 kuraine kuraine 3.3M  2月 17 22:51 test-2020-02-17-002.chunk
@@ -90,7 +102,9 @@ $ls -lh *chunk
 -rw-rw-r--. 1 kuraine kuraine 3.3M  2月 17 22:51 test-2020-02-17-009.chunk
 -rw-rw-r--. 1 kuraine kuraine 3.3M  2月 17 22:51 test-2020-02-17-010.chunk
 -rw-rw-r--. 1 kuraine kuraine   33  2月 17 22:51 test-2020-02-17-011.chunk
-
+```
+ヘッダ確認
+```
 $head test-2020-02-17-001.chunk
 "col1","col2","col3"
 TZi0viSLAJ,vGy3pFZDyo,Mv3VxwRRLR
@@ -104,13 +118,15 @@ z5vWCaTrwF,VumFwHl6TH,D+Dh93+dRc
 MbrZwRsw90,nGlUNmoR8H,lSsfZPTrZ5
 $head test-2020-02-17-011.chunk
 WTEzT7Yj3e,P1Ls3ksHLj,P/CF3hkN1d
+```
 
-001ファイル目以外に先頭行へヘッダ行を追加
-
+分割先頭ファイル以外に先頭行へヘッダ行を追加
+```
 $ls *chunk | grep -v 001 | xargs -I@ sed -i '1i"col1","col2","col3"' @
-
+```
 
 確認
+```
 $grep -n -P '"col1","col2","col3"' *chunk
 test-2020-02-17-001.chunk:1:"col1","col2","col3"
 test-2020-02-17-002.chunk:1:"col1","col2","col3"
@@ -123,11 +139,15 @@ test-2020-02-17-008.chunk:1:"col1","col2","col3"
 test-2020-02-17-009.chunk:1:"col1","col2","col3"
 test-2020-02-17-010.chunk:1:"col1","col2","col3"
 test-2020-02-17-011.chunk:1:"col1","col2","col3"
+```
 
 取込
+```
 $ls *chunk | while read tgt;do printf "sqlite3 testdb -separator , \".import %s %s\"\n" $tgt $(echo $tgt | perl -pe 's/-|\./_/g');done | sh
+```
 
 確認
+```
 with sub as(
 select rowid as rn,"select "||"'"||name ||"' as tbl"||" ,count(*) as cnt from "||name as sni from sqlite_master
 )select s1.sni || case when exists(select 1 from sub s2 where s1.rn<s2.rn) then ' union all' else ';' end  as build_sql from sub s1;
@@ -144,9 +164,10 @@ select 'test_2020_02_17_008_chunk' as tbl ,count(*) as cnt from test_2020_02_17_
 select 'test_2020_02_17_009_chunk' as tbl ,count(*) as cnt from test_2020_02_17_009_chunk union all
 select 'test_2020_02_17_010_chunk' as tbl ,count(*) as cnt from test_2020_02_17_010_chunk union all
 select 'test_2020_02_17_011_chunk' as tbl ,count(*) as cnt from test_2020_02_17_011_chunk;
+```
 
 ヘッダ行を考慮している模様
-
+```
 |tbl|cnt|
 |:-:|:-:|
 |test_2020_02_17_001_chunk|99,999|
@@ -160,9 +181,10 @@ select 'test_2020_02_17_011_chunk' as tbl ,count(*) as cnt from test_2020_02_17_
 |test_2020_02_17_009_chunk|100,000|
 |test_2020_02_17_010_chunk|100,000|
 |test_2020_02_17_011_chunk|1|
+```
 
 テーブル一括削除
-
+```
 select "sqlite3 testdb "||"'drop table "||name||"'" from sqlite_master;
 
 sqlite3 testdb 'drop table test_tbl'
@@ -210,7 +232,7 @@ sqlite3 testdb ".dump test_2020_02_17_011_chunk">test_2020_02_17_011_chunk.dmp
 
 確認
 ```
-kuraine@d6c72bd8ba33 ~$ls -lh *dmp
+$ls -lh *dmp
 -rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_001_chunk.dmp
 -rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_002_chunk.dmp
 -rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_003_chunk.dmp
@@ -246,11 +268,41 @@ COMMIT;
 echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1"\t"col2"\t"col3"'>test.tsv
 ```
 
-
 ```
 $sqlite3 testdb
->create table test_tbl(col1 text,col2 text,col3 text);
->.import ./test.tsv test_tbl
+-- Loading resources from /home/kuraine/.sqliterc
+SQLite version 3.30.0 2019-10-04 15:03:17
+Enter ".help" for usage hints.
+sqlite>>>.show
+        echo: off
+         eqp: off
+     explain: auto
+     headers: on
+        mode: column
+   nullvalue: "NULL"
+      output: stdout
+colseparator: "|"
+rowseparator: "\n"
+       stats: off
+       width:
+    filename: testdb
+sqlite>>>.separator \t
+sqlite>>>select count(*) from test_tbl;
+Run Time: real 0.001 user 0.000019 sys 0.000735
+Error: no such table: test_tbl
+sqlite>>>.import ./test.tsv test_tbl
+sqlite>>>select count(*) from test_tbl;
+count(*)
+----------
+1000000
+Run Time: real 0.018 user 0.005200 sys 0.012919
+sqlite>>>select * from test_tbl limit 4;
+col1        col2        col3
+----------  ----------  ----------
+PtKnzGJiy5  lbBGcbr8a8  mxWwh0nD2B
+wnt7dejpwW  iSR1Cik/BU  QthV0M3tRO
+IShgZxuo+a  RiUPk/uW4t  HRKU269mc9
+Za3vCYIvEp  LjD3Ers9wQ  Ydpn/Vw1R2
+Run Time: real 0.000 user 0.000217 sys 0.000025
+
 ```
-
-
