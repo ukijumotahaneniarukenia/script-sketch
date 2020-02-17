@@ -4,3 +4,8 @@
 
 コマンドのサンプル集
 - https://qiita.com/mug-cup/items/ba5dd0a14838e83e69ac
+
+
+Elasticsearchとkibanaの連携
+
+- https://kapibara-sos.net/archives/475
