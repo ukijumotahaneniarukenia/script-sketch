@@ -8,7 +8,7 @@
 ダミーデータではダブルクヲートとシングルクヲートを排除しておく
 
 ```
-echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'>test-1000000.tsv
+echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste -d',' $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1","col2","col3"'>test.csv
 ```
 
 # インポート
@@ -239,7 +239,13 @@ COMMIT;
 ```
 
 
-tsvファイルの場合
+## tsvファイルの場合
+
+
+```
+echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1"\t"col2"\t"col3"'>test.tsv
+```
+
 
 ```
 $sqlite3 testdb
