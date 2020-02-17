@@ -5,7 +5,7 @@
 
 100万件のデータ
 
-ダブルクヲートとシングルクヲートを排除しておく
+ダミーデータではダブルクヲートとシングルクヲートを排除しておく
 
 ```
 echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'>test-1000000.tsv
@@ -22,10 +22,10 @@ echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ ech
 $head test.csv
 "col1","col2","col3"
 TZi0viSLAJ,vGy3pFZDyo,Mv3VxwRRLR
-"8qVtso1oU4","8t7LiuxONh",z7eUuNYmFv
+8qVtso1oU4,8t7LiuxONh,z7eUuNYmFv
 qSH9Kv8ogH,/56H1yXQRx,BMeKDZkm7R
 Xym5Ip7e+y,TcZXdX6Oou,LYwctbv5B6
-JLRsTUVBPG,"7aMaq9zxOA","7iP1UfidkL"
+JLRsTUVBPG,7aMaq9zxOA,7iP1UfidkL
 PwdSxxZAyd,isLkfpDWA5,X/TWQTbkYp
 dxzM3k9LSP,yKf4hupF8s,IzliufCXF6
 z5vWCaTrwF,VumFwHl6TH,D+Dh93+dRc
