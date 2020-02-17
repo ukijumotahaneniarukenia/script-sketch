@@ -9,3 +9,8 @@
 Elasticsearchとkibanaの連携
 
 - https://kapibara-sos.net/archives/475
+
+
+ログ収集との連携
+
+- https://knowledge.sakura.ad.jp/2736/
