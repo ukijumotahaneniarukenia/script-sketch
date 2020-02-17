@@ -1,6 +1,10 @@
+Mroonga実装例
+
+- https://www.slideshare.net/kou/jpmugdbstudy1
+
 Mysqlユーザー定義関数
 
-https://blog.kamipo.net/entry/20111208/1323356185
+- https://blog.kamipo.net/entry/20111208/1323356185
 
 Wikiデータ投入
 
@@ -9,11 +13,11 @@ Wikiデータ投入
 
 C言語から外部コマンド呼び出し。
 jqコマンド呼び出す。
-http://www.t-net.ne.jp/~cyfis/c/stdlib/system.html
+- http://www.t-net.ne.jp/~cyfis/c/stdlib/system.html
 
 
 引数受け取り
-http://www.c-lang.org/argument.html
+- http://www.c-lang.org/argument.html
 
 
 引数の有無による型指定
