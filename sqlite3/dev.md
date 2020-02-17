@@ -178,3 +178,71 @@ sqlite3 testdb 'drop table test_2020_02_17_011_chunk'
 
 # エクスポート
 
+## 単一ファイルの場合
+
+```
+sqlite3 testdb ".dump test_2020_02_17_011_chunk">test_2020_02_17_011_chunk.dmp
+```
+
+## 複数ファイルの場合
+
+エクスポートコマンド作成
+```
+select "sqlite3 testdb "||""""||".dump "||name||""""||">"||name ||".dmp" from sqlite_master;
+```
+
+実行
+```
+sqlite3 testdb ".dump test_2020_02_17_001_chunk">test_2020_02_17_001_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_002_chunk">test_2020_02_17_002_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_003_chunk">test_2020_02_17_003_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_004_chunk">test_2020_02_17_004_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_005_chunk">test_2020_02_17_005_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_006_chunk">test_2020_02_17_006_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_007_chunk">test_2020_02_17_007_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_008_chunk">test_2020_02_17_008_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_009_chunk">test_2020_02_17_009_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_010_chunk">test_2020_02_17_010_chunk.dmp
+sqlite3 testdb ".dump test_2020_02_17_011_chunk">test_2020_02_17_011_chunk.dmp
+```
+
+確認
+```
+kuraine@d6c72bd8ba33 ~$ls -lh *dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_001_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_002_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_003_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_004_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_005_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_006_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_007_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_008_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_009_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine 8.3M  2月 17 23:40 test_2020_02_17_010_chunk.dmp
+-rw-rw-r--. 1 kuraine kuraine  225  2月 17 23:40 test_2020_02_17_011_chunk.dmp
+```
+
+中身確認
+```
+$cat test_2020_02_17_011_chunk.dmp
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE test_2020_02_17_011_chunk(
+  "col1" TEXT,
+  "col2" TEXT,
+  "col3" TEXT
+);
+INSERT INTO test_2020_02_17_011_chunk VALUES('WTEzT7Yj3e','P1Ls3ksHLj','P/CF3hkN1d');
+COMMIT;
+```
+
+
+tsvファイルの場合
+
+```
+$sqlite3 testdb
+>create table test_tbl(col1 text,col2 text,col3 text);
+>.import ./test.tsv test_tbl
+```
+
+
