@@ -65,11 +65,6 @@ QvxliH4+K+  8arzTs/bYA  FD3ERLBwZ+
 Run Time: real 0.001 user 0.000963 sys 0.000000
 ```
 
-```
-$sqlite3 testdb
->create table test_tbl(col1 text,col2 text,col3 text);
->.import ./test.tsv test_tbl
-```
 
 ### 複数ファイル
 
