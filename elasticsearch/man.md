@@ -15,3 +15,7 @@ Elasticsearchとkibanaの連携
 
 - https://knowledge.sakura.ad.jp/2736/
 - https://qiita.com/kenichi_nakamura/items/c29e9a099ea9b3dd0bf8
+
+
+公式ドキュメント
+- https://www.elastic.co/guide/en/elasticsearch/reference/7.3/getting-started-search.html
