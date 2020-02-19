@@ -4,8 +4,10 @@
 
 入れた後、逆生成したい
 
-```
+こんな感じからスタート
 
+```
+cat test.json | jq --stream -c 'select(length==2)|{key:.[0]|join("."),value:.[1]}' | jq --slurp 'map({key:.key,value:.value|type})'
 ```
 
 
