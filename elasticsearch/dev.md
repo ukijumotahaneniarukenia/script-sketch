@@ -1,3 +1,7 @@
+# 所感
+
+- 触った感じだとインデックス初回投入したあとは、nodejsコマンドラインツールで操作したほうがハンディかな
+
 # インデックス作成
 
 動的に型定義判定してくれるぽいからいいかな
@@ -309,4 +313,26 @@ curl -X GET "localhost:9200/test_idx/_search?pretty" -H 'Content-Type: applicati
     ]
   }
 }
+```
+
+# エクスポート
+
+nodejsのコマンドツールをインストール
+
+グローバルにインストールするので、rootユーザーで実行
+
+```
+npm install -g elasticdump
+```
+
+
+```
+elasticdump --input=http://localhost:9200/test_idx --output=test_idx.dump
+```
+
+# インポート
+
+事前にインデックスは削除した上で実行する
+```
+elasticdump --input=test_idx.dump --output=http://localhost:9200/test_idx
 ```
