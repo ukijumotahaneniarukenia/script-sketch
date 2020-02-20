@@ -25,3 +25,10 @@ $trdsql -ih "select grp,group_concat(val,',')over(partition by grp) from a.out.d
 1,"com.github.javafaker,javafaker,1.0.2"
 2,"org.json,json,20190722"
 ```
+
+
+この形を目指して、grepで対象絞りやすくするようにする。
+mvn install:install-file -Dfile=target/foo.jar -DgroupId=com.foo -DartifactId=foo \
+-Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
+
+jqと、コラボ
