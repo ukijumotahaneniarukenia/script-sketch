@@ -11,3 +11,9 @@ kuraine@71ecc4cebf8f ~/script-sketch/trdsql$trdsql -ih "select 'grp',group_conca
 {"grp":"1","id":"kbcnL5XqWJi/iYn/BuKqrf/JSzXEf2szaOaXmzc6oZ4=_170496c85db:c60c640:31d4c877","title":"経験者がいない状態で、戦略的DDDを現場でやってみた話/ OOC2020"}
 ]
 ```
+
+
+```
+trdsql -driver postgres -dsn "postgres://postgres:postgres_pwd@localhost:5432/testdb?sslmode=disable" -ih "select * from a.out"
+
+```
