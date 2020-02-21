@@ -47,3 +47,8 @@ seq,grp,grpseq,val
 5,2,2,json
 6,2,3,20190722
 ```
+この形を目指して、grepで対象絞りやすくするようにする。
+mvn install:install-file -Dfile=target/foo.jar -DgroupId=com.foo -DartifactId=foo \
+-Dversion=1.0 -Dpackaging=jar -DgeneratePom=true
+
+jqと、コラボ
