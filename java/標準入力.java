@@ -1,80 +1,54 @@
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.stream.Stream;
+import sun.misc.Signal;
 
-//import java.util.ArrayList;
-//import java.util.List;
-//https://docs.oracle.com/javase/jp/8/docs/api/java/util/Scanner.html
+import java.util.*;
 
 public class 標準入力 {
-  public static void main(String[] rsv_args) {
-    try{
-      if(rsv_args.length==0){
-        Scanner stdin=new Scanner(System.in);
-        while (stdin.hasNextLine()) {
-          String ln=stdin.nextLine();
-          System.out.println(ln);
+    public static void main(String[] rsv_args) {
+        trap(new String[]{"INT"});
+        try{
+            if(rsv_args.length==0){
+                //via pipe args
+                Scanner stdin=new Scanner(System.in);
+                List<String> liz = new ArrayList<>(Arrays.asList(stdin.nextLine().split(" ")));
+                circle(liz);
+                stdin.close();
+            }else{
+                //via cmdline args
+                List<String> liz = new ArrayList<>(Arrays.asList(rsv_args));
+                circle(liz);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
         }
-        stdin.close();
-      }else{
-        Stream<String> stream=Arrays.stream(rsv_args);
-        stream.forEach(System.out::println);
-      }
-    }catch(Exception e){
-      e.printStackTrace();
-      System.exit(1);
     }
-  }
-//https://stackoverflow.com/questions/1216172/how-can-i-intercept-ctrlc-in-a-cli-application
-//https://rosettacode.org/wiki/Handle_a_signal#Java
-  private static void usage(){
-    System.out.println("Usage:");
-    System.exit(1);
-  }
+    private static void circle(List<String> rsv_liz){
+        for (int ind=0;ind<rsv_liz.size();ind++){
+            Collections.rotate(rsv_liz, 1);
+            System.out.println(rsv_liz);
+        }
+    }
+    private static void trap(String[] sig_args){
+        for (String sig:sig_args) {
+            catch_sig(sig);
+        }
+    }
+    private static void usage() {
+        final String className = new Object(){}.getClass().getEnclosingClass().getName();
+        System.out.println("\nUsage:\n" +
+                "$echo {a..c} | java "+ className +"\n"+
+                "$java "+ className +" {a..c}"+"\n"+
+                "$java "+className +"$(echo -e '\\U1f4a'{0..9})\n"+
+                "$echo -e '\\U1f4a'{0..9} | java "+className+"\n"
+        );
+        System.exit(0);
+    }
+    private static void catch_sig(String sig) {
+        Signal signal = new Signal(sig);
+        Signal.handle(signal, Signal -> {
+            if ("INT".equals(signal.getName())) {
+                usage();
+            }
+        });
+    }
 }
-
-//[sqlite💘ceacf3fb0808 (金 11月 15 00:10:19) ~/script_scratch/java]$echo $(seq 10 | xargs -n3) | xxd -c1 -ps
-//31
-//20
-//32
-//20
-//33
-//20
-//34
-//20
-//35
-//20
-//36
-//20
-//37
-//20
-//38
-//20
-//39
-//20
-//31
-//30
-//0a
-//[sqlite💘ceacf3fb0808 (金 11月 15 00:10:51) ~/script_scratch/java]$echo "$(seq 10 | xargs -n3)" | xxd -c1 -ps
-//31
-//20
-//32
-//20
-//33
-//0a
-//34
-//20
-//35
-//20
-//36
-//0a
-//37
-//20
-//38
-//20
-//39
-//0a
-//31
-//30
-//0a
-//

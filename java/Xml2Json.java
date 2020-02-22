@@ -66,14 +66,14 @@ public class Xml2Json {
                 "$ll -lh json-20190722.jar\n"+
                 "\n"+
                 "#3. please complie.\n"+
-                "$javac -classpath $(pwd)/json-20190722.jar Xml2Json.java\n"+
+                "$javac -classpath $(pwd)/lib/json-20190722.jar Xml2Json.java\n"+
                 "\n"+
                 "#4. please execute.\n"+
-                "$java -classpath $(pwd):$(pwd)/json-20190722.jar Xml2Json test.xml | jq\n"+
+                "$java -classpath $(pwd)/out:$(pwd)/lib/json-20190722.jar Xml2Json test.xml | jq\n"+
                 "\n"+
                 "or\n"+
                 "\n"+
-                "$echo test.xml | java -classpath $(pwd):$(pwd)/json-20190722.jar Xml2Json | jq\n"+
+                "$echo test.xml | java -classpath $(pwd)/out:$(pwd)/lib/json-20190722.jar Xml2Json | jq\n"+
                 "");
         System.exit(0);
     }
