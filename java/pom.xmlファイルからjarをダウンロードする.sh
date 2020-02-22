@@ -48,3 +48,6 @@ while read tgt;do
  $tgt
  echo $tgt | perl -pe 's;.*/;;g' | xargs -I@ mv @ lib/@
 done
+
+
+ls $HOME/script-sketch/java | grep pom | grep -vP 'xml' | xargs rm -rf

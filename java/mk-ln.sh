@@ -1,9 +1,13 @@
 #!/bin/bash
 
+rm -rf $HOME/script-sketch/java/out/*
+
+
+ls $HOME/script-sketch/java | grep DONE | xargs -I@ javac -d $HOME/script-sketch/java/out -classpath "$HOME/script-sketch/java/lib/*" @
+
+
 while read tgt;do
 
+  printf "echo \x27alias %s=\x22java -classpath \$HOME/script-sketch/java/out:\$HOME/script-sketch/java/lib/* %s\x22\x27 \n"
 
-  printf "ln -fsr %s %s\n" $tgt $HOME/.local/bin/$(echo $tgt | perl -pe 's;.*DONE_(.*)\.class;\1;g')
-
-
-done < <(ls $HOME/script-sketch/java/out/* | xargs -n1 )
+done < <(ls $HOME/script-sketch/java/out/*)
