@@ -1,4 +1,6 @@
+
+//echo unko | node $0
+
 process.stdin.on('data', function (buf) {
-    console.log("XXXXXX");
     process.stdout.write(buf.toString());
 });
