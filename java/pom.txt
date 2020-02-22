@@ -1,9 +1,0 @@
-com.github.javafaker
-javafaker
-1.0.2
-org.json
-json
-20190722
-com.ibm.icu
-icu4j
-65.1
