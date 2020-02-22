@@ -26,3 +26,6 @@ function mock5(init_args){
 }
 mock5("@");
 '
+
+
+echo {う,ん,こ,💩} | xargs -I@ node -e 'function f(a){b=a.split(" ");for(let i=1;i<=b.length;i++){let f=b.splice(0,1);b.splice(a.split(" ").length,0,f);console.log("ind:"+i+",f:"+b[i-1]+",cnt:"+a.split(" ").length+",liz:"+b.join("")+",a:"+a.split(" ").join(""));}}f("@");'
