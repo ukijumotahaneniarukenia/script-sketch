@@ -1,3 +1,0 @@
-Main-Class: app.Full2Half
-Class-Path: ./JAR-INF/lib/icu4j-65_1.jar
-
