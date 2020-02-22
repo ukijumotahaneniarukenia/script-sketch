@@ -39,7 +39,7 @@ $java -cp "JAR-INF:JAR-INF/lib/*" app.DetectEnc
 # マニュフェストファイル作成
 
 ```
-$cat JAR-INF/META-INF/MANIFEST.MF 
+$cat JAR-INF/META-INF/MANIFEST.MF
 Main-Class: app.DetectEnc
 Class-Path: ./JAR-INF/lib/icu4j-65.1.jar
 
@@ -62,7 +62,7 @@ lib/icu4j-65.1.jarを追加中です(入=12901874)(出=12028108)(6%収縮され�
 # jarファイル展開
 
 ```
-$jar tf detect-enc.jar 
+$jar tf detect-enc.jar
 META-INF/
 META-INF/MANIFEST.MF
 app/
@@ -74,6 +74,6 @@ lib/icu4j-65.1.jar
 # jarファイル実行
 
 ```
-$java -jar detect-enc.jar 
+$java -jar detect-enc.jar
 UTF-8
 ```

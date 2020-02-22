@@ -9,4 +9,9 @@
     <artifactId>json</artifactId>
     <version>20190722</version>
   </dependency>
+  <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>65.1</version>
+  </dependency>
 </dependencies>
