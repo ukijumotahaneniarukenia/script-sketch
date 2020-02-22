@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class java_XMLからJSONへ変換_XML2JSON_DONE_xml2json {
+public class java_XMLからJSONへ変換_convert_xml_to_json_DONE_xml2json.java {
     //https://www.code-adviser.com/detail_28451370
     public static void main(String[] rsv_args) {
         trap(new String[]{"INT"});

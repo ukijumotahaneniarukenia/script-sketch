@@ -1,11 +1,6 @@
 import java.io.File;
 
-import com.ibm.icu.text.CharsetDetector;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
+import com.ibm.icu.text.Transliterator;
 import sun.misc.Signal;
 
 import java.io.IOException;
@@ -17,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class java_標準入力の文字コードを推測する_detect_enc_DONE_dctenc {
+public class java_全角文字から半角文字へ変換_convert_full_width_to_half_width_DONE_full2half {
     public static void main(String[] rsv_args) {
         trap(new String[]{"INT"});
         try{
@@ -41,18 +36,18 @@ public class java_標準入力の文字コードを推測する_detect_enc_DONE_
     }
     private static void process(List<String> tgt_liz) throws IOException {
         for(int i=0;i<tgt_liz.size();i++){
-            System.out.println(dctenc(tgt_liz.get(i)));
+            System.out.println(full2half(tgt_liz.get(i)));
         }
     }
-    private static String dctenc(String text) {
-        InputStream inputStream = new ByteArrayInputStream(text.getBytes());
-        CharsetDetector detector = new CharsetDetector();
-        try {
-            detector.setText(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static String full2half(String tgt) throws IOException {
+        File file = new File(tgt);
+        if(!file.exists()){
+          return Transliterator.getInstance("Fullwidth-Halfwidth").transliterate(tgt);
+        }else{
+          Path path = Paths.get(tgt);
+          String txt = Files.readString(path);
+          return Transliterator.getInstance("Fullwidth-Halfwidth").transliterate(txt);
         }
-        return detector.detect().getName();
     }
     private static void trap(String[] sig_args){
         for (String sig:sig_args) {
