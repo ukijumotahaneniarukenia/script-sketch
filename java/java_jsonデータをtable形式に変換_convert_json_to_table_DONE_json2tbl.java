@@ -73,8 +73,12 @@ public class java_jsonデータをtable形式に変換_convert_json_to_table_DON
     private static void usage() {
         final String className = new Object(){}.getClass().getEnclosingClass().getName();
         System.out.println("\nUsage:\n" +
-            "cat test.txt | "+ className.replaceAll(".*_", "") +" | sort | uniq -c \n" +
-            "ls *xml | while read tgt;do echo $tgt; "+className.replaceAll(".*_", "")+" $tgt;done | xargs -n2 \n"
+        "echo '[\"a\",{\"b\":[1,2]},[3,4,null,true,false],[{\"c\":[11,12]},\"eee\",{\"d\":[111,112]}],{\"f\":true}]' | "+className.replaceAll(".*_", "")+" \n" +
+        className.replaceAll(".*_", "") + "<<<'[\"a\",{\"b\":[1,2]},[3,4,null,true,false],[{\"c\":[11,12]},\"eee\",{\"d\":[111,112]}],{\"f\":true}]' \n" +
+        "seq 10 | xargs -n3 | xargs -I@ jq -c -n '\"@\"|split(\" \")' | " + className.replaceAll(".*_", "") +"\n" +
+        "cat /dev/urandom | base64 -w0 | fold -w10 | head -n10 | xargs -n3 | xargs -I@ jq -c -n '\"@\"|split(\" \")' | " + className.replaceAll(".*_", "") +"\n" +
+        "ls *json | xargs | "+className.replaceAll(".*_", "") +"\n" +
+        className.replaceAll(".*_", "") + " $(ls *json) " + "\n"
         );
         System.exit(0);
     }
