@@ -45,7 +45,6 @@ trdsql -driver postgres -dsn 'postgres://postgres:postgres_pwd@localhost:5432/te
   group by \
     grp" | \
 while read tgt;do
- ls $HOME/script-sketch/java/lib/$(echo $tgt | perl -pe 's;.*/;;g') && break
  ls $HOME/script-sketch/java/lib/$(echo $tgt | perl -pe 's;.*/;;g') || $tgt
  echo $tgt | perl -pe 's;.*/;;g' | xargs -I@ mv @ lib/@
 done
