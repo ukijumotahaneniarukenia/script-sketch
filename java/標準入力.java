@@ -1,7 +1,4 @@
 import java.io.IOException;
-
-import sun.misc.Signal;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +7,8 @@ import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import sun.misc.Signal;
 
 public class 標準入力 {
     public static void main(String[] cmdline_args) {
