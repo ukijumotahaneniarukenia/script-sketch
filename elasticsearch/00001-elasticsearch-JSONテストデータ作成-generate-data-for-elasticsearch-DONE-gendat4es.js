@@ -6,8 +6,7 @@ const usage = async (status) =>{
     console.log("please stdin via pipe only.");
     console.log("Usage:");
     let file_name=process.argv[1].replace(/.*\//, '');
-    console.log("echo 3 | ./" + file_name + "| jq '.[\"items\"]'");
-    //echo 3 | ./00005-JSONテストデータ作成-elasticsearch用-generate-test-data-for-elasticsearch-DONE-gendat4elastic.js| jq '.["items"]'| jq -c 'to_entries|map([{index:{"_id":(.key+1)|tostring}},.value])|flatten|.[]'
+    console.log("echo 3 | ./" + file_name + "| jq '.[\"items\"]'" + "| jq -c 'to_entries|map([{index:{\"_id\":(.key+1)|tostring}},.value])|flatten|.[]'");
     process.exit(status);
 }
 
