@@ -1,1 +1,2 @@
-
+- うまくとりいれたいんだよな
+  - https://qiita.com/koduki/items/086d42b5a3c74ed8b59e#forkjoin
