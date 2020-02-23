@@ -13,7 +13,7 @@ import sun.misc.Signal;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class java_URLエンコードから文字列へ変換_convert_url_encoding_to_str_DONE_urlenc2dec {
+public class java_URLエンコードから文字列へ変換_convert_url_encoding_to_str_DONE_urlenc2str {
 
     private static String encoding = "UTF-8";//usage decoding
 
