@@ -316,3 +316,80 @@ export default {
 </script>
 EOS
 ```
+
+# テストデータ作成
+
+- ぐれさんの記事に載ってた。
+
+  - https://qiita.com/greymd/items/e3f068fcf13e01a03347#-faker-cli
+
+```
+npm install -g faker-cli
+```
+
+
+```
+seq 10 | while read tgt;do printf "%s\t%s\t%s\n" "$(faker-cli -l words)" "$(faker-cli -l sentences)" "$(faker-cli -I avatar)";done | perl -pe 's; {1,};;g' | xargs -I@  jq -n '"@"|split("\t")|{image:.[2],title:.[0],body:.[1]}' | jq -s ''
+```
+
+先頭から2件取得した場合
+
+```
+seq 10 | while read tgt;do printf "%s\t%s\t%s\n" "$(faker-cli -l words)" "$(faker-cli -l sentences)" "$(faker-cli -I avatar)";done | perl -pe 's; {1,};;g' | xargs -I@  jq -n '"@"|split("\t")|{image:.[2],title:.[0],body:.[1]}' | jq -s '.[0:2]'
+[
+  {
+    "image": "https://s3.amazonaws.com/uifaces/faces/twitter/mr_shiznit/128.jpg",
+    "title": "aperiamsequiperspiciatis",
+    "body": "Quinamipsum.Enimmolestiaedoloremqueeavoluptatesenimsolutaautcumque.Inciduntmaioresetrepellenduseligendilaudantiumvelid.Corporisdolorumvelit.Aliquamrerumitaquemollitia."
+  },
+  {
+    "image": "https://s3.amazonaws.com/uifaces/faces/twitter/mangosango/128.jpg",
+    "title": "cumqueofficiaquisquam",
+    "body": "Sitdignissimossitvelitbeataeenimdignissimos.Facilisetetautquodexcepturi."
+  }
+]
+```
+
+# テストデータ配備
+
+```
+cd test/static
+mkdir data
+cd data
+seq 3 | while read tgt;do printf "%s\t%s\t%s\n" "$(faker-cli -l words)" "$(faker-cli -l sentences)" "$(faker-cli -I avatar)";done | perl -pe 's; {1,};;g' | xargs -I@  jq -n '"@"|split("\t")|{image:.[2],title:.[0],body:.[1]}' | jq -s '' >images.json
+```
+
+# ビュー作成
+
+```
+cd test
+cat <<EOS >pages/grid/index.vue
+<template>
+  <div>
+    <magic-grid>
+      <card
+        v-for="(x, i) in data"
+        :key="i"
+        :image="x.image"
+        :title="x.title"
+        :body="x.body" />
+    </magic-grid>
+  </div>
+</template>
+
+<script>
+import card from "../../components/Card.vue";
+
+export default {
+  name: "grid",
+  components: {
+    card
+  },
+  async asyncData({ $axios }) {
+    const imagesData = await $axios.$get(`/data/images.json`);
+    return { data: imagesData };
+  }
+};
+</script>
+EOS
+```

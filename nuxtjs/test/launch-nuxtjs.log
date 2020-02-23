@@ -60,3 +60,20 @@ To install it, you can run: npm install --save vue-magic-grid
 ℹ Compiling Client
 ✔ Server: Compiled successfully in 175.60ms
 ✔ Client: Compiled successfully in 169.28ms
+↻ Updated .nuxt/axios.js
+✔ Nuxt files generated
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Server: Compiled with some errors in 563.35ms
+✔ Client: Compiled with some errors in 653.48ms
+
+ ERROR  Failed to compile with 1 errors
+
+This relative module was not found:
+
+* ../components/Card.vue in ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/grid/index.vue?vue&type=script&lang=js&
+↻ Updated pages/grid/index.vue
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Client: Compiled successfully in 169.08ms
+✔ Server: Compiled successfully in 182.89ms
