@@ -211,9 +211,10 @@ kuraine    811  0.0  0.0  54304  1856 pts/2    R+   10:49   0:00 ps aux
 $kill -9 144
 ```
 
-
-
 # グリッドレイアウト化
+
+- これ以降の操作は常に各オペーレーション単位でブラウザのリフレッシュを行い、デグレが起きないことを確認しながらすすめる。
+- デグレ起きた場合はコミットせず、直前のコミット資産をクローンしなおして、すすめる。
 
 ```
 cd test
@@ -273,4 +274,45 @@ module.exports = {
     "~/plugins/magic-grid"
   ]
 }
+```
+
+# コンポーネント作成
+
+```
+cd test
+cat <<EOS >components/Card.vue
+<template>
+  <div class="card large">
+    <div class="card-image">
+      <figure class="image">
+        <img v-bind:src="image" alt="Image" />
+      </figure>
+    </div>
+    <div class="card-content content">
+      <h6>{{ title }}</h6>
+      <p>{{ body }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "card",
+  props: {
+    image: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+    body: {
+      type: String,
+      default: ""
+    }
+  }
+};
+</script>
+EOS
 ```
