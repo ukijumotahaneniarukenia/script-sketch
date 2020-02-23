@@ -1,0 +1,38 @@
+
+> test@1.0.0 dev /home/kuraine/script-sketch/nuxtjs/test
+> HOST=0.0.0.0 PORT=3000 nuxt
+
+ℹ Listening on: http://172.17.0.2:3000/
+ℹ Preparing project for development
+ℹ Initial build may take a while
+✔ Builder initialized
+✔ Nuxt files generated
+ℹ Compiling Client
+ℹ Compiling Server
+✔ Server: Compiled successfully in 1.37s
+✔ Client: Compiled successfully in 1.65s
+ℹ Waiting for file changes
+ℹ Memory usage: 146 MB (RSS: 216 MB)
+
+ ERROR  $axios is not defined
+
+  at asyncData (index.vue:17:0)
+  at promisify (.nuxt/utils.js:245:0)
+  at server.js:1646:82
+  at Array.map (<anonymous>)
+  at module.exports../.nuxt/server.js.__webpack_exports__.default (.nuxt/server.js:210:0)
+
+
+ ERROR  $axios is not defined
+
+  at asyncData (index.vue:17:0)
+  at promisify (.nuxt/utils.js:245:0)
+  at server.js:1646:82
+  at Array.map (<anonymous>)
+  at module.exports../.nuxt/server.js.__webpack_exports__.default (.nuxt/server.js:210:0)
+
+↻ Updated pages/index.vue
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Server: Compiled successfully in 262.12ms
+✔ Client: Compiled successfully in 353.59ms
