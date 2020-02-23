@@ -385,8 +385,8 @@ export default {
   components: {
     card
   },
-  async asyncData({ $axios }) {
-    const imagesData = await $axios.$get(`/data/images.json`);
+  async asyncData({ \$axios }) {
+    const imagesData = await \$axios.\$get(`/data/images.json`);
     return { data: imagesData };
   }
 };
