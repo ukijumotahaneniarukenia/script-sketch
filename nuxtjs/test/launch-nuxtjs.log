@@ -9,7 +9,54 @@
 ✔ Nuxt files generated
 ℹ Compiling Client
 ℹ Compiling Server
-✔ Server: Compiled successfully in 1.47s
-✔ Client: Compiled successfully in 1.75s
+✔ Server: Compiled successfully in 1.38s
+✔ Client: Compiled successfully in 1.67s
 ℹ Waiting for file changes
-ℹ Memory usage: 154 MB (RSS: 224 MB)
+ℹ Memory usage: 143 MB (RSS: 219 MB)
+↻ Updated nuxt.config.js
+ℹ Listening on: http://172.17.0.2:3000/
+ℹ Preparing project for development
+ℹ Initial build may take a while
+✔ Builder initialized
+✔ Nuxt files generated
+ℹ Compiling Client
+ℹ Compiling Server
+✔ Server: Compiled successfully in 1.44s
+✔ Client: Compiled successfully in 1.62s
+ℹ Waiting for file changes
+ℹ Memory usage: 143 MB (RSS: 241 MB)
+↻ Updated nuxt.config.js
+ℹ Listening on: http://172.17.0.2:3000/
+ℹ Preparing project for development
+ℹ Initial build may take a while
+✔ Builder initialized
+✔ Nuxt files generated
+ℹ Compiling Client
+ℹ Compiling Server
+✔ Server: Compiled successfully in 1.01s
+✔ Client: Compiled successfully in 1.18s
+ℹ Waiting for file changes
+ℹ Memory usage: 136 MB (RSS: 242 MB)
+↻ Updated plugins/magic-grid.js
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Server: Compiled with some errors in 132.37ms
+✔ Client: Compiled with some errors in 246.90ms
+
+ ERROR  Failed to compile with 1 errors
+
+This dependency was not found:
+
+* vue-magic-grid in ./plugins/magic-grid.js
+
+To install it, you can run: npm install --save vue-magic-grid
+↻ Updated node_modules/vue-magic-grid
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Server: Compiled successfully in 193.46ms
+✔ Client: Compiled successfully in 176.84ms
+↻ Updated plugins/magic-grid.js
+ℹ Compiling Server
+ℹ Compiling Client
+✔ Server: Compiled successfully in 175.60ms
+✔ Client: Compiled successfully in 169.28ms

@@ -38,5 +38,8 @@ module.exports = {
   modules:
   [
       "@nuxtjs/axios",
+  ],
+  plugins: [
+    "~/plugins/magic-grid"
   ]
 }
