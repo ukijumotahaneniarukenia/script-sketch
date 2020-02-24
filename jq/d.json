@@ -1,6 +1,62 @@
-{
-  "IPAM": {
-    "Driver": "default",
-    "Options": null
+[
+  {
+    "key": 0,
+    "value": [
+      {
+        "id": "3",
+        "value": "AGTCGGTCTT"
+      },
+      {
+        "id": "5",
+        "value": "AGTCT"
+      },
+      {
+        "id": "8",
+        "value": "ACCGGTGTT"
+      }
+    ]
+  },
+  {
+    "key": 1,
+    "value": [
+      {
+        "id": "1",
+        "value": "CAAGAGAGT"
+      }
+    ]
+  },
+  {
+    "key": 2,
+    "value": [
+      {
+        "id": "4",
+        "value": "GTCTGGC"
+      },
+      {
+        "id": "6",
+        "value": "GCAGACTGAT"
+      },
+      {
+        "id": "7",
+        "value": "GGTAGGCG"
+      },
+      {
+        "id": "9",
+        "value": "GTTCTAGCA"
+      },
+      {
+        "id": "10",
+        "value": "GTAGCAGGT"
+      }
+    ]
+  },
+  {
+    "key": 3,
+    "value": [
+      {
+        "id": "2",
+        "value": "TCGCGTCTAG"
+      }
+    ]
   }
-}
+]
