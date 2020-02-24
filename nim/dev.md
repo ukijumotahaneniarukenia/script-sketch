@@ -19,6 +19,8 @@ unko1unko2unko3
 ```
 
 split系を取り入れたい
+  - https://nim-by-example.github.io/
+
 
 ```
 apache@5953b2510380 ~/script-sketch/nim$stdin_via_pipe  a b c
