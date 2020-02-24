@@ -1,0 +1,68 @@
+- IN
+
+```
+$cat a.json
+[
+  {
+    "id": "1",
+    "value": "CAAGAGAGT"
+  },
+  {
+    "id": "2",
+    "value": "TCGCGTCTAG"
+  },
+  {
+    "id": "3",
+    "value": "AGTCGGTCTT"
+  },
+  {
+    "id": "4",
+    "value": "GTCTGGC"
+  },
+  {
+    "id": "5",
+    "value": "AGTCT"
+  },
+  {
+    "id": "6",
+    "value": "GCAGACTGAT"
+  },
+  {
+    "id": "7",
+    "value": "GGTAGGCG"
+  },
+  {
+    "id": "8",
+    "value": "ACCGGTGTT"
+  },
+  {
+    "id": "9",
+    "value": "GTTCTAGCA"
+  },
+  {
+    "id": "10",
+    "value": "GTAGCAGGT"
+  }
+]
+```
+
+- CMD
+
+```
+$cat a.json | jq '.[]' | jq -c '[.]'
+```
+
+
+- OUT
+```
+[{"id":"1","value":"CAAGAGAGT"}]
+[{"id":"2","value":"TCGCGTCTAG"}]
+[{"id":"3","value":"AGTCGGTCTT"}]
+[{"id":"4","value":"GTCTGGC"}]
+[{"id":"5","value":"AGTCT"}]
+[{"id":"6","value":"GCAGACTGAT"}]
+[{"id":"7","value":"GGTAGGCG"}]
+[{"id":"8","value":"ACCGGTGTT"}]
+[{"id":"9","value":"GTTCTAGCA"}]
+[{"id":"10","value":"GTAGCAGGT"}]
+```
