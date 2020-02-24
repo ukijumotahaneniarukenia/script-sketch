@@ -1,1 +1,4 @@
-stdout.write("hello, world")
+import os
+
+when isMainModule:
+  let args = commandLineParams()

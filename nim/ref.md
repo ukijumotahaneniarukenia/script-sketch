@@ -1,3 +1,8 @@
+- 競プロ
+  - https://ikatakos.com/pot/programming/nim/programming_contest
+
+- https://gist.github.com/miyakogi/b1df00c8bc99927d9d0d
+
 - 外部ファイル読み込み系
   - https://nim-lang.org/docs/manual.html#modules-import-statement
 
