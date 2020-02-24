@@ -1,42 +1,72 @@
 [
   {
-    "id": "1",
-    "value": "CAAGAGAGT"
+    "grp": "A",
+    "items": [
+      {
+        "grp": "A",
+        "id": "3",
+        "value": "AGTCGGTCTT"
+      },
+      {
+        "grp": "A",
+        "id": "5",
+        "value": "AGTCT"
+      },
+      {
+        "grp": "A",
+        "id": "8",
+        "value": "ACCGGTGTT"
+      }
+    ]
   },
   {
-    "id": "2",
-    "value": "TCGCGTCTAG"
+    "grp": "C",
+    "items": [
+      {
+        "grp": "C",
+        "id": "1",
+        "value": "CAAGAGAGT"
+      }
+    ]
   },
   {
-    "id": "3",
-    "value": "AGTCGGTCTT"
+    "grp": "G",
+    "items": [
+      {
+        "grp": "G",
+        "id": "4",
+        "value": "GTCTGGC"
+      },
+      {
+        "grp": "G",
+        "id": "6",
+        "value": "GCAGACTGAT"
+      },
+      {
+        "grp": "G",
+        "id": "7",
+        "value": "GGTAGGCG"
+      },
+      {
+        "grp": "G",
+        "id": "9",
+        "value": "GTTCTAGCA"
+      },
+      {
+        "grp": "G",
+        "id": "10",
+        "value": "GTAGCAGGT"
+      }
+    ]
   },
   {
-    "id": "4",
-    "value": "GTCTGGC"
-  },
-  {
-    "id": "5",
-    "value": "AGTCT"
-  },
-  {
-    "id": "6",
-    "value": "GCAGACTGAT"
-  },
-  {
-    "id": "7",
-    "value": "GGTAGGCG"
-  },
-  {
-    "id": "8",
-    "value": "ACCGGTGTT"
-  },
-  {
-    "id": "9",
-    "value": "GTTCTAGCA"
-  },
-  {
-    "id": "10",
-    "value": "GTAGCAGGT"
+    "grp": "T",
+    "items": [
+      {
+        "grp": "T",
+        "id": "2",
+        "value": "TCGCGTCTAG"
+      }
+    ]
   }
 ]
