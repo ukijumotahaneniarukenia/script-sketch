@@ -1,10 +1,7 @@
-- 処理前
-IN
+- IN
+
 ```
-cat test-groonga.json | jq '.'
-```
-OUT
-```
+$cat test.json
 [
   {
     "id": 1,
@@ -36,15 +33,17 @@ OUT
 ]
 ```
 
+- CMD
+  - 単一キーごとに処理してパイプで流していく
+  - mapだから透過的に振る舞う
 
-- 単一キーごとに処理してパイプで流していく
-
-IN
 ```
-cat test-groonga.json | jq '.|map(.updated|=strftime("%Y-%M-%dT%H:%M:%S"))|map(.crawled|=strftime("%Y-%M-%dT%H:%M:%S"))|map(.published|=strftime("%Y-%M-%dT%H:%M:%S"))'
+$cat test.json | jq '.|map(.updated|=strftime("%Y-%M-%dT%H:%M:%S"))|map(.crawled|=strftime("%Y-%M-%dT%H:%M:%S"))|map(.published|=strftime("%Y-%M-%dT%H:%M:%S"))'
 ```
 
-OUT
+
+- OUT
+
 ```
 [
   {
@@ -75,3 +74,4 @@ OUT
     "url": "https://deposit-grey"
   }
 ]
+```
