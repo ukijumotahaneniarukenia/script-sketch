@@ -1,30 +1,10 @@
 [
   {
-    "grp": 1,
-    "item": {
-      "key": "a",
-      "value": 11
-    }
+    "key": "a",
+    "value": "foo"
   },
   {
-    "grp": 1,
-    "item": {
-      "key": "b",
-      "value": 12
-    }
-  },
-  {
-    "grp": 2,
-    "item": {
-      "key": "c",
-      "value": 13
-    }
-  },
-  {
-    "grp": 2,
-    "item": {
-      "key": "d",
-      "value": 14
-    }
+    "key": "b.c.d.test.key",
+    "value": "value"
   }
 ]
