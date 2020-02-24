@@ -1,10 +1,18 @@
 [
   {
-    "key": "a",
-    "value": "foo"
+    "grp": 1,
+    "value": 10
   },
   {
-    "key": "b.c.d.test.key",
-    "value": "value"
+    "grp": 1,
+    "value": 3
+  },
+  {
+    "grp": 2,
+    "value": 1
+  },
+  {
+    "grp": 2,
+    "value": 5
   }
 ]
