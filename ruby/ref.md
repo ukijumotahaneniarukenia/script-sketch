@@ -7,3 +7,7 @@
 
 - XMLをJSONに変換する
   - http://seratch.hatenablog.jp/entry/20120308/1331187494
+
+- rubyのクローラがいいかも
+
+  - https://www.slideshare.net/takurosasaki/ruby-crawler
