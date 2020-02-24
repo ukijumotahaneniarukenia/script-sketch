@@ -1,14 +1,14 @@
 import os
 
 proc main(args: seq[string]): int =
-  if args.len < 1:
-    stdout.writeLine("unko")
-    return 1
+  if args.len == 0:
+    let s = readLine(stdin)
+    stdout.writeLine(s)
+    return 0
   else:
-    stdout.writeLine("unkojanai")
+    stdout.writeLine(args)
     return 0
 
 when isMainModule:
   let args = commandLineParams()
-  stdout.writeLine(args)
   quit main(args)
