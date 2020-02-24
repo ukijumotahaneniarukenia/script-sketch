@@ -22,6 +22,11 @@
 - CMD
   - 属性をタプルとして管理するのか。勉強になる。属性値かどうかを判別する方法が組み込まれているんだな。すごい。
 ```
+sudo gem install activesupport
+sudo gem install nokogiri
+```
+
+```
 ruby 00002-ruby-XMLをJSONに変換する-convert-xml-to-json-XXX.rb 2>/dev/null | jq
 ```
 
