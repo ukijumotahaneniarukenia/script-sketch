@@ -1,22 +1,7 @@
-```
-apache@7a3307bc719a ~/script-sketch/jq$cat test.json | jq -r 'paths|map(if type=="number" then "["+tostring+"]" else "."+tojson end)|join("")'
-[0]
-[0]."key"
-[0]."value"
-[1]
-[1]."key"
-[1]."value"
-[2]
-[2]."key"
-[2]."value"
-[3]
-[3]."key"
-[3]."value"
-```
-
+- IN
 
 ```
-apache@7a3307bc719a ~/script-sketch/jq$cat test.json
+$cat test.json
 [
   {
     "key": "items.0.id",
@@ -35,4 +20,28 @@ apache@7a3307bc719a ~/script-sketch/jq$cat test.json
     "value": "経験者がいない状態で、戦略的DDDを現場でやってみた話/ OOC2020"
   }
 ]
+```
+
+- CMD
+
+```
+$cat test.json | jq -r 'paths|map(if type=="number" then "["+tostring+"]" else "."+tojson end)|join("")'
+```
+
+
+- OUT
+
+```
+[0]
+[0]."key"
+[0]."value"
+[1]
+[1]."key"
+[1]."value"
+[2]
+[2]."key"
+[2]."value"
+[3]
+[3]."key"
+[3]."value"
 ```
