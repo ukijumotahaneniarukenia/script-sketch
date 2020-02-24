@@ -1,18 +1,30 @@
 [
   {
     "grp": 1,
-    "value": "a"
+    "item": {
+      "key": "a",
+      "value": 11
+    }
   },
   {
     "grp": 1,
-    "value": "b"
+    "item": {
+      "key": "b",
+      "value": 12
+    }
   },
   {
     "grp": 2,
-    "value": "c"
+    "item": {
+      "key": "c",
+      "value": 13
+    }
   },
   {
     "grp": 2,
-    "value": "d"
+    "item": {
+      "key": "d",
+      "value": 14
+    }
   }
 ]
