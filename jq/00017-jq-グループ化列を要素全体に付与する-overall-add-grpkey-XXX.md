@@ -65,33 +65,74 @@ $cat e.json
   }
 ]
 ```
-- CMD
-  - 単一検証から複数検証を行うために**[.[0]]**のみを取り除けば、検証可能なようにハンディにしておくため。
-  - ただ、状況によるので、なんとも
 
+- CMD
+  - map-mapべんりやな
 ```
-cat e.json | jq '[.[0]]|map(.)'
+cat e.json | jq 'map([.])|map(.[].grp as $grp|.[].item|map({grp:$grp}+.))'
 ```
 
 - OUT
+
 ```
 [
-  {
-    "grp": 0,
-    "item": [
-      {
-        "id": "3",
-        "value": "AGTCGGTCTT"
-      },
-      {
-        "id": "5",
-        "value": "AGTCT"
-      },
-      {
-        "id": "8",
-        "value": "ACCGGTGTT"
-      }
-    ]
-  }
+  [
+    {
+      "grp": 0,
+      "id": "3",
+      "value": "AGTCGGTCTT"
+    },
+    {
+      "grp": 0,
+      "id": "5",
+      "value": "AGTCT"
+    },
+    {
+      "grp": 0,
+      "id": "8",
+      "value": "ACCGGTGTT"
+    }
+  ],
+  [
+    {
+      "grp": 1,
+      "id": "1",
+      "value": "CAAGAGAGT"
+    }
+  ],
+  [
+    {
+      "grp": 2,
+      "id": "4",
+      "value": "GTCTGGC"
+    },
+    {
+      "grp": 2,
+      "id": "6",
+      "value": "GCAGACTGAT"
+    },
+    {
+      "grp": 2,
+      "id": "7",
+      "value": "GGTAGGCG"
+    },
+    {
+      "grp": 2,
+      "id": "9",
+      "value": "GTTCTAGCA"
+    },
+    {
+      "grp": 2,
+      "id": "10",
+      "value": "GTAGCAGGT"
+    }
+  ],
+  [
+    {
+      "grp": 3,
+      "id": "2",
+      "value": "TCGCGTCTAG"
+    }
+  ]
 ]
 ```
