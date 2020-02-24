@@ -1,29 +1,18 @@
 [
   {
-    "id": 1,
-    "title": "Metal auxiliary Quality",
-    "tag": "Investment Account",
-    "updated": 1581748485,
-    "crawled": 1581749225,
-    "published": 1581748485,
-    "url": "https://seize-Technician-Morocco"
+    "grp": 1,
+    "value": "a"
   },
   {
-    "id": 2,
-    "title": "Incredible Concrete Chair",
-    "tag": "Home Loan Account",
-    "updated": 1581748485,
-    "crawled": 1581749448,
-    "published": 1581748485,
-    "url": "https://Rand-Namibia-Dollar"
+    "grp": 1,
+    "value": "b"
   },
   {
-    "id": 3,
-    "title": "architecture bandwidth-monitored matrix",
-    "tag": "moderator calculating",
-    "updated": 1581748485,
-    "crawled": 1581749140,
-    "published": 1581748485,
-    "url": "https://deposit-grey"
+    "grp": 2,
+    "value": "c"
+  },
+  {
+    "grp": 2,
+    "value": "d"
   }
 ]
