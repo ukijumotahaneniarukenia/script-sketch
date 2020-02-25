@@ -11,7 +11,7 @@ j
 - CMD
 
 ```
-$printf "%s\n" {a..j} | xargs -n3 | php 標準入力.php
+$printf "%s\n" {a..j} | xargs -n3 | php 00002-php-パイプ経由の標準入力-stdin-via-pipe.php
 ```
 
 - OUT

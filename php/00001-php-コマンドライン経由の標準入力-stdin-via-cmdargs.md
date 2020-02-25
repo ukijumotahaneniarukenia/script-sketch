@@ -8,7 +8,7 @@
 - CMD
 
 ```
-$php コマンドライン経由の標準入力.php
+$php コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php
 ```
 
 - OUT
@@ -16,7 +16,7 @@ $php コマンドライン経由の標準入力.php
 ```
 Array
 (
-    [0] => コマンドライン経由の標準入力.php
+    [0] => コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php
 )
 ```
 
@@ -32,7 +32,7 @@ a b c d e f g h i j
 - CMD
 
 ```
-$php コマンドライン経由の標準入力.php {a..j}
+$php コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php {a..j}
 ```
 
 - OUT
@@ -40,7 +40,7 @@ $php コマンドライン経由の標準入力.php {a..j}
 ```
 Array
 (
-    [0] => コマンドライン経由の標準入力.php
+    [0] => コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php
     [1] => a
     [2] => b
     [3] => c
@@ -70,7 +70,7 @@ j
 - CMD
 
 ```
-$php コマンドライン経由の標準入力.php "$(printf "%s\n" {a..j} | xargs -n3)"
+$php コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php "$(printf "%s\n" {a..j} | xargs -n3)"
 ```
 
 
@@ -79,7 +79,7 @@ $php コマンドライン経由の標準入力.php "$(printf "%s\n" {a..j} | xa
 ```
 Array
 (
-    [0] => コマンドライン経由の標準入力.php
+    [0] => コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php
     [1] => a b c
 d e f
 g h i
@@ -102,7 +102,7 @@ j
 - CMD
 
 ```
-$php コマンドライン経由の標準入力.php $(printf "%s\n" {a..j} | xargs -n3)
+$php コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php $(printf "%s\n" {a..j} | xargs -n3)
 ```
 
 - OUT
@@ -110,7 +110,7 @@ $php コマンドライン経由の標準入力.php $(printf "%s\n" {a..j} | xar
 ```
 Array
 (
-    [0] => コマンドライン経由の標準入力.php
+    [0] => コマンドライン経由の00001-php-コマンドライン経由の標準入力-stdin-via-cmdargs.php
     [1] => a
     [2] => b
     [3] => c
