@@ -1,33 +1,102 @@
-実際はファイルとテーブルの項目マッピング定義が必要になり。
+# 所感
 
-ファイル名とテーブル名は揃える
+- 実際はファイルとテーブルの項目マッピング定義が必要になり。
 
-データダンプディレクトリが決められており。
+- ファイル名とテーブル名は揃える
 
-全てrootユーザーで作業する
+- データダンプディレクトリが決められており。
 
-CSVファイル
+- 全てrootユーザーで作業する
 
-単一ファイルインポート
+# エクスポート
 
-mysql -uroot -pMysql3306 -Dtestdb -e 'drop table test_tbl;create table test_tbl(col1 text,col2 text,col3 text);'
+- データベース単位
 
-echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste -d',' $(seq 3 | xargs -I@ echo - | xargs) | head -n10" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1","col2","col3"'>/var/lib/mysql-files/test_tbl.csv
+ダンプ
+```
+mysqldump -uroot -pMysql3306 testdb | gzip >testdb_$(date "+%Y_%m_%d").dump.gz
+```
 
-テーブルにデータあれば削除し、ヘッダ行をスキップしてインポート
 
+# インポート
+
+- データベース単位
+
+リストア
+
+```
+zcat testdb_2020_02_18.dump.gz | mysql -uroot -pMysql3306 -Dtestdb
+```
+
+- 単一テーブル単位
+
+  - CSV（ヘッダ行なし）
+
+ファイル作成
+```
+$echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste -d',' $(seq 3 | xargs -I@ echo - | xargs) | head -n10" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1","col2","col3"'>/var/lib/mysql-files/test_tbl.csv
+```
+
+テーブル削除
+```
+$mysql -uroot -pMysql3306 -Dtestdb -e 'drop table test_tbl;'
+```
+
+
+テーブル作成
+```
+$mysql -uroot -pMysql3306 -Dtestdb -e 'create table test_tbl(col1 text,col2 text,col3 text);'
+```
+
+インポート
+```
 mysqlimport -uroot -pMysql3306 --delete --fields-terminated-by=',' --fields-optionally-enclosed-by='"' --ignore-lines=1 testdb /var/lib/mysql-files/test_tbl.csv
+```
 
+確認
+```
 
-複数ファイルインポート
+```
 
+  - TSV（ヘッダ行なし）
+
+ファイル作成
+```
+echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n10" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1"	"col2"	"col3"'>/var/lib/mysql-files/test_tbl.tsv
+```
+
+テーブル削除
+```
+$mysql -uroot -pMysql3306 -Dtestdb -e 'drop table test_tbl;'
+```
+
+テーブル作成
+```
+$mysql -uroot -pMysql3306 -Dtestdb -e 'create table test_tbl(col1 text,col2 text,col3 text);'
+```
+
+インポート
+```
+mysqlimport -uroot -pMysql3306 --delete --ignore-lines=1 testdb /var/lib/mysql-files/test_tbl.tsv
+```
+
+確認
+```
+
+```
+
+- 複数テーブル単位
+  - いいかんじのスクリプトにこしらえる元ネタ
+  - インポート対象のファイルは外部ファイルに切り出しておくことを想定して書いておく
+
+  - CSV（ヘッダ行なし）
+
+```
 rm -rf /var/lib/mysql-files/*
 
 echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste -d',' $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1","col2","col3"'>/var/lib/mysql-files/test.csv
 
 cat /var/lib/mysql-files/test.csv | split -l 100000 --numeric-suffixes=1 --suffix-length=3 --additional-suffix=.csv - /var/lib/mysql-files/test_"$(date "+%Y_%m_%d")"_
-
-ls -lh /var/lib/mysql-files/*csv
 
 ls /var/lib/mysql-files/*csv | grep -v 001 | xargs -I@ sed -i '1i"col1","col2","col3"' @
 
@@ -46,24 +115,18 @@ mysql -uroot -pMysql3306 -Dtestdb -e 'source ddl.sql'
 chmod 700 ./import-cmd.sh
 
 ./import-cmd.sh
+```
 
+  - TSV（ヘッダ行なし）
 
-tsvファイル
-
-単一ファイルインポート
-
-mysql -uroot -pMysql3306 -Dtestdb -e 'drop table test_tbl;create table test_tbl(col1 text,col2 text,col3 text);'
-echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n10" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1"	"col2"	"col3"'>/var/lib/mysql-files/test_tbl.tsv
-mysqlimport -uroot -pMysql3306 --delete --ignore-lines=1 testdb /var/lib/mysql-files/test_tbl.tsv
-
-複数ファイルインポート
-
+```
 rm -rf /var/lib/mysql-files/*
+
 echo "cat /dev/urandom | base64 -w0 | fold -w 10 | paste $(seq 3 | xargs -I@ echo - | xargs) | head -n1000000" | sh | perl -pe 's/\x22|\x27//g'|sed '1i"col1"	"col2"	"col3"'>/var/lib/mysql-files/test.tsv
+
 cat /var/lib/mysql-files/test.tsv | split -l 100000 --numeric-suffixes=1 --suffix-length=3 --additional-suffix=.tsv - /var/lib/mysql-files/test_"$(date "+%Y_%m_%d")"_
 
 ls /var/lib/mysql-files/*tsv | grep -v 001 | xargs -I@ sed -i '1i"col1"	"col2"	"col3"' @
-
 
 rm -rf import-cmd.sh ddl.sql && ( cd /var/lib/mysql-files && find . -name "*tsv" ) | perl -pe 's;\./;;g' | \
   while read tgt;do
@@ -71,25 +134,18 @@ rm -rf import-cmd.sh ddl.sql && ( cd /var/lib/mysql-files && find . -name "*tsv"
     ( echo "mysqlimport -uroot -pMysql3306 --delete --ignore-lines=1 testdb " /var/lib/mysql-files/$tgt )>>import-cmd.sh
   done
 
+mysql -uroot -pMysql3306 -Dtestdb -e 'source ddl.sql'
+
+chmod 700 ./import-cmd.sh
+
+./import-cmd.sh
+```
 
 確認
-
+```
 with sub as(
 SELECT row_number()over(order by TABLE_NAME) as rn
 ,concat('select ',"'",TABLE_NAME,"'",' as tbl,count(*) as cnt from ',table_name) as build_sql FROM INFORMATION_SCHEMA.TABLES t WHERE TABLE_NAME like 'test%'
 )select concat(s1.build_sql,case when exists(select 1 from sub s2 where s1.rn<s2.rn) then ' union all' else ';' end )as build_sql from sub s1
 ;
-
-
-
-
-ダンプ
-
-mysqldump -uroot -pMysql3306 testdb | gzip >testdb_$(date "+%Y_%m_%d").dump.gz
-
-
-
-リストア
-
-zcat testdb_2020_02_18.dump.gz | mysql -uroot -pMysql3306 -Dtestdb
-
+```
