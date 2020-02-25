@@ -114,6 +114,7 @@ CREATE TABLE
 ```
 $psql -U postgres -d testdb -c "\copy test_tbl from 'test.csv' with csv;"
 COPY 10
+```
 
 確認
 ```
