@@ -17,7 +17,7 @@ if ARGV.length > 0
   puts "コマンドライン引数"
 elsif FileTest.pipe?(STDIN)
   pipe_args = STDIN.readlines.map { |line| line.chomp }
-  puts pipe_args[3]
+  puts pipe_args
   puts "パイプ経由引数"
 else
   usage

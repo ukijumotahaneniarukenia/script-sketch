@@ -11,3 +11,7 @@
 - rubyのクローラがいいかも
 
   - https://www.slideshare.net/takurosasaki/ruby-crawler
+
+- Fakerでダミーデータを生成する
+  - https://qiita.com/Keisuke69/items/edcaadc100361cf945e2
+
