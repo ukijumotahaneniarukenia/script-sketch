@@ -1,2 +1,0 @@
-- シグナルハンドラ
-  - https://www.php.net/manual/ja/function.pcntl-signal.php
