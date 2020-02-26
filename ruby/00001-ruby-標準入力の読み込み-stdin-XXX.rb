@@ -4,7 +4,7 @@ def usage
   f = File.basename(__FILE__)
   puts <<~EOF
 Usage:
-  IN :  #{f}
+  IN :  printf "%s\\n" {a..j} | xargs -n3 | ./#{f} or ./#{f} "$(printf "%s\\n" {a..j} | xargs -n3)"
   OUT:
 EOF
   return 0
