@@ -1,3 +1,13 @@
+# Unicodeオプション
+
+- http://blog.livedoor.jp/dankogai/archives/51026593.html
+```
+aine@centos ~/script-env-regression-test$echo うんこUNKOウンコunko産んこＵｎｋｏｳﾝｺ | perl -CIO -pe 's/\p{Katakana}/-/g'
+うんこUNKO---unko産んこＵｎｋｏ---
+
+```
+
+
 # プログラム単位のファイル名の切り方参考に
 
 - http://www.kent-web.com/
