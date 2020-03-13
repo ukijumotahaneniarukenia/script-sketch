@@ -1,3 +1,7 @@
+- 可変長読込ができぬとき
+  - キャプチャして代用
+  - https://bokko.hatenablog.com/entry/20071201/1196513384
+
 # Unicodeオプション
 
 - http://blog.livedoor.jp/dankogai/archives/51026593.html
