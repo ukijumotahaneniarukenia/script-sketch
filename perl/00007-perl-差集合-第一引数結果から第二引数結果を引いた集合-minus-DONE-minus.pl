@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+use Data::Dumper;
+
 sub usage{
   my $msg=<<"EOS";
 Usage:
@@ -33,9 +35,6 @@ sub main{
   my $rt=0;
   if ( @ARGV ) {
       $rt=mock @ARGV;
-  } elsif ( -p STDIN ) {
-      @stdin=map { $_ =~ s/\n$//;$_;} split(/ /,<STDIN>); #スペース区切りの単一スカラ値で入ってくるぽいので、splitで配列に展開し、最終要素の末尾に改行文字が含まれているので、sコマンドで置換
-      $rt=mock @stdin;
   } else {
       usage;
   }
