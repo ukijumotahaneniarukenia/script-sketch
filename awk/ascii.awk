@@ -36,3 +36,41 @@ function def_ascii_code(){
   RCB="\x7d"
   TLD="\x7e"
 }
+
+BEGIN{
+  def_ascii_code()
+  print LNF
+  print SPA
+  print ECM
+  print DQT
+  print NSG
+  print DLR
+  print PCT
+  print AMP
+  print SQT
+  print LPS
+  print RPS
+  print AST
+  print PLS
+  print CNM
+  print PYN
+  print DOT
+  print SLS
+  print CLN
+  print SCN
+  print LTS
+  print EQL
+  print GTS
+  print QES
+  print ATM
+  print LSB
+  print BSL
+  print RSB
+  print CLT
+  print USC
+  print BQT
+  print LCB
+  print VTB
+  print RCB
+  print TLD
+}
