@@ -256,6 +256,9 @@ https://memo.sugyan.com/entry/20090906/1252176278
 パタン生成に使える
 https://www.perl.com/article/creating-ip-address-tools-from-scratch/
 
+- perl oneliner
+
+  - https://yohei-a.hatenablog.jp/entry/20150711/1436623390#f-fe7b2784
 
 こういうのいい
 https://qiita.com/uniqrow/items/e1fab393113d32e3a7cb
