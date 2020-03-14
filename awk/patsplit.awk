@@ -1,14 +1,15 @@
-#!/usr/local/bin/gawk -f
+#!/usr/bin/env gawk
 
 BEGIN {
+  #カンマ以外の文字列の0回以上の連続ないしはダブルクヲートで囲まれた文字列をパタンキャッチ
   pat[1] = "([^,]*)|(\"[^\"]+\")"
-  dat[1] = "a,bb,ccc,,dddd,,"
-
-  for (j = 1; j in dat; j++) {
-    printf("Splitting: <%s>\n", dat[j])
-    n = patsplit(dat[j], cols, pat[j], sep)
-    print "n =", n
-    for (i = 1; i <= n; i++)
-      printf("cols[%d] = <%s>\n", i, cols[i])
+  for(idx in ARGV){
+    if(idx>0){
+      n = patsplit(ARGV[idx], cols, pat[1], sep)
+      print "n =", n
+      for (i = 1; i <= n; i++){
+        printf("cols[%d] = <%s>\n", i, cols[i])
+      }
+    }
   }
 }
