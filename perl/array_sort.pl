@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl5.30.0
+#!/usr/bin/env perl
 
 my @arr=(3,2,8,6);
 
