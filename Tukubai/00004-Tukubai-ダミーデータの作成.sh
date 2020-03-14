@@ -2,6 +2,7 @@
 
 day=20140101
 range=365
+len=32
 nn=$1;shift
 
 
@@ -17,16 +18,19 @@ cat a | juni | \
   while read id tag typ len;do
     mkfifo a-$id
     if [ $typ = "num" ];then
+      #echo "bash 00001-Tukubai-数値型データの作成.sh $len $nn >a-$id &"
       bash 00001-Tukubai-数値型データの作成.sh $len $nn >a-$id &
     elif [ $typ = "str" ];then
+      #echo "bash 00002-Tukubai-文字列型データの作成.sh $len $nn >a-$id &"
       bash 00002-Tukubai-文字列型データの作成.sh $len $nn >a-$id &
     elif [ $typ = "yyyymmdd" ];then
-      bash 00003-Tukubai-日付型データの作成.sh $len $nn >a-$id &
+      #echo "bash 00003-Tukubai-日付型データの作成.sh $len $nn >a-$id &"
+      bash 00003-Tukubai-日付型データの作成.sh $day $range $nn >a-$id &
     fi
   done
 
 paste -d' ' a-*
 
-rm -rf a-*
+rm -rf a*
 
 exit 0
