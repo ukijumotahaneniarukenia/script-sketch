@@ -1,1 +1,0 @@
-for i in $(yes "$(echo -ne '\U1F194')" | head -n 5);do echo -ne $i;done
