@@ -1,6 +1,6 @@
-#!/usr/local/bin/awk
+#!/usr/bin/env awk
 
-function _def_ascii_code(){
+function def_ascii_code(){
   LNF="\x0a"
   SPA="\x20"
   ECM="\x21"

@@ -1,2 +1,0 @@
-/UNKO/d
-/ANKO/d
