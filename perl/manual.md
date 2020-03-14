@@ -1,12 +1,17 @@
-[こんどこそわかる(肯|否)定(先|後)読み](https://qiita.com/tohta/items/2ba7ecde5636b38ef1f6)
+- リファレンスは中身をみることができないので。デリファレンスする。
+  - https://tutorial.perlzemi.com/blog/20180214151861.html
+
+- こんどこそわかる(肯|否)定(先|後)読み
+
+  - https://qiita.com/tohta/items/2ba7ecde5636b38ef1f6
 
 
-C言語での実装
+- C言語での実装
 - http://ocw.nagoya-u.jp/files/259/2nd.pdf
 - http://www.yamamo10.jp/yamamoto/lecture/entrance_ex/info_recursive/html/node1.html
 
-アルゴリズムやり直す
-- https://blog.shibayu36.org/entry/2016/12/21/081625
+- 順列アルゴリズム
+  - https://blog.shibayu36.org/entry/2016/12/21/081625
 
 - 可変長読込ができぬとき
   - キャプチャして代用
