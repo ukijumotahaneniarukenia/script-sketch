@@ -56,3 +56,15 @@ https://rcmdnk.com/blog/2014/01/15/coputer-bash-zsh/
 - 名前付きパイプに関して
 
   - http://cympfh.cc/taglibro/2019/12/07
+
+- 標準出力と標準エラー出力とファイルディスクリプタ
+
+  - http://www.usinezumi.com/blog/2016/11/02/329/
+
+- ファイルディスクリプタ
+
+  - https://github.com/ueokande/tegrep/blob/master/tegrep
+
+  - testコマンドの-tオプション
+  - -t FD  ファイル記述子 FD がターミナル上で開いている
+
