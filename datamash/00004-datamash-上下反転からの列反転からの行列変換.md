@@ -1,59 +1,81 @@
 - IN
-
 ```
-$cat test-on-head.tsv
-更新日	原価	商品コード	売値	商品名
-20140724	639	68435	168	ZxdXZInepm
-20140116	997	41360	510	JifBbrIXJP
-20140220	539	52529	640	cHrlaTAQVs
-20140208	692	08503	545	OlRPjCzqXp
-20140327	727	18132	393	VjOfYukvFU
-20141229	943	47231	728	EhqWwkvhCs
-20140102	858	78144	799	aNwwNfBzPH
-20140319	568	32927	665	nIpREeCeFV
-20140928	085	17638	373	vNLLyysPcw
-20140729	518	12457	011	FHdjXBvAvN
+$cat test-non-head.tsv
+A	1	xx
+B	2	yy
+C	3	zz
 ```
 
 - CMD
-
 ```
+$cat test-non-head.tsv | tac
+```
+
+- OUT
+```
+C	3	zz
+B	2	yy
+A	1	xx
+```
+
+- CMD
+```
+$cat test-non-head.tsv | tac | rev
+```
+
+- OUT
+```
+zz	3	C
+yy	2	B
+xx	1	A
+```
+
+- CMD
+```
+$cat test-non-head.tsv | tac | rev | datamash transpose
+```
+
+- OUT
+```
+zz	yy	xx
+3	2	1
+C	B	A
+```
+
+- CMD
+```
+$cat test-non-head.tsv | tac | rev | datamash transpose | rev
 ```
 
 - OUT
 
 ```
+xx	yy	zz
+1	2	3
+A	B	C
 ```
 
 - CMD
-
 ```
-$datamash reverse <test-on-head.tsv
+$cat test-non-head.tsv | tac | rev | datamash transpose | rev | tac
+```
+
+- OUT
+```
+A	B	C
+1	2	3
+xx	yy	zz
+```
+
+- CMD
+```
+$cat test-non-head.tsv | tac | rev | datamash transpose | rev | tac | datamash transpose
 ```
 
 - OUT
 
 ```
-```
-
-- CMD
-
-```
-$datamash reverse <test-on-head.tsv
-```
-
-- OUT
-
-```
-```
-
-- CMD
-
-```
-$datamash reverse <test-on-head.tsv
-```
-
-- OUT
-
-```
+A	1	xx
+B	2	yy
+C	3	zz
 ```
