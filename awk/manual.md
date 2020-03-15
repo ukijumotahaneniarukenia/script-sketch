@@ -9,3 +9,9 @@
 
 - アイディアがたしかよかった
   - https://yuis-programming.com/?p=1621
+
+- 
+
+```
+echo {{a..z},{A..Z},{1..9},{a..z},{1..9},{A..D}} | tr -d ' ' | fold -s10>test.txt
+```
