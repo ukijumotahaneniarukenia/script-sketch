@@ -1,3 +1,11 @@
+- IN
+
+```
+$time ./c.sh  32 10000000 >done
+```
+- CMD
+
+```
 #!/bin/bash
 
 mx=$1;shift
@@ -13,3 +21,12 @@ done
 paste a-* | tr -d '\t'
 
 rm -rf a-* a
+```
+
+- OUT
+
+```
+real	0m3.126s
+user	0m15.291s
+sys	0m1.531s
+```
