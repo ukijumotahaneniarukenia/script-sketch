@@ -1,7 +1,7 @@
 - IN
 
 ```
-$cat test-na.tsv
+$cat test-na-on-head.tsv
 更新日	原価	商品コード	売値	商品名
 20140724	639	68435	168	ZxdXZInepm
 20140116	997	41360	510	JifBbrIXJP
@@ -18,7 +18,7 @@ $cat test-na.tsv
 - CMD
 
 ```
-$datamash transpose <test-na.tsv
+$datamash transpose <test-na-on-head.tsv
 ```
 
 - OUT
@@ -34,7 +34,7 @@ $datamash transpose <test-na.tsv
 - CMD
 
 ```
-$datamash transpose <test-na.tsv | awk '{print NF}'
+$datamash transpose <test-na-on-head.tsv | awk '{print NF}'
 ```
 
 - OUT
@@ -51,7 +51,7 @@ $datamash transpose <test-na.tsv | awk '{print NF}'
 - CMD
 
 ```
-$datamash transpose <test-na.tsv | perl -pe 's/\t{2}/\tNA\t/'
+$datamash transpose <test-na-on-head.tsv | perl -pe 's/\t{2}/\tNA\t/'
 ```
 
 - OUT
@@ -67,7 +67,7 @@ $datamash transpose <test-na.tsv | perl -pe 's/\t{2}/\tNA\t/'
 - CMD
 
 ```
-$datamash transpose <test-na.tsv | perl -pe 's/\t{2}/\tNA\t/' | awk '{print NF}'
+$datamash transpose <test-na-on-head.tsv | perl -pe 's/\t{2}/\tNA\t/' | awk '{print NF}'
 ```
 
 - OUT
@@ -83,13 +83,13 @@ $datamash transpose <test-na.tsv | perl -pe 's/\t{2}/\tNA\t/' | awk '{print NF}'
 - CMD
 
 ```
-$datamash transpose <test-na.tsv | perl -pe 's/\t{2}/\tNA\t/' >test-na.tsv.trans
+$datamash transpose <test-na-on-head.tsv | perl -pe 's/\t{2}/\tNA\t/' >test-na-on-head.tsv.trans
 ```
 
 - OUT
 
 ```
-$cat test-na.tsv.trans
+$cat test-na-on-head.tsv.trans
 更新日	20140724	20140116	20140220	20140208	20140327	20141229	20140102	20140319	20140928	20140729
 原価	639	997	539	692	727	943	858	568	085	518
 商品コード	68435	41360	52529	08503	18132	47231	78144	32927	17638	12457
