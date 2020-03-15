@@ -6,3 +6,5 @@ nn=$1;shift;
 tag=$1;shift;
 
 mdate -e $day/+$range | tarr | shuf -rn$nn >done-dtm-$tag
+
+sed -i "1i$tag" done-dtm-$tag

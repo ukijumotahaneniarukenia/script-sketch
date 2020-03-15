@@ -13,4 +13,6 @@ done
 
 paste a-* | tr -d '\t' >done-num-$tag
 
+sed -i "1i$tag" done-num-$tag
+
 rm -rf a-* a
