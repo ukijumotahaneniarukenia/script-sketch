@@ -7,4 +7,3 @@ chk_single_row(){
   [ $CNT -gt 1 ] || echo 0
   [ $CNT -gt 1 ] && echo 1
 }
-
