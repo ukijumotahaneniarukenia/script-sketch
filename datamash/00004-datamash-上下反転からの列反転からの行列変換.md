@@ -18,16 +18,42 @@ $cat test-on-head.tsv
 - CMD
 
 ```
-$datamash transpose <test-on-head.tsv
 ```
-
 
 - OUT
 
 ```
-更新日	20140724	20140116	20140220	20140208	20140327	20141229	20140102	20140319	20140928	20140729
-原価	639	997	539	692	727	943	858	568	085	518
-商品コード	68435	41360	52529	08503	18132	47231	78144	32927	17638	12457
-売値	168	510	640	545	393	728	799	665	373	011
-商品名	ZxdXZInepm	JifBbrIXJP	cHrlaTAQVs	OlRPjCzqXp	VjOfYukvFU	EhqWwkvhCs	aNwwNfBzPH	nIpREeCeFV	vNLLyysPcw	FHdjXBvAvN
+```
+
+- CMD
+
+```
+$datamash reverse <test-on-head.tsv
+```
+
+- OUT
+
+```
+```
+
+- CMD
+
+```
+$datamash reverse <test-on-head.tsv
+```
+
+- OUT
+
+```
+```
+
+- CMD
+
+```
+$datamash reverse <test-on-head.tsv
+```
+
+- OUT
+
+```
 ```
