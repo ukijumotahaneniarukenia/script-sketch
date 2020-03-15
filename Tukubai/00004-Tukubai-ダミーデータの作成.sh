@@ -1,9 +1,19 @@
-#!/bin/bash -x
+#!/bin/bash
+
+usage(){
+cat <<EOS
+Usage:
+  $0 100
+EOS
+exit 0
+}
 
 day=20140101
 range=365
 len=32
 nn=$1;shift
+
+[ -z $nn ] && usage
 
 cat <<EOS >tbl-def
 商品コード num 5
