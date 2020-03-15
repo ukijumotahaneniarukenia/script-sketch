@@ -51,3 +51,8 @@ http://m-hiyama.hatenablog.com/entry/20071221/1198221671
 
 パイプからの入力なのか判定
 https://rcmdnk.com/blog/2014/01/15/coputer-bash-zsh/
+
+
+- 名前付きパイプに関して
+
+  - http://cympfh.cc/taglibro/2019/12/07
