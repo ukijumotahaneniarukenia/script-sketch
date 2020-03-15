@@ -1,7 +1,7 @@
 - IN
 
 ```
-$time ./c.sh  32 10000000 >done
+$time ./00001-Tukubai-数値型データの作成.sh 32 10000000 >done
 ```
 - CMD
 
@@ -26,7 +26,15 @@ rm -rf a-* a
 - OUT
 
 ```
-real	0m3.126s
-user	0m15.291s
-sys	0m1.531s
+$time ./00001-Tukubai-数値型データの作成.sh 32 10000000 >done
+
+real	0m3.265s
+user	0m15.001s
+sys	0m1.556s
+
+$ll -lh done
+-rw-rw-r--. 1 kuraine kuraine 315M  3月 15 11:06 done
+
+$cat done | awk '{print length}' | uniq -c
+10000000 32
 ```
