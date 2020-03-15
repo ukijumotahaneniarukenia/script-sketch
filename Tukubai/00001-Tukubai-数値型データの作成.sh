@@ -2,6 +2,7 @@
 
 mx=$1;shift
 nn=$1;shift
+tag=$1;shift
 
 seq 0 9 >a
 
@@ -10,6 +11,6 @@ for i in $(seq 1 $mx | maezero 1.2);do
   cat a | shuf -rn$nn >a-$i &
 done
 
-paste a-* | tr -d '\t'
+paste a-* | tr -d '\t' >done-num-$tag
 
 rm -rf a-* a

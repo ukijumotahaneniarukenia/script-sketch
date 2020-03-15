@@ -1,12 +1,11 @@
-#!/bin/bash
+#!/bin/bash -x
 
 day=20140101
 range=365
 len=32
 nn=$1;shift
 
-
-cat <<EOS >a
+cat <<EOS >tbl-def
 商品コード num 5
 原価       num 3
 売価       num 3
@@ -14,23 +13,19 @@ cat <<EOS >a
 更新日     yyyymmdd
 EOS
 
-cat a | juni | \
+cat tbl-def | juni | \
   while read id tag typ len;do
-    mkfifo a-$id
     if [ $typ = "num" ];then
-      #echo "bash 00001-Tukubai-数値型データの作成.sh $len $nn >a-$id &"
-      bash 00001-Tukubai-数値型データの作成.sh $len $nn >a-$id &
+      bash 00001-Tukubai-数値型データの作成.sh $len $nn $tag
     elif [ $typ = "str" ];then
-      #echo "bash 00002-Tukubai-文字列型データの作成.sh $len $nn >a-$id &"
-      bash 00002-Tukubai-文字列型データの作成.sh $len $nn >a-$id &
+      bash 00002-Tukubai-文字列型データの作成.sh $len $nn $tag
     elif [ $typ = "yyyymmdd" ];then
-      #echo "bash 00003-Tukubai-日付型データの作成.sh $len $nn >a-$id &"
-      bash 00003-Tukubai-日付型データの作成.sh $day $range $nn >a-$id &
+      bash 00003-Tukubai-日付型データの作成.sh $day $range $nn $tag
     fi
   done
 
-paste -d' ' a-*
+paste -d' ' done-* >done
 
-rm -rf a*
+rm -rf done-*
 
 exit 0
