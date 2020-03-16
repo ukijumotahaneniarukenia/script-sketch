@@ -63,8 +63,8 @@ $sudo pip install pandas
 - 標準入力読み取り
 https://www.lifewithpython.com/2014/05/python-get-stdin-standard-input.html
 
-range関数
-https://note.nkmk.me/python-range-usage/
+- range関数
+  - https://note.nkmk.me/python-range-usage/
 
 - アスキー文字列からアスキーコードの相互変換
   - https://python.civic-apps.com/char-ord/
