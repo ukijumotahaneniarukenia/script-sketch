@@ -11,9 +11,8 @@ EOF
 end
 
 def mock(ary)
-  p ary[0]
-  p "===="
-  p ary[1]
+  #ary.map{|e|p File.read(e)}
+  ary.map{|e|print File.read(e)}
   return 0
 end
 
