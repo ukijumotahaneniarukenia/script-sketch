@@ -1,5 +1,17 @@
-cat test3.csv | perl -F, -anlE '
-  $,=",";
-  (@F[1]=~/banana/ or @F[2]>7) and map{s/a/PPP/} @F[1] or map{s/$/TTT/} @F[1];
-  say @F;
+#!/usr/bin/env bash
+
+cat test-nlp.txt | \
+  perl -MText::MeCab -ne '
+    $,="\t";
+    my $m=Text::MeCab->new();
+    my $c=0;
+    for(my $n=$m->parse($_);$n;$n=$n->next){
+      if($n->surface){
+        #からじゃない
+        print $.,$c++,$n->surface,"\n";
+      }else{
+        #からのばあい、初期化
+        $c=0;
+      }
+    }
 '
