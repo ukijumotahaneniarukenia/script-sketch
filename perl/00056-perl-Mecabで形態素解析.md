@@ -227,7 +227,7 @@ $cat test-nlp-done.tsv|head -n3
 - CMD
 
 ```
-$cat test-nlp-done.tsv|head -n3 |awk -v FS='\t' '{ele_cnt=split($4,array,",");for(i=ele_cnt;i>0;i--)print NR,i,array[i],$0}' | sort -nk1,2 | keta
+$cat test-nlp-done.tsv|head -n3 |awk -v FS='\t' -v OFS='\t'  '{ele_cnt=split($4,array,",");for(i=ele_cnt;i>0;i--)print NR,i,array[i],$0}' | sort -nk1,2 | keta
 ```
 
 
