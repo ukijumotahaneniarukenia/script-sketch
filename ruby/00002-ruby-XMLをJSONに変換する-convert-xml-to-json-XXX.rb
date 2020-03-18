@@ -15,7 +15,13 @@ EOF
 end
 
 def mock(ary)
-  ary.map{|e|print Hash.from_xml(File.read(e)).to_json}
+  ary.map{|e|
+    txt=Hash.from_xml(File.read(e)).to_json
+    f=e.slice!(/.*(?=\.xml)/);
+    File.open(f+".json","w") do |file|
+      file.puts txt;
+    end
+  }
   return 0
 end
 
