@@ -1,4 +1,4 @@
-#!/usr/bin/tclsh
+#!/usr/bin/env tclsh
 
 #https://code-examples.net/ja/docs/tcl_tk/tclcmd/open.htm
 #https://freesoftnet.co.jp/webfiles/tclkits/doc/tclcom.html
@@ -11,7 +11,7 @@ Usage:
 
 コマンドライン経由引数
 
-\$echo {a..g} | xargs -n3 | [info script] 
+\$echo {a..g} | xargs -n3 | [info script]
 {{a b c} {d e f} g}
 
 パイプ経由引数
