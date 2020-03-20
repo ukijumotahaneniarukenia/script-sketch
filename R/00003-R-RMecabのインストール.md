@@ -1,5 +1,6 @@
 - LIB
   - http://rmecab.jp/wiki/index.php?RMeCab
+  - http://rmecab.jp/wiki/index.php?plugin=attach&refer=SoftArchive&openfile=manual081108.pdf
 
 - CMD
   - rootユーザーで実行
