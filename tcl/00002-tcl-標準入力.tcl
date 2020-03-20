@@ -1,8 +1,5 @@
 #!/usr/bin/env tclsh
 
-#https://code-examples.net/ja/docs/tcl_tk/tclcmd/open.htm
-#https://freesoftnet.co.jp/webfiles/tclkits/doc/tclcom.html
-#
 proc usage {} {
   puts "
 Usage:
@@ -27,6 +24,7 @@ Usage:
 
 proc main {argc argv} {
   if {$argc!=0} {
+    #コマンドライン経由引数
     set input $argv
     if {[string length $input]==0} {
       usage
@@ -35,9 +33,8 @@ proc main {argc argv} {
     set input_done_done [lrange $input_done 0 end-1]
     set init_args "\{$input_done_done\}"
     puts $init_args
-    puts ""
-    puts "コマンドライン経由引数"
   } else {
+    #パイプ経由引数
     set stdin [open "| cat -"]
     set input [read $stdin]
     if {[string length $input]==1} {
@@ -47,8 +44,6 @@ proc main {argc argv} {
     set input_done_done [lrange $input_done 0 end-1]
     set init_args "\{$input_done_done\}"
     puts $init_args
-    puts ""
-    puts "パイプ経由引数"
   }
 }
 
