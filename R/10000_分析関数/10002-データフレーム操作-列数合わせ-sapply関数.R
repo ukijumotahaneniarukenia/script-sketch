@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 #マスタベクタの作成
 mst_col <- c("col1","col2","col3")
 
