@@ -1,20 +1,27 @@
+
+
+
+
 Tcl 好きな人発見
-[データ構造訓練](https://blog.it-see.net/it-dokata/tcl-tk/data-structure/) </ br>
-[tclで絵文字表示](https://yuuki0xff.jp/articles/build-cpython-tcl-tk-for-adding-unicode-emoji-supports.html) </ br>
+[データ構造訓練](https://blog.it-see.net/it-dokata/tcl-tk/data-structure/)
+[tclで絵文字表示](https://yuuki0xff.jp/articles/build-cpython-tcl-tk-for-adding-unicode-emoji-supports.html)
 
 コンパイルオプション
 絵文字でふぉでは印字できない
-[絵文字表示のコンパイルオプション](https://wiki.tcl-lang.org/page/emoji) </ br>
+[絵文字表示のコンパイルオプション](https://wiki.tcl-lang.org/page/emoji)
 
-[演算子](https://www.tutorialspoint.com/tcl-tk/tcl_operators.htm) </ br>
+[演算子](https://www.tutorialspoint.com/tcl-tk/tcl_operators.htm)
 
-[文法とコマンド](https://freesoftnet.co.jp/webfiles/tclkits/doc/tclcom.html)</ br>
+[文法とコマンド](https://freesoftnet.co.jp/webfiles/tclkits/doc/tclcom.html)
 
 古いスレッドだけど、勉強になる。
-[unicodeコマンド](http://www.rakunet.org/tsnet/TSfree/48/1442.html)</ br>
+[unicodeコマンド](http://www.rakunet.org/tsnet/TSfree/48/1442.html)
 
 [eval!](http://www.interq.or.jp/japan/s-imai/tcltk/list.html)
 
+
+- データ構造
+  - https://blog.it-see.net/it-dokata/tcl-tk/data-structure/
 
 # tdomライブラリのいんすこ
 
@@ -22,7 +29,7 @@ Tcl 好きな人発見
 $mkdir lib
 $cd lib
 $curl -LO http://tdom.org/downloads/tdom-0.9.1-src.zip
-$unzip tdom-0.9.1-src.zip 
+$unzip tdom-0.9.1-src.zip
 $cd tdom-0.9.1
 $cd unix/
 $../configure
