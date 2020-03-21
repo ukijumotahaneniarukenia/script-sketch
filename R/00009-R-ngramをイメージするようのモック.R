@@ -25,6 +25,5 @@ for(vec_idx in 1:length(tgt)){
   gram<-strsplit(tgt[vec_idx],"")
   for(gram_idx in 1:length(gram[[1]])){
     print(c(tgt[vec_idx],substr(tgt[vec_idx],gram_idx,gram_idx+(nnn-1)),vec_idx,gram_idx))
-    print(mmm)
   }
 }
