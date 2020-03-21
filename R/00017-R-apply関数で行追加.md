@@ -13,6 +13,7 @@ $Rscript -e 'mtx<-matrix(c(1:12), nrow=4, ncol=3);df<-data.frame(mtx);sm<-apply(
 ```
 X1 X2 X3
 10 26 42
+```
 
 - CMD
 
