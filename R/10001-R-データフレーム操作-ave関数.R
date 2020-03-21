@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 pacman::p_load(dplyr,pipeR)
 
 numdat <- c(11, 12, 4, 15, 5, 8, 6, 10, 3)
