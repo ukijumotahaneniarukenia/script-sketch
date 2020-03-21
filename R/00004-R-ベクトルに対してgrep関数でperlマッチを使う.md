@@ -15,9 +15,8 @@ $cat test.txt | Rscript -e 's<-readLines("stdin");print(s)'
 
 
 - CMD
-  - 指定したベクトル要素番号に紐付かないベクトルがあるときはNAが返却される
 ```
-$cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,invert=T);print(s[2])'
+$cat test.txt | Rscript -e 's<-readLines("stdin");print(s[2])'
 ```
 
 - OUT
@@ -29,7 +28,7 @@ $cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,inver
 - CMD
 
 ```
-$cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,invert=T);print(s[3])'
+$cat test.txt | Rscript -e 's<-readLines("stdin");print(s[3])'
 ```
 
 - OUT
@@ -39,7 +38,7 @@ $cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,inver
 
 - CMD
 ```
-$cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,invert=T);print(s[10])'
+$cat test.txt | Rscript -e 's<-readLines("stdin");print(s[10])'
 ```
 
 - OUT
@@ -50,10 +49,11 @@ $cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,inver
 - CMD
 
 ```
-$cat test.txt | Rscript -e 's<-readLines("stdin");m<-grep("う",s,perl = T,invert=T);print(s[11])'
+$cat test.txt | Rscript -e 's<-readLines("stdin");print(s[11])'
 ```
 
 - OUT
+  - 指定したベクトル要素番号に紐付かないベクトルがあるときはNAが返却される
 ```
 [1] NA
 ```
