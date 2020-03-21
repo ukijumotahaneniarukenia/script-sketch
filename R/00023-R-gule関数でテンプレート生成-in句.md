@@ -1,4 +1,8 @@
+- LIB
 
+```
+$Rscript -e 'install.packages("glue",repos="http://cran.ism.ac.jp/", dependencies = TRUE, Ncpus = getOption("Ncpus", 12L))'
+```
 
 - CMD
 ```
