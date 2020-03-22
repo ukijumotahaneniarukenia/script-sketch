@@ -52,3 +52,19 @@ $cat test.tsv | python3 -c 'import sys;a=list(map(lambda x:x.strip().split("\t")
 ['100', '200', '300']
 ['A', 'B', 'C']
 ```
+
+
+- CMD
+
+```
+$printf "%s\n" {a..j} | xargs -n3 | python3 -c 'import sys;a=list(map(lambda x:x.strip().split(),sys.stdin.readlines()));[print(*list(e)) for e in zip(a)]'
+```
+
+- OUT
+
+```
+['a', 'b', 'c']
+['d', 'e', 'f']
+['g', 'h', 'i']
+['j']
+```
