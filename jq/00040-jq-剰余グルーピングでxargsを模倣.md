@@ -69,13 +69,80 @@ $cat d.json | jq -c 'paths'
 - CMD
   - 行番号必要なので、明細単位でforeachする必要がある
 ```
-$cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([];if $idx%2==0 then $tgt[$idx%2]+$tgt[$idx%2+1] else . end )' | jq -s -c 'map(select(length!=0))'
+$cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([];if $idx%2==0 then $tgt[$idx]+$tgt[$idx+1] else . end )' | jq -s 'map(select(length!=0))'
 ```
 
 - OUT
 
 ```
-[[{"table_name":"yara_events"},{"name":"target_path","type":"TEXT"},{"name":"category","type":"TEXT"},{"name":"action","type":"TEXT"},{"name":"transaction_id","type":"BIGINT"},{"name":"matches","type":"TEXT"},{"name":"count","type":"INTEGER"},{"name":"strings","type":"TEXT"},{"name":"tags","type":"TEXT"},{"name":"time","type":"BIGINT"}],[{"table_name":"yara_events"},{"name":"target_path","type":"TEXT"},{"name":"category","type":"TEXT"},{"name":"action","type":"TEXT"},{"name":"transaction_id","type":"BIGINT"},{"name":"matches","type":"TEXT"},{"name":"count","type":"INTEGER"},{"name":"strings","type":"TEXT"},{"name":"tags","type":"TEXT"},{"name":"time","type":"BIGINT"}]]
+[
+  [
+    {
+      "table_name": "yara_events"
+    },
+    {
+      "name": "target_path",
+      "type": "TEXT"
+    },
+    {
+      "name": "category",
+      "type": "TEXT"
+    },
+    {
+      "name": "action",
+      "type": "TEXT"
+    },
+    {
+      "name": "transaction_id",
+      "type": "BIGINT"
+    },
+    {
+      "name": "matches",
+      "type": "TEXT"
+    },
+    {
+      "name": "count",
+      "type": "INTEGER"
+    },
+    {
+      "name": "strings",
+      "type": "TEXT"
+    },
+    {
+      "name": "tags",
+      "type": "TEXT"
+    },
+    {
+      "name": "time",
+      "type": "BIGINT"
+    }
+  ],
+  [
+    {
+      "table_name": "yum_sources"
+    },
+    {
+      "name": "name",
+      "type": "TEXT"
+    },
+    {
+      "name": "baseurl",
+      "type": "TEXT"
+    },
+    {
+      "name": "enabled",
+      "type": "TEXT"
+    },
+    {
+      "name": "gpgcheck",
+      "type": "TEXT"
+    },
+    {
+      "name": "gpgkey",
+      "type": "TEXT"
+    }
+  ]
+]
 ```
 
 
@@ -84,7 +151,7 @@ $cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([]
   - グルーピングし直されていることを確認
 
 ```
-$cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([];if $idx%2==0 then $tgt[$idx%2]+$tgt[$idx%2+1] else . end )' | jq -s -c 'map(select(length!=0))|paths'
+$cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([];if $idx%2==0 then $tgt[$idx]+$tgt[$idx+1] else . end )' | jq -s -c 'map(select(length!=0))|paths'
 ```
 
 - OUT
@@ -138,16 +205,4 @@ $cat d.json | jq -s '. as $tgt|length as $ele|range(0;$ele)|foreach . as $idx([]
 [1,5]
 [1,5,"name"]
 [1,5,"type"]
-[1,6]
-[1,6,"name"]
-[1,6,"type"]
-[1,7]
-[1,7,"name"]
-[1,7,"type"]
-[1,8]
-[1,8,"name"]
-[1,8,"type"]
-[1,9]
-[1,9,"name"]
-[1,9,"type"]
 ```
