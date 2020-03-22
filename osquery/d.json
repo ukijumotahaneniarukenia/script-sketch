@@ -1,0 +1,4 @@
+[{"table_name":"yara_events"}]
+[{"name":"target_path","type":"TEXT"},{"name":"category","type":"TEXT"},{"name":"action","type":"TEXT"},{"name":"transaction_id","type":"BIGINT"},{"name":"matches","type":"TEXT"},{"name":"count","type":"INTEGER"},{"name":"strings","type":"TEXT"},{"name":"tags","type":"TEXT"},{"name":"time","type":"BIGINT"}]
+[{"table_name":"yum_sources"}]
+[{"name":"name","type":"TEXT"},{"name":"baseurl","type":"TEXT"},{"name":"enabled","type":"TEXT"},{"name":"gpgcheck","type":"TEXT"},{"name":"gpgkey","type":"TEXT"}]

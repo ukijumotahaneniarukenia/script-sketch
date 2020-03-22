@@ -1,0 +1,1846 @@
+[
+  {"table_name":"acpi_tables"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"md5","type":"TEXT"}
+]
+[
+  {"table_name":"apparmor_profiles"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"attach","type":"TEXT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"sha1","type":"TEXT"}
+]
+[
+  {"table_name":"apt_sources"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"source","type":"TEXT"},
+  {"name":"base_uri","type":"TEXT"},
+  {"name":"release","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"maintainer","type":"TEXT"},
+  {"name":"components","type":"TEXT"},
+  {"name":"architectures","type":"TEXT"}
+]
+[
+  {"table_name":"arp_cache"}
+]
+[
+  {"name":"address","type":"TEXT"},
+  {"name":"mac","type":"TEXT"},
+  {"name":"interface","type":"TEXT"},
+  {"name":"permanent","type":"TEXT"}
+]
+[
+  {"table_name":"atom_packages"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"license","type":"TEXT"},
+  {"name":"homepage","type":"TEXT"},
+  {"name":"uid","type":"BIGINT"}
+]
+[
+  {"table_name":"augeas"}
+]
+[
+  {"name":"node","type":"TEXT"},
+  {"name":"value","type":"TEXT"},
+  {"name":"label","type":"TEXT"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"authorized_keys"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"algorithm","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"key_file","type":"TEXT"}
+]
+[
+  {"table_name":"block_devices"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"parent","type":"TEXT"},
+  {"name":"vendor","type":"TEXT"},
+  {"name":"model","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"block_size","type":"INTEGER"},
+  {"name":"uuid","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"label","type":"TEXT"}
+]
+[
+  {"table_name":"carbon_black_info"}
+]
+[
+  {"name":"sensor_id","type":"INTEGER"},
+  {"name":"config_name","type":"TEXT"},
+  {"name":"collect_store_files","type":"INTEGER"},
+  {"name":"collect_module_loads","type":"INTEGER"},
+  {"name":"collect_module_info","type":"INTEGER"},
+  {"name":"collect_file_mods","type":"INTEGER"},
+  {"name":"collect_reg_mods","type":"INTEGER"},
+  {"name":"collect_net_conns","type":"INTEGER"},
+  {"name":"collect_processes","type":"INTEGER"},
+  {"name":"collect_cross_processes","type":"INTEGER"},
+  {"name":"collect_emet_events","type":"INTEGER"},
+  {"name":"collect_data_file_writes","type":"INTEGER"},
+  {"name":"collect_process_user_context","type":"INTEGER"},
+  {"name":"collect_sensor_operations","type":"INTEGER"},
+  {"name":"log_file_disk_quota_mb","type":"INTEGER"},
+  {"name":"log_file_disk_quota_percentage","type":"INTEGER"},
+  {"name":"protection_disabled","type":"INTEGER"},
+  {"name":"sensor_ip_addr","type":"TEXT"},
+  {"name":"sensor_backend_server","type":"TEXT"},
+  {"name":"event_queue","type":"INTEGER"},
+  {"name":"binary_queue","type":"INTEGER"}
+]
+[
+  {"table_name":"carves"}
+]
+[
+  {"name":"time","type":"BIGINT"},
+  {"name":"sha256","type":"TEXT"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"path","type":"TEXT"},
+  {"name":"status","type":"TEXT"},
+  {"name":"carve_guid","type":"TEXT"},
+  {"name":"carve","type":"INTEGER"}
+]
+[
+  {"table_name":"chrome_extensions"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"profile","type":"TEXT"},
+  {"name":"identifier","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"locale","type":"TEXT"},
+  {"name":"update_url","type":"TEXT"},
+  {"name":"author","type":"TEXT"},
+  {"name":"persistent","type":"INTEGER"},
+  {"name":"path","type":"TEXT"},
+  {"name":"permissions","type":"TEXT"},
+  {"name":"optional_permissions","type":"TEXT"}
+]
+[
+  {"table_name":"cpu_time"}
+]
+[
+  {"name":"core","type":"INTEGER"},
+  {"name":"user","type":"BIGINT"},
+  {"name":"nice","type":"BIGINT"},
+  {"name":"system","type":"BIGINT"},
+  {"name":"idle","type":"BIGINT"},
+  {"name":"iowait","type":"BIGINT"},
+  {"name":"irq","type":"BIGINT"},
+  {"name":"softirq","type":"BIGINT"},
+  {"name":"steal","type":"BIGINT"},
+  {"name":"guest","type":"BIGINT"},
+  {"name":"guest_nice","type":"BIGINT"}
+]
+[
+  {"table_name":"cpuid"}
+]
+[
+  {"name":"feature","type":"TEXT"},
+  {"name":"value","type":"TEXT"},
+  {"name":"output_register","type":"TEXT"},
+  {"name":"output_bit","type":"INTEGER"},
+  {"name":"input_eax","type":"TEXT"}
+]
+[
+  {"table_name":"crontab"}
+]
+[
+  {"name":"event","type":"TEXT"},
+  {"name":"minute","type":"TEXT"},
+  {"name":"hour","type":"TEXT"},
+  {"name":"day_of_month","type":"TEXT"},
+  {"name":"month","type":"TEXT"},
+  {"name":"day_of_week","type":"TEXT"},
+  {"name":"command","type":"TEXT"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"curl"}
+]
+[
+  {"name":"url","type":"TEXT"},
+  {"name":"method","type":"TEXT"},
+  {"name":"user_agent","type":"TEXT"},
+  {"name":"response_code","type":"INTEGER"},
+  {"name":"round_trip_time","type":"BIGINT"},
+  {"name":"bytes","type":"BIGINT"},
+  {"name":"result","type":"TEXT"}
+]
+[
+  {"table_name":"curl_certificate"}
+]
+[
+  {"name":"hostname","type":"TEXT"},
+  {"name":"common_name","type":"TEXT"},
+  {"name":"organization","type":"TEXT"},
+  {"name":"organization_unit","type":"TEXT"},
+  {"name":"serial_number","type":"TEXT"},
+  {"name":"issuer_common_name","type":"TEXT"},
+  {"name":"issuer_organization","type":"TEXT"},
+  {"name":"issuer_organization_unit","type":"TEXT"},
+  {"name":"valid_from","type":"TEXT"},
+  {"name":"valid_to","type":"TEXT"},
+  {"name":"sha256_fingerprint","type":"TEXT"},
+  {"name":"sha1_fingerprint","type":"TEXT"}
+]
+[
+  {"table_name":"deb_packages"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"source","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"arch","type":"TEXT"},
+  {"name":"revision","type":"TEXT"}
+]
+[
+  {"table_name":"device_file"}
+]
+[
+  {"name":"device","type":"TEXT"},
+  {"name":"partition","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"filename","type":"TEXT"},
+  {"name":"inode","type":"BIGINT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"block_size","type":"INTEGER"},
+  {"name":"atime","type":"BIGINT"},
+  {"name":"mtime","type":"BIGINT"},
+  {"name":"ctime","type":"BIGINT"},
+  {"name":"hard_links","type":"INTEGER"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"device_hash"}
+]
+[
+  {"name":"device","type":"TEXT"},
+  {"name":"partition","type":"TEXT"},
+  {"name":"inode","type":"BIGINT"},
+  {"name":"md5","type":"TEXT"},
+  {"name":"sha1","type":"TEXT"},
+  {"name":"sha256","type":"TEXT"}
+]
+[
+  {"table_name":"device_partitions"}
+]
+[
+  {"name":"device","type":"TEXT"},
+  {"name":"partition","type":"INTEGER"},
+  {"name":"label","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"offset","type":"BIGINT"},
+  {"name":"blocks_size","type":"BIGINT"},
+  {"name":"blocks","type":"BIGINT"},
+  {"name":"inodes","type":"BIGINT"},
+  {"name":"flags","type":"INTEGER"}
+]
+[
+  {"table_name":"disk_encryption"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"uuid","type":"TEXT"},
+  {"name":"encrypted","type":"INTEGER"},
+  {"name":"type","type":"TEXT"},
+  {"name":"uid","type":"TEXT"},
+  {"name":"user_uuid","type":"TEXT"},
+  {"name":"encryption_status","type":"TEXT"}
+]
+[
+  {"table_name":"dns_resolvers"}
+]
+[
+  {"name":"id","type":"INTEGER"},
+  {"name":"type","type":"TEXT"},
+  {"name":"address","type":"TEXT"},
+  {"name":"netmask","type":"TEXT"},
+  {"name":"options","type":"BIGINT"}
+]
+[
+  {"table_name":"docker_container_labels"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"docker_container_mounts"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"source","type":"TEXT"},
+  {"name":"destination","type":"TEXT"},
+  {"name":"driver","type":"TEXT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"rw","type":"INTEGER"},
+  {"name":"propagation","type":"TEXT"}
+]
+[
+  {"table_name":"docker_container_networks"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"network_id","type":"TEXT"},
+  {"name":"endpoint_id","type":"TEXT"},
+  {"name":"gateway","type":"TEXT"},
+  {"name":"ip_address","type":"TEXT"},
+  {"name":"ip_prefix_len","type":"INTEGER"},
+  {"name":"ipv6_gateway","type":"TEXT"},
+  {"name":"ipv6_address","type":"TEXT"},
+  {"name":"ipv6_prefix_len","type":"INTEGER"},
+  {"name":"mac_address","type":"TEXT"}
+]
+[
+  {"table_name":"docker_container_ports"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"port","type":"INTEGER"},
+  {"name":"host_ip","type":"TEXT"},
+  {"name":"host_port","type":"INTEGER"}
+]
+[
+  {"table_name":"docker_container_processes"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"cmdline","type":"TEXT"},
+  {"name":"state","type":"TEXT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"euid","type":"BIGINT"},
+  {"name":"egid","type":"BIGINT"},
+  {"name":"suid","type":"BIGINT"},
+  {"name":"sgid","type":"BIGINT"},
+  {"name":"wired_size","type":"BIGINT"},
+  {"name":"resident_size","type":"BIGINT"},
+  {"name":"total_size","type":"BIGINT"},
+  {"name":"start_time","type":"BIGINT"},
+  {"name":"parent","type":"BIGINT"},
+  {"name":"pgroup","type":"BIGINT"},
+  {"name":"threads","type":"INTEGER"},
+  {"name":"nice","type":"INTEGER"},
+  {"name":"user","type":"TEXT"},
+  {"name":"time","type":"TEXT"},
+  {"name":"cpu","type":"DOUBLE"},
+  {"name":"mem","type":"DOUBLE"}
+]
+[
+  {"table_name":"docker_container_stats"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"pids","type":"INTEGER"},
+  {"name":"read","type":"BIGINT"},
+  {"name":"preread","type":"BIGINT"},
+  {"name":"interval","type":"BIGINT"},
+  {"name":"disk_read","type":"BIGINT"},
+  {"name":"disk_write","type":"BIGINT"},
+  {"name":"num_procs","type":"INTEGER"},
+  {"name":"cpu_total_usage","type":"BIGINT"},
+  {"name":"cpu_kernelmode_usage","type":"BIGINT"},
+  {"name":"cpu_usermode_usage","type":"BIGINT"},
+  {"name":"system_cpu_usage","type":"BIGINT"},
+  {"name":"online_cpus","type":"INTEGER"},
+  {"name":"pre_cpu_total_usage","type":"BIGINT"},
+  {"name":"pre_cpu_kernelmode_usage","type":"BIGINT"},
+  {"name":"pre_cpu_usermode_usage","type":"BIGINT"},
+  {"name":"pre_system_cpu_usage","type":"BIGINT"},
+  {"name":"pre_online_cpus","type":"INTEGER"},
+  {"name":"memory_usage","type":"BIGINT"},
+  {"name":"memory_max_usage","type":"BIGINT"},
+  {"name":"memory_limit","type":"BIGINT"},
+  {"name":"network_rx_bytes","type":"BIGINT"},
+  {"name":"network_tx_bytes","type":"BIGINT"}
+]
+[
+  {"table_name":"docker_containers"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"image","type":"TEXT"},
+  {"name":"image_id","type":"TEXT"},
+  {"name":"command","type":"TEXT"},
+  {"name":"created","type":"BIGINT"},
+  {"name":"state","type":"TEXT"},
+  {"name":"status","type":"TEXT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"config_entrypoint","type":"TEXT"},
+  {"name":"started_at","type":"TEXT"},
+  {"name":"finished_at","type":"TEXT"},
+  {"name":"privileged","type":"INTEGER"},
+  {"name":"security_options","type":"TEXT"},
+  {"name":"env_variables","type":"TEXT"},
+  {"name":"readonly_rootfs","type":"INTEGER"},
+  {"name":"cgroup_namespace","type":"TEXT"},
+  {"name":"ipc_namespace","type":"TEXT"},
+  {"name":"mnt_namespace","type":"TEXT"},
+  {"name":"net_namespace","type":"TEXT"},
+  {"name":"pid_namespace","type":"TEXT"},
+  {"name":"user_namespace","type":"TEXT"},
+  {"name":"uts_namespace","type":"TEXT"}
+]
+[
+  {"table_name":"docker_image_labels"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"docker_image_layers"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"layer_id","type":"TEXT"},
+  {"name":"layer_order","type":"INTEGER"}
+]
+[
+  {"table_name":"docker_images"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"created","type":"BIGINT"},
+  {"name":"size_bytes","type":"BIGINT"},
+  {"name":"tags","type":"TEXT"}
+]
+[
+  {"table_name":"docker_info"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"containers","type":"INTEGER"},
+  {"name":"containers_running","type":"INTEGER"},
+  {"name":"containers_paused","type":"INTEGER"},
+  {"name":"containers_stopped","type":"INTEGER"},
+  {"name":"images","type":"INTEGER"},
+  {"name":"storage_driver","type":"TEXT"},
+  {"name":"memory_limit","type":"INTEGER"},
+  {"name":"swap_limit","type":"INTEGER"},
+  {"name":"kernel_memory","type":"INTEGER"},
+  {"name":"cpu_cfs_period","type":"INTEGER"},
+  {"name":"cpu_cfs_quota","type":"INTEGER"},
+  {"name":"cpu_shares","type":"INTEGER"},
+  {"name":"cpu_set","type":"INTEGER"},
+  {"name":"ipv4_forwarding","type":"INTEGER"},
+  {"name":"bridge_nf_iptables","type":"INTEGER"},
+  {"name":"bridge_nf_ip6tables","type":"INTEGER"},
+  {"name":"oom_kill_disable","type":"INTEGER"},
+  {"name":"logging_driver","type":"TEXT"},
+  {"name":"cgroup_driver","type":"TEXT"},
+  {"name":"kernel_version","type":"TEXT"},
+  {"name":"os","type":"TEXT"},
+  {"name":"os_type","type":"TEXT"},
+  {"name":"architecture","type":"TEXT"},
+  {"name":"cpus","type":"INTEGER"},
+  {"name":"memory","type":"BIGINT"},
+  {"name":"http_proxy","type":"TEXT"},
+  {"name":"https_proxy","type":"TEXT"},
+  {"name":"no_proxy","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"server_version","type":"TEXT"},
+  {"name":"root_dir","type":"TEXT"}
+]
+[
+  {"table_name":"docker_network_labels"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"docker_networks"}
+]
+[
+  {"name":"id","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"driver","type":"TEXT"},
+  {"name":"created","type":"BIGINT"},
+  {"name":"enable_ipv6","type":"INTEGER"},
+  {"name":"subnet","type":"TEXT"},
+  {"name":"gateway","type":"TEXT"}
+]
+[
+  {"table_name":"docker_version"}
+]
+[
+  {"name":"version","type":"TEXT"},
+  {"name":"api_version","type":"TEXT"},
+  {"name":"min_api_version","type":"TEXT"},
+  {"name":"git_commit","type":"TEXT"},
+  {"name":"go_version","type":"TEXT"},
+  {"name":"os","type":"TEXT"},
+  {"name":"arch","type":"TEXT"},
+  {"name":"kernel_version","type":"TEXT"},
+  {"name":"build_time","type":"TEXT"}
+]
+[
+  {"table_name":"docker_volume_labels"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"docker_volumes"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"driver","type":"TEXT"},
+  {"name":"mount_point","type":"TEXT"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"elf_dynamic"}
+]
+[
+  {"name":"tag","type":"INTEGER"},
+  {"name":"value","type":"INTEGER"},
+  {"name":"class","type":"INTEGER"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"elf_info"}
+]
+[
+  {"name":"class","type":"TEXT"},
+  {"name":"abi","type":"TEXT"},
+  {"name":"abi_version","type":"INTEGER"},
+  {"name":"type","type":"TEXT"},
+  {"name":"machine","type":"INTEGER"},
+  {"name":"version","type":"INTEGER"},
+  {"name":"entry","type":"BIGINT"},
+  {"name":"flags","type":"INTEGER"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"elf_sections"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"type","type":"INTEGER"},
+  {"name":"vaddr","type":"INTEGER"},
+  {"name":"offset","type":"INTEGER"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"flags","type":"TEXT"},
+  {"name":"link","type":"TEXT"},
+  {"name":"align","type":"INTEGER"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"elf_segments"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"offset","type":"INTEGER"},
+  {"name":"vaddr","type":"INTEGER"},
+  {"name":"psize","type":"INTEGER"},
+  {"name":"msize","type":"INTEGER"},
+  {"name":"flags","type":"TEXT"},
+  {"name":"align","type":"INTEGER"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"elf_symbols"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"addr","type":"INTEGER"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"type","type":"TEXT"},
+  {"name":"binding","type":"TEXT"},
+  {"name":"offset","type":"INTEGER"},
+  {"name":"table","type":"TEXT"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"etc_hosts"}
+]
+[
+  {"name":"address","type":"TEXT"},
+  {"name":"hostnames","type":"TEXT"}
+]
+[
+  {"table_name":"etc_protocols"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"number","type":"INTEGER"},
+  {"name":"alias","type":"TEXT"},
+  {"name":"comment","type":"TEXT"}
+]
+[
+  {"table_name":"etc_services"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"port","type":"INTEGER"},
+  {"name":"protocol","type":"TEXT"},
+  {"name":"aliases","type":"TEXT"},
+  {"name":"comment","type":"TEXT"}
+]
+[
+  {"table_name":"file"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"directory","type":"TEXT"},
+  {"name":"filename","type":"TEXT"},
+  {"name":"inode","type":"BIGINT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"device","type":"BIGINT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"block_size","type":"INTEGER"},
+  {"name":"atime","type":"BIGINT"},
+  {"name":"mtime","type":"BIGINT"},
+  {"name":"ctime","type":"BIGINT"},
+  {"name":"btime","type":"BIGINT"},
+  {"name":"hard_links","type":"INTEGER"},
+  {"name":"symlink","type":"INTEGER"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"file_events"}
+]
+[
+  {"name":"target_path","type":"TEXT"},
+  {"name":"category","type":"TEXT"},
+  {"name":"action","type":"TEXT"},
+  {"name":"transaction_id","type":"BIGINT"},
+  {"name":"inode","type":"BIGINT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"atime","type":"BIGINT"},
+  {"name":"mtime","type":"BIGINT"},
+  {"name":"ctime","type":"BIGINT"},
+  {"name":"md5","type":"TEXT"},
+  {"name":"sha1","type":"TEXT"},
+  {"name":"sha256","type":"TEXT"},
+  {"name":"hashed","type":"INTEGER"},
+  {"name":"time","type":"BIGINT"}
+]
+[
+  {"table_name":"firefox_addons"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"identifier","type":"TEXT"},
+  {"name":"creator","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"source_url","type":"TEXT"},
+  {"name":"visible","type":"INTEGER"},
+  {"name":"active","type":"INTEGER"},
+  {"name":"disabled","type":"INTEGER"},
+  {"name":"autoupdate","type":"INTEGER"},
+  {"name":"native","type":"INTEGER"},
+  {"name":"location","type":"TEXT"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"groups"}
+]
+[
+  {"name":"gid","type":"BIGINT"},
+  {"name":"gid_signed","type":"BIGINT"},
+  {"name":"groupname","type":"TEXT"}
+]
+[
+  {"table_name":"hardware_events"}
+]
+[
+  {"name":"action","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"driver","type":"TEXT"},
+  {"name":"vendor","type":"TEXT"},
+  {"name":"vendor_id","type":"TEXT"},
+  {"name":"model","type":"TEXT"},
+  {"name":"model_id","type":"TEXT"},
+  {"name":"serial","type":"TEXT"},
+  {"name":"revision","type":"TEXT"},
+  {"name":"time","type":"BIGINT"}
+]
+[
+  {"table_name":"hash"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"directory","type":"TEXT"},
+  {"name":"md5","type":"TEXT"},
+  {"name":"sha1","type":"TEXT"},
+  {"name":"sha256","type":"TEXT"},
+  {"name":"ssdeep","type":"TEXT"}
+]
+[
+  {"table_name":"intel_me_info"}
+]
+[
+  {"name":"version","type":"TEXT"}
+]
+[
+  {"table_name":"interface_addresses"}
+]
+[
+  {"name":"interface","type":"TEXT"},
+  {"name":"address","type":"TEXT"},
+  {"name":"mask","type":"TEXT"},
+  {"name":"broadcast","type":"TEXT"},
+  {"name":"point_to_point","type":"TEXT"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"interface_details"}
+]
+[
+  {"name":"interface","type":"TEXT"},
+  {"name":"mac","type":"TEXT"},
+  {"name":"type","type":"INTEGER"},
+  {"name":"mtu","type":"INTEGER"},
+  {"name":"metric","type":"INTEGER"},
+  {"name":"flags","type":"INTEGER"},
+  {"name":"ipackets","type":"BIGINT"},
+  {"name":"opackets","type":"BIGINT"},
+  {"name":"ibytes","type":"BIGINT"},
+  {"name":"obytes","type":"BIGINT"},
+  {"name":"ierrors","type":"BIGINT"},
+  {"name":"oerrors","type":"BIGINT"},
+  {"name":"idrops","type":"BIGINT"},
+  {"name":"odrops","type":"BIGINT"},
+  {"name":"collisions","type":"BIGINT"},
+  {"name":"last_change","type":"BIGINT"},
+  {"name":"link_speed","type":"BIGINT"},
+  {"name":"pci_slot","type":"TEXT"}
+]
+[
+  {"table_name":"iptables"}
+]
+[
+  {"name":"filter_name","type":"TEXT"},
+  {"name":"chain","type":"TEXT"},
+  {"name":"policy","type":"TEXT"},
+  {"name":"target","type":"TEXT"},
+  {"name":"protocol","type":"INTEGER"},
+  {"name":"src_port","type":"TEXT"},
+  {"name":"dst_port","type":"TEXT"},
+  {"name":"src_ip","type":"TEXT"},
+  {"name":"src_mask","type":"TEXT"},
+  {"name":"iniface","type":"TEXT"},
+  {"name":"iniface_mask","type":"TEXT"},
+  {"name":"dst_ip","type":"TEXT"},
+  {"name":"dst_mask","type":"TEXT"},
+  {"name":"outiface","type":"TEXT"},
+  {"name":"outiface_mask","type":"TEXT"},
+  {"name":"match","type":"TEXT"},
+  {"name":"packets","type":"INTEGER"},
+  {"name":"bytes","type":"INTEGER"}
+]
+[
+  {"table_name":"kernel_info"}
+]
+[
+  {"name":"version","type":"TEXT"},
+  {"name":"arguments","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"device","type":"TEXT"}
+]
+[
+  {"table_name":"kernel_modules"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"size","type":"TEXT"},
+  {"name":"used_by","type":"TEXT"},
+  {"name":"status","type":"TEXT"},
+  {"name":"address","type":"TEXT"}
+]
+[
+  {"table_name":"known_hosts"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"key_file","type":"TEXT"}
+]
+[
+  {"table_name":"last"}
+]
+[
+  {"name":"username","type":"TEXT"},
+  {"name":"tty","type":"TEXT"},
+  {"name":"pid","type":"INTEGER"},
+  {"name":"type","type":"INTEGER"},
+  {"name":"time","type":"INTEGER"},
+  {"name":"host","type":"TEXT"}
+]
+[
+  {"table_name":"listening_ports"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"port","type":"INTEGER"},
+  {"name":"protocol","type":"INTEGER"},
+  {"name":"family","type":"INTEGER"},
+  {"name":"address","type":"TEXT"},
+  {"name":"fd","type":"BIGINT"},
+  {"name":"socket","type":"BIGINT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"net_namespace","type":"TEXT"}
+]
+[
+  {"table_name":"lldp_neighbors"}
+]
+[
+  {"name":"interface","type":"TEXT"},
+  {"name":"rid","type":"INTEGER"},
+  {"name":"chassis_id_type","type":"TEXT"},
+  {"name":"chassis_id","type":"TEXT"},
+  {"name":"chassis_sysname","type":"TEXT"},
+  {"name":"chassis_sys_description","type":"INTEGER"},
+  {"name":"chassis_bridge_capability_available","type":"INTEGER"},
+  {"name":"chassis_bridge_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_router_capability_available","type":"INTEGER"},
+  {"name":"chassis_router_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_repeater_capability_available","type":"INTEGER"},
+  {"name":"chassis_repeater_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_wlan_capability_available","type":"INTEGER"},
+  {"name":"chassis_wlan_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_tel_capability_available","type":"INTEGER"},
+  {"name":"chassis_tel_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_docsis_capability_available","type":"INTEGER"},
+  {"name":"chassis_docsis_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_station_capability_available","type":"INTEGER"},
+  {"name":"chassis_station_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_other_capability_available","type":"INTEGER"},
+  {"name":"chassis_other_capability_enabled","type":"INTEGER"},
+  {"name":"chassis_mgmt_ips","type":"TEXT"},
+  {"name":"port_id_type","type":"TEXT"},
+  {"name":"port_id","type":"TEXT"},
+  {"name":"port_description","type":"TEXT"},
+  {"name":"port_ttl","type":"BIGINT"},
+  {"name":"port_mfs","type":"BIGINT"},
+  {"name":"port_aggregation_id","type":"TEXT"},
+  {"name":"port_autoneg_supported","type":"INTEGER"},
+  {"name":"port_autoneg_enabled","type":"INTEGER"},
+  {"name":"port_mau_type","type":"TEXT"},
+  {"name":"port_autoneg_10baset_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_10baset_fd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100basetx_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100basetx_fd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100baset2_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100baset2_fd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100baset4_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_100baset4_fd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_1000basex_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_1000basex_fd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_1000baset_hd_enabled","type":"INTEGER"},
+  {"name":"port_autoneg_1000baset_fd_enabled","type":"INTEGER"},
+  {"name":"power_device_type","type":"TEXT"},
+  {"name":"power_mdi_supported","type":"INTEGER"},
+  {"name":"power_mdi_enabled","type":"INTEGER"},
+  {"name":"power_paircontrol_enabled","type":"INTEGER"},
+  {"name":"power_pairs","type":"TEXT"},
+  {"name":"power_class","type":"TEXT"},
+  {"name":"power_8023at_enabled","type":"INTEGER"},
+  {"name":"power_8023at_power_type","type":"TEXT"},
+  {"name":"power_8023at_power_source","type":"TEXT"},
+  {"name":"power_8023at_power_priority","type":"TEXT"},
+  {"name":"power_8023at_power_allocated","type":"TEXT"},
+  {"name":"power_8023at_power_requested","type":"TEXT"},
+  {"name":"med_device_type","type":"TEXT"},
+  {"name":"med_capability_capabilities","type":"INTEGER"},
+  {"name":"med_capability_policy","type":"INTEGER"},
+  {"name":"med_capability_location","type":"INTEGER"},
+  {"name":"med_capability_mdi_pse","type":"INTEGER"},
+  {"name":"med_capability_mdi_pd","type":"INTEGER"},
+  {"name":"med_capability_inventory","type":"INTEGER"},
+  {"name":"med_policies","type":"TEXT"},
+  {"name":"vlans","type":"TEXT"},
+  {"name":"pvid","type":"TEXT"},
+  {"name":"ppvids_supported","type":"TEXT"},
+  {"name":"ppvids_enabled","type":"TEXT"},
+  {"name":"pids","type":"TEXT"}
+]
+[
+  {"table_name":"load_average"}
+]
+[
+  {"name":"period","type":"TEXT"},
+  {"name":"average","type":"TEXT"}
+]
+[
+  {"table_name":"logged_in_users"}
+]
+[
+  {"name":"type","type":"TEXT"},
+  {"name":"user","type":"TEXT"},
+  {"name":"tty","type":"TEXT"},
+  {"name":"host","type":"TEXT"},
+  {"name":"time","type":"INTEGER"},
+  {"name":"pid","type":"INTEGER"}
+]
+[
+  {"table_name":"magic"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"magic_db_files","type":"TEXT"},
+  {"name":"data","type":"TEXT"},
+  {"name":"mime_type","type":"TEXT"},
+  {"name":"mime_encoding","type":"TEXT"}
+]
+[
+  {"table_name":"md_devices"}
+]
+[
+  {"name":"device_name","type":"TEXT"},
+  {"name":"status","type":"TEXT"},
+  {"name":"raid_level","type":"INTEGER"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"chunk_size","type":"BIGINT"},
+  {"name":"raid_disks","type":"INTEGER"},
+  {"name":"nr_raid_disks","type":"INTEGER"},
+  {"name":"working_disks","type":"INTEGER"},
+  {"name":"active_disks","type":"INTEGER"},
+  {"name":"failed_disks","type":"INTEGER"},
+  {"name":"spare_disks","type":"INTEGER"},
+  {"name":"superblock_state","type":"TEXT"},
+  {"name":"superblock_version","type":"TEXT"},
+  {"name":"superblock_update_time","type":"BIGINT"},
+  {"name":"bitmap_on_mem","type":"TEXT"},
+  {"name":"bitmap_chunk_size","type":"TEXT"},
+  {"name":"bitmap_external_file","type":"TEXT"},
+  {"name":"recovery_progress","type":"TEXT"},
+  {"name":"recovery_finish","type":"TEXT"},
+  {"name":"recovery_speed","type":"TEXT"},
+  {"name":"resync_progress","type":"TEXT"},
+  {"name":"resync_finish","type":"TEXT"},
+  {"name":"resync_speed","type":"TEXT"},
+  {"name":"reshape_progress","type":"TEXT"},
+  {"name":"reshape_finish","type":"TEXT"},
+  {"name":"reshape_speed","type":"TEXT"},
+  {"name":"check_array_progress","type":"TEXT"},
+  {"name":"check_array_finish","type":"TEXT"},
+  {"name":"check_array_speed","type":"TEXT"},
+  {"name":"unused_devices","type":"TEXT"},
+  {"name":"other","type":"TEXT"}
+]
+[
+  {"table_name":"md_drives"}
+]
+[
+  {"name":"md_device_name","type":"TEXT"},
+  {"name":"drive_name","type":"TEXT"},
+  {"name":"slot","type":"INTEGER"},
+  {"name":"state","type":"TEXT"}
+]
+[
+  {"table_name":"md_personalities"}
+]
+[
+  {"name":"name","type":"TEXT"}
+]
+[
+  {"table_name":"memory_array_mapped_addresses"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"memory_array_handle","type":"TEXT"},
+  {"name":"starting_address","type":"TEXT"},
+  {"name":"ending_address","type":"TEXT"},
+  {"name":"partition_width","type":"INTEGER"}
+]
+[
+  {"table_name":"memory_arrays"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"location","type":"TEXT"},
+  {"name":"use","type":"TEXT"},
+  {"name":"memory_error_correction","type":"TEXT"},
+  {"name":"max_capacity","type":"INTEGER"},
+  {"name":"memory_error_info_handle","type":"TEXT"},
+  {"name":"number_memory_devices","type":"INTEGER"}
+]
+[
+  {"table_name":"memory_device_mapped_addresses"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"memory_device_handle","type":"TEXT"},
+  {"name":"memory_array_mapped_address_handle","type":"TEXT"},
+  {"name":"starting_address","type":"TEXT"},
+  {"name":"ending_address","type":"TEXT"},
+  {"name":"partition_row_position","type":"INTEGER"},
+  {"name":"interleave_position","type":"INTEGER"},
+  {"name":"interleave_data_depth","type":"INTEGER"}
+]
+[
+  {"table_name":"memory_devices"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"array_handle","type":"TEXT"},
+  {"name":"form_factor","type":"TEXT"},
+  {"name":"total_width","type":"INTEGER"},
+  {"name":"data_width","type":"INTEGER"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"set","type":"INTEGER"},
+  {"name":"device_locator","type":"TEXT"},
+  {"name":"bank_locator","type":"TEXT"},
+  {"name":"memory_type","type":"TEXT"},
+  {"name":"memory_type_details","type":"TEXT"},
+  {"name":"max_speed","type":"INTEGER"},
+  {"name":"configured_clock_speed","type":"INTEGER"},
+  {"name":"manufacturer","type":"TEXT"},
+  {"name":"serial_number","type":"TEXT"},
+  {"name":"asset_tag","type":"TEXT"},
+  {"name":"part_number","type":"TEXT"},
+  {"name":"min_voltage","type":"INTEGER"},
+  {"name":"max_voltage","type":"INTEGER"},
+  {"name":"configured_voltage","type":"INTEGER"}
+]
+[
+  {"table_name":"memory_error_info"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"error_type","type":"TEXT"},
+  {"name":"error_granularity","type":"TEXT"},
+  {"name":"error_operation","type":"TEXT"},
+  {"name":"vendor_syndrome","type":"TEXT"},
+  {"name":"memory_array_error_address","type":"TEXT"},
+  {"name":"device_error_address","type":"TEXT"},
+  {"name":"error_resolution","type":"TEXT"}
+]
+[
+  {"table_name":"memory_info"}
+]
+[
+  {"name":"memory_total","type":"BIGINT"},
+  {"name":"memory_free","type":"BIGINT"},
+  {"name":"buffers","type":"BIGINT"},
+  {"name":"cached","type":"BIGINT"},
+  {"name":"swap_cached","type":"BIGINT"},
+  {"name":"active","type":"BIGINT"},
+  {"name":"inactive","type":"BIGINT"},
+  {"name":"swap_total","type":"BIGINT"},
+  {"name":"swap_free","type":"BIGINT"}
+]
+[
+  {"table_name":"memory_map"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"start","type":"TEXT"},
+  {"name":"end","type":"TEXT"}
+]
+[
+  {"table_name":"mounts"}
+]
+[
+  {"name":"device","type":"TEXT"},
+  {"name":"device_alias","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"blocks_size","type":"BIGINT"},
+  {"name":"blocks","type":"BIGINT"},
+  {"name":"blocks_free","type":"BIGINT"},
+  {"name":"blocks_available","type":"BIGINT"},
+  {"name":"inodes","type":"BIGINT"},
+  {"name":"inodes_free","type":"BIGINT"},
+  {"name":"flags","type":"TEXT"}
+]
+[
+  {"table_name":"msr"}
+]
+[
+  {"name":"processor_number","type":"BIGINT"},
+  {"name":"turbo_disabled","type":"BIGINT"},
+  {"name":"turbo_ratio_limit","type":"BIGINT"},
+  {"name":"platform_info","type":"BIGINT"},
+  {"name":"perf_ctl","type":"BIGINT"},
+  {"name":"perf_status","type":"BIGINT"},
+  {"name":"feature_control","type":"BIGINT"},
+  {"name":"rapl_power_limit","type":"BIGINT"},
+  {"name":"rapl_energy_status","type":"BIGINT"},
+  {"name":"rapl_power_units","type":"BIGINT"}
+]
+[
+  {"table_name":"npm_packages"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"author","type":"TEXT"},
+  {"name":"license","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"directory","type":"TEXT"}
+]
+[
+  {"table_name":"oem_strings"}
+]
+[
+  {"name":"handle","type":"TEXT"},
+  {"name":"number","type":"INTEGER"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"opera_extensions"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"identifier","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"locale","type":"TEXT"},
+  {"name":"update_url","type":"TEXT"},
+  {"name":"author","type":"TEXT"},
+  {"name":"persistent","type":"INTEGER"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"os_version"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"major","type":"INTEGER"},
+  {"name":"minor","type":"INTEGER"},
+  {"name":"patch","type":"INTEGER"},
+  {"name":"build","type":"TEXT"},
+  {"name":"platform","type":"TEXT"},
+  {"name":"platform_like","type":"TEXT"},
+  {"name":"codename","type":"TEXT"}
+]
+[
+  {"table_name":"osquery_events"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"publisher","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"subscriptions","type":"INTEGER"},
+  {"name":"events","type":"INTEGER"},
+  {"name":"refreshes","type":"INTEGER"},
+  {"name":"active","type":"INTEGER"}
+]
+[
+  {"table_name":"osquery_extensions"}
+]
+[
+  {"name":"uuid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"sdk_version","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"osquery_flags"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"default_value","type":"TEXT"},
+  {"name":"value","type":"TEXT"},
+  {"name":"shell_only","type":"INTEGER"}
+]
+[
+  {"table_name":"osquery_info"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"uuid","type":"TEXT"},
+  {"name":"instance_id","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"config_hash","type":"TEXT"},
+  {"name":"config_valid","type":"INTEGER"},
+  {"name":"extensions","type":"TEXT"},
+  {"name":"build_platform","type":"TEXT"},
+  {"name":"build_distro","type":"TEXT"},
+  {"name":"start_time","type":"INTEGER"},
+  {"name":"watcher","type":"INTEGER"},
+  {"name":"platform_mask","type":"INTEGER"}
+]
+[
+  {"table_name":"osquery_packs"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"platform","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"shard","type":"INTEGER"},
+  {"name":"discovery_cache_hits","type":"INTEGER"},
+  {"name":"discovery_executions","type":"INTEGER"},
+  {"name":"active","type":"INTEGER"}
+]
+[
+  {"table_name":"osquery_registry"}
+]
+[
+  {"name":"registry","type":"TEXT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"owner_uuid","type":"INTEGER"},
+  {"name":"internal","type":"INTEGER"},
+  {"name":"active","type":"INTEGER"}
+]
+[
+  {"table_name":"osquery_schedule"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"query","type":"TEXT"},
+  {"name":"interval","type":"INTEGER"},
+  {"name":"executions","type":"BIGINT"},
+  {"name":"last_executed","type":"BIGINT"},
+  {"name":"blacklisted","type":"INTEGER"},
+  {"name":"output_size","type":"BIGINT"},
+  {"name":"wall_time","type":"BIGINT"},
+  {"name":"user_time","type":"BIGINT"},
+  {"name":"system_time","type":"BIGINT"},
+  {"name":"average_memory","type":"BIGINT"}
+]
+[
+  {"table_name":"pci_devices"}
+]
+[
+  {"name":"pci_slot","type":"TEXT"},
+  {"name":"pci_class","type":"TEXT"},
+  {"name":"driver","type":"TEXT"},
+  {"name":"vendor","type":"TEXT"},
+  {"name":"vendor_id","type":"TEXT"},
+  {"name":"model","type":"TEXT"},
+  {"name":"model_id","type":"TEXT"},
+  {"name":"pci_class_id","type":"TEXT"},
+  {"name":"pci_subclass_id","type":"TEXT"},
+  {"name":"pci_subclass","type":"TEXT"},
+  {"name":"subsystem_vendor_id","type":"TEXT"},
+  {"name":"subsystem_vendor","type":"TEXT"},
+  {"name":"subsystem_model_id","type":"TEXT"},
+  {"name":"subsystem_model","type":"TEXT"}
+]
+[
+  {"table_name":"platform_info"}
+]
+[
+  {"name":"vendor","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"date","type":"TEXT"},
+  {"name":"revision","type":"TEXT"},
+  {"name":"address","type":"TEXT"},
+  {"name":"size","type":"TEXT"},
+  {"name":"volume_size","type":"INTEGER"},
+  {"name":"extra","type":"TEXT"}
+]
+[
+  {"table_name":"portage_keywords"}
+]
+[
+  {"name":"package","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"keyword","type":"TEXT"},
+  {"name":"mask","type":"INTEGER"},
+  {"name":"unmask","type":"INTEGER"}
+]
+[
+  {"table_name":"portage_packages"}
+]
+[
+  {"name":"package","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"slot","type":"TEXT"},
+  {"name":"build_time","type":"BIGINT"},
+  {"name":"repository","type":"TEXT"},
+  {"name":"eapi","type":"BIGINT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"world","type":"INTEGER"}
+]
+[
+  {"table_name":"portage_use"}
+]
+[
+  {"name":"package","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"use","type":"TEXT"}
+]
+[
+  {"table_name":"process_envs"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"process_events"}
+]
+[
+  {"name":"pid","type":"BIGINT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"cmdline","type":"TEXT"},
+  {"name":"cwd","type":"TEXT"},
+  {"name":"auid","type":"BIGINT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"euid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"egid","type":"BIGINT"},
+  {"name":"owner_uid","type":"BIGINT"},
+  {"name":"owner_gid","type":"BIGINT"},
+  {"name":"atime","type":"BIGINT"},
+  {"name":"mtime","type":"BIGINT"},
+  {"name":"ctime","type":"BIGINT"},
+  {"name":"btime","type":"BIGINT"},
+  {"name":"parent","type":"BIGINT"},
+  {"name":"time","type":"BIGINT"},
+  {"name":"uptime","type":"BIGINT"},
+  {"name":"syscall","type":"TEXT"}
+]
+[
+  {"table_name":"process_file_events"}
+]
+[
+  {"name":"operation","type":"TEXT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"ppid","type":"BIGINT"},
+  {"name":"time","type":"BIGINT"},
+  {"name":"executable","type":"TEXT"},
+  {"name":"partial","type":"TEXT"},
+  {"name":"cwd","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"dest_path","type":"TEXT"},
+  {"name":"uid","type":"TEXT"},
+  {"name":"gid","type":"TEXT"},
+  {"name":"euid","type":"TEXT"},
+  {"name":"egid","type":"TEXT"},
+  {"name":"uptime","type":"BIGINT"}
+]
+[
+  {"table_name":"process_memory_map"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"start","type":"TEXT"},
+  {"name":"end","type":"TEXT"},
+  {"name":"permissions","type":"TEXT"},
+  {"name":"offset","type":"BIGINT"},
+  {"name":"device","type":"TEXT"},
+  {"name":"inode","type":"INTEGER"},
+  {"name":"path","type":"TEXT"},
+  {"name":"pseudo","type":"INTEGER"}
+]
+[
+  {"table_name":"process_namespaces"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"cgroup_namespace","type":"TEXT"},
+  {"name":"ipc_namespace","type":"TEXT"},
+  {"name":"mnt_namespace","type":"TEXT"},
+  {"name":"net_namespace","type":"TEXT"},
+  {"name":"pid_namespace","type":"TEXT"},
+  {"name":"user_namespace","type":"TEXT"},
+  {"name":"uts_namespace","type":"TEXT"}
+]
+[
+  {"table_name":"process_open_files"}
+]
+[
+  {"name":"pid","type":"BIGINT"},
+  {"name":"fd","type":"BIGINT"},
+  {"name":"path","type":"TEXT"}
+]
+[
+  {"table_name":"process_open_pipes"}
+]
+[
+  {"name":"pid","type":"BIGINT"},
+  {"name":"fd","type":"BIGINT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"inode","type":"BIGINT"},
+  {"name":"type","type":"TEXT"},
+  {"name":"partner_pid","type":"BIGINT"},
+  {"name":"partner_fd","type":"BIGINT"},
+  {"name":"partner_mode","type":"TEXT"}
+]
+[
+  {"table_name":"process_open_sockets"}
+]
+[
+  {"name":"pid","type":"INTEGER"},
+  {"name":"fd","type":"BIGINT"},
+  {"name":"socket","type":"BIGINT"},
+  {"name":"family","type":"INTEGER"},
+  {"name":"protocol","type":"INTEGER"},
+  {"name":"local_address","type":"TEXT"},
+  {"name":"remote_address","type":"TEXT"},
+  {"name":"local_port","type":"INTEGER"},
+  {"name":"remote_port","type":"INTEGER"},
+  {"name":"path","type":"TEXT"},
+  {"name":"state","type":"TEXT"},
+  {"name":"net_namespace","type":"TEXT"}
+]
+[
+  {"table_name":"processes"}
+]
+[
+  {"name":"pid","type":"BIGINT"},
+  {"name":"name","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"cmdline","type":"TEXT"},
+  {"name":"state","type":"TEXT"},
+  {"name":"cwd","type":"TEXT"},
+  {"name":"root","type":"TEXT"},
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"euid","type":"BIGINT"},
+  {"name":"egid","type":"BIGINT"},
+  {"name":"suid","type":"BIGINT"},
+  {"name":"sgid","type":"BIGINT"},
+  {"name":"on_disk","type":"INTEGER"},
+  {"name":"wired_size","type":"BIGINT"},
+  {"name":"resident_size","type":"BIGINT"},
+  {"name":"total_size","type":"BIGINT"},
+  {"name":"user_time","type":"BIGINT"},
+  {"name":"system_time","type":"BIGINT"},
+  {"name":"disk_bytes_read","type":"BIGINT"},
+  {"name":"disk_bytes_written","type":"BIGINT"},
+  {"name":"start_time","type":"BIGINT"},
+  {"name":"parent","type":"BIGINT"},
+  {"name":"pgroup","type":"BIGINT"},
+  {"name":"threads","type":"INTEGER"},
+  {"name":"nice","type":"INTEGER"}
+]
+[
+  {"table_name":"prometheus_metrics"}
+]
+[
+  {"name":"target_name","type":"TEXT"},
+  {"name":"metric_name","type":"TEXT"},
+  {"name":"metric_value","type":"DOUBLE"},
+  {"name":"timestamp_ms","type":"BIGINT"}
+]
+[
+  {"table_name":"python_packages"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"summary","type":"TEXT"},
+  {"name":"author","type":"TEXT"},
+  {"name":"license","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"directory","type":"TEXT"}
+]
+[
+  {"table_name":"routes"}
+]
+[
+  {"name":"destination","type":"TEXT"},
+  {"name":"netmask","type":"INTEGER"},
+  {"name":"gateway","type":"TEXT"},
+  {"name":"source","type":"TEXT"},
+  {"name":"flags","type":"INTEGER"},
+  {"name":"interface","type":"TEXT"},
+  {"name":"mtu","type":"INTEGER"},
+  {"name":"metric","type":"INTEGER"},
+  {"name":"type","type":"TEXT"},
+  {"name":"hopcount","type":"INTEGER"}
+]
+[
+  {"table_name":"rpm_package_files"}
+]
+[
+  {"name":"package","type":"TEXT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"username","type":"TEXT"},
+  {"name":"groupname","type":"TEXT"},
+  {"name":"mode","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"sha256","type":"TEXT"}
+]
+[
+  {"table_name":"rpm_packages"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"release","type":"TEXT"},
+  {"name":"source","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"sha1","type":"TEXT"},
+  {"name":"arch","type":"TEXT"},
+  {"name":"epoch","type":"INTEGER"},
+  {"name":"install_time","type":"INTEGER"}
+]
+[
+  {"table_name":"selinux_events"}
+]
+[
+  {"name":"type","type":"TEXT"},
+  {"name":"message","type":"TEXT"},
+  {"name":"time","type":"BIGINT"},
+  {"name":"uptime","type":"BIGINT"}
+]
+[
+  {"table_name":"selinux_settings"}
+]
+[
+  {"name":"scope","type":"TEXT"},
+  {"name":"key","type":"TEXT"},
+  {"name":"value","type":"TEXT"}
+]
+[
+  {"table_name":"shadow"}
+]
+[
+  {"name":"password_status","type":"TEXT"},
+  {"name":"hash_alg","type":"TEXT"},
+  {"name":"last_change","type":"BIGINT"},
+  {"name":"min","type":"BIGINT"},
+  {"name":"max","type":"BIGINT"},
+  {"name":"warning","type":"BIGINT"},
+  {"name":"inactive","type":"BIGINT"},
+  {"name":"expire","type":"BIGINT"},
+  {"name":"flag","type":"BIGINT"},
+  {"name":"username","type":"TEXT"}
+]
+[
+  {"table_name":"shared_memory"}
+]
+[
+  {"name":"shmid","type":"INTEGER"},
+  {"name":"owner_uid","type":"BIGINT"},
+  {"name":"creator_uid","type":"BIGINT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"creator_pid","type":"BIGINT"},
+  {"name":"atime","type":"BIGINT"},
+  {"name":"dtime","type":"BIGINT"},
+  {"name":"ctime","type":"BIGINT"},
+  {"name":"permissions","type":"TEXT"},
+  {"name":"size","type":"BIGINT"},
+  {"name":"attached","type":"INTEGER"},
+  {"name":"status","type":"TEXT"},
+  {"name":"locked","type":"INTEGER"}
+]
+[
+  {"table_name":"shell_history"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"time","type":"INTEGER"},
+  {"name":"command","type":"TEXT"},
+  {"name":"history_file","type":"TEXT"}
+]
+[
+  {"table_name":"smart_drive_info"}
+]
+[
+  {"name":"device_name","type":"TEXT"},
+  {"name":"disk_id","type":"INTEGER"},
+  {"name":"driver_type","type":"TEXT"},
+  {"name":"model_family","type":"TEXT"},
+  {"name":"device_model","type":"TEXT"},
+  {"name":"serial_number","type":"TEXT"},
+  {"name":"lu_wwn_device_id","type":"TEXT"},
+  {"name":"additional_product_id","type":"TEXT"},
+  {"name":"firmware_version","type":"TEXT"},
+  {"name":"user_capacity","type":"TEXT"},
+  {"name":"sector_sizes","type":"TEXT"},
+  {"name":"rotation_rate","type":"TEXT"},
+  {"name":"form_factor","type":"TEXT"},
+  {"name":"in_smartctl_db","type":"INTEGER"},
+  {"name":"ata_version","type":"TEXT"},
+  {"name":"transport_type","type":"TEXT"},
+  {"name":"sata_version","type":"TEXT"},
+  {"name":"read_device_identity_failure","type":"TEXT"},
+  {"name":"smart_supported","type":"TEXT"},
+  {"name":"smart_enabled","type":"TEXT"},
+  {"name":"packet_device_type","type":"TEXT"},
+  {"name":"power_mode","type":"TEXT"},
+  {"name":"warnings","type":"TEXT"}
+]
+[
+  {"table_name":"smbios_tables"}
+]
+[
+  {"name":"number","type":"INTEGER"},
+  {"name":"type","type":"INTEGER"},
+  {"name":"description","type":"TEXT"},
+  {"name":"handle","type":"INTEGER"},
+  {"name":"header_size","type":"INTEGER"},
+  {"name":"size","type":"INTEGER"},
+  {"name":"md5","type":"TEXT"}
+]
+[
+  {"table_name":"socket_events"}
+]
+[
+  {"name":"action","type":"TEXT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"fd","type":"TEXT"},
+  {"name":"auid","type":"BIGINT"},
+  {"name":"success","type":"INTEGER"},
+  {"name":"family","type":"INTEGER"},
+  {"name":"local_address","type":"TEXT"},
+  {"name":"remote_address","type":"TEXT"},
+  {"name":"local_port","type":"INTEGER"},
+  {"name":"remote_port","type":"INTEGER"},
+  {"name":"time","type":"BIGINT"},
+  {"name":"uptime","type":"BIGINT"}
+]
+[
+  {"table_name":"ssh_configs"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"block","type":"TEXT"},
+  {"name":"option","type":"TEXT"},
+  {"name":"ssh_config_file","type":"TEXT"}
+]
+[
+  {"table_name":"sudoers"}
+]
+[
+  {"name":"source","type":"TEXT"},
+  {"name":"header","type":"TEXT"},
+  {"name":"rule_details","type":"TEXT"}
+]
+[
+  {"table_name":"suid_bin"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"username","type":"TEXT"},
+  {"name":"groupname","type":"TEXT"},
+  {"name":"permissions","type":"TEXT"}
+]
+[
+  {"table_name":"syslog_events"}
+]
+[
+  {"name":"time","type":"BIGINT"},
+  {"name":"datetime","type":"TEXT"},
+  {"name":"host","type":"TEXT"},
+  {"name":"severity","type":"INTEGER"},
+  {"name":"facility","type":"TEXT"},
+  {"name":"tag","type":"TEXT"},
+  {"name":"message","type":"TEXT"}
+]
+[
+  {"table_name":"system_controls"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"oid","type":"TEXT"},
+  {"name":"subsystem","type":"TEXT"},
+  {"name":"current_value","type":"TEXT"},
+  {"name":"config_value","type":"TEXT"},
+  {"name":"type","type":"TEXT"}
+]
+[
+  {"table_name":"system_info"}
+]
+[
+  {"name":"hostname","type":"TEXT"},
+  {"name":"uuid","type":"TEXT"},
+  {"name":"cpu_type","type":"TEXT"},
+  {"name":"cpu_subtype","type":"TEXT"},
+  {"name":"cpu_brand","type":"TEXT"},
+  {"name":"cpu_physical_cores","type":"INTEGER"},
+  {"name":"cpu_logical_cores","type":"INTEGER"},
+  {"name":"cpu_microcode","type":"TEXT"},
+  {"name":"physical_memory","type":"BIGINT"},
+  {"name":"hardware_vendor","type":"TEXT"},
+  {"name":"hardware_model","type":"TEXT"},
+  {"name":"hardware_version","type":"TEXT"},
+  {"name":"hardware_serial","type":"TEXT"},
+  {"name":"computer_name","type":"TEXT"},
+  {"name":"local_hostname","type":"TEXT"}
+]
+[
+  {"table_name":"time"}
+]
+[
+  {"name":"weekday","type":"TEXT"},
+  {"name":"year","type":"INTEGER"},
+  {"name":"month","type":"INTEGER"},
+  {"name":"day","type":"INTEGER"},
+  {"name":"hour","type":"INTEGER"},
+  {"name":"minutes","type":"INTEGER"},
+  {"name":"seconds","type":"INTEGER"},
+  {"name":"timezone","type":"TEXT"},
+  {"name":"local_time","type":"INTEGER"},
+  {"name":"local_timezone","type":"TEXT"},
+  {"name":"unix_time","type":"INTEGER"},
+  {"name":"timestamp","type":"TEXT"},
+  {"name":"datetime","type":"TEXT"},
+  {"name":"iso_8601","type":"TEXT"}
+]
+[
+  {"table_name":"ulimit_info"}
+]
+[
+  {"name":"type","type":"TEXT"},
+  {"name":"soft_limit","type":"TEXT"},
+  {"name":"hard_limit","type":"TEXT"}
+]
+[
+  {"table_name":"uptime"}
+]
+[
+  {"name":"days","type":"INTEGER"},
+  {"name":"hours","type":"INTEGER"},
+  {"name":"minutes","type":"INTEGER"},
+  {"name":"seconds","type":"INTEGER"},
+  {"name":"total_seconds","type":"BIGINT"}
+]
+[
+  {"table_name":"usb_devices"}
+]
+[
+  {"name":"usb_address","type":"INTEGER"},
+  {"name":"usb_port","type":"INTEGER"},
+  {"name":"vendor","type":"TEXT"},
+  {"name":"vendor_id","type":"TEXT"},
+  {"name":"version","type":"TEXT"},
+  {"name":"model","type":"TEXT"},
+  {"name":"model_id","type":"TEXT"},
+  {"name":"serial","type":"TEXT"},
+  {"name":"class","type":"TEXT"},
+  {"name":"subclass","type":"TEXT"},
+  {"name":"protocol","type":"TEXT"},
+  {"name":"removable","type":"INTEGER"}
+]
+[
+  {"table_name":"user_events"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"auid","type":"BIGINT"},
+  {"name":"pid","type":"BIGINT"},
+  {"name":"message","type":"TEXT"},
+  {"name":"type","type":"INTEGER"},
+  {"name":"path","type":"TEXT"},
+  {"name":"address","type":"TEXT"},
+  {"name":"terminal","type":"TEXT"},
+  {"name":"time","type":"BIGINT"},
+  {"name":"uptime","type":"BIGINT"}
+]
+[
+  {"table_name":"user_groups"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"}
+]
+[
+  {"table_name":"user_ssh_keys"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"path","type":"TEXT"},
+  {"name":"encrypted","type":"INTEGER"}
+]
+[
+  {"table_name":"users"}
+]
+[
+  {"name":"uid","type":"BIGINT"},
+  {"name":"gid","type":"BIGINT"},
+  {"name":"uid_signed","type":"BIGINT"},
+  {"name":"gid_signed","type":"BIGINT"},
+  {"name":"username","type":"TEXT"},
+  {"name":"description","type":"TEXT"},
+  {"name":"directory","type":"TEXT"},
+  {"name":"shell","type":"TEXT"},
+  {"name":"uuid","type":"TEXT"}
+]
+[
+  {"table_name":"yara"}
+]
+[
+  {"name":"path","type":"TEXT"},
+  {"name":"matches","type":"TEXT"},
+  {"name":"count","type":"INTEGER"},
+  {"name":"sig_group","type":"TEXT"},
+  {"name":"sigfile","type":"TEXT"},
+  {"name":"strings","type":"TEXT"},
+  {"name":"tags","type":"TEXT"}
+]
+[
+  {"table_name":"yara_events"}
+]
+[
+  {"name":"target_path","type":"TEXT"},
+  {"name":"category","type":"TEXT"},
+  {"name":"action","type":"TEXT"},
+  {"name":"transaction_id","type":"BIGINT"},
+  {"name":"matches","type":"TEXT"},
+  {"name":"count","type":"INTEGER"},
+  {"name":"strings","type":"TEXT"},
+  {"name":"tags","type":"TEXT"},
+  {"name":"time","type":"BIGINT"}
+]
+[
+  {"table_name":"yum_sources"}
+]
+[
+  {"name":"name","type":"TEXT"},
+  {"name":"baseurl","type":"TEXT"},
+  {"name":"enabled","type":"TEXT"},
+  {"name":"gpgcheck","type":"TEXT"},
+  {"name":"gpgkey","type":"TEXT"}
+]
