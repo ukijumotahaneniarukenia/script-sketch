@@ -20,3 +20,6 @@
 
   - https://datumstudio.jp/blog-cat/data-analytics/page/2
 
+- 入出力系
+
+  - https://a-habakiri.hateblo.jp/entry/2016/12/12/222806
