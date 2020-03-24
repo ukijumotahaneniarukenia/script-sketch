@@ -1,13 +1,36 @@
 #!/usr/bin/env perl
 
-use strict;
-use Text::MeCab;
+# 無名関数
+my $f = sub {
+          print "無名の世界から、こんにちは\n";
+        };
 
-my $mecab = Text::MeCab->new();
-my $text = "日本語の形態素解析のテストを行ってみます";
+# 無名関数を実行
+$f->();
 
-for (my $node = $mecab->parse($text); $node; $node = $node->next) {
-   # See perdoc for Text::MeCab::Node for list of methods
-   print $node->surface, "\n";
-   print $node->feature, "\n";
+# ふつうの関数のように引数も受け取れる
+my $ff = sub {
+              my ($x, $y) = @_;
+
+              print "$x\n";
+              print "$y\n";
+            };
+
+# 無名関数を実行
+$ff->('無名の世界へ引数を与える', 'こんにちは');
+
+# 無名関数受け取る、名前のある関数
+sub hoge {
+  my $c = shift;
+
+  print "hoge関数の中です\n";
+  $c->();
 }
+
+
+# 無名関数取得
+my $fff = sub { print "わたしを誰かよびだして〜\n" };
+
+
+# 無名関数を引数にして hoge関数を実行
+hoge($fff);
