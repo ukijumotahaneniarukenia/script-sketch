@@ -60,3 +60,32 @@ ueoai
 eoaiu
 oaiue
 ```
+
+
+- CMD
+  - これがNgram
+
+
+```
+$printf "%s\n" ウンコもりもり森鴎外 aiueo | perl -C -anlE 'map{s/(\p{Any})/${^N}${^POSTMATCH}\n/gp}@F;@a=map{split(/\n/,$_)}@F;map{say substr($_,0,2)}@a'
+```
+
+- OUT
+
+```
+ウン
+ンコ
+コも
+もり
+りも
+もり
+り森
+森鴎
+鴎外
+外
+ai
+iu
+ue
+eo
+o
+```
