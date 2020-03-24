@@ -1,2 +1,9 @@
-ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm
-bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz
+id,item,qty,dtm
+0001,apple,6,20190201
+0002,apple,10,20190206
+0003,apple,11,20190206
+0004,banana,7,20190208
+0005,banana,3,20190209
+0006,banana,4,20190202
+0007,kiwii,10,20190201
+0008,kiwii,5,20190209
