@@ -1,4 +1,5 @@
-printf "%s\n" abc def ghi | xargs -n2 | python3 -c '
+#!/usr/bin/env python3
+
 import sys;
 import re;
 from functools import reduce;
@@ -15,4 +16,3 @@ else:
   c=list(map(lambda x:list(map(lambda y:list(filter(lambda z:0!=len(z),y)),x)),b));
 print(b);
 print(c);
-'
