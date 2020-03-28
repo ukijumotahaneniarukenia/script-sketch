@@ -2,6 +2,7 @@ package main
 import (
     "fmt"
     "gosample"
+    "data"
 )
 
 
@@ -10,6 +11,10 @@ func mmm (a int,b int) int{ //先頭文字が小文字は同一パッケージ�
 }
 
 func main() {
+    var e data.Mydata
+    e.Num =100
+    e.Str ="kkk"
+    fmt.Printf("e.num=%d,e.str=%s\n",e.Num,e.Str)
     fmt.Println(gosample.Message)
     fmt.Println(gosample.NNN)
     rt :=mmm(10,20)
