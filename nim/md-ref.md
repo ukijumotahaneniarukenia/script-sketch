@@ -1,3 +1,6 @@
+- とりま配列制覇したい
+  - https://nim-lang.org/docs/sequtils.html#foldl.t%2Cuntyped%2Cuntyped
+
 - いい感じのサンプル
   - http://flat-leon.hatenablog.com/entry/nim_howto
 
