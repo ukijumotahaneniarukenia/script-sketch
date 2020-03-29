@@ -1,3 +1,6 @@
+- いい感じのサンプル
+  - http://flat-leon.hatenablog.com/entry/nim_howto
+
 - nimスクリプト集
   - https://scripter.co/notes/nim/
 

@@ -1,49 +1,4 @@
-# コマンドライン引数経由の標準入力
-
-```
-$cat stdin.nim
-import os
-
-when isMainModule:
-  let args = commandLineParams()
-  stdout.write(args)
-```
-
-改行されないのがポイント
-
-```
-$stdin unko
-unko
-$stdin unko{1..3}
-unko1unko2unko3
-```
-
-split系を取り入れたい
-  - https://nim-by-example.github.io/
-
-
-```
-$stdin_via_pipe  a b c
-a
-b
-c
-$seq 10 | xargs -n3 | stdin_via_pipe
-1 2 3
-4 5 6
-7 8 9
-10
-$stdin_via_pipe  {a..d}
-a
-b
-c
-$stdin_via_pipe  a b c
-a
-b
-c
-```
-
-
-
+- 事始め
 ```
 $mkdir -p 00001-nim-ハローワールド
 $cd 00001-nim-ハローワールド
@@ -52,4 +7,39 @@ $touch main.nim
 $nim c main.nim
 $./main
 ハローワールド
+```
+
+```
+$cd 00004-nim-標準入力
+
+$./main $(echo {a..f} | xargs -n2)
+1@["a", "b", "c", "d", "e", "f"]
+
+$./main $(echo {a..f} | xargs -n1)
+1@["a", "b", "c", "d", "e", "f"]
+
+$echo {a..f} | xargs -n1 | ./main
+1@["a"]
+2@["b"]
+3@["c"]
+4@["d"]
+5@["e"]
+6@["f"]
+
+$echo {a..f} | xargs -n2 | ./main
+1@["a", "b"]
+2@["c", "d"]
+3@["e", "f"]
+
+$echo {a..f} | xargs -n3 | ./main
+1@["a", "b", "c"]
+2@["d", "e", "f"]
+
+
+$echo {a..f} | xargs -n4 | ./main
+1@["a", "b", "c", "d"]
+2@["e", "f"]
+
+$echo {a..f} | xargs -n6 | ./main
+1@["a", "b", "c", "d", "e", "f"]
 ```
