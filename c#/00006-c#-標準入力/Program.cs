@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace _00006_c__標準入力
 {
@@ -86,22 +87,13 @@ namespace _00006_c__標準入力
         }
 
         private static void Usage()
-        //FILE NAME DYNAMIC
         {
+            String filename = "";
+            filename = Regex.Replace(Process.GetCurrentProcess().MainModule.FileName, ".*/","");
             String doc =@"
 Usage:
-IN: ./bin/*/*/00003-c#-コマンドライン引数 ""$(echo {a..f} | xargs -n3)""
-OUT:
-    0:0:a
-    0:1:b
-    0:2:c
-    1:0:d
-    1:1:e
-    1:2:f
-
-or
-
-IN: ./bin/*/*/00003-c#-コマンドライン引数 ""$(echo {a..f} | xargs -n2)""
+IN: echo {a..f} | xargs -n2 | " + @"./bin/*/*/"+String.Format(@"{0}",filename)+
+@"
 OUT:
     0:0:a
     0:1:b
@@ -112,7 +104,8 @@ OUT:
 
 or
 
-IN: ./bin/*/*/00003-c#-コマンドライン引数 ""$(echo {a..f} | xargs -n1)""
+IN: echo {a..f} | xargs -n1 | " + @"./bin/*/*/"+String.Format(@"{0}",filename)+
+@"
 OUT:
     0:0:a
     1:0:b
@@ -120,9 +113,43 @@ OUT:
     3:0:d
     4:0:e
     5:0:f
+
 or
 
-IN: ./bin/*/*/00003-c#-コマンドライン引数 $(echo {a..f} | xargs -n2)
+IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" ""$(echo {a..f} | xargs -n3)"""+@"
+OUT:
+    0:0:a
+    0:1:b
+    0:2:c
+    1:0:d
+    1:1:e
+    1:2:f
+
+or
+
+IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" ""$(echo {a..f} | xargs -n2)"""+@"
+OUT:
+    0:0:a
+    0:1:b
+    1:0:c
+    1:1:d
+    2:0:e
+    2:1:f
+
+or
+
+IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" ""$(echo {a..f} | xargs -n1)"""+@"
+OUT:
+     0:0:a
+    1:0:b
+    2:0:c
+    3:0:d
+    4:0:e
+    5:0:f
+
+or
+
+IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" $(echo {a..f} | xargs -n2)"+@"
 OUT:
     0:0:a
     0:1:b
@@ -133,7 +160,7 @@ OUT:
 
 or
 
-IN: ./bin/*/*/00003-c#-コマンドライン引数 $(echo {a..f} | xargs -n1)
+IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" $(echo {a..f} | xargs -n1)"+@"
 OUT:
     0:0:a
     0:1:b
