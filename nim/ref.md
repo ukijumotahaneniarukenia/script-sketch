@@ -1,3 +1,6 @@
+- ブロックとスコープ
+  - https://gist.github.com/miyakogi/b1df00c8bc99927d9d0d#%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%A8block
+
 - 競プロ
   - https://ikatakos.com/pot/programming/nim/programming_contest
 
