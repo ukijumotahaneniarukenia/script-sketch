@@ -1,3 +1,6 @@
+- コマンドラインから実行する
+  - https://symfoware.blog.fc2.com/blog-entry-2249.html
+
 - ブロックとスコープ
   - https://gist.github.com/miyakogi/b1df00c8bc99927d9d0d#%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97%E3%81%A8block
 
