@@ -62,7 +62,6 @@ namespace _00006_c__標準入力
                     for(int i=0;i<=cnt-1;i++)
                     {
                         lizzzz.Add(liz[i]);
-                        // Console.WriteLine(i+liz[i]);
                     }
                     map.Add(0,lizzzz);
                     debug(map);
@@ -140,7 +139,7 @@ or
 
 IN: ./bin/*/*/"+String.Format(@"{0}",filename)+@" ""$(echo {a..f} | xargs -n1)"""+@"
 OUT:
-     0:0:a
+    0:0:a
     1:0:b
     2:0:c
     3:0:d
