@@ -48,6 +48,7 @@ c
 $mkdir -p 00001-nim-ハローワールド
 $cd 00001-nim-ハローワールド
 $echo '/main' | xargs -n1 >.gitignore
+$touch main.nim
 $nim c main.nim
 $./main
 ハローワールド
