@@ -1,3 +1,9 @@
+- nimスクリプト集
+  - https://scripter.co/notes/nim/
+
+- nimのハッシュエントリはテーブルで代替
+  - https://nim-lang.org/docs/tables.html
+
 - コマンドラインから実行する
   - https://symfoware.blog.fc2.com/blog-entry-2249.html
 
