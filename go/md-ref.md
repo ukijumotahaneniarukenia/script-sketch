@@ -4,3 +4,5 @@
   - https://gobyexample.com/
 - go web
   - https://astaxie.gitbooks.io/build-web-application-with-golang/
+- go defer
+  - https://kamatama41.hatenablog.com/entry/2019/05/31/173346
