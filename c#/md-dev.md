@@ -10,6 +10,8 @@ mkdir -p 00001-c#-ハローワールド
 
 cd 00001-c#-ハローワールド
 
+echo '/bin/* /obj/*' | xargs -n1 >.gitignore
+
 dotnet new console
 
 dotnet run
