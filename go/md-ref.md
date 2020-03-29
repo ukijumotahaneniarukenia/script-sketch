@@ -2,3 +2,5 @@
   - https://speakerdeck.com/dqneo/how-i-wrote-a-self-hosted-go-compiler-from-scratch
 - 機能一覧
   - https://gobyexample.com/
+- go web
+  - https://astaxie.gitbooks.io/build-web-application-with-golang/
