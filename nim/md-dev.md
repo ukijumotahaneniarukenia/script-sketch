@@ -23,21 +23,32 @@ split系を取り入れたい
 
 
 ```
-apache@5953b2510380 ~/script-sketch/nim$stdin_via_pipe  a b c
+$stdin_via_pipe  a b c
 a
 b
 c
-apache@5953b2510380 ~/script-sketch/nim$seq 10 | xargs -n3 | stdin_via_pipe 
+$seq 10 | xargs -n3 | stdin_via_pipe
 1 2 3
 4 5 6
 7 8 9
 10
-apache@5953b2510380 ~/script-sketch/nim$stdin_via_pipe  {a..d}
+$stdin_via_pipe  {a..d}
 a
 b
 c
-apache@5953b2510380 ~/script-sketch/nim$stdin_via_pipe  a b c
+$stdin_via_pipe  a b c
 a
 b
 c
+```
+
+
+
+```
+$mkdir -p 00001-nim-ハローワールド
+$cd 00001-nim-ハローワールド
+$echo '/main' | xargs -n1 >.gitignore
+$nim c main.nim
+$./main
+ハローワールド
 ```
