@@ -6,7 +6,7 @@
 $mkdir -p 00004-go-テキスト処理/{bin,pkg,src{,/main}}
 $cd 00004-go-テキスト処理
 $touch src/main/main.go
-$echo '/bin/* /pkg/* /github.com/* main' | xargs -n1 >.gitignore
+$echo '/bin/* /pkg/* /github.com/* /main' | xargs -n1 >.gitignore
 ```
 
 - 動作確認
