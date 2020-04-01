@@ -1,3 +1,6 @@
+- クローラ
+  - https://blog.mamansoft.net/2018/04/22/nim-github-search-tool/
+
 - とりま配列制覇したい
   - https://nim-lang.org/docs/sequtils.html#foldl.t%2Cuntyped%2Cuntyped
 
