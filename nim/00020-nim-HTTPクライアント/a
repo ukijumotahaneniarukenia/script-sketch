@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<html class="client-nojs" lang="ja" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>新しいファイルのギャラリー - Wikipedia</title>
+<script>document.documentElement.className="client-js";RLCONF={"wgBreakFrames":!0,"wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"ja","wgMonthNames":["","1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"wgRequestId":"dfdd4fb7-cb6b-426b-a8a5-e21463f5d7e4","wgCSPNonce":!1,"wgCanonicalNamespace":"Special","wgCanonicalSpecialPageName":"Newimages","wgNamespaceNumber":-1,"wgPageName":"特別:新着ファイル","wgTitle":"新着ファイル","wgCurRevisionId":0,"wgRevisionId":0,"wgArticleId":0,"wgIsArticle":!1,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgPageContentLanguage":"ja","wgPageContentModel":"wikitext","wgRelevantPageName":"特別:新着ファイル","wgRelevantArticleId":0,"wgIsProbablyEditable":!1,"wgRelevantPageIsProbablyEditable":!1,"wgMediaViewerOnClick":!0,"wgMediaViewerEnabledByDefault":!0,"wgPopupsReferencePreviews":!1,
+"wgPopupsConflictsWithNavPopupGadget":!1,"wgVisualEditor":{"pageLanguageCode":"ja","pageLanguageDir":"ltr","pageVariantFallbacks":"ja"},"wgMFDisplayWikibaseDescriptions":{"search":!0,"nearby":!0,"watchlist":!0,"tagline":!0},"wgWMESchemaEditAttemptStepOversample":!1,"wgULSCurrentAutonym":"日本語","wgNoticeProject":"wikipedia","wgCentralAuthMobileDomain":!1,"wgEditSubmitButtonLabelPublish":!0,"wgSiteNoticeId":"2.46"};RLSTATE={"ext.globalCssJs.user.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":"ready","user.options":"loading","mediawiki.helplink":"ready","oojs-ui-core.styles":"ready","oojs-ui.styles.indicators":"ready","mediawiki.widgets.styles":"ready","oojs-ui-core.icons":"ready","mediawiki.htmlform.ooui.styles":"ready","mediawiki.htmlform.styles":"ready","mediawiki.widgets.DateInputWidget.styles":"ready","mediawiki.page.gallery.styles":"ready","skins.vector.styles.legacy":"ready",
+"ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","ext.tmh.thumbnail.styles":"ready","ext.dismissableSiteNotice.styles":"ready"};RLPAGEMODULES=["mediawiki.htmlform","mediawiki.htmlform.ooui","mediawiki.widgets.UserInputWidget","oojs-ui-widgets","mediawiki.widgets.DateInputWidget","site","mediawiki.page.startup","skins.vector.js","mediawiki.page.ready","ext.gadget.ReferenceTooltips","ext.gadget.suppressEnterAtSummaryBox","ext.gadget.checkSignature","ext.gadget.WikiMiniAtlas","ext.gadget.switcher","ext.centralauth.centralautologin","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging","ext.wikimediaEvents","ext.navigationTiming","ext.uls.compactlinks","ext.uls.interface","ext.cx.eventlogging.campaigns","ext.centralNotice.geoIP","mw.MediaWikiPlayer.loader","mw.PopUpMediaTransform","ext.dismissableSiteNotice"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@1hzgi",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});mw.user.options.set({"variant":"ja"});
+});});</script>
+<link rel="stylesheet" href="/w/load.php?lang=ja&amp;modules=ext.dismissableSiteNotice.styles%7Cext.tmh.thumbnail.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.helplink%7Cmediawiki.htmlform.ooui.styles%7Cmediawiki.htmlform.styles%7Cmediawiki.page.gallery.styles%7Cmediawiki.widgets.DateInputWidget.styles%7Cmediawiki.widgets.styles%7Coojs-ui-core.icons%2Cstyles%7Coojs-ui.styles.indicators%7Cskins.vector.styles.legacy&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?lang=ja&amp;modules=startup&amp;only=scripts&amp;raw=1&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?lang=ja&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.35.0-wmf.25"/>
+<meta name="referrer" content="origin"/>
+<meta name="referrer" content="origin-when-crossorigin"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (ja)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//ja.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="license" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="alternate" type="application/atom+xml" title="WikipediaのAtomフィード" href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%9C%80%E8%BF%91%E3%81%AE%E6%9B%B4%E6%96%B0&amp;feed=atom"/>
+<link rel="canonical" href="https://ja.wikipedia.org/wiki/%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<!--[if lt IE 9]><script src="/w/resources/lib/html5shiv/html5shiv.js"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns--1 ns-special mw-special-Newimages page-特別_新着ファイル rootpage-特別_新着ファイル skin-vector action-view">
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --><div id="mw-dismissablenotice-anonplace"></div><script>(function(){var node=document.getElementById("mw-dismissablenotice-anonplace");if(node){node.outerHTML="\u003Cdiv class=\"mw-dismissable-notice\"\u003E\u003Cdiv class=\"mw-dismissable-notice-close\"\u003E[\u003Ca tabindex=\"0\" role=\"button\"\u003E非表示\u003C/a\u003E]\u003C/div\u003E\u003Cdiv class=\"mw-dismissable-notice-body\"\u003E\u003Cdiv id=\"localNotice\" lang=\"ja\" dir=\"ltr\"\u003E\u003Cp\u003E\u003Ca href=\"/wiki/Wikipedia:%E6%8B%A1%E5%BC%B5%E5%8D%8A%E4%BF%9D%E8%AD%B7%E3%81%AE%E6%96%B9%E9%87%9D\" title=\"Wikipedia:拡張半保護の方針\"\u003E拡張半保護\u003C/a\u003Eの導入の是非を問う投票を実施しています（\u003Ca href=\"/wiki/Wikipedia:%E4%BA%95%E6%88%B8%E7%AB%AF/subj/%E6%8B%A1%E5%BC%B5%E5%8D%8A%E4%BF%9D%E8%AD%B7%E3%81%AE%E5%B0%8E%E5%85%A5%EF%BC%88%E5%86%8D%E6%8F%90%E6%A1%88%EF%BC%89/%E6%B1%BA%E9%81%B8%E6%8A%95%E7%A5%A8\" title=\"Wikipedia:井戸端/subj/拡張半保護の導入（再提案）/決選投票\"\u003E投票場所\u003C/a\u003E）。\n\u003C/p\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E";}}());</script></div>
+	<div class="mw-indicators mw-body-content">
+<div id="mw-indicator-mw-helplink" class="mw-indicator"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:New_images" target="_blank" class="mw-helplink">ヘルプ</a></div>
+</div>
+
+	<h1 id="firstHeading" class="firstHeading" lang="ja">新しいファイルのギャラリー</h1>
+	
+	<div id="bodyContent" class="mw-body-content">
+		
+		<div id="contentSub"></div>
+		
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">ナビゲーションに移動</a>
+		<a class="mw-jump-link" href="#p-search">検索に移動</a>
+		<div id="mw-content-text"><div class="mw-specialpage-summary">
+<p>この特別ページでは、最近アップロードされたファイルを表示します。
+</p>
+</div><div class='mw-htmlform-ooui-wrapper oo-ui-layout oo-ui-panelLayout oo-ui-panelLayout-padded oo-ui-panelLayout-framed'><form action='/wiki/%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB' method='get' enctype='application/x-www-form-urlencoded' class='mw-htmlform mw-htmlform-ooui oo-ui-layout oo-ui-formLayout'><fieldset class='oo-ui-layout oo-ui-labelElement oo-ui-fieldsetLayout'><legend class='oo-ui-fieldsetLayout-header'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-labelElement-label'>絞り込み</span></legend><div class='oo-ui-fieldsetLayout-group'><div aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled'><div data-mw-modules='mediawiki.widgets.UserInputWidget' id='ooui-php-19' class='mw-htmlform-field-HTMLUserTextField  mw-htmlform-field-autoinfuse oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-user"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"IP\u30a2\u30c9\u30ec\u30b9\u307e\u305f\u306f\u5229\u7528\u8005\u540d:"},"classes":["mw-htmlform-field-HTMLUserTextField","","mw-htmlform-field-autoinfuse"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label for='ooui-php-1' class='oo-ui-labelElement-label'>IPアドレスまたは利用者名:</label></span><div class='oo-ui-fieldLayout-field'><div id='mw-input-user' aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-textInputWidget oo-ui-textInputWidget-type-text oo-ui-textInputWidget-php mw-widget-userInputWidget' data-ooui='{"_":"mw.widgets.UserInputWidget","$overlay":true,"name":"user","inputId":"ooui-php-1"}'><input type='text' tabindex='0' aria-disabled='false' name='user' value='' id='ooui-php-1' class='oo-ui-inputWidget-input' /><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator'></span></div></div></div></div><div id='ooui-php-20' class='mw-htmlform-field-HTMLCheckField  oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-showbots"},"align":"inline","helpInline":true,"$overlay":true,"label":{"html":"\u30dc\u30c3\u30c8\u306b\u3088\u308b\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3092\u8868\u793a"},"classes":["mw-htmlform-field-HTMLCheckField",""]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span id='mw-input-showbots' aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget' data-ooui='{"_":"OO.ui.CheckboxInputWidget","name":"showbots","value":"1","inputId":"ooui-php-2"}'><input type='checkbox' tabindex='0' aria-disabled='false' name='showbots' value='1' id='ooui-php-2' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-2' class='oo-ui-labelElement-label'>ボットによるアップロードを表示</label></span></div></div><div id='ooui-php-21' class='mw-htmlform-field-HTMLMultiSelectField  mw-htmlform-flatlist oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"ooui-php-22"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"\u30e1\u30c7\u30a3\u30a2\u306e\u7a2e\u985e:"},"classes":["mw-htmlform-field-HTMLMultiSelectField"," mw-htmlform-flatlist"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label id='ooui-php-14' class='oo-ui-labelElement-label'>メディアの種類:</label></span><div class='oo-ui-fieldLayout-field'><div aria-disabled='false' aria-labelledby='ooui-php-14' id='ooui-php-22' class=' mw-htmlform-flatlist oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxMultiselectInputWidget' data-ooui='{"_":"OO.ui.CheckboxMultiselectInputWidget","options":[{"data":"3D","label":{"html":"3D"},"disabled":false},{"data":"OFFICE","label":{"html":"\u30aa\u30d5\u30a3\u30b9\u30d5\u30a1\u30a4\u30eb"},"disabled":false},{"data":"AUDIO","label":{"html":"\u30aa\u30fc\u30c7\u30a3\u30aa"},"disabled":false},{"data":"TEXT","label":{"html":"\u30c6\u30ad\u30b9\u30c8"},"disabled":false},{"data":"BITMAP","label":{"html":"\u30d3\u30c3\u30c8\u30de\u30c3\u30d7\u753b\u50cf"},"disabled":false},{"data":"MULTIMEDIA","label":{"html":"\u30ea\u30c3\u30c1\u30e1\u30c7\u30a3\u30a2"},"disabled":false},{"data":"UNKNOWN","label":{"html":"\u4e0d\u660e"},"disabled":false},{"data":"VIDEO","label":{"html":"\u52d5\u753b"},"disabled":false},{"data":"ARCHIVE","label":{"html":"\u5727\u7e2e\u30d5\u30a9\u30fc\u30de\u30c3\u30c8"},"disabled":false},{"data":"EXECUTABLE","label":{"html":"\u5b9f\u884c\u30d5\u30a1\u30a4\u30eb"},"disabled":false},{"data":"DRAWING","label":{"html":"\u7dda\u753b (\u30d9\u30af\u30bf\u30fc\u30a4\u30e1\u30fc\u30b8)"},"disabled":false}],"name":"mediatype[]","value":["OFFICE","EXECUTABLE","MULTIMEDIA","AUDIO","BITMAP","DRAWING","TEXT","VIDEO","UNKNOWN","ARCHIVE","3D"],"classes":[" mw-htmlform-flatlist"]}'><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='3D' id='ooui-php-3' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-3' class='oo-ui-labelElement-label'>3D</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='OFFICE' id='ooui-php-4' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-4' class='oo-ui-labelElement-label'>オフィスファイル</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='AUDIO' id='ooui-php-5' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-5' class='oo-ui-labelElement-label'>オーディオ</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='TEXT' id='ooui-php-6' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-6' class='oo-ui-labelElement-label'>テキスト</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='BITMAP' id='ooui-php-7' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-7' class='oo-ui-labelElement-label'>ビットマップ画像</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='MULTIMEDIA' id='ooui-php-8' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-8' class='oo-ui-labelElement-label'>リッチメディア</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='UNKNOWN' id='ooui-php-9' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-9' class='oo-ui-labelElement-label'>不明</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='VIDEO' id='ooui-php-10' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-10' class='oo-ui-labelElement-label'>動画</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='ARCHIVE' id='ooui-php-11' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-11' class='oo-ui-labelElement-label'>圧縮フォーマット</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='EXECUTABLE' id='ooui-php-12' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-12' class='oo-ui-labelElement-label'>実行ファイル</label></span></div></div><div class='oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-inline'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-field'><span aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-checkboxInputWidget'><input type='checkbox' tabindex='0' aria-disabled='false' name='mediatype[]' value='DRAWING' id='ooui-php-13' checked='checked' class='oo-ui-inputWidget-input' /><span aria-disabled='false' class='oo-ui-checkboxInputWidget-checkIcon oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-check oo-ui-iconElement oo-ui-labelElement-invisible oo-ui-iconWidget oo-ui-image-invert'></span></span></span><span class='oo-ui-fieldLayout-header'><label for='ooui-php-13' class='oo-ui-labelElement-label'>線画 (ベクターイメージ)</label></span></div></div></div></div></div></div><div data-mw-modules='mediawiki.widgets.DateInputWidget' id='ooui-php-23' class='mw-htmlform-field-HTMLDateTimeField  mw-htmlform-datetime-field mw-htmlform-field-autoinfuse oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-start"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"\u3053\u306e\u65e5\u304b\u3089:"},"classes":["mw-htmlform-field-HTMLDateTimeField"," mw-htmlform-datetime-field","mw-htmlform-field-autoinfuse"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label for='ooui-php-17' class='oo-ui-labelElement-label'>この日から:</label></span><div class='oo-ui-fieldLayout-field'><div id='mw-input-start' aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-textInputWidget oo-ui-textInputWidget-type-text oo-ui-textInputWidget-php mw-widget-dateInputWidget' data-ooui='{"_":"mw.widgets.DateInputWidget","longDisplayFormat":false,"precision":"day","$overlay":true,"placeholder":"YYYY-MM-DD","name":"start","inputId":"ooui-php-17"}'><input type='date' tabindex='0' aria-disabled='false' name='start' value='' placeholder='YYYY-MM-DD' id='ooui-php-17' class='oo-ui-inputWidget-input' /><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator'></span></div></div></div></div><div data-mw-modules='mediawiki.widgets.DateInputWidget' id='ooui-php-24' class='mw-htmlform-field-HTMLDateTimeField  mw-htmlform-datetime-field mw-htmlform-field-autoinfuse oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-top' data-ooui='{"_":"mw.htmlform.FieldLayout","fieldWidget":{"tag":"mw-input-end"},"align":"top","helpInline":true,"$overlay":true,"label":{"html":"\u3053\u306e\u65e5\u307e\u3067:"},"classes":["mw-htmlform-field-HTMLDateTimeField"," mw-htmlform-datetime-field","mw-htmlform-field-autoinfuse"]}'><div class='oo-ui-fieldLayout-body'><span class='oo-ui-fieldLayout-header'><label for='ooui-php-18' class='oo-ui-labelElement-label'>この日まで:</label></span><div class='oo-ui-fieldLayout-field'><div id='mw-input-end' aria-disabled='false' class='oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-textInputWidget oo-ui-textInputWidget-type-text oo-ui-textInputWidget-php mw-widget-dateInputWidget' data-ooui='{"_":"mw.widgets.DateInputWidget","longDisplayFormat":false,"precision":"day","$overlay":true,"placeholder":"YYYY-MM-DD","name":"end","inputId":"ooui-php-18"}'><input type='date' tabindex='0' aria-disabled='false' name='end' value='' placeholder='YYYY-MM-DD' id='ooui-php-18' class='oo-ui-inputWidget-input' /><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon'></span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator'></span></div></div></div></div><input type="hidden" value="specialnewimages" name="wpFormIdentifier"/>
+<input id="mw-input-limit" name="limit" type="hidden" value="50"/>
+<input id="mw-input-offset" name="offset" type="hidden"/>
+<div class="mw-htmlform-submit-buttons">
+<span aria-disabled='false' id='ooui-php-25' class='mw-htmlform-submit oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-buttonElement oo-ui-buttonElement-framed oo-ui-labelElement oo-ui-flaggedElement-primary oo-ui-flaggedElement-progressive oo-ui-buttonInputWidget' data-ooui='{"_":"OO.ui.ButtonInputWidget","type":"submit","value":"\u691c\u7d22","label":"\u691c\u7d22","flags":["primary","progressive"],"classes":["mw-htmlform-submit"]}'><button type='submit' tabindex='0' aria-disabled='false' value='検索' class='oo-ui-inputWidget-input oo-ui-buttonElement-button'><span class='oo-ui-iconElement-icon oo-ui-iconElement-noIcon oo-ui-image-invert'></span><span class='oo-ui-labelElement-label'>検索</span><span class='oo-ui-indicatorElement-indicator oo-ui-indicatorElement-noIndicator oo-ui-image-invert'></span></button></span></div>
+</div></div></fieldset></form></div><ul class="gallery mw-gallery-traditional">
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:41px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Saikistation_blackbord.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/9/90/Saikistation_blackbord.JPG/120px-Saikistation_blackbord.JPG" decoding="async" width="120" height="68" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/9/90/Saikistation_blackbord.JPG/180px-Saikistation_blackbord.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/9/90/Saikistation_blackbord.JPG/240px-Saikistation_blackbord.JPG 2x" data-file-width="2208" data-file-height="1244" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Saikistation_blackbord.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Saikistation blackbord.JPG">Saikistation blackbord.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%BF%E3%81%8B%E3%81%BE" title="利用者:みかま">みかま</a><br />
+<i>2020年4月1日 (水) 04:13</i><br />
+2,208 × 1,244；532キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:41px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG/120px-%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG" decoding="async" width="120" height="68" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG/180px-%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG/240px-%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG 2x" data-file-width="2208" data-file-height="1244" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%B6%B4%E5%B4%8E%E9%A7%85%E5%90%8D%E6%A8%99.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:鶴崎駅名標.JPG">鶴崎駅名標.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%BF%E3%81%8B%E3%81%BE" title="利用者:みかま">みかま</a><br />
+<i>2020年4月1日 (水) 03:57</i><br />
+2,208 × 1,244；560キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Hazawa_edoken.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/8/8f/Hazawa_edoken.jpg/90px-Hazawa_edoken.jpg" decoding="async" width="90" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/8/8f/Hazawa_edoken.jpg/135px-Hazawa_edoken.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/8/8f/Hazawa_edoken.jpg/180px-Hazawa_edoken.jpg 2x" data-file-width="900" data-file-height="1200" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Hazawa_edoken.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Hazawa edoken.jpg">Hazawa edoken.jpg</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%A6%E3%81%AB%E3%81%8B%E3%81%AD%EF%BC%92&amp;action=edit&amp;redlink=1" class="new" title="利用者:てにかね２ (存在しないページ)">てにかね２</a><br />
+<i>2020年3月31日 (火) 13:25</i><br />
+900 × 1,200；364キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Amahisa.seiichi2.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/ac/Amahisa.seiichi2.png/103px-Amahisa.seiichi2.png" decoding="async" width="103" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/ac/Amahisa.seiichi2.png/155px-Amahisa.seiichi2.png 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/ac/Amahisa.seiichi2.png/207px-Amahisa.seiichi2.png 2x" data-file-width="305" data-file-height="354" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Amahisa.seiichi2.png" class="galleryfilename galleryfilename-truncate" title="ファイル:Amahisa.seiichi2.png">Amahisa.seiichi2.png</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E5%B1%95%E9%96%8B%E4%B8%AD%E6%AD%A6%E9%81%93%E4%BC%9A&amp;action=edit&amp;redlink=1" class="new" title="利用者:展開中武道会 (存在しないページ)">展開中武道会</a><br />
+<i>2020年3月31日 (火) 11:17</i><br />
+305 × 354；128キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Amahisa.seiichi.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Amahisa.seiichi.png/103px-Amahisa.seiichi.png" decoding="async" width="103" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Amahisa.seiichi.png/155px-Amahisa.seiichi.png 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Amahisa.seiichi.png/207px-Amahisa.seiichi.png 2x" data-file-width="305" data-file-height="354" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Amahisa.seiichi.png" class="galleryfilename galleryfilename-truncate" title="ファイル:Amahisa.seiichi.png">Amahisa.seiichi.png</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E5%B1%95%E9%96%8B%E4%B8%AD%E6%AD%A6%E9%81%93%E4%BC%9A&amp;action=edit&amp;redlink=1" class="new" title="利用者:展開中武道会 (存在しないページ)">展開中武道会</a><br />
+<i>2020年3月31日 (火) 11:06</i><br />
+305 × 354；238キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:IMG_9828.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/4/49/IMG_9828.JPG/120px-IMG_9828.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/4/49/IMG_9828.JPG/180px-IMG_9828.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/4/49/IMG_9828.JPG/240px-IMG_9828.JPG 2x" data-file-width="3360" data-file-height="2240" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:IMG_9828.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:IMG 9828.JPG">IMG 9828.JPG</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:Oohashi211&amp;action=edit&amp;redlink=1" class="new" title="利用者:Oohashi211 (存在しないページ)">Oohashi211</a><br />
+<i>2020年3月31日 (火) 02:20</i><br />
+3,360 × 2,240；4.11メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Higasshii.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/c/cb/Higasshii.jpg/84px-Higasshii.jpg" decoding="async" width="84" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/c/cb/Higasshii.jpg/126px-Higasshii.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/c/cb/Higasshii.jpg/168px-Higasshii.jpg 2x" data-file-width="416" data-file-height="595" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Higasshii.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Higasshii.jpg">Higasshii.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%82%8F%E3%81%95" title="利用者:わさ">わさ</a><br />
+<i>2020年3月30日 (月) 06:13</i><br />
+416 × 595；93キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18814.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/1/12/Pcs34560_IMG18814.JPG/80px-Pcs34560_IMG18814.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/1/12/Pcs34560_IMG18814.JPG/120px-Pcs34560_IMG18814.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/1/12/Pcs34560_IMG18814.JPG/160px-Pcs34560_IMG18814.JPG 2x" data-file-width="3648" data-file-height="5472" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18814.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Pcs34560 IMG18814.JPG">Pcs34560 IMG18814.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Pcs34560" title="利用者:Pcs34560">Pcs34560</a><br />
+<i>2020年3月29日 (日) 22:33</i><br />
+3,648 × 5,472；7.03メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:68px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Shimokitahantou_stitch_20200329.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Shimokitahantou_stitch_20200329.JPG/120px-Shimokitahantou_stitch_20200329.JPG" decoding="async" width="120" height="14" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Shimokitahantou_stitch_20200329.JPG/180px-Shimokitahantou_stitch_20200329.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/5/5b/Shimokitahantou_stitch_20200329.JPG/240px-Shimokitahantou_stitch_20200329.JPG 2x" data-file-width="10000" data-file-height="1142" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Shimokitahantou_stitch_20200329.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Shimokitahantou stitch 20200329.JPG">Shimokitahantou stitch 20200329.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%82%E3%81%8A%E3%82%82%E3%82%8A%E3%81%8F%E3%81%BE" title="利用者:あおもりくま">あおもりくま</a><br />
+<i>2020年3月29日 (日) 09:13</i><br />
+10,000 × 1,142；1.9メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:29px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Gifubus_shisaku.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/ad/Gifubus_shisaku.JPG/120px-Gifubus_shisaku.JPG" decoding="async" width="120" height="92" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/ad/Gifubus_shisaku.JPG/180px-Gifubus_shisaku.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/ad/Gifubus_shisaku.JPG/240px-Gifubus_shisaku.JPG 2x" data-file-width="848" data-file-height="652" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Gifubus_shisaku.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Gifubus shisaku.JPG">Gifubus shisaku.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Mkb" title="利用者:Mkb">Mkb</a><br />
+<i>2020年3月29日 (日) 04:35</i><br />
+848 × 652；104キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:29px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus110.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/c/c3/Yachimatafureaibus110.jpg/120px-Yachimatafureaibus110.jpg" decoding="async" width="120" height="92" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/c/c3/Yachimatafureaibus110.jpg/180px-Yachimatafureaibus110.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/c/c3/Yachimatafureaibus110.jpg/240px-Yachimatafureaibus110.jpg 2x" data-file-width="1709" data-file-height="1307" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus110.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Yachimatafureaibus110.jpg">Yachimatafureaibus110.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月28日 (土) 14:58</i><br />
+1,709 × 1,307；1.61メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus226.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/4/40/Yachimatafureaibus226.jpg/120px-Yachimatafureaibus226.jpg" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/4/40/Yachimatafureaibus226.jpg/180px-Yachimatafureaibus226.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/4/40/Yachimatafureaibus226.jpg/240px-Yachimatafureaibus226.jpg 2x" data-file-width="1393" data-file-height="931" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus226.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Yachimatafureaibus226.jpg">Yachimatafureaibus226.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月28日 (土) 14:53</i><br />
+1,393 × 931；1,009キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:33px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus281.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/6/63/Yachimatafureaibus281.jpg/120px-Yachimatafureaibus281.jpg" decoding="async" width="120" height="84" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/6/63/Yachimatafureaibus281.jpg/180px-Yachimatafureaibus281.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/6/63/Yachimatafureaibus281.jpg/240px-Yachimatafureaibus281.jpg 2x" data-file-width="2086" data-file-height="1467" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus281.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Yachimatafureaibus281.jpg">Yachimatafureaibus281.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月28日 (土) 13:59</i><br />
+2,086 × 1,467；2.26メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:29px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus177.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Yachimatafureaibus177.jpg/120px-Yachimatafureaibus177.jpg" decoding="async" width="120" height="92" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Yachimatafureaibus177.jpg/180px-Yachimatafureaibus177.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Yachimatafureaibus177.jpg/240px-Yachimatafureaibus177.jpg 2x" data-file-width="1514" data-file-height="1158" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Yachimatafureaibus177.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Yachimatafureaibus177.jpg">Yachimatafureaibus177.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月28日 (土) 13:54</i><br />
+1,514 × 1,158；1.36メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:27.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:ChibaGreenBus-189.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/ad/ChibaGreenBus-189.jpg/120px-ChibaGreenBus-189.jpg" decoding="async" width="120" height="95" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/ad/ChibaGreenBus-189.jpg/180px-ChibaGreenBus-189.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/ad/ChibaGreenBus-189.jpg/240px-ChibaGreenBus-189.jpg 2x" data-file-width="889" data-file-height="703" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:ChibaGreenBus-189.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:ChibaGreenBus-189.jpg">ChibaGreenBus-189.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月28日 (土) 10:44</i><br />
+889 × 703；586キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:34px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/6/66/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG/120px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG" decoding="async" width="120" height="82" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/6/66/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG/180px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/6/66/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG/240px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG 2x" data-file-width="5696" data-file-height="3893" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E5%9C%9F%E5%99%A8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:王墓山古墳 (善通寺市) 出土 土器.JPG">王墓山古墳 (善通寺市) 出土 土器.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月28日 (土) 06:05</i><br />
+5,696 × 3,893；7.35メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:33.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/6/6a/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG/120px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG" decoding="async" width="120" height="83" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/6/6a/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG/180px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/6/6a/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG/240px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG 2x" data-file-width="5687" data-file-height="3931" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-1.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:王墓山古墳 (善通寺市) 出土 鉄製品-1.JPG">王墓山古墳 (善通寺市) 出土 鉄製品-1.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月28日 (土) 06:05</i><br />
+5,687 × 3,931；7.34メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:19.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/3/33/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG/120px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG" decoding="async" width="120" height="111" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/3/33/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG/180px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/3/33/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG/240px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG 2x" data-file-width="3168" data-file-height="2939" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%89%84%E8%A3%BD%E5%93%81-2.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:王墓山古墳 (善通寺市) 出土 鉄製品-2.JPG">王墓山古墳 (善通寺市) 出土 鉄製品-2.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月28日 (土) 06:04</i><br />
+3,168 × 2,939；3.21メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:28px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/9/99/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG/120px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG" decoding="async" width="120" height="94" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/9/99/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG/180px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/9/99/%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG/240px-%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_%28%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82%29_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG 2x" data-file-width="4204" data-file-height="3289" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%8E%8B%E5%A2%93%E5%B1%B1%E5%8F%A4%E5%A2%B3_(%E5%96%84%E9%80%9A%E5%AF%BA%E5%B8%82)_%E5%87%BA%E5%9C%9F_%E9%87%91%E9%8A%85%E8%A3%BD%E5%86%A0%E5%B8%BD%E3%83%BB%E9%8A%80%E8%B1%A1%E5%B5%8C%E5%85%A5%E9%89%84%E5%88%80.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:王墓山古墳 (善通寺市) 出土 金銅製冠帽・銀象嵌入鉄刀.JPG">王墓山古墳 (善通寺市) 出土 金銅製冠帽・銀象嵌入鉄刀.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月28日 (土) 06:04</i><br />
+4,204 × 3,289；4.62メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/9/93/%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG/120px-%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/9/93/%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG/180px-%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/9/93/%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG/240px-%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG 2x" data-file-width="6016" data-file-height="4000" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E7%A3%A8%E8%87%BC%E5%B1%B1%E5%8F%A4%E5%A2%B3%E5%87%BA%E5%9C%9F_%E5%89%B2%E7%AB%B9%E5%BD%A2%E7%9F%B3%E6%A3%BA.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:磨臼山古墳出土 割竹形石棺.JPG">磨臼山古墳出土 割竹形石棺.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月28日 (土) 01:25</i><br />
+6,016 × 4,000；7.07メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:68.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:B6122-1-.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/7/79/B6122-1-.png/120px-B6122-1-.png" decoding="async" width="120" height="13" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/7/79/B6122-1-.png/180px-B6122-1-.png 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/7/79/B6122-1-.png/240px-B6122-1-.png 2x" data-file-width="600" data-file-height="65" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:B6122-1-.png" class="galleryfilename galleryfilename-truncate" title="ファイル:B6122-1-.png">B6122-1-.png</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:Iguwan&amp;action=edit&amp;redlink=1" class="new" title="利用者:Iguwan (存在しないページ)">Iguwan</a><br />
+<i>2020年3月27日 (金) 23:42</i><br />
+600 × 65；14キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta4.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/b/b2/Keisei-CherrySta4.jpg/96px-Keisei-CherrySta4.jpg" decoding="async" width="96" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/b/b2/Keisei-CherrySta4.jpg/143px-Keisei-CherrySta4.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/b/b2/Keisei-CherrySta4.jpg/191px-Keisei-CherrySta4.jpg 2x" data-file-width="1080" data-file-height="1354" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta4.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Keisei-CherrySta4.jpg">Keisei-CherrySta4.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月27日 (金) 18:07</i><br />
+1,080 × 1,354；796キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:45px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Jougakura_Oohashi_THETAZ1_360_20200322.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/0/02/Jougakura_Oohashi_THETAZ1_360_20200322.jpg/120px-Jougakura_Oohashi_THETAZ1_360_20200322.jpg" decoding="async" width="120" height="60" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/0/02/Jougakura_Oohashi_THETAZ1_360_20200322.jpg/180px-Jougakura_Oohashi_THETAZ1_360_20200322.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/0/02/Jougakura_Oohashi_THETAZ1_360_20200322.jpg/240px-Jougakura_Oohashi_THETAZ1_360_20200322.jpg 2x" data-file-width="6720" data-file-height="3360" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Jougakura_Oohashi_THETAZ1_360_20200322.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Jougakura Oohashi THETAZ1 360 20200322.jpg">Jougakura Oohashi THETAZ1 360 20200322.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%82%E3%81%8A%E3%82%82%E3%82%8A%E3%81%8F%E3%81%BE" title="利用者:あおもりくま">あおもりくま</a><br />
+<i>2020年3月27日 (金) 08:18</i><br />
+6,720 × 3,360；3.08メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Haruhiro_Ohtsu.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Haruhiro_Ohtsu.jpg/103px-Haruhiro_Ohtsu.jpg" decoding="async" width="103" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Haruhiro_Ohtsu.jpg/155px-Haruhiro_Ohtsu.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/a6/Haruhiro_Ohtsu.jpg/206px-Haruhiro_Ohtsu.jpg 2x" data-file-width="627" data-file-height="730" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Haruhiro_Ohtsu.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Haruhiro Ohtsu.jpg">Haruhiro Ohtsu.jpg</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:Yanakanokuroneko&amp;action=edit&amp;redlink=1" class="new" title="利用者:Yanakanokuroneko (存在しないページ)">Yanakanokuroneko</a><br />
+<i>2020年3月27日 (金) 04:55</i><br />
+627 × 730；170キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta3.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/5/5e/Keisei-CherrySta3.JPG/67px-Keisei-CherrySta3.JPG" decoding="async" width="67" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/5/5e/Keisei-CherrySta3.JPG/101px-Keisei-CherrySta3.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/5/5e/Keisei-CherrySta3.JPG/135px-Keisei-CherrySta3.JPG 2x" data-file-width="2160" data-file-height="3840" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta3.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Keisei-CherrySta3.JPG">Keisei-CherrySta3.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月27日 (金) 02:44</i><br />
+2,160 × 3,840；2.27メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:41px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta2.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/f/ff/Keisei-CherrySta2.JPG/120px-Keisei-CherrySta2.JPG" decoding="async" width="120" height="68" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/f/ff/Keisei-CherrySta2.JPG/180px-Keisei-CherrySta2.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/f/ff/Keisei-CherrySta2.JPG/240px-Keisei-CherrySta2.JPG 2x" data-file-width="3840" data-file-height="2160" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta2.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Keisei-CherrySta2.JPG">Keisei-CherrySta2.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月27日 (金) 02:31</i><br />
+3,840 × 2,160；1.96メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta1.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/b/b7/Keisei-CherrySta1.JPG/67px-Keisei-CherrySta1.JPG" decoding="async" width="67" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/b/b7/Keisei-CherrySta1.JPG/101px-Keisei-CherrySta1.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/b/b7/Keisei-CherrySta1.JPG/135px-Keisei-CherrySta1.JPG 2x" data-file-width="2160" data-file-height="3840" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Keisei-CherrySta1.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Keisei-CherrySta1.JPG">Keisei-CherrySta1.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月27日 (金) 02:27</i><br />
+2,160 × 3,840；1.9メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:39.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/7/71/Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg/120px-Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg" decoding="async" width="120" height="71" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/7/71/Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg/180px-Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/7/71/Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg/240px-Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg 2x" data-file-width="1920" data-file-height="1132" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Jougakura_Oohashi_Aomori_2020_early_spring_THETA_Z1.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Jougakura Oohashi Aomori 2020 early spring THETA Z1.jpg">Jougakura Oohashi Aomori 2020 early spring THETA Z1.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%82%E3%81%8A%E3%82%82%E3%82%8A%E3%81%8F%E3%81%BE" title="利用者:あおもりくま">あおもりくま</a><br />
+<i>2020年3月25日 (水) 10:57</i><br />
+1,920 × 1,132；566キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18475.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/e/e0/Pcs34560_IMG18475.JPG/120px-Pcs34560_IMG18475.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/e/e0/Pcs34560_IMG18475.JPG/180px-Pcs34560_IMG18475.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/e/e0/Pcs34560_IMG18475.JPG/240px-Pcs34560_IMG18475.JPG 2x" data-file-width="5472" data-file-height="3648" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18475.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Pcs34560 IMG18475.JPG">Pcs34560 IMG18475.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Pcs34560" title="利用者:Pcs34560">Pcs34560</a><br />
+<i>2020年3月24日 (火) 23:17</i><br />
+5,472 × 3,648；10.13メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18980.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/7/72/Pcs34560_IMG18980.JPG/120px-Pcs34560_IMG18980.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/7/72/Pcs34560_IMG18980.JPG/180px-Pcs34560_IMG18980.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/7/72/Pcs34560_IMG18980.JPG/240px-Pcs34560_IMG18980.JPG 2x" data-file-width="5472" data-file-height="3648" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18980.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Pcs34560 IMG18980.JPG">Pcs34560 IMG18980.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Pcs34560" title="利用者:Pcs34560">Pcs34560</a><br />
+<i>2020年3月24日 (火) 23:02</i><br />
+5,472 × 3,648；10.25メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18975.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/d/d8/Pcs34560_IMG18975.JPG/120px-Pcs34560_IMG18975.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/d/d8/Pcs34560_IMG18975.JPG/180px-Pcs34560_IMG18975.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/d/d8/Pcs34560_IMG18975.JPG/240px-Pcs34560_IMG18975.JPG 2x" data-file-width="5472" data-file-height="3648" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Pcs34560_IMG18975.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Pcs34560 IMG18975.JPG">Pcs34560 IMG18975.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Pcs34560" title="利用者:Pcs34560">Pcs34560</a><br />
+<i>2020年3月24日 (火) 23:00</i><br />
+5,472 × 3,648；3.59メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:38px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Soya_rebuild.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/1/13/Soya_rebuild.png/120px-Soya_rebuild.png" decoding="async" width="120" height="74" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/1/13/Soya_rebuild.png/180px-Soya_rebuild.png 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/1/13/Soya_rebuild.png/240px-Soya_rebuild.png 2x" data-file-width="705" data-file-height="436" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Soya_rebuild.png" class="galleryfilename galleryfilename-truncate" title="ファイル:Soya rebuild.png">Soya rebuild.png</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Tatsubou" title="利用者:Tatsubou">Tatsubou</a><br />
+<i>2020年3月23日 (月) 05:47</i><br />
+705 × 436；230キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:HayamiRemu20200322.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/3/3e/HayamiRemu20200322.JPG/67px-HayamiRemu20200322.JPG" decoding="async" width="67" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/3/3e/HayamiRemu20200322.JPG/101px-HayamiRemu20200322.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/3/3e/HayamiRemu20200322.JPG/135px-HayamiRemu20200322.JPG 2x" data-file-width="2160" data-file-height="3840" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:HayamiRemu20200322.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:HayamiRemu20200322.JPG">HayamiRemu20200322.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月22日 (日) 06:21</i><br />
+2,160 × 3,840；1.75メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:32.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/8/8a/%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif/120px-%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif" decoding="async" width="120" height="85" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/8/8a/%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif/180px-%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/8/8a/%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif/240px-%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif 2x" data-file-width="2000" data-file-height="1414" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E4%B8%AD%E5%9B%BD%E3%81%AE%E6%AD%B4%E4%BB%A3%E7%8E%8B%E6%9C%9D.gif" class="galleryfilename galleryfilename-truncate" title="ファイル:中国の歴代王朝.gif">中国の歴代王朝.gif</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:HWTOF" title="利用者:HWTOF">HWTOF</a><br />
+<i>2020年3月22日 (日) 05:41</i><br />
+2,000 × 1,414；6.25メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:30px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Mikuniminato_busstop.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/c/c1/Mikuniminato_busstop.JPG/120px-Mikuniminato_busstop.JPG" decoding="async" width="120" height="90" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/c/c1/Mikuniminato_busstop.JPG/180px-Mikuniminato_busstop.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/c/c1/Mikuniminato_busstop.JPG/240px-Mikuniminato_busstop.JPG 2x" data-file-width="1600" data-file-height="1200" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Mikuniminato_busstop.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Mikuniminato busstop.JPG">Mikuniminato busstop.JPG</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%A6%E3%81%AB%E3%81%8B%E3%81%AD%EF%BC%92&amp;action=edit&amp;redlink=1" class="new" title="利用者:てにかね２ (存在しないページ)">てにかね２</a><br />
+<i>2020年3月22日 (日) 04:53</i><br />
+1,600 × 1,200；670キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etitetu_awara_0km.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/0/06/Etitetu_awara_0km.JPG/90px-Etitetu_awara_0km.JPG" decoding="async" width="90" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/0/06/Etitetu_awara_0km.JPG/135px-Etitetu_awara_0km.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/0/06/Etitetu_awara_0km.JPG/180px-Etitetu_awara_0km.JPG 2x" data-file-width="1200" data-file-height="1600" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etitetu_awara_0km.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Etitetu awara 0km.JPG">Etitetu awara 0km.JPG</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%A6%E3%81%AB%E3%81%8B%E3%81%AD%EF%BC%92&amp;action=edit&amp;redlink=1" class="new" title="利用者:てにかね２ (存在しないページ)">てにかね２</a><br />
+<i>2020年3月22日 (日) 04:44</i><br />
+1,200 × 1,600；477キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:30px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etitetu_eiheiji_0km.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/8/86/Etitetu_eiheiji_0km.JPG/120px-Etitetu_eiheiji_0km.JPG" decoding="async" width="120" height="90" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/8/86/Etitetu_eiheiji_0km.JPG/180px-Etitetu_eiheiji_0km.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/8/86/Etitetu_eiheiji_0km.JPG/240px-Etitetu_eiheiji_0km.JPG 2x" data-file-width="1600" data-file-height="1200" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etitetu_eiheiji_0km.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Etitetu eiheiji 0km.JPG">Etitetu eiheiji 0km.JPG</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%A6%E3%81%AB%E3%81%8B%E3%81%AD%EF%BC%92&amp;action=edit&amp;redlink=1" class="new" title="利用者:てにかね２ (存在しないページ)">てにかね２</a><br />
+<i>2020年3月22日 (日) 04:40</i><br />
+1,600 × 1,200；557キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:30px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etizen_tawaramachi.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/2/21/Etizen_tawaramachi.JPG/120px-Etizen_tawaramachi.JPG" decoding="async" width="120" height="90" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/2/21/Etizen_tawaramachi.JPG/180px-Etizen_tawaramachi.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/2/21/Etizen_tawaramachi.JPG/240px-Etizen_tawaramachi.JPG 2x" data-file-width="1600" data-file-height="1200" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Etizen_tawaramachi.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:Etizen tawaramachi.JPG">Etizen tawaramachi.JPG</a>
+<a href="/w/index.php?title=%E5%88%A9%E7%94%A8%E8%80%85:%E3%81%A6%E3%81%AB%E3%81%8B%E3%81%AD%EF%BC%92&amp;action=edit&amp;redlink=1" class="new" title="利用者:てにかね２ (存在しないページ)">てにかね２</a><br />
+<i>2020年3月22日 (日) 04:29</i><br />
+1,600 × 1,200；653キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:26px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:ChibaChuoBus-HEIWAKOEN.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/7/7e/ChibaChuoBus-HEIWAKOEN.jpg/120px-ChibaChuoBus-HEIWAKOEN.jpg" decoding="async" width="120" height="98" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/7/7e/ChibaChuoBus-HEIWAKOEN.jpg/180px-ChibaChuoBus-HEIWAKOEN.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/7/7e/ChibaChuoBus-HEIWAKOEN.jpg/240px-ChibaChuoBus-HEIWAKOEN.jpg 2x" data-file-width="783" data-file-height="641" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:ChibaChuoBus-HEIWAKOEN.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:ChibaChuoBus-HEIWAKOEN.jpg">ChibaChuoBus-HEIWAKOEN.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:%E6%B1%9F%E6%88%B8%E5%89%8D%E9%B0%BB" title="利用者:江戸前鰻">江戸前鰻</a><br />
+<i>2020年3月22日 (日) 00:36</i><br />
+783 × 641；552キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:16.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Aikatsu_Friends!_at_Osaka.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/a/a7/Aikatsu_Friends%21_at_Osaka.jpg/120px-Aikatsu_Friends%21_at_Osaka.jpg" decoding="async" width="120" height="117" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/a/a7/Aikatsu_Friends%21_at_Osaka.jpg/180px-Aikatsu_Friends%21_at_Osaka.jpg 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/a/a7/Aikatsu_Friends%21_at_Osaka.jpg/240px-Aikatsu_Friends%21_at_Osaka.jpg 2x" data-file-width="468" data-file-height="458" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Aikatsu_Friends!_at_Osaka.jpg" class="galleryfilename galleryfilename-truncate" title="ファイル:Aikatsu Friends! at Osaka.jpg">Aikatsu Friends! at Osaka.jpg</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Miyuki_Meinaka" title="利用者:Miyuki Meinaka">Miyuki Meinaka</a><br />
+<i>2020年3月21日 (土) 13:40</i><br />
+468 × 458；273キロバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:33.5px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/6/63/%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG/120px-%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG" decoding="async" width="120" height="83" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/6/63/%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG/180px-%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/6/63/%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG/240px-%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG 2x" data-file-width="5605" data-file-height="3889" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A7%AB%E8%A1%97%E9%81%93%E3%81%A8%E9%8A%85%E9%90%B8%E3%81%AE%E6%AD%B4%E5%8F%B2%E6%B0%91%E4%BF%97%E8%B3%87%E6%96%99%E9%A4%A8_%E9%8A%85%E9%90%B8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:浜松市姫街道と銅鐸の歴史民俗資料館 銅鐸.JPG">浜松市姫街道と銅鐸の歴史民俗資料館 銅鐸.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+5,605 × 3,889；7.2メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/f/f1/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/f/f1/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/120px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/f/f1/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 2x" data-file-width="2423" data-file-height="3644" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E5%A4%A9%E6%BA%80%E5%B9%B3%E7%A9%B4%E3%83%8E%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区細江町中川天満平穴ノ谷出土 六区画袈裟襷紋銅鐸.JPG">静岡県浜松市北区細江町中川天満平穴ノ谷出土 六区画袈裟襷紋銅鐸.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,423 × 3,644；3.75メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/5/56/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/5/56/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/5/56/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 2x" data-file-width="2457" data-file-height="3696" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E4%B8%8D%E5%8B%95%E5%B9%B3%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区細江町中川不動平出土 六区画袈裟襷紋銅鐸.JPG">静岡県浜松市北区細江町中川不動平出土 六区画袈裟襷紋銅鐸.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,457 × 3,696；3.27メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/d/d8/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/d/d8/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/d/d8/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 2x" data-file-width="2271" data-file-height="3416" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E9%83%BD%E7%94%B0%E7%94%BA%E5%89%8D%E5%8E%9F_%E5%89%8D%E5%8E%9FVIII%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区都田町前原 前原VIII遺跡出土 六区画袈裟襷紋銅鐸.JPG">静岡県浜松市北区都田町前原 前原VIII遺跡出土 六区画袈裟襷紋銅鐸.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,271 × 3,416；2.9メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:35px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_(%E7%94%A3%E5%B1%8B).JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/8/83/%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG/120px-%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG" decoding="async" width="120" height="80" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/8/83/%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG/180px-%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/8/83/%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG/240px-%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_%28%E7%94%A3%E5%B1%8B%29.JPG 2x" data-file-width="5300" data-file-height="3521" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E6%97%A7%E5%B1%B1%E7%80%AC%E5%AE%B6%E3%81%AE%E3%82%B3%E3%83%A4_(%E7%94%A3%E5%B1%8B).JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:旧山瀬家のコヤ (産屋).JPG">旧山瀬家のコヤ (産屋).JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+5,300 × 3,521；6.16メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/5/5f/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/5/5f/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/5/5f/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG 2x" data-file-width="2424" data-file-height="3650" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A2%E5%8F%B7.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区細江町中川滝峯七曲がり出土 六区画袈裟襷紋銅鐸 七曲がり2号.JPG">静岡県浜松市北区細江町中川滝峯七曲がり出土 六区画袈裟襷紋銅鐸 七曲がり2号.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,424 × 3,650；3.14メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/2/2e/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG/79px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG" decoding="async" width="79" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/2/2e/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG/118px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/2/2e/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG/158px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG 2x" data-file-width="2342" data-file-height="3558" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E4%B8%83%E6%9B%B2%E3%81%8C%E3%82%8A1%E5%8F%B7.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区細江町中川滝峯七曲がり出土 六区画袈裟襷紋銅鐸 七曲がり1号.JPG">静岡県浜松市北区細江町中川滝峯七曲がり出土 六区画袈裟襷紋銅鐸 七曲がり1号.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,342 × 3,558；3.05メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_(%E8%A4%87%E8%A3%BD).JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/f/f3/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/f/f3/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/f/f3/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_%28%E8%A4%87%E8%A3%BD%29.JPG 2x" data-file-width="2352" data-file-height="3540" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E8%88%B9%E6%B8%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%E8%88%B9%E6%B8%A11%E5%8F%B7_(%E8%A4%87%E8%A3%BD).JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市北区細江町中川船渡出土 六区画袈裟襷紋銅鐸 船渡1号 (複製).JPG">静岡県浜松市北区細江町中川船渡出土 六区画袈裟襷紋銅鐸 船渡1号 (複製).JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,352 × 3,540；3.16メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/2/23/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/2/23/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/2/23/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG 2x" data-file-width="2347" data-file-height="3535" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7_%E6%BB%9D%E5%B3%AF%E6%89%8D%E5%9B%9B%E9%83%8E%E8%B0%B7%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8.JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市浜松市北区細江町中川滝峯才四郎谷 滝峯才四郎谷遺跡出土 六区画袈裟襷紋銅鐸.JPG">静岡県浜松市浜松市北区細江町中川滝峯才四郎谷 滝峯才四郎谷遺跡出土 六区画袈裟襷紋銅鐸.JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,347 × 3,535；3.35メガバイト<br />
+
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 155px"><div style="width: 155px">
+			<div class="thumb" style="width: 150px;"><div style="margin:15px auto;"><a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_(%E8%A4%87%E8%A3%BD).JPG" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG/80px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG" decoding="async" width="80" height="120" srcset="//upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG/119px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG 1.5x, //upload.wikimedia.org/wikipedia/ja/thumb/1/1d/%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG/159px-%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_%28%E8%A4%87%E8%A3%BD%29.JPG 2x" data-file-width="2371" data-file-height="3568" /></a></div></div>
+			<div class="gallerytext">
+<a href="/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%8C%97%E5%8C%BA%E7%B4%B0%E6%B1%9F%E7%94%BA%E4%B8%AD%E5%B7%9D%E6%82%AA%E3%83%B6%E8%B0%B7%E5%87%BA%E5%9C%9F_%E5%85%AD%E5%8C%BA%E7%94%BB%E8%A2%88%E8%A3%9F%E8%A5%B7%E7%B4%8B%E9%8A%85%E9%90%B8_(%E8%A4%87%E8%A3%BD).JPG" class="galleryfilename galleryfilename-truncate" title="ファイル:静岡県浜松市浜松市北区細江町中川悪ヶ谷出土 六区画袈裟襷紋銅鐸 (複製).JPG">静岡県浜松市浜松市北区細江町中川悪ヶ谷出土 六区画袈裟襷紋銅鐸 (複製).JPG</a>
+<a href="/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Saigen_Jiro" title="利用者:Saigen Jiro">Saigen Jiro</a><br />
+<i>2020年3月21日 (土) 03:42</i><br />
+2,371 × 3,568；3.15メガバイト<br />
+
+			</div>
+		</div></li>
+</ul>(最新 | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;dir=prev" class="mw-lastlink" title="特別:新着ファイル">最古</a>) (以後の50件 | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=20200321034229" class="mw-nextlink" title="特別:新着ファイル" rel="next">以前の50件</a>) (<a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=&amp;limit=20" class="mw-numlink" title="特別:新着ファイル">20</a> | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=&amp;limit=50" class="mw-numlink" title="特別:新着ファイル">50</a> | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=&amp;limit=100" class="mw-numlink" title="特別:新着ファイル">100</a> | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=&amp;limit=250" class="mw-numlink" title="特別:新着ファイル">250</a> | <a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;offset=&amp;limit=500" class="mw-numlink" title="特別:新着ファイル">500</a> 件) を表示<noscript><img src="//ja.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>
+		<div class="printfooter">「<a dir="ltr" href="https://ja.wikipedia.org/wiki/特別:新着ファイル">https://ja.wikipedia.org/wiki/特別:新着ファイル</a>」から取得</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+		<div class="visualClear"></div>
+		
+	</div>
+</div>
+<div id='mw-data-after-content'>
+	<div class="read-more-container"></div>
+</div>
+
+<div id="mw-navigation">
+    <h2>案内メニュー</h2>
+    <div id="mw-head">
+        
+        <div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+        	<h3 id="p-personal-label">個人用ツール</h3>
+        	<ul >
+        		
+        		<li id="pt-anonuserpage">ログインしていません</li>
+        		<li id="pt-anontalk"><a href="/wiki/%E7%89%B9%E5%88%A5:%E3%83%88%E3%83%BC%E3%82%AF%E3%83%9A%E3%83%BC%E3%82%B8" title="このIPアドレスからなされた編集についての議論 [n]" accesskey="n">トーク</a></li><li id="pt-anoncontribs"><a href="/wiki/%E7%89%B9%E5%88%A5:%E8%87%AA%E5%88%86%E3%81%AE%E6%8A%95%E7%A8%BF%E8%A8%98%E9%8C%B2" title="このIPアドレスからなされた編集の一覧 [y]" accesskey="y">投稿記録</a></li><li id="pt-createaccount"><a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90&amp;returnto=%E7%89%B9%E5%88%A5%3A%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB" title="アカウントを作成してログインすることをお勧めしますが、必須ではありません">アカウント作成</a></li><li id="pt-login"><a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3&amp;returnto=%E7%89%B9%E5%88%A5%3A%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB" title="ログインすることを推奨します。ただし、必須ではありません。 [o]" accesskey="o">ログイン</a></li>
+        	</ul>
+        </div>
+        <div id="left-navigation">
+            <div id="p-namespaces" role="navigation" class="vectorTabs " aria-labelledby="p-namespaces-label">
+            	<h3 id="p-namespaces-label">名前空間</h3>
+            	<ul >
+            		<li id="ca-nstab-special" class="selected"><a href="/wiki/%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB" title="これは特別ページですので、編集はできません。">特別ページ</a></li>
+            	</ul>
+            </div>
+            <div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+            	<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-variants-label" />
+            	<h3 id="p-variants-label">
+            		<span>変種</span>
+            	</h3>
+            	<ul class="menu" >
+            		
+            	</ul>
+            </div>
+        </div>
+        <div id="right-navigation">
+            <div id="p-views" role="navigation" class="vectorTabs emptyPortlet" aria-labelledby="p-views-label">
+            	<h3 id="p-views-label">表示</h3>
+            	<ul >
+            		
+            	</ul>
+            </div>
+            <div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+            	<input type="checkbox" class="vectorMenuCheckbox" aria-labelledby="p-cactions-label" />
+            	<h3 id="p-cactions-label">
+            		<span>その他</span>
+            	</h3>
+            	<ul class="menu" >
+            		
+            	</ul>
+            </div>
+            <div id="p-search" role="search">
+            	<h3 >
+            		<label for="searchInput">検索</label>
+            	</h3>
+            	<form action="/w/index.php" id="searchform">
+            		<div id="simpleSearch">
+            			<input type="search" name="search" placeholder="Wikipedia内を検索" title="Wikipedia内を検索する [f]" accesskey="f" id="searchInput"/>
+            			<input type="hidden" value="特別:検索" name="title"/>
+            			<input type="submit" name="fulltext" value="検索" title="この文字列が含まれるページを探す" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/>
+            			<input type="submit" name="go" value="表示" title="厳密に一致する名前のページが存在すれば、そのページへ移動する" id="searchButton" class="searchButton"/>
+            		</div>
+            	</form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mw-panel">
+    	<div id="p-logo" role="banner">
+    		<a  title="メインページに移動する" class="mw-wiki-logo" href="/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8"></a>
+    	</div>
+    	<div class="portal" role="navigation" id="p-navigation"  aria-labelledby="p-navigation-label">
+    		<h3  id="p-navigation-label">
+    			案内
+    		</h3>
+    		<div class="body">
+    			<ul><li id="n-mainpage"><a href="/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8" title="メインページに移動する [z]" accesskey="z">メインページ</a></li><li id="n-portal"><a href="/wiki/Wikipedia:%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BB%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB" title="このプロジェクトについて、できること、情報を入手する場所">コミュニティ・ポータル</a></li><li id="n-currentevents"><a href="/wiki/Portal:%E6%9C%80%E8%BF%91%E3%81%AE%E5%87%BA%E6%9D%A5%E4%BA%8B" title="最近の出来事の背景を知る">最近の出来事</a></li><li id="n-newpages"><a href="/wiki/%E7%89%B9%E5%88%A5:%E6%96%B0%E3%81%97%E3%81%84%E3%83%9A%E3%83%BC%E3%82%B8" title="最近新規に作成されたページの一覧">新しいページ</a></li><li id="n-recentchanges"><a href="/wiki/%E7%89%B9%E5%88%A5:%E6%9C%80%E8%BF%91%E3%81%AE%E6%9B%B4%E6%96%B0" title="このウィキにおける最近の更新の一覧 [r]" accesskey="r">最近の更新</a></li><li id="n-randompage"><a href="/wiki/%E7%89%B9%E5%88%A5:%E3%81%8A%E3%81%BE%E3%81%8B%E3%81%9B%E8%A1%A8%E7%A4%BA" title="無作為に選択されたページを読み込む [x]" accesskey="x">おまかせ表示</a></li><li id="n-sandbox"><a href="/wiki/Wikipedia:%E3%82%B5%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9" title="練習用のページ">練習用ページ</a></li><li id="n-commonsupload"><a href="//commons.wikimedia.org/wiki/Special:UploadWizard?uselang=ja" title="画像やメディアファイルをウィキメディア・コモンズにアップロード">アップロード (ウィキメディア・コモンズ)</a></li></ul>
+    			
+    		</div>
+    	</div>
+    	
+    	<div class="portal" role="navigation" id="p-help"  aria-labelledby="p-help-label">
+    		<h3  id="p-help-label">
+    			ヘルプ
+    		</h3>
+    		<div class="body">
+    			<ul><li id="n-help"><a href="/wiki/Help:%E7%9B%AE%E6%AC%A1" title="情報を得る場所">ヘルプ</a></li><li id="n-villagepump"><a href="/wiki/Wikipedia:%E4%BA%95%E6%88%B8%E7%AB%AF" title="プロジェクトについての意見交換">井戸端</a></li><li id="n-notice"><a href="/wiki/Wikipedia:%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="プロジェクトについてのお知らせ">お知らせ</a></li><li id="n-bugreportspage"><a href="/wiki/Wikipedia:%E3%83%90%E3%82%B0%E3%81%AE%E5%A0%B1%E5%91%8A" title="ウィキペディア・ソフトウェアのバグ報告">バグの報告</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_ja.wikipedia.org&amp;uselang=ja" title="ご支援ください">寄付</a></li><li id="n-contact"><a href="/wiki/Wikipedia:%E9%80%A3%E7%B5%A1%E5%85%88" title="ウィキペディアやウィキメディア財団に関する連絡先">ウィキペディアに関するお問い合わせ</a></li></ul>
+    			
+    		</div>
+    	</div>
+    	
+    	<div class="portal" role="navigation" id="p-tb"  aria-labelledby="p-tb-label">
+    		<h3  id="p-tb-label">
+    			ツール
+    		</h3>
+    		<div class="body">
+    			<ul><li id="t-upload"><a href="/wiki/Wikipedia:%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89" title="ファイルをアップロードする [u]" accesskey="u">ファイルをアップロード</a></li><li id="t-specialpages"><a href="/wiki/%E7%89%B9%E5%88%A5:%E7%89%B9%E5%88%A5%E3%83%9A%E3%83%BC%E3%82%B8%E4%B8%80%E8%A6%A7" title="特別ページの一覧 [q]" accesskey="q">特別ページ</a></li><li id="t-print"><a href="/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;printable=yes" rel="alternate" title="このページの印刷用ページ [p]" accesskey="p">印刷用バージョン</a></li></ul>
+    			
+    		</div>
+    	</div>
+    	
+    	<div class="portal" role="navigation" id="p-lang"  aria-labelledby="p-lang-label">
+    		<h3  id="p-lang-label">
+    			他言語版
+    		</h3>
+    		<div class="body">
+    			<ul></ul>
+    			
+    		</div>
+    	</div>
+    	
+    </div>
+</div>
+
+<div id="footer" role="contentinfo" >
+	<ul id="footer-places" class="">
+		<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/ja" class="extiw" title="m:Privacy policy/ja">プライバシー・ポリシー</a></li>
+		<li id="footer-places-about"><a href="/wiki/Wikipedia:%E3%82%A6%E3%82%A3%E3%82%AD%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" title="Wikipedia:ウィキペディアについて">ウィキペディアについて</a></li>
+		<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85" title="Wikipedia:免責事項">免責事項</a></li>
+		<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">開発者</a></li>
+		<li id="footer-places-statslink"><a href="https://stats.wikimedia.org/#/ja.wikipedia.org">統計</a></li>
+		<li id="footer-places-cookiestatement"><a href="https://foundation.wikimedia.org/wiki/Cookie_statement">Cookieに関する声明</a></li>
+		<li id="footer-places-mobileview"><a href="//ja.m.wikipedia.org/w/index.php?title=%E7%89%B9%E5%88%A5:%E6%96%B0%E7%9D%80%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">モバイルビュー</a></li>
+	</ul>
+	<ul id="footer-icons" class="noprint">
+		<li id="footer-copyrightico"><a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a></li>
+		<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a></li>
+	</ul>
+	<div style="clear: both;"></div>
+</div>
+
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":225,"wgHostname":"mw1263"});});</script></body></html>
+
