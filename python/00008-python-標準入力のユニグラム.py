@@ -14,5 +14,8 @@ if(aaa==len(a)):
 else:
   #複数列の場合
   c=list(map(lambda x:list(map(lambda y:list(filter(lambda z:0!=len(z),y)),x)),b));
-print(b);
-print(c);
+
+for i,d in enumerate(c):
+  for j,e in enumerate(d):
+    for k,gram in enumerate(e):
+      print(i,j,k,gram,''.join(e))
