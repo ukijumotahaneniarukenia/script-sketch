@@ -15,3 +15,6 @@
 - Fakerでダミーデータを生成する
   - https://qiita.com/Keisuke69/items/edcaadc100361cf945e2
 
+
+- 配列
+  - https://qiita.com/kidach1/items/a00558cfb0a6a3e23f4b#reject
