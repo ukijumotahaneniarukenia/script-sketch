@@ -10,19 +10,16 @@ EOF
   return 0
 end
 
+
 if ARGV.length > 0
   cmd_args = [ *ARGV ]
-  stdin = cmd_args[0].split(/\n/)
+  stdin = cmd_args[0].split(/\n/).map{|e|e.split(/ /)}
   puts stdin.inspect
-  puts stdin
-  puts stdin.class
-  puts stdin.size
+  puts stdin.transpose.inspect
 elsif FileTest.pipe?(STDIN)
-  pipe_args = STDIN.readlines.map { |line| line.chomp }
+  pipe_args = STDIN.readlines.map {|line|line.chomp.split(/ /) }
   puts pipe_args.inspect
-  puts pipe_args
-  puts pipe_args.class
-  puts pipe_args.size
+  puts pipe_args.transpose.inspect
 else
   usage
 end
