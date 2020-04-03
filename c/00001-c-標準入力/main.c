@@ -46,5 +46,5 @@ int main(int argc, char **argv){
       rt=rt&&XXX(argv[i]);
     }
   }
-  return rt;
+  return rt?0:1; //戻り値を反転 1のとき0にして返す
 }
