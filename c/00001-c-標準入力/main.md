@@ -8,6 +8,9 @@
 - ファイルの存在チェック
   - https://programming-place.net/ppp/contents/c/rev_res/file000.html
 
+- fopen,fread,fwrite,fclose
+  - https://www.cc.u-tokyo.ac.jp/public/VOL8/No5/data_no1_0609.pdf
+
 - IN
 
 ```
