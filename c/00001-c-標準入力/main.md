@@ -1,82 +1,88 @@
-- 複数行の複数列がうまくいけてない
+- millrerコマンドの一部
+  - C勉強になる
+  - https://github.com/johnkerl/miller/blob/master/perf/catc.c
 
-- headコマンドで見たことのあるシグナルが出る
+- getdelim関数に紐付いて取得できた情報
+  - http://manpages.ubuntu.com/manpages/bionic/ja/man3/getline.3.html
 
-- CMD
+- ファイルの存在チェック
+  - https://programming-place.net/ppp/contents/c/rev_res/file000.html
 
-```
-$seq 1 | ./main
-1
-```
-
-
-- CMD
+- IN
 
 ```
-$seq 10 | ./main
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+$cat test.txt
+a b c
+d e f
+g h i
+j k l
+m n o
+p q r
+s t u
+v w x
+y z
 ```
 
 - CMD
+  - コマンドライン引数が優先
+```
+$echo うんこ | ./main test{,1..2}.txt
+```
+
+- OUT
 
 ```
-$echo {a..d} | ./main
-a b c d
+a b c
+d e f
+g h i
+j k l
+m n o
+p q r
+s t u
+v w x
+y z
 ```
 
 - IN
-```
-$echo {a..d} | xargs -n1
-a
-b
-c
-d
-```
-
-- CMD
 
 ```
-$echo {a..d} | xargs -n1 | ./main
-a
-xargs: echo: terminated by signal 13
-```
-
-- CMD
-
-```
-$echo うんこ | ./main
+$echo うんこ もりもり 森鴎外 | xargs -n1
 うんこ
+もりもり
+森鴎外
 ```
 
 - CMD
 
 ```
-$echo う ん こ | ./main
-う ん こ
+$echo うんこ もりもり 森鴎外 | xargs -n1 | ./main
 ```
 
+- OUT
+
+```
+うんこ
+もりもり
+森鴎外
+```
 
 - IN
 
 ```
-$echo う ん こ | xargs -n2
-う ん
-こ
+$echo うんこ もりもり 森鴎外 | xargs -n2
+うんこ もりもり
+森鴎外
 ```
 
 - CMD
 
 ```
-$echo う ん こ | xargs -n2 | ./main
-う ん
-xargs: echo: terminated by signal 13
+$echo うんこ もりもり 森鴎外 | xargs -n2 | ./main
+```
+
+- OUT
+
+```
+うんこ もりもり
+森鴎外
 ```
