@@ -1,4 +1,6 @@
+.mode csv
 .width 100 100
+.timer off
 
 select
 	page.page_title as convert_src
