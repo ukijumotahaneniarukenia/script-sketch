@@ -1,3 +1,20 @@
+- コンパイラ
+  - 誕生日だ
+```
+$gcc --version
+gcc (Ubuntu 9.2.1-9ubuntu2) 9.2.1 20191008
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+```
+
+- コンパイル
+
+```
+$gcc -o main main.c
+```
+
 - millrerコマンドの一部
   - C勉強になる
   - https://github.com/johnkerl/miller/blob/master/perf/catc.c
