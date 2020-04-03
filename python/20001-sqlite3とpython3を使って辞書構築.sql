@@ -1,6 +1,8 @@
+.width 100 100
+
 select
-	page.page_title
-, redirect.rd_title
+	page.page_title as convert_src
+, redirect.rd_title as convert_dest
 from
 	page inner join redirect
 		on
