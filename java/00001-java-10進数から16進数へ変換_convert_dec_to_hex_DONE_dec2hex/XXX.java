@@ -66,16 +66,13 @@ public class XXX {
     }
     private static void trap(List<String> liz){
         for (String ele:liz) {
-            catch_sig(ele);
+            Signal sig = new Signal(ele);
+            Signal.handle(sig, Signal -> {
+                if (ele.equals(sig.getName())) {
+                    usage();
+                }
+            });
         }
-    }
-    private static void catch_sig(String str) {
-        Signal sig = new Signal(str);
-        Signal.handle(sig, Signal -> {
-            if ("INT".equals(sig.getName())) {
-                usage();
-            }
-        });
     }
     private static void usage() {
         final String className = new Object(){}.getClass().getEnclosingClass().getName();
