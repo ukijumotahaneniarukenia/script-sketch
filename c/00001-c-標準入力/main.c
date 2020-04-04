@@ -1,6 +1,34 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> //free関数用
+#include <signal.h>
+
+volatile sig_atomic_t eflag = 0;
+
+// https://www.jpcert.or.jp/sc-rules/c-sig30-c.html
+// https://qiita.com/supaiku2452/items/10772cbd2706dede06b9#comments
+void usage(char *cmdname) {
+  fputs( "\nUsage:\n",stdout);
+  fputs( "IN:\n",stdout);
+  printf("%s\n",cmdname);
+  fputs( "OUT:\n",stdout);
+}
+
+void handler(int signum) {
+  eflag = 1;
+}
+
+void trap(void){
+  //受信したいシグナルの数だけ記載
+  if (signal(SIGTERM, handler) == SIG_ERR) { //プロセスに対するシグナル受信を待ち構えておく trapping
+    perror("Abend");
+    exit(1);
+  }
+  if (signal(SIGINT, handler) == SIG_ERR) { //プロセスに対するシグナル受信を待ち構えておく trapping
+    perror("Abend");
+    exit(1);
+  }
+}
 
 static int XXX(char *filename){
   FILE *instream=stdin;//デフォルト値を設定
@@ -34,6 +62,7 @@ static int XXX(char *filename){
 }
 
 int main(int argc, char **argv){
+  trap();//シグナル受信ハンドラ仕込み
   int rt=1; //正常終了
   //printf("%d\n",argc);
   if(argc==1){
@@ -45,6 +74,9 @@ int main(int argc, char **argv){
     for (int i = 1; i < argc; i++){
       rt=rt&&XXX(argv[i]);
     }
+  }
+  if(1==eflag){
+    usage(argv[0]); //Ctrl+CしてからCtrl+Dは効く。むずい。
   }
   return rt?0:1; //戻り値を反転 1のとき0にして返す
 }
