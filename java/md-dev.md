@@ -5,49 +5,47 @@ mvn使おう
   - https://www.qoosky.io/techs/07d7bf8708
   - ハンディじゃないんだよな
 ```
-$cd ~/script-sketch/java
+mkdir 00007-java-クローラー-crawling-DONE-crawl
 
-$mvn archetype:generate -DgroupId=app -DartifactId=00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+cd 00007-java-クローラー-crawling-DONE-crawl
 
-$cd ~/script-sketch/java
+mvn archetype:generate -DgroupId=app -DartifactId=nnn -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
-$javac $(find 00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex -name "App.java")
+vi $(find 00007* -name "pom.xml")
 
-$tree 00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex
-00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex
-├── pom.xml
-└── src
-    ├── main
-    │   └── java
-    │       └── app
-    │           ├── App$1.class
-    │           ├── App.class
-    │           └── App.java
-    └── test
-        └── java
-            └── app
-                └── AppTest.java
+cd ~/script-sketch/java/00007-java-クローラー-crawling-DONE-crawl/nnn
 
-7 directories, 5 files
+mvn dependency:copy-dependencies
 
-$java -cp .:00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex/src/main/java/app App
+vi $(find 00007* -name "App.java")
 
-$seq 17 | java -cp .:00001-java-10進数から2進数へ変換_convert_dec_to_hex_DONE_dec2hex/src/main/java/app App
-1
-2
-3
-4
-5
-6
-7
-8
-9
-a
-b
-c
-d
-e
-f
-10
-11
+javac -cp ".:$(find 00007* -name "dependency")/*" $(find 00007* -name "App.java")
+
+javac -cp "." $(find 00001* -name "App.java")
+
+$tree 00007-java-クローラー-crawling-DONE-crawl
+00007-java-クローラー-crawling-DONE-crawl
+└── nnn
+    ├── pom.xml
+    ├── src
+    │   ├── main
+    │   │   └── java
+    │   │       └── app
+    │   │           ├── App$1.class
+    │   │           ├── App.class
+    │   │           └── App.java
+    │   └── test
+    │       └── java
+    │           └── app
+    │               └── AppTest.java
+    └── target
+        └── dependency
+            ├── jsoup-1.12.2.jar
+            └── junit-3.8.1.jar
+
+10 directories, 7 files
+
+java -cp ".:$(find 00007* -name "dependency"):$(find 00007* -name "app"|grep main)" App
+
+java -cp ".:$(find 00001* -name "app"|grep main)" App
 ```
