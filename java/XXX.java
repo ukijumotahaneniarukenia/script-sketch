@@ -6,11 +6,6 @@ import java.util.HashMap;
 import sun.misc.Signal;
 
 public class XXX {
-    //public static void main(String[] cmdLineArgs) {
-    //    HashMap<Integer, List<String>> maz=new HashMap<Integer, List<String>>();
-    //    maz=KKK(cmdLineArgs,new Scanner(System.in),Arrays.asList("INT"));
-    //    debug_maz(maz);
-    //}
     public static HashMap<Integer, List<String>> KKK(String className,String cmdInput,String[] cmdLineArgs,Scanner stdin,List<String> signalArgs) {
         List<String> liz=new ArrayList<>();
         HashMap<Integer, List<String>> maz=new HashMap<Integer, List<String>>();
@@ -20,16 +15,13 @@ public class XXX {
                 //via pipe args
                 liz=pre_process(stdin);
                 maz=sub_process(liz);
-                //debug_maz(maz);
             }else{
                 //via cmdline args
                 liz = new ArrayList<>(Arrays.asList(cmdLineArgs));
                 if(liz.size()==1){
                     maz=sub_process(new ArrayList<>(Arrays.asList(liz.get(0).split("\n"))));
-                    //debug_maz(maz);
                 }else{
                     maz=sub_process(liz);
-                    //debug_maz(maz);
                 }
             }
         }catch(Exception e){
