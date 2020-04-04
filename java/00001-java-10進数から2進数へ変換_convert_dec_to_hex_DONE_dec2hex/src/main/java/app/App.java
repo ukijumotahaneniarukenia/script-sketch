@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 import sun.misc.Signal;
 
-public class dec2hex {
+public class App {
     public static final String className = new Object(){}.getClass().getEnclosingClass().getName();
     public static final String cmdInput="seq 17 |";
     public static void main(String[] cmdline_args) {
