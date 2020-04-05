@@ -236,7 +236,7 @@ echo 'https://ukijumotahaneniarukenia.site/ a[href]' | java -jar crawl.jar
 
 - 実行可能jarで外部ライブラリの依存ありポータブルである
   - maven使う
-
+  - https://www.glamenv-septzen.net/view/1121
 ```
 
 
