@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: app.App
+Class-Path: ./target/dependency/jsoup-1.12.2.jar
+

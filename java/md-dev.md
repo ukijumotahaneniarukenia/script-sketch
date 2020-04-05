@@ -180,3 +180,64 @@ f
 10
 11
 ```
+
+
+- 実行可能jarで外部ライブラリの依存ありポータブルでない
+
+```
+$mkdir -p 00008-java-クローラー-実行可能なjar外部依存あり-crawling-DONE-crawl/nnn/target/dependency
+
+$find ~/.m2/repository -maxdepth 1 -type d | xargs -I@ echo cp -r @ 00008-java-クローラー-実行可能なjar外部依存あり-crawling-DONE-crawl/nnn/target/dependency | sh
+
+$javac -d $(find 00008* -type d -name "nnn")/out -cp "$(find 00008* -type d -name "nnn")/out:$(find 00008-java-クローラー-実行可能なjar外部依存あり-crawling-DONE-crawl -type f -name "*jar"|xargs|tr ' ' ':')" $(find 00008* -name "XXX.java")
+
+$javac -d $(find 00008* -type d -name "nnn")/out -cp "$(find 00008* -type d -name "nnn")/out:$(find 00008-java-クローラー-実行可能なjar外部依存あり-crawling-DONE-crawl -type f -name "*jar"|xargs|tr ' ' ':')" $(find 00008* -name "App.java")
+
+$cat manifest.txt
+Manifest-Version: 1.0
+Main-Class: app.App
+Class-Path: ./target/dependency/jsoup-1.12.2.jar
+
+
+$jar cvfm crawl.jar manifest.txt -C out app target/
+マニフェストが追加されました
+app/を追加中です(入=0)(出=0)(0%格納されました)
+app/XXX.classを追加中です(入=5107)(出=2182)(57%収縮されました)
+app/App$1.classを追加中です(入=277)(出=222)(19%収縮されました)
+app/App.classを追加中です(入=3266)(出=1641)(49%収縮されました)
+app/AppTest.classを追加中です(入=373)(出=275)(26%収縮されました)
+target/を追加中です(入=0)(出=0)(0%格納されました)
+target/dependency/を追加中です(入=0)(出=0)(0%格納されました)
+target/dependency/jsoup-1.12.2.jarを追加中です(入=391231)(出=362437)(7%収縮されました)
+
+$jar tf crawl.jar
+META-INF/
+META-INF/MANIFEST.MF
+app/
+app/XXX.class
+app/App$1.class
+app/App.class
+app/AppTest.class
+target/
+target/dependency/
+target/dependency/jsoup-1.12.2.jar
+
+$jar xf crawl.jar META-INF/MANIFEST.MF
+
+$cat META-INF/MANIFEST.MF
+Manifest-Version: 1.0
+Main-Class: app.App
+Class-Path: ./target/dependency/jsoup-1.12.2.jar
+Created-By: 11 (Oracle Corporation)
+
+echo 'https://ukijumotahaneniarukenia.site/ a[href]' | java -jar crawl.jar
+```
+
+
+- 実行可能jarで外部ライブラリの依存ありポータブルである
+  - maven使う
+
+```
+
+
+```
