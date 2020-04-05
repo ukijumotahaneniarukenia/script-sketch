@@ -69,9 +69,9 @@ java -cp "$(find 00001* -name "dependency"):$(find 00001* -type d -name "nnn")/o
 ```
 cp XXX.java $(find 00007* -type d -name "app" | grep main)
 
-javac -d $(find 00007* -type d -name "nnn")/out -cp "$(find 00007* -type d -name "nnn")/out:~/.m2/repository/*/*/*/*jar" $(find 00007* -name "XXX.java")
+javac -d $(find 00007* -type d -name "nnn")/out -cp "$(find 00007* -type d -name "nnn")/out:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" $(find 00007* -name "XXX.java")
 
-javac -d $(find 00007* -type d -name "nnn")/out -cp "$(find 00007* -type d -name "nnn")/out:~/.m2/repository/*/*/*/*jar" $(find 00007* -name "App.java")
+javac -d $(find 00007* -type d -name "nnn")/out -cp "$(find 00007* -type d -name "nnn")/out:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" $(find 00007* -name "App.java")
 
 tree 00007-java-クローラー-crawling-DONE-crawl/
 00007-java-\343\202\257\343\203\255\343\203\274\343\203\251\343\203\274-crawling-DONE-crawl/
@@ -95,7 +95,6 @@ tree 00007-java-クローラー-crawling-DONE-crawl/
 
 10 directories, 7 files
 
-
-java -cp "$(find 00007* -type d -name "nnn")/out:~/.m2/repository/*/*/*/*jar" app/App
+java -cp "$(find 00007* -type d -name "nnn")/out:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App
 
 ```

@@ -2,6 +2,8 @@ package app;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,16 +23,16 @@ public class App {
     private static void crawl(HashMap<Integer, List<String>> maz){
         maz.forEach((k,v)->{
             System.out.printf("%s:%s\n",k,v);
-//            try {
-//                Document doc = Jsoup.connect(v.get(0)).get();
-//                System.out.printf("%s\n",doc.title());
-//                Elements newsHeadlines = doc.select(v.get(1));
-//                for (Element headline : newsHeadlines) {
-//                    System.out.printf("%s\t%s\n",headline.attr("title"), headline.absUrl("href"));
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Document doc = Jsoup.connect(v.get(0)).get();
+                System.out.printf("%s\n",doc.title());
+                Elements newsHeadlines = doc.select(v.get(1));
+                for (Element headline : newsHeadlines) {
+                    System.out.printf("%s\t%s\n",headline.attr("title"), headline.absUrl("href"));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 }
