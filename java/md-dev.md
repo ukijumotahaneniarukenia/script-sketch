@@ -98,3 +98,80 @@ tree 00007-java-クローラー-crawling-DONE-crawl/
 java -cp "$(find 00007* -type d -name "nnn")/out:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App
 
 ```
+
+
+
+- 外部ライブラリ依存がない実行可能jarの作成
+
+  - コマンドラインのみ
+
+```
+$cd ~/script-sketch/java/00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn
+
+$touch 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/manifest.txt
+
+$cat << EOS >00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/manifest.txt
+Manifest-Version: 1.0
+Main-Class: app.App
+
+EOS
+$tree 00002*
+00002-java-10\351\200\262\346\225\260\343\201\213\343\202\21116\351\200\262\346\225\260\343\201\270\345\244\211\346\217\233-\345\256\237\350\241\214\345\217\257\350\203\275\343\201\252jar-convert-dec-to-hex-DONE-dec2hex
+`-- nnn
+    |-- dec2hex.jar
+    |-- manifest.txt
+    |-- out
+    |   `-- app
+    |       |-- App$1.class
+    |       |-- App.class
+    |       `-- XXX.class
+    |-- pom.xml
+    |-- src
+    |   |-- main
+    |   |   `-- java
+    |   |       `-- app
+    |   |           |-- App.java
+    |   |           `-- XXX.java
+    |   `-- test
+    |       `-- java
+    |           `-- app
+    |               `-- AppTest.java
+    `-- target
+        `-- dependency
+            `-- junit-3.8.1.jar
+
+12 directories, 10 files
+
+
+$jar tf 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar
+META-INF/
+META-INF/MANIFEST.MF
+app/
+app/XXX.class
+app/App$1.class
+app/App.class
+
+$java -jar 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar
+^C
+Usage:
+seq 17 | java App
+
+$seq 17 | java -jar 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar
+1
+2
+3
+4
+5
+6
+7
+8
+9
+a
+b
+c
+d
+e
+f
+10
+11
+```
