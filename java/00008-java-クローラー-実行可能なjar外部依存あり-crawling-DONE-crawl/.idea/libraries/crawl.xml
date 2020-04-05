@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="crawl">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/nnn/crawl.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
