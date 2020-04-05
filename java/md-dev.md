@@ -153,6 +153,9 @@ app/XXX.class
 app/App$1.class
 app/App.class
 
+//マニュフェストファイルの内容を出力
+$jar xf 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar META-INF/MANIFEST.MF
+
 $java -jar 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar
 ^C
 Usage:
