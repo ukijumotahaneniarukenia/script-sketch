@@ -4,3 +4,5 @@ out/*
 /*class*
 /*/nnn/src/main/java/app/*class*
 /*/nnn/target/*
+/*/.idea/*
+/*/*iml
