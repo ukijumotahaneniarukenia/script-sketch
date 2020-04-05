@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class App {
     public static final String className = new Object(){}.getClass().getEnclosingClass().getName();
-    public static final String cmdInput="seq 17 |";
+    public static final String cmdInput="cat test-url.txt |";
     public static void main(String[] cmdline_args) {
         XXX xxx = new XXX();
         HashMap<Integer, List<String>> maz;
@@ -22,11 +22,12 @@ public class App {
     }
     private static void crawl(HashMap<Integer, List<String>> maz){
         maz.forEach((k,v)->{
-            System.out.printf("%s:%s\n",k,v);
+            String url = v.get(0);
+            String selector = String.join(" ",v.subList(1,v.size()));
             try {
-                Document doc = Jsoup.connect(v.get(0)).get();
+                Document doc = Jsoup.connect(url).get();
                 System.out.printf("%s\n",doc.title());
-                Elements newsHeadlines = doc.select(v.get(1));
+                Elements newsHeadlines = doc.select(selector);
                 for (Element headline : newsHeadlines) {
                     System.out.printf("%s\t%s\n",headline.attr("title"), headline.absUrl("href"));
                 }
