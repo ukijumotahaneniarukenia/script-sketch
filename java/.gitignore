@@ -1,8 +1,9 @@
-*.jar
-lib/*
-out/*
-/*class*
-/*/nnn/src/main/java/app/*class*
-/*/nnn/target/*
-/*/.idea/*
-/*/*iml
+#コマンドライン用
+/*/nnn/out/*class*
+/*/nnn/target*
+/*/nnn/*jar
+
+#IDE用
+/*/nnn/.idea/*
+/*/nnn/*iml
+/*/nnn/out/*
