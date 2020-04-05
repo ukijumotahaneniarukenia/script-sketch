@@ -142,6 +142,8 @@ $tree 00002*
 
 12 directories, 10 files
 
+//マニュフェストファイルがある場所で実行
+$jar cvfm dec2hex.jar manifest.txt -C out app
 
 $jar tf 00002-java-10進数から16進数へ変換-実行可能なjar-convert-dec-to-hex-DONE-dec2hex/nnn/dec2hex.jar
 META-INF/
