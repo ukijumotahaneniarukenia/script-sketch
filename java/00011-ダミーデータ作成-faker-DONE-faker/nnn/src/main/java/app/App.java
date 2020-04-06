@@ -2,69 +2,116 @@ package app;
 
 import com.github.javafaker.Faker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class App
 {
     public static void main(String[] args) {
-        //echo '--help' | perl -nlE '/(\Q-h\E|\Q--h\E|\Q--help\E|\Q-help\E)/p and say ${^MATCH}'
         List<String> cmdLineArgs = new ArrayList<>(Arrays.asList(args));
-        List<String> helpOpts = Arrays.asList("true","-h", "--h", "--help", "-help");
-        List<String> versionOpts = Arrays.asList("true","-v", "--v", "-V", "--V", "--version", "-version");
-        List<String> randomNumOpts = Arrays.asList("false","-n.*", "--n", "-number", "--number");
-        List<List<String>> ll = new ArrayList<>(new ArrayList<>());
-        ll.add(helpOpts);
-        ll.add(versionOpts);
-        ll.add(randomNumOpts);
-
         List<Pattern> parsePtn = new ArrayList<>();
-        parsePtn = prepareParseOpts(ll);
-
-//        Pattern helpOptsListRegexp = Pattern.compile("(" + helpOpts.stream().map(Pattern::quote).map("|"::concat).collect(Collectors.joining()) + ")");//くぉーとで囲んでしっかりマッチ
-//        Pattern versionOptsListRegexp = Pattern.compile("(" + versionOpts.stream().map(Pattern::quote).map("|"::concat).collect(Collectors.joining()) + ")");//くぉーとで囲んでしっかりマッチ
-//        Pattern randomNumOptsListRegexp = Pattern.compile("((?!.)." + randomNumOpts.stream().map("|"::concat).collect(Collectors.joining()) + ")");//先頭文字列にパタンマッチ入れておく（左側に任意の文字が存在しない任意文字。これは空文字がある文字の両端に存在しないものがないので、ダミーパタン。）
-//        for (int i=0;i<cmdLineArgs.size();i++){
-//            if(cmdLineArgs.get(i).matches(helpOptsListRegexp.toString())){
-//                System.out.println("HELP");
-//            }else if(cmdLineArgs.get(i).matches(versionOptsListRegexp.toString())){
-//                System.out.println("VERSION");
-//            }else if(cmdLineArgs.get(i).matches(randomNumOptsListRegexp.toString())){
-//                System.out.println("RANDOM_NUMBER");
-//                List<String> random_number = Arrays.asList(cmdLineArgs.get(i).split(":"));
-//                if(3 != random_number.size()){
-//                    System.exit(0);
-//                }else{
-//                    System.out.printf("%s:%s:%s\n",random_number.get(0),random_number.get(1),random_number.get(2));
-//                }
-//            }else{
-//                System.out.println("UNKNOWN");
-//            }
-//        }
-//        System.out.println(cmdLineArgs);
+        List<Map<String, List<String>>> l = new ArrayList<>();
+        l.add(new HashMap<String, List<String>>() {{put("HELP", Arrays.asList("true","-h", "--h", "--help", "-help"));}});
+        l.add(new HashMap<String, List<String>>() {{put("RANDOM_NUMBER", Arrays.asList("false","-n.*", "--n.*", "-number.*", "--number.*"));}});
+        l.add(new HashMap<String, List<String>>() {{put("VERSION", Arrays.asList("true","-v", "--v", "-V", "--V", "-version", "--version"));}});
+        Map<String, List<String>> mainProcessArgs = execParseOpts(cmdLineArgs,prepareParseOpts(l));
+        mainProcess(mainProcessArgs);
     }
 
-    private static List<Pattern> prepareParseOpts(List<List<String>> l){
-        List<Pattern> rt = new ArrayList<>();
-        for(int i=0;i<l.size();i++){
-            if(Boolean.valueOf(l.get(i).get(0))){
-                Pattern ptn = Pattern.compile("(" + l.get(i).subList(1,l.get(i).size()).stream().map(Pattern::quote).map("|"::concat).collect(Collectors.joining()) + ")");//くぉーとで囲んでしっかりマッチ
-                rt.add(ptn);
-            }else{
-                Pattern ptn = Pattern.compile("((?!.)." + l.get(i).subList(1,l.get(i).size()).stream().map("|"::concat).collect(Collectors.joining()) + ")");//先頭文字列にパタンマッチ入れておく（左側に任意の文字が存在しない任意文字。これは空文字がある文字の両端に存在しないものがないので、ダミーパタン。）
-                rt.add(ptn);
+    private static void mainProcess (Map<String, List<String>> mainProcessArgs) {
+        finish : {
+            for(Map.Entry<String,List<String>> entry : mainProcessArgs.entrySet()){
+                switch (entry.getKey()){
+                    case "HELP":
+                    case "USAGE":
+                        if(entry.getValue().contains("1")){
+                            Usage();
+                            break finish;
+                        }else{
+                            break;
+                        }
+                    case "VERSION":
+                        if(entry.getValue().contains("1")){
+                            Version();
+                            break finish;
+                        }else{
+                            break;
+                        }
+                    case "RANDOM_NUMBER":
+                        if(entry.getValue().get(1).contains(entry.getValue().get(0))){
+                            genRandomNumber(Integer.parseInt(entry.getValue().get(2)),Boolean.valueOf(entry.getValue().get(3)));
+                            break;
+                        }else{
+                            break;
+                        }
+                    default:
+                        break finish;
+                }
             }
-            System.out.println(l.get(i));
         }
-        System.out.println(rt);
+    }
+
+    private static Map<String, List<String>> execParseOpts (List<String> cmdLineArgs,Map<String, String> ptnMap){
+        //デフォルト値の設定
+        Map<String, List<String>> rt = new HashMap<>();
+        rt.put("HELP", Arrays.asList("0"));
+        rt.put("VERSION", Arrays.asList("0"));
+        rt.put("RANDOM_NUMBER", Arrays.asList("0"));
+        rt.put("USAGE", Arrays.asList("1"));
+
+        //引数処理
+        for (int i=0;i<cmdLineArgs.size();i++){
+            if(cmdLineArgs.get(i).matches(ptnMap.get("HELP"))){
+                rt.put("HELP", Arrays.asList("1"));
+                rt.put("USAGE", Arrays.asList("0"));
+            }else if(cmdLineArgs.get(i).matches(ptnMap.get("VERSION"))){
+                rt.put("VERSION", Arrays.asList("1"));
+                rt.put("USAGE", Arrays.asList("0"));
+            }else if(cmdLineArgs.get(i).matches(ptnMap.get("RANDOM_NUMBER"))){
+                List<String> random_number = Arrays.asList(cmdLineArgs.get(i).split(":"));
+                if(3 != random_number.size()){
+                    Usage();
+                    System.exit(0);
+                }else{
+                    rt.put("RANDOM_NUMBER", Arrays.asList(random_number.get(0),ptnMap.get("RANDOM_NUMBER"),random_number.get(1),random_number.get(2)));
+                    rt.put("USAGE", Arrays.asList("0"));
+                }
+            }else{
+                Usage();
+            }
+        }
+        return rt;
+    }
+
+    private static void Usage(){
+        System.out.println("Usage");
+    }
+
+    private static void Version(){
+        System.out.println("1-0-0");
+    }
+
+    private static Map<String, String> prepareParseOpts(List<Map<String, List<String>>> l){
+        Map<String, String> rt = new HashMap<>();
+        for(int i=0;i<l.size();i++){
+            for(Map.Entry<String,List<String>> entry : l.get(i).entrySet()){
+                if(Boolean.valueOf(entry.getValue().get(0))){
+                    Pattern ptn = Pattern.compile("((?!.)." + entry.getValue().subList(1,entry.getValue().size()).stream().map(Pattern::quote).map("|"::concat).collect(Collectors.joining()) + ")");
+                    rt.put(entry.getKey(),ptn.toString());
+                }else{
+                    Pattern ptn = Pattern.compile("((?!.)." + entry.getValue().subList(1,entry.getValue().size()).stream().map("|"::concat).collect(Collectors.joining()) + ")");
+                    rt.put(entry.getKey(),ptn.toString());
+                }
+            }
+        }
         return rt;
     }
 
     private static void genRandomNumber(Integer n,boolean b){
         Faker faker = new Faker();
-        System.out.println(faker.number().randomNumber(n, b));
+        for(int i=0;i<n;i++){
+            System.out.println(faker.number().randomNumber(n, b));
+        }
     }
 }
