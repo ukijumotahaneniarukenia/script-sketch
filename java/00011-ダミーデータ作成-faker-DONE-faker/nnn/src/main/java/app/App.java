@@ -79,6 +79,7 @@ public class App
                 }
             }else{
                 Usage();
+                System.exit(1);
             }
         }
         return rt;
