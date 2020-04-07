@@ -108,11 +108,52 @@ public class App
         }
         return rt;
     }
-
+    private static void genAddress(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.address().fullAddress());
+        }
+    }
     private static void genRandomNumber(Integer n,boolean b){
         Faker faker = new Faker();
         for(int i=0;i<n;i++){
             System.out.println(faker.number().randomNumber(n, b));
+        }
+    }
+    private static void genHumanName(Integer n){
+        Faker faker = new Faker(new Locale("ja_JP"));
+        for(int i=0;i<n;i++){
+            System.out.println(faker.name().fullName());
+        }
+    }
+    private static void genAvatar(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.avatar().image());
+        }
+    }
+    private static void genPhoneNumberCellPhone(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.phoneNumber().cellPhone());
+        }
+    }
+    private static void genPhoneNumber(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.phoneNumber().phoneNumber());
+        }
+    }
+    private static void genSlackEmoji(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.slackEmoji().emoji());
+        }
+    }
+    private static void genJob(Integer n){
+        Faker faker = new Faker();
+        for(int i=0;i<n;i++){
+            System.out.println(faker.job().field());
         }
     }
 }
