@@ -16,6 +16,10 @@ public class App {
         };
         System.out.println(m);
         System.out.println(unnest(m));
+        List<Map<String, Integer>> l = unnest(m);
+        for(int i=0;i<l.size();i++){
+          System.out.println(l.get(i));
+        }
     }
     private static List<Integer> niz(Integer s,Integer e){
         return IntStream.range(s,e+1).boxed().collect(Collectors.toList());

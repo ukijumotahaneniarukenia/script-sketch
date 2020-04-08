@@ -1,0 +1,15 @@
+m.put("banana",2);
+m.put("banana",3);
+m.put("orange",5);
+m.put("orange",6);
+m.put("orange",7);
+m.put("orange",8);
+m.put("orange",9);
+m.put("apple",3);
+m.put("apple",4);
+m.put("apple",5);
+m.put("kiwii",2);
+m.put("kiwii",3);
+m.put("kiwii",4);
+m.put("kiwii",5);
+m.put("kiwii",6);
