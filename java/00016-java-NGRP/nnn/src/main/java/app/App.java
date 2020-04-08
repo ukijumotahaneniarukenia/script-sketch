@@ -31,7 +31,6 @@ public class App {
     private static List<String> ngram (String s,Integer n){
         List<String> rt = new ArrayList<>();
         String ngramPtn = Stream.of(repeat(".",n)).map(e->salt(e,"(?=(","))")).collect(Collectors.joining());
-        Stream.Builder<String> b = Stream.builder();
         Pattern p = Pattern.compile(ngramPtn);
         Matcher m = p.matcher(s);
         while(m.find()){
