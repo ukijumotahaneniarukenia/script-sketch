@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main( String[] cmdline_args ) {
-        System.out.println(fill(pre_process(new Scanner(System.in)),cmdline_args));
+        fill(pre_process(new Scanner(System.in)),cmdline_args).stream().forEach(e-> System.out.println(e));
     }
     private static List<String> pre_process(Scanner stdin){
         List<String> rt = new ArrayList<>();
