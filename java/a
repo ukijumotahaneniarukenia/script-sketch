@@ -1,15 +1,1 @@
-        l.add(new HashMap<String, Integer>(){{put("banana",2);}});
-        l.add(new HashMap<String, Integer>(){{put("banana",3);}});
-        l.add(new HashMap<String, Integer>(){{put("orange",5);}});
-        l.add(new HashMap<String, Integer>(){{put("orange",6);}});
-        l.add(new HashMap<String, Integer>(){{put("orange",7);}});
-        l.add(new HashMap<String, Integer>(){{put("orange",8);}});
-        l.add(new HashMap<String, Integer>(){{put("orange",9);}});
-        l.add(new HashMap<String, Integer>(){{put("apple",3);}});
-        l.add(new HashMap<String, Integer>(){{put("apple",4);}});
-        l.add(new HashMap<String, Integer>(){{put("apple",5);}});
-        l.add(new HashMap<String, Integer>(){{put("kiwii",2);}});
-        l.add(new HashMap<String, Integer>(){{put("kiwii",3);}});
-        l.add(new HashMap<String, Integer>(){{put("kiwii",4);}});
-        l.add(new HashMap<String, Integer>(){{put("kiwii",5);}});
-        l.add(new HashMap<String, Integer>(){{put("kiwii",6);}});
+"["","+","+this.seq+","+this.grp+","+this.subgrp+","+this.grpseq+","+this.dtm+","+this.qty+","+this.name+","+"]";
