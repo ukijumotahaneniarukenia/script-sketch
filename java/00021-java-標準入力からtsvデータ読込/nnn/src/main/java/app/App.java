@@ -3,6 +3,9 @@ package app;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class App {
@@ -21,14 +24,53 @@ public class App {
 //            System.out.println(entry);
 //        }
 
-        Map<Boolean,Map<Integer,List<String>>> m = l.stream().collect(Collectors.partitioningBy(e->e.qty>=5
-                ,Collectors.groupingBy(e->e.grp
+//        Map<Boolean,Map<Integer,List<String>>> m = l.stream().collect(Collectors.partitioningBy(e->e.qty>=5
+//                                                                        ,Collectors.groupingBy(e->e.grp
+//                                                                                ,Collectors.mapping(e->e.getDtm().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+//                                                                                        ,Collectors.toList()))));
+//        for(Map.Entry<Boolean,Map<Integer,List<String>>> entry : m.entrySet()){
+//            System.out.println(entry);
+//        }
+//        LocalDateTime now = LocalDateTime.now();
+
+        Map<Boolean,Map<Integer,List<String>>> m = l.stream().collect(Collectors.partitioningBy(e->isDtm(e)
+                ,Collectors.groupingBy(e->grpCol(e)
                         ,Collectors.mapping(e->e.getDtm().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
-                            ,Collectors.toList()))));
+                                ,Collectors.toList()))));
         for(Map.Entry<Boolean,Map<Integer,List<String>>> entry : m.entrySet()){
             System.out.println(entry);
         }
     }
+
+    private static Integer grpCol(Item item) {
+        return item.grp+item.subgrp;
+    }
+
+    private static boolean isDtm(Item item) {
+        LocalDateTime now = LocalDateTime.now();
+        if(item.dtm.isEqual(now.minusDays(1))){
+            return true;
+        }else{
+            return false;
+        }
+    };
+
+
+//    static BiPredicate<Item, LocalDateTime> isEqualDtm = (item, limitDtm) -> {
+//        if(item.dtm.isEqual(limitDtm)){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    };
+
+    static BiPredicate<Item, Integer> isUpperQty = (item, lowerLimitQty) -> {
+        if(item.getQty() >lowerLimitQty){
+            return true;
+        }else{
+            return false;
+        }
+    };
 
     static class Item{
         private Integer seq;
