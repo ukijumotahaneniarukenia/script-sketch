@@ -10,23 +10,22 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
+import static java.util.Comparator.*;
 
 public class App {
     public static final String className = new Object(){}.getClass().getEnclosingClass().getName();
     public static final String cmdInput="cat test.tsv |";
 
-    public static void main(String[] cmdline_args) throws CannotCompileException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException, NotFoundException, ClassNotFoundException {
+    public static void main(String[] cmdline_args) throws CannotCompileException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException{
+        //型と名前を意識したい。名前から型を類推したい。
         XXX xxx = new XXX();
         HashMap<Integer, List<String>> maz;
         maz=xxx.KKK(className,cmdInput,cmdline_args,new Scanner(System.in), Arrays.asList("INT"),"\t");
+
         List <String> filedList = maz.get(0).stream().map(e->e.toLowerCase()).collect(toList()); //header
-        List<List<String>> datList = maz.entrySet().stream().skip(1).map(e->e.getValue()).collect(toList());
-
+        List<List<String>> datList = maz.entrySet().stream().skip(1).map(e->e.getValue()).collect(toList()); //non-header
         List<Map<String,String>> mkDatListMap = mkDatListMap(filedList,datList);
-
-        int mx = mkDatListMap.size();
 
         CtClass cc = mkClass(filedList);
         Map<String,Map<String,List<String>>> fetchSetter = fetchSetter(Arrays.asList(cc.getMethods()));
@@ -34,7 +33,32 @@ public class App {
         Class<?> clazz = cc.toClass(); //実行は１回のみ Caused by: java.lang.LinkageError: loader 'app' (instance of jdk.internal.loader.ClassLoaders$AppClassLoader) attempted duplicate class definition for Item. 一度生成したら使い回すこと
         Constructor<?> ct = clazz.getConstructor();
 
-        List<Object> rr = new ArrayList<>();
+        List<Object> rt = prepareData(clazz,ct,mkDatListMap,fetchSetter);
+
+        rt.stream().map(e->aliasGetter(clazz,e,"getName")).forEach(strings -> System.out.println(strings));
+
+        rt.stream().map(e->aliasGetter(clazz,e,"getName").get()).forEach(strings -> System.out.println(strings));
+
+        rt.stream().map(e->aliasGetter(clazz,e,"getName").get()+"-----").forEach(strings -> System.out.println(strings));
+
+        rt.stream().map(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get())+100).forEach(strings -> System.out.println(strings));
+
+        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp"),toList())).forEach((strings, objects) -> System.out.printf("%s\t%s\n",strings.get(),objects));
+
+        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp")
+                                ,groupingBy(e->aliasGetter(clazz,e,"getSubgrp"),
+                                    toList()))).forEach((strings, eitherListMap) -> System.out.printf("%s\t%s\n",strings.get(),eitherListMap));
+
+        rt.stream().map(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get())).forEach(strings -> System.out.println(strings));
+
+        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp")
+                                ,maxBy(comparingInt(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get()))))).forEach((strings, eitherListMap) -> System.out.printf("%s\t%s\n",strings.get(),eitherListMap));
+
+    }
+
+    private static List<Object> prepareData(Class<?> clazz,Constructor<?> ct,List<Map<String,String>> mkDatListMap,Map<String,Map<String,List<String>>> fetchSetter) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+        int mx = mkDatListMap.size();
+        List<Object> rt = new ArrayList<>();
         for(int i=0;i<mx;i++){
             Object obj = ct.newInstance();
             for(Map.Entry<String,String> e : mkDatListMap.get(i).entrySet()){
@@ -45,17 +69,9 @@ public class App {
                     }
                 }
             }
-            rr.add(obj);
+            rt.add(obj);
         }
-
-        rr.stream().map(e->aliasGetter(clazz,e,"getName")).forEach(strings -> System.out.println(strings));
-
-        rr.stream().map(e->aliasGetter(clazz,e,"getName").get()).forEach(strings -> System.out.println(strings));
-
-        rr.stream().map(e->aliasGetter(clazz,e,"getName").get()+"-----").forEach(strings -> System.out.println(strings));
-
-        rr.stream().map(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get())+100).forEach(strings -> System.out.println(strings));
-
+        return rt;
     }
 
     private static Either<Object,String> aliasGetter(Class<?> clazz,Object obj,String getterName){
@@ -100,19 +116,17 @@ public class App {
         return rt;
     }
 
-    private static CtClass mkClass(List<String> filedList) throws CannotCompileException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-        List <String> filed = filedList.stream().map(e->e.toLowerCase()).map(e->"private String "+e+";").collect(toList());
+    private static CtClass mkClass(List<String> filedList) throws CannotCompileException{
+        //そんな変わるところでもないので、このままでいい
+        List <String> field = filedList.stream().map(e->e.toLowerCase()).map(e->"private String "+e+";").collect(toList());
         List <String> getterList = filedList.stream().map(e->"public String get"+String.valueOf(e.charAt(0)).toUpperCase()+e.substring(1)+"(){return "+e+";}").collect(toList());
         List <String> setterList = filedList.stream().map(e->"public void set"+String.valueOf(e.charAt(0)).toUpperCase()+e.substring(1)+"(String "+e+"){this."+e+"="+e+";}").collect(toList());
         String toStringMethod = filedList.stream().map(e->"this."+e).map(e->e+"+\",\"").collect(joining("+","public String toString() { return \"[\"+","+\"]\";}"));
-        String constHeader = filedList.stream().map(e->"String "+e).collect(joining(",","(",")"));
-        List<String> constBody = filedList.stream().map(e->"this."+e+"="+e+";").collect(toList());
-        String constructor = constBody.stream().collect(joining("","public Item"+constHeader+"{","}"));
 
         CtClass c = ClassPool.getDefault().makeClass("Item");
-        int mxFieldCnt = filed.size();
+        int mxFieldCnt = field.size();
         for (int i=0;i<mxFieldCnt;i++){
-            c.addField(CtField.make(filed.get(i),c));
+            c.addField(CtField.make(field.get(i),c));
         }
 
         c.addMethod(CtNewMethod.make(toStringMethod,c));
@@ -128,7 +142,6 @@ public class App {
         }
 
         c.addConstructor(CtNewConstructor.defaultConstructor(c));
-        c.addConstructor(CtNewConstructor.make(constructor,c));
 
        return c;
     }
