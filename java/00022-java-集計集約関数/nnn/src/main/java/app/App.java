@@ -1,148 +1,173 @@
 package app;
 
-import javaslang.control.Either;
-import javassist.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
-import static java.util.Comparator.*;
 
 public class App {
-    public static final String className = new Object(){}.getClass().getEnclosingClass().getName();
-    public static final String cmdInput="cat test.tsv |";
-
-    public static void main(String[] cmdline_args) throws CannotCompileException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException{
-        //型と名前を意識したい。名前から型を類推したい。
-        XXX xxx = new XXX();
-        HashMap<Integer, List<String>> maz;
-        maz=xxx.KKK(className,cmdInput,cmdline_args,new Scanner(System.in), Arrays.asList("INT"),"\t");
-
-        List <String> filedList = maz.get(0).stream().map(e->e.toLowerCase()).collect(toList()); //header
-        List<List<String>> datList = maz.entrySet().stream().skip(1).map(e->e.getValue()).collect(toList()); //non-header
-        List<Map<String,String>> mkDatListMap = mkDatListMap(filedList,datList);
-
-        CtClass cc = mkClass(filedList);
-        Map<String,Map<String,List<String>>> fetchSetter = fetchSetter(Arrays.asList(cc.getMethods()));
-
-        Class<?> clazz = cc.toClass(); //実行は１回のみ Caused by: java.lang.LinkageError: loader 'app' (instance of jdk.internal.loader.ClassLoaders$AppClassLoader) attempted duplicate class definition for Item. 一度生成したら使い回すこと
-        Constructor<?> ct = clazz.getConstructor();
-
-        List<Object> rt = prepareData(clazz,ct,mkDatListMap,fetchSetter);
-
-        rt.stream().map(e->aliasGetter(clazz,e,"getName")).forEach(strings -> System.out.println(strings));
-
-        rt.stream().map(e->aliasGetter(clazz,e,"getName").get()).forEach(strings -> System.out.println(strings));
-
-        rt.stream().map(e->aliasGetter(clazz,e,"getName").get()+"-----").forEach(strings -> System.out.println(strings));
-
-        rt.stream().map(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get())+100).forEach(strings -> System.out.println(strings));
-
-        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp"),toList())).forEach((strings, objects) -> System.out.printf("%s\t%s\n",strings.get(),objects));
-
-        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp")
-                                ,groupingBy(e->aliasGetter(clazz,e,"getSubgrp"),
-                                    toList()))).forEach((strings, eitherListMap) -> System.out.printf("%s\t%s\n",strings.get(),eitherListMap));
-
-        rt.stream().map(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get())).forEach(strings -> System.out.println(strings));
-
-        rt.stream().collect(groupingBy(e->aliasGetter(clazz,e,"getGrp")
-                                ,maxBy(comparingInt(e->Integer.valueOf(aliasGetter(clazz,e,"getQty").get()))))).forEach((strings, eitherListMap) -> System.out.printf("%s\t%s\n",strings.get(),eitherListMap));
-
-    }
-
-    private static List<Object> prepareData(Class<?> clazz,Constructor<?> ct,List<Map<String,String>> mkDatListMap,Map<String,Map<String,List<String>>> fetchSetter) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        int mx = mkDatListMap.size();
-        List<Object> rt = new ArrayList<>();
-        for(int i=0;i<mx;i++){
-            Object obj = ct.newInstance();
-            for(Map.Entry<String,String> e : mkDatListMap.get(i).entrySet()){
-                if(fetchSetter.containsKey(e.getKey())){
-                    for(Map.Entry<String,List<String>> ee : fetchSetter.get(e.getKey()).entrySet()){
-                        Method method = clazz.getMethod(ee.getKey(),ee.getValue().stream().map(eee->eee.getClass()).toArray(Class[]::new));
-                        method.invoke(obj,e.getValue());
-                    }
-                }
+    public static void main(String... cmdline_args) {
+        String[][] dat = {
+                {"1","1","1","1","2020-04-10","7","LVJMLDEB"}
+                ,{"2","1","1","2","2020-04-11","3","ORDNJMJG"}
+                ,{"3","1","1","3","2020-04-12","5","UIVUF"}
+                ,{"4","1","2","1","2020-04-10","2","DATQ"}
+                ,{"5","1","2","2","2020-04-11","6","J"}
+                ,{"6","1","2","3","2020-04-12","9","JAPJ"}
+                ,{"7","1","3","1","2020-04-10","5","SXPQDH"}
+                ,{"8","2","1","1","2020-04-10","9","LAROPRBUQ"}
+                ,{"9","2","1","2","2020-04-11","5","UQKFMCMNY"}
+                ,{"10","2","2","1","2020-04-10","8","VEKJZZCE"}
+                ,{"11","2","2","2","2020-04-11","1","ERHFFDDO"}
+                ,{"12","2","2","3","2020-04-12","8","UFT"}
+                ,{"13","2","3","1","2020-04-10","7","U"}
+                ,{"14","2","3","2","2020-04-11","4","PZ"}
+                ,{"15","3","1","1","2020-04-10","2","BVJQNRVE"}
+        };
+        int row = dat.length;
+        int col = dat[0].length;
+        List<List<String>> l = new ArrayList<>();
+        for(int i=0;i<row;i++){
+            List<String> c = new ArrayList<>();
+            for (int j =0;j<col;j++){
+                c.add(dat[i][j]);
             }
-            rt.add(obj);
+            l.add(c);
         }
-        return rt;
-    }
-
-    private static Either<Object,String> aliasGetter(Class<?> clazz,Object obj,String getterName){
-        try {
-            return Either.right((String) clazz.getMethod(getterName).invoke(obj));
+        List<Item> in = l.stream().map(e->new Item(e)).collect(toList());//body
+        //単一グループによる件数取得
+        Map<LocalDateTime,Long> m = in.stream().collect(groupingBy(e->e.getDtm(),counting()));
+        for(Map.Entry<LocalDateTime,Long> entry : m.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),entry.getValue());
         }
-        catch (Exception e) {
-            return Either.left(e);
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //単一グループによる最大値取得
+        Map<LocalDateTime, Optional<Item>> mm = in.stream().collect(groupingBy(e->e.getDtm(),maxBy(Comparator.comparingInt(e->e.getQty()))));
+        for(Map.Entry<LocalDateTime,Optional<Item>> entry : mm.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),entry.getValue().get().getQty());
         }
-    }
-
-    private static List<Map<String,String>> mkDatListMap(List <String> filedList,List<List<String>> datList){
-        List<Map<String,String>> rt = new ArrayList<>();
-        int row = datList.size();
-        int col = datList.get(0).size();
-        List<Map<String,String>> l = new ArrayList<>();
-        for(int i = 0;i<row;i++){
-            Map<String,String> m = new HashMap<>();
-            for(int j=0;j<col;j++){
-                m.put(filedList.get(j),datList.get(i).get(j));
-            }
-            rt.add(m);
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //単一グループによる最小値取得
+        Map<LocalDateTime, Optional<Item>> mmm = in.stream().collect(groupingBy(e->e.getDtm(),minBy(Comparator.comparingInt(e->e.getQty()))));
+        for(Map.Entry<LocalDateTime,Optional<Item>> entry : mmm.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),entry.getValue().get().getQty());
         }
-        return rt;
-    }
-
-    private static Map<String,Map<String,List<String>>> fetchSetter(List<CtMethod> l){
-        Map<String,Map<String,List<String>>> rt = new HashMap<>();
-        int mx = l.size();
-        String defaultTypePara = "String";
-        List<String> ll = new ArrayList<>();
-        ll.add(defaultTypePara);
-        Pattern p = Pattern.compile("^set.*$");
-        for(int i=0;i<mx;i++){
-            Matcher m = p.matcher(l.get(i).getName());
-            Map<String,List<String>> mm = new HashMap<>();
-            while(m.find()){
-                mm.put(m.group(),ll);
-                rt.put(String.valueOf(m.group().substring(3).charAt(0)).toLowerCase()+m.group().substring(4),mm);
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //単一グループによる合計値取得
+        Map<LocalDateTime, Integer> mmmm = in.stream().collect(groupingBy(e->e.getDtm(),summingInt(e->e.getQty())));
+        for(Map.Entry<LocalDateTime, Integer> entry : mmmm.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),entry.getValue());
+        }
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //単一グループによるListAgg
+        Map<LocalDateTime, String> mmmmm = in.stream().collect(groupingBy(e->e.getDtm(),mapping(e->String.valueOf(e.getQty()),joining(","))));
+        for(Map.Entry<LocalDateTime, String> entry : mmmmm.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd")),entry.getValue());
+        }
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //複数グループによる件数取得
+        Map<Integer,Map<Integer,Long>> dm =  in.stream().collect(groupingBy(e->e.getGrp(),
+                groupingBy(e->e.getSubgrp(),counting())));
+        for(Map.Entry<Integer,Map<Integer,Long>> e : dm.entrySet()){
+            for(Map.Entry<Integer,Long> ee : e.getValue().entrySet()){
+                System.out.printf("%s\t%s\t%s\n",e.getKey(),ee.getKey(),ee.getValue());
             }
         }
-        return rt;
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //複数グループによる最大値取得
+        Map<Integer,Map<Integer,Optional<Item>>> ddm =  in.stream().collect(groupingBy(e->e.getGrp()
+                                                                        ,groupingBy(e->e.getSubgrp(),maxBy(Comparator.comparingInt(e->e.getQty())))));
+        for(Map.Entry<Integer,Map<Integer,Optional<Item>>> e : ddm.entrySet()){
+            for(Map.Entry<Integer,Optional<Item>> ee : e.getValue().entrySet()){
+                System.out.printf("%s\t%s\t%s\n",e.getKey(),ee.getKey(),ee.getValue().get().getQty());
+            }
+        }
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //複数グループによる最小値取得
+        Map<Integer,Map<Integer,Optional<Item>>> dddm =  in.stream().collect(groupingBy(e->e.getGrp()
+                ,groupingBy(e->e.getSubgrp(),minBy(Comparator.comparingInt(e->e.getQty())))));
+        for(Map.Entry<Integer,Map<Integer,Optional<Item>>> e : dddm.entrySet()){
+            for(Map.Entry<Integer,Optional<Item>> ee : e.getValue().entrySet()){
+                System.out.printf("%s\t%s\t%s\n",e.getKey(),ee.getKey(),ee.getValue().get().getQty());
+            }
+        }
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //複数グループによる合計値取得
+        Map<Integer,Map<Integer,Integer>> ddddm =  in.stream().collect(groupingBy(e->e.getGrp()
+                ,groupingBy(e->e.getSubgrp(),summingInt(e->e.getQty()))));
+        for(Map.Entry<Integer,Map<Integer,Integer>> e : ddddm.entrySet()){
+            for(Map.Entry<Integer,Integer> ee : e.getValue().entrySet()){
+                System.out.printf("%s\t%s\t%s\n",e.getKey(),ee.getKey(),ee.getValue());
+            }
+        }
+        System.out.println(Stream.generate(()->"-").limit(80).collect(joining()));
+        //複数グループによるListAgg
+        Map<Integer,Map<Integer,String>> dddddm =  in.stream().collect(groupingBy(e->e.getGrp()
+                ,groupingBy(e->e.getSubgrp(),mapping(e->String.valueOf(e.getQty()),joining(",")))));
+        for(Map.Entry<Integer,Map<Integer,String>> e : dddddm.entrySet()){
+            for(Map.Entry<Integer,String> ee : e.getValue().entrySet()){
+                System.out.printf("%s\t%s\t%s\n",e.getKey(),ee.getKey(),ee.getValue());
+            }
+        }
+        //オール・インワン
+        Map<LocalDateTime,IntSummaryStatistics> mmmmmm = in.stream().collect(groupingBy(e->e.getDtm(),summarizingInt(e->e.getQty())));
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n","grp","cnt","min","max","avg","sum");
+        for(Map.Entry<LocalDateTime,IntSummaryStatistics> entry : mmmmmm.entrySet()){
+            System.out.printf("%s\t%s\t%s\t%s\t%.3f\t%s\n",entry.getKey().format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))
+                                                        ,entry.getValue().getCount()
+                                                        ,entry.getValue().getMin()
+                                                        ,entry.getValue().getMax()
+                                                        ,entry.getValue().getAverage()
+                                                        ,entry.getValue().getSum());
+        }
     }
+    static class Item{
+        private Integer seq;
+        private Integer grp;
+        private Integer subgrp;
+        private Integer grpseq;
+        private LocalDateTime dtm;
+        private Integer qty;
+        private String name;
 
-    private static CtClass mkClass(List<String> filedList) throws CannotCompileException{
-        //そんな変わるところでもないので、このままでいい
-        List <String> field = filedList.stream().map(e->e.toLowerCase()).map(e->"private String "+e+";").collect(toList());
-        List <String> getterList = filedList.stream().map(e->"public String get"+String.valueOf(e.charAt(0)).toUpperCase()+e.substring(1)+"(){return "+e+";}").collect(toList());
-        List <String> setterList = filedList.stream().map(e->"public void set"+String.valueOf(e.charAt(0)).toUpperCase()+e.substring(1)+"(String "+e+"){this."+e+"="+e+";}").collect(toList());
-        String toStringMethod = filedList.stream().map(e->"this."+e).map(e->e+"+\",\"").collect(joining("+","public String toString() { return \"[\"+","+\"]\";}"));
-
-        CtClass c = ClassPool.getDefault().makeClass("Item");
-        int mxFieldCnt = field.size();
-        for (int i=0;i<mxFieldCnt;i++){
-            c.addField(CtField.make(field.get(i),c));
+        public Item(List<String> l){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss,SSS");
+            this.seq=Integer.parseInt(l.get(0));
+            this.grp=Integer.parseInt(l.get(1));
+            this.subgrp=Integer.parseInt(l.get(2));
+            this.grpseq=Integer.parseInt(l.get(3));
+            this.dtm=LocalDateTime.parse(l.get(4)+" 23:59:59,999", formatter);
+            this.qty=Integer.parseInt(l.get(5));
+            this.name=l.get(6);
         }
 
-        c.addMethod(CtNewMethod.make(toStringMethod,c));
-
-        int mxGetterListCnt = getterList.size();
-        for (int i=0;i<mxGetterListCnt;i++){
-            c.addMethod(CtNewMethod.make(getterList.get(i),c));
+        @Override
+        public String toString() {
+            return "["+this.seq+","+this.grp+","+this.subgrp+","+this.grpseq+","+this.dtm.format(DateTimeFormatter.ofPattern("uuuu-MM-dd"))+","+this.qty+","+this.name+"]";
         }
 
-        int mxSetterListCnt = setterList.size();
-        for (int i=0;i<mxSetterListCnt;i++){
-            c.addMethod(CtNewMethod.make(setterList.get(i),c));
+        public Integer getSeq() {
+            return seq;
         }
-
-        c.addConstructor(CtNewConstructor.defaultConstructor(c));
-
-       return c;
+        public Integer getGrp() {
+            return grp;
+        }
+        public Integer getSubgrp() {
+            return subgrp;
+        }
+        public Integer getGrpseq() {
+            return grpseq;
+        }
+        public LocalDateTime getDtm() {
+            return dtm;
+        }
+        public Integer getQty() {
+            return qty;
+        }
+        public String getName() {
+            return name;
+        }
     }
 }
