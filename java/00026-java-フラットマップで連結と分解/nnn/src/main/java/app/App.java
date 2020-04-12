@@ -49,7 +49,7 @@ public class App {
                 //先頭要素が配列である場合
                 l++;
                 //flatMapでネストレベルを一段下げる
-                return Stream.of(o).flatMap(a -> flatten((Object[])a));//配列である場合は呼び出し元にネストレベルを一段下げたストリームをオブジェクト配列にキャストして引数に渡しreturn
+                return Stream.of(o).flatMap(a -> flatten((Object[])a));//配列である場合はネストレベルを一段下げたストリームをオブジェクト配列にキャストして引数に渡し再帰呼び出し
             }
         }
     }
