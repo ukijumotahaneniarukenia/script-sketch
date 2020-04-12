@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
         List<String> l = new ArrayList<>(Arrays.asList("a", "b", "c","d"));
+
+        String s = Stream.generate(()->"a").limit(30).collect(Collectors.joining());
 
         String txt = "うんこのおまもり";
         String dottxt = "う.ん.こ.の.お.ま.も.り";
@@ -21,6 +26,7 @@ public class App {
         System.out.println(rrr(l));//先頭要素取得
         System.out.println(eee(txt));//逆順
         System.out.println(uuu(dottxt));//逆順
+        fff(txt,3);
     }
 
     private static Optional<String> nnn(List<String> l){
@@ -67,5 +73,14 @@ public class App {
 
     private static Optional<String> uuu(String s){
         return Arrays.stream(s.split("\\.")).reduce((a,e)->e+"."+a);
+    }
+
+    private static void fff(String s,int grp){
+        List<String> rt = new ArrayList<>();
+        int n = s.length()/grp;
+        IntStream.range(0,n+1).reduce((a, e)->{
+            System.out.println(e);
+            return 0;//dummy
+        });
     }
 }
