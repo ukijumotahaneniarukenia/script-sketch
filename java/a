@@ -1,7 +1,7 @@
-echo うんこのおまもり | xargs -I@ bash -c 'jshell -s <(cat <<EOS
+jshell -s <(cat <<EOS
 import java.util.*;
-System.out.println(Arrays.stream("@".split("")).reduce((a,e)->e+a).get());
+import java.util.stream.*;
+IntStream.range(0,10).boxed().flatMap(e->Stream.generate(()->e).limit(e).map(ee->ee.toString())).reduce((a,e)->{System.out.println(a);return a+e;});
 /exit
 EOS
 )
-'

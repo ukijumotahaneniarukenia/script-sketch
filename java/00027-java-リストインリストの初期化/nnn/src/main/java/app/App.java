@@ -12,10 +12,11 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main( String[] args ) {
-        List<List<String>> rt = ttt(nnn(jjj(1000000),kkk(1,10)),kkk(1,10)); //呼び出し側で型指定
-//        System.out.println(rt);
-        System.out.println(rt.size());
-        System.out.println(rt.get(0).size());
+        IntStream.range(0,10).boxed().flatMap(e->Stream.generate(()->e).limit(e).map(ee->ee.toString())).reduce((a,e)->{System.out.println(a);return a+e;});
+//        List<List<String>> rt = ttt(nnn(jjj(1000000),kkk(1,10)),kkk(1,10)); //呼び出し側で型指定
+////        System.out.println(rt);
+//        System.out.println(rt.size());
+//        System.out.println(rt.get(0).size());
     }
 
     private static Integer kkk (Integer s,Integer e){
