@@ -31,7 +31,7 @@ public class App {
         System.out.println(rt);
     }
 
-    private static <E> List<E> flattenList(Collection<E>... c){
-        return Arrays.stream(c).flatMap(e -> e.stream()).collect(toList());
+    private static <E> List<E> flattenList(Collection<E>... liz){
+        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(toList());
     }
 }
