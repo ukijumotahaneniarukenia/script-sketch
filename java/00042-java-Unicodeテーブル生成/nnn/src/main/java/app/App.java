@@ -51,20 +51,43 @@ public class App {
     }
     private static String str2utf16(String s) {
         byte[] b = s.getBytes(StandardCharsets.UTF_16);
-        return IntStream.rangeClosed(0,b.length-1).boxed().map(e->String.format("%02X",b[e])).collect(Collectors.joining("-"));
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<b.length;i++){
+            String hex = String.format("%02X",b[i]);
+            if(hex.equals("FE")||hex.equals("FF")){
+
+            }else if((sb.length()-sb.toString().split("-").length+1)%4==0&&0<sb.length()){
+                sb.append("-"+hex);
+            }
+            else{
+                sb.append(hex);
+            }
+        }
+        return sb.toString();
     }
     private static String str2utf32(String s) {
         byte[] b = s.getBytes(Charset.forName("UTF-32"));
-        return IntStream.rangeClosed(0,b.length-1).boxed().map(e->String.format("%02X",b[e])).collect(Collectors.joining("-"));
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<b.length;i++){
+            String hex = String.format("%02X",b[i]);
+            if((sb.length()-sb.toString().split("-").length+1)%8==0&&0<sb.length()) {
+                sb.append("-" + hex);
+            }else{
+                sb.append(hex);
+            }
+        }
+        return sb.toString();
     }
     private static String str2norm(String s, Normalizer.Form typ) {
         return Normalizer.normalize(s,typ);
     }
     public static void main( String[] args ) {
+        int s=0;
+        int e=0x10FFFF;
 //        int s=0;
-//        int e=0x10FFFF;
-        int s=0x3040;
-        int e=0x30FF;
+//        int e=0xFF;
+//        int s=0x3040;
+//        int e=0x30FF;
 //        int s=0x1F400;
 //        int e=0x1F4FF;
         Map<Integer, List<String>> m = new HashMap<>();
