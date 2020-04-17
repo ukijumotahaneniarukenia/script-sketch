@@ -1,67 +1,68 @@
 package app;
 
-import java.util.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//https://github.com/vdurmont/emoji-Java
-//https://www.it-swarm.dev/ja/java/java%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E2%9C%85%E3%80%81%E3%80%81%E2%9C%88%E3%80%81%E2%99%9B%E3%81%AA%E3%81%A9%E3%81%AE%E7%B5%B5%E6%96%87%E5%AD%97-imagessign%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%BE%E3%81%99%E3%80%82/837301366/
 public class App {
-    private static String nnn(String s) {
-        String[] ss = s.split("\\\\u");
-        char[] ciz = new char[ss.length - 1];
-        for (int i = 0; i < ciz.length; i++) {
-            ciz[i] = (char)Integer.parseInt(ss[i + 1], 16);
-        }
-        return new String(ciz);
+    private static String cp2str(Integer n) {
+        return new String(Character.toChars(n));
     }
-    private static String ppp(Integer n){
-        return "\\u"+Integer.toHexString(n);
+
+    private static String hex2bin(String s){
+        return Integer.toBinaryString(Integer.parseInt(s,16));
     }
-    private static String qqq(Integer n){
-        return Character.getName(n);
+
+//    private static void grpUtf8(List<String> l){
+//        Pattern p = Pattern.compile("^1*0");
+//        l.stream().map(e->{
+//            Matcher mc = p.matcher(e);
+//            StringBuilder sb = new StringBuilder();
+//            if(mc.find()){
+//                if(0!=sb.length()){
+//                    sb.append(",");
+//                }
+//                if(2!=mc.group().length()){
+//                    sb.append("\n"+e);
+//                }
+//                sb.append(e);
+//            }
+//            return sb.toString();
+//        }).forEach(e-> System.out.println(e));
+//    }
+    private static String str2uni(String s){
+        return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%X",(int)s.charAt(e))).collect(Collectors.joining("-"));
     }
-    private static Character.UnicodeBlock rrr(Integer n){
-        return Character.UnicodeBlock.of(n);
+    private static String str2utf8(String s) {
+        byte[] b = s.getBytes(StandardCharsets.UTF_8);
+        return IntStream.rangeClosed(0,b.length-1).boxed().map(e->String.format("%02X",b[e])).collect(Collectors.joining("-"));
     }
-    private static String sss(Integer n){
-        return Character.UnicodeScript.of(n).name();
+    private static String str2utf16(String s) {
+        byte[] b = s.getBytes(StandardCharsets.UTF_16);
+        return IntStream.rangeClosed(0,b.length-1).boxed().map(e->String.format("%02X",b[e])).collect(Collectors.joining("-"));
     }
-    private static List<Character.UnicodeBlock> lookUp2(Map<Integer,Character.UnicodeBlock> m, List<Integer> l){
-        return l.stream().map(e->m.get(e)).collect(Collectors.toList());
-    }
-    private static List<String> lookUp(Map<Integer,List<String>> m,List<Integer> l,Integer...n){
-        return l.stream().map(e->m.get(e).get(0!=n.length&&m.get(e).size()>n[0]?n[0]:0)).collect(Collectors.toList());
-    }
-    private static Map<Character.UnicodeBlock,List<Integer>> yyy(Map<Integer,Character.UnicodeBlock> m){
-        return m.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    private static String str2utf32(String s) {
+        byte[] b = s.getBytes(Charset.forName("UTF-32"));
+        return IntStream.rangeClosed(0,b.length-1).boxed().map(e->String.format("%02X",b[e])).collect(Collectors.joining("-"));
     }
     public static void main( String[] args ) {
-        int s=0;
-//        int e=0x333B;
-//        int e=0xFFF;
-//        int e=0xFF;
-        int e=0x10FFFF;
-        Map<Integer,List<String>> m = new LinkedHashMap<>();
-        Map<Integer,Character.UnicodeBlock> mm = new LinkedHashMap<>();
-        List<String> l;
-        List<Character.UnicodeBlock> ll;
+//        int s=0;
+//        int e=0x10FFFF;
+//        int s=0x3040;
+//        int e=0x30FF;
+        int s=0x1F400;
+        int e=0x1F4FF;
+        Map<Integer, List<String>> m = new HashMap<>();
         for(int i=s;i<=e;i++){
-            m.put(i, Arrays.asList(nnn(ppp(i)),ppp(i),qqq(i),sss(i)));
-            Character.UnicodeBlock rt =rrr(i);
-            if(Objects.nonNull(rt)){
-                //ブロック名が定義されていないものは除外
-                mm.put(i, rt);
-            }
+            m.put(i, Arrays.asList(String.valueOf(i),cp2str(i),str2utf8(cp2str(i)),str2utf16(cp2str(i)),str2utf32(cp2str(i)),str2uni(cp2str(i))));
         }
-        l=lookUp(m,IntStream.rangeClosed(2160,2207).boxed().collect(Collectors.toList()),2);
-        l=lookUp(m, IntStream.rangeClosed(2160,2207).boxed().collect(Collectors.toList()));
-        ll=lookUp2(mm,IntStream.rangeClosed(0,10).boxed().collect(Collectors.toList()));
-        Map<Character.UnicodeBlock,List<Integer>> rt = yyy(mm);
-        System.out.println(Character.UnicodeBlock.forName("THAANA"));
-        System.out.println(rt.get(Character.UnicodeBlock.forName("THAANA")));
-        l=lookUp(m,rt.get(Character.UnicodeBlock.forName("THAANA")),2);
-        l=lookUp(m,rt.get(Character.UnicodeBlock.forName("THAANA")));
-        System.out.println(l);
+        for(Map.Entry<Integer, List<String>> entry : m.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+        }
     }
 }
