@@ -240,6 +240,50 @@ public class App {
         }
         return rt;
     }
+    private static Map<String, List<String>> mkGramIdxUniScriptName(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Set<Integer> findGramIdxUniScriptName(Integer s,Integer e) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkGramIdxUniScriptName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
+    private static Map<String, List<String>> mkGramIdxUniBlockName(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Set<Integer> findGramIdxUniBlockName(Integer s,Integer e) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkGramIdxUniBlockName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
     public static void main(String... args ) {
         if(args.length!=0){
             if(args.length%3!=0){
@@ -269,6 +313,12 @@ public class App {
                 switch (defaultGramIdx){
                     case 1:
                         s = findGramIdxUniName(defaultStartRn,defaultEndRn);
+                        break;
+                    case 2:
+                        s = findGramIdxUniScriptName(defaultStartRn,defaultEndRn);
+                        break;
+                    case 3:
+                        s = findGramIdxUniBlockName(defaultStartRn,defaultEndRn);
                         break;
                     default:
                         System.exit(1);
