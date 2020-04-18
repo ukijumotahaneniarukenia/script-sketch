@@ -99,76 +99,80 @@ public class App {
         return rt;
     }
     private static Map<Integer, List<String>> mkTblNfc(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        for(int i=s;i<=e;i++){
-            rt.put(i, Arrays.asList(
-                    String.valueOf(i)
-                    ,cpToUniName(i)
-                    ,cpToStr(i)
-                    ,cpToUniScriptName(i)
-                    ,cpToUniBlockName(i)
-                    ,strToNorm(cpToStr(i), Normalizer.Form.NFC)
-                    ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                    ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                    ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                    ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-            ));
-        }
-        return rt;
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
+                i->i
+                ,i->Arrays.asList(
+                        String.valueOf(i)
+                        ,cpToUniName(i)
+                        ,cpToStr(i)
+                        ,cpToUniScriptName(i)
+                        ,cpToUniBlockName(i)
+                        ,strToNorm(cpToStr(i), Normalizer.Form.NFC)
+                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFC))
+                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFC))
+                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFC))
+                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFC))
+                )
+                ,((pre, post) -> post)
+                ,LinkedHashMap::new
+        ));
     }
     private static Map<Integer, List<String>> mkTblNfd(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        for(int i=s;i<=e;i++){
-            rt.put(i, Arrays.asList(
-                    String.valueOf(i)
-                    ,cpToUniName(i)
-                    ,cpToStr(i)
-                    ,cpToUniScriptName(i)
-                    ,cpToUniBlockName(i)
-                    ,strToNorm(cpToStr(i), Normalizer.Form.NFD)
-                    ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                    ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                    ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                    ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-            ));
-        }
-        return rt;
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
+                i->i
+                ,i->Arrays.asList(
+                        String.valueOf(i)
+                        ,cpToUniName(i)
+                        ,cpToStr(i)
+                        ,cpToUniScriptName(i)
+                        ,cpToUniBlockName(i)
+                        ,strToNorm(cpToStr(i), Normalizer.Form.NFD)
+                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFD))
+                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFD))
+                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFD))
+                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFD))
+                )
+                ,((pre, post) -> post)
+                ,LinkedHashMap::new
+        ));
     }
     private static Map<Integer, List<String>> mkTblNfkc(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        for(int i=s;i<=e;i++){
-            rt.put(i, Arrays.asList(
-                    String.valueOf(i)
-                    ,cpToUniName(i)
-                    ,cpToStr(i)
-                    ,cpToUniScriptName(i)
-                    ,cpToUniBlockName(i)
-                    ,strToNorm(cpToStr(i), Normalizer.Form.NFKC)
-                    ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                    ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                    ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                    ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-            ));
-        }
-        return rt;
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
+                i->i
+                ,i->Arrays.asList(
+                        String.valueOf(i)
+                        ,cpToUniName(i)
+                        ,cpToStr(i)
+                        ,cpToUniScriptName(i)
+                        ,cpToUniBlockName(i)
+                        ,strToNorm(cpToStr(i), Normalizer.Form.NFKC)
+                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
+                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
+                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
+                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
+                )
+                ,((pre, post) -> post)
+                ,LinkedHashMap::new
+        ));
     }
     private static Map<Integer, List<String>> mkTblNfkd(Integer s,Integer e){
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        for(int i=s;i<=e;i++){
-            rt.put(i, Arrays.asList(
-                    String.valueOf(i)
-                    ,cpToUniName(i)
-                    ,cpToStr(i)
-                    ,cpToUniScriptName(i)
-                    ,cpToUniBlockName(i)
-                    ,strToNorm(cpToStr(i), Normalizer.Form.NFKD)
-                    ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                    ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                    ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                    ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-            ));
-        }
-        return rt;
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
+                i->i
+                ,i->Arrays.asList(
+                        String.valueOf(i)
+                        ,cpToUniName(i)
+                        ,cpToStr(i)
+                        ,cpToUniScriptName(i)
+                        ,cpToUniBlockName(i)
+                        ,strToNorm(cpToStr(i), Normalizer.Form.NFKD)
+                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
+                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
+                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
+                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
+                )
+                ,((pre, post) -> post)
+                ,LinkedHashMap::new
+        ));
     }
     private static void printOut(Map<Integer, List<String>> m){
         m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultIndexCol)).orElse(defaultNoneKeyWord).contains(defaultKeyWord))
@@ -199,27 +203,44 @@ public class App {
                 .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static String defaultKeyWord="KATAKANA";
-    private static Integer defaultNormGrp=1;
+    private static Integer defaultNormGrp=0;
+    private static Integer defaultSearchMode=1;
     private static Integer defaultIndexCol=1;
+    private static Integer defaultTransIndexCol=1;
     private static Integer defaultSelectColStartRn=0;
     private static Integer defaultSelectColEndRn=8;
     private static Integer defaultStartRn=0;
     private static Integer defaultEndRn=0x10FFFF;
     private static String defaultNoneKeyWord="ウンコもりもり森鴎外";
 
-//        int s=0x3040;
-//        int e=0x30FF;
-//        int s=0x1F400;
-//        int e=0x1F4FF;
-
-    private static void submain(){
-
+    private static <K,V> void debug(Map<K,V> map){
+        for(Map.Entry<K, V> entry : map.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+        }
     }
-
-
+    private static Map<String, List<String>> mkTransIdxUniName(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Set<Integer> findTransIdxUniName(Integer s,Integer e) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkTransIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNoneKeyWord));
+        if(l.get(0).equals(defaultNoneKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
     public static void main(String... args ) {
-//        Map<Integer, String> m = mkTblNfkd(defaultStartRn,defaultEndRn);
-//        System.out.println(m);
         if(args.length!=0){
             if(args.length%3!=0){
                 System.exit(1);
@@ -236,53 +257,63 @@ public class App {
                 }else{
                     defaultIndexCol=Integer.valueOf(args[1]);
                 }
-
                 defaultKeyWord=args[2];
-
-//                defaultStartRn=Integer.valueOf(args[2]);
-//                defaultEndRn=Integer.valueOf(args[3]);
-//                if(defaultEndRn<defaultStartRn){
-//                    System.exit(1);
-//                }
             }
         }else{
 
         }
 
-        Map<Integer, String> m = null;
-        switch (defaultIndexCol){
+        switch (defaultSearchMode){
             case 1:
-                m = findIdxUniName(defaultStartRn,defaultEndRn);
+                Set<Integer> s = null;
+                switch (defaultTransIndexCol){
+                    case 1:
+                        s = findTransIdxUniName(defaultStartRn,defaultEndRn);
+                        break;
+                    default:
+                        System.exit(1);
+                }
+                defaultStartRn = s.stream().min(Comparator.comparing(e->e)).get();
+                defaultEndRn = s.stream().max(Comparator.comparing(e->e)).get();
                 break;
             case 2:
-                m = findIdxUniScriptName(defaultStartRn,defaultEndRn);
-                break;
-            case 3:
-                m = findIdxUniBlockName(defaultStartRn,defaultEndRn);
+                Map<Integer, String> m = null;
+                switch (defaultIndexCol){
+                    case 1:
+                        m = findIdxUniName(defaultStartRn,defaultEndRn);
+                        break;
+                    case 2:
+                        m = findIdxUniScriptName(defaultStartRn,defaultEndRn);
+                        break;
+                    case 3:
+                        m = findIdxUniBlockName(defaultStartRn,defaultEndRn);
+                        break;
+                    default:
+                        System.exit(1);
+                }
+                defaultStartRn = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).min(Comparator.comparing(ee->ee.getKey())).get().getKey();
+                defaultEndRn = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).max(Comparator.comparing(ee->ee.getKey())).get().getKey();
                 break;
             default:
                 System.exit(1);
         }
 
-        Integer mn = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).min(Comparator.comparing(ee->ee.getKey())).get().getKey();
-        Integer mx = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).max(Comparator.comparing(ee->ee.getKey())).get().getKey();
-
         Map<Integer, List<String>> ret = null;
         switch (defaultNormGrp){
             case 0:
-                ret= mkTblCore(mn,mx);
+                ret= mkTblCore(defaultStartRn,defaultEndRn);
                 break;
             case 1:
-                ret= mkTblNfc(mn,mx);
+                ret= mkTblNfc(defaultStartRn,defaultEndRn);
                 break;
             case 2:
-                ret= mkTblNfd(mn,mx);
+                ret= mkTblNfd(defaultStartRn,defaultEndRn);
                 break;
             case 3:
-                ret= mkTblNfkc(mn,mx);
+                ret= mkTblNfkc(defaultStartRn,defaultEndRn);
                 break;
             case 4:
-                ret= mkTblNfkd(mn,mx);
+                ret= mkTblNfkd(defaultStartRn,defaultEndRn);
                 break;
             default:
                 System.exit(1);
