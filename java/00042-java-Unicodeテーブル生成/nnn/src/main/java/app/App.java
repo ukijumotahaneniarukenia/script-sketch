@@ -176,14 +176,26 @@ public class App {
     }
     private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    }
+    private static Map<Integer, String> findIdxUniName(Integer s,Integer e) {
+        return mkIdxUniName(s,e).entrySet().stream()
                 .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Map<Integer, String> mkIdxUniScriptName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    }
+    private static Map<Integer, String> findIdxUniScriptName(Integer s,Integer e) {
+        return mkIdxUniScriptName(s,e).entrySet().stream()
                 .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Map<Integer, String> mkIdxUniBlockName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    }
+    private static Map<Integer, String> findIdxUniBlockName(Integer s,Integer e) {
+        return mkIdxUniBlockName(s,e).entrySet().stream()
                 .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static String defaultKeyWord="KATAKANA";
@@ -200,7 +212,14 @@ public class App {
 //        int s=0x1F400;
 //        int e=0x1F4FF;
 
+    private static void submain(){
+
+    }
+
+
     public static void main(String... args ) {
+//        Map<Integer, String> m = mkTblNfkd(defaultStartRn,defaultEndRn);
+//        System.out.println(m);
         if(args.length!=0){
             if(args.length%3!=0){
                 System.exit(1);
@@ -233,13 +252,13 @@ public class App {
         Map<Integer, String> m = null;
         switch (defaultIndexCol){
             case 1:
-                m = mkIdxUniName(defaultStartRn,defaultEndRn);
+                m = findIdxUniName(defaultStartRn,defaultEndRn);
                 break;
             case 2:
-                m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
+                m = findIdxUniScriptName(defaultStartRn,defaultEndRn);
                 break;
             case 3:
-                m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
+                m = findIdxUniBlockName(defaultStartRn,defaultEndRn);
                 break;
             default:
                 System.exit(1);
