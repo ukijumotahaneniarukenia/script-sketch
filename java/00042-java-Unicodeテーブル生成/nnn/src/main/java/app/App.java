@@ -296,72 +296,9 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
-
-
     private static Set<Integer> mkNGramIdxShape(List<String> l){
         return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
     }
-
-//    private static Set<Integer> findNGramIdxUniName(Integer s,Integer e,Integer n) {
-//        Set<Integer> rt = new HashSet<>();
-//        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-//        if(l.get(0).equals(defaultNonKeyWord)){
-//            System.exit(0);
-//        }else{
-////            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-//            rt = mkNGramIdxShape(l);
-//        }
-//        return rt;
-//    }
-//    private static Set<Integer> findNGramIdxUniScriptName(Integer s,Integer e,Integer n) {
-//        Set<Integer> rt = new HashSet<>();
-//        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
-//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-//        if(l.get(0).equals(defaultNonKeyWord)){
-//            System.exit(0);
-//        }else{
-////            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-//            rt = mkNGramIdxShape(l);
-//        }
-//        return rt;
-//    }
-//    private static Set<Integer> findNGramIdxUniBlockName(Integer s,Integer e,Integer n) {
-//        Set<Integer> rt = new HashSet<>();
-//        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
-//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-//        if(l.get(0).equals(defaultNonKeyWord)){
-//            System.exit(0);
-//        }else{
-//            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-//        }
-//        return rt;
-//    }
-
-//    static BiFunction <Integer,Integer,Map<Integer,String>> mkIdxUniName = (s,e) ->
-//            IntStream.rangeClosed(s, e).boxed().parallel()
-//                    .collect(Collectors.toMap(i -> i, i -> Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord)))
-//                    .entrySet().stream().collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
-//
-//    static BiFunction <Map<Integer, String>,Integer,Map<String,List<String>>> mkNGramIdx = (m,n) ->{
-//        Map<String, String> tmp = new HashMap<>();
-//        for(Map.Entry<Integer, String> entry : m.entrySet()){
-//            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
-//            int mx = l.size();
-//            for(int i=0;i<mx;i++){
-//                List<String> ll = ngram(l.get(i),n);
-//                int mxmx=ll.size();
-//                for(int j=0;j<mxmx;j++){
-//                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
-//                }
-//            }
-//        }
-//        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-//    };
-//
-//    static Function <List<String>,Set<Integer>> mkNGramIdxShape = (l) ->
-//            l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-
 
     private static <K,V,N,S,R> Set<N> executeNgramSearch(
             K defaultStartRn
@@ -386,15 +323,14 @@ public class App {
     }
 
     private static void subMain(){
-//        defaultKeyWord="NAGOGU";
-        defaultKeyWord="APLPLP";
+        defaultKeyWord="NAGOGU";
 
-//        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
-//        System.out.println(rrr);
-//        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
-//        System.out.println(rrrr);
-//        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
-//        System.out.println(rrrrr);
+        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
+        System.out.println(rrr);
+        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
+        System.out.println(rrrr);
+        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
+        System.out.println(rrrrr);
 
         System.exit(0);
     }
