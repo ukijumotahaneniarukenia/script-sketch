@@ -14,13 +14,13 @@ public class App {
     private static String defaultKeyWord="KATAKANA";
     private static Integer defaultNormGrp=0;
     private static Integer defaultSearchMode=1;
-    private static Integer defaultNoneGramIdxCol=1;
-    private static Integer defaultGramIdxUniName=1;
+    private static Integer defaultNonGramIdx=1;
+    private static Integer defaultGramIdx=1;
     private static Integer defaultSelectColStartRn=0;
     private static Integer defaultSelectColEndRn=8;
     private static Integer defaultStartRn=0;
     private static Integer defaultEndRn=0x10FFFF;
-    private static String defaultNoneKeyWord="ウンコもりもり森鴎外";
+    private static String defaultNonKeyWord="ウンコもりもり森鴎外";
 
     private static String hexToBin(String s){
         return Integer.toBinaryString(Integer.parseInt(s,16));
@@ -191,11 +191,11 @@ public class App {
         }
     }
     private static void printOut(Map<Integer, List<String>> m){
-        m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultNoneGramIdxCol)).orElse(defaultNoneKeyWord).contains(defaultKeyWord))
+        m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultNonGramIdx)).orElse(defaultNonKeyWord).contains(defaultKeyWord))
                 .forEach(e-> System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
     }
     private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Set<Integer> findIdxUniName(Integer s, Integer e) {
@@ -203,7 +203,7 @@ public class App {
                 .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
     private static Map<Integer, String> mkIdxUniScriptName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Set<Integer> findIdxUniScriptName(Integer s,Integer e) {
@@ -211,7 +211,7 @@ public class App {
                 .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
     private static Map<Integer, String> mkIdxUniBlockName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Set<Integer> findIdxUniBlockName(Integer s,Integer e) {
@@ -232,8 +232,8 @@ public class App {
     private static Set<Integer> findGramIdxUniName(Integer s,Integer e) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNoneKeyWord));
-        if(l.get(0).equals(defaultNoneKeyWord)){
+        List<String> l = Optional.ofNullable(mkGramIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
             System.exit(0);
         }else{
             rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
@@ -251,11 +251,11 @@ public class App {
                 }else{
                     defaultNormGrp=Integer.valueOf(args[0]);
                 }
-                List<Integer> chkdefaultNoneGramIdxColRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                if(chkdefaultNoneGramIdxColRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                List<Integer> chkdefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                if(chkdefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
                     System.exit(1);
                 }else{
-                    defaultNoneGramIdxCol=Integer.valueOf(args[1]);
+                    defaultNonGramIdx=Integer.valueOf(args[1]);
                 }
                 defaultKeyWord=args[2];
             }
@@ -266,7 +266,7 @@ public class App {
         switch (defaultSearchMode){
             case 1:
                 Set<Integer> s = null;
-                switch (defaultGramIdxUniName){
+                switch (defaultGramIdx){
                     case 1:
                         s = findGramIdxUniName(defaultStartRn,defaultEndRn);
                         break;
@@ -278,7 +278,7 @@ public class App {
                 break;
             case 2:
                 Set<Integer> ss = null;
-                switch (defaultNoneGramIdxCol){
+                switch (defaultNonGramIdx){
                     case 1:
                         ss = findIdxUniName(defaultStartRn,defaultEndRn);
                         break;
