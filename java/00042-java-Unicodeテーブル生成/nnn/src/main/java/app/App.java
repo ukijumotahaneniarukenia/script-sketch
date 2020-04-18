@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -294,6 +296,8 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
+
+
     private static Set<Integer> findNGramIdxUniName(Integer s,Integer e,Integer n) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
@@ -327,10 +331,63 @@ public class App {
         }
         return rt;
     }
+
+    static BiFunction <Integer,Integer,Map<Integer,String>> mkIdxUniName = (s,e) ->
+            IntStream.rangeClosed(s, e).boxed().parallel()
+            .collect(Collectors.toMap(i -> i, i -> Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord)))
+            .entrySet().stream().collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+
+    static BiFunction <Map<Integer, String>,Integer,Map<String,List<String>>> mkNGramIdx = (m,n) ->{
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                List<String> ll = ngram(l.get(i),n);
+                int mxmx=ll.size();
+                for(int j=0;j<mxmx;j++){
+                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+                }
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    };
+
+    private static <K,V,R> Map<K,R> jjj(K defaultStartRn, V defaultEndRn,BiFunction<K,V,Map<K,R>> mkIdxFunction){
+        return mkIdxFunction.apply(defaultStartRn,defaultEndRn);
+    }
+
+    private static <K,V> Map<V,List<V>> ppp(Map<K,V> input,K ngram,BiFunction<Map<K,V>,K,Map<V,List<V>>> mkNGramIdxFunction){
+        return mkNGramIdxFunction.apply(input,ngram);
+    }
+
+    private static <K,V,N,S,R> List<R> wrapperNNN(
+            K defaultStartRn
+            ,V defaultEndRn
+            ,N defaultNGram
+            ,S defaultKeyWord
+            ,List<R> defaultNonKeyWord
+            ,BiFunction<K,V,Map<K,R>> mkIdxFunction
+            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkNGramIdxFunction){
+        Map<K,R> input = mkIdxFunction.apply(defaultStartRn,defaultEndRn);
+        Map<R,List<R>> midput = mkNGramIdxFunction.apply(input,defaultNGram);
+        List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
+        if(output.get(0).equals(defaultNonKeyWord.get(0))){
+            System.exit(0);
+        }
+        return output;
+    }
+
     private static void subMain(){
-        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        Map<String, List<String>> rt = mkNGramIdx(m,5);
-        debug(rt);
+        Map<Integer, String> r = jjj(defaultStartRn,defaultEndRn,mkIdxUniName);
+        Map<String, List<String>> rr = ppp(r,defaultNGram,mkNGramIdx);
+
+        defaultKeyWord="NAGOGU";
+
+        List<String> rrr = wrapperNNN(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx);
+
+        System.out.println(rrr);
+
         System.exit(0);
     }
     public static void main(String... args ) {
