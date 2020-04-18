@@ -298,95 +298,103 @@ public class App {
     }
 
 
-    private static Set<Integer> findNGramIdxUniName(Integer s,Integer e,Integer n) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
-    }
-    private static Set<Integer> findNGramIdxUniScriptName(Integer s,Integer e,Integer n) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
-    }
-    private static Set<Integer> findNGramIdxUniBlockName(Integer s,Integer e,Integer n) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
+    private static Set<Integer> mkNGramIdxShape(List<String> l){
+        return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
     }
 
-    static BiFunction <Integer,Integer,Map<Integer,String>> mkIdxUniName = (s,e) ->
-            IntStream.rangeClosed(s, e).boxed().parallel()
-            .collect(Collectors.toMap(i -> i, i -> Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord)))
-            .entrySet().stream().collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+//    private static Set<Integer> findNGramIdxUniName(Integer s,Integer e,Integer n) {
+//        Set<Integer> rt = new HashSet<>();
+//        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
+//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+//        if(l.get(0).equals(defaultNonKeyWord)){
+//            System.exit(0);
+//        }else{
+////            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+//            rt = mkNGramIdxShape(l);
+//        }
+//        return rt;
+//    }
+//    private static Set<Integer> findNGramIdxUniScriptName(Integer s,Integer e,Integer n) {
+//        Set<Integer> rt = new HashSet<>();
+//        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
+//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+//        if(l.get(0).equals(defaultNonKeyWord)){
+//            System.exit(0);
+//        }else{
+////            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+//            rt = mkNGramIdxShape(l);
+//        }
+//        return rt;
+//    }
+//    private static Set<Integer> findNGramIdxUniBlockName(Integer s,Integer e,Integer n) {
+//        Set<Integer> rt = new HashSet<>();
+//        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
+//        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+//        if(l.get(0).equals(defaultNonKeyWord)){
+//            System.exit(0);
+//        }else{
+//            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+//        }
+//        return rt;
+//    }
 
-    static BiFunction <Map<Integer, String>,Integer,Map<String,List<String>>> mkNGramIdx = (m,n) ->{
-        Map<String, String> tmp = new HashMap<>();
-        for(Map.Entry<Integer, String> entry : m.entrySet()){
-            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
-            int mx = l.size();
-            for(int i=0;i<mx;i++){
-                List<String> ll = ngram(l.get(i),n);
-                int mxmx=ll.size();
-                for(int j=0;j<mxmx;j++){
-                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
-                }
-            }
-        }
-        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    };
+//    static BiFunction <Integer,Integer,Map<Integer,String>> mkIdxUniName = (s,e) ->
+//            IntStream.rangeClosed(s, e).boxed().parallel()
+//                    .collect(Collectors.toMap(i -> i, i -> Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord)))
+//                    .entrySet().stream().collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+//
+//    static BiFunction <Map<Integer, String>,Integer,Map<String,List<String>>> mkNGramIdx = (m,n) ->{
+//        Map<String, String> tmp = new HashMap<>();
+//        for(Map.Entry<Integer, String> entry : m.entrySet()){
+//            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+//            int mx = l.size();
+//            for(int i=0;i<mx;i++){
+//                List<String> ll = ngram(l.get(i),n);
+//                int mxmx=ll.size();
+//                for(int j=0;j<mxmx;j++){
+//                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+//                }
+//            }
+//        }
+//        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+//    };
+//
+//    static Function <List<String>,Set<Integer>> mkNGramIdxShape = (l) ->
+//            l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
 
-    private static <K,V,R> Map<K,R> jjj(K defaultStartRn, V defaultEndRn,BiFunction<K,V,Map<K,R>> mkIdxFunction){
-        return mkIdxFunction.apply(defaultStartRn,defaultEndRn);
-    }
 
-    private static <K,V> Map<V,List<V>> ppp(Map<K,V> input,K ngram,BiFunction<Map<K,V>,K,Map<V,List<V>>> mkNGramIdxFunction){
-        return mkNGramIdxFunction.apply(input,ngram);
-    }
-
-    private static <K,V,N,S,R> List<R> wrapperNNN(
+    private static <K,V,N,S,R> Set<N> executeNgramSearch(
             K defaultStartRn
             ,V defaultEndRn
             ,N defaultNGram
             ,S defaultKeyWord
             ,List<R> defaultNonKeyWord
             ,BiFunction<K,V,Map<K,R>> mkIdxFunction
-            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkNGramIdxFunction){
+            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkNGramIdxFunction
+            ,Function<List<R>,Set<N>> mkNGramIdxShapeFunction
+    ){
+        Set<N> rt = new HashSet<>();
         Map<K,R> input = mkIdxFunction.apply(defaultStartRn,defaultEndRn);
         Map<R,List<R>> midput = mkNGramIdxFunction.apply(input,defaultNGram);
         List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
         if(output.get(0).equals(defaultNonKeyWord.get(0))){
             System.exit(0);
+        }else{
+            rt = mkNGramIdxShapeFunction.apply(output);
         }
-        return output;
+        return rt;
     }
 
     private static void subMain(){
-        Map<Integer, String> r = jjj(defaultStartRn,defaultEndRn,mkIdxUniName);
-        Map<String, List<String>> rr = ppp(r,defaultNGram,mkNGramIdx);
+//        defaultKeyWord="NAGOGU";
+        defaultKeyWord="APLPLP";
 
-        defaultKeyWord="NAGOGU";
-
-        List<String> rrr = wrapperNNN(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx);
-
-        System.out.println(rrr);
+//        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
+//        System.out.println(rrr);
+//        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
+//        System.out.println(rrrr);
+//        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
+//        System.out.println(rrrrr);
 
         System.exit(0);
     }
@@ -448,13 +456,13 @@ public class App {
                         s = findGramIdxUniBlockName(defaultStartRn,defaultEndRn);
                         break;
                     case 4:
-                        s = findNGramIdxUniName(defaultStartRn,defaultEndRn,defaultNGram);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
                         break;
                     case 5:
-                        s = findNGramIdxUniScriptName(defaultStartRn,defaultEndRn,defaultNGram);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
                         break;
                     case 6:
-                        s = findNGramIdxUniBlockName(defaultStartRn,defaultEndRn,defaultNGram);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
                         break;
                     default:
                         System.exit(1);
