@@ -286,22 +286,34 @@ public class App {
     }
     public static void main(String... args ) {
         if(args.length!=0){
-            if(args.length%3!=0){
+            if(args.length%5!=0){
                 System.exit(1);
             }else{
-                List<Integer> chkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                if(chkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[0])))){
+                List<Integer> checkDefaultSearchModeRange = IntStream.rangeClosed(1,2).boxed().collect(Collectors.toList());
+                if(checkDefaultSearchModeRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[0])))){
                     System.exit(1);
                 }else{
-                    defaultNormGrp=Integer.valueOf(args[0]);
+                    defaultSearchMode=Integer.valueOf(args[0]);
                 }
-                List<Integer> chkdefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                if(chkdefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                if(checkDefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
                     System.exit(1);
                 }else{
                     defaultNonGramIdx=Integer.valueOf(args[1]);
                 }
-                defaultKeyWord=args[2];
+                List<Integer> checkDefaultGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                if(checkDefaultGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
+                    System.exit(1);
+                }else{
+                    defaultGramIdx=Integer.valueOf(args[2]);
+                }
+                List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
+                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
+                    System.exit(1);
+                }else{
+                    defaultNormGrp=Integer.valueOf(args[3]);
+                }
+                defaultKeyWord=args[4];
             }
         }else{
 
@@ -323,8 +335,12 @@ public class App {
                     default:
                         System.exit(1);
                 }
-                defaultStartRn = s.stream().min(Comparator.comparing(e->e)).get();
-                defaultEndRn = s.stream().max(Comparator.comparing(e->e)).get();
+                if(0!=s.size()){
+                    defaultStartRn = s.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = s.stream().max(Comparator.comparing(e->e)).get();
+                }else{
+                    System.exit(1);
+                }
                 break;
             case 2:
                 Set<Integer> ss = null;
@@ -341,8 +357,12 @@ public class App {
                     default:
                         System.exit(1);
                 }
-                defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
-                defaultEndRn = ss.stream().max(Comparator.comparing(e->e)).get();
+                if(0!=ss.size()){
+                    defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = ss.stream().max(Comparator.comparing(e->e)).get();
+                }else{
+                    System.exit(1);
+                }
                 break;
             default:
                 System.exit(1);
