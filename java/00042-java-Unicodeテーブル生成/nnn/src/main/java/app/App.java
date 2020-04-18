@@ -12,10 +12,10 @@ import java.util.stream.Stream;
 
 public class App {
     private static String defaultKeyWord="KATAKANA";
-    private static Integer defaultNormGrp=0;
     private static Integer defaultSearchMode=1;
     private static Integer defaultNonGramIdx=1;
-    private static Integer defaultGramIdx=1;
+    private static Integer defaultGramIdx=2;
+    private static Integer defaultNormGrp=4;
     private static Integer defaultSelectColStartRn=0;
     private static Integer defaultSelectColEndRn=8;
     private static Integer defaultStartRn=0;
@@ -97,8 +97,8 @@ public class App {
         for(int i=s;i<=e;i++){
             rt.put(i, Arrays.asList(
                     String.valueOf(i)
-                    ,cpToUniName(i)
                     ,cpToStr(i)
+                    ,cpToUniName(i)
                     ,cpToUniScriptName(i)
                     ,cpToUniBlockName(i)
                     ,strToUtf8(cpToStr(i))//律速ボトルネック
@@ -114,8 +114,8 @@ public class App {
                 i->i
                 ,i->Arrays.asList(
                         String.valueOf(i)
-                        ,cpToUniName(i)
                         ,cpToStr(i)
+                        ,cpToUniName(i)
                         ,cpToUniScriptName(i)
                         ,cpToUniBlockName(i)
                         ,strToNorm(cpToStr(i), Normalizer.Form.NFC)
@@ -133,8 +133,8 @@ public class App {
                 i->i
                 ,i->Arrays.asList(
                         String.valueOf(i)
-                        ,cpToUniName(i)
                         ,cpToStr(i)
+                        ,cpToUniName(i)
                         ,cpToUniScriptName(i)
                         ,cpToUniBlockName(i)
                         ,strToNorm(cpToStr(i), Normalizer.Form.NFD)
@@ -152,8 +152,8 @@ public class App {
                 i->i
                 ,i->Arrays.asList(
                         String.valueOf(i)
-                        ,cpToUniName(i)
                         ,cpToStr(i)
+                        ,cpToUniName(i)
                         ,cpToUniScriptName(i)
                         ,cpToUniBlockName(i)
                         ,strToNorm(cpToStr(i), Normalizer.Form.NFKC)
@@ -171,8 +171,8 @@ public class App {
                 i->i
                 ,i->Arrays.asList(
                         String.valueOf(i)
-                        ,cpToUniName(i)
                         ,cpToStr(i)
+                        ,cpToUniName(i)
                         ,cpToUniScriptName(i)
                         ,cpToUniBlockName(i)
                         ,strToNorm(cpToStr(i), Normalizer.Form.NFKD)
@@ -191,8 +191,8 @@ public class App {
         }
     }
     private static void printOut(Map<Integer, List<String>> m){
-        m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultNonGramIdx)).orElse(defaultNonKeyWord).contains(defaultKeyWord))
-                .forEach(e-> System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
+        m.entrySet().stream().filter(v->v.getValue().contains(defaultKeyWord))
+                .forEach(e->System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
     }
     private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
@@ -218,7 +218,7 @@ public class App {
         return mkIdxUniBlockName(s,e).entrySet().stream()
                 .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
-    private static Map<String, List<String>> mkGramIdxUniName(Map<Integer, String> m){
+    private static Map<String, List<String>> mkGramIdx(Map<Integer, String> m){
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W"));
@@ -232,29 +232,18 @@ public class App {
     private static Set<Integer> findGramIdxUniName(Integer s,Integer e) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
         if(l.get(0).equals(defaultNonKeyWord)){
             System.exit(0);
         }else{
             rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
         }
         return rt;
-    }
-    private static Map<String, List<String>> mkGramIdxUniScriptName(Map<Integer, String> m){
-        Map<String, String> tmp = new HashMap<>();
-        for(Map.Entry<Integer, String> entry : m.entrySet()){
-            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
-            int mx = l.size();
-            for(int i=0;i<mx;i++){
-                tmp.put(entry.getKey() +"-"+ i,l.get(i));
-            }
-        }
-        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
     private static Set<Integer> findGramIdxUniScriptName(Integer s,Integer e) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdxUniScriptName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
         if(l.get(0).equals(defaultNonKeyWord)){
             System.exit(0);
         }else{
@@ -262,21 +251,10 @@ public class App {
         }
         return rt;
     }
-    private static Map<String, List<String>> mkGramIdxUniBlockName(Map<Integer, String> m){
-        Map<String, String> tmp = new HashMap<>();
-        for(Map.Entry<Integer, String> entry : m.entrySet()){
-            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
-            int mx = l.size();
-            for(int i=0;i<mx;i++){
-                tmp.put(entry.getKey() +"-"+ i,l.get(i));
-            }
-        }
-        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
     private static Set<Integer> findGramIdxUniBlockName(Integer s,Integer e) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdxUniBlockName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
         if(l.get(0).equals(defaultNonKeyWord)){
             System.exit(0);
         }else{
@@ -286,7 +264,7 @@ public class App {
     }
     public static void main(String... args ) {
         if(args.length!=0){
-            if(args.length%5!=0){
+            if(args.length%4!=0){
                 System.exit(1);
             }else{
                 List<Integer> checkDefaultSearchModeRange = IntStream.rangeClosed(1,2).boxed().collect(Collectors.toList());
@@ -295,29 +273,34 @@ public class App {
                 }else{
                     defaultSearchMode=Integer.valueOf(args[0]);
                 }
-                List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                if(checkDefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
-                    System.exit(1);
+                if(1==defaultSearchMode){
+                    List<Integer> checkDefaultGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                    if(checkDefaultGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                        System.exit(1);
+                    }else{
+                        defaultGramIdx=Integer.valueOf(args[1]);
+                    }
                 }else{
-                    defaultNonGramIdx=Integer.valueOf(args[1]);
-                }
-                List<Integer> checkDefaultGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                if(checkDefaultGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
-                    System.exit(1);
-                }else{
-                    defaultGramIdx=Integer.valueOf(args[2]);
+                    List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                    if(checkDefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                        System.exit(1);
+                    }else{
+                        defaultNonGramIdx=Integer.valueOf(args[1]);
+                    }
                 }
                 List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
+                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
                     System.exit(1);
                 }else{
-                    defaultNormGrp=Integer.valueOf(args[3]);
+                    defaultNormGrp=Integer.valueOf(args[2]);
                 }
-                defaultKeyWord=args[4];
+                defaultKeyWord=args[3];
             }
         }else{
 
         }
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
 
         switch (defaultSearchMode){
             case 1:
@@ -334,6 +317,7 @@ public class App {
                         break;
                     default:
                         System.exit(1);
+                        break;
                 }
                 if(0!=s.size()){
                     defaultStartRn = s.stream().min(Comparator.comparing(e->e)).get();
@@ -356,6 +340,7 @@ public class App {
                         break;
                     default:
                         System.exit(1);
+                        break;
                 }
                 if(0!=ss.size()){
                     defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
@@ -366,7 +351,10 @@ public class App {
                 break;
             default:
                 System.exit(1);
+                break;
         }
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
 
         Map<Integer, List<String>> ret = null;
         switch (defaultNormGrp){
@@ -389,5 +377,7 @@ public class App {
                 System.exit(1);
         }
         printOut(ret);
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
     }
 }
