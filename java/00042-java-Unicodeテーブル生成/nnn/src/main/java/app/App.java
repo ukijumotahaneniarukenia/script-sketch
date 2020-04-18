@@ -11,6 +11,17 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
+    private static String defaultKeyWord="KATAKANA";
+    private static Integer defaultNormGrp=0;
+    private static Integer defaultSearchMode=1;
+    private static Integer defaultNoneGramIdxCol=1;
+    private static Integer defaultGramIdxUniName=1;
+    private static Integer defaultSelectColStartRn=0;
+    private static Integer defaultSelectColEndRn=8;
+    private static Integer defaultStartRn=0;
+    private static Integer defaultEndRn=0x10FFFF;
+    private static String defaultNoneKeyWord="ウンコもりもり森鴎外";
+
     private static String hexToBin(String s){
         return Integer.toBinaryString(Integer.parseInt(s,16));
     }
@@ -174,51 +185,40 @@ public class App {
                 ,LinkedHashMap::new
         ));
     }
+    private static <K,V> void debug(Map<K,V> map){
+        for(Map.Entry<K, V> entry : map.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+        }
+    }
     private static void printOut(Map<Integer, List<String>> m){
-        m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultIndexCol)).orElse(defaultNoneKeyWord).contains(defaultKeyWord))
+        m.entrySet().stream().filter(v->Optional.ofNullable(v.getValue().get(defaultNoneGramIdxCol)).orElse(defaultNoneKeyWord).contains(defaultKeyWord))
                 .forEach(e-> System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
     }
     private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Map<Integer, String> findIdxUniName(Integer s,Integer e) {
+    private static Set<Integer> findIdxUniName(Integer s, Integer e) {
         return mkIdxUniName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
     private static Map<Integer, String> mkIdxUniScriptName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Map<Integer, String> findIdxUniScriptName(Integer s,Integer e) {
+    private static Set<Integer> findIdxUniScriptName(Integer s,Integer e) {
         return mkIdxUniScriptName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
     private static Map<Integer, String> mkIdxUniBlockName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNoneKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Map<Integer, String> findIdxUniBlockName(Integer s,Integer e) {
+    private static Set<Integer> findIdxUniBlockName(Integer s,Integer e) {
         return mkIdxUniBlockName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
-    private static String defaultKeyWord="KATAKANA";
-    private static Integer defaultNormGrp=0;
-    private static Integer defaultSearchMode=1;
-    private static Integer defaultIndexCol=1;
-    private static Integer defaultTransIndexCol=1;
-    private static Integer defaultSelectColStartRn=0;
-    private static Integer defaultSelectColEndRn=8;
-    private static Integer defaultStartRn=0;
-    private static Integer defaultEndRn=0x10FFFF;
-    private static String defaultNoneKeyWord="ウンコもりもり森鴎外";
-
-    private static <K,V> void debug(Map<K,V> map){
-        for(Map.Entry<K, V> entry : map.entrySet()){
-            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
-        }
-    }
-    private static Map<String, List<String>> mkTransIdxUniName(Map<Integer, String> m){
+    private static Map<String, List<String>> mkGramIdxUniName(Map<Integer, String> m){
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W"));
@@ -229,10 +229,10 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
-    private static Set<Integer> findTransIdxUniName(Integer s,Integer e) {
+    private static Set<Integer> findGramIdxUniName(Integer s,Integer e) {
         Set<Integer> rt = new HashSet<>();
         Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkTransIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNoneKeyWord));
+        List<String> l = Optional.ofNullable(mkGramIdxUniName(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNoneKeyWord));
         if(l.get(0).equals(defaultNoneKeyWord)){
             System.exit(0);
         }else{
@@ -251,11 +251,11 @@ public class App {
                 }else{
                     defaultNormGrp=Integer.valueOf(args[0]);
                 }
-                List<Integer> chkDefaultIndexColRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                if(chkDefaultIndexColRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                List<Integer> chkdefaultNoneGramIdxColRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                if(chkdefaultNoneGramIdxColRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
                     System.exit(1);
                 }else{
-                    defaultIndexCol=Integer.valueOf(args[1]);
+                    defaultNoneGramIdxCol=Integer.valueOf(args[1]);
                 }
                 defaultKeyWord=args[2];
             }
@@ -266,9 +266,9 @@ public class App {
         switch (defaultSearchMode){
             case 1:
                 Set<Integer> s = null;
-                switch (defaultTransIndexCol){
+                switch (defaultGramIdxUniName){
                     case 1:
-                        s = findTransIdxUniName(defaultStartRn,defaultEndRn);
+                        s = findGramIdxUniName(defaultStartRn,defaultEndRn);
                         break;
                     default:
                         System.exit(1);
@@ -277,22 +277,22 @@ public class App {
                 defaultEndRn = s.stream().max(Comparator.comparing(e->e)).get();
                 break;
             case 2:
-                Map<Integer, String> m = null;
-                switch (defaultIndexCol){
+                Set<Integer> ss = null;
+                switch (defaultNoneGramIdxCol){
                     case 1:
-                        m = findIdxUniName(defaultStartRn,defaultEndRn);
+                        ss = findIdxUniName(defaultStartRn,defaultEndRn);
                         break;
                     case 2:
-                        m = findIdxUniScriptName(defaultStartRn,defaultEndRn);
+                        ss = findIdxUniScriptName(defaultStartRn,defaultEndRn);
                         break;
                     case 3:
-                        m = findIdxUniBlockName(defaultStartRn,defaultEndRn);
+                        ss = findIdxUniBlockName(defaultStartRn,defaultEndRn);
                         break;
                     default:
                         System.exit(1);
                 }
-                defaultStartRn = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).min(Comparator.comparing(ee->ee.getKey())).get().getKey();
-                defaultEndRn = m.entrySet().stream().parallel().filter(v->v.getValue().contains(defaultKeyWord)).max(Comparator.comparing(ee->ee.getKey())).get().getKey();
+                defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
+                defaultEndRn = ss.stream().max(Comparator.comparing(e->e)).get();
                 break;
             default:
                 System.exit(1);
