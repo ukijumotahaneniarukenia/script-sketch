@@ -16,7 +16,7 @@ public class App {
     private static String defaultKeyWord="KATAKANA";
     private static Integer defaultSearchMode=1;
     private static Integer defaultNonGramIdx=1;
-    private static Integer defaultGramIdx=2;
+    private static Integer defaultGramIdxPtn=2;
     private static Integer defaultNGram=6;
     private static Integer defaultNormGrp=4;
     private static Integer defaultSelectColStartRn=0;
@@ -188,82 +188,17 @@ public class App {
                 ,LinkedHashMap::new
         ));
     }
-    private static <K,V> void debug(Map<K,V> map){
-        for(Map.Entry<K, V> entry : map.entrySet()){
-            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
-        }
-    }
-    private static void printOut(Map<Integer, List<String>> m){
-        m.entrySet().stream().filter(v->v.getValue().contains(defaultKeyWord))
-                .forEach(e->System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
-    }
     private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    }
-    private static Set<Integer> findIdxUniName(Integer s, Integer e) {
-        return mkIdxUniName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
     }
     private static Map<Integer, String> mkIdxUniScriptName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Set<Integer> findIdxUniScriptName(Integer s,Integer e) {
-        return mkIdxUniScriptName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
-    }
     private static Map<Integer, String> mkIdxUniBlockName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    }
-    private static Set<Integer> findIdxUniBlockName(Integer s,Integer e) {
-        return mkIdxUniBlockName(s,e).entrySet().stream()
-                .filter(v->v.getValue().contains(defaultKeyWord)).map(ee->ee.getKey()).collect(Collectors.toSet());
-    }
-    private static Map<String, List<String>> mkGramIdx(Map<Integer, String> m){
-        Map<String, String> tmp = new HashMap<>();
-        for(Map.Entry<Integer, String> entry : m.entrySet()){
-            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
-            int mx = l.size();
-            for(int i=0;i<mx;i++){
-                tmp.put(entry.getKey() +"-"+ i,l.get(i));
-            }
-        }
-        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Set<Integer> findGramIdxUniName(Integer s,Integer e) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
-    }
-    private static Set<Integer> findGramIdxUniScriptName(Integer s,Integer e) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
-    }
-    private static Set<Integer> findGramIdxUniBlockName(Integer s,Integer e) {
-        Set<Integer> rt = new HashSet<>();
-        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
-        List<String> l = Optional.ofNullable(mkGramIdx(m).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
-        if(l.get(0).equals(defaultNonKeyWord)){
-            System.exit(0);
-        }else{
-            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-        }
-        return rt;
     }
     private static String repeat(String str, int n) {
         return Stream.generate(() -> str).limit(n).collect(Collectors.joining());
@@ -281,6 +216,17 @@ public class App {
         }
         return rt;
     }
+    private static Map<String, List<String>> mkWordIdx(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
     private static Map<String, List<String>> mkNGramIdx(Map<Integer, String> m,Integer n){
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
@@ -296,52 +242,116 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
-    private static Set<Integer> mkNGramIdxShape(List<String> l){
+    private static Set<Integer> mkIdxShape(List<String> l){
         return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
     }
-
+    private static Set<Integer> mkIdxFilter(Map<Integer,String> m,String s){
+        return m.entrySet().stream()
+                .filter(v->v.getValue().contains(s)).map(ee->ee.getKey()).collect(Collectors.toSet());
+    }
     private static <K,V,N,S,R> Set<N> executeNgramSearch(
             K defaultStartRn
             ,V defaultEndRn
             ,N defaultNGram
             ,S defaultKeyWord
             ,List<R> defaultNonKeyWord
-            ,BiFunction<K,V,Map<K,R>> mkIdxFunction
-            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkNGramIdxFunction
-            ,Function<List<R>,Set<N>> mkNGramIdxShapeFunction
+            ,BiFunction<K,V,Map<K,R>> mkInputFunction
+            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkIdxFunction
+            ,Function<List<R>,Set<N>> mkIdxShapeFunction
     ){
         Set<N> rt = new HashSet<>();
-        Map<K,R> input = mkIdxFunction.apply(defaultStartRn,defaultEndRn);
-        Map<R,List<R>> midput = mkNGramIdxFunction.apply(input,defaultNGram);
+        Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
+        Map<R,List<R>> midput = mkIdxFunction.apply(input,defaultNGram);
         List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
         if(output.get(0).equals(defaultNonKeyWord.get(0))){
             System.exit(0);
         }else{
-            rt = mkNGramIdxShapeFunction.apply(output);
+            rt = mkIdxShapeFunction.apply(output);
         }
         return rt;
     }
-
-    private static void subMain(){
-        defaultKeyWord="NAGOGU";
-
-        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
-        System.out.println(rrr);
-        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
-        System.out.println(rrrr);
-        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
-        System.out.println(rrrrr);
-
-        System.exit(0);
+    private static <K,V,N,S,R> Set<N> executeNonNgramSearch(
+            K defaultStartRn
+            ,V defaultEndRn
+            ,S defaultKeyWord
+            ,List<R> defaultNonKeyWord
+            ,BiFunction<K,V,Map<K,R>> mkInputFunction
+            ,Function<Map<K,R>,Map<R,List<R>>> mkIdxFunction
+            ,Function<List<R>,Set<N>> mkIdxShapeFunction
+    ){
+        Set<N> rt = new HashSet<>();
+        Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
+        Map<R,List<R>> midput = mkIdxFunction.apply(input);
+        List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
+        if(output.get(0).equals(defaultNonKeyWord.get(0))){
+            System.exit(0);
+        }else{
+            rt = mkIdxShapeFunction.apply(output);
+        }
+        return rt;
     }
+    private static <K,V,N,S,R> Set<N> executeHashKeySearch(
+            K defaultStartRn
+            ,V defaultEndRn
+            ,S defaultKeyWord
+            ,BiFunction<K,V,Map<K,R>> mkInputFunction
+            ,BiFunction<Map<K,R>,S,Set<N>> mkIdxFilterFunction
+    ){
+        Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
+        return mkIdxFilterFunction.apply(input,defaultKeyWord);
+    }
+    private static <K,V> void debug(Map<K,V> map){
+        for(Map.Entry<K, V> entry : map.entrySet()){
+            System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+        }
+    }
+    private static void printOut(Map<Integer, List<String>> m){
+        m.entrySet().stream().filter(v->v.getValue().contains(defaultKeyWord))
+                .forEach(e->System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
+    }
+    private static void subMain(){
+        //Ngram
+//        defaultKeyWord="NAGOGU";
+
+//        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
+//        System.out.println(rrr);
+//        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
+//        System.out.println(rrrr);
+//        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
+//        System.out.println(rrrrr);
+
+        //Word
+//        defaultKeyWord="KATAKANA";
+//
+//        Set<Integer> rrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkWordIdx,App::mkIdxShape);
+//        System.out.println(rrrrrr);
+//        Set<Integer> rrrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkWordIdx,App::mkIdxShape);
+//        System.out.println(rrrrrrr);
+//        Set<Integer> rrrrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkWordIdx,App::mkIdxShape);
+//        System.out.println(rrrrrrrr);
+
+        //HashKey
+//        defaultKeyWord="KATAKANA";
+//        Set<Integer> rrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
+//        System.out.println(rrrrrrrrr);
+//        Set<Integer> rrrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
+//        System.out.println(rrrrrrrrrr);
+//        Set<Integer> rrrrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
+//        System.out.println(rrrrrrrrrrr);
+
+//        System.exit(0);
+    }
+
     public static void main(String... args ) {
 
         subMain();
 
+        //TODO チェック処理いい感じに見直す
+
         if(args.length!=0){
             if(args.length%4!=0){
                 System.exit(1);
-            }else{
+            }else if(args.length%5!=0){
                 List<Integer> checkDefaultSearchModeRange = IntStream.rangeClosed(1,2).boxed().collect(Collectors.toList());
                 if(checkDefaultSearchModeRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[0])))){
                     System.exit(1);
@@ -349,13 +359,20 @@ public class App {
                     defaultSearchMode=Integer.valueOf(args[0]);
                 }
                 if(1==defaultSearchMode){
-                    List<Integer> checkDefaultGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                    if(checkDefaultGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
+                    List<Integer> checkdefaultGramIdxPtnRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
+                    if(checkdefaultGramIdxPtnRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
                         System.exit(1);
                     }else{
-                        defaultGramIdx=Integer.valueOf(args[1]);
+                        defaultGramIdxPtn=Integer.valueOf(args[1]);
                         defaultNGram=Integer.valueOf(args[2]);
                     }
+                    List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
+                    if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
+                        System.exit(1);
+                    }else{
+                        defaultNormGrp=Integer.valueOf(args[3]);
+                    }
+                    defaultKeyWord=args[4];
                 }else{
                     List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
                     if(checkDefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
@@ -363,42 +380,44 @@ public class App {
                     }else{
                         defaultNonGramIdx=Integer.valueOf(args[1]);
                     }
+                    List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
+                    if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
+                        System.exit(1);
+                    }else{
+                        defaultNormGrp=Integer.valueOf(args[2]);
+                    }
+                    defaultKeyWord=args[3];
                 }
-                List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
-                    System.exit(1);
-                }else{
-                    defaultNormGrp=Integer.valueOf(args[3]);
-                }
-                defaultKeyWord=args[4];
+            }else{
+                System.exit(1);
             }
         }else{
 
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
 
         switch (defaultSearchMode){
             case 1:
                 Set<Integer> s = null;
-                switch (defaultGramIdx){
+                switch (defaultGramIdxPtn){
                     case 1:
-                        s = findGramIdxUniName(defaultStartRn,defaultEndRn);
+                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case 2:
-                        s = findGramIdxUniScriptName(defaultStartRn,defaultEndRn);
+                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case 3:
-                        s = findGramIdxUniBlockName(defaultStartRn,defaultEndRn);
+                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case 4:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkNGramIdxShape);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 5:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkNGramIdxShape);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 6:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkNGramIdxShape);
+                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(1);
@@ -415,13 +434,13 @@ public class App {
                 Set<Integer> ss = null;
                 switch (defaultNonGramIdx){
                     case 1:
-                        ss = findIdxUniName(defaultStartRn,defaultEndRn);
+                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
                         break;
                     case 2:
-                        ss = findIdxUniScriptName(defaultStartRn,defaultEndRn);
+                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
                         break;
                     case 3:
-                        ss = findIdxUniBlockName(defaultStartRn,defaultEndRn);
+                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
                         break;
                     default:
                         System.exit(1);
@@ -439,7 +458,7 @@ public class App {
                 break;
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
 
         Map<Integer, List<String>> ret = null;
         switch (defaultNormGrp){
@@ -463,6 +482,6 @@ public class App {
         }
         printOut(ret);
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdx:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
     }
 }
