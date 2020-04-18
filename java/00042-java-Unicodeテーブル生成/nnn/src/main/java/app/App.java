@@ -15,6 +15,7 @@ public class App {
     private static Integer defaultSearchMode=1;
     private static Integer defaultNonGramIdx=1;
     private static Integer defaultGramIdx=2;
+    private static Integer defaultNGram=6;
     private static Integer defaultNormGrp=4;
     private static Integer defaultSelectColStartRn=0;
     private static Integer defaultSelectColEndRn=8;
@@ -262,7 +263,80 @@ public class App {
         }
         return rt;
     }
+    private static String repeat(String str, int n) {
+        return Stream.generate(() -> str).limit(n).collect(Collectors.joining());
+    }
+    private static String salt(String str,String prefix,String suffix) {
+        return Stream.of(str).collect(Collectors.joining("",prefix,suffix));
+    }
+    private static List<String> ngram (String s,Integer n){
+        List<String> rt = new ArrayList<>();
+        String ngramPtn = Stream.of(repeat(".",n)).map(e->salt(e,"(?=(","))")).collect(Collectors.joining());
+        Pattern p = Pattern.compile(ngramPtn);
+        Matcher m = p.matcher(s);
+        while(m.find()){
+            rt.add(m.group(1));
+        }
+        return rt;
+    }
+    private static Map<String, List<String>> mkNGramIdx(Map<Integer, String> m,Integer n){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                List<String> ll = ngram(l.get(i),n);
+                int mxmx=ll.size();
+                for(int j=0;j<mxmx;j++){
+                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+                }
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Set<Integer> findNGramIdxUniName(Integer s,Integer e,Integer n) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
+    private static Set<Integer> findNGramIdxUniScriptName(Integer s,Integer e,Integer n) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniScriptName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
+    private static Set<Integer> findNGramIdxUniBlockName(Integer s,Integer e,Integer n) {
+        Set<Integer> rt = new HashSet<>();
+        Map<Integer, String> m = mkIdxUniBlockName(defaultStartRn,defaultEndRn);
+        List<String> l = Optional.ofNullable(mkNGramIdx(m,n).get(defaultKeyWord)).orElse(Arrays.asList(defaultNonKeyWord));
+        if(l.get(0).equals(defaultNonKeyWord)){
+            System.exit(0);
+        }else{
+            rt = l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
+        }
+        return rt;
+    }
+    private static void subMain(){
+        Map<Integer, String> m = mkIdxUniName(defaultStartRn,defaultEndRn);
+        Map<String, List<String>> rt = mkNGramIdx(m,5);
+        debug(rt);
+        System.exit(0);
+    }
     public static void main(String... args ) {
+
+        subMain();
+
         if(args.length!=0){
             if(args.length%4!=0){
                 System.exit(1);
@@ -279,6 +353,7 @@ public class App {
                         System.exit(1);
                     }else{
                         defaultGramIdx=Integer.valueOf(args[1]);
+                        defaultNGram=Integer.valueOf(args[2]);
                     }
                 }else{
                     List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
@@ -289,12 +364,12 @@ public class App {
                     }
                 }
                 List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
+                if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
                     System.exit(1);
                 }else{
-                    defaultNormGrp=Integer.valueOf(args[2]);
+                    defaultNormGrp=Integer.valueOf(args[3]);
                 }
-                defaultKeyWord=args[3];
+                defaultKeyWord=args[4];
             }
         }else{
 
@@ -314,6 +389,15 @@ public class App {
                         break;
                     case 3:
                         s = findGramIdxUniBlockName(defaultStartRn,defaultEndRn);
+                        break;
+                    case 4:
+                        s = findNGramIdxUniName(defaultStartRn,defaultEndRn,defaultNGram);
+                        break;
+                    case 5:
+                        s = findNGramIdxUniScriptName(defaultStartRn,defaultEndRn,defaultNGram);
+                        break;
+                    case 6:
+                        s = findNGramIdxUniBlockName(defaultStartRn,defaultEndRn,defaultNGram);
                         break;
                     default:
                         System.exit(1);
