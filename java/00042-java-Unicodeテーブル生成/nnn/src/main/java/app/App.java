@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class App {
     private static String defaultKeyWord="KATAKANA";
     private static Integer defaultSearchMode=1;
-    private static Integer defaultNonGramIdx=1;
+    private static Integer defaultHashKeyIdxPtn=1;
     private static Integer defaultGramIdxPtn=2;
     private static Integer defaultNGramIdxPtn=3;
     private static Integer defaultNGram=7;
@@ -321,7 +321,7 @@ public class App {
                 defaultNGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
                 break;
             case 3:
-                defaultNonGramIdx = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultHashKeyIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
                 break;
             default:
                 break;
@@ -329,8 +329,31 @@ public class App {
         defaultNormGrp = Integer.valueOf(checkXXX(0,4,2,args));
         defaultKeyWord = checkXXX(3,3,3,args);
 
-        System.out.printf("defaultSearchMode:%s\tdefaultGramIdxPtn:%s\tdefaultNGramIdxPtn:%s\tdefaultNonGramIdx:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
-                ,defaultSearchMode,defaultGramIdxPtn,defaultNGramIdxPtn,defaultNonGramIdx,defaultNormGrp,defaultKeyWord);
+        System.out.printf("defaultSearchMode:%s\tdefaultGramIdxPtn:%s\tdefaultNGramIdxPtn:%s\tdefaultHashKeyIdxPtn:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
+                ,defaultSearchMode,defaultGramIdxPtn,defaultNGramIdxPtn,defaultHashKeyIdxPtn,defaultNormGrp,defaultKeyWord);
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
+
+        if(2==defaultSearchMode){
+            List<String> l = Arrays.asList(defaultKeyWord.split(":"));
+            defaultKeyWord = l.get(0);
+            defaultNGram = Integer.valueOf(l.get(1));
+        }
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
+
         return rt;
     }
 
@@ -360,7 +383,27 @@ public class App {
 
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
+
+        if(2==defaultSearchMode){
+            List<String> l = Arrays.asList(defaultKeyWord.split(":"));
+            defaultKeyWord = l.get(0);
+            defaultNGram = Integer.valueOf(l.get(1));
+        }
+
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
 
         switch (defaultSearchMode){
             case 1:
@@ -410,7 +453,7 @@ public class App {
                 break;
             case 3:
                 Set<Integer> sss = null;
-                switch (defaultNonGramIdx){
+                switch (defaultHashKeyIdxPtn){
                     case 1:
                         sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
                         break;
@@ -436,7 +479,13 @@ public class App {
                 break;
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
 
         Map<Integer, List<String>> ret = null;
         switch (defaultNormGrp){
@@ -458,8 +507,16 @@ public class App {
             default:
                 System.exit(1);
         }
+
         printOut(ret);
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",defaultSearchMode,defaultSearchMode==1?defaultGramIdxPtn:defaultNonGramIdx,defaultNormGrp,defaultKeyWord,defaultStartRn,defaultEndRn);
+        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+                ,defaultSearchMode
+                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNormGrp
+                ,defaultKeyWord
+                ,defaultStartRn
+                ,defaultEndRn);
+
     }
 }

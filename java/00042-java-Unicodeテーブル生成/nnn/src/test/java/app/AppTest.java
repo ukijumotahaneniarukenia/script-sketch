@@ -26,9 +26,12 @@ public class AppTest {
         m.put("argsPtn1",Arrays.asList("1","1","1","JJJ:3"));
         m.put("argsPtn2",Arrays.asList("1","2","1","KKJJJ:5"));
         m.put("argsPtn3",Arrays.asList("1","3","1","PP:2"));
+        m.put("argsPtn4",Arrays.asList("2","1","1","AAA:3"));
+        m.put("argsPtn5",Arrays.asList("2","2","1","BBBBB:5"));
+        m.put("argsPtn6",Arrays.asList("2","3","1","CC:2"));
 
         int s=1;
-        int e=3;
+        int e=m.size();
 
         for(int i=s;i<=e;i++){
             executeTestMethod(m.get("argsPtn"+i),Arrays.asList("argsPtn"+i,"start","end"),AppTest::testPtn);
