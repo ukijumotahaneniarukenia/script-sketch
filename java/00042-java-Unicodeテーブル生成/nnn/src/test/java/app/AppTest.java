@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static app.App.subMain;
+import static app.App.processArgs;
 
 public class AppTest {
     private static <S,R> R executeTestMethod(List<S> args, List<S> l, BiFunction<List<S>, List<S>, R> function){
@@ -74,7 +74,7 @@ public class AppTest {
         String startMsg = l.get(1);
         String endMsg = l.get(2);
         logger(startMsg,testName);
-        rt = subMain(args);
+        rt = processArgs(args);
         logger(endMsg,testName);
         return rt;
     }

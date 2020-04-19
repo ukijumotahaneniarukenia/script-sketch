@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
+
     private static Integer SuccessRetVal=0;
     private static Integer FailRetVal=1;
     private static String defaultKeyWord="KATAKANA";
@@ -307,24 +308,24 @@ public class App {
         }
     }
 
-    public static Integer subMain(final List<String> args ){
+    public static Integer processArgs(final List<String> args ){
         int rt=0;
-        defaultSearchMode = Integer.valueOf(checkXXX(1,3,0,args));
+        defaultSearchMode = Integer.valueOf(checkArgs(1,3,0,args));
         switch (defaultSearchMode){
             case 1:
-                defaultGramIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultGramIdxInputPtn = Integer.valueOf(checkArgs(1,3,1,args));
                 break;
             case 2:
-                defaultNGramIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultNGramIdxInputPtn = Integer.valueOf(checkArgs(1,3,1,args));
                 break;
             case 3:
-                defaultHashKeyIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultHashKeyIdxInputPtn = Integer.valueOf(checkArgs(1,3,1,args));
                 break;
             default:
                 break;
         }
-        defaultNormGrp = Integer.valueOf(checkXXX(0,4,2,args));
-        defaultKeyWord = checkXXX(3,3,3,args);
+        defaultNormGrp = Integer.valueOf(checkArgs(0,4,2,args));
+        defaultKeyWord = checkArgs(3,3,3,args);
 
         if(2==defaultSearchMode){
             List<String> l = Arrays.asList(defaultKeyWord.split(":"));
@@ -338,7 +339,7 @@ public class App {
 
         return rt;
     }
-    private static String checkXXX(Integer s,Integer e,Integer n,final List<String> l){
+    private static String checkArgs(Integer s,Integer e,Integer n,final List<String> l){
         Pattern p = Pattern.compile("\\D");
         int mx=l.size();
         if(n>mx){
@@ -411,7 +412,14 @@ public class App {
         return ret+cnt;
     }
 
+    private static void subMain(){
+        //https://qiita.com/kiida/items/9d26b850194fa1a02e67
+        System.exit(0);
+    }
+
     public static void main(String... args) {
+
+        subMain();
 
         int ret=SuccessRetVal;
 
@@ -419,7 +427,7 @@ public class App {
             if(args.length%4!=0){
                 System.exit(FailRetVal);
             }else{
-                subMain(Arrays.asList(args)); //テストパッケージのBiFunctionの戻り値はvoid無理やからここでは捨てる
+                processArgs(Arrays.asList(args)); //テストパッケージのBiFunctionの戻り値はvoid無理やからここでは捨てる
             }
         }else{
 
