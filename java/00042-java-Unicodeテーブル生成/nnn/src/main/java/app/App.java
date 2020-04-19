@@ -264,7 +264,6 @@ public class App {
         Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
         Map<R,List<R>> midput = mkIdxFunction.apply(input,defaultNGram);
         List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
-        System.out.println(output);
         if(output.get(0).equals(defaultNonKeyWord.get(0))){
             System.exit(0);
         }else{
