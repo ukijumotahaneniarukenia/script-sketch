@@ -403,10 +403,12 @@ public class App {
 
     private static Integer printOut(Map<Integer,List<Integer>> rr){
         int ret = SuccessRetVal;
+        int cnt = 0;
         for(int i=0;i<rr.size();i++){
+            cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
             debug(searchTbl(rr.get(i).get(0),rr.get(i).get(1)));
         }
-        return ret;
+        return ret+cnt;
     }
 
     public static void main(String... args) {
@@ -496,8 +498,8 @@ public class App {
                 break;
         }
 
-        ret = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
-
+        int cnt = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+        System.out.println(cnt);
         System.exit(ret);
     }
 }
