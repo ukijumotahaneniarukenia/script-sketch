@@ -17,7 +17,8 @@ public class App {
     private static Integer defaultSearchMode=1;
     private static Integer defaultNonGramIdx=1;
     private static Integer defaultGramIdxPtn=2;
-    private static Integer defaultNGram=6;
+    private static Integer defaultNGramIdxPtn=3;
+    private static Integer defaultNGram=7;
     private static Integer defaultNormGrp=4;
     private static Integer defaultSelectColStartRn=0;
     private static Integer defaultSelectColEndRn=8;
@@ -309,85 +310,49 @@ public class App {
         m.entrySet().stream().filter(v->v.getValue().contains(defaultKeyWord))
                 .forEach(e->System.out.println(e.getValue().subList(defaultSelectColStartRn,defaultSelectColEndRn)));
     }
-    private static void subMain(){
-        //Ngram
-//        defaultKeyWord="NAGOGU";
+    public static Integer subMain(final List<String> args ){
+        int rt=0;
+        defaultSearchMode = Integer.valueOf(checkXXX(1,2,0,args));
+        switch (defaultSearchMode){
+            case 1:
+                defaultGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                break;
+            case 2:
+                defaultNGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                break;
+            case 3:
+                defaultNonGramIdx = Integer.valueOf(checkXXX(1,3,1,args));
+                break;
+            default:
+                break;
+        }
+        defaultNormGrp = Integer.valueOf(checkXXX(0,4,2,args));
+        defaultKeyWord = checkXXX(3,3,3,args);
 
-//        Set<Integer> rrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
-//        System.out.println(rrr);
-//        Set<Integer> rrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
-//        System.out.println(rrrr);
-//        Set<Integer> rrrrr = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
-//        System.out.println(rrrrr);
-
-        //Word
-//        defaultKeyWord="KATAKANA";
-//
-//        Set<Integer> rrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkWordIdx,App::mkIdxShape);
-//        System.out.println(rrrrrr);
-//        Set<Integer> rrrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkWordIdx,App::mkIdxShape);
-//        System.out.println(rrrrrrr);
-//        Set<Integer> rrrrrrrr = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkWordIdx,App::mkIdxShape);
-//        System.out.println(rrrrrrrr);
-
-        //HashKey
-//        defaultKeyWord="KATAKANA";
-//        Set<Integer> rrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
-//        System.out.println(rrrrrrrrr);
-//        Set<Integer> rrrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
-//        System.out.println(rrrrrrrrrr);
-//        Set<Integer> rrrrrrrrrrr = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
-//        System.out.println(rrrrrrrrrrr);
-
-//        System.exit(0);
+        System.out.printf("defaultSearchMode:%s\tdefaultGramIdxPtn:%s\tdefaultNGramIdxPtn:%s\tdefaultNonGramIdx:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
+                ,defaultSearchMode,defaultGramIdxPtn,defaultNGramIdxPtn,defaultNonGramIdx,defaultNormGrp,defaultKeyWord);
+        return rt;
     }
 
-    public static void main(String... args ) {
+    private static String checkXXX(Integer s,Integer e,Integer n,final List<String> l){
+        int mx=l.size();
+        if(n>mx){
+            return "-1";
+        }
+        if(-1!=l.get(n).indexOf(":")){
+            return l.get(n);
+        }else{
+            return IntStream.rangeClosed(s,e).boxed().noneMatch(ee->ee.equals(Optional.ofNullable(Integer.valueOf(l.get(n))).orElse(-1)))?"-1":l.get(n);
+        }
+    }
 
-        subMain();
+    public static void main(String... args) {
+        subMain(Arrays.asList(args));
 
         //TODO チェック処理いい感じに見直す
-
         if(args.length!=0){
             if(args.length%4!=0){
-                System.exit(1);
-            }else if(args.length%5!=0){
-                List<Integer> checkDefaultSearchModeRange = IntStream.rangeClosed(1,2).boxed().collect(Collectors.toList());
-                if(checkDefaultSearchModeRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[0])))){
-                    System.exit(1);
-                }else{
-                    defaultSearchMode=Integer.valueOf(args[0]);
-                }
-                if(1==defaultSearchMode){
-                    List<Integer> checkdefaultGramIdxPtnRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                    if(checkdefaultGramIdxPtnRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
-                        System.exit(1);
-                    }else{
-                        defaultGramIdxPtn=Integer.valueOf(args[1]);
-                        defaultNGram=Integer.valueOf(args[2]);
-                    }
-                    List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                    if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[3])))){
-                        System.exit(1);
-                    }else{
-                        defaultNormGrp=Integer.valueOf(args[3]);
-                    }
-                    defaultKeyWord=args[4];
-                }else{
-                    List<Integer> checkDefaultNonGramIdxRange = IntStream.rangeClosed(1,3).boxed().collect(Collectors.toList());
-                    if(checkDefaultNonGramIdxRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[1])))){
-                        System.exit(1);
-                    }else{
-                        defaultNonGramIdx=Integer.valueOf(args[1]);
-                    }
-                    List<Integer> checkDefaultNormGrpRange = IntStream.rangeClosed(0,4).boxed().collect(Collectors.toList());
-                    if(checkDefaultNormGrpRange.stream().noneMatch(e->e.equals(Integer.valueOf(args[2])))){
-                        System.exit(1);
-                    }else{
-                        defaultNormGrp=Integer.valueOf(args[2]);
-                    }
-                    defaultKeyWord=args[3];
-                }
+
             }else{
                 System.exit(1);
             }
@@ -410,15 +375,6 @@ public class App {
                     case 3:
                         s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkWordIdx,App::mkIdxShape);
                         break;
-                    case 4:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
-                    case 5:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
-                    case 6:
-                        s = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
                     default:
                         System.exit(1);
                         break;
@@ -429,18 +385,17 @@ public class App {
                 }else{
                     System.exit(1);
                 }
-                break;
             case 2:
                 Set<Integer> ss = null;
-                switch (defaultNonGramIdx){
+                switch (defaultNGramIdxPtn){
                     case 1:
-                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
+                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 2:
-                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
+                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 3:
-                        ss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
+                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(1);
@@ -449,6 +404,29 @@ public class App {
                 if(0!=ss.size()){
                     defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
                     defaultEndRn = ss.stream().max(Comparator.comparing(e->e)).get();
+                }else{
+                    System.exit(1);
+                }
+                break;
+            case 3:
+                Set<Integer> sss = null;
+                switch (defaultNonGramIdx){
+                    case 1:
+                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
+                        break;
+                    case 2:
+                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
+                        break;
+                    case 3:
+                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
+                        break;
+                    default:
+                        System.exit(1);
+                        break;
+                }
+                if(0!=sss.size()){
+                    defaultStartRn = sss.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = sss.stream().max(Comparator.comparing(e->e)).get();
                 }else{
                     System.exit(1);
                 }
