@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 public class App {
     private static String defaultKeyWord="KATAKANA";
     private static Integer defaultSearchMode=1;
-    private static Integer defaultHashKeyIdxPtn=1;
-    private static Integer defaultGramIdxPtn=2;
-    private static Integer defaultNGramIdxPtn=3;
+    private static Integer defaultHashKeyIdxInputPtn=1;
+    private static Integer defaultGramIdxInputPtn=2;
+    private static Integer defaultNGramIdxInputPtn=3;
     private static Integer defaultNGram=7;
     private static Integer defaultNormGrp=4;
     private static Integer defaultSelectColStartRn=0;
@@ -189,15 +189,15 @@ public class App {
                 ,LinkedHashMap::new
         ));
     }
-    private static Map<Integer, String> mkIdxUniName(Integer s,Integer e) {
+    private static Map<Integer, String> mkInputUniName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Map<Integer, String> mkIdxUniScriptName(Integer s,Integer e) {
+    private static Map<Integer, String> mkInputUniScriptName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
-    private static Map<Integer, String> mkIdxUniBlockName(Integer s,Integer e) {
+    private static Map<Integer, String> mkInputUniBlockName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(defaultNonKeyWord))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
@@ -263,7 +263,8 @@ public class App {
         Set<N> rt = new HashSet<>();
         Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
         Map<R,List<R>> midput = mkIdxFunction.apply(input,defaultNGram);
-        List<R> output = Optional.ofNullable(midput.get("BB8")).orElse(defaultNonKeyWord);
+        List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
+        System.out.println(output);
         if(output.get(0).equals(defaultNonKeyWord.get(0))){
             System.exit(0);
         }else{
@@ -315,13 +316,13 @@ public class App {
         defaultSearchMode = Integer.valueOf(checkXXX(1,3,0,args));
         switch (defaultSearchMode){
             case 1:
-                defaultGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultGramIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
                 break;
             case 2:
-                defaultNGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultNGramIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
                 break;
             case 3:
-                defaultHashKeyIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
+                defaultHashKeyIdxInputPtn = Integer.valueOf(checkXXX(1,3,1,args));
                 break;
             default:
                 break;
@@ -329,12 +330,12 @@ public class App {
         defaultNormGrp = Integer.valueOf(checkXXX(0,4,2,args));
         defaultKeyWord = checkXXX(3,3,3,args);
 
-        System.out.printf("defaultSearchMode:%s\tdefaultGramIdxPtn:%s\tdefaultNGramIdxPtn:%s\tdefaultHashKeyIdxPtn:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
-                ,defaultSearchMode,defaultGramIdxPtn,defaultNGramIdxPtn,defaultHashKeyIdxPtn,defaultNormGrp,defaultKeyWord);
+        System.out.printf("defaultSearchMode:%s\tdefaultGramIdxInputPtn:%s\tdefaultNGramIdxInputPtn:%s\tdefaultHashKeyIdxInputPtn:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
+                ,defaultSearchMode,defaultGramIdxInputPtn,defaultNGramIdxInputPtn,defaultHashKeyIdxInputPtn,defaultNormGrp,defaultKeyWord);
 
         System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultSearchMode==1?defaultGramIdxInputPtn:defaultSearchMode==2?defaultNGramIdxInputPtn:defaultSearchMode==3?defaultHashKeyIdxInputPtn:null
                 ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
@@ -353,7 +354,7 @@ public class App {
 
         System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultSearchMode==1?defaultGramIdxInputPtn:defaultSearchMode==2?defaultNGramIdxInputPtn:defaultSearchMode==3?defaultHashKeyIdxInputPtn:null
                 ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
@@ -362,7 +363,6 @@ public class App {
 
         return rt;
     }
-
     private static String checkXXX(Integer s,Integer e,Integer n,final List<String> l){
         Pattern p = Pattern.compile("\\D");
         int mx=l.size();
@@ -376,6 +376,43 @@ public class App {
         }else{
             return IntStream.rangeClosed(s,e).boxed().noneMatch(ee->ee.equals(Optional.ofNullable(Integer.valueOf(l.get(n))).orElse(-1)))?"-1":l.get(n);
         }
+    }
+    private static List<List<String>> grpKeTsuBanMnMx(List<Integer> r){
+        Map<Integer,Integer> m = r.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toMap(e->e,e->e+1,(pre,post)->post,LinkedHashMap::new));
+        StringBuilder sb = new StringBuilder();
+        Integer preKey=-1;
+        for(Map.Entry<Integer,Integer> entry : m.entrySet()){
+            if(entry.getKey().intValue()==preKey){
+                sb.append(","+entry.getKey().intValue());
+            }else{
+                sb.append("\n"+","+entry.getKey());
+            }
+            preKey = entry.getValue().intValue();
+        }
+        return Stream.of(sb.toString()).flatMap(e->Arrays.asList(e.split("\n")).stream().filter(ee->0!=ee.length())).map(ee->Arrays.asList(Arrays.asList(ee.split(",")).stream().filter(eee->0!=eee.length()).toArray(String[]::new))).collect(Collectors.toList());
+    }
+    private static Map<Integer, List<String>> searchTbl(Integer defaultStartRn,Integer defaultEndRn){
+        Map<Integer, List<String>> rt = null;
+        switch (defaultNormGrp){
+            case 0:
+                rt= mkTblCore(defaultStartRn,defaultEndRn);
+                break;
+            case 1:
+                rt= mkTblNfc(defaultStartRn,defaultEndRn);
+                break;
+            case 2:
+                rt= mkTblNfd(defaultStartRn,defaultEndRn);
+                break;
+            case 3:
+                rt= mkTblNfkc(defaultStartRn,defaultEndRn);
+                break;
+            case 4:
+                rt= mkTblNfkd(defaultStartRn,defaultEndRn);
+                break;
+            default:
+                System.exit(1);
+        }
+        return rt;
     }
 
     public static void main(String... args) throws InterruptedException {
@@ -392,79 +429,77 @@ public class App {
 
         System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultSearchMode==1?defaultGramIdxInputPtn:defaultSearchMode==2?defaultNGramIdxInputPtn:defaultSearchMode==3?defaultHashKeyIdxInputPtn:null
                 ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
                 ,defaultEndRn);
 
+        Set<Integer> rt = null;
         switch (defaultSearchMode){
             case 1://NGRAMの粒度より少し粗い単語単位の分割。
-                Set<Integer> s = null;
-                switch (defaultGramIdxPtn){
+                switch (defaultGramIdxInputPtn){
                     case 1:
-                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case 2:
-                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniScriptName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case 3:
-                        s = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeNonNgramSearch(defaultStartRn,defaultEndRn,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniBlockName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(1);
                         break;
                 }
-                if(0!=s.size()){
-                    defaultStartRn = s.stream().min(Comparator.comparing(e->e)).get();
-                    defaultEndRn = s.stream().max(Comparator.comparing(e->e)).get();
+                if(0!=rt.size()){
+                    defaultStartRn = rt.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = rt.stream().max(Comparator.comparing(e->e)).get();
                 }else{
                     System.exit(1);
                 }
                 break;
             case 2://ヒットしたという感覚が検索結果の多寡に応じて一喜一憂するなら、NGRAMは網羅性を除いてはあまりヒット率の向上には役に立たないのかもしれない。
-                Set<Integer> ss = null;
-                switch (defaultNGramIdxPtn){
+                switch (defaultNGramIdxInputPtn){
                     case 1:
-                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 2:
-                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniScriptName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniScriptName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case 3:
-                        ss = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkIdxUniBlockName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(defaultStartRn,defaultEndRn,defaultNGram,defaultKeyWord,Arrays.asList(defaultNonKeyWord),App::mkInputUniBlockName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(1);
                         break;
                 }
-                if(0!=ss.size()){
-                    defaultStartRn = ss.stream().min(Comparator.comparing(e->e)).get();
-                    defaultEndRn = ss.stream().max(Comparator.comparing(e->e)).get();
+                if(0!=rt.size()){
+                    defaultStartRn = rt.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = rt.stream().max(Comparator.comparing(e->e)).get();
                 }else{
                     System.exit(1);
                 }
                 break;
             case 3://単一文字列に対するハッシュキー検索は文字列に対するcontains関数によるもの。これがはやい。
-                Set<Integer> sss = null;
-                switch (defaultHashKeyIdxPtn){
+                switch (defaultHashKeyIdxInputPtn){
                     case 1:
-                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkInputUniName,App::mkIdxFilter);
                         break;
                     case 2:
-                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniScriptName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkInputUniScriptName,App::mkIdxFilter);
                         break;
                     case 3:
-                        sss = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkIdxUniBlockName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(defaultStartRn,defaultEndRn,defaultKeyWord,App::mkInputUniBlockName,App::mkIdxFilter);
                         break;
                     default:
                         System.exit(1);
                         break;
                 }
-                if(0!=sss.size()){
-                    defaultStartRn = sss.stream().min(Comparator.comparing(e->e)).get();
-                    defaultEndRn = sss.stream().max(Comparator.comparing(e->e)).get();
+                if(0!=rt.size()){
+                    defaultStartRn = rt.stream().min(Comparator.comparing(e->e)).get();
+                    defaultEndRn = rt.stream().max(Comparator.comparing(e->e)).get();
                 }else{
                     System.exit(1);
                 }
@@ -476,38 +511,36 @@ public class App {
 
         System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultSearchMode==1?defaultGramIdxInputPtn:defaultSearchMode==2?defaultNGramIdxInputPtn:defaultSearchMode==3?defaultHashKeyIdxInputPtn:null
                 ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
                 ,defaultEndRn);
 
+        List<Integer> r = rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 
-        //通番チェックが必要。通番ならフィルタリングなし。通番じゃないならフィルタリングあり。
+        List<List<String>> ll = grpKeTsuBanMnMx(r);
 
-        Map<Integer, List<String>> ret = null;
-        switch (defaultNormGrp){
-            case 0:
-                ret= mkTblCore(defaultStartRn,defaultEndRn);
-                break;
-            case 1:
-                ret= mkTblNfc(defaultStartRn,defaultEndRn);
-                break;
-            case 2:
-                ret= mkTblNfd(defaultStartRn,defaultEndRn);
-                break;
-            case 3:
-                ret= mkTblNfkc(defaultStartRn,defaultEndRn);
-                break;
-            case 4:
-                ret= mkTblNfkd(defaultStartRn,defaultEndRn);
-                break;
-            default:
-                System.exit(1);
+        Map<Integer,List<Integer>> m = new HashMap<>();
+        int row=ll.size();
+        for(int i=0;i<row;i++){
+            m.put(i,Arrays.asList(Integer.valueOf(ll.get(i).stream().min(Comparator.comparing(e->Integer.valueOf(e))).get())
+                    ,Integer.valueOf(ll.get(i).stream().max(Comparator.comparing(e->Integer.valueOf(e))).get())));
+            System.out.printf("%s\t%s\t%s\t%s\t%s\n"
+                    ,i
+                    ,ll.get(i).size()
+                    ,ll.get(i).stream().min(Comparator.comparing(e->Integer.valueOf(e))).get()
+                    ,ll.get(i).stream().max(Comparator.comparing(e->Integer.valueOf(e))).get()
+                    ,ll.stream().collect(Collectors.summingInt(e->e.size()))
+            );
         }
 
-        debug(ret);
-//        printOut(ret);
+        for(int i=0;i<m.size();i++){
+            Map<Integer, List<String>> ret = searchTbl(m.get(i).get(0),m.get(i).get(1));
+            debug(ret);
+        }
+
+        System.exit(0);
     }
 }
