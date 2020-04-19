@@ -263,7 +263,7 @@ public class App {
         Set<N> rt = new HashSet<>();
         Map<K,R> input = mkInputFunction.apply(defaultStartRn,defaultEndRn);
         Map<R,List<R>> midput = mkIdxFunction.apply(input,defaultNGram);
-        List<R> output = Optional.ofNullable(midput.get(defaultKeyWord)).orElse(defaultNonKeyWord);
+        List<R> output = Optional.ofNullable(midput.get("BB8")).orElse(defaultNonKeyWord);
         if(output.get(0).equals(defaultNonKeyWord.get(0))){
             System.exit(0);
         }else{
@@ -312,7 +312,7 @@ public class App {
     }
     public static Integer subMain(final List<String> args ){
         int rt=0;
-        defaultSearchMode = Integer.valueOf(checkXXX(1,2,0,args));
+        defaultSearchMode = Integer.valueOf(checkXXX(1,3,0,args));
         switch (defaultSearchMode){
             case 1:
                 defaultGramIdxPtn = Integer.valueOf(checkXXX(1,3,1,args));
@@ -332,9 +332,10 @@ public class App {
         System.out.printf("defaultSearchMode:%s\tdefaultGramIdxPtn:%s\tdefaultNGramIdxPtn:%s\tdefaultHashKeyIdxPtn:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\n"
                 ,defaultSearchMode,defaultGramIdxPtn,defaultNGramIdxPtn,defaultHashKeyIdxPtn,defaultNormGrp,defaultKeyWord);
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+        System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
                 ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
@@ -342,13 +343,18 @@ public class App {
 
         if(2==defaultSearchMode){
             List<String> l = Arrays.asList(defaultKeyWord.split(":"));
-            defaultKeyWord = l.get(0);
-            defaultNGram = Integer.valueOf(l.get(1));
+            if(2!=l.size()){
+                defaultKeyWord = Optional.of(l.get(0)).orElse(defaultKeyWord);
+            }else{
+                defaultKeyWord = Optional.of(l.get(0)).orElse(defaultKeyWord);
+                defaultNGram = Optional.of(Integer.valueOf(l.get(1))).orElse(-1);
+            }
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+        System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
                 ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
@@ -358,55 +364,43 @@ public class App {
     }
 
     private static String checkXXX(Integer s,Integer e,Integer n,final List<String> l){
+        Pattern p = Pattern.compile("\\D");
         int mx=l.size();
         if(n>mx){
             return "-1";
         }
         if(-1!=l.get(n).indexOf(":")){
             return l.get(n);
+        }else if(p.matcher(l.get(n)).find()) {
+            return l.get(n);
         }else{
             return IntStream.rangeClosed(s,e).boxed().noneMatch(ee->ee.equals(Optional.ofNullable(Integer.valueOf(l.get(n))).orElse(-1)))?"-1":l.get(n);
         }
     }
 
-    public static void main(String... args) {
-        subMain(Arrays.asList(args));
+    public static void main(String... args) throws InterruptedException {
 
-        //TODO チェック処理いい感じに見直す
         if(args.length!=0){
             if(args.length%4!=0){
-
-            }else{
                 System.exit(1);
+            }else{
+                subMain(Arrays.asList(args)); //テストパッケージのBiFunctionの戻り値はvoid無理やからここでは捨てる
             }
         }else{
 
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+        System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
                 ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
-                ,defaultNormGrp
-                ,defaultKeyWord
-                ,defaultStartRn
-                ,defaultEndRn);
-
-        if(2==defaultSearchMode){
-            List<String> l = Arrays.asList(defaultKeyWord.split(":"));
-            defaultKeyWord = l.get(0);
-            defaultNGram = Integer.valueOf(l.get(1));
-        }
-
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
-                ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
                 ,defaultEndRn);
 
         switch (defaultSearchMode){
-            case 1:
+            case 1://NGRAMの粒度より少し粗い単語単位の分割。
                 Set<Integer> s = null;
                 switch (defaultGramIdxPtn){
                     case 1:
@@ -428,7 +422,8 @@ public class App {
                 }else{
                     System.exit(1);
                 }
-            case 2:
+                break;
+            case 2://ヒットしたという感覚が検索結果の多寡に応じて一喜一憂するなら、NGRAMは網羅性を除いてはあまりヒット率の向上には役に立たないのかもしれない。
                 Set<Integer> ss = null;
                 switch (defaultNGramIdxPtn){
                     case 1:
@@ -451,7 +446,7 @@ public class App {
                     System.exit(1);
                 }
                 break;
-            case 3:
+            case 3://単一文字列に対するハッシュキー検索は文字列に対するcontains関数によるもの。これがはやい。
                 Set<Integer> sss = null;
                 switch (defaultHashKeyIdxPtn){
                     case 1:
@@ -479,13 +474,17 @@ public class App {
                 break;
         }
 
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
+        System.out.printf("defaultSearchMode:%s\tdefaultSearchPtn:%s\tdefaultNGram:%s\tdefaultNormGrp:%s\tdefaultKeyWord:%s\tdefaultStartRn:%s\tdefaultEndRn:%s\n"
                 ,defaultSearchMode
                 ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
+                ,defaultNGram
                 ,defaultNormGrp
                 ,defaultKeyWord
                 ,defaultStartRn
                 ,defaultEndRn);
+
+
+        //通番チェックが必要。通番ならフィルタリングなし。通番じゃないならフィルタリングあり。
 
         Map<Integer, List<String>> ret = null;
         switch (defaultNormGrp){
@@ -508,15 +507,7 @@ public class App {
                 System.exit(1);
         }
 
-        printOut(ret);
-
-        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n"
-                ,defaultSearchMode
-                ,defaultSearchMode==1?defaultGramIdxPtn:defaultSearchMode==2?defaultNGramIdxPtn:defaultSearchMode==3?defaultHashKeyIdxPtn:null
-                ,defaultNormGrp
-                ,defaultKeyWord
-                ,defaultStartRn
-                ,defaultEndRn);
-
+        debug(ret);
+//        printOut(ret);
     }
 }
