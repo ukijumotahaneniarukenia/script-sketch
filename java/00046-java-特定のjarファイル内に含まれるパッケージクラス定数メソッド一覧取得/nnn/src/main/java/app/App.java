@@ -19,10 +19,10 @@ public class App {
     private final static String METHOD_SIGN = "MMMMM";
     private final static String OFS = "\t";
     private final static String RS = "\n";
-    private final static String CLASS_GRP = "5";
-    private final static String CLASS_GRPSEQ = "5";
-    private final static String SIGNATURE_GRP = "2";
-    private final static String SIGNATURE_GRPSEQ = "2";
+    private final static String CLASS_GRP_DIGIT = "5";
+    private final static String CLASS_GRPSEQ_DIGIT = "5";
+    private final static String SIGNATURE_GRP_DIGIT = "2";
+    private final static String SIGNATURE_GRPSEQ_DIGIT = "2";
 
     public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()),Arrays.asList("クラス名" ,"定数名"));
     public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
@@ -59,19 +59,49 @@ public class App {
         return rt;
     }
 
+    @SafeVarargs
+    private static <K,V> List<Map.Entry<K,V>> jjj(Map<K,V>... maz){
+        return IntStream.range(0,maz.length).boxed().flatMap(e->maz[e].entrySet().stream()).collect(Collectors.toList());
+    }
+
+    @SafeVarargs
+    private static <K,V> Map<Integer,Map<K,V>> nnn(Map<K,V>... maz){
+        return IntStream.range(0,maz.length).boxed().collect(Collectors.toMap(e->e,e->maz[e]));
+    }
+
     public static void main( String[] args ) throws IOException {
 
-        List<File> filePath = Arrays.asList(
-                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
-                ,"/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar" //600K
-                ,"/home/kuraine/.m2/repository/it/unimi/dsi/fastutil/8.3.0/fastutil-8.3.0.jar" //18M
-                ).stream().map(e->new File(e)).collect(Collectors.toList());
+//        List<File> filePath = Arrays.asList(
+//                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
+//                ,"/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar" //600K
+//                ,"/home/kuraine/.m2/repository/it/unimi/dsi/fastutil/8.3.0/fastutil-8.3.0.jar" //18M
+//                ).stream().map(e->new File(e)).collect(Collectors.toList());
 //        List<File> filePath = Arrays.asList("/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar").stream().map(e->new File(e)).collect(Collectors.toList());
 //        fff(filePath);
-//        uuu(fff(filePath));
-//        unnest(uuu(fff(filePath)));
+//        uuu(fff(filePath)).entrySet().stream().forEach(e-> System.out.println(e));
+//        unnest(uuu(fff(filePath))).entrySet().stream().forEach(e-> System.out.println(e));
 
-        fileWriteOut(unnest(uuu(fff(filePath)))); //bottle neck
+//        fileWriteOut(unnest(uuu(fff(filePath)))); //bottle neck
+//        ddd(unnest(uuu(fff(filePath)))); //bottle neck
+
+        Map<Integer,String> m1 = IntStream.rangeClosed('a','c').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
+        Map<Integer,String> m2 = IntStream.rangeClosed('a','c').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
+//        Map<Integer,String> m2 = IntStream.rangeClosed('d','f').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
+//        Map<Integer,String> m3 = IntStream.rangeClosed('g','i').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
+
+//        jjj(m1,m2);
+        nnn(m1,m2);
+        System.out.println(nnn(m1,m2));
+//        System.out.println(jjj(m1,m2));
+//        List<Map.Entry<Integer,String>> rt = jjj(m1,m2);
+//        for(int i=0;i<rt.size();i++){
+//            System.out.println(rt.get(i).getKey());
+//            System.out.println(rt.get(i).getValue());
+//        }
+//        jjj(m1,m2).stream().forEach(e-> System.out.println(e));
+
+
+
     }
     private static Map<String,List<String>> unnest(Map<String,List<String>> m){
         Map<String,List<String>> rt = new LinkedHashMap<>();
@@ -82,7 +112,7 @@ public class App {
                 int cnt = liz.size();
                 for(int j=0;j<cnt;j++){
                     rt.put(
-                            entry.getKey()+F+String.format("%0"+SIGNATURE_GRP+"d",i)+F+String.format("%0"+SIGNATURE_GRPSEQ+"d",j)
+                            entry.getKey()+F+String.format("%0"+SIGNATURE_GRP_DIGIT+"d",i)+F+String.format("%0"+SIGNATURE_GRPSEQ_DIGIT+"d",j)
                             ,Arrays.asList(
                                     entry.getKey().contains(CONST_SIGN)?ccc.get(i):mmm.get(i)
                                     ,liz.get(j).replace(R,C)));
@@ -91,6 +121,27 @@ public class App {
         }
         return rt;
     }
+
+
+//    Input: List<List<Stirng>>
+//
+//    Output: crosstab
+
+    public class CrossTab{
+        private Map<String,Set<String>> s; //key k-k-k,jj
+        private Map<String,Map<String,String>> l; //key jj, kkk Z-Z-Z-Z
+
+    }
+
+
+    private static List<List<String>> ddd (Map<String,List<String>> m){
+        for(Map.Entry<String,List<String>> entry : m.entrySet()) {
+            String s = Arrays.asList(entry.getKey().split(F)).stream().collect(Collectors.joining(OFS))+OFS+entry.getValue().stream().collect(Collectors.joining(OFS));
+            System.out.println(s);
+        }
+        return null;
+    }
+
     private static void fileWriteOut (Map<String,List<String>> m){
         final String SEARCH = "jar";
         final String SUFFIX = "tsv";
@@ -126,7 +177,7 @@ public class App {
             ++grp;
             for(Map.Entry<Field,Class<?>> entry : rtF.entrySet()){
                 ++cnt;
-                rt.put(eeeee.getValue()+F+CONST_SIGN+F+String.format("%0"+CLASS_GRP+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ+"d",cnt)
+                rt.put(eeeee.getValue()+F+CONST_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
                         , Arrays.asList(
                                 String.valueOf(entry.getValue().getName())//クラス名
                                 ,String.valueOf(entry.getKey().getName()))//定数名
@@ -135,7 +186,7 @@ public class App {
             Map<Method,Class<?>> rtM = ggg(clz);
             for(Map.Entry<Method,Class<?>> entry : rtM.entrySet()){
                 ++cnt;
-                rt.put(eeeee.getValue()+F+METHOD_SIGN+F+String.format("%0"+CLASS_GRP+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ+"d",cnt)
+                rt.put(eeeee.getValue()+F+METHOD_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
                         ,Arrays.asList(
                                 entry.getValue().getName()//クラス名
                                 ,Modifier.toString(entry.getKey().getModifiers())//アクセス修飾子
