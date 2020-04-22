@@ -9,10 +9,11 @@ import java.util.concurrent.Callable;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class App {
 
-    private final static String F = "---";
+    private final static String F = "~~~";
     private final static String R = "###";
     private final static String C = ",";
     private final static String CONST_SIGN = "CCCCC";
@@ -23,6 +24,27 @@ public class App {
     private final static String CLASS_GRPSEQ_DIGIT = "5";
     private final static String SIGNATURE_GRP_DIGIT = "2";
     private final static String SIGNATURE_GRPSEQ_DIGIT = "2";
+
+    public static class CrossTab {
+        private String tblHead;//表頭
+        private Map<String, String> tblBody;//表側
+
+        public void setTblHead(String tblHead) {
+            this.tblHead = tblHead;
+        }
+
+        public void setTblBody(Map<String, String> tblBody) {
+            this.tblBody = tblBody;
+        }
+
+        public String getTblHead() {
+            return tblHead;
+        }
+
+        public Map<String, String> getTblBody() {
+            return tblBody;
+        }
+    }
 
     public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()),Arrays.asList("クラス名" ,"定数名"));
     public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
@@ -71,38 +93,83 @@ public class App {
 
     public static void main( String[] args ) throws IOException {
 
-//        List<File> filePath = Arrays.asList(
-//                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
+        List<File> filePath = Arrays.asList(
+                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
 //                ,"/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar" //600K
 //                ,"/home/kuraine/.m2/repository/it/unimi/dsi/fastutil/8.3.0/fastutil-8.3.0.jar" //18M
-//                ).stream().map(e->new File(e)).collect(Collectors.toList());
+                ).stream().map(e->new File(e)).collect(Collectors.toList());
 //        List<File> filePath = Arrays.asList("/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar").stream().map(e->new File(e)).collect(Collectors.toList());
-//        fff(filePath);
-//        uuu(fff(filePath)).entrySet().stream().forEach(e-> System.out.println(e));
-//        unnest(uuu(fff(filePath))).entrySet().stream().forEach(e-> System.out.println(e));
 
 //        fileWriteOut(unnest(uuu(fff(filePath)))); //bottle neck
-//        ddd(unnest(uuu(fff(filePath)))); //bottle neck
-
-        Map<Integer,String> m1 = IntStream.rangeClosed('a','c').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
-        Map<Integer,String> m2 = IntStream.rangeClosed('a','c').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
-//        Map<Integer,String> m2 = IntStream.rangeClosed('d','f').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
-//        Map<Integer,String> m3 = IntStream.rangeClosed('g','i').boxed().collect(Collectors.toMap(e->e,e->String.valueOf(Character.toChars(e))));
-
-//        jjj(m1,m2);
-        nnn(m1,m2);
-        System.out.println(nnn(m1,m2));
-//        System.out.println(jjj(m1,m2));
-//        List<Map.Entry<Integer,String>> rt = jjj(m1,m2);
-//        for(int i=0;i<rt.size();i++){
-//            System.out.println(rt.get(i).getKey());
-//            System.out.println(rt.get(i).getValue());
-//        }
-//        jjj(m1,m2).stream().forEach(e-> System.out.println(e));
-
-
-
+//        sss(unnest(uuu(fff(filePath)))).stream().forEach(list -> System.out.println(list));
+        CrossTab crossTab = new CrossTab();
+        crossTab(sss(unnest(uuu(fff(filePath)))),2,4,crossTab);
+        Stream.of(crossTab.getTblHead()).forEach(e-> System.out.println(e));
+        crossTab.getTblBody().entrySet().stream().sorted(Comparator.comparing(e->e.getKey())).forEach(e-> System.out.println(e.getKey()+"\t"+e.getValue()));
     }
+
+    private static List<List<String>> sss(Map<String,List<String>> m){
+        List<List<String>> ll = new ArrayList<>();
+        for(Map.Entry<String,List<String>> entry : m.entrySet()){
+            ll.add(flattenList(
+                                List.of(Arrays.asList(entry.getKey().split(F)).subList(0,4).stream().collect(Collectors.joining(F)))
+                                ,Arrays.asList(entry.getKey().split(F)).subList(4,5)
+                                ,entry.getValue()
+                                )
+            );
+        }
+        return ll;
+    }
+
+    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx          ,CrossTab crossTab){
+        int row = ll.size();
+        int col = ll.get(0).size();
+
+        if(Stream.of(endGrpColIdx,grpColIdx).anyMatch(e->e<=0)){
+            return null;
+        }
+        if(col<grpColIdx||col <= endGrpColIdx){
+            return null;
+        }
+        if(grpColIdx <= endGrpColIdx){
+            return null;
+        }
+
+        //表頭 //hard kaku konoke-sugatokusyu
+        Map<String, Set<String>> ms = IntStream.range(0,row).boxed().collect(Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
+                ,Collectors.mapping(i->ll.get(i).get(endGrpColIdx),Collectors.toSet())));
+        String tblHead = "行番号\t"+ms.values().stream().flatMap(e->e.stream()).collect(Collectors.joining("\t"));
+        //表側
+        //Preput
+        Map<String, Map<String,String>> tmp = IntStream.range(0,row).boxed()
+                                                    .collect(Collectors.groupingBy(i->ll.get(i).subList(0,endGrpColIdx).stream().collect(Collectors.joining("-"))
+                                                            ,Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
+                                                                    ,Collectors.mapping(i->ll.get(i).get(grpColIdx-1),Collectors.joining(",")))));
+
+        //Midput
+        Map<String,String> tblBodyTmp = tmp.entrySet().stream().sorted(Comparator.comparing(e->e.getKey()))
+                .collect(Collectors.groupingBy(e->e.getKey().split("-")[0]
+                            ,Collectors.mapping(e->e.getValue().get(e.getKey().split("-")[1])
+                                ,Collectors.joining("\t"))));
+
+        Set<String> s = new HashSet<String>(ccc.values());
+        Set<String> r = new HashSet<String>(ccc.values());
+        s.retainAll(mmm.values());
+        r.addAll(mmm.values());
+        r.removeAll(s);
+
+        Map<String,String> tblBody = new LinkedHashMap<>();
+        for(Map.Entry<String,String> entry : tblBodyTmp.entrySet()){
+            tblBody.put(entry.getKey()
+                    ,entry.getValue()+Stream.generate(()->"\t").limit(r.size() - (entry.getValue().length()-entry.getValue().replace("\t","").length())).collect(Collectors.joining())
+            );
+        }
+        //Set
+        crossTab.setTblHead(tblHead);
+        crossTab.setTblBody(tblBody);
+        return crossTab;
+    }
+
     private static Map<String,List<String>> unnest(Map<String,List<String>> m){
         Map<String,List<String>> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : m.entrySet()){
@@ -121,25 +188,9 @@ public class App {
         }
         return rt;
     }
-
-
-//    Input: List<List<Stirng>>
-//
-//    Output: crosstab
-
-    public class CrossTab{
-        private Map<String,Set<String>> s; //key k-k-k,jj
-        private Map<String,Map<String,String>> l; //key jj, kkk Z-Z-Z-Z
-
-    }
-
-
-    private static List<List<String>> ddd (Map<String,List<String>> m){
-        for(Map.Entry<String,List<String>> entry : m.entrySet()) {
-            String s = Arrays.asList(entry.getKey().split(F)).stream().collect(Collectors.joining(OFS))+OFS+entry.getValue().stream().collect(Collectors.joining(OFS));
-            System.out.println(s);
-        }
-        return null;
+    @SafeVarargs
+    private static <E> List<E> flattenList(Collection<E>... liz){
+        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
     }
 
     private static void fileWriteOut (Map<String,List<String>> m){
