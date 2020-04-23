@@ -1,3 +1,6 @@
+- REF
+  - http://unicode.org/emoji/charts/emoji-zwj-sequences.html
+
 - IN
 
 ```
