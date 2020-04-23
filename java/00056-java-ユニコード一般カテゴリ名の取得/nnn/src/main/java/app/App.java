@@ -21,12 +21,18 @@ public class App {
 
         System.out.println(uniCtgMst);
 
-//        List<String> l = genAllStr().stream().limit(10000).collect(Collectors.toList());
+        List<String> l = genAllStr().stream().limit(10000).collect(Collectors.toList());
 
-//        Map<String,String> uniCtgTbl = IntStream.range(0,l.size())
-//                                            .boxed()
-//                                            .collect(Collectors.toMap(e->l.get(e),e->uniCtgMst.get(String.valueOf(Character.getType(l.get(e).toCharArray()[0])))));
-//
+        Map<String,Long> uniCtgTbl = IntStream.range(0,l.size())
+                .boxed()
+                .collect(Collectors.groupingBy(e->uniCtgMst.get(String.valueOf(Character.getType(l.get(e).toCharArray()[0]))),Collectors.counting()));
+
+        Map<Integer,Long> uniCtgTbl2 = IntStream.range(0,l.size())
+                .boxed()
+                .collect(Collectors.groupingBy(e->Character.getType(l.get(e).toCharArray()[0]),Collectors.counting()));
+
+        System.out.println(uniCtgTbl2);
+
 //        uniCtgTbl.entrySet().stream().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
 //        System.out.println(uniCtgTbl.size());
 
@@ -42,6 +48,9 @@ public class App {
         Class c = Character.class;
         for(Map.Entry<Class<?>,String> o : m.entrySet()){
             for(Map.Entry<Field,Class<?>> i : findFields(o.getKey()).entrySet()){
+
+                //TODO 型に応じてString型への変換の仕方を変える
+
                 if("byte".equals(c.getField(i.getKey().getName()).getGenericType().getTypeName())){
                     //http://blog.livedoor.jp/leopardhead/archives/484735.html
                     byte[] bytes = new byte[]{(byte)c.getField(i.getKey().getName()).get(Character.TYPE)};
@@ -51,7 +60,6 @@ public class App {
         }
         return rt;
     }
-
     public static <T> T uncheckCall(Callable<T> callable) {
         //パールの暗黙の変数みたいなものだろう。すべてのコンテキストに含まれている隠しオブジェクト。callableはすべての例外をグルーピングしている
         //これがいちばんすごいわ
