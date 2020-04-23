@@ -21,6 +21,8 @@ public class App {
     private final static String RS = "\n";
     private final static String CLASS_GRP_DIGIT = "5";
     private final static String CLASS_GRPSEQ_DIGIT = "5";
+    private final static String SIGNATURE_GRP_DIGIT = "2";
+    private final static String SIGNATURE_GRPSEQ_DIGIT = "2";
 
     public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()), Arrays.asList("クラス名" ,"定数名"));
     public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
@@ -57,7 +59,8 @@ public class App {
     public static void main( String[] args ) throws ClassNotFoundException {
         Map<Class<?>,String> m = Arrays.asList("java.lang.Thread","java.lang.ClassLoader").stream()
                 .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
-        fileWriteOut(uuu(m));
+//        unnest(uuu(m)).entrySet().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
+        fileWriteOut(unnest(uuu(m)));
     }
     private static void fileWriteOut (Map<String,List<String>> m){
         final String SUFFIX = ".tsv";
@@ -84,6 +87,24 @@ public class App {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+    private static Map<String,List<String>> unnest(Map<String,List<String>> m){
+        Map<String,List<String>> rt = new LinkedHashMap<>();
+        for(Map.Entry<String,List<String>> entry : m.entrySet()){
+            int mx = entry.getValue().size();
+            for(int i =0;i<mx;i++){
+                List<String> liz = Arrays.asList(entry.getValue().get(i).split(C));
+                int cnt = liz.size();
+                for(int j=0;j<cnt;j++){
+                    rt.put(
+                            entry.getKey()+F+String.format("%0"+SIGNATURE_GRP_DIGIT+"d",i)+F+String.format("%0"+SIGNATURE_GRPSEQ_DIGIT+"d",j)
+                            ,Arrays.asList(
+                                    entry.getKey().contains(CONST_SIGN)?ccc.get(i):mmm.get(i)
+                                    ,liz.get(j).replace(R,C)));
+                }
+            }
+        }
+        return rt;
     }
     private static Map<Method,Class<?>> ggg(Class<?> e){
         List<Method> l = Arrays.asList(e.getMethods());

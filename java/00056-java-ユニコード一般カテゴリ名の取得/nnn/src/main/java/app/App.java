@@ -73,7 +73,7 @@ public class App {
                 .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
 
         //InputData
-        List<String> l = genAllStr().stream().limit(100).collect(Collectors.toList());
+        List<String> l = genAllStr().stream().collect(Collectors.toList());
 
         //PrepareData
         Map<String,List<String>> allCharConstMap = genUniCtgMst(m).entrySet().stream().collect(Collectors.groupingBy(e->e.getValue().split(":")[1],Collectors.mapping(e->e.getKey(),Collectors.toList())));
@@ -98,6 +98,6 @@ public class App {
         ));
 
         //OutputData
-        unicodeCtgTbl.entrySet().stream().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
+//        unicodeCtgTbl.entrySet().stream().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
     }
 }
