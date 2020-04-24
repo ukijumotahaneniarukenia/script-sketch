@@ -28,9 +28,9 @@ java.lang.ClassLoader-00002-00078			java.lang.ClassLoader	public final	void	wait
 java.lang.ClassLoader-00002-00079			java.lang.ClassLoader	public	java.net.URL	getResource	false	1			java.lang.String	arg0
 java.lang.ClassLoader-00002-00080			java.lang.ClassLoader	public final native	java.lang.Class<?>	getClass	false	0				
 java.lang.ClassLoader-00002-00081			java.lang.ClassLoader	public final native	void	notifyAll	false	0				
-java.lang.Thread-00001-00001	java.lang.Thread	NORM_PRIORITY											
-java.lang.Thread-00001-00002	java.lang.Thread	MAX_PRIORITY											
-java.lang.Thread-00001-00003	java.lang.Thread	MIN_PRIORITY											
+java.lang.Thread-00001-00001	java.lang.Thread	NORM_PRIORITY										
+java.lang.Thread-00001-00002	java.lang.Thread	MAX_PRIORITY										
+java.lang.Thread-00001-00003	java.lang.Thread	MIN_PRIORITY										
 java.lang.Thread-00001-00004			java.lang.Thread	public final	boolean	isDaemon	false	0				
 java.lang.Thread-00001-00005			java.lang.Thread	public	java.lang.StackTraceElement[]	getStackTrace	false	0				
 java.lang.Thread-00001-00006			java.lang.Thread	public final	void	join	false	0				
