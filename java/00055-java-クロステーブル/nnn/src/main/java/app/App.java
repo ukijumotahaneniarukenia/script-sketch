@@ -56,7 +56,7 @@ public class App {
                 ,Arrays.asList("00002","04","XXX","---")
         );
         //グループ化列名はでたらめにつけると予期せぬ
-//        行番号	クラス名	戻り値の型	仮引数の変数名リスト	XXX
+//        行番号	XXX	クラス名	仮引数の変数名リスト	戻り値の型
 //        00001	org.chasen.mecab.Model	arg0,arg1,boolean	~~~
 //        00002	org.chasen.mecab.Model	arg0,arg1,boolean	---
         List<List<String>> XXX = Arrays.asList(
