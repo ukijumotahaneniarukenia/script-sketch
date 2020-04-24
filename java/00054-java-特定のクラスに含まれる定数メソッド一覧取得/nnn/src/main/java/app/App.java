@@ -10,6 +10,9 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class App {
     private final static String F = "---";
@@ -24,8 +27,30 @@ public class App {
     private final static String SIGNATURE_GRP_DIGIT = "2";
     private final static String SIGNATURE_GRPSEQ_DIGIT = "2";
 
-    public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()), Arrays.asList("クラス名" ,"定数名"));
-    public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
+    private static final String A1 = "行番号";
+    private static final String COL_NAME_SEPARATOR = "-";
+    private static final String COL_SEPARATOR = "\t";
+    private static final String COL_VALUE_SEPARATOR = ",";
+
+    public static class CrossTab{
+        private String tblHead;//表頭
+        private Map<String,String> tblBody;//表側
+        public void setTblHead(String tblHead) {
+            this.tblHead=tblHead;
+        }
+        public void setTblBody(Map<String,String> tblBody) {
+            this.tblBody=tblBody;
+        }
+        public String getTblHead() {
+            return tblHead;
+        }
+        public Map<String, String> getTblBody() {
+            return tblBody;
+        }
+    }
+
+    public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(toList()), Arrays.asList("クラス名" ,"定数名"));
+    public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(toList()), Arrays.asList(
             "クラス名"
             ,"アクセス修飾子"
             ,"戻り値の型"
@@ -59,8 +84,81 @@ public class App {
     public static void main( String[] args ) throws ClassNotFoundException {
         Map<Class<?>,String> m = Arrays.asList("java.lang.Thread","java.lang.ClassLoader").stream()
                 .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
-//        unnest(uuu(m)).entrySet().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
-        fileWriteOut(unnest(uuu(m)));
+        List<List<String>> ll = unnest(uuu(m)).entrySet().stream().map(e-> flattenList(Arrays.asList(e.getKey().split(F)).subList(0,e.getKey().split(F).length-1).stream().collect(Collectors.toList()),e.getValue())).collect(Collectors.toList());
+
+        int row = ll.size();
+
+        List<List<String>> ll_rearrage = IntStream.range(0,row).boxed()
+                .collect(Collectors.mapping(e->Arrays.asList(
+                        ll.get(e).get(0)
+                        ,ll.get(e).get(2)
+                        ,ll.get(e).get(3)
+                        ,ll.get(e).get(1)+COL_NAME_SEPARATOR+ll.get(e).get(4)
+                        ,ll.get(e).get(1)+COL_NAME_SEPARATOR+ll.get(e).get(4)+COL_NAME_SEPARATOR+ll.get(e).get(5)
+                        ,ll.get(e).get(6)
+                ),Collectors.toList()));
+
+        CrossTab crossTab = new CrossTab();
+        crossTab(ll_rearrage,4,6,crossTab);
+
+        Stream.of(crossTab.getTblHead()).forEach(e-> System.out.println(e));
+        crossTab.getTblBody().entrySet().stream()
+                .sorted(Comparator.comparing(e->e.getKey()))
+                .forEach(e->System.out.printf("%s\n",e.getKey()+COL_SEPARATOR+e.getValue()));
+    }
+    @SafeVarargs
+    private static <E> List<E> flattenList(Collection<E>... liz){
+        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
+    }
+    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab){
+        int row = ll.size();
+        int col = IntStream.range(0,row).boxed().map(i->ll.get(i).size()).min(Comparator.comparingInt(e->e)).get();
+
+        if(Stream.of(endGrpColIdx,grpColIdx).anyMatch(e->e<=0)){
+            return null;
+        }
+        if(col<grpColIdx||col <= endGrpColIdx){
+            return null;
+        }
+        if(grpColIdx <= endGrpColIdx){
+            return null;
+        }
+
+        //表頭
+        Map<String, Set<String>> ms = IntStream.range(0,row).boxed().collect(Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
+                ,Collectors.mapping(i->ll.get(i).get(endGrpColIdx),Collectors.toSet())));
+
+        String tblHead = A1+COL_SEPARATOR+ms.entrySet().stream()
+                .flatMap(e->e.getValue().stream())
+                .sorted(Comparator.comparing(e->Arrays.asList(e.split(COL_NAME_SEPARATOR)).subList(0,endGrpColIdx-1).stream().collect(Collectors.joining())))
+                .collect(Collectors.joining(COL_SEPARATOR));
+
+        //表側
+        //PreProcess
+        Map<String, Map<String,String>> preBody = IntStream.range(0,row).boxed()
+                .collect(Collectors.groupingBy(i->ll.get(i).subList(0,endGrpColIdx).stream().collect(Collectors.joining(COL_NAME_SEPARATOR))
+                        ,Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
+                                ,Collectors.mapping(i->ll.get(i).get(grpColIdx-1),Collectors.joining(COL_VALUE_SEPARATOR)))));
+
+        //MidProcess
+        Map<String,String> midBody = preBody.entrySet().stream().sorted(Comparator.comparing(e->e.getKey()))
+                .collect(Collectors.groupingBy(e->Arrays.asList(e.getKey().split(COL_NAME_SEPARATOR)).subList(0,endGrpColIdx-1).stream().collect(Collectors.joining(COL_NAME_SEPARATOR))
+                                ,Collectors.mapping(e->e.getValue().values().stream().limit(1).collect(Collectors.joining())
+                                                    ,Collectors.joining(COL_SEPARATOR))));
+
+        Integer mx = tblHead.length()-tblHead.replace("\t","").length()+1;
+
+        //PostProcess
+        Map<String,String> tblBody = midBody.entrySet().stream()
+                .collect(Collectors.toMap(e->e.getKey()
+                        ,e->(e.getValue().length()-e.getValue().replace("\t","").length()+1)==mmm.size()?
+                                COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace("\t","").length()+1)-1)+e.getValue()
+                                :e.getValue()+COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace("\t","").length()+1)-1)));
+
+        //Set
+        crossTab.setTblHead(tblHead);
+        crossTab.setTblBody(tblBody);
+        return crossTab;
     }
     private static void fileWriteOut (Map<String,List<String>> m){
         final String SUFFIX = ".tsv";
