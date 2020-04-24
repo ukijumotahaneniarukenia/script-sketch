@@ -3,12 +3,15 @@ package app;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
     private static final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+    //http://unicode.org/reports/tr44/#General_Category_Values
 
     private static List<String> includeDirectionality(List<String> l){
         return l.stream().filter(e->e.contains("DIRECTIONALITY")).collect(Collectors.toList());
@@ -97,7 +100,7 @@ public class App {
                         +unicodeNonDirectionalityMap.get(i).values().stream().limit(i).collect(Collectors.joining())
         ));
 
-        //OutputData
-//        unicodeCtgTbl.entrySet().stream().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
+//        OutputData
+        unicodeCtgTbl.entrySet().stream().forEach(e-> System.out.printf("%s\t%s\n",e.getKey(),e.getValue()));
     }
 }
