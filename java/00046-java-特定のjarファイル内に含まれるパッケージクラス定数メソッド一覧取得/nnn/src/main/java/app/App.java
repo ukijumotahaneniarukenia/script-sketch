@@ -4,9 +4,13 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -52,9 +56,9 @@ public class App {
         }
     }
 
-    public static Map<Integer,String> mkConstNameHashTbl = mkHashTbl(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()),Arrays.asList(
-            "クラス名" ,"定数名"));
-    public static Map<Integer,String> mkMethodNameHashTbl = mkHashTbl(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
+    public static Map<Integer,String> mkConstNameHashTbl = uncheckCall(()->mkHashTbl(IntStream.rangeClosed(0,1).boxed().collect(Collectors.toList()),Arrays.asList(
+            "クラス名" ,"定数名")));
+    public static Map<Integer,String> mkMethodNameHashTbl = uncheckCall(()->mkHashTbl(IntStream.rangeClosed(0,9).boxed().collect(Collectors.toList()), Arrays.asList(
             "クラス名"
             ,"アクセス修飾子"
             ,"戻り値の型"
@@ -64,19 +68,19 @@ public class App {
             ,"型パラメータリスト"
             ,"型パラメータ記号リスト"
             ,"引数の型リスト"
-            ,"仮引数の変数名リスト"));
+            ,"仮引数の変数名リスト")));
 
-    private static Map<Integer,String> mkHashTbl(List<Integer> k,List<String> v){
+    private static Map<Integer,String> mkHashTbl(List<Integer> k,List<String> v)throws Exception{
         return k.size()!=v.size()?new HashMap<>():k.stream().collect(Collectors.toMap(e->e,e->v.get(e)));
     }
-    private static List<List<String>> mkListInList(Map<String,List<String>> m){
-        return m.entrySet().stream().parallel().map(e -> flattenList(
+    private static List<List<String>> mkListInList(Map<String,List<String>> m)throws Exception{
+        return m.entrySet().stream().parallel().map(e -> uncheckCall(()->flattenList(
                 Arrays.asList(e.getKey().split(F)).subList(0, 4).stream().collect(Collectors.toList())
                 , Arrays.asList(e.getKey().split(F)).subList(4, 5)
                 , e.getValue()
-        )).collect(Collectors.toList());
+        ))).collect(Collectors.toList());
     }
-    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab){
+    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab)throws Exception{
         int row = ll.size();
         int col = IntStream.range(0,row).boxed().map(i->ll.get(i).size()).min(Comparator.comparingInt(e->e)).get();
 
@@ -125,7 +129,7 @@ public class App {
         crossTab.setTblBody(tblBody);
         return crossTab;
     }
-    private static Map<String,List<String>> unnest(Map<String,List<String>> m){
+    private static Map<String,List<String>> unnest(Map<String,List<String>> m)throws Exception{
         Map<String,List<String>> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : m.entrySet()){
             int mx = entry.getValue().size();
@@ -144,10 +148,10 @@ public class App {
         return rt;
     }
     @SafeVarargs
-    private static <E> List<E> flattenList(Collection<E>... liz){
+    private static <E> List<E> flattenList(Collection<E>... liz)throws Exception{
         return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
     }
-    private static Map<String,List<String>> mkFieldMethodInfo(Map<Class<?>,String> m){
+    private static Map<String,List<String>> mkFieldMethodInfo(Map<Class<?>,String> m)throws Exception{
         Map<String,List<String>> rt = new LinkedHashMap<>();
         int grp=0;
         for(Map.Entry<Class<?>,String> entry : m.entrySet()){
@@ -160,7 +164,7 @@ public class App {
         }
         return rt;
     }
-    private static Map<String,List<String>> mkFieldDetailInfo(String key,Map<Field,Class<?>> rtF,Integer grp){
+    private static Map<String,List<String>> mkFieldDetailInfo(String key,Map<Field,Class<?>> rtF,Integer grp)throws Exception{
         //TODO こういうふうに書きたい
 //        List<Field> l = new ArrayList<>(rtF.keySet());
 //        int mx = l.size();
@@ -185,7 +189,7 @@ public class App {
         }
         return rt;
     }
-    private static Map<String,List<String>> mkMethodDetailInfo(String key,Map<Method,Class<?>> rtM,Integer grp){
+    private static Map<String,List<String>> mkMethodDetailInfo(String key,Map<Method,Class<?>> rtM,Integer grp)throws Exception{
         //TODO こういうふうに書きたい
 //        List<Method> l = new ArrayList<>(rtM.keySet());
 //        int mx = l.size();
@@ -231,11 +235,11 @@ public class App {
         }
         return rt;
     }
-    private static Map<Field,Class<?>> mkFieldInfo(Class<?> e){
+    private static Map<Field,Class<?>> mkFieldInfo(Class<?> e)throws Exception{
         List<Field> l = Arrays.asList(e.getFields());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<Method,Class<?>> mkMethodInfo(Class<?> e){
+    private static Map<Method,Class<?>> mkMethodInfo(Class<?> e)throws Exception{
         List<Method> l = Arrays.asList(e.getMethods());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
@@ -248,22 +252,21 @@ public class App {
             throw new RuntimeException(e);
         }
     }
-    private static Map<Class<?>,String> mkJarInfo2ClazzInfo(File f) throws IOException {
+    private static Map<Class<?>,String> mkJarInfo2ClazzInfo(File f) throws Exception{
         String path = f.getPath();
         if(path.endsWith(".class")){
             return new LinkedHashMap<>();
         }else{
-            JarFile jarFile = new JarFile(path);
-            return Collections.list(jarFile.entries()).stream()
+            return uncheckCall(()->Collections.list(new JarFile(path).entries()).stream()
                     .parallel()
                     .map(e->e.getName())
                     .filter(e->e.endsWith(".class"))
                     .map(e -> e.replace('/', '.').replaceAll(".class$", ""))
                     .map(e->uncheckCall(()->classLoader.loadClass(e)))
-                    .collect(Collectors.toMap(e->e, e->f.getName()));
+                    .collect(Collectors.toMap(e->e, e->f.getName())));
         }
     }
-    private static void fileWriteOut (String outPutFileName,List<String> l){
+    private static void fileWriteOut (String outPutFileName,List<String> l)throws Exception{
 
         File destFile = new File(outPutFileName);
         if(destFile.exists()){
@@ -276,43 +279,118 @@ public class App {
             l.stream().forEach(e-> {
                 pw.println(e);
             });
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
-    public static void main( String[] args ) throws IOException {
 
-        //43 sec
-        List<File> filePathList = Arrays.asList(
-                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
+    private static boolean exclude(List<String> nonTgtFile,File f)throws Exception{
+        return nonTgtFile.stream().noneMatch(e->f.getName().contains(e));
+    }
+
+    private static List<List<String>> rearrange(List<List<String>> ll)throws Exception{
+        return IntStream.range(0, ll.size()).boxed().map(e -> Arrays.asList(
+                ll.get(e).get(0)
+                , ll.get(e).get(2)
+                , ll.get(e).get(3)
+                , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4)
+                , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4) + COL_NAME_SEPARATOR + ll.get(e).get(5)
+                , ll.get(e).get(6)
+        )).collect(Collectors.toList());
+    }
+
+    private static List<File> skipFileList = new ArrayList<>();
+    private static List<File> errorFileList = new ArrayList<>();
+    private static List<File> processFileList = new ArrayList<>();
+
+    public static void main( String[] args )throws Exception{
+
+        Path baseDir = Paths.get("/home/kuraine/.m2");
+        String targetExtension  = "jar";
+        String includeExtensionPtn = ("(?i)^.*\\." + Pattern.quote(targetExtension) + "$");
+
+        List<String> nonTgtFile = Arrays.asList(
+                "/home/kuraine/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar"
+                ,"/home/kuraine/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.12.4/maven-surefire-common-2.12.4.jar"
+                ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.10/plexus-utils-1.5.10.jar"
+                ,"/home/kuraine/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar"
+                ,"/home/kuraine/.m2/repository/org/apache/maven/shared/maven-shared-utils/0.3/maven-shared-utils-0.3.jarException"
+                ,"/home/kuraine/.m2/repository/com/vladsch/flexmark/flexmark-formatter/0.18.4/flexmark-formatter-0.18.4.jar"
+                ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-java/0.9.10/plexus-java-0.9.10.jar"
+                ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar"
+                ,"/home/kuraine/.m2/repository/sslext/sslext/1.2-0/sslext-1.2-0.jar"
+                ,"/home/kuraine/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.jar"
+                ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-java/0.9.10/plexus-java-0.9.10.jar"
+//                ,"plexus"
+                ,"/home/kuraine/.m2/repository/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.jar"
+                ,"/home/kuraine/.m2/repository/org/apache/pdfbox/fontbox/2.0.4/fontbox-2.0.4.jar"
+                ,"/home/kuraine/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar"
+        );
+
+        List<File> filePathList = uncheckCall(()->Files.walk(baseDir)
+                .parallel()
+                .map(e->e.toFile())
+                .filter(e->e.isFile())
+                .filter(e->e.getAbsolutePath().matches(includeExtensionPtn))
+                .filter(e->uncheckCall(()->exclude(nonTgtFile,e)))
+                .collect(Collectors.toList()));
+//        real	0m22.252s
+//        user	2m21.820s
+//        sys	0m3.428s
+//        List<File> filePathList = Arrays.asList(
+//                "/usr/local/src/mecab-java-0.996/MeCab.jar" //13K
 //                ,"/usr/local/src/idea-IC-192.7142.36/plugins/Kotlin/lib/javaslang-2.0.6.jar" //600K
 //                ,"/home/kuraine/.m2/repository/it/unimi/dsi/fastutil/8.3.0/fastutil-8.3.0.jar" //18M
-        ).stream().map(e->new File(e)).collect(Collectors.toList());
-
+//        ).stream().parallel().map(e->new File(e)).collect(Collectors.toList());
+//
         int mx = filePathList.size();
 
+
+        //TODO jarファイルのなにがしかの異常検知をしたい　んで　スキップ件数だしたい
         IntStream.range(0,mx).boxed().parallel().forEach(i->{
-            List<List<String>> ll =mkListInList(unnest(mkFieldMethodInfo(uncheckCall(()->mkJarInfo2ClazzInfo(filePathList.get(i))))));
 
-            int row = ll.size();
+            System.out.println(filePathList.get(i));
 
-            List<List<String>> ll_rearrange = IntStream.range(0, row).boxed().map(e -> Arrays.asList(
-                    ll.get(e).get(0)
-                    , ll.get(e).get(2)
-                    , ll.get(e).get(3)
-                    , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4)
-                    , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4) + COL_NAME_SEPARATOR + ll.get(e).get(5)
-                    , ll.get(e).get(6)
-            )).collect(Collectors.toList());
+            if(uncheckCall(()->exclude(nonTgtFile,filePathList.get(i)))){
+                skipFileList.add(filePathList.get(i));
+            }
+
+            List<List<String>> ll_rearrange = new ArrayList<>();
+            try{
+                ll_rearrange =rearrange(mkListInList(unnest(mkFieldMethodInfo(uncheckCall(()->mkJarInfo2ClazzInfo(filePathList.get(i)))))));
+            }catch(Exception ex){
+                ex.printStackTrace();
+                errorFileList.add(filePathList.get(i));
+            }
 
             CrossTab crossTab = new CrossTab();
-            crossTab(ll_rearrange,4,6,crossTab);
+            try{
+                crossTab(ll_rearrange,4,6,crossTab);
+            }catch(Exception ex){
+                ex.printStackTrace();
+                errorFileList.add(filePathList.get(i));
+            }
 
             List<String> dat = new ArrayList<>();
-            dat.add(crossTab.getTblHead());
-            dat.addAll(crossTab.getTblBody().entrySet().stream().sorted(Comparator.comparing(e->e.getKey())).map(e->e.getKey()+COL_SEPARATOR+e.getValue()).collect(Collectors.toList()));
+            try{
+                dat.add(crossTab.getTblHead());
+                dat.addAll(crossTab.getTblBody().entrySet().stream().sorted(Comparator.comparing(e->e.getKey())).map(e->e.getKey()+COL_SEPARATOR+e.getValue()).collect(Collectors.toList()));
+            }catch(Exception ex){
+                ex.printStackTrace();
+                errorFileList.add(filePathList.get(i));
+            }
 
-            fileWriteOut(filePathList.get(i).getName().replaceAll(".*/","").replace(".jar",".tsv"),dat);
+            try{
+                fileWriteOut(filePathList.get(i).getName().replaceAll(".*/","").replace(".jar",".tsv.done"),dat);
+            }catch(Exception ex){
+                ex.printStackTrace();
+                errorFileList.add(filePathList.get(i));
+            }
+
+            processFileList.add(filePathList.get(i));
         });
+
+        System.out.printf("TGT-CNT:%s\tPROCESS-CNT:%s\tSKIP-CNT:%s\tERROR-CNT:%s\n",filePathList.size(),processFileList.size(),skipFileList.size(),errorFileList.size());
+
     }
 }
