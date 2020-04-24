@@ -55,6 +55,7 @@ public class App {
                 ,Arrays.asList("00002","02","戻り値の型","boolean")
                 ,Arrays.asList("00002","04","XXX","---")
         );
+        //グループ化列名はでたらめにつけると予期せぬ
 //        行番号	クラス名	戻り値の型	仮引数の変数名リスト	XXX
 //        00001	org.chasen.mecab.Model	arg0,arg1,boolean	~~~
 //        00002	org.chasen.mecab.Model	arg0,arg1,boolean	---
@@ -72,7 +73,7 @@ public class App {
                 ,Arrays.asList("00002","C","01","クラス名","org.chasen.mecab.Model")
                 ,Arrays.asList("00002","C","02","定数名","KKKKKKKK")
         );
-//                行番号	M-クラス名	C-クラス名	C-定数名	M-仮引数の変数名リスト	M-戻り値の型
+//        行番号	C-クラス名	C-定数名	M-クラス名	M-仮引数の変数名リスト	M-戻り値の型
 //        00001	org.chasen.mecab.Model	JJJJJJJJ	org.chasen.mecab.Model	arg0,arg1	boolean
 //        00002	org.chasen.mecab.Model	KKKKKKKK	org.chasen.mecab.Model	arg0,arg1	boolean
         List<List<String>> XXXX = Arrays.asList(
@@ -89,7 +90,7 @@ public class App {
                 ,Arrays.asList("00002","C","c","01","クラス名","org.chasen.mecab.Model")
                 ,Arrays.asList("00002","C","c","02","定数名","KKKKKKKK")
         );
-//        行番号	M-m-クラス名	C-c-クラス名	C-c-定数名	M-m-仮引数の変数名リスト	M-mm-仮引数の変数名リスト	M-mm-戻り値の型
+//        行番号	C-c-クラス名	C-c-定数名	M-mm-仮引数の変数名リスト	M-mm-戻り値の型	M-m-クラス名	M-m-仮引数の変数名リスト
 //        00001	org.chasen.mecab.Model	JJJJJJJJ	org.chasen.mecab.Model	arg0	arg1	boolean
 //        00002	org.chasen.mecab.Model	KKKKKKKK	org.chasen.mecab.Model	arg0	arg1	boolean
 
@@ -147,8 +148,10 @@ public class App {
                         +(ll.get(i).stream().skip(1).limit(endGrpColIdx-2).collect(Collectors.joining(COL_NAME_SEPARATOR)).isEmpty()?"":COL_NAME_SEPARATOR)
                         +ll.get(i).get(endGrpColIdx),Collectors.toSet())));
 
-        String tblHead = A1+COL_SEPARATOR+ ms.entrySet().stream().sorted(Comparator.comparing(e->e.getKey()))
-                .flatMap(e->e.getValue().stream()).collect(Collectors.joining(COL_SEPARATOR));
+        String tblHead = A1+COL_SEPARATOR+ ms.entrySet().stream()
+                .flatMap(e->e.getValue().stream())
+                .sorted(Comparator.comparing(e->Arrays.asList(e.split(COL_NAME_SEPARATOR)).subList(0,endGrpColIdx).stream().collect(Collectors.joining())))
+                .collect(Collectors.joining(COL_SEPARATOR));
 
         //表側
         //Preput
