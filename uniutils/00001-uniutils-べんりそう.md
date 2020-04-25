@@ -1,3 +1,7 @@
+- REF
+
+  - https://yutarine.blogspot.com/2017/04/uniutils-unicode.html
+
 - IN
 
 ```
