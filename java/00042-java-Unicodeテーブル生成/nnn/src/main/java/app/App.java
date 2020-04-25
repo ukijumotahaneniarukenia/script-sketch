@@ -16,7 +16,7 @@ public class App {
 
     private static Integer SUCCESS_STATUS=0;
     private static Integer FAILURE_STATUS=1;
-    private static String DEFAULT_SEARCH_KEY_WORD="KATAKANA";
+    private static String DEFAULT_SEARCH_KEY_WORD="DEFAULT_SEARCH_KEY_WORD";
 
     private static String DEFAULT_SEARCH_MODE="1";
     private static final String SEARCH_MODE_WORD = "1";
@@ -35,6 +35,18 @@ public class App {
     private static final String NORM_GRP_NFKC="3";
     private static final String NORM_GRP_NFKD="4";
 
+    private final static String OPTION_ON = "1";
+    private final static String OPTION_OFF = "-999999999999";
+    private final static String OPTION_HELP = "OPTION_HELP";
+    private final static String OPTION_VERSION = "OPTION_VERSION";
+    private final static String OPTION_USAGE = "OPTION_USAGE";
+
+    private final static String OPTION_WORD_SEARCH = "WORD_SEARCH";
+    private final static String OPTION_NGRAM_SEARCH = "NGRAM_SEARCH ";
+    private final static String OPTION_HASH_KEY_SEARCH = "HASH_KEY_SEARCH";
+
+    private final static String ARTIFACT_ID = "1-0-0";
+    private final static String ARGS_SEPARATOR = ":";
 
     private static Integer DEFAULT_NGRAM_CNT=7;
 
@@ -42,6 +54,67 @@ public class App {
     private static Integer DEFAULT_END_RN=Character.MAX_CODE_POINT;
 
     private static String DEFAULT_NONE_KEY_WORD="ウンコもりもり森鴎外";
+
+    private final static Map<String, List<String>> prepareParseOptPtn = new LinkedHashMap<>(){{
+        put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
+        put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
+        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*")); //-w
+        put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-h.*", "--h.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
+    }};
+
+    private final static Map<String, List<String>> prepareParseOptPtnName = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
+        put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
+    }};
+
+    private final static Map<String, Map<String,String>> prepareParseOptPtnRangeChk = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:2","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+        put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:2","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+        put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:2","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+    }};
+
+    private static void OPTION_USAGE(String optionPtn){
+        switch (optionPtn){
+            case OPTION_HELP:
+            case OPTION_USAGE:
+                OPTION_HELP();
+                break;
+            case OPTION_VERSION:
+                OPTION_VERSION();
+                break;
+            case OPTION_WORD_SEARCH:
+                usageWordSearch();
+                break;
+            case OPTION_NGRAM_SEARCH:
+                usageNgramSearch();
+                break;
+            case OPTION_HASH_KEY_SEARCH:
+                usageHashKeySearch();
+                break;
+            default:
+                break;
+        }
+    }
+    private static void OPTION_HELP(){
+        System.out.println("OPTION_HELP");
+    }
+    private static void OPTION_VERSION(){
+        System.out.println(ARTIFACT_ID);
+    }
+    private static void usageWordSearch(){
+        //TODO ヒアドキュメント対応する
+        System.out.println("usageWordSearch");
+    }
+    private static void usageNgramSearch(){
+        //TODO ヒアドキュメント対応する
+        System.out.println("usageNgramSearch");
+    }
+    private static void usageHashKeySearch(){
+        //TODO ヒアドキュメント対応する
+        System.out.println("usageHashKeySearch");
+    }
 
     private static String hexToBin(String s){
         return Integer.toBinaryString(Integer.parseInt(s,16));
@@ -113,11 +186,6 @@ public class App {
     private static String strToNorm(String s, Normalizer.Form typ) {
         return Normalizer.normalize(s,typ);
     }
-
-    private static Map<Integer,String> mkHashTbl(List<Integer> k,List<String> v) {
-        return k.size()!=v.size()?new HashMap<>():k.stream().collect(Collectors.toMap(e->e,e->v.get(e)));
-    }
-
     private static Map<Integer, List<String>> mkTblCore(Integer s,Integer e) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
         for(int i=s;i<=e;i++){
@@ -328,16 +396,6 @@ public class App {
             System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue().stream().collect(Collectors.joining("\t")));
         }
     }
-
-
-
-
-
-
-
-
-
-
     private static List<List<String>> grpKeTsuBanMnMx(List<Integer> r){
         Map<Integer,Integer> m = r.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toMap(e->e,e->e+1,(pre,post)->post,LinkedHashMap::new));
         StringBuilder sb = new StringBuilder();
@@ -352,7 +410,6 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e->Arrays.asList(e.split("\n")).stream().filter(ee->0!=ee.length())).map(ee->Arrays.asList(Arrays.asList(ee.split(",")).stream().filter(eee->0!=eee.length()).toArray(String[]::new))).collect(Collectors.toList());
     }
-
     private static Map<Integer, List<String>> searchTbl(Integer startRn,Integer endRn){
         Map<Integer, List<String>> rt = null;
         switch (DEFAULT_NORM_GRP){
@@ -376,7 +433,6 @@ public class App {
         }
         return rt;
     }
-
     private static Map<Integer,List<Integer>> grpStartEndRn(List<Integer> r){
         List<List<String>> ll = grpKeTsuBanMnMx(r);
         Map<Integer,List<Integer>> rt = new HashMap<>();
@@ -387,7 +443,6 @@ public class App {
         }
         return rt;
     }
-
     private static Integer printOut(Map<Integer,List<Integer>> rr){
         int ret = SUCCESS_STATUS;
         int cnt = 0;
@@ -397,20 +452,10 @@ public class App {
         }
         return ret+cnt;
     }
-
     private static void subMain(){
         //https://qiita.com/kiida/items/9d26b850194fa1a02e67
         System.exit(0);
     }
-
-
-
-
-
-
-
-
-
     private static Set<Integer> searchCodePointStartEnd(String searchModePtn,String idxInputPtn){
         Set<Integer> rt = null;
         switch (searchModePtn){
@@ -469,106 +514,31 @@ public class App {
         return rt;
     }
 
-
-
-
-
-
-
-    private final static String OPTION_ON = "1";
-    private final static String OPTION_OFF = "-999999999999";
-    private final static String OPTION_HELP = "OPTION_HELP";
-    private final static String OPTION_VERSION = "OPTION_VERSION";
-    private final static String OPTION_USAGE = "OPTION_USAGE";
-
-    private final static String OPTION_WORD_SEARCH = "WORD_SEARCH";
-    private final static String OPTION_NGRAM_SEARCH = "NGRAM_SEARCH ";
-    private final static String OPTION_HASH_KEY_SEARCH = "HASH_KEY_SEARCH";
-
-    private final static String ARTIFACT_ID = "1-0-0";
-    private final static String ARGS_SEPARATOR = ":";
-
-    private static void OPTION_HELP(){
-        System.out.println("OPTION_HELP");
-    }
-    private static void OPTION_VERSION(){
-        System.out.println(ARTIFACT_ID);
-    }
-    private static void usageWordSearch(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageWordSearch");
-    }
-    private static void usageNgramSearch(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageNgramSearch");
-    }
-    private static void usageHashKeySearch(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageHashKeySearch");
-    }
-
-
-    private static void OPTION_USAGE(String optionPtn){
-        switch (optionPtn){
-            case OPTION_HELP:
-            case OPTION_USAGE:
-                OPTION_HELP();
-                break;
-            case OPTION_VERSION:
-                OPTION_VERSION();
-                break;
-            case OPTION_WORD_SEARCH:
-                usageWordSearch();
-                break;
-            case OPTION_NGRAM_SEARCH:
-                usageNgramSearch();
-                break;
-            case OPTION_HASH_KEY_SEARCH:
-                usageHashKeySearch();
-                break;
-            default:
-                break;
-        }
-    }
-
-    public static Integer processArgs(final List<String> args ){
-        int rt=0;
-
-        DEFAULT_SEARCH_MODE = checkArgs(1,3,0,args);
-        DEFAULT_IDX_INPUT_PTN = checkArgs(1,3,1,args);
-        DEFAULT_NORM_GRP = checkArgs(0,4,2,args);
-        DEFAULT_SEARCH_KEY_WORD = checkArgs(3,3,3,args);
-
-        if(SEARCH_MODE_NGRAM==DEFAULT_SEARCH_MODE){
-            List<String> l = Arrays.asList(DEFAULT_SEARCH_KEY_WORD.split(ARGS_SEPARATOR));
-            if(2!=l.size()){
-                DEFAULT_SEARCH_KEY_WORD = Optional.of(l.get(0)).orElse(DEFAULT_SEARCH_KEY_WORD);
-            }else{
-                DEFAULT_SEARCH_KEY_WORD = Optional.of(l.get(0)).orElse(DEFAULT_SEARCH_KEY_WORD);
-                DEFAULT_NGRAM_CNT = Optional.of(Integer.valueOf(l.get(1))).orElse(-1);
+    private static boolean argsRangeChk(Map<String,Map<String,String>> m){
+        int b = 0;
+        Stream.generate(()->"=").limit(100).forEach(e-> System.out.printf(e));
+        System.out.println();
+        for(Map.Entry<String,Map<String,String>> e1 : m.entrySet()){
+            Map<String,String> chkMap = prepareParseOptPtnRangeChk.get(e1.getKey());
+            for(Map.Entry<String,String> e2 : e1.getValue().entrySet()){
+                if(e1.getKey().contains(OPTION_NGRAM_SEARCH) && e2.getKey().contains(DEFAULT_SEARCH_KEY_WORD) && !e2.getValue().matches(chkMap.get(e2.getKey()))){
+                    ++b;
+                    System.out.printf("%s\t%s\n",e2.getValue(),chkMap.get(e2.getKey()));
+                }else{
+                    if(!e2.getKey().contains(DEFAULT_SEARCH_KEY_WORD)){
+                        List<String> startEndChkMap = Arrays.asList(chkMap.get(e2.getKey()).split(ARGS_SEPARATOR));
+                        if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
+                                .noneMatch(i->i==Integer.parseInt(e2.getValue()))){
+                            ++b;
+                            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1)));
+                            System.out.println(b);
+                        }
+                    }
+                }
             }
         }
-
-//        if(Stream.of(DEFAULT_SEARCH_MODE,defaultGramIdxInputPtn,defaultNGramIdxInputPtn,defaultHashKeyIdxInputPtn,DEFAULT_NORM_GRP,defaultNGram).anyMatch(e->e==-1)){
-//            System.exit(FAILURE_STATUS);
-//        }
-
-        return rt;
+        return b==0?true:false;
     }
-
-    private final static Map<String, List<String>> prepareParseOptPtn = new LinkedHashMap<>(){{
-        put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
-        put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
-        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*")); //-w
-        put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
-        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-h.*", "--h.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
-    }};
-
-    private final static Map<String, List<String>> prepareParseOptPtnName = new LinkedHashMap<>(){{
-        put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
-        put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
-        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
-    }};
 
     private final static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> m){
         Map<String,Map<String,String>> rt = new LinkedHashMap<>();
@@ -579,7 +549,6 @@ public class App {
             if(Stream.of(OPTION_HELP,OPTION_USAGE,OPTION_VERSION).noneMatch(e->e.contains(entry.getKey())) && entry.getValue().size()==1){
                 continue;
             }
-//            String search_mode = entry.getValue().get(0);
             entry.getValue().remove(0);
             entry.getValue().remove(0);
             int mx = entry.getValue().size();
@@ -592,8 +561,6 @@ public class App {
         }
         return rt;
     }
-
-
 
     private static Map<String, String> prepareParseOpts(Map<String, List<String>> prepareParseOptPtn){
         Map<String, String> rt = new LinkedHashMap<>();
@@ -687,79 +654,55 @@ public class App {
                 .filter(key->mainProcessArgs.get(key).contains(OPTION_ON)).count();
     }
 
-//    private static void mainProcess (Map<String, List<String>> mainProcessArgs) {
-////        System.out.println(Stream.generate(()->"=").limit(100).collect(Collectors.joining()));
-////        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
-//        finish : {
-//            if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
-//                OPTION_USAGE(OPTION_USAGE);
-//                break finish;
-//            }
-//            if(showCmdInfo(mainProcessArgs,OPTION_VERSION)){
-//                OPTION_USAGE(OPTION_VERSION);
-//                break finish;
-//            }
-//            for(Map.Entry<String,List<String>> entry : mainProcessArgs.entrySet()){
-//                switch (entry.getKey()){
-//                    case SEARCH_MODE_WORD:
-//                        if(entry.getValue().contains(OPTION_OFF)){
-//                            break;
-//                        }else{
-//                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
-//                                genRandomNumber(entry.getValue().subList(2,entry.getValue().size()));
-//                                break;
-//                            }
-//                        }
-//                    case SEARCH_MODE_WORD:
-//                        if(entry.getValue().contains(OPTION_OFF)){
-//                            break;
-//                        }else{
-//                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
-//                                genHumanName(entry.getValue().subList(2,entry.getValue().size()));
-//                                break;
-//                            }
-//                        }
-//                    default:
-//                        break finish;
-//                }
-//            }
-//        }
-//    }
-    
-    private static String checkArgs(Integer s,Integer e,Integer n,final List<String> l){
-        Pattern p = Pattern.compile("\\D");
-        int mx=l.size();
-        if(n>mx){
-            return "-1";
-        }
-        if(-1!=l.get(n).indexOf(ARGS_SEPARATOR)){
-            return l.get(n);
-        }else if(p.matcher(l.get(n)).find()) {
-            return l.get(n);
-        }else{
-            return IntStream.rangeClosed(s,e).boxed().noneMatch(ee->ee.equals(Optional.ofNullable(Integer.valueOf(l.get(n))).orElse(-1)))?"-1":l.get(n);
+    private static void mainProcess (Map<String, List<String>> mainProcessArgs,Map<String,Map<String,String>> mainReStyleProcessArgs) {
+        System.out.println(Stream.generate(()->"=").limit(100).collect(Collectors.joining()));
+        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+        finish : {
+            if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
+                OPTION_USAGE(OPTION_USAGE);
+                break finish;
+            }
+            if(showCmdInfo(mainProcessArgs,OPTION_VERSION)){
+                OPTION_USAGE(OPTION_VERSION);
+                break finish;
+            }
+            System.out.println(Stream.generate(()->"~").limit(100).collect(Collectors.joining()));
+            for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
+
+
+//                searchCodePointStartEnd();
+
+
+
+
+                System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+            }
         }
     }
 
+
     public static void main(String... args) {
+//        int ret=SUCCESS_STATUS;
+
         Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(prepareParseOptPtn));
         mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+
+        System.out.println(Stream.generate(()->"-").limit(100).collect(Collectors.joining()));
+        System.out.println();
 
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
         mainReStyleProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
 
-//        int ret=SUCCESS_STATUS;
-//
-//        if(args.length!=0){
-//            if(args.length%4!=0){
-//                System.exit(FAILURE_STATUS);
-//            }else{
-//                processArgs(Arrays.asList(args));
-//            }
-//        }else{
-//
-//        }
-//
+        if(argsRangeChk(mainReStyleProcessArgs)){
+            System.out.println("ok");
+        }else{
+            System.out.println("ng");
+        }
+
+        mainProcess(mainProcessArgs,mainReStyleProcessArgs);
+
+
+
 //        Set<Integer> rt = searchCodePointStartEnd(DEFAULT_SEARCH_MODE,DEFAULT_IDX_INPUT_PTN);
 //
 //        int cnt = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
