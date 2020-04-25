@@ -564,6 +564,37 @@ public class App {
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-h.*", "--h.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
     }};
 
+    private final static Map<String, List<String>> prepareParseOptPtnName = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
+        put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
+    }};
+
+    private final static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> m){
+        Map<String,Map<String,String>> rt = new LinkedHashMap<>();
+        for(Map.Entry<String, List<String>> entry : m.entrySet()){
+            if(Stream.of(OPTION_HELP,OPTION_USAGE,OPTION_VERSION).anyMatch(e->e.contains(entry.getKey()))){
+                continue;
+            }
+            if(Stream.of(OPTION_HELP,OPTION_USAGE,OPTION_VERSION).noneMatch(e->e.contains(entry.getKey())) && entry.getValue().size()==1){
+                continue;
+            }
+//            String search_mode = entry.getValue().get(0);
+            entry.getValue().remove(0);
+            entry.getValue().remove(0);
+            int mx = entry.getValue().size();
+            List<String> keyName = prepareParseOptPtnName.get(entry.getKey());
+            Map<String,String> mm = new LinkedHashMap<>();
+            for(int i=0;i<mx;i++){
+                mm.put(keyName.get(i),entry.getValue().get(i));
+            }
+            rt.put(entry.getKey(),mm);
+        }
+        return rt;
+    }
+
+
+
     private static Map<String, String> prepareParseOpts(Map<String, List<String>> prepareParseOptPtn){
         Map<String, String> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : prepareParseOptPtn.entrySet()){
@@ -713,6 +744,10 @@ public class App {
     public static void main(String... args) {
         Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(prepareParseOptPtn));
         mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+
+        Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
+        mainReStyleProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+
 //        int ret=SUCCESS_STATUS;
 //
 //        if(args.length!=0){
