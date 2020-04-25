@@ -16,7 +16,13 @@ public class App {
 
     private static Integer SUCCESS_STATUS=0;
     private static Integer FAILURE_STATUS=1;
-    private static String DEFAULT_SEARCH_KEY_WORD="DEFAULT_SEARCH_KEY_WORD";
+    private static String DEFAULT_SEARCH_KEY_WORD="KATAKANA";
+
+    private static String MAPKEY_SEARCH_MODE="DEFAULT_SEARCH_MODE";
+    private static String MAPKEY_IDX_INPUT_PTN="DEFAULT_IDX_INPUT_PTN";
+    private static String MAPKEY_NORM_GRP="DEFAULT_NORM_GRP";
+    private static String MAPKEY_SEARCH_KEY_WORD="DEFAULT_SEARCH_KEY_WORD";
+    private static String MAPKEY_NGRAM_CNT="DEFAULT_NGRAM_CNT";
 
     private static String DEFAULT_SEARCH_MODE="1";
     private static final String SEARCH_MODE_WORD = "1";
@@ -344,18 +350,19 @@ public class App {
             K startRn
             ,V endRn
             ,N ngramCnt
-            ,S DEFAULT_SEARCH_KEY_WORD
+            ,S search_key_word
             ,List<R> noneKeyWord
             ,BiFunction<K,V,Map<K,R>> mkInputFunction
             ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkIdxFunction
             ,Function<List<R>,Set<N>> mkIdxShapeFunction
     ){
-        Set<N> rt = new HashSet<>();
+        Set<N> rt;
         Map<K,R> input = mkInputFunction.apply(startRn,endRn);
         Map<R,List<R>> midput = mkIdxFunction.apply(input,ngramCnt);
-        List<R> output = Optional.ofNullable(midput.get(DEFAULT_SEARCH_KEY_WORD)).orElse(noneKeyWord);
+        List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
+        output.stream().limit(10).forEach(e-> System.out.println(e));
         if(output.get(0).equals(noneKeyWord.get(0))){
-            System.exit(0);
+            return new HashSet<>();
         }else{
             rt = mkIdxShapeFunction.apply(output);
         }
@@ -364,18 +371,21 @@ public class App {
     private static <K,V,N,S,R> Set<N> executeWordNgramSearch(
             K startRn
             ,V endRn
-            ,S DEFAULT_SEARCH_KEY_WORD
+            ,S search_key_word
             ,List<R> noneKeyWord
             ,BiFunction<K,V,Map<K,R>> mkInputFunction
             ,Function<Map<K,R>,Map<R,List<R>>> mkIdxFunction
             ,Function<List<R>,Set<N>> mkIdxShapeFunction
     ){
-        Set<N> rt = new HashSet<>();
+        Set<N> rt;
         Map<K,R> input = mkInputFunction.apply(startRn,endRn);
+//        input.entrySet().stream().forEach(e-> System.out.println(e));
         Map<R,List<R>> midput = mkIdxFunction.apply(input);
-        List<R> output = Optional.ofNullable(midput.get(DEFAULT_SEARCH_KEY_WORD)).orElse(noneKeyWord);
+//        midput.entrySet().stream().forEach(e-> System.out.println(e));
+        List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
+        output.stream().limit(10).forEach(e-> System.out.println(e));
         if(output.get(0).equals(noneKeyWord.get(0))){
-            System.exit(0);
+            return new HashSet<>();
         }else{
             rt = mkIdxShapeFunction.apply(output);
         }
@@ -384,12 +394,12 @@ public class App {
     private static <K,V,N,S,R> Set<N> executeHashKeySearch(
             K startRn
             ,V endRn
-            ,S DEFAULT_SEARCH_KEY_WORD
+            ,S search_key_word
             ,BiFunction<K,V,Map<K,R>> mkInputFunction
             ,BiFunction<Map<K,R>,S,Set<N>> mkIdxFilterFunction
     ){
         Map<K,R> input = mkInputFunction.apply(startRn,endRn);
-        return mkIdxFilterFunction.apply(input,DEFAULT_SEARCH_KEY_WORD);
+        return mkIdxFilterFunction.apply(input,search_key_word);
     }
     private static void debug(Map<Integer,List<String>> map){
         for(Map.Entry<Integer,List<String>> entry : map.entrySet()){
@@ -456,19 +466,34 @@ public class App {
         //https://qiita.com/kiida/items/9d26b850194fa1a02e67
         System.exit(0);
     }
-    private static Set<Integer> searchCodePointStartEnd(String searchModePtn,String idxInputPtn){
+
+    private static Set<Integer> searchCodePointStartEndWithSearchModeWord(Map<String,String> searchCondition){
         Set<Integer> rt = null;
-        switch (searchModePtn){
+
+        return rt;
+    }
+
+    private static boolean ptnCheck(){
+        //TODO
+        return true;
+    }
+
+    private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
+        searchCondition.entrySet().stream().forEach(e-> System.out.println(e));
+        System.out.println(Stream.generate(()->"~").limit(100).collect(Collectors.joining()));
+
+        Set<Integer> rt = null;
+        switch (searchCondition.get(MAPKEY_SEARCH_MODE)){
             case SEARCH_MODE_WORD:
-                switch (idxInputPtn){
+                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
                     case IDX_INPUT_UNICODE_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkWordIdx,App::mkIdxShape);
+                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkWordIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(FAILURE_STATUS);
@@ -476,15 +501,15 @@ public class App {
                 }
                 break;
             case SEARCH_MODE_NGRAM:
-                switch (idxInputPtn){
+                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
                     case IDX_INPUT_UNICODE_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_NGRAM_CNT,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_NGRAM_CNT,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_NGRAM_CNT,DEFAULT_SEARCH_KEY_WORD,Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkNGramIdx,App::mkIdxShape);
+                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkNGramIdx,App::mkIdxShape);
                         break;
                     default:
                         System.exit(FAILURE_STATUS);
@@ -492,15 +517,15 @@ public class App {
                 }
                 break;
             case SEARCH_MODE_HASH_KEY:
-                switch (idxInputPtn){
+                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
                     case IDX_INPUT_UNICODE_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,App::mkInputUnicodeName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeName,App::mkIdxFilter);
                         break;
                     case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,App::mkInputUnicodeScriptName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeScriptName,App::mkIdxFilter);
                         break;
                     case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,DEFAULT_SEARCH_KEY_WORD,App::mkInputUnicodeBlockName,App::mkIdxFilter);
+                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeBlockName,App::mkIdxFilter);
                         break;
                     default:
                         System.exit(FAILURE_STATUS);
@@ -516,22 +541,24 @@ public class App {
 
     private static boolean argsRangeChk(Map<String,Map<String,String>> m){
         int b = 0;
-        Stream.generate(()->"=").limit(100).forEach(e-> System.out.printf(e));
-        System.out.println();
+//        Stream.generate(()->"=").limit(100).forEach(e-> System.out.printf(e));
+//        System.out.println();
         for(Map.Entry<String,Map<String,String>> e1 : m.entrySet()){
             Map<String,String> chkMap = prepareParseOptPtnRangeChk.get(e1.getKey());
             for(Map.Entry<String,String> e2 : e1.getValue().entrySet()){
-                if(e1.getKey().contains(OPTION_NGRAM_SEARCH) && e2.getKey().contains(DEFAULT_SEARCH_KEY_WORD) && !e2.getValue().matches(chkMap.get(e2.getKey()))){
+//                System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),chkMap.get(e2.getKey()));
+                if(e1.getKey().contains(OPTION_NGRAM_SEARCH) && e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD) && !e2.getValue().matches(chkMap.get(e2.getKey()))){
                     ++b;
-                    System.out.printf("%s\t%s\n",e2.getValue(),chkMap.get(e2.getKey()));
+//                    System.out.printf("%s\t%s\n",e2.getValue(),chkMap.get(e2.getKey()));
+//                    System.out.println(b);
                 }else{
-                    if(!e2.getKey().contains(DEFAULT_SEARCH_KEY_WORD)){
+                    if(!e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD)){
                         List<String> startEndChkMap = Arrays.asList(chkMap.get(e2.getKey()).split(ARGS_SEPARATOR));
                         if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
                                 .noneMatch(i->i==Integer.parseInt(e2.getValue()))){
                             ++b;
-                            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1)));
-                            System.out.println(b);
+//                            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1)));
+//                            System.out.println(b);
                         }
                     }
                 }
@@ -654,9 +681,8 @@ public class App {
                 .filter(key->mainProcessArgs.get(key).contains(OPTION_ON)).count();
     }
 
-    private static void mainProcess (Map<String, List<String>> mainProcessArgs,Map<String,Map<String,String>> mainReStyleProcessArgs) {
-        System.out.println(Stream.generate(()->"=").limit(100).collect(Collectors.joining()));
-        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+    private static Integer mainProcess (Map<String, List<String>> mainProcessArgs,Map<String,Map<String,String>> mainReStyleProcessArgs) {
+        int ret = SUCCESS_STATUS;
         finish : {
             if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
                 OPTION_USAGE(OPTION_USAGE);
@@ -666,47 +692,28 @@ public class App {
                 OPTION_USAGE(OPTION_VERSION);
                 break finish;
             }
-            System.out.println(Stream.generate(()->"~").limit(100).collect(Collectors.joining()));
+            Set<Integer> rt;
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
-
-
-//                searchCodePointStartEnd();
-
-
-
-
-                System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+                rt = searchCodePointStartEnd(entry.getValue());
+                ret += printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
             }
         }
+        return ret;
     }
 
-
     public static void main(String... args) {
-//        int ret=SUCCESS_STATUS;
-
+        int ret;
         Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(prepareParseOptPtn));
-        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
-
-        System.out.println(Stream.generate(()->"-").limit(100).collect(Collectors.joining()));
-        System.out.println();
-
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
-        mainReStyleProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
-
         if(argsRangeChk(mainReStyleProcessArgs)){
-            System.out.println("ok");
+            mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+            mainReStyleProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+            System.out.println(Stream.generate(()->"-").limit(100).collect(Collectors.joining()));
+            ret = mainProcess(mainProcessArgs,mainReStyleProcessArgs);
+            System.exit(ret);
         }else{
-            System.out.println("ng");
+            ret = FAILURE_STATUS;
+            System.exit(ret);
         }
-
-        mainProcess(mainProcessArgs,mainReStyleProcessArgs);
-
-
-
-//        Set<Integer> rt = searchCodePointStartEnd(DEFAULT_SEARCH_MODE,DEFAULT_IDX_INPUT_PTN);
-//
-//        int cnt = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
-//        System.out.println(cnt);
-//        System.exit(ret);
     }
 }
