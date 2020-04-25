@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+count = 0
+for n in 0..0x10FFFF
+  if n < 0xD800 || 0xDFFF < n
+    if /\p{Hiragana}/.match(n.chr('UTF-8'))
+        p 'U+' + n.to_s(16).upcase + ' ' + n.chr('UTF-8')
+        count += 1
+    end
+  end
+end
+
+p count

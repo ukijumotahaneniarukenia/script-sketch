@@ -70,17 +70,17 @@ public class App {
             ,"引数の型リスト"
             ,"仮引数の変数名リスト")));
 
-    private static Map<Integer,String> mkHashTbl(List<Integer> k,List<String> v)throws Exception{
+    private static Map<Integer,String> mkHashTbl(List<Integer> k,List<String> v) {
         return k.size()!=v.size()?new HashMap<>():k.stream().collect(Collectors.toMap(e->e,e->v.get(e)));
     }
-    private static List<List<String>> mkListInList(Map<String,List<String>> m)throws Exception{
+    private static List<List<String>> mkListInList(Map<String,List<String>> m) {
         return m.entrySet().stream().parallel().map(e -> uncheckCall(()->flattenList(
                 Arrays.asList(e.getKey().split(F)).subList(0, 4).stream().collect(Collectors.toList())
                 , Arrays.asList(e.getKey().split(F)).subList(4, 5)
                 , e.getValue()
         ))).collect(Collectors.toList());
     }
-    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab)throws Exception{
+    private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab) {
         int row = ll.size();
         int col = IntStream.range(0,row).boxed().map(i->ll.get(i).size()).min(Comparator.comparingInt(e->e)).get();
 
@@ -129,7 +129,7 @@ public class App {
         crossTab.setTblBody(tblBody);
         return crossTab;
     }
-    private static Map<String,List<String>> unnest(Map<String,List<String>> m)throws Exception{
+    private static Map<String,List<String>> unnest(Map<String,List<String>> m) {
         Map<String,List<String>> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : m.entrySet()){
             int mx = entry.getValue().size();
@@ -148,10 +148,10 @@ public class App {
         return rt;
     }
     @SafeVarargs
-    private static <E> List<E> flattenList(Collection<E>... liz)throws Exception{
+    private static <E> List<E> flattenList(Collection<E>... liz) {
         return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
     }
-    private static Map<String,List<String>> mkFieldMethodInfo(Map<Class<?>,String> m)throws Exception{
+    private static Map<String,List<String>> mkFieldMethodInfo(Map<Class<?>,String> m) {
         Map<String,List<String>> rt = new LinkedHashMap<>();
         int grp=0;
         for(Map.Entry<Class<?>,String> entry : m.entrySet()){
@@ -164,7 +164,7 @@ public class App {
         }
         return rt;
     }
-    private static Map<String,List<String>> mkFieldDetailInfo(String key,Map<Field,Class<?>> rtF,Integer grp)throws Exception{
+    private static Map<String,List<String>> mkFieldDetailInfo(String key,Map<Field,Class<?>> rtF,Integer grp) {
         //TODO こういうふうに書きたい
 //        List<Field> l = new ArrayList<>(rtF.keySet());
 //        int mx = l.size();
@@ -189,7 +189,7 @@ public class App {
         }
         return rt;
     }
-    private static Map<String,List<String>> mkMethodDetailInfo(String key,Map<Method,Class<?>> rtM,Integer grp)throws Exception{
+    private static Map<String,List<String>> mkMethodDetailInfo(String key,Map<Method,Class<?>> rtM,Integer grp) {
         //TODO こういうふうに書きたい
 //        List<Method> l = new ArrayList<>(rtM.keySet());
 //        int mx = l.size();
@@ -235,11 +235,11 @@ public class App {
         }
         return rt;
     }
-    private static Map<Field,Class<?>> mkFieldInfo(Class<?> e)throws Exception{
+    private static Map<Field,Class<?>> mkFieldInfo(Class<?> e){
         List<Field> l = Arrays.asList(e.getFields());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<Method,Class<?>> mkMethodInfo(Class<?> e)throws Exception{
+    private static Map<Method,Class<?>> mkMethodInfo(Class<?> e){
         List<Method> l = Arrays.asList(e.getMethods());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
@@ -249,24 +249,26 @@ public class App {
         try {
             return callable.call();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
-    private static Map<Class<?>,String> mkJarInfo2ClazzInfo(File f) throws Exception{
+    private static Map<Class<?>,String> mkJarInfo2ClazzInfo(File f) throws IOException {
         String path = f.getPath();
         if(path.endsWith(".class")){
             return new LinkedHashMap<>();
         }else{
-            return uncheckCall(()->Collections.list(new JarFile(path).entries()).stream()
+            JarFile jarFile = new JarFile(path);
+            return Collections.list(jarFile.entries()).stream()
                     .parallel()
                     .map(e->e.getName())
                     .filter(e->e.endsWith(".class"))
                     .map(e -> e.replace('/', '.').replaceAll(".class$", ""))
                     .map(e->uncheckCall(()->classLoader.loadClass(e)))
-                    .collect(Collectors.toMap(e->e, e->f.getName())));
+                    .collect(Collectors.toMap(e->e, e->f.getName()));
         }
     }
-    private static void fileWriteOut (String outPutFileName,List<String> l)throws Exception{
+    private static void fileWriteOut (String outPutFileName,List<String> l) {
 
         File destFile = new File(outPutFileName);
         if(destFile.exists()){
@@ -284,11 +286,11 @@ public class App {
         }
     }
 
-    private static boolean exclude(List<String> nonTgtFile,File f)throws Exception{
-        return nonTgtFile.stream().noneMatch(e->f.getName().contains(e));
+    private static boolean exclude(List<String> nonTgtFile,File f){
+        return nonTgtFile.stream().anyMatch(e->f.getName().contains(e));
     }
 
-    private static List<List<String>> rearrange(List<List<String>> ll)throws Exception{
+    private static List<List<String>> rearrange(List<List<String>> ll) {
         return IntStream.range(0, ll.size()).boxed().map(e -> Arrays.asList(
                 ll.get(e).get(0)
                 , ll.get(e).get(2)
@@ -310,7 +312,9 @@ public class App {
         String includeExtensionPtn = ("(?i)^.*\\." + Pattern.quote(targetExtension) + "$");
 
         List<String> nonTgtFile = Arrays.asList(
-                "/home/kuraine/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar"
+                "classgraph"
+                ,"/home/kuraine/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar"
+                ,"/home/kuraine/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar"
                 ,"/home/kuraine/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.12.4/maven-surefire-common-2.12.4.jar"
                 ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.10/plexus-utils-1.5.10.jar"
                 ,"/home/kuraine/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar"
@@ -321,19 +325,18 @@ public class App {
                 ,"/home/kuraine/.m2/repository/sslext/sslext/1.2-0/sslext-1.2-0.jar"
                 ,"/home/kuraine/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.jar"
                 ,"/home/kuraine/.m2/repository/org/codehaus/plexus/plexus-java/0.9.10/plexus-java-0.9.10.jar"
-//                ,"plexus"
+                ,"/home/kuraine/.m2/repository/io/github/classgraph/classgraph/4.8.60/classgraph-4.8.60.jar"
                 ,"/home/kuraine/.m2/repository/org/apache/maven/maven-error-diagnostics/2.0.6/maven-error-diagnostics-2.0.6.jar"
                 ,"/home/kuraine/.m2/repository/org/apache/pdfbox/fontbox/2.0.4/fontbox-2.0.4.jar"
                 ,"/home/kuraine/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar"
         );
 
-        List<File> filePathList = uncheckCall(()->Files.walk(baseDir)
+        List<File> filePathList = Files.walk(baseDir)
                 .parallel()
                 .map(e->e.toFile())
                 .filter(e->e.isFile())
                 .filter(e->e.getAbsolutePath().matches(includeExtensionPtn))
-                .filter(e->uncheckCall(()->exclude(nonTgtFile,e)))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
 //        real	0m22.252s
 //        user	2m21.820s
 //        sys	0m3.428s
@@ -345,22 +348,23 @@ public class App {
 //
         int mx = filePathList.size();
 
-
         //TODO jarファイルのなにがしかの異常検知をしたい　んで　スキップ件数だしたい
-        IntStream.range(0,mx).boxed().parallel().forEach(i->{
+        for(int i=0;i<mx;i++){
 
             System.out.println(filePathList.get(i));
 
-            if(uncheckCall(()->exclude(nonTgtFile,filePathList.get(i)))){
+            if(exclude(nonTgtFile,filePathList.get(i))){
                 skipFileList.add(filePathList.get(i));
+                continue;
             }
 
-            List<List<String>> ll_rearrange = new ArrayList<>();
+            List<List<String>> ll_rearrange = null;
             try{
-                ll_rearrange =rearrange(mkListInList(unnest(mkFieldMethodInfo(uncheckCall(()->mkJarInfo2ClazzInfo(filePathList.get(i)))))));
+                ll_rearrange =rearrange(mkListInList(unnest(mkFieldMethodInfo(mkJarInfo2ClazzInfo(filePathList.get(i))))));
             }catch(Exception ex){
                 ex.printStackTrace();
                 errorFileList.add(filePathList.get(i));
+                continue;
             }
 
             CrossTab crossTab = new CrossTab();
@@ -369,6 +373,7 @@ public class App {
             }catch(Exception ex){
                 ex.printStackTrace();
                 errorFileList.add(filePathList.get(i));
+                continue;
             }
 
             List<String> dat = new ArrayList<>();
@@ -378,6 +383,7 @@ public class App {
             }catch(Exception ex){
                 ex.printStackTrace();
                 errorFileList.add(filePathList.get(i));
+                continue;
             }
 
             try{
@@ -385,10 +391,11 @@ public class App {
             }catch(Exception ex){
                 ex.printStackTrace();
                 errorFileList.add(filePathList.get(i));
+                continue;
             }
 
             processFileList.add(filePathList.get(i));
-        });
+        }
 
         System.out.printf("TGT-CNT:%s\tPROCESS-CNT:%s\tSKIP-CNT:%s\tERROR-CNT:%s\n",filePathList.size(),processFileList.size(),skipFileList.size(),errorFileList.size());
 

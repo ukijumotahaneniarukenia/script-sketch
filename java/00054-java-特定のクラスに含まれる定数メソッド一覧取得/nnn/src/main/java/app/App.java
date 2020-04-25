@@ -86,9 +86,41 @@ public class App {
                 .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
         List<List<String>> ll = unnest(uuu(m)).entrySet().stream().map(e-> flattenList(Arrays.asList(e.getKey().split(F)).subList(0,e.getKey().split(F).length-1).stream().collect(Collectors.toList()),e.getValue())).collect(Collectors.toList());
 
+        ll.stream().limit(30).forEach(l-> System.out.println(l));
+//[java.lang.Thread, CCCCC, 00001, 00001, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, CCCCC, 00001, 00001, 01, 定数名, NORM_PRIORITY]
+//[java.lang.Thread, CCCCC, 00001, 00002, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, CCCCC, 00001, 00002, 01, 定数名, MAX_PRIORITY]
+//[java.lang.Thread, CCCCC, 00001, 00003, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, CCCCC, 00001, 00003, 01, 定数名, MIN_PRIORITY]
+//[java.lang.Thread, MMMMM, 00001, 00004, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, MMMMM, 00001, 00004, 01, アクセス修飾子, public final]
+//[java.lang.Thread, MMMMM, 00001, 00004, 02, 戻り値の型, boolean]
+//[java.lang.Thread, MMMMM, 00001, 00004, 03, メソッド名, isDaemon]
+//[java.lang.Thread, MMMMM, 00001, 00004, 04, 可変長引数があるか, false]
+//[java.lang.Thread, MMMMM, 00001, 00004, 05, 引数の個数, 0]
+//[java.lang.Thread, MMMMM, 00001, 00004, 06, 型パラメータリスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00004, 07, 型パラメータ記号リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00004, 08, 引数の型リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00004, 09, 仮引数の変数名リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00005, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, MMMMM, 00001, 00005, 01, アクセス修飾子, public]
+//[java.lang.Thread, MMMMM, 00001, 00005, 02, 戻り値の型, java.lang.StackTraceElement[]]
+//[java.lang.Thread, MMMMM, 00001, 00005, 03, メソッド名, getStackTrace]
+//[java.lang.Thread, MMMMM, 00001, 00005, 04, 可変長引数があるか, false]
+//[java.lang.Thread, MMMMM, 00001, 00005, 05, 引数の個数, 0]
+//[java.lang.Thread, MMMMM, 00001, 00005, 06, 型パラメータリスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00005, 07, 型パラメータ記号リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00005, 08, 引数の型リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00005, 09, 仮引数の変数名リスト, ]
+//[java.lang.Thread, MMMMM, 00001, 00006, 00, クラス名, java.lang.Thread]
+//[java.lang.Thread, MMMMM, 00001, 00006, 01, アクセス修飾子, public final]
+//[java.lang.Thread, MMMMM, 00001, 00006, 02, 戻り値の型, void]
+//[java.lang.Thread, MMMMM, 00001, 00006, 03, メソッド名, join]
+
         int row = ll.size();
 
-        List<List<String>> ll_rearrage = IntStream.range(0,row).boxed()
+        List<List<String>> ll_rearrange = IntStream.range(0,row).boxed()
                 .collect(Collectors.mapping(e->Arrays.asList(
                         ll.get(e).get(0)
                         ,ll.get(e).get(2)
@@ -98,13 +130,76 @@ public class App {
                         ,ll.get(e).get(6)
                 ),Collectors.toList()));
 
+        ll_rearrange.stream().limit(30).forEach(l-> System.out.println(l));
+//[java.lang.Thread, 00001, 00001, CCCCC-00, CCCCC-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00001, CCCCC-01, CCCCC-01-定数名, NORM_PRIORITY]
+//[java.lang.Thread, 00001, 00002, CCCCC-00, CCCCC-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00002, CCCCC-01, CCCCC-01-定数名, MAX_PRIORITY]
+//[java.lang.Thread, 00001, 00003, CCCCC-00, CCCCC-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00003, CCCCC-01, CCCCC-01-定数名, MIN_PRIORITY]
+//[java.lang.Thread, 00001, 00004, MMMMM-00, MMMMM-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00004, MMMMM-01, MMMMM-01-アクセス修飾子, public final]
+//[java.lang.Thread, 00001, 00004, MMMMM-02, MMMMM-02-戻り値の型, boolean]
+//[java.lang.Thread, 00001, 00004, MMMMM-03, MMMMM-03-メソッド名, isDaemon]
+//[java.lang.Thread, 00001, 00004, MMMMM-04, MMMMM-04-可変長引数があるか, false]
+//[java.lang.Thread, 00001, 00004, MMMMM-05, MMMMM-05-引数の個数, 0]
+//[java.lang.Thread, 00001, 00004, MMMMM-06, MMMMM-06-型パラメータリスト, ]
+//[java.lang.Thread, 00001, 00004, MMMMM-07, MMMMM-07-型パラメータ記号リスト, ]
+//[java.lang.Thread, 00001, 00004, MMMMM-08, MMMMM-08-引数の型リスト, ]
+//[java.lang.Thread, 00001, 00004, MMMMM-09, MMMMM-09-仮引数の変数名リスト, ]
+//[java.lang.Thread, 00001, 00005, MMMMM-00, MMMMM-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00005, MMMMM-01, MMMMM-01-アクセス修飾子, public]
+//[java.lang.Thread, 00001, 00005, MMMMM-02, MMMMM-02-戻り値の型, java.lang.StackTraceElement[]]
+//[java.lang.Thread, 00001, 00005, MMMMM-03, MMMMM-03-メソッド名, getStackTrace]
+//[java.lang.Thread, 00001, 00005, MMMMM-04, MMMMM-04-可変長引数があるか, false]
+//[java.lang.Thread, 00001, 00005, MMMMM-05, MMMMM-05-引数の個数, 0]
+//[java.lang.Thread, 00001, 00005, MMMMM-06, MMMMM-06-型パラメータリスト, ]
+//[java.lang.Thread, 00001, 00005, MMMMM-07, MMMMM-07-型パラメータ記号リスト, ]
+//[java.lang.Thread, 00001, 00005, MMMMM-08, MMMMM-08-引数の型リスト, ]
+//[java.lang.Thread, 00001, 00005, MMMMM-09, MMMMM-09-仮引数の変数名リスト, ]
+//[java.lang.Thread, 00001, 00006, MMMMM-00, MMMMM-00-クラス名, java.lang.Thread]
+//[java.lang.Thread, 00001, 00006, MMMMM-01, MMMMM-01-アクセス修飾子, public final]
+//[java.lang.Thread, 00001, 00006, MMMMM-02, MMMMM-02-戻り値の型, void]
+//[java.lang.Thread, 00001, 00006, MMMMM-03, MMMMM-03-メソッド名, join]
+
         CrossTab crossTab = new CrossTab();
-        crossTab(ll_rearrage,4,6,crossTab);
+        crossTab(ll_rearrange,4,6,crossTab);
 
         Stream.of(crossTab.getTblHead()).forEach(e-> System.out.println(e));
-        crossTab.getTblBody().entrySet().stream()
+        crossTab.getTblBody().entrySet().stream().limit(30)
                 .sorted(Comparator.comparing(e->e.getKey()))
-                .forEach(e->System.out.printf("%s\n",e.getKey()+COL_SEPARATOR+e.getValue()));
+                .forEach(e->System.out.println(e.getKey()+COL_SEPARATOR+e.getValue()));
+//        行番号	CCCCC-00-クラス名	CCCCC-01-定数名	MMMMM-00-クラス名	MMMMM-01-アクセス修飾子	MMMMM-02-戻り値の型	MMMMM-03-メソッド名	MMMMM-04-可変長引数があるか	MMMMM-05-引数の個数	MMMMM-06-型パラメータリスト	MMMMM-07-型パラメータ記号リスト	MMMMM-08-引数の型リスト	MMMMM-09-仮引数の変数名リスト
+//        java.lang.ClassLoader-00002-00053			java.lang.ClassLoader	public	java.lang.String	toString	false	0
+//        java.lang.ClassLoader-00002-00054			java.lang.ClassLoader	public static	java.io.InputStream	getSystemResourceAsStream	false	1			java.lang.String	arg0
+//        java.lang.ClassLoader-00002-00055			java.lang.ClassLoader	public	java.lang.Class<?>	loadClass	false	1			java.lang.String	arg0
+//        java.lang.ClassLoader-00002-00080			java.lang.ClassLoader	public final native	java.lang.Class<?>	getClass	false	0
+//        java.lang.ClassLoader-00002-00081			java.lang.ClassLoader	public final native	void	notifyAll	false	0
+//        java.lang.Thread-00001-00001	java.lang.Thread	NORM_PRIORITY
+//        java.lang.Thread-00001-00002	java.lang.Thread	MAX_PRIORITY
+//        java.lang.Thread-00001-00003	java.lang.Thread	MIN_PRIORITY
+//        java.lang.Thread-00001-00004			java.lang.Thread	public final	boolean	isDaemon	false	0
+//        java.lang.Thread-00001-00005			java.lang.Thread	public	java.lang.StackTraceElement[]	getStackTrace	false	0
+//        java.lang.Thread-00001-00006			java.lang.Thread	public final	void	join	false	0
+//        java.lang.Thread-00001-00007			java.lang.Thread	public final synchronized	void	join	false	2			long,int	arg0,arg1
+//        java.lang.Thread-00001-00008			java.lang.Thread	public final synchronized	void	join	false	1			long	arg0
+//        java.lang.Thread-00001-00009			java.lang.Thread	public	boolean	equals	false	1			java.lang.Object	arg0
+//        java.lang.Thread-00001-00030			java.lang.Thread	public static	boolean	interrupted	false	0
+//        java.lang.Thread-00001-00031			java.lang.Thread	public final native	void	notifyAll	false	0
+//        java.lang.Thread-00001-00032			java.lang.Thread	public static native	void	yield	false	0
+//        java.lang.Thread-00001-00033			java.lang.Thread	public static	void	sleep	false	2			long,int	arg0,arg1
+//        java.lang.Thread-00001-00034			java.lang.Thread	public static native	void	sleep	false	1			long	arg0
+//        java.lang.Thread-00001-00035			java.lang.Thread	public static	int	enumerate	false	1			java.lang.Thread[]	arg0
+//        java.lang.Thread-00001-00040			java.lang.Thread	public	java.lang.Thread$State	getState	false	0
+//        java.lang.Thread-00001-00041			java.lang.Thread	public static native	boolean	holdsLock	false	1			java.lang.Object	arg0
+//        java.lang.Thread-00001-00042			java.lang.Thread	public final	void	setDaemon	false	1			boolean	arg0
+//        java.lang.Thread-00001-00043			java.lang.Thread	public	java.lang.String	toString	false	0
+//        java.lang.Thread-00001-00044			java.lang.Thread	public native	int	countStackFrames	false	0
+//        java.lang.Thread-00001-00045			java.lang.Thread	public final	int	getPriority	false	0
+//        java.lang.Thread-00001-00046			java.lang.Thread	public static	void	dumpStack	false	0
+//        java.lang.Thread-00001-00047			java.lang.Thread	public	boolean	isInterrupted	false	0
+//        java.lang.Thread-00001-00048			java.lang.Thread	public final	void	resume	false	0
+//        java.lang.Thread-00001-00049			java.lang.Thread	public static	int	activeCount	false	0
     }
     @SafeVarargs
     private static <E> List<E> flattenList(Collection<E>... liz){
@@ -146,14 +241,14 @@ public class App {
                                 ,Collectors.mapping(e->e.getValue().values().stream().limit(1).collect(Collectors.joining())
                                                     ,Collectors.joining(COL_SEPARATOR))));
 
-        Integer mx = tblHead.length()-tblHead.replace("\t","").length()+1;
+        Integer mx = tblHead.length()-tblHead.replace(COL_SEPARATOR,"").length()+1;
 
         //PostProcess
         Map<String,String> tblBody = midBody.entrySet().stream()
                 .collect(Collectors.toMap(e->e.getKey()
-                        ,e->(e.getValue().length()-e.getValue().replace("\t","").length()+1)==mmm.size()?
-                                COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace("\t","").length()+1)-1)+e.getValue()
-                                :e.getValue()+COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace("\t","").length()+1)-1)));
+                        ,e->(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)==mmm.size()?
+                                COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)-1)+e.getValue()
+                                :e.getValue()+COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)-1)));
 
         //Set
         crossTab.setTblHead(tblHead);

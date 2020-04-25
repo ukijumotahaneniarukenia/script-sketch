@@ -4,15 +4,15 @@ require 'faker'
 
 Faker::Config.locale=:ja
 
-def usage
-  f = File.basename(__FILE__)
-  puts <<~EOF
-Usage:
-  IN : seq 10 | ./#{f} or ./#{f} 2
-  OUT:
-EOF
-  return 0
-end
+#def usage
+#  f = File.basename(__FILE__)
+#  puts <<~EOF
+#Usage:
+#  IN : seq 10 | ./#{f} or ./#{f} 2
+#  OUT:
+#EOF
+#  return 0
+#end
 
 def mock(ary)
   ary.map do|e|
