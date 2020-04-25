@@ -2,6 +2,8 @@
 
   - https://yutarine.blogspot.com/2017/04/uniutils-unicode.html
 
+  - http://rpm.pbone.net/index.php3/stat/4/idpl/55500312/dir/centos_6/com/uniutils-2.27-6.6.x86_64.rpm.html
+
 - IN
 
 ```
