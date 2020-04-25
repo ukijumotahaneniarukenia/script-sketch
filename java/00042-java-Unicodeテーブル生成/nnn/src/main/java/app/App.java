@@ -559,9 +559,9 @@ public class App {
     private final static Map<String, List<String>> prepareParseOptPtn = new LinkedHashMap<>(){{
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
-        put(SEARCH_MODE_WORD, Arrays.asList("false","1", "-w.*", "--w.*", "-word.*", "--word.*")); //-w
-        put(SEARCH_MODE_NGRAM, Arrays.asList("false","2", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
-        put(SEARCH_MODE_HASH_KEY, Arrays.asList("false","1", "-h.*", "--h.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
+        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*")); //-w
+        put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-h.*", "--h.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
     }};
 
     private static Map<String, String> prepareParseOpts(Map<String, List<String>> prepareParseOptPtn){
@@ -594,32 +594,32 @@ public class App {
                 rt.put(OPTION_HELP, Arrays.asList(OPTION_ON));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_VERSION))){
                 rt.put(OPTION_VERSION, Arrays.asList(OPTION_ON));
-            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(SEARCH_MODE_NGRAM))){
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NGRAM_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_NGRAM).get(1))!=l.size()-1){
+                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_NGRAM_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    OPTION_USAGE(SEARCH_MODE_NGRAM);
+                    OPTION_USAGE(OPTION_NGRAM_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(SEARCH_MODE_NGRAM, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(SEARCH_MODE_NGRAM)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_NGRAM).get(1))+1)));
+                    rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_NGRAM_SEARCH).get(1))+1)));
                 }
-            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(SEARCH_MODE_WORD))){
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_WORD_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_WORD).get(1))!=l.size()-1){
+                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_WORD_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    OPTION_USAGE(SEARCH_MODE_WORD);
+                    OPTION_USAGE(OPTION_WORD_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(SEARCH_MODE_WORD, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(SEARCH_MODE_WORD)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_WORD).get(1))+1)));
+                    rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_WORD_SEARCH).get(1))+1)));
                 }
-            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(SEARCH_MODE_HASH_KEY))){
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HASH_KEY_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_HASH_KEY).get(1))!=l.size()-1){
+                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    OPTION_USAGE(SEARCH_MODE_HASH_KEY);
+                    OPTION_USAGE(OPTION_HASH_KEY_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(SEARCH_MODE_HASH_KEY, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(SEARCH_MODE_HASH_KEY)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(SEARCH_MODE_HASH_KEY).get(1))+1)));
+                    rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))+1)));
                 }
             }else{
                 OPTION_USAGE(OPTION_HELP);
@@ -637,14 +637,14 @@ public class App {
         if(!rt.containsKey(OPTION_VERSION)){
             rt.put(OPTION_VERSION,Arrays.asList(OPTION_OFF));
         }
-        if(!rt.containsKey(SEARCH_MODE_WORD)){
-            rt.put(SEARCH_MODE_WORD,Arrays.asList(OPTION_OFF));
+        if(!rt.containsKey(OPTION_WORD_SEARCH)){
+            rt.put(OPTION_WORD_SEARCH,Arrays.asList(OPTION_OFF));
         }
-        if(!rt.containsKey(SEARCH_MODE_NGRAM)){
-            rt.put(SEARCH_MODE_NGRAM,Arrays.asList(OPTION_OFF));
+        if(!rt.containsKey(OPTION_NGRAM_SEARCH)){
+            rt.put(OPTION_NGRAM_SEARCH,Arrays.asList(OPTION_OFF));
         }
-        if(!rt.containsKey(SEARCH_MODE_HASH_KEY)){
-            rt.put(SEARCH_MODE_HASH_KEY,Arrays.asList(OPTION_OFF));
+        if(!rt.containsKey(OPTION_HASH_KEY_SEARCH)){
+            rt.put(OPTION_HASH_KEY_SEARCH,Arrays.asList(OPTION_OFF));
         }
 
         return rt;
@@ -656,44 +656,44 @@ public class App {
                 .filter(key->mainProcessArgs.get(key).contains(OPTION_ON)).count();
     }
 
-    private static void mainProcess (Map<String, List<String>> mainProcessArgs) {
-//        System.out.println(Stream.generate(()->"=").limit(100).collect(Collectors.joining()));
-//        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
-        finish : {
-            if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
-                OPTION_USAGE(OPTION_USAGE);
-                break finish;
-            }
-            if(showCmdInfo(mainProcessArgs,OPTION_VERSION)){
-                OPTION_USAGE(OPTION_VERSION);
-                break finish;
-            }
-            for(Map.Entry<String,List<String>> entry : mainProcessArgs.entrySet()){
-                switch (entry.getKey()){
-                    case SEARCH_MODE_WORD:
-                        if(entry.getValue().contains(OPTION_OFF)){
-                            break;
-                        }else{
-                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
-                                genRandomNumber(entry.getValue().subList(2,entry.getValue().size()));
-                                break;
-                            }
-                        }
-                    case SEARCH_MODE_WORD:
-                        if(entry.getValue().contains(OPTION_OFF)){
-                            break;
-                        }else{
-                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
-                                genHumanName(entry.getValue().subList(2,entry.getValue().size()));
-                                break;
-                            }
-                        }
-                    default:
-                        break finish;
-                }
-            }
-        }
-    }
+//    private static void mainProcess (Map<String, List<String>> mainProcessArgs) {
+////        System.out.println(Stream.generate(()->"=").limit(100).collect(Collectors.joining()));
+////        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+//        finish : {
+//            if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
+//                OPTION_USAGE(OPTION_USAGE);
+//                break finish;
+//            }
+//            if(showCmdInfo(mainProcessArgs,OPTION_VERSION)){
+//                OPTION_USAGE(OPTION_VERSION);
+//                break finish;
+//            }
+//            for(Map.Entry<String,List<String>> entry : mainProcessArgs.entrySet()){
+//                switch (entry.getKey()){
+//                    case SEARCH_MODE_WORD:
+//                        if(entry.getValue().contains(OPTION_OFF)){
+//                            break;
+//                        }else{
+//                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
+//                                genRandomNumber(entry.getValue().subList(2,entry.getValue().size()));
+//                                break;
+//                            }
+//                        }
+//                    case SEARCH_MODE_WORD:
+//                        if(entry.getValue().contains(OPTION_OFF)){
+//                            break;
+//                        }else{
+//                            if(entry.getValue().get(1).contains(entry.getValue().get(0))){
+//                                genHumanName(entry.getValue().subList(2,entry.getValue().size()));
+//                                break;
+//                            }
+//                        }
+//                    default:
+//                        break finish;
+//                }
+//            }
+//        }
+//    }
     
     private static String checkArgs(Integer s,Integer e,Integer n,final List<String> l){
         Pattern p = Pattern.compile("\\D");
@@ -711,23 +711,24 @@ public class App {
     }
 
     public static void main(String... args) {
-
-        int ret=SUCCESS_STATUS;
-
-        if(args.length!=0){
-            if(args.length%4!=0){
-                System.exit(FAILURE_STATUS);
-            }else{
-                processArgs(Arrays.asList(args));
-            }
-        }else{
-
-        }
-
-        Set<Integer> rt = searchCodePointStartEnd(DEFAULT_SEARCH_MODE,DEFAULT_IDX_INPUT_PTN);
-
-        int cnt = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
-        System.out.println(cnt);
-        System.exit(ret);
+        Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(prepareParseOptPtn));
+        mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+//        int ret=SUCCESS_STATUS;
+//
+//        if(args.length!=0){
+//            if(args.length%4!=0){
+//                System.exit(FAILURE_STATUS);
+//            }else{
+//                processArgs(Arrays.asList(args));
+//            }
+//        }else{
+//
+//        }
+//
+//        Set<Integer> rt = searchCodePointStartEnd(DEFAULT_SEARCH_MODE,DEFAULT_IDX_INPUT_PTN);
+//
+//        int cnt = printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+//        System.out.println(cnt);
+//        System.exit(ret);
     }
 }
