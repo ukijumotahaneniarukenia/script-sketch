@@ -133,18 +133,39 @@ public class App {
     private static String cpToStr(Integer n) {
         return new String(Character.toChars(n));
     }
+    static Function<Integer, String> cpToStr = (n)-> {
+        return new String(Character.toChars(n));
+    };
+    private static String numToStr(Integer n) {
+        return String.valueOf(n);
+    }
+    static Function<Integer, String> numToStr = (n)-> {
+        return String.valueOf(n);
+    };
     private static String cpToUniScriptName(Integer n){
         return Character.UnicodeScript.of(n).name();
     }
+    static Function<Integer, String> cpToUniScriptName = (n)-> {
+        return Character.UnicodeScript.of(n).name();
+    };
     private static String cpToUniBlockName(Integer n){
         return String.valueOf(Character.UnicodeBlock.of(n));
     }
+    static Function<Integer, String> cpToUniBlockName = (n)-> {
+        return String.valueOf(Character.UnicodeBlock.of(n));
+    };
     private static String cpToUniName(Integer n){
         return Character.getName(n);
     }
+    static Function<Integer, String> cpToUniName = (n)-> {
+        return Character.getName(n);
+    };
     private static String strToUnicode(String s){
         return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
     }
+    static Function<String, String> strToUnicode = (s)-> {
+        return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
+    };
     private static String strToUtf8(String s) {
         byte[] b = s.getBytes(StandardCharsets.UTF_8);
         Pattern p = Pattern.compile("^1*0");
@@ -162,6 +183,23 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
     }
+    static Function<String, String> strToUtf8 = (s)-> {
+        byte[] b = s.getBytes(StandardCharsets.UTF_8);
+        Pattern p = Pattern.compile("^1*0");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<b.length;i++){
+            String bin = hexToBin(String.format("%02X",b[i]));
+            Matcher mc = p.matcher(bin);
+            if(mc.find()){
+                if(2!=mc.group().length()){
+                    sb.append("\n"+binToHex(bin));
+                }else{
+                    sb.append(binToHex(bin));
+                }
+            }
+        }
+        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
+    };
     private static String strToUtf16(String s) {
         byte[] b = s.getBytes(StandardCharsets.UTF_16);
         StringBuilder sb = new StringBuilder();
@@ -178,6 +216,23 @@ public class App {
         }
         return sb.toString();
     }
+    static Function<String, String> strToUtf16 = (s)-> {
+        byte[] b = s.getBytes(StandardCharsets.UTF_8);
+        Pattern p = Pattern.compile("^1*0");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<b.length;i++){
+            String bin = hexToBin(String.format("%02X",b[i]));
+            Matcher mc = p.matcher(bin);
+            if(mc.find()){
+                if(2!=mc.group().length()){
+                    sb.append("\n"+binToHex(bin));
+                }else{
+                    sb.append(binToHex(bin));
+                }
+            }
+        }
+        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
+    };
     private static String strToUtf32(String s) {
         byte[] b = s.getBytes(Charset.forName("UTF-32"));
         StringBuilder sb = new StringBuilder();
@@ -191,14 +246,86 @@ public class App {
         }
         return sb.toString();
     }
+    static Function<String, String> strToUtf32 = (s)-> {
+        byte[] b = s.getBytes(StandardCharsets.UTF_8);
+        Pattern p = Pattern.compile("^1*0");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<b.length;i++){
+            String bin = hexToBin(String.format("%02X",b[i]));
+            Matcher mc = p.matcher(bin);
+            if(mc.find()){
+                if(2!=mc.group().length()){
+                    sb.append("\n"+binToHex(bin));
+                }else{
+                    sb.append(binToHex(bin));
+                }
+            }
+        }
+        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
+    };
+
     private static String strToNorm(String s, Normalizer.Form typ) {
         return Normalizer.normalize(s,typ);
     }
+    static BiFunction<String, Normalizer.Form, String> strToNorm = (s,typ)-> {
+        return Normalizer.normalize(s,typ);
+    };
+
+    private static <N,S> Map<N, List<S>> executeMkTbl(
+            N i
+            ,List<Function<N,S>> singleArgFunctionInNumOutStrList
+            ,List<Function<S,S>> singleArgFunctionInStrOutStrList
+            ,BiFunction<S,Normalizer.Form,S> multipleArgFunction
+            ,Normalizer.Form... norm
+    ){
+        Map<N, List<S>> rt = new LinkedHashMap<>();
+
+        Function<N,S> numToStr = singleArgFunctionInNumOutStrList.get(0); //numToStr(i)
+        Function<N,S> cpToStr = singleArgFunctionInNumOutStrList.get(1); //cpToStr(i)
+
+        S dest = null;
+        if(norm.length>0){
+            //正規化有りの場合
+            dest = multipleArgFunction.apply(cpToStr.apply(i),norm[0]);//strToNorm(cpToStr(i), Normalizer.Form.NFD)
+        }
+
+        for(int j=2;j<singleArgFunctionInNumOutStrList.subList(2,singleArgFunctionInNumOutStrList.size()).size();j++){
+            rt.put(i,Arrays.asList(
+                    numToStr.apply(i)
+                    ,cpToStr.apply(i)
+                    ,Optional.ofNullable(dest).orElse(singleArgFunctionInNumOutStrList.get(j).apply(i))
+            ));
+        }
+
+        for(int j=0;j<singleArgFunctionInStrOutStrList.size();j++){
+            //デフォルト値の設定
+            if(rt.containsKey(i)){
+                //紐づくキーがあれば、リスト追加
+                rt.get(i).add(Optional.ofNullable(singleArgFunctionInStrOutStrList.get(j).apply(dest)).orElse(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i))));
+            }else{
+                //紐づくキーは直前のループで追加済み
+            }
+        }
+
+        return rt;
+    }
+
     private static Map<Integer, List<String>> mkTblCore(Integer s,Integer e) {
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction));
+        }
+        return rt;
+    }
+
+    private static Map<Integer, List<String>> mkTblCore_mock(Integer s,Integer e) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
         for(int i=s;i<=e;i++){
             rt.put(i, Arrays.asList(
-                    String.valueOf(i)
+                    numToStr(i)
                     ,cpToStr(i)
                     ,cpToUniName(i)
                     ,cpToUniScriptName(i)
@@ -211,11 +338,23 @@ public class App {
         }
         return rt;
     }
+
     private static Map<Integer, List<String>> mkTblNfc(Integer s,Integer e) {
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFC));
+        }
+        return rt;
+    }
+
+    private static Map<Integer, List<String>> mkTblNfc_mock(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
                 i->i
                 ,i->Arrays.asList(
-                        String.valueOf(i)
+                        numToStr(i)
                         ,cpToStr(i)
                         ,cpToUniName(i)
                         ,cpToUniScriptName(i)
@@ -230,11 +369,12 @@ public class App {
                 ,LinkedHashMap::new
         ));
     }
+
     private static Map<Integer, List<String>> mkTblNfd(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
                 i->i
                 ,i->Arrays.asList(
-                        String.valueOf(i)
+                        numToStr(i)
                         ,cpToStr(i)
                         ,cpToUniName(i)
                         ,cpToUniScriptName(i)
@@ -253,7 +393,7 @@ public class App {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
                 i->i
                 ,i->Arrays.asList(
-                        String.valueOf(i)
+                        numToStr(i)
                         ,cpToStr(i)
                         ,cpToUniName(i)
                         ,cpToUniScriptName(i)
@@ -272,7 +412,7 @@ public class App {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
                 i->i
                 ,i->Arrays.asList(
-                        String.valueOf(i)
+                        numToStr(i)
                         ,cpToStr(i)
                         ,cpToUniName(i)
                         ,cpToUniScriptName(i)
