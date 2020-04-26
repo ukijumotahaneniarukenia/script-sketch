@@ -11,6 +11,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+
+//TODO
+//1. 全件取得機能
+//2. 取得列のサプレス機能
+//3. レンジ指定の全件取得機能
+//4. 新規検索方法の追加随時
+//5. インデックスデータのユーザー指定機能
+//6. 5.のデータに対するUnicodeテーブルへの突合せ結果の一覧表示
+//7. ヘルプのリッチ化
+//8. 検索結果件数の表示
+//9. 正規表現の変数化 グラム化インデックス粒度を可変にする
+
 public class App {
 
     private static Integer SUCCESS_STATUS=0;
