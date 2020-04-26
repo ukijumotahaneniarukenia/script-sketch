@@ -1,6 +1,5 @@
 package app;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.*;
@@ -106,9 +105,11 @@ public class App {
         }
     }
     private static void optionHelp(){
+        //TODO ヒアドキュメント対応する
         System.out.println("optionHelp");
     }
     private static void optionVersion(){
+        //TODO ヒアドキュメント対応する
         System.out.println(ARTIFACT_ID);
     }
     private static void usageWordSearch(){
@@ -124,65 +125,44 @@ public class App {
         System.out.println("usageHashKeySearch");
     }
 
+    @SafeVarargs
+    private static <E> List<E> flattenList(Collection<E>... liz){
+        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
+    }
+
     private static String hexToBin(String s){
         return Integer.toBinaryString(Integer.parseInt(s,16));
     }
     private static String binToHex(String s){
         return Integer.toHexString(Integer.parseInt(s,2));
     }
-    private static String cpToStr(Integer n) {
-        return new String(Character.toChars(n));
+    private static String cpToUniName(Integer n){
+        return Character.getName(n);
+    }
+    private static String cpToUniScriptName(Integer n){
+        return Character.UnicodeScript.of(n).name();
+    }
+    private static String cpToUniBlockName(Integer n){
+        return String.valueOf(Character.UnicodeBlock.of(n));
     }
     static Function<Integer, String> cpToStr = (n)-> {
         return new String(Character.toChars(n));
     };
-    private static String numToStr(Integer n) {
-        return String.valueOf(n);
-    }
     static Function<Integer, String> numToStr = (n)-> {
         return String.valueOf(n);
     };
-    private static String cpToUniScriptName(Integer n){
-        return Character.UnicodeScript.of(n).name();
-    }
+    static BiFunction<String, Normalizer.Form, String> strToNorm = (s,typ)-> {
+        return Normalizer.normalize(s,typ);
+    };
     static Function<Integer, String> cpToUniScriptName = (n)-> {
         return Character.UnicodeScript.of(n).name();
     };
-    private static String cpToUniBlockName(Integer n){
-        return String.valueOf(Character.UnicodeBlock.of(n));
-    }
     static Function<Integer, String> cpToUniBlockName = (n)-> {
         return String.valueOf(Character.UnicodeBlock.of(n));
     };
-    private static String cpToUniName(Integer n){
-        return Character.getName(n);
-    }
     static Function<Integer, String> cpToUniName = (n)-> {
         return Character.getName(n);
     };
-    private static String strToUnicode(String s){
-        return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
-    }
-    static Function<String, String> strToUnicode = (s)-> {
-        return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
-    };
-    private static String strToUtf8(String s) {
-        byte[] b = s.getBytes(StandardCharsets.UTF_8);
-        Pattern p = Pattern.compile("^1*0");
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<b.length;i++){
-            String bin = hexToBin(String.format("%02X",b[i]));
-            Matcher mc = p.matcher(bin);
-            if(mc.find()){
-                if(2!=mc.group().length()){
-                    sb.append("\n"+binToHex(bin));
-                }else{
-                    sb.append(binToHex(bin));
-                }
-            }
-        }
-        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
-    }
     static Function<String, String> strToUtf8 = (s)-> {
         byte[] b = s.getBytes(StandardCharsets.UTF_8);
         Pattern p = Pattern.compile("^1*0");
@@ -200,22 +180,6 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
     };
-    private static String strToUtf16(String s) {
-        byte[] b = s.getBytes(StandardCharsets.UTF_16);
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<b.length;i++){
-            String hex = String.format("%02X",b[i]);
-            if(hex.equals("FE")||hex.equals("FF")){
-
-            }else if((sb.length()-sb.toString().split("-").length+1)%4==0&&0<sb.length()){
-                sb.append("-"+hex);
-            }
-            else{
-                sb.append(hex);
-            }
-        }
-        return sb.toString();
-    }
     static Function<String, String> strToUtf16 = (s)-> {
         byte[] b = s.getBytes(StandardCharsets.UTF_8);
         Pattern p = Pattern.compile("^1*0");
@@ -233,19 +197,6 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
     };
-    private static String strToUtf32(String s) {
-        byte[] b = s.getBytes(Charset.forName("UTF-32"));
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<b.length;i++){
-            String hex = String.format("%02X",b[i]);
-            if((sb.length()-sb.toString().split("-").length+1)%8==0&&0<sb.length()) {
-                sb.append("-" + hex);
-            }else{
-                sb.append(hex);
-            }
-        }
-        return sb.toString();
-    }
     static Function<String, String> strToUtf32 = (s)-> {
         byte[] b = s.getBytes(StandardCharsets.UTF_8);
         Pattern p = Pattern.compile("^1*0");
@@ -263,14 +214,9 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
     };
-
-    private static String strToNorm(String s, Normalizer.Form typ) {
-        return Normalizer.normalize(s,typ);
-    }
-    static BiFunction<String, Normalizer.Form, String> strToNorm = (s,typ)-> {
-        return Normalizer.normalize(s,typ);
+    static Function<String, String> strToUnicode = (s)-> {
+        return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
     };
-
     private static <N,S> Map<N, List<S>> executeMkTbl(
             N i
             ,List<Function<N,S>> singleArgFunctionInNumOutStrList
@@ -283,14 +229,6 @@ public class App {
         Function<N,S> numToStr = singleArgFunctionInNumOutStrList.get(0); //numToStr(i)
         Function<N,S> cpToStr = singleArgFunctionInNumOutStrList.get(1); //cpToStr(i)
 
-        S dest = null;
-        if(norm.length>0 && norm[0]!=null){
-            //正規化有りの場合
-            dest = multipleArgFunction.apply(cpToStr.apply(i),norm[0]);//strToNorm(cpToStr(i), Normalizer.Form.NFD)
-        }else{
-            //正規化無しの場合
-        }
-
         List<S> l = new ArrayList<>();
         l.add(numToStr.apply(i));
         l.add(cpToStr.apply(i));
@@ -298,6 +236,16 @@ public class App {
             l.add(singleArgFunctionInNumOutStrList.get(j).apply(i));
         }
         rt.put(i,l);
+
+        S dest = null;
+        if(norm.length>0 && norm[0]!=null){
+            //正規化有りの場合
+            dest = multipleArgFunction.apply(cpToStr.apply(i),norm[0]);//strToNorm(cpToStr(i), Normalizer.Form.NFD)
+            l.add(dest);
+            rt.put(i,l);
+        }else{
+            //正規化無しの場合
+        }
 
         for(int j=0;j<singleArgFunctionInStrOutStrList.size();j++){
            //デフォルト値の設定
@@ -330,56 +278,6 @@ public class App {
 
         for(int i=s;i<=e;i++){
             rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,norm));
-        }
-        return rt;
-    }
-    private static Map<Integer, List<String>> mkTblCore(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction));
-        }
-        return rt;
-    }
-    private static Map<Integer, List<String>> mkTblNfc(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFC));
-        }
-        return rt;
-    }
-    private static Map<Integer, List<String>> mkTblNfd(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFD));
-        }
-        return rt;
-    }
-    private static Map<Integer, List<String>> mkTblNfkc(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFKC));
-        }
-        return rt;
-    }
-    private static Map<Integer, List<String>> mkTblNfkd(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFKD));
         }
         return rt;
     }
@@ -560,13 +458,6 @@ public class App {
         //https://qiita.com/kiida/items/9d26b850194fa1a02e67
         System.exit(0);
     }
-
-    private static Set<Integer> searchCodePointStartEndWithSearchModeWord(Map<String,String> searchCondition){
-        Set<Integer> rt = null;
-
-        return rt;
-    }
-
     private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
         Set<Integer> rt = null;
         switch (searchCondition.get(MAPKEY_SEARCH_MODE)){
@@ -624,8 +515,6 @@ public class App {
         }
         return rt;
     }
-
-
     private static boolean argsRangeChk(Map<String,Map<String,String>> m){
         int b = 0;
         for(Map.Entry<String,Map<String,String>> e1 : m.entrySet()){
@@ -646,7 +535,6 @@ public class App {
         }
         return b==0?true:false;
     }
-
     private static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> mainProcessArgs){
         Map<String,Map<String,String>> rt = new LinkedHashMap<>();
         for(Map.Entry<String, List<String>> entry : mainProcessArgs.entrySet()){
@@ -669,7 +557,6 @@ public class App {
         }
         return rt;
     }
-
     private static Map<String, String> prepareParseOpts(Map<String, List<String>> prepareParseOptPtn){
         Map<String, String> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : prepareParseOptPtn.entrySet()){
@@ -685,12 +572,6 @@ public class App {
         }
         return rt;
     }
-
-    @SafeVarargs
-    private static <E> List<E> flattenList(Collection<E>... liz){
-        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
-    }
-
     private static Map<String, List<String>> execParseOpts (List<String> cmdLineArgs,Map<String, String> prepareParseOpts){
         Map<String, List<String>> rt = new LinkedHashMap<>();
         //引数処理
@@ -754,13 +635,11 @@ public class App {
 
         return rt;
     }
-
     private static boolean showCmdInfo(Map<String, List<String>> mainProcessArgs,String... s){
         return 0!=mainProcessArgs.keySet().stream()
                 .filter(key->Stream.of(s).anyMatch(ss->ss.contains(key)))
                 .filter(key->mainProcessArgs.get(key).contains(OPTION_ON)).count();
     }
-
     private static Integer mainProcess (Map<String, List<String>> mainProcessArgs,Map<String,Map<String,String>> mainReStyleProcessArgs) {
         int ret = SUCCESS_STATUS;
         finish : {
@@ -780,7 +659,6 @@ public class App {
         }
         return ret;
     }
-
     private static Integer ptnCheck(Map<String,Map<String,String>> mainReStyleProcessArgs){
         int w = 0;
         int n = 0;
@@ -814,7 +692,6 @@ public class App {
         }
         return w+n+h;
     }
-
     private static void canYouHelpMe(Map<String, List<String>> mainProcessArgs){
         for(Map.Entry<String, List<String>> entry : mainProcessArgs.entrySet()){
             if(Stream.of(OPTION_HELP).anyMatch(e->e.contains(entry.getKey())) && entry.getValue().get(0).contains(OPTION_ON)){
@@ -831,7 +708,6 @@ public class App {
             }
         }
     }
-
     public static void main(String... args) {
         int ret;
 
