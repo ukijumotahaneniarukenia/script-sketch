@@ -27,6 +27,8 @@ import java.util.stream.Stream;
 
 public class App {
 
+    private static final String PROGRAM_NAME = "unidat";
+
     private static Integer SUCCESS_STATUS=0;
     private static Integer FAILURE_STATUS=1;
     private static String DEFAULT_SEARCH_KEY_WORD="KATAKANA";
@@ -64,6 +66,30 @@ public class App {
     private final static String OPTION_NGRAM_SEARCH = "NGRAM_SEARCH";
     private final static String OPTION_HASH_KEY_SEARCH = "HASH_KEY_SEARCH";
 
+    private final static List<String> OPTION_MODE_LIST = Arrays.asList(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+
+    private final static String OPTION_WORD_SEARCH_SUBPTN = "WORD_SEARCH_SUBPTN";
+    private final static String OPTION_NGRAM_SEARCH_SUBPTN = "NGRAM_SEARCH_SUBPTN";
+    private final static String OPTION_HASH_KEY_SEARCH_SUBPTN = "HASH_KEY_SEARCH_SUBPTN";
+
+    private final static List<String> OPTION_SUBPTN_LIST = Arrays.asList(OPTION_WORD_SEARCH_SUBPTN,OPTION_NGRAM_SEARCH_SUBPTN,OPTION_HASH_KEY_SEARCH_SUBPTN);
+
+    private static final String OPTION_IDX_INPUT_UNICODE_NAME = "IDX_INPUT_UNICODE_NAME";
+    private static final String OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME = "IDX_INPUT_UNICODE_SCRIPT_NAME";
+    private static final String OPTION_IDX_INPUT_UNICODE_BLOCK_NAME = "IDX_INPUT_UNICODE_BLOCK_NAME";
+
+    private final static List<String> OPTION_IDX_INPUT_LIST = Arrays.asList(OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME);
+
+    private static final String OPTION_NORM_GRP_CORE="NORM_GRP_CORE";
+    private static final String OPTION_NORM_GRP_NFC="NORM_GRP_NFC";
+    private static final String OPTION_NORM_GRP_NFD="NORM_GRP_NFD";
+    private static final String OPTION_NORM_GRP_NFKC="NORM_GRP_NFKC";
+    private static final String OPTION_NORM_GRP_NFKD="NORM_GRP_NFKD";
+
+    private final static List<String> OPTION_NORM_GRP_LIST = Arrays.asList(OPTION_NORM_GRP_CORE,OPTION_NORM_GRP_NFC,OPTION_NORM_GRP_NFD,OPTION_NORM_GRP_NFKC,OPTION_NORM_GRP_NFKD);
+
+    private final static List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
+
     private final static String ARTIFACT_ID = "1-0-0";
     private final static String ARGS_SEPARATOR = ":";
 
@@ -77,26 +103,15 @@ public class App {
     private final static Map<String, List<String>> prepareParseOptPtn = new LinkedHashMap<>(){{
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
-        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*")); //-w
+        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-{1,}hh.*", "-{1,}hash.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
     }};
-
     private final static Map<String, List<String>> prepareParseOptPtnName = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
     }};
-
-
-    //ASIS
-    private final static Map<String, Map<String,String>> prepareParseOptPtnRangeChk = new LinkedHashMap<>(){{
-        put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
-        put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
-        put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
-    }};
-
-    //TOBE
     private final static Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4"));
         put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7"));
@@ -107,7 +122,6 @@ public class App {
         put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
         put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
     }};
-
     private static void optionUsage(String... optionPtn){
         for(String option : optionPtn){
             switch (option){
@@ -141,10 +155,27 @@ public class App {
         System.out.println(ARTIFACT_ID);
     }
     private static void usageWordSearch(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageWordSearch");
+        //https://qiita.com/munieru_jp/items/02533ebe5c822e6e29bb#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+        int cnt=0;
+        for(int i=0;i<OPTION_MODE_LIST.subList(0,1).size();i++){
+            for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
+                for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
+                    for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
+//                        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l),OPTION_SAMPLE_KEYWORD_LIST.get(cnt));
+                        System.out.printf("%s:" + "\n" + "[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -w:%s:%s:%s:%s\n"
+                                ,methodName
+                                ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
+                                ,PROGRAM_NAME,i+1,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
+                        );
+                        cnt++;
+                    }
+                }
+            }
+        }
     }
     private static void usageNgramSearch(){
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
         //TODO ヒアドキュメント対応する
         System.out.println("usageNgramSearch");
     }
