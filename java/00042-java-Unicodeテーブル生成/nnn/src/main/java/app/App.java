@@ -284,24 +284,32 @@ public class App {
         Function<N,S> cpToStr = singleArgFunctionInNumOutStrList.get(1); //cpToStr(i)
 
         S dest = null;
-        if(norm.length>0){
+        if(norm.length>0 && norm[0]!=null){
             //正規化有りの場合
             dest = multipleArgFunction.apply(cpToStr.apply(i),norm[0]);//strToNorm(cpToStr(i), Normalizer.Form.NFD)
+        }else{
+            //正規化無しの場合
         }
 
-        for(int j=2;j<singleArgFunctionInNumOutStrList.subList(2,singleArgFunctionInNumOutStrList.size()).size();j++){
-            rt.put(i,Arrays.asList(
-                    numToStr.apply(i)
-                    ,cpToStr.apply(i)
-                    ,Optional.ofNullable(dest).orElse(singleArgFunctionInNumOutStrList.get(j).apply(i))
-            ));
+        List<S> l = new ArrayList<>();
+        l.add(numToStr.apply(i));
+        l.add(cpToStr.apply(i));
+        for(int j=2;j<singleArgFunctionInNumOutStrList.size();j++){
+            l.add(singleArgFunctionInNumOutStrList.get(j).apply(i));
         }
+        rt.put(i,l);
 
         for(int j=0;j<singleArgFunctionInStrOutStrList.size();j++){
-            //デフォルト値の設定
+           //デフォルト値の設定
             if(rt.containsKey(i)){
                 //紐づくキーがあれば、リスト追加
-                rt.get(i).add(Optional.ofNullable(singleArgFunctionInStrOutStrList.get(j).apply(dest)).orElse(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i))));
+                if(dest==null){
+                    //正規化無しの場合
+                    rt.get(i).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i)))));
+                }else{
+                    //正規化有りの場合
+                    rt.get(i).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(dest))));
+                }
             }else{
                 //紐づくキーは直前のループで追加済み
             }
@@ -309,7 +317,22 @@ public class App {
 
         return rt;
     }
+    private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Normalizer.Form... norms) {
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
 
+        Normalizer.Form norm = null;
+        if(norms.length>0){
+            norm=norms[0];
+        }
+
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,norm));
+        }
+        return rt;
+    }
     private static Map<Integer, List<String>> mkTblCore(Integer s,Integer e) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
         List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
@@ -320,25 +343,6 @@ public class App {
         }
         return rt;
     }
-
-    private static Map<Integer, List<String>> mkTblCore_mock(Integer s,Integer e) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        for(int i=s;i<=e;i++){
-            rt.put(i, Arrays.asList(
-                    numToStr(i)
-                    ,cpToStr(i)
-                    ,cpToUniName(i)
-                    ,cpToUniScriptName(i)
-                    ,cpToUniBlockName(i)
-                    ,strToUtf8(cpToStr(i))//律速ボトルネック
-                    ,strToUtf16(cpToStr(i))//律速ボトルネック
-                    ,strToUtf32(cpToStr(i))//律速ボトルネック
-                    ,strToUnicode(cpToStr(i))//律速ボトルネック
-            ));
-        }
-        return rt;
-    }
-
     private static Map<Integer, List<String>> mkTblNfc(Integer s,Integer e) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
         List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
@@ -349,83 +353,35 @@ public class App {
         }
         return rt;
     }
-
-    private static Map<Integer, List<String>> mkTblNfc_mock(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
-                i->i
-                ,i->Arrays.asList(
-                        numToStr(i)
-                        ,cpToStr(i)
-                        ,cpToUniName(i)
-                        ,cpToUniScriptName(i)
-                        ,cpToUniBlockName(i)
-                        ,strToNorm(cpToStr(i), Normalizer.Form.NFC)
-                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFC))
-                )
-                ,((pre, post) -> post)
-                ,LinkedHashMap::new
-        ));
-    }
-
     private static Map<Integer, List<String>> mkTblNfd(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
-                i->i
-                ,i->Arrays.asList(
-                        numToStr(i)
-                        ,cpToStr(i)
-                        ,cpToUniName(i)
-                        ,cpToUniScriptName(i)
-                        ,cpToUniBlockName(i)
-                        ,strToNorm(cpToStr(i), Normalizer.Form.NFD)
-                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFD))
-                )
-                ,((pre, post) -> post)
-                ,LinkedHashMap::new
-        ));
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFD));
+        }
+        return rt;
     }
     private static Map<Integer, List<String>> mkTblNfkc(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
-                i->i
-                ,i->Arrays.asList(
-                        numToStr(i)
-                        ,cpToStr(i)
-                        ,cpToUniName(i)
-                        ,cpToUniScriptName(i)
-                        ,cpToUniBlockName(i)
-                        ,strToNorm(cpToStr(i), Normalizer.Form.NFKC)
-                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKC))
-                )
-                ,((pre, post) -> post)
-                ,LinkedHashMap::new
-        ));
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFKC));
+        }
+        return rt;
     }
-    private static Map<Integer, List<String>> mkTblNfkd(Integer s,Integer e){
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(
-                i->i
-                ,i->Arrays.asList(
-                        numToStr(i)
-                        ,cpToStr(i)
-                        ,cpToUniName(i)
-                        ,cpToUniScriptName(i)
-                        ,cpToUniBlockName(i)
-                        ,strToNorm(cpToStr(i), Normalizer.Form.NFKD)
-                        ,strToUtf8(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                        ,strToUtf16(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                        ,strToUtf32(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                        ,strToUnicode(strToNorm(cpToStr(i), Normalizer.Form.NFKD))
-                )
-                ,((pre, post) -> post)
-                ,LinkedHashMap::new
-        ));
+    private static Map<Integer, List<String>> mkTblNfkd(Integer s,Integer e) {
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction, Normalizer.Form.NFKD));
+        }
+        return rt;
     }
     private static Map<Integer, String> mkInputUnicodeName(Integer s,Integer e) {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
@@ -502,7 +458,6 @@ public class App {
         Map<K,R> input = mkInputFunction.apply(startRn,endRn);
         Map<R,List<R>> midput = mkIdxFunction.apply(input,ngramCnt);
         List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
-//        output.stream().limit(10).forEach(e-> System.out.println(e));
         if(output.get(0).equals(noneKeyWord.get(0))){
             return new HashSet<>();
         }else{
@@ -521,11 +476,8 @@ public class App {
     ){
         Set<N> rt;
         Map<K,R> input = mkInputFunction.apply(startRn,endRn);
-//        input.entrySet().stream().forEach(e-> System.out.println(e));
         Map<R,List<R>> midput = mkIdxFunction.apply(input);
-//        midput.entrySet().stream().forEach(e-> System.out.println(e));
         List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
-//        output.stream().limit(10).forEach(e-> System.out.println(e));
         if(output.get(0).equals(noneKeyWord.get(0))){
             return new HashSet<>();
         }else{
@@ -562,23 +514,23 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e->Arrays.asList(e.split("\n")).stream().filter(ee->0!=ee.length())).map(ee->Arrays.asList(Arrays.asList(ee.split(",")).stream().filter(eee->0!=eee.length()).toArray(String[]::new))).collect(Collectors.toList());
     }
-    private static Map<Integer, List<String>> searchTbl(Integer startRn,Integer endRn){
+    private static Map<Integer, List<String>> searchTbl(String normGrp,Integer startRn,Integer endRn){
         Map<Integer, List<String>> rt = null;
-        switch (DEFAULT_NORM_GRP){
+        switch (normGrp){
             case NORM_GRP_CORE:
-                rt= mkTblCore(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn);
                 break;
             case NORM_GRP_NFC:
-                rt= mkTblNfc(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFC);
                 break;
             case NORM_GRP_NFD:
-                rt= mkTblNfd(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFD);
                 break;
             case NORM_GRP_NFKC:
-                rt= mkTblNfkc(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFKC);
                 break;
             case NORM_GRP_NFKD:
-                rt= mkTblNfkd(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFKD);
                 break;
             default:
                 System.exit(FAILURE_STATUS);
@@ -595,12 +547,12 @@ public class App {
         }
         return rt;
     }
-    private static Integer printOut(Map<Integer,List<Integer>> rr){
+    private static Integer printOut(String normGrp,Map<Integer,List<Integer>> rr){
         int ret = SUCCESS_STATUS;
         int cnt = 0;
         for(int i=0;i<rr.size();i++){
             cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
-            debug(searchTbl(rr.get(i).get(0),rr.get(i).get(1)));
+            debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1)));
         }
         return ret+cnt;
     }
@@ -616,9 +568,6 @@ public class App {
     }
 
     private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
-//        searchCondition.entrySet().stream().forEach(e-> System.out.println(e));
-//        System.out.println(Stream.generate(()->"~").limit(100).collect(Collectors.joining()));
-
         Set<Integer> rt = null;
         switch (searchCondition.get(MAPKEY_SEARCH_MODE)){
             case SEARCH_MODE_WORD:
@@ -679,24 +628,17 @@ public class App {
 
     private static boolean argsRangeChk(Map<String,Map<String,String>> m){
         int b = 0;
-//        Stream.generate(()->"=").limit(100).forEach(e-> System.out.printf(e));
-//        System.out.println();
         for(Map.Entry<String,Map<String,String>> e1 : m.entrySet()){
             Map<String,String> chkMap = prepareParseOptPtnRangeChk.get(e1.getKey());
             for(Map.Entry<String,String> e2 : e1.getValue().entrySet()){
-//                System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),chkMap.get(e2.getKey()));
                 if(e1.getKey().contains(OPTION_NGRAM_SEARCH) && e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD) && !e2.getValue().matches(chkMap.get(e2.getKey()))){
                     ++b;
-//                    System.out.printf("%s\t%s\n",e2.getValue(),chkMap.get(e2.getKey()));
-//                    System.out.println(b);
                 }else{
                     if(!e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD)){
                         List<String> startEndChkMap = Arrays.asList(chkMap.get(e2.getKey()).split(ARGS_SEPARATOR));
                         if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
                                 .noneMatch(i->i==Integer.parseInt(e2.getValue()))){
                             ++b;
-//                            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",chkMap.size(),e1.getKey(),e1.getValue(),e2.getKey(),e2.getValue(),Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1)));
-//                            System.out.println(b);
                         }
                     }
                 }
@@ -707,9 +649,7 @@ public class App {
 
     private static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> mainProcessArgs){
         Map<String,Map<String,String>> rt = new LinkedHashMap<>();
-//        mainProcessArgs.entrySet().forEach(e-> System.out.println(e));
         for(Map.Entry<String, List<String>> entry : mainProcessArgs.entrySet()){
-//            System.out.println(entry.getKey());
             if(Stream.of(OPTION_HELP,OPTION_USAGE,OPTION_VERSION).anyMatch(e->e.contains(entry.getKey()))){
                 continue;
             }
@@ -753,7 +693,6 @@ public class App {
 
     private static Map<String, List<String>> execParseOpts (List<String> cmdLineArgs,Map<String, String> prepareParseOpts){
         Map<String, List<String>> rt = new LinkedHashMap<>();
-
         //引数処理
         for (int i=0;i<cmdLineArgs.size();i++){
             if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HELP))){
@@ -836,7 +775,7 @@ public class App {
             Set<Integer> rt;
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
                 rt = searchCodePointStartEnd(entry.getValue());
-                ret += printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                ret += printOut(entry.getValue().get(MAPKEY_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
             }
         }
         return ret;
@@ -847,7 +786,6 @@ public class App {
         int n = 0;
         int h = 0;
         for(String option_search_mode : mainReStyleProcessArgs.keySet()){
-//            System.out.printf("%s\t%s\t%s\t%s\t%s\n",SEARCH_MODE_WORD,SEARCH_MODE_NGRAM,SEARCH_MODE_HASH_KEY,option_search_mode,mainReStyleProcessArgs.get(option_search_mode).get(MAPKEY_SEARCH_MODE));
             switch (option_search_mode){
                 case OPTION_WORD_SEARCH:
                     if(Integer.parseInt(SEARCH_MODE_WORD)!=Integer.parseInt(mainReStyleProcessArgs.get(option_search_mode).get(MAPKEY_SEARCH_MODE))){
@@ -904,10 +842,7 @@ public class App {
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
 
         if(argsRangeChk(mainReStyleProcessArgs)){
-//            mainProcessArgs.entrySet().forEach(e-> System.out.println(e));
-//            mainReStyleProcessArgs.entrySet().forEach(e-> System.out.println(e));
             ret = ptnCheck(mainReStyleProcessArgs);
-//            System.out.println(ret);
             switch (ret){
                 case 7:
                     optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
