@@ -22,6 +22,8 @@ import java.util.stream.Stream;
 //7. ヘルプのリッチ化
 //8. 検索結果件数の表示
 //9. 正規表現の変数化 グラム化インデックス粒度を可変にする
+//10. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
+
 
 public class App {
 
@@ -86,10 +88,24 @@ public class App {
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
     }};
 
+
+    //ASIS
     private final static Map<String, Map<String,String>> prepareParseOptPtnRangeChk = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
         put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
         put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+    }};
+
+    //TOBE
+    private final static Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4"));
+        put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7"));
+        put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4"));
+    }};
+    private final static Map<String, Map<String,String>> argsGraphChk = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+        put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
+        put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_KEY_WORD","[A-Z]+"));
     }};
 
     private static void optionUsage(String... optionPtn){
@@ -529,23 +545,29 @@ public class App {
     }
     private static boolean argsRangeChk(Map<String,Map<String,String>> m){
         int b = 0;
-        for(Map.Entry<String,Map<String,String>> e1 : m.entrySet()){
-            Map<String,String> chkMap = prepareParseOptPtnRangeChk.get(e1.getKey());
-            for(Map.Entry<String,String> e2 : e1.getValue().entrySet()){
-                if(e1.getKey().contains(OPTION_NGRAM_SEARCH) && e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD) && !e2.getValue().matches(chkMap.get(e2.getKey()))){
+        for(Map.Entry<String,Map<String,String>> entry : m.entrySet()){
+            Map<String,String> argsRangeChkMap = argsRangeChk.get(entry.getKey());
+            for(Map.Entry<String,String> argsRangeMap : argsRangeChkMap.entrySet()){
+                List<String> startEndChkMap = Arrays.asList(argsRangeMap.getValue().split(ARGS_SEPARATOR));
+                if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
+                        .noneMatch(i->i==Integer.parseInt(entry.getValue().get(argsRangeMap.getKey())))){
                     ++b;
-                }else{
-                    if(!e2.getKey().contains(MAPKEY_SEARCH_KEY_WORD)){
-                        List<String> startEndChkMap = Arrays.asList(chkMap.get(e2.getKey()).split(ARGS_SEPARATOR));
-                        if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
-                                .noneMatch(i->i==Integer.parseInt(e2.getValue()))){
-                            ++b;
-                        }
-                    }
                 }
             }
         }
-        return b==0?true:false;
+        return b!=0?true:false;
+    }
+    private static boolean argsGraphChk(Map<String,Map<String,String>> m){
+        int b = 0;
+        for(Map.Entry<String,Map<String,String>> entry : m.entrySet()){
+            Map<String,String> argsGraphChkMap = argsGraphChk.get(entry.getKey());
+            for(Map.Entry<String,String> argsGraphMap : argsGraphChkMap.entrySet()){
+                if(!entry.getValue().get(argsGraphMap.getKey()).matches(argsGraphMap.getValue())){
+                    b++;
+                }
+            }
+        }
+        return b!=0?true:false;
     }
     private static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> mainProcessArgs){
         Map<String,Map<String,String>> rt = new LinkedHashMap<>();
@@ -681,21 +703,18 @@ public class App {
                     if(Integer.parseInt(SEARCH_MODE_WORD)!=Integer.parseInt(mainReStyleProcessArgs.get(option_search_mode).get(MAPKEY_SEARCH_MODE))){
                         //数値比較にした
                         w=w+4;
-                        System.out.printf("%s\t%s\t%s\n",w,n,h);
                     }
                     break;
                 case OPTION_NGRAM_SEARCH:
                     if(Integer.parseInt(SEARCH_MODE_NGRAM)!=Integer.parseInt(mainReStyleProcessArgs.get(option_search_mode).get(MAPKEY_SEARCH_MODE))){
                         //数値比較にした
                         n=n+2;
-                        System.out.printf("%s\t%s\t%s\n",w,n,h);
                     }
                     break;
                 case OPTION_HASH_KEY_SEARCH:
                     if(Integer.parseInt(SEARCH_MODE_HASH_KEY)!=Integer.parseInt(mainReStyleProcessArgs.get(option_search_mode).get(MAPKEY_SEARCH_MODE))){
                         //数値比較にした
                         h=h+1;
-                        System.out.printf("%s\t%s\t%s\n",w,n,h);
                     }
                     break;
                 default:
@@ -730,32 +749,46 @@ public class App {
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
 
         if(argsRangeChk(mainReStyleProcessArgs)){
-            ret = ptnCheck(mainReStyleProcessArgs);
-            switch (ret){
-                case 7:
-                    optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
-                    break;
-                case 6:
-                    optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH);
-                    break;
-                case 5:
-                    optionUsage(OPTION_WORD_SEARCH,OPTION_HASH_KEY_SEARCH);
-                    break;
-                case 3:
-                    optionUsage(OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
-                    break;
-                case 1:
-                    optionUsage(OPTION_HASH_KEY_SEARCH);
-                    break;
-                case 0:
-                    ret = mainProcess(mainProcessArgs,mainReStyleProcessArgs);
-                    System.exit(ret);
-                default:
-            }
-        }else{
+            //TODO 入力の引数に応じてHELPだし分けたい
             ret = FAILURE_STATUS;
             optionUsage(OPTION_USAGE);
             System.exit(ret);
+        }
+
+        if(argsGraphChk(mainReStyleProcessArgs)){
+            //TODO 入力の引数に応じてHELPだし分けたい
+            ret = FAILURE_STATUS;
+            optionUsage(OPTION_USAGE);
+            System.exit(ret);
+        }
+
+        ret = ptnCheck(mainReStyleProcessArgs);
+        switch (ret){
+            case 7:
+                optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+                break;
+            case 6:
+                optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH);
+                break;
+            case 5:
+                optionUsage(OPTION_WORD_SEARCH,OPTION_HASH_KEY_SEARCH);
+                break;
+            case 4:
+                optionUsage(OPTION_WORD_SEARCH);
+                break;
+            case 3:
+                optionUsage(OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+                break;
+            case 2:
+                optionUsage(OPTION_NGRAM_SEARCH);
+                break;
+            case 1:
+                optionUsage(OPTION_HASH_KEY_SEARCH);
+                break;
+            case 0:
+                ret = mainProcess(mainProcessArgs,mainReStyleProcessArgs);
+                System.exit(ret);
+            default:
         }
     }
 }
