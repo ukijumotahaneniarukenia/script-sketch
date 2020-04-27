@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 
 
 //TODO
-//1. 全件取得機能
-//2. 取得列のサプレス機能
-//3. レンジ指定の全件取得機能
+//1. 全件取得機能 DONE
+//2. 取得列のサプレス機能 DONE
+//3. レンジ指定の全件取得機能 DONE
 //4. 新規検索方法の追加随時
 //5. インデックスデータのユーザー指定機能
 //6. 5.のデータに対するUnicodeテーブルへの突合せ結果の一覧表示
-//7. ヘルプのリッチ化
+//7. ヘルプのリッチ化 DONE
 //8. 検索結果件数の表示
 //9. 正規表現の変数化 グラム化インデックス粒度を可変にする
 //10. 出現位置を切り捨てないパタンもオプションだす
@@ -189,6 +189,8 @@ public class App {
         System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:BBF"); //レンジを絞って検索
         System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
         System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:1:3:HIRA -cp -usc -ubl -u8 -u32 --unicode"); //Suppress
+        System.out.println("unidat -hash:3:1:3:HIRA -w:1:2:1:HIRAGANA --range:12345:12377");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -346,8 +348,8 @@ public class App {
             ,N grp
             ,N grpSeq
             ,N i
-            ,List<Function<N,S>> singleArgFunctionInNumOutStrList
-            ,List<Function<S,S>> singleArgFunctionInStrOutStrList
+            ,Map<S,Function<N,S>> singleArgFunctionInNumOutStrMap
+            ,Map<S,Function<S,S>> singleArgFunctionInStrOutStrMap
             ,BiFunction<S,Normalizer.Form,S> multipleArgFunction
             ,Map<S,List<S>> suppressColumnsMap
             ,Normalizer.Form... norm
@@ -355,19 +357,33 @@ public class App {
 
         Map<N, List<S>> rt = new LinkedHashMap<>();
 
-        Function<N,S> numToStr = singleArgFunctionInNumOutStrList.get(0); //numToStr(i)
-        Function<N,S> cpToStr = singleArgFunctionInNumOutStrList.get(1); //cpToStr(i)
+        Function<N,S> numToStr = singleArgFunctionInNumOutStrMap.get(OPTION_NUM_TO_STR); //numToStr(i)
+        Function<N,S> cpToStr = singleArgFunctionInNumOutStrMap.get(OPTION_CP_TO_STR); //cpToStr(i)
 
+        // Must Item
         List<S> l = new ArrayList<>();
         l.add(numToStr.apply(grp));
         l.add(numToStr.apply(grpSeq));
-        l.add(numToStr.apply(i));
-        l.add(cpToStr.apply(i));
-        for(int j=2;j<singleArgFunctionInNumOutStrList.size();j++){
-            l.add(singleArgFunctionInNumOutStrList.get(j).apply(i));
+//        l.add(numToStr.apply(i));
+//        l.add(cpToStr.apply(i));
+
+        for(Map.Entry<S,Function<N,S>> entry : singleArgFunctionInNumOutStrMap.entrySet()){
+//            if(Stream.of(OPTION_NUM_TO_STR,OPTION_CP_TO_STR).anyMatch(e->e.equals(entry.getKey()))){
+//                continue;
+//            }
+            //cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName
+//            System.out.printf("%s\t%s\n",entry.getKey(),suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count());
+            if(1L==suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count()){
+
+            }else{
+                l.add(entry.getValue().apply(i));
+            }
         }
         rt.put(seq,l);
 
+//        rt.entrySet().stream().forEach(e-> System.out.println(e));
+
+        // Option Item
         S dest = null;
         if(norm.length>0 && norm[0]!=null){
             //正規化有りの場合
@@ -378,16 +394,28 @@ public class App {
             //正規化無しの場合
         }
 
-        for(int j=0;j<singleArgFunctionInStrOutStrList.size();j++){
-           //デフォルト値の設定
+        // Character Code Item
+        for(Map.Entry<S,Function<S,S>> entry : singleArgFunctionInStrOutStrMap.entrySet()){
+            //strToUtf8,strToUtf16,strToUtf32,strToUnicode
+            //デフォルト値の設定
             if(rt.containsKey(seq)){
                 //紐づくキーがあれば、リスト追加
                 if(dest==null){
                     //正規化無しの場合
-                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i)))));
+                    if(1L==suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count()){
+
+                    }else{
+                        rt.get(seq).addAll(new ArrayList<>(Arrays.asList(entry.getValue().apply(cpToStr.apply(i)))));
+                    }
                 }else{
                     //正規化有りの場合
-                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(dest))));
+//                    System.out.printf("%s\t%s\t%s\n",entry.getKey(),entry.getValue(),entry.getValue().apply(cpToStr.apply(i)));
+                    if(1L==suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count()){
+
+                    }else{
+                        rt.get(seq).addAll(new ArrayList<>(Arrays.asList(entry.getValue().apply(dest))));
+
+                    }
                 }
             }else{
                 //紐づくキーは直前のループで追加済み
@@ -398,8 +426,36 @@ public class App {
     }
     private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap,Normalizer.Form... norms) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName);
-        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+//        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName);
+//        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
+//        Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = Map.of(
+//                OPTION_NUM_TO_STR,numToStr
+//                ,OPTION_CP_TO_STR,cpToStr
+//                ,OPTION_CP_TO_UNICODE_NAME,cpToUnicodeName
+//                ,OPTION_CP_TO_UNICODE_SCRIPT_NAME,cpToUnicodeScriptName
+//                ,OPTION_CP_TO_UNICODE_BLOCK_NAME,cpToUnicodeBlockName
+//        );
+//        Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = Map.of(
+//                OPTION_STR_TO_UTF8,strToUtf8
+//                ,OPTION_STR_TO_UTF16,strToUtf16
+//                ,OPTION_STR_TO_UTF32,strToUtf32
+//                ,OPTION_STR_TO_UNICODE,strToUnicode
+//        );
+
+        Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
+            put(OPTION_NUM_TO_STR, numToStr);
+            put(OPTION_CP_TO_STR, cpToStr);
+            put(OPTION_CP_TO_UNICODE_NAME, cpToUnicodeName);
+            put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, cpToUnicodeScriptName);
+            put(OPTION_CP_TO_UNICODE_BLOCK_NAME, cpToUnicodeBlockName);
+        }};
+        Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = new LinkedHashMap<>(){{
+            put(OPTION_STR_TO_UTF8, strToUtf8);
+            put(OPTION_STR_TO_UTF16, strToUtf16);
+            put(OPTION_STR_TO_UTF32, strToUtf32);
+            put(OPTION_STR_TO_UNICODE, strToUnicode);
+        }};
+
         BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
 
         Normalizer.Form norm = null;
@@ -408,7 +464,7 @@ public class App {
         }
         ++GRP_CNT;
         for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,suppressColumnsMap,norm));
+            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrMap,singleArgFunctionInStrOutStrMap,multipleArgFunction,suppressColumnsMap,norm));
         }
         return rt;
     }
@@ -582,7 +638,7 @@ public class App {
         for(int i=0;i<rr.size();i++){
             cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
             debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1),suppressColumnsMap));
-//            searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1));
+//            searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1),suppressColumnsMap);
         }
         return ret+cnt;
     }
