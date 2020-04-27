@@ -1,6 +1,5 @@
 package app;
 
-import javax.xml.stream.events.Characters;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
@@ -13,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+
+// TODO https://ja.wikipedia.org/wiki/Unicode
 
 //TODO
 //1. 全件取得機能 DONE
@@ -27,7 +28,8 @@ import java.util.stream.Stream;
 //10. 出現位置を切り捨てないパタンもオプションだす
 //11.正規化オプション4パタン
 //12. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
-
+//13. 同じオプションの引数違いを後勝ちではなく与えた分だけ処理する -ngram:2:2:1:4:HIRA -ngram:2:2:2:4:HIRA
+//14. 入力で与えた引数がユニコードの第何群第何面に属しているかチェックし、サマリ情報を出力
 
 public class App {
 
@@ -37,6 +39,8 @@ public class App {
     private static Integer FAILURE_STATUS=1;
     private static String DEFAULT_SEARCH_KEY_WORD="KATAKANA";
 
+
+    //ここむだ
     private static String MAPKEY_SEARCH_MODE="DEFAULT_SEARCH_MODE";
     private static String MAPKEY_IDX_INPUT_PTN="DEFAULT_IDX_INPUT_PTN";
     private static String MAPKEY_NORM_GRP="DEFAULT_NORM_GRP";
@@ -615,6 +619,7 @@ public class App {
     }
     private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
         Set<Integer> rt = null;
+        searchCondition.entrySet().stream().forEach(e-> System.out.println(e));
         if(searchCondition.get(MAPKEY_SEARCH_MODE)==null){
             //検索モード以外の場合
 
@@ -754,6 +759,9 @@ public class App {
 
         //引数処理
         for (int i=0;i<cmdLineArgs.size();i++){
+            //ここはマップに持たせて引数処理があるものと無いもので、用意するマップを変える
+            //コマンドライん引数が用意したマップのキーにマッチしたら、フラグ設定
+            //put関数の戻り値はList<String>なので、Supplierでうまくごまかせるような気がする
             if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HELP))){
                 rt.put(OPTION_HELP, Arrays.asList(OPTION_ON));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_VERSION))){
@@ -1017,12 +1025,17 @@ public class App {
         canYouHelpMe(mainProcessArgs);
 
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
+
+        mainReStyleProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
+
         if(argsRangeChk(mainReStyleProcessArgs)){
             //TODO 入力の引数に応じてHELPだし分けたい
             ret = FAILURE_STATUS;
             optionUsage(OPTION_USAGE);
             System.exit(ret);
         }
+
+//        System.exit(SUCCESS_STATUS); //done
 
         if(argsGraphChk(mainReStyleProcessArgs)){
             //TODO 入力の引数に応じてHELPだし分けたい
