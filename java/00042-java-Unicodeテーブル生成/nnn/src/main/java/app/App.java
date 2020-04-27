@@ -349,6 +349,7 @@ public class App {
             ,List<Function<N,S>> singleArgFunctionInNumOutStrList
             ,List<Function<S,S>> singleArgFunctionInStrOutStrList
             ,BiFunction<S,Normalizer.Form,S> multipleArgFunction
+            ,Map<S,List<S>> suppressColumnsMap
             ,Normalizer.Form... norm
     ){
 
@@ -395,7 +396,7 @@ public class App {
 
         return rt;
     }
-    private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Normalizer.Form... norms) {
+    private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap,Normalizer.Form... norms) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
         List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName);
         List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
@@ -407,7 +408,7 @@ public class App {
         }
         ++GRP_CNT;
         for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,norm));
+            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,suppressColumnsMap,norm));
         }
         return rt;
     }
@@ -542,23 +543,23 @@ public class App {
         }
         return Stream.of(sb.toString()).flatMap(e->Arrays.asList(e.split("\n")).stream().filter(ee->0!=ee.length())).map(ee->Arrays.asList(Arrays.asList(ee.split(",")).stream().filter(eee->0!=eee.length()).toArray(String[]::new))).collect(Collectors.toList());
     }
-    private static Map<Integer, List<String>> searchTbl(String normGrp,Integer startRn,Integer endRn){
+    private static Map<Integer, List<String>> searchTbl(String normGrp,Integer startRn,Integer endRn,Map<String, List<String>> suppressColumnsMap){
         Map<Integer, List<String>> rt = null;
         switch (normGrp){
             case NORM_GRP_CORE:
-                rt= wrapperExecuteMkTbl(startRn,endRn);
+                rt= wrapperExecuteMkTbl(startRn,endRn,suppressColumnsMap);
                 break;
             case NORM_GRP_NFC:
-                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFC);
+                rt= wrapperExecuteMkTbl(startRn,endRn,suppressColumnsMap,Normalizer.Form.NFC);
                 break;
             case NORM_GRP_NFD:
-                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFD);
+                rt= wrapperExecuteMkTbl(startRn,endRn,suppressColumnsMap,Normalizer.Form.NFD);
                 break;
             case NORM_GRP_NFKC:
-                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFKC);
+                rt= wrapperExecuteMkTbl(startRn,endRn,suppressColumnsMap,Normalizer.Form.NFKC);
                 break;
             case NORM_GRP_NFKD:
-                rt= wrapperExecuteMkTbl(startRn,endRn,Normalizer.Form.NFKD);
+                rt= wrapperExecuteMkTbl(startRn,endRn,suppressColumnsMap,Normalizer.Form.NFKD);
                 break;
             default:
                 System.exit(FAILURE_STATUS);
@@ -575,12 +576,12 @@ public class App {
         }
         return rt;
     }
-    private static Integer printOut(String normGrp,Map<Integer,List<Integer>> rr){
+    private static Integer printOut(String normGrp,Map<Integer,List<Integer>> rr,Map<String, List<String>> suppressColumnsMap){
         int ret = SUCCESS_STATUS;
         int cnt = 0;
         for(int i=0;i<rr.size();i++){
             cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
-            debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1)));
+            debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1),suppressColumnsMap));
 //            searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1));
         }
         return ret+cnt;
@@ -924,8 +925,9 @@ public class App {
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
                 if(entry.getKey().contains(OPTION_RANGE) && 1==mainReStyleProcessArgs.size()){
                     //range指定のみフル出力
+                    mainProcessArgs.entrySet().stream().forEach(e-> System.out.println(e));
                     rt = IntStream.rangeClosed(DEFAULT_START_RN,DEFAULT_END_RN).boxed().collect(Collectors.toSet());
-                    ret += printOut(Optional.ofNullable(entry.getValue().get(MAPKEY_NORM_GRP)).orElse(DEFAULT_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                    ret += printOut(Optional.ofNullable(entry.getValue().get(MAPKEY_NORM_GRP)).orElse(DEFAULT_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())),mainProcessArgs);
                     break finish ;
                 }
                 if(entry.getValue().get(MAPKEY_SEARCH_MODE)==null){
@@ -934,7 +936,7 @@ public class App {
                 }else {
                     //検索モードの場合
                     rt = searchCodePointStartEnd(entry.getValue());
-                    ret += printOut(entry.getValue().get(MAPKEY_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                    ret += printOut(entry.getValue().get(MAPKEY_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())),mainProcessArgs);
                 }
             }
         }
