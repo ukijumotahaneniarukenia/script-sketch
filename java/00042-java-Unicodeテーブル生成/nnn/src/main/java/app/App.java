@@ -135,7 +135,7 @@ public class App {
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
-        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*"));
+        put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-word.*", "--w.*", "-word.*", "--word.*"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5","-ngram.*", "--ngram.*"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
     }};
@@ -181,16 +181,17 @@ public class App {
         }
     }
     private static void optionHelp(){
-        System.out.println("unidat -hash:3:1:2:POI -n:2:2:4:4:RUBY -w:1:1:3:BUTTA");
-        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HAN --range:1:30000 -n:2:3:4:2:JI"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:1:2:POI -ngram:2:2:4:4:RUBY -word:1:1:3:BUTTA");
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -word:1:3:4:HAN --range:1:30000 -ngram:2:3:4:2:JI"); //レンジを絞って検索
         System.out.println("unidat --range:1:30"); //レンジを絞って出力
         System.out.println("unidat --range:50:80"); //レンジを絞って出力
         System.out.println("unidat --range:12354:12390"); //レンジを絞って出力
-        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:BBF"); //レンジを絞って検索
-        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
-        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -word:1:3:4:HIRAGANA --range:1:30000 -ngram:2:1:4:3:BBF"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -word:1:3:4:HIRAGANA --range:1:30000 -ngram:2:1:4:3:CJK"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -word:1:3:4:HIRAGANA --range:1:30000 -ngram:2:1:4:3:CJK"); //レンジを絞って検索
         System.out.println("unidat -hash:3:1:3:HIRA -cp -usc -ubl -u8 -u32 --unicode"); //Suppress
-        System.out.println("unidat -hash:3:1:3:HIRA -w:1:2:1:HIRAGANA --range:12345:12377");
+        System.out.println("unidat -hash:3:1:3:HIRA -word:1:2:1:HIRAGANA --range:12345:12377");
+        System.out.println("unidat -ngram:2:2:1:4:KANA -usc -ubl");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -204,7 +205,7 @@ public class App {
             for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
                 for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
                     for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
-                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -w:%s:%s:%s:%s\n"
+                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -word:%s:%s:%s:%s\n"
                                 ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
                                 ,PROGRAM_NAME,i+1,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
                         );
@@ -222,7 +223,7 @@ public class App {
             for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
                 for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
                     for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
-                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -n:%s:%s:%s:%s:%s\n"
+                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -ngram:%s:%s:%s:%s:%s\n"
                                 ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
                                 ,PROGRAM_NAME,i+2,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt).length(),OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
                         );
@@ -361,18 +362,13 @@ public class App {
         Function<N,S> cpToStr = singleArgFunctionInNumOutStrMap.get(OPTION_CP_TO_STR); //cpToStr(i)
 
         // Must Item
+        //grp.grpseq
         List<S> l = new ArrayList<>();
         l.add(numToStr.apply(grp));
         l.add(numToStr.apply(grpSeq));
-//        l.add(numToStr.apply(i));
-//        l.add(cpToStr.apply(i));
 
+        //cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName
         for(Map.Entry<S,Function<N,S>> entry : singleArgFunctionInNumOutStrMap.entrySet()){
-//            if(Stream.of(OPTION_NUM_TO_STR,OPTION_CP_TO_STR).anyMatch(e->e.equals(entry.getKey()))){
-//                continue;
-//            }
-            //cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName
-//            System.out.printf("%s\t%s\n",entry.getKey(),suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count());
             if(1L==suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count()){
 
             }else{
@@ -381,9 +377,7 @@ public class App {
         }
         rt.put(seq,l);
 
-//        rt.entrySet().stream().forEach(e-> System.out.println(e));
-
-        // Option Item
+        //norm
         S dest = null;
         if(norm.length>0 && norm[0]!=null){
             //正規化有りの場合
@@ -394,9 +388,8 @@ public class App {
             //正規化無しの場合
         }
 
-        // Character Code Item
+        //strToUtf8,strToUtf16,strToUtf32,strToUnicode
         for(Map.Entry<S,Function<S,S>> entry : singleArgFunctionInStrOutStrMap.entrySet()){
-            //strToUtf8,strToUtf16,strToUtf32,strToUnicode
             //デフォルト値の設定
             if(rt.containsKey(seq)){
                 //紐づくキーがあれば、リスト追加
@@ -409,39 +402,20 @@ public class App {
                     }
                 }else{
                     //正規化有りの場合
-//                    System.out.printf("%s\t%s\t%s\n",entry.getKey(),entry.getValue(),entry.getValue().apply(cpToStr.apply(i)));
                     if(1L==suppressColumnsMap.get(entry.getKey()).stream().filter(e->e.equals(OPTION_OFF)).count()){
 
                     }else{
                         rt.get(seq).addAll(new ArrayList<>(Arrays.asList(entry.getValue().apply(dest))));
-
                     }
                 }
             }else{
                 //紐づくキーは直前のループで追加済み
             }
         }
-
         return rt;
     }
     private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap,Normalizer.Form... norms) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
-//        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName);
-//        List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
-//        Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = Map.of(
-//                OPTION_NUM_TO_STR,numToStr
-//                ,OPTION_CP_TO_STR,cpToStr
-//                ,OPTION_CP_TO_UNICODE_NAME,cpToUnicodeName
-//                ,OPTION_CP_TO_UNICODE_SCRIPT_NAME,cpToUnicodeScriptName
-//                ,OPTION_CP_TO_UNICODE_BLOCK_NAME,cpToUnicodeBlockName
-//        );
-//        Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = Map.of(
-//                OPTION_STR_TO_UTF8,strToUtf8
-//                ,OPTION_STR_TO_UTF16,strToUtf16
-//                ,OPTION_STR_TO_UTF32,strToUtf32
-//                ,OPTION_STR_TO_UNICODE,strToUnicode
-//        );
-
         Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
             put(OPTION_NUM_TO_STR, numToStr);
             put(OPTION_CP_TO_STR, cpToStr);
@@ -455,9 +429,7 @@ public class App {
             put(OPTION_STR_TO_UTF32, strToUtf32);
             put(OPTION_STR_TO_UNICODE, strToUnicode);
         }};
-
         BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-
         Normalizer.Form norm = null;
         if(norms.length>0){
             norm=norms[0];
@@ -638,7 +610,6 @@ public class App {
         for(int i=0;i<rr.size();i++){
             cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
             debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1),suppressColumnsMap));
-//            searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1),suppressColumnsMap);
         }
         return ret+cnt;
     }
@@ -784,8 +755,6 @@ public class App {
             optionUsage(OPTION_HELP);
             System.exit(FAILURE_STATUS);
         }
-
-        System.out.println(cmdLineArgs);
 
         //引数処理
         for (int i=0;i<cmdLineArgs.size();i++){
