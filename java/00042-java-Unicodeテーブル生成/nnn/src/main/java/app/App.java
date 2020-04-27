@@ -147,24 +147,21 @@ public class App {
         }
     }
     private static void optionHelp(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("optionHelp");
+        System.out.println("unidat -hash:3:1:2:POI -n:2:2:4:4:RUBY -w:1:1:3:BUTTA");
     }
     private static void optionVersion(){
-        //TODO ヒアドキュメント対応する
         System.out.println(ARTIFACT_ID);
     }
     private static void usageWordSearch(){
         //https://qiita.com/munieru_jp/items/02533ebe5c822e6e29bb#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97
         final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
         int cnt=0;
+        System.out.println(methodName);
         for(int i=0;i<OPTION_MODE_LIST.subList(0,1).size();i++){
             for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
                 for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
                     for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
-//                        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\n",cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l),OPTION_SAMPLE_KEYWORD_LIST.get(cnt));
-                        System.out.printf("%s:" + "\n" + "[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -w:%s:%s:%s:%s\n"
-                                ,methodName
+                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -w:%s:%s:%s:%s\n"
                                 ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
                                 ,PROGRAM_NAME,i+1,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
                         );
@@ -176,14 +173,41 @@ public class App {
     }
     private static void usageNgramSearch(){
         final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageNgramSearch");
+        int cnt=0;
+        System.out.println(methodName);
+        for(int i=0;i<OPTION_MODE_LIST.subList(0,1).size();i++){
+            for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
+                for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
+                    for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
+                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -n:%s:%s:%s:%s:%s\n"
+                                ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
+                                ,PROGRAM_NAME,i+2,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt).length(),OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
+                        );
+                        cnt++;
+                    }
+                }
+            }
+        }
     }
     private static void usageHashKeySearch(){
-        //TODO ヒアドキュメント対応する
-        System.out.println("usageHashKeySearch");
+        //https://qiita.com/munieru_jp/items/02533ebe5c822e6e29bb#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+        int cnt=0;
+        System.out.println(methodName);
+        for(int i=0;i<OPTION_MODE_LIST.subList(0,1).size();i++){
+            for (int j=0;j<OPTION_SUBPTN_LIST.subList(0,1).size();j++){
+                for(int l=0;l<OPTION_NORM_GRP_LIST.size();l++){
+                    for(int k=0;k<OPTION_IDX_INPUT_LIST.size();k++){
+                        System.out.printf("[pattern %s] %s && %s && %s && %s:" + "\n" + "%s -hash:%s:%s:%s:%s\n"
+                                ,cnt,OPTION_MODE_LIST.get(i),OPTION_SUBPTN_LIST.get(j),OPTION_IDX_INPUT_LIST.get(k),OPTION_NORM_GRP_LIST.get(l)
+                                ,PROGRAM_NAME,i+3,k+1,l,OPTION_SAMPLE_KEYWORD_LIST.get(cnt)
+                        );
+                        cnt++;
+                    }
+                }
+            }
+        }
     }
-
     @SafeVarargs
     private static <E> List<E> flattenList(Collection<E>... liz){
         return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
