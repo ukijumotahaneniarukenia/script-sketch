@@ -58,7 +58,7 @@ public class App {
 
     private final static String OPTION_ON = "1";
     private final static String OPTION_OFF = "-9999";
-    private final static String OPTION_ALL = "OPTION_ALL";
+    private final static String OPTION_RANGE = "OPTION_RANGE";
     private final static String OPTION_HELP = "OPTION_HELP";
     private final static String OPTION_VERSION = "OPTION_VERSION";
     private final static String OPTION_USAGE = "OPTION_USAGE";
@@ -102,7 +102,7 @@ public class App {
     private static String DEFAULT_NONE_KEY_WORD="ウンコもりもり森鴎外";
 
     private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
-        put(OPTION_ALL, Arrays.asList("true", "-a", "--a", "--all", "-all"));
+        put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
         put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*"));
@@ -110,11 +110,13 @@ public class App {
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-{1,}hh.*", "-{1,}hash.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
     }};
     private final static Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
+        put(OPTION_RANGE, Arrays.asList("DEFAULT_START_RN","DEFAULT_END_RN"));
         put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
     }};
     private final static Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
+        put(OPTION_RANGE, Map.of("DEFAULT_START_RN",String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN),"DEFAULT_END_RN",String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN)));
         put(OPTION_WORD_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4"));
         put(OPTION_NGRAM_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4","DEFAULT_NGRAM_CNT","0:7"));
         put(OPTION_HASH_KEY_SEARCH, Map.of("DEFAULT_SEARCH_MODE","1:3","DEFAULT_IDX_INPUT_PTN","1:3","DEFAULT_NORM_GRP","0:4"));
@@ -150,6 +152,7 @@ public class App {
     }
     private static void optionHelp(){
         System.out.println("unidat -hash:3:1:2:POI -n:2:2:4:4:RUBY -w:1:1:3:BUTTA");
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HAN --range:1:30000 -n:2:3:4:2:JI"); //レンジを絞って検索
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -545,58 +548,65 @@ public class App {
     }
     private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
         Set<Integer> rt = null;
-        switch (searchCondition.get(MAPKEY_SEARCH_MODE)){
-            case SEARCH_MODE_WORD:
-                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
-                    case IDX_INPUT_UNICODE_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkWordIdx,App::mkIdxShape);
-                        break;
-                    case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkWordIdx,App::mkIdxShape);
-                        break;
-                    case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkWordIdx,App::mkIdxShape);
-                        break;
-                    default:
-                        System.exit(FAILURE_STATUS);
-                        break;
-                }
-                break;
-            case SEARCH_MODE_NGRAM:
-                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
-                    case IDX_INPUT_UNICODE_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
-                    case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
-                    case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkNGramIdx,App::mkIdxShape);
-                        break;
-                    default:
-                        System.exit(FAILURE_STATUS);
-                        break;
-                }
-                break;
-            case SEARCH_MODE_HASH_KEY:
-                switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
-                    case IDX_INPUT_UNICODE_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeName,App::mkIdxFilter);
-                        break;
-                    case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeScriptName,App::mkIdxFilter);
-                        break;
-                    case IDX_INPUT_UNICODE_BLOCK_NAME:
-                        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeBlockName,App::mkIdxFilter);
-                        break;
-                    default:
-                        System.exit(FAILURE_STATUS);
-                        break;
-                }
-                break;
-            default:
-                System.exit(FAILURE_STATUS);
-                break;
+        if(searchCondition.get(MAPKEY_SEARCH_MODE)==null){
+            //検索モード以外の場合
+
+
+        }else{
+            //検索モードの場合
+            switch (searchCondition.get(MAPKEY_SEARCH_MODE)){
+                case SEARCH_MODE_WORD:
+                    switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
+                        case IDX_INPUT_UNICODE_NAME:
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkWordIdx,App::mkIdxShape);
+                            break;
+                        case IDX_INPUT_UNICODE_SCRIPT_NAME:
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkWordIdx,App::mkIdxShape);
+                            break;
+                        case IDX_INPUT_UNICODE_BLOCK_NAME:
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkWordIdx,App::mkIdxShape);
+                            break;
+                        default:
+                            System.exit(FAILURE_STATUS);
+                            break;
+                    }
+                    break;
+                case SEARCH_MODE_NGRAM:
+                    switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
+                        case IDX_INPUT_UNICODE_NAME:
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeName,App::mkNGramIdx,App::mkIdxShape);
+                            break;
+                        case IDX_INPUT_UNICODE_SCRIPT_NAME:
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeScriptName,App::mkNGramIdx,App::mkIdxShape);
+                            break;
+                        case IDX_INPUT_UNICODE_BLOCK_NAME:
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(MAPKEY_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),Arrays.asList(DEFAULT_NONE_KEY_WORD),App::mkInputUnicodeBlockName,App::mkNGramIdx,App::mkIdxShape);
+                            break;
+                        default:
+                            System.exit(FAILURE_STATUS);
+                            break;
+                    }
+                    break;
+                case SEARCH_MODE_HASH_KEY:
+                    switch (searchCondition.get(MAPKEY_IDX_INPUT_PTN)){
+                        case IDX_INPUT_UNICODE_NAME:
+                            rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeName,App::mkIdxFilter);
+                            break;
+                        case IDX_INPUT_UNICODE_SCRIPT_NAME:
+                            rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeScriptName,App::mkIdxFilter);
+                            break;
+                        case IDX_INPUT_UNICODE_BLOCK_NAME:
+                            rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(MAPKEY_SEARCH_KEY_WORD)).orElse(DEFAULT_SEARCH_KEY_WORD),App::mkInputUnicodeBlockName,App::mkIdxFilter);
+                            break;
+                        default:
+                            System.exit(FAILURE_STATUS);
+                            break;
+                    }
+                    break;
+                default:
+                    System.exit(FAILURE_STATUS);
+                    break;
+            }
         }
         return rt;
     }
@@ -607,7 +617,7 @@ public class App {
             for(Map.Entry<String,String> argsRangeMap : argsRangeChkMap.entrySet()){
                 List<String> startEndChkMap = Arrays.asList(argsRangeMap.getValue().split(ARGS_SEPARATOR));
                 if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
-                        .noneMatch(i->i==Integer.parseInt(entry.getValue().get(argsRangeMap.getKey())))){
+                        .noneMatch(i->i==Integer.parseInt(Optional.ofNullable(entry.getValue().get(argsRangeMap.getKey())).orElse("0")))){
                     ++b;
                 }
             }
@@ -618,10 +628,14 @@ public class App {
         int b = 0;
         for(Map.Entry<String,Map<String,String>> entry : m.entrySet()){
             Map<String,String> argsGraphChkMap = argsGraphChk.get(entry.getKey());
-            for(Map.Entry<String,String> argsGraphMap : argsGraphChkMap.entrySet()){
-                if(!entry.getValue().get(argsGraphMap.getKey()).matches(argsGraphMap.getValue())){
-                    b++;
+            if(argsGraphChkMap != null){
+                for(Map.Entry<String,String> argsGraphMap : argsGraphChkMap.entrySet()){
+                    if(!entry.getValue().get(argsGraphMap.getKey()).matches(argsGraphMap.getValue())){
+                        b++;
+                    }
                 }
+            }else{
+                //文字チェックしない
             }
         }
         return b!=0?true:false;
@@ -665,12 +679,55 @@ public class App {
     }
     private static Map<String, List<String>> execParseOpts (List<String> cmdLineArgs,Map<String, String> prepareParseOpts){
         Map<String, List<String>> rt = new LinkedHashMap<>();
+
+        if(cmdLineArgs.size()<=0){
+            optionUsage(OPTION_HELP);
+            System.exit(FAILURE_STATUS);
+        }
+
         //引数処理
         for (int i=0;i<cmdLineArgs.size();i++){
             if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HELP))){
                 rt.put(OPTION_HELP, Arrays.asList(OPTION_ON));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_VERSION))){
                 rt.put(OPTION_VERSION, Arrays.asList(OPTION_ON));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_RANGE))){
+                List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
+                if(l.size()>3){
+                    optionUsage(OPTION_HELP);
+                    System.exit(FAILURE_STATUS);
+                }
+                if(2==l.size()){
+                    if(l.get(1).length()>String.valueOf(DEFAULT_END_RN).length()){
+                        optionUsage(OPTION_HELP);
+                        System.exit(FAILURE_STATUS);
+                    }
+                    if(Integer.parseInt(l.get(1))>DEFAULT_END_RN){
+                        optionUsage(OPTION_HELP);
+                        System.exit(FAILURE_STATUS);
+                    }
+                    if(Integer.parseInt(l.get(1))<DEFAULT_END_RN){
+                        DEFAULT_END_RN=Integer.parseInt(l.get(1));
+                    }
+                }else if(3==l.size()){
+                    if(l.get(1).length()>String.valueOf(DEFAULT_END_RN).length()||l.get(2).length()>String.valueOf(DEFAULT_END_RN).length()){
+                        optionUsage(OPTION_HELP);
+                        System.exit(FAILURE_STATUS);
+                    }
+                    if(Integer.parseInt(l.get(2))<DEFAULT_START_RN){
+                        optionUsage(OPTION_HELP);
+                        System.exit(FAILURE_STATUS);
+                    }
+                    DEFAULT_START_RN=Integer.parseInt(l.get(1));
+                    DEFAULT_END_RN=Integer.parseInt(l.get(2));
+                }else{
+                    optionUsage(OPTION_HELP);
+                    System.exit(FAILURE_STATUS);
+                }
+
+                //option,regexp,cmdlines
+                rt.put(OPTION_RANGE, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_RANGE)),l.subList(1,l.size())));
+
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NGRAM_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(Integer.parseInt(argsOptPtn.get(OPTION_NGRAM_SEARCH).get(1))!=l.size()-1){
@@ -678,7 +735,8 @@ public class App {
                     optionUsage(OPTION_NGRAM_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_NGRAM_SEARCH).get(1))+1)));
+                    //option,regexp,cmdlines
+                    rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,l.size())));
                 }
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_WORD_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
@@ -687,7 +745,8 @@ public class App {
                     optionUsage(OPTION_WORD_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_WORD_SEARCH).get(1))+1)));
+                    //option,regexp,cmdlines
+                    rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,l.size())));
                 }
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HASH_KEY_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
@@ -696,7 +755,8 @@ public class App {
                     optionUsage(OPTION_HASH_KEY_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))+1)));
+                    //option,regexp,cmdlines
+                    rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,l.size())));
                 }
             }else{
                 optionUsage(OPTION_HELP);
@@ -744,8 +804,20 @@ public class App {
             }
             Set<Integer> rt;
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
-                rt = searchCodePointStartEnd(entry.getValue());
-                ret += printOut(entry.getValue().get(MAPKEY_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                if(entry.getKey().contains(OPTION_RANGE) && 1==mainReStyleProcessArgs.size()){
+                    //range指定のみフル出力
+                    rt = IntStream.rangeClosed(DEFAULT_START_RN,DEFAULT_END_RN).boxed().collect(Collectors.toSet());
+                    ret += printOut(Optional.ofNullable(entry.getValue().get(MAPKEY_NORM_GRP)).orElse(DEFAULT_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                    break finish ;
+                }
+                if(entry.getValue().get(MAPKEY_SEARCH_MODE)==null){
+                    //検索モード以外の場合
+
+                }else {
+                    //検索モードの場合
+                    rt = searchCodePointStartEnd(entry.getValue());
+                    ret += printOut(entry.getValue().get(MAPKEY_NORM_GRP),grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())));
+                }
             }
         }
         return ret;
@@ -804,7 +876,6 @@ public class App {
         canYouHelpMe(mainProcessArgs);
 
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
-
         if(argsRangeChk(mainReStyleProcessArgs)){
             //TODO 入力の引数に応じてHELPだし分けたい
             ret = FAILURE_STATUS;
@@ -820,6 +891,7 @@ public class App {
         }
 
         ret = ptnCheck(mainReStyleProcessArgs);
+
         switch (ret){
             case 7:
                 optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
