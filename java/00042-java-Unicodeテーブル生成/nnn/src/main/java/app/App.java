@@ -22,7 +22,9 @@ import java.util.stream.Stream;
 //7. ヘルプのリッチ化
 //8. 検索結果件数の表示
 //9. 正規表現の変数化 グラム化インデックス粒度を可変にする
-//10. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
+//10. 出現位置を切り捨てないパタンもオプションだす
+//11.正規化オプション4パタン
+//12. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
 
 
 public class App {
@@ -91,10 +93,17 @@ public class App {
 
     private final static List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
 
+//    private static final String COL_CODEPOINT="NORM_GRP_CORE";
+
+
+
     private final static String ARTIFACT_ID = "1-0-0";
     private final static String ARGS_SEPARATOR = ":";
 
     private static Integer DEFAULT_NGRAM_CNT=7;
+
+    private static Integer SEQ_CNT=0;
+    private static Integer GRP_CNT=0;
 
     private static Integer DEFAULT_START_RN=Character.MIN_CODE_POINT;
     private static Integer DEFAULT_END_RN=Character.MAX_CODE_POINT;
@@ -102,6 +111,7 @@ public class App {
     private static String DEFAULT_NONE_KEY_WORD="ウンコもりもり森鴎外";
 
     private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
+        put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
@@ -153,6 +163,12 @@ public class App {
     private static void optionHelp(){
         System.out.println("unidat -hash:3:1:2:POI -n:2:2:4:4:RUBY -w:1:1:3:BUTTA");
         System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HAN --range:1:30000 -n:2:3:4:2:JI"); //レンジを絞って検索
+        System.out.println("unidat --range:1:30"); //レンジを絞って出力
+        System.out.println("unidat --range:50:80"); //レンジを絞って出力
+        System.out.println("unidat --range:12354:12390"); //レンジを絞って出力
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:BBF"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
+        System.out.println("unidat -hash:3:3:1:HIRAGANA -w:1:3:4:HIRAGANA --range:1:30000 -n:2:1:4:3:CJK"); //レンジを絞って検索
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -306,45 +322,51 @@ public class App {
         return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
     };
     private static <N,S> Map<N, List<S>> executeMkTbl(
-            N i
+            N seq
+            ,N grp
+            ,N grpSeq
+            ,N i
             ,List<Function<N,S>> singleArgFunctionInNumOutStrList
             ,List<Function<S,S>> singleArgFunctionInStrOutStrList
             ,BiFunction<S,Normalizer.Form,S> multipleArgFunction
             ,Normalizer.Form... norm
     ){
+
         Map<N, List<S>> rt = new LinkedHashMap<>();
 
         Function<N,S> numToStr = singleArgFunctionInNumOutStrList.get(0); //numToStr(i)
         Function<N,S> cpToStr = singleArgFunctionInNumOutStrList.get(1); //cpToStr(i)
 
         List<S> l = new ArrayList<>();
+        l.add(numToStr.apply(grp));
+        l.add(numToStr.apply(grpSeq));
         l.add(numToStr.apply(i));
         l.add(cpToStr.apply(i));
         for(int j=2;j<singleArgFunctionInNumOutStrList.size();j++){
             l.add(singleArgFunctionInNumOutStrList.get(j).apply(i));
         }
-        rt.put(i,l);
+        rt.put(seq,l);
 
         S dest = null;
         if(norm.length>0 && norm[0]!=null){
             //正規化有りの場合
             dest = multipleArgFunction.apply(cpToStr.apply(i),norm[0]);//strToNorm(cpToStr(i), Normalizer.Form.NFD)
             l.add(dest);
-            rt.put(i,l);
+            rt.put(seq,l);
         }else{
             //正規化無しの場合
         }
 
         for(int j=0;j<singleArgFunctionInStrOutStrList.size();j++){
            //デフォルト値の設定
-            if(rt.containsKey(i)){
+            if(rt.containsKey(seq)){
                 //紐づくキーがあれば、リスト追加
                 if(dest==null){
                     //正規化無しの場合
-                    rt.get(i).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i)))));
+                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(cpToStr.apply(i)))));
                 }else{
                     //正規化有りの場合
-                    rt.get(i).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(dest))));
+                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrList.get(j).apply(dest))));
                 }
             }else{
                 //紐づくキーは直前のループで追加済み
@@ -363,9 +385,9 @@ public class App {
         if(norms.length>0){
             norm=norms[0];
         }
-
+        ++GRP_CNT;
         for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,norm));
+            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrList,singleArgFunctionInStrOutStrList,multipleArgFunction,norm));
         }
         return rt;
     }
@@ -539,6 +561,7 @@ public class App {
         for(int i=0;i<rr.size();i++){
             cnt+=(rr.get(i).get(1)-rr.get(i).get(0)+1);
             debug(searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1)));
+//            searchTbl(normGrp,rr.get(i).get(0),rr.get(i).get(1));
         }
         return ret+cnt;
     }
