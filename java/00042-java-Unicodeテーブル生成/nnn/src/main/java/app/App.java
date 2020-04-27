@@ -93,9 +93,15 @@ public class App {
 
     private final static List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
 
-//    private static final String COL_CODEPOINT="NORM_GRP_CORE";
-
-
+    private static final String OPTION_NUM_TO_STR="NUM_TO_STR";
+    private static final String OPTION_CP_TO_STR="CP_TO_STR";
+    private static final String OPTION_CP_TO_UNICODE_NAME="CP_TO_UNICODE_NAME";
+    private static final String OPTION_CP_TO_UNICODE_SCRIPT_NAME="CP_TO_UNICODE_SCRIPT_NAME";
+    private static final String OPTION_CP_TO_UNICODE_BLOCK_NAME="CP_TO_UNICODE_BLOCK_NAME";
+    private static final String OPTION_STR_TO_UTF8="STR_TO_UTF8";
+    private static final String OPTION_STR_TO_UTF16="STR_TO_UTF16";
+    private static final String OPTION_STR_TO_UTF32="STR_TO_UTF32";
+    private static final String OPTION_STR_TO_UNICODE="STR_TO_UNICODE";
 
     private final static String ARTIFACT_ID = "1-0-0";
     private final static String ARGS_SEPARATOR = ":";
@@ -111,13 +117,27 @@ public class App {
     private static String DEFAULT_NONE_KEY_WORD="ウンコもりもり森鴎外";
 
     private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
-        put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
+        put(OPTION_NUM_TO_STR, Arrays.asList("true", "-cp", "--cp", "--codepoint"));
+        put(OPTION_CP_TO_STR, Arrays.asList("true", "-s", "-str", "--str"));
+        put(OPTION_CP_TO_UNICODE_NAME, Arrays.asList("true", "-unm", "--unm"));
+        put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, Arrays.asList("true", "-usc", "--usc"));
+        put(OPTION_CP_TO_UNICODE_BLOCK_NAME, Arrays.asList("true", "-ubl", "--ubl"));
+        put(OPTION_STR_TO_UTF8, Arrays.asList("true", "-u8", "--u8"));
+        put(OPTION_STR_TO_UTF16, Arrays.asList("true", "-u16", "--u16"));
+        put(OPTION_STR_TO_UTF32, Arrays.asList("true", "-u32","--u32"));
+        put(OPTION_STR_TO_UNICODE, Arrays.asList("true", "-unicode", "--unicode"));
+        put(OPTION_NORM_GRP_CORE, Arrays.asList("true", "-core", "--core"));
+        put(OPTION_NORM_GRP_NFC, Arrays.asList("true", "-nfc", "--nfc"));
+        put(OPTION_NORM_GRP_NFD, Arrays.asList("true", "-nfd","--nfd"));
+        put(OPTION_NORM_GRP_NFKC, Arrays.asList("true", "-nfkc", "--nfkc"));
+        put(OPTION_NORM_GRP_NFKD, Arrays.asList("true", "-nfkd", "--nfkd"));
+
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
         put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*"));
-        put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
-        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-{1,}hh.*", "-{1,}hash.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
+        put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5","-ngram.*", "--ngram.*"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
     }};
     private final static Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
         put(OPTION_RANGE, Arrays.asList("DEFAULT_START_RN","DEFAULT_END_RN"));
@@ -240,13 +260,13 @@ public class App {
     private static String binToHex(String s){
         return Integer.toHexString(Integer.parseInt(s,2));
     }
-    private static String cpToUniName(Integer n){
+    private static String cpToUnicodeName(Integer n){
         return Character.getName(n);
     }
-    private static String cpToUniScriptName(Integer n){
+    private static String cpToUnicodeScriptName(Integer n){
         return Character.UnicodeScript.of(n).name();
     }
-    private static String cpToUniBlockName(Integer n){
+    private static String cpToUnicodeBlockName(Integer n){
         return String.valueOf(Character.UnicodeBlock.of(n));
     }
     static Function<Integer, String> cpToStr = (n)-> {
@@ -258,13 +278,13 @@ public class App {
     static BiFunction<String, Normalizer.Form, String> strToNorm = (s,typ)-> {
         return Normalizer.normalize(s,typ);
     };
-    static Function<Integer, String> cpToUniScriptName = (n)-> {
+    static Function<Integer, String> cpToUnicodeScriptName = (n)-> {
         return Character.UnicodeScript.of(n).name();
     };
-    static Function<Integer, String> cpToUniBlockName = (n)-> {
+    static Function<Integer, String> cpToUnicodeBlockName = (n)-> {
         return String.valueOf(Character.UnicodeBlock.of(n));
     };
-    static Function<Integer, String> cpToUniName = (n)-> {
+    static Function<Integer, String> cpToUnicodeName = (n)-> {
         return Character.getName(n);
     };
     static Function<String, String> strToUtf8 = (s)-> {
@@ -377,7 +397,7 @@ public class App {
     }
     private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Normalizer.Form... norms) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUniName,cpToUniScriptName,cpToUniBlockName);
+        List<Function<Integer,String>> singleArgFunctionInNumOutStrList = Arrays.asList(numToStr,cpToStr,cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName);
         List<Function<String,String>> singleArgFunctionInStrOutStrList = Arrays.asList(strToUtf8,strToUtf16,strToUtf32,strToUnicode);
         BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
 
@@ -392,15 +412,15 @@ public class App {
         return rt;
     }
     private static Map<Integer, String> mkInputUnicodeName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Map<Integer, String> mkInputUnicodeScriptName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniScriptName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeScriptName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static Map<Integer, String> mkInputUnicodeBlockName(Integer s,Integer e) {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUniBlockName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeBlockName(i)).orElse(DEFAULT_NONE_KEY_WORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
     }
     private static String repeat(String str, int n) {
@@ -708,12 +728,42 @@ public class App {
             System.exit(FAILURE_STATUS);
         }
 
+        System.out.println(cmdLineArgs);
+
         //引数処理
         for (int i=0;i<cmdLineArgs.size();i++){
             if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HELP))){
                 rt.put(OPTION_HELP, Arrays.asList(OPTION_ON));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_VERSION))){
                 rt.put(OPTION_VERSION, Arrays.asList(OPTION_ON));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NUM_TO_STR))){
+                rt.put(OPTION_NUM_TO_STR, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_CP_TO_STR))){
+                rt.put(OPTION_CP_TO_STR, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_CP_TO_UNICODE_NAME))){
+                rt.put(OPTION_CP_TO_UNICODE_NAME, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_CP_TO_UNICODE_SCRIPT_NAME))){
+                rt.put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_CP_TO_UNICODE_BLOCK_NAME))){
+                rt.put(OPTION_CP_TO_UNICODE_BLOCK_NAME, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_STR_TO_UTF8))){
+                rt.put(OPTION_STR_TO_UTF8, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_STR_TO_UTF16))){
+                rt.put(OPTION_STR_TO_UTF16, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_STR_TO_UTF32))){
+                rt.put(OPTION_STR_TO_UTF32, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_STR_TO_UNICODE))){
+                rt.put(OPTION_STR_TO_UNICODE, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NORM_GRP_CORE))){
+                rt.put(OPTION_NORM_GRP_CORE, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NORM_GRP_NFC))){
+                rt.put(OPTION_NORM_GRP_NFC, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NORM_GRP_NFD))){
+                rt.put(OPTION_NORM_GRP_NFD, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NORM_GRP_NFKC))){
+                rt.put(OPTION_NORM_GRP_NFKC, Arrays.asList(OPTION_OFF));
+            }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NORM_GRP_NFKD))){
+                rt.put(OPTION_NORM_GRP_NFKD, Arrays.asList(OPTION_OFF));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_RANGE))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(l.size()>3){
@@ -805,6 +855,51 @@ public class App {
         }
         if(!rt.containsKey(OPTION_HASH_KEY_SEARCH)){
             rt.put(OPTION_HASH_KEY_SEARCH,Arrays.asList(OPTION_OFF));
+        }
+        if(!rt.containsKey(OPTION_NUM_TO_STR)){
+            rt.put(OPTION_NUM_TO_STR,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_CP_TO_STR)){
+            rt.put(OPTION_CP_TO_STR,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_CP_TO_UNICODE_NAME)){
+            rt.put(OPTION_CP_TO_UNICODE_NAME,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_CP_TO_UNICODE_SCRIPT_NAME)){
+            rt.put(OPTION_CP_TO_UNICODE_SCRIPT_NAME,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_CP_TO_UNICODE_BLOCK_NAME)){
+            rt.put(OPTION_CP_TO_UNICODE_BLOCK_NAME,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_STR_TO_UTF8)){
+            rt.put(OPTION_STR_TO_UTF8,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_STR_TO_UTF16)){
+            rt.put(OPTION_STR_TO_UTF16,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_STR_TO_UTF32)){
+            rt.put(OPTION_STR_TO_UTF32,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_STR_TO_UNICODE)){
+            rt.put(OPTION_STR_TO_UNICODE,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_NORM_GRP_CORE)){
+            rt.put(OPTION_NORM_GRP_CORE,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_STR_TO_UNICODE)){
+            rt.put(OPTION_STR_TO_UNICODE,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_NORM_GRP_NFC)){
+            rt.put(OPTION_NORM_GRP_NFC,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_NORM_GRP_NFD)){
+            rt.put(OPTION_NORM_GRP_NFD,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_NORM_GRP_NFKC)){
+            rt.put(OPTION_NORM_GRP_NFKC,Arrays.asList(OPTION_ON));
+        }
+        if(!rt.containsKey(OPTION_NORM_GRP_NFKD)){
+            rt.put(OPTION_NORM_GRP_NFKD,Arrays.asList(OPTION_ON));
         }
 
         return rt;
