@@ -1,5 +1,7 @@
 package app;
 
+import javax.xml.stream.events.Characters;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.*;
@@ -308,38 +310,32 @@ public class App {
         return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
     };
     static Function<String, String> strToUtf16 = (s)-> {
-        byte[] b = s.getBytes(StandardCharsets.UTF_8);
-        Pattern p = Pattern.compile("^1*0");
+        byte[] b = s.getBytes(StandardCharsets.UTF_16);
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<b.length;i++){
-            String bin = hexToBin(String.format("%02X",b[i]));
-            Matcher mc = p.matcher(bin);
-            if(mc.find()){
-                if(2!=mc.group().length()){
-                    sb.append("\n"+binToHex(bin));
-                }else{
-                    sb.append(binToHex(bin));
-                }
+            String hex = String.format("%02X",b[i]);
+            if(hex.equals("FE")||hex.equals("FF")){
+            }else if((sb.length()-sb.toString().split("-").length+1)%4==0&&0<sb.length()){
+                sb.append("-"+hex);
+            }
+            else{
+                sb.append(hex);
             }
         }
-        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
+        return sb.toString();
     };
     static Function<String, String> strToUtf32 = (s)-> {
-        byte[] b = s.getBytes(StandardCharsets.UTF_8);
-        Pattern p = Pattern.compile("^1*0");
+        byte[] b = s.getBytes(Charset.forName("UTF-32"));
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<b.length;i++){
-            String bin = hexToBin(String.format("%02X",b[i]));
-            Matcher mc = p.matcher(bin);
-            if(mc.find()){
-                if(2!=mc.group().length()){
-                    sb.append("\n"+binToHex(bin));
-                }else{
-                    sb.append(binToHex(bin));
-                }
+            String hex = String.format("%02X",b[i]);
+            if((sb.length()-sb.toString().split("-").length+1)%8==0&&0<sb.length()) {
+                sb.append("-" + hex);
+            }else{
+                sb.append(hex);
             }
         }
-        return Stream.of(sb.toString()).flatMap(e-> Arrays.stream(e.split("\n"))).filter(ee->0!=ee.length()).collect(Collectors.joining("-"));
+        return sb.toString();
     };
     static Function<String, String> strToUnicode = (s)-> {
         return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
