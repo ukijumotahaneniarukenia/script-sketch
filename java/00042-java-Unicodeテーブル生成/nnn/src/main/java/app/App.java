@@ -58,6 +58,7 @@ public class App {
 
     private final static String OPTION_ON = "1";
     private final static String OPTION_OFF = "-9999";
+    private final static String OPTION_ALL = "OPTION_ALL";
     private final static String OPTION_HELP = "OPTION_HELP";
     private final static String OPTION_VERSION = "OPTION_VERSION";
     private final static String OPTION_USAGE = "OPTION_USAGE";
@@ -100,14 +101,15 @@ public class App {
 
     private static String DEFAULT_NONE_KEY_WORD="ウンコもりもり森鴎外";
 
-    private final static Map<String, List<String>> prepareParseOptPtn = new LinkedHashMap<>(){{
+    private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
+        put(OPTION_ALL, Arrays.asList("true", "-a", "--a", "--all", "-all"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
         put(OPTION_WORD_SEARCH, Arrays.asList("false","4", "-w.*", "--w.*", "-word.*", "--word.*"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("false","5", "-n.*", "--n.*", "-ngram.*", "--ngram.*"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","4", "-{1,}hh.*", "-{1,}hash.*", "-{1,}hash-?key.*", "-{1,}hash-?Key.*", "-{1,}Hash-?Key.*", "-{1,}Hash-?key.*"));
     }};
-    private final static Map<String, List<String>> prepareParseOptPtnName = new LinkedHashMap<>(){{
+    private final static Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_NGRAM_CNT","DEFAULT_SEARCH_KEY_WORD"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("DEFAULT_SEARCH_MODE","DEFAULT_IDX_INPUT_PTN","DEFAULT_NORM_GRP","DEFAULT_SEARCH_KEY_WORD"));
@@ -637,7 +639,7 @@ public class App {
             entry.getValue().remove(0);
             entry.getValue().remove(0);
             int mx = entry.getValue().size();
-            List<String> keyName = prepareParseOptPtnName.get(entry.getKey());
+            List<String> keyName = argsKeyName.get(entry.getKey());
             Map<String,String> mm = new LinkedHashMap<>();
             for(int i=0;i<mx;i++){
                 mm.put(keyName.get(i),entry.getValue().get(i));
@@ -646,9 +648,9 @@ public class App {
         }
         return rt;
     }
-    private static Map<String, String> prepareParseOpts(Map<String, List<String>> prepareParseOptPtn){
+    private static Map<String, String> prepareParseOpts(Map<String, List<String>> argsOptPtn){
         Map<String, String> rt = new LinkedHashMap<>();
-        for(Map.Entry<String,List<String>> entry : prepareParseOptPtn.entrySet()){
+        for(Map.Entry<String,List<String>> entry : argsOptPtn.entrySet()){
             if(Boolean.parseBoolean(entry.getValue().get(0))){
                 //コマンドライン引数値を伴わない場合
                 Pattern ptn = Pattern.compile("((?!.)." + entry.getValue().subList(1,entry.getValue().size()).stream().map(Pattern::quote).map("|"::concat).collect(Collectors.joining()) + ")");
@@ -671,30 +673,30 @@ public class App {
                 rt.put(OPTION_VERSION, Arrays.asList(OPTION_ON));
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_NGRAM_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_NGRAM_SEARCH).get(1))!=l.size()-1){
+                if(Integer.parseInt(argsOptPtn.get(OPTION_NGRAM_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
                     optionUsage(OPTION_NGRAM_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_NGRAM_SEARCH).get(1))+1)));
+                    rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_NGRAM_SEARCH).get(1))+1)));
                 }
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_WORD_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_WORD_SEARCH).get(1))!=l.size()-1){
+                if(Integer.parseInt(argsOptPtn.get(OPTION_WORD_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
                     optionUsage(OPTION_WORD_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_WORD_SEARCH).get(1))+1)));
+                    rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_WORD_SEARCH).get(1))+1)));
                 }
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_HASH_KEY_SEARCH))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
-                if(Integer.parseInt(prepareParseOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))!=l.size()-1){
+                if(Integer.parseInt(argsOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
                     optionUsage(OPTION_HASH_KEY_SEARCH);
                     System.exit(SUCCESS_STATUS);
                 }else{
-                    rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,Integer.parseInt(prepareParseOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))+1)));
+                    rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,Integer.parseInt(argsOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))+1)));
                 }
             }else{
                 optionUsage(OPTION_HELP);
@@ -797,7 +799,7 @@ public class App {
     public static void main(String... args) {
         int ret;
 
-        Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(prepareParseOptPtn));
+        Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(argsOptPtn));
 
         canYouHelpMe(mainProcessArgs);
 
