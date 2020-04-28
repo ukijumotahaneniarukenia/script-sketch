@@ -45,13 +45,13 @@ public class App {
     private final static String ARTIFACT_ID = "1-0-0";
     private final static String ARGS_SEPARATOR = ":";
 
-    private static String OPTION_SEARCH_MODE="SEARCH_MODE";
-    private static String OPTION_IDX_INPUT_PTN="IDX_INPUT_PTN";
-    private static String OPTION_NORM_GRP="NORM_GRP";
-    private static String OPTION_SEARCH_KEYWORD="SEARCH_KEYWORD";
-    private static String OPTION_NGRAM_CNT="NGRAM_CNT";
-    private static String OPTION_START_RN="START_RN";
-    private static String OPTION_END_RN="END_RN";
+    private final static String OPTION_SEARCH_MODE="SEARCH_MODE";
+    private final static String OPTION_IDX_INPUT_PTN="IDX_INPUT_PTN";
+    private final static String OPTION_NORM_GRP="NORM_GRP";
+    private final static String OPTION_SEARCH_KEYWORD="SEARCH_KEYWORD";
+    private final static String OPTION_NGRAM_CNT="NGRAM_CNT";
+    private final static String OPTION_START_RN="START_RN";
+    private final static String OPTION_END_RN="END_RN";
 
     private static String DEFAULT_SEARCH_MODE="1";
     private static String DEFAULT_IDX_INPUT_PTN="1";
@@ -153,7 +153,7 @@ public class App {
         put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
         put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
     }};
-    private static void optionUsage(String... optionPtn){
+    private static void optionUsage(Integer status,String... optionPtn){
         for(String option : optionPtn){
             switch (option){
                 case OPTION_HELP:
@@ -172,10 +172,17 @@ public class App {
                 case OPTION_HASH_KEY_SEARCH:
                     usageHashKeySearch();
                     break;
+                case OPTION_SEARCH_MODE:
+                    optionHelp();
+                    break;
+                case OPTION_IDX_INPUT_PTN:
+                    optionHelp();
+                    break;
                 default:
                     break;
             }
         }
+        System.exit(status);
     }
     private static void optionHelp(){
         System.out.println("unidat -hash:3:1:POI -ngram:2:2:4:RUBY -word:1:1:BUTTA");
@@ -644,8 +651,9 @@ public class App {
         }
         return rt;
     }
-    private static boolean argsRangeChk(Map<String,Map<String,String>> m){
+    private static Map<String,Boolean> argsRangeChk(Map<String,Map<String,String>> m){
         int b = 0;
+        Map<String,Boolean> rt = new HashMap<>();
         for(Map.Entry<String,Map<String,String>> entry : m.entrySet()){
             Map<String,String> argsRangeChkMap = argsRangeChk.get(entry.getKey());
             for(Map.Entry<String,String> argsRangeMap : argsRangeChkMap.entrySet()){
@@ -653,26 +661,31 @@ public class App {
                 if(IntStream.rangeClosed(Integer.parseInt(startEndChkMap.get(0)),Integer.parseInt(startEndChkMap.get(1))).boxed()
                         .noneMatch(i->i==Integer.parseInt(Optional.ofNullable(entry.getValue().get(argsRangeMap.getKey())).orElse("0")))){
                     ++b;
+                    rt.put(argsRangeMap.getKey(),b!=0?true:false);
+                    b=0;
                 }
             }
         }
-        return b!=0?true:false;
+        return rt;
     }
-    private static boolean argsGraphChk(Map<String,Map<String,String>> m){
+    private static Map<String,Boolean> argsGraphChk(Map<String,Map<String,String>> m){
         int b = 0;
+        Map<String,Boolean> rt = new HashMap<>();
         for(Map.Entry<String,Map<String,String>> entry : m.entrySet()){
             Map<String,String> argsGraphChkMap = argsGraphChk.get(entry.getKey());
             if(argsGraphChkMap != null){
                 for(Map.Entry<String,String> argsGraphMap : argsGraphChkMap.entrySet()){
                     if(!entry.getValue().get(argsGraphMap.getKey()).matches(argsGraphMap.getValue())){
-                        b++;
+                        ++b;
+                        rt.put(argsGraphMap.getKey(),b!=0?true:false);
+                        b=0;
                     }
                 }
             }else{
                 //文字チェックしない
             }
         }
-        return b!=0?true:false;
+        return rt;
     }
     private static Map<String,Map<String,String>> restyleArgs(Map<String, List<String>> mainProcessArgs){
         Map<String,Map<String,String>> rt = new LinkedHashMap<>();
@@ -715,8 +728,7 @@ public class App {
         Map<String, List<String>> rt = new LinkedHashMap<>();
 
         if(cmdLineArgs.size()<=0){
-            optionUsage(OPTION_HELP);
-            System.exit(FAILURE_STATUS);
+            optionUsage(FAILURE_STATUS,OPTION_HELP);
         }
 
         //引数処理
@@ -759,35 +771,29 @@ public class App {
             }else if(cmdLineArgs.get(i).matches(prepareParseOpts.get(OPTION_RANGE))){
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(l.size()>3){
-                    optionUsage(OPTION_HELP);
-                    System.exit(FAILURE_STATUS);
+                    optionUsage(FAILURE_STATUS,OPTION_HELP);
                 }
                 if(2==l.size()){
                     if(l.get(1).length()>String.valueOf(DEFAULT_END_RN).length()){
-                        optionUsage(OPTION_HELP);
-                        System.exit(FAILURE_STATUS);
+                        optionUsage(FAILURE_STATUS,OPTION_HELP);
                     }
                     if(Integer.parseInt(l.get(1))>DEFAULT_END_RN){
-                        optionUsage(OPTION_HELP);
-                        System.exit(FAILURE_STATUS);
+                        optionUsage(FAILURE_STATUS,OPTION_HELP);
                     }
                     if(Integer.parseInt(l.get(1))<DEFAULT_END_RN){
                         DEFAULT_END_RN=Integer.parseInt(l.get(1));
                     }
                 }else if(3==l.size()){
                     if(l.get(1).length()>String.valueOf(DEFAULT_END_RN).length()||l.get(2).length()>String.valueOf(DEFAULT_END_RN).length()){
-                        optionUsage(OPTION_HELP);
-                        System.exit(FAILURE_STATUS);
+                        optionUsage(FAILURE_STATUS,OPTION_HELP);
                     }
                     if(Integer.parseInt(l.get(2))<DEFAULT_START_RN){
-                        optionUsage(OPTION_HELP);
-                        System.exit(FAILURE_STATUS);
+                        optionUsage(FAILURE_STATUS,OPTION_HELP);
                     }
                     DEFAULT_START_RN=Integer.parseInt(l.get(1));
                     DEFAULT_END_RN=Integer.parseInt(l.get(2));
                 }else{
-                    optionUsage(OPTION_HELP);
-                    System.exit(FAILURE_STATUS);
+                    optionUsage(FAILURE_STATUS,OPTION_HELP);
                 }
 
                 //option,regexp,cmdlines
@@ -797,8 +803,7 @@ public class App {
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(Integer.parseInt(argsOptPtn.get(OPTION_NGRAM_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    optionUsage(OPTION_NGRAM_SEARCH);
-                    System.exit(SUCCESS_STATUS);
+                    optionUsage(SUCCESS_STATUS,OPTION_NGRAM_SEARCH);
                 }else{
                     //option,regexp,cmdlines
                     rt.put(OPTION_NGRAM_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_NGRAM_SEARCH)),l.subList(1,l.size())));
@@ -807,8 +812,7 @@ public class App {
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(Integer.parseInt(argsOptPtn.get(OPTION_WORD_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    optionUsage(OPTION_WORD_SEARCH);
-                    System.exit(SUCCESS_STATUS);
+                    optionUsage(SUCCESS_STATUS,OPTION_WORD_SEARCH);
                 }else{
                     //option,regexp,cmdlines
                     rt.put(OPTION_WORD_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_WORD_SEARCH)),l.subList(1,l.size())));
@@ -817,15 +821,13 @@ public class App {
                 List<String> l = Arrays.asList(cmdLineArgs.get(i).split(ARGS_SEPARATOR));
                 if(Integer.parseInt(argsOptPtn.get(OPTION_HASH_KEY_SEARCH).get(1))!=l.size()-1){
                     //引数個数チェック
-                    optionUsage(OPTION_HASH_KEY_SEARCH);
-                    System.exit(SUCCESS_STATUS);
+                    optionUsage(SUCCESS_STATUS,OPTION_HASH_KEY_SEARCH);
                 }else{
                     //option,regexp,cmdlines
                     rt.put(OPTION_HASH_KEY_SEARCH, flattenList(Arrays.asList(l.get(0),prepareParseOpts.get(OPTION_HASH_KEY_SEARCH)),l.subList(1,l.size())));
                 }
             }else{
-                optionUsage(OPTION_HELP);
-                System.exit(FAILURE_STATUS);
+                optionUsage(FAILURE_STATUS,OPTION_HELP);
             }
         }
 
@@ -905,12 +907,12 @@ public class App {
         int ret = SUCCESS_STATUS;
         finish : {
             if(showCmdInfo(mainProcessArgs,OPTION_HELP,OPTION_USAGE)){
-                optionUsage(OPTION_USAGE);
-                break finish;
+                optionUsage(ret,OPTION_USAGE);
+                break finish ;
             }
             if(showCmdInfo(mainProcessArgs,OPTION_VERSION)){
-                optionUsage(OPTION_VERSION);
-                break finish;
+                optionUsage(ret,OPTION_VERSION);
+                break finish ;
             }
             Set<Integer> rt;
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
@@ -965,16 +967,13 @@ public class App {
     private static void canYouHelpMe(Map<String, List<String>> mainProcessArgs){
         for(Map.Entry<String, List<String>> entry : mainProcessArgs.entrySet()){
             if(Stream.of(OPTION_HELP).anyMatch(e->e.contains(entry.getKey())) && entry.getValue().get(0).contains(ON)){
-                optionUsage(OPTION_HELP);
-                System.exit(SUCCESS_STATUS);
+                optionUsage(SUCCESS_STATUS,OPTION_HELP);
             }
             if(Stream.of(OPTION_USAGE).anyMatch(e->e.contains(entry.getKey())) && entry.getValue().get(0).contains(ON)){
-                optionUsage(OPTION_USAGE);
-                System.exit(SUCCESS_STATUS);
+                optionUsage(SUCCESS_STATUS,OPTION_USAGE);
             }
             if(Stream.of(OPTION_VERSION).anyMatch(e->e.contains(entry.getKey())) && entry.getValue().get(0).contains(ON)){
-                optionUsage(OPTION_VERSION);
-                System.exit(SUCCESS_STATUS);
+                optionUsage(SUCCESS_STATUS,OPTION_VERSION);
             }
         }
     }
@@ -987,43 +986,50 @@ public class App {
 
         Map<String,Map<String,String>> mainReStyleProcessArgs = restyleArgs(mainProcessArgs);
 
-        if(argsRangeChk(mainReStyleProcessArgs)){
-            //TODO 入力の引数に応じてHELPだし分けたい
+        Map<String,Boolean> argsRangeChkResult = argsRangeChk(mainReStyleProcessArgs);
+        Long argsRangeChkResultCnt = argsRangeChkResult.keySet().stream().filter(k->argsRangeChkResult.get(k).equals(true)).count();
+        if(0L!=argsRangeChkResultCnt){
             ret = FAILURE_STATUS;
-            optionUsage(OPTION_USAGE);
-            System.exit(ret);
+            optionUsage(ret,argsRangeChkResult.keySet().stream().filter(k->argsRangeChkResult.get(k).equals(true)).toArray(String[]::new));
         }
 
-        if(argsGraphChk(mainReStyleProcessArgs)){
-            //TODO 入力の引数に応じてHELPだし分けたい
+        Map<String,Boolean> argsGraphChkResult = argsGraphChk(mainReStyleProcessArgs);
+        Long argsGraphChkResultCnt = argsGraphChkResult.keySet().stream().filter(k->argsGraphChkResult.get(k).equals(true)).count();
+        if(0L!=argsGraphChkResultCnt){
             ret = FAILURE_STATUS;
-            optionUsage(OPTION_USAGE);
-            System.exit(ret);
+            optionUsage(ret,argsGraphChkResult.keySet().stream().filter(k->argsGraphChkResult.get(k).equals(true)).toArray(String[]::new));
         }
 
         ret = ptnCheck(mainReStyleProcessArgs);
 
         switch (ret){
             case 7:
-                optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
                 break;
             case 6:
-                optionUsage(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH);
                 break;
             case 5:
-                optionUsage(OPTION_WORD_SEARCH,OPTION_HASH_KEY_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_WORD_SEARCH,OPTION_HASH_KEY_SEARCH);
                 break;
             case 4:
-                optionUsage(OPTION_WORD_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_WORD_SEARCH);
                 break;
             case 3:
-                optionUsage(OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
                 break;
             case 2:
-                optionUsage(OPTION_NGRAM_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_NGRAM_SEARCH);
                 break;
             case 1:
-                optionUsage(OPTION_HASH_KEY_SEARCH);
+                ret = SUCCESS_STATUS;
+                optionUsage(ret,OPTION_HASH_KEY_SEARCH);
                 break;
             case 0:
                 ret = mainProcess(mainProcessArgs,mainReStyleProcessArgs);
