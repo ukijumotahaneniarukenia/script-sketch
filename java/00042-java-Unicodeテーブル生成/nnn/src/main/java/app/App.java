@@ -30,6 +30,13 @@ import java.util.stream.Stream;
 //12. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
 //13. 同じオプションの引数違いを後勝ちではなく与えた分だけ処理する -ngram:2:1:4:HIRA -ngram:2:2:4:HIRA
 //14. 入力で与えた引数がユニコードの第何群第何面に属しているかチェックし、サマリ情報を出力
+//15. 指定した文字数までのランダムな文字列生成。日本語。タミル語。ハングル文字。
+//16. 引数の名寄せ処理集計処理があれば与えられた引数の先頭何文字かでグルーピンぐできそう。range以外とrangeで分ける -ngram -uniscript HIRA -ngram -uniscript HIRA -ngram -uniname HIRA -hash -uniscript HIRA -hash -uniscript HIRA
+//17. 引数で与えられた文字列の長さからNGRM数をだす
+
+//コマンドライン引数からこういう風に渡す
+//$echo '-hash '{-uniname,-uniscript,-uniblock}' '{HIRA,KANA}
+//        -hash -uniname HIRA -hash -uniname KANA -hash -uniscript HIRA -hash -uniscript KANA -hash -uniblock HIRA -hash -uniblock KANA
 
 public class App {
 
@@ -40,18 +47,18 @@ public class App {
 
     private static Integer SEQ_CNT=0;
     private static Integer GRP_CNT=0;
-    private final static String ON = "1";
-    private final static String OFF = "-9999";
-    private final static String ARTIFACT_ID = "1-0-0";
-    private final static String ARGS_SEPARATOR = ":";
+    private static final String ON = "1";
+    private static final String OFF = "-9999";
+    private static final String ARTIFACT_ID = "1-0-0";
+    private static final String ARGS_SEPARATOR = ":";
+    private static final String CHK_ARGS_SEPARATOR = ":";
 
-    private final static String OPTION_SEARCH_MODE="SEARCH_MODE";
-    private final static String OPTION_IDX_INPUT_PTN="IDX_INPUT_PTN";
-    private final static String OPTION_NORM_GRP="NORM_GRP";
-    private final static String OPTION_SEARCH_KEYWORD="SEARCH_KEYWORD";
-    private final static String OPTION_NGRAM_CNT="NGRAM_CNT";
-    private final static String OPTION_START_RN="START_RN";
-    private final static String OPTION_END_RN="END_RN";
+    private static final String OPTION_SEARCH_MODE="SEARCH_MODE";
+    private static final String OPTION_IDX_INPUT_PTN="IDX_INPUT_PTN";
+    private static final String OPTION_SEARCH_KEYWORD="SEARCH_KEYWORD";
+    private static final String OPTION_NGRAM_CNT="NGRAM_CNT";
+    private static final String OPTION_START_RN="START_RN";
+    private static final String OPTION_END_RN="END_RN";
 
     private static String DEFAULT_SEARCH_MODE="1";
     private static String DEFAULT_IDX_INPUT_PTN="1";
@@ -61,6 +68,9 @@ public class App {
     private static Integer DEFAULT_END_RN=Character.MAX_CODE_POINT;
     private static String DEFAULT_NONE_KEYWORD="ウンコもりもり森鴎外";
 
+    private static final String MK_IDX = ON;
+    private static final String NON_MK_IDX = OFF;
+
     private static final String SEARCH_MODE_WORD = "1";
     private static final String SEARCH_MODE_NGRAM = "2";
     private static final String SEARCH_MODE_HASH_KEY = "3";
@@ -69,18 +79,18 @@ public class App {
     private static final String IDX_INPUT_UNICODE_SCRIPT_NAME = "2";
     private static final String IDX_INPUT_UNICODE_BLOCK_NAME = "3";
 
-    private final static String OPTION_RANGE = "OPTION_RANGE";
-    private final static String OPTION_HELP = "OPTION_HELP";
-    private final static String OPTION_VERSION = "OPTION_VERSION";
-    private final static String OPTION_USAGE = "OPTION_USAGE";
+    private static final String OPTION_RANGE = "OPTION_RANGE";
+    private static final String OPTION_HELP = "OPTION_HELP";
+    private static final String OPTION_VERSION = "OPTION_VERSION";
+    private static final String OPTION_USAGE = "OPTION_USAGE";
 
-    private final static String OPTION_WORD_SEARCH = "WORD_SEARCH";
-    private final static String OPTION_NGRAM_SEARCH = "NGRAM_SEARCH";
-    private final static String OPTION_HASH_KEY_SEARCH = "HASH_KEY_SEARCH";
+    private static final String OPTION_WORD_SEARCH = "WORD_SEARCH";
+    private static final String OPTION_NGRAM_SEARCH = "NGRAM_SEARCH";
+    private static final String OPTION_HASH_KEY_SEARCH = "HASH_KEY_SEARCH";
 
-    private final static String OPTION_WORD_SEARCH_SUBPTN = "WORD_SEARCH_SUBPTN";
-    private final static String OPTION_NGRAM_SEARCH_SUBPTN = "NGRAM_SEARCH_SUBPTN";
-    private final static String OPTION_HASH_KEY_SEARCH_SUBPTN = "HASH_KEY_SEARCH_SUBPTN";
+    private static final String OPTION_WORD_SEARCH_SUBPTN = "WORD_SEARCH_SUBPTN";
+    private static final String OPTION_NGRAM_SEARCH_SUBPTN = "NGRAM_SEARCH_SUBPTN";
+    private static final String OPTION_HASH_KEY_SEARCH_SUBPTN = "HASH_KEY_SEARCH_SUBPTN";
 
     private static final String OPTION_IDX_INPUT_UNICODE_NAME = "IDX_INPUT_UNICODE_NAME";
     private static final String OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME = "IDX_INPUT_UNICODE_SCRIPT_NAME";
@@ -102,12 +112,31 @@ public class App {
     private static final String OPTION_STR_TO_UTF32="STR_TO_UTF32";
     private static final String OPTION_STR_TO_UNICODE="STR_TO_UNICODE";
 
-    private final static List<String> OPTION_MODE_LIST = Arrays.asList(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
-    private final static List<String> OPTION_SUBPTN_LIST = Arrays.asList(OPTION_WORD_SEARCH_SUBPTN,OPTION_NGRAM_SEARCH_SUBPTN,OPTION_HASH_KEY_SEARCH_SUBPTN);
-    private final static List<String> OPTION_IDX_INPUT_LIST = Arrays.asList(OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME);
-    private final static List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
+    private static final String OPTION_MK_WORD_IDX_NON_WORD_SPLIT="MK_WORD_IDX_NON_WORD_SPLIT";
+    private static final String OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT="MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT";
+    private static final String OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT="MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT";
+    private static final String OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT="MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT";
+    private static final String OPTION_MK_WORD_IDX_NON_WORD_NON_WORD_BOUNDARY_SPLIT="MK_WORD_IDX_NON_WORD_NON_WORD_BOUNDARY_SPLIT";
 
-    private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
+    private static final String OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT="MK_NGRAM_IDX_NON_WORD_SPLIT";
+    private static final String OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT="MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT";
+    private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT";
+    private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT";
+
+    private static final String OPTION_SEARCH_MODE_RANGE_START="1";
+    private static final String OPTION_SEARCH_MODE_RANGE_END="3";
+    private static final String OPTION_IDX_INPUT_PTN_RANGE_START="1";
+    private static final String OPTION_IDX_INPUT_PTN_RANGE_END="3";
+    private static final String OPTION_NGRAM_CNT_RANGE_START="1";
+    private static final String OPTION_NGRAM_CNT_RANGE_END=String.valueOf(DEFAULT_NGRAM_CNT);
+    private static final String OPTION_SEARCH_KEYWORD_PTN="[A-Z]+";
+
+    private static final List<String> OPTION_MODE_LIST = Arrays.asList(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
+    private static final List<String> OPTION_SUBPTN_LIST = Arrays.asList(OPTION_WORD_SEARCH_SUBPTN,OPTION_NGRAM_SEARCH_SUBPTN,OPTION_HASH_KEY_SEARCH_SUBPTN);
+    private static final List<String> OPTION_IDX_INPUT_LIST = Arrays.asList(OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME);
+    private static final List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
+
+    private static final Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
         put(OPTION_NUM_TO_STR, Arrays.asList("true", "-cp", "--cp", "--codepoint"));
         put(OPTION_CP_TO_STR, Arrays.asList("true", "-s", "-str", "--str"));
         put(OPTION_CP_TO_UNICODE_NAME, Arrays.asList("true", "-unm", "--unm"));
@@ -123,35 +152,57 @@ public class App {
         put(OPTION_NORM_GRP_NFKC, Arrays.asList("true", "-nfkc", "--nfkc"));
         put(OPTION_NORM_GRP_NFKD, Arrays.asList("true", "-nfkd", "--nfkd"));
 
+        //swith文を消す想定 START
+        put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT, Arrays.asList("true", "-word-split", "--word-split"));
+        put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT, Arrays.asList("true", "-word-hyphen-split","--word-hyphen-split"));
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT, Arrays.asList("true", "-word-underscore-split", "--word-underscore-split"));
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT, Arrays.asList("true", "-word-all-split", "--word-all-split"));
+        put(OPTION_MK_WORD_IDX_NON_WORD_NON_WORD_BOUNDARY_SPLIT, Arrays.asList("true", "-word-unigram", "--word-unigram")); //実験的というかいらんか
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT, Arrays.asList("true", "-ngram-split", "--ngram-split"));
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT, Arrays.asList("true", "-ngram-hyphen-split","--ngram-hyphen-split"));
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT, Arrays.asList("true", "-ngram-underscore-split", "--ngram-underscore-split"));
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT, Arrays.asList("true", "-ngram-all-split", "--ngram-all-split"));
+        //swith文を消す想定 END
+
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
         put(OPTION_WORD_SEARCH, Arrays.asList("false","3", "-word.*", "--w.*", "-word.*", "--word.*"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("false","4","-ngram.*", "--ngram.*"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","3", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
+
     }};
-    private final static Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
+
+
+
+
+    private static final Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
         put(OPTION_RANGE, Arrays.asList(OPTION_START_RN,OPTION_END_RN));
         put(OPTION_WORD_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_SEARCH_KEYWORD));
         put(OPTION_NGRAM_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_NGRAM_CNT,OPTION_SEARCH_KEYWORD));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_SEARCH_KEYWORD));
     }};
-    private final static Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
-        put(OPTION_RANGE, Map.of(OPTION_START_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN),OPTION_END_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN)));
-        put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3"));
-        put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3",OPTION_NGRAM_CNT,"0"+":"+DEFAULT_NGRAM_CNT));
-        put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3"));
+    private static final Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
+        put(OPTION_RANGE, Map.of(OPTION_START_RN,String.valueOf(DEFAULT_START_RN)+CHK_ARGS_SEPARATOR+String.valueOf(DEFAULT_END_RN),OPTION_END_RN,String.valueOf(DEFAULT_START_RN)+CHK_ARGS_SEPARATOR+String.valueOf(DEFAULT_END_RN)));
+        put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END));
+        put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END,OPTION_NGRAM_CNT,OPTION_NGRAM_CNT_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_NGRAM_CNT_RANGE_END));
+        put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END));
     }};
-    private final static Map<String, Map<String,String>> argsGraphChk = new LinkedHashMap<>(){{
-        put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,"[A-Z]+"));
-        put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,"[A-Z]+"));
-        put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,"[A-Z]+"));
+    private static final Map<String, Map<String,String>> argsGraphChk = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,OPTION_SEARCH_KEYWORD_PTN));
+        put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,OPTION_SEARCH_KEYWORD_PTN));
+        put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,OPTION_SEARCH_KEYWORD_PTN));
     }};
-    private final static Map<String, Normalizer.Form> normMap = new HashMap<>(){{
+    private static final Map<String, Normalizer.Form> normMap = new HashMap<>(){{
         put(OPTION_NORM_GRP_NFC, Normalizer.Form.NFC);
         put(OPTION_NORM_GRP_NFD, Normalizer.Form.NFD);
         put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
         put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
+    }};
+    private static final Map<String, String> searchPtnMap = new LinkedHashMap<>(){{
+        put(OPTION_WORD_SEARCH, MK_IDX);
+        put(OPTION_NGRAM_SEARCH, MK_IDX);
+        put(OPTION_HASH_KEY_SEARCH, NON_MK_IDX);
     }};
     private static void optionUsage(Integer status,String... optionPtn){
         for(String option : optionPtn){
@@ -456,10 +507,11 @@ public class App {
         }
         return rt;
     }
-    private static Map<String, List<String>> mkWordIdx(Map<Integer, String> m){
+    private static Map<String, List<String>> mkWordIdxNonWordNonWordBoundarySplit(Map<Integer, String> m){
+        //unigram
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
-            List<String> l = Arrays.asList(entry.getValue().split("\\W"));
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("\\B")).stream()).collect(Collectors.toList());
             int mx = l.size();
             for(int i=0;i<mx;i++){
                 tmp.put(entry.getKey() +"-"+ i,l.get(i));
@@ -467,7 +519,51 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
-    private static Map<String, List<String>> mkNGramIdx(Map<Integer, String> m,Integer n){
+    private static Map<String, List<String>> mkWordIdxNonWordSplit(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkWordIdxNonWordHyphenSplit(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkWordIdxNonWordUnderScoreSplit(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkWordIdxNonWordUnderScoreHyphenSplit(Map<Integer, String> m){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                tmp.put(entry.getKey() +"-"+ i,l.get(i));
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkNgramIdxNonWordSplit(Map<Integer, String> m,Integer n){
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W"));
@@ -482,7 +578,53 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     }
+    private static Map<String, List<String>> mkNgramIdxNonWordHyphenSplit(Map<Integer, String> m,Integer n){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                List<String> ll = ngram(l.get(i),n);
+                int mxmx=ll.size();
+                for(int j=0;j<mxmx;j++){
+                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+                }
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkNgramIdxNonWordUnderScoreSplit(Map<Integer, String> m,Integer n){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                List<String> ll = ngram(l.get(i),n);
+                int mxmx=ll.size();
+                for(int j=0;j<mxmx;j++){
+                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+                }
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
+    private static Map<String, List<String>> mkNgramIdxNonWordUnderScoreHyphenSplit(Map<Integer, String> m,Integer n){
+        Map<String, String> tmp = new HashMap<>();
+        for(Map.Entry<Integer, String> entry : m.entrySet()){
+            List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
+            int mx = l.size();
+            for(int i=0;i<mx;i++){
+                List<String> ll = ngram(l.get(i),n);
+                int mxmx=ll.size();
+                for(int j=0;j<mxmx;j++){
+                    tmp.put(entry.getKey() +"-"+ i+"-"+ j,ll.get(j));
+                }
+            }
+        }
+        return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
+    }
     private static Set<Integer> mkIdxShape(List<String> l){
+        //mkIdxShape
         return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
     }
     private static Set<Integer> mkIdxFilter(Map<Integer,String> m,String s){
@@ -588,10 +730,14 @@ public class App {
         System.exit(0);
     }
     private static Set<Integer> searchCodePointStartEnd(Map<String,String> searchCondition){
+
+        //ここはオプション方式にするかも。記述量が少なくてすむ。
+        //関数リストを用意 インプットリストとスプリットリスト
+        //ラッパーえぐぜを用意
+
         Set<Integer> rt = null;
         if(searchCondition.get(OPTION_SEARCH_MODE)==null){
             //検索モード以外の場合
-
 
         }else{
             //検索モードの場合
@@ -599,13 +745,13 @@ public class App {
                 case SEARCH_MODE_WORD:
                     switch (searchCondition.get(OPTION_IDX_INPUT_PTN)){
                         case IDX_INPUT_UNICODE_NAME:
-                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkWordIdx,App::mkIdxShape);
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkWordIdxNonWordSplit,App::mkIdxShape);
                             break;
                         case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeScriptName,App::mkWordIdx,App::mkIdxShape);
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeScriptName,App::mkWordIdxNonWordSplit,App::mkIdxShape);
                             break;
                         case IDX_INPUT_UNICODE_BLOCK_NAME:
-                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeBlockName,App::mkWordIdx,App::mkIdxShape);
+                            rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeBlockName,App::mkWordIdxNonWordSplit,App::mkIdxShape);
                             break;
                         default:
                             System.exit(FAILURE_STATUS);
@@ -615,13 +761,13 @@ public class App {
                 case SEARCH_MODE_NGRAM:
                     switch (searchCondition.get(OPTION_IDX_INPUT_PTN)){
                         case IDX_INPUT_UNICODE_NAME:
-                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkNGramIdx,App::mkIdxShape);
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkNgramIdxNonWordSplit,App::mkIdxShape);
                             break;
                         case IDX_INPUT_UNICODE_SCRIPT_NAME:
-                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeScriptName,App::mkNGramIdx,App::mkIdxShape);
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeScriptName,App::mkNgramIdxNonWordSplit,App::mkIdxShape);
                             break;
                         case IDX_INPUT_UNICODE_BLOCK_NAME:
-                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeBlockName,App::mkNGramIdx,App::mkIdxShape);
+                            rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeBlockName,App::mkNgramIdxNonWordSplit,App::mkIdxShape);
                             break;
                         default:
                             System.exit(FAILURE_STATUS);
@@ -710,6 +856,9 @@ public class App {
         return rt;
     }
     private static Map<String, String> prepareParseOpts(Map<String, List<String>> argsOptPtn){
+//        文字列クラスに備わっているmatchesとパタンクラスに備わっているmatcherの振る舞いはことなる。
+//        ここでは文字列に変換して文字列クラスのmatchesを使うような実装にしている。
+//        正規表現のコンパイル時間がネックそう
         Map<String, String> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : argsOptPtn.entrySet()){
             if(Boolean.parseBoolean(entry.getValue().get(0))){
@@ -916,6 +1065,8 @@ public class App {
             }
             Set<Integer> rt;
             for(Map.Entry<String,Map<String,String>> entry : mainReStyleProcessArgs.entrySet()){
+                //ここは実行優先度を管理することになる
+                //意図しない引数を与えられても無視されたように感じるような振舞
                 if(entry.getKey().contains(OPTION_RANGE) && 1==mainReStyleProcessArgs.size()){
                     //range指定のみフル出力
                     rt = IntStream.rangeClosed(DEFAULT_START_RN,DEFAULT_END_RN).boxed().collect(Collectors.toSet());
@@ -978,6 +1129,7 @@ public class App {
         }
     }
     public static void main(String... args) {
+
         int ret;
 
         Map<String, List<String>> mainProcessArgs = execParseOpts(Arrays.asList(args),prepareParseOpts(argsOptPtn));
