@@ -33,10 +33,17 @@ import java.util.stream.Stream;
 //15. 指定した文字数までのランダムな文字列生成。日本語。タミル語。ハングル文字。
 //16. 引数の名寄せ処理集計処理があれば与えられた引数の先頭何文字かでグルーピンぐできそう。range以外とrangeで分ける -ngram -uniscript HIRA -ngram -uniscript HIRA -ngram -uniname HIRA -hash -uniscript HIRA -hash -uniscript HIRA
 //17. 引数で与えられた文字列の長さからNGRM数をだす
+//18. mk***Split 系の関数は適用順序をもったストリームないしはコレクションを引数に受け取り、順次適用していく形で汎用化できる
 
 //コマンドライン引数からこういう風に渡す
 //$echo '-hash '{-uniname,-uniscript,-uniblock}' '{HIRA,KANA}
 //        -hash -uniname HIRA -hash -uniname KANA -hash -uniscript HIRA -hash -uniscript KANA -hash -uniblock HIRA -hash -uniblock KANA
+
+//$echo '-word '{-split,-hyphen-split}' '{-uniname,-uniscript,-uniblock}' '{HIRA,KANA}
+//-word -split -uniname HIRA -word -split -uniname KANA -word -split -uniscript HIRA -word -split -uniscript KANA -word -split -uniblock HIRA -word -split -uniblock KANA -word -hyphen-split -uniname HIRA -word -hyphen-split -uniname KANA -word -hyphen-split -uniscript HIRA -word -hyphen-split -uniscript KANA -word -hyphen-split -uniblock HIRA -word -hyphen-split -uniblock KANA
+
+//$echo '-ngram '{-split,-hyphen-split}' '{-uniname,-uniscript,-uniblock}' '{HIRA,KANA}
+//-ngram -split -uniname HIRA -ngram -split -uniname KANA -ngram -split -uniscript HIRA -ngram -split -uniscript KANA -ngram -split -uniblock HIRA -ngram -split -uniblock KANA -ngram -hyphen-split -uniname HIRA -ngram -hyphen-split -uniname KANA -ngram -hyphen-split -uniscript HIRA -ngram -hyphen-split -uniscript KANA -ngram -hyphen-split -uniblock HIRA -ngram -hyphen-split -uniblock KANA
 
 public class App {
 
@@ -67,9 +74,6 @@ public class App {
     private static Integer DEFAULT_START_RN=Character.MIN_CODE_POINT;
     private static Integer DEFAULT_END_RN=Character.MAX_CODE_POINT;
     private static String DEFAULT_NONE_KEYWORD="ウンコもりもり森鴎外";
-
-    private static final String MK_IDX = ON;
-    private static final String NON_MK_IDX = OFF;
 
     private static final String SEARCH_MODE_WORD = "1";
     private static final String SEARCH_MODE_NGRAM = "2";
@@ -112,16 +116,21 @@ public class App {
     private static final String OPTION_STR_TO_UTF32="STR_TO_UTF32";
     private static final String OPTION_STR_TO_UNICODE="STR_TO_UNICODE";
 
+    //swith文を消す想定 START
+    private static final String MK_IDX = ON;
+    private static final String NON_MK_IDX = OFF;
+    private static final String OPTION_MK_WORD_IDX_NON_SPLIT="MK_WORD_IDX_NON_SPLIT"; //あったほうがいい デフォルトとの比較できる
     private static final String OPTION_MK_WORD_IDX_NON_WORD_SPLIT="MK_WORD_IDX_NON_WORD_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT="MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT="MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT="MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_NON_WORD_BOUNDARY_SPLIT="MK_WORD_IDX_NON_WORD_NON_WORD_BOUNDARY_SPLIT";
-
+    private static final String OPTION_MK_NGRAM_IDX_NON_SPLIT="MK_NGRAM_IDX_NON_SPLIT"; //あったほうがいい デフォルトとの比較できる
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT="MK_NGRAM_IDX_NON_WORD_SPLIT";
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT="MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT";
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT";
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT";
+    //swith文を消す想定 END
 
     private static final String OPTION_SEARCH_MODE_RANGE_START="1";
     private static final String OPTION_SEARCH_MODE_RANGE_END="3";
@@ -167,13 +176,12 @@ public class App {
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
         put(OPTION_VERSION, Arrays.asList("true", "-v", "--v", "-V", "--V", "-version", "--version"));
+
         put(OPTION_WORD_SEARCH, Arrays.asList("false","3", "-word.*", "--w.*", "-word.*", "--word.*"));
         put(OPTION_NGRAM_SEARCH, Arrays.asList("false","4","-ngram.*", "--ngram.*"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","3", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
 
     }};
-
-
 
 
     private static final Map<String, List<String>> argsKeyName = new LinkedHashMap<>(){{
@@ -184,9 +192,12 @@ public class App {
     }};
     private static final Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
         put(OPTION_RANGE, Map.of(OPTION_START_RN,String.valueOf(DEFAULT_START_RN)+CHK_ARGS_SEPARATOR+String.valueOf(DEFAULT_END_RN),OPTION_END_RN,String.valueOf(DEFAULT_START_RN)+CHK_ARGS_SEPARATOR+String.valueOf(DEFAULT_END_RN)));
+
+        //switch文消すに伴っていらなくなる START
         put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END));
         put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END,OPTION_NGRAM_CNT,OPTION_NGRAM_CNT_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_NGRAM_CNT_RANGE_END));
         put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_MODE,OPTION_SEARCH_MODE_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_SEARCH_MODE_RANGE_END,OPTION_IDX_INPUT_PTN,OPTION_IDX_INPUT_PTN_RANGE_START+CHK_ARGS_SEPARATOR+OPTION_IDX_INPUT_PTN_RANGE_END));
+        //switch文消すに伴っていらなくなる END
     }};
     private static final Map<String, Map<String,String>> argsGraphChk = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_KEYWORD,OPTION_SEARCH_KEYWORD_PTN));
@@ -199,11 +210,17 @@ public class App {
         put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
         put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
     }};
+
+
+    //executeNgramSearch,executeWordNgramSearch,executeHashKeySearch 3つの関数を単一のインターフェース関数にマージする際の参照用マップ
+    //switch文消すに伴っていらなくなる START
     private static final Map<String, String> searchPtnMap = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, MK_IDX);
         put(OPTION_NGRAM_SEARCH, MK_IDX);
         put(OPTION_HASH_KEY_SEARCH, NON_MK_IDX);
     }};
+    //switch文消すに伴っていらなくなる END
+
     private static void optionUsage(Integer status,String... optionPtn){
         for(String option : optionPtn){
             switch (option){
@@ -881,6 +898,8 @@ public class App {
         }
 
         //引数処理
+
+        //Map in Listに変える 1ループごとにリストに詰る
         for (int i=0;i<cmdLineArgs.size();i++){
             //ここはマップに持たせて引数処理があるものと無いもので、用意するマップを変える
             //コマンドライん引数が用意したマップのキーにマッチしたら、フラグ設定
