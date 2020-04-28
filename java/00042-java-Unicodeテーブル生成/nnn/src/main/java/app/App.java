@@ -55,7 +55,6 @@ public class App {
 
     private static String DEFAULT_SEARCH_MODE="1";
     private static String DEFAULT_IDX_INPUT_PTN="1";
-    private static String DEFAULT_NORM_GRP="4";
     private static Integer DEFAULT_NGRAM_CNT=7;
     private static String DEFAULT_SEARCH_KEY_WORD="KATAKANA";
     private static Integer DEFAULT_START_RN=Character.MIN_CODE_POINT;
@@ -69,20 +68,6 @@ public class App {
     private static final String IDX_INPUT_UNICODE_NAME = "1";
     private static final String IDX_INPUT_UNICODE_SCRIPT_NAME = "2";
     private static final String IDX_INPUT_UNICODE_BLOCK_NAME = "3";
-
-    private final static Map<String, Normalizer.Form> normMap = new HashMap<>(){{
-        put(OPTION_NORM_GRP_NFC, Normalizer.Form.NFC);
-        put(OPTION_NORM_GRP_NFD, Normalizer.Form.NFD);
-        put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
-        put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
-    }};
-
-    //ASIS
-//    private static final String NORM_GRP_CORE="0";
-//    private static final String NORM_GRP_NFC="1";
-//    private static final String NORM_GRP_NFD="2";
-//    private static final String NORM_GRP_NFKC="3";
-//    private static final String NORM_GRP_NFKD="4";
 
     private final static String OPTION_RANGE = "OPTION_RANGE";
     private final static String OPTION_HELP = "OPTION_HELP";
@@ -120,7 +105,6 @@ public class App {
     private final static List<String> OPTION_MODE_LIST = Arrays.asList(OPTION_WORD_SEARCH,OPTION_NGRAM_SEARCH,OPTION_HASH_KEY_SEARCH);
     private final static List<String> OPTION_SUBPTN_LIST = Arrays.asList(OPTION_WORD_SEARCH_SUBPTN,OPTION_NGRAM_SEARCH_SUBPTN,OPTION_HASH_KEY_SEARCH_SUBPTN);
     private final static List<String> OPTION_IDX_INPUT_LIST = Arrays.asList(OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME);
-    private final static List<String> OPTION_NORM_GRP_LIST = Arrays.asList(OPTION_NORM_GRP_CORE,OPTION_NORM_GRP_NFC,OPTION_NORM_GRP_NFD,OPTION_NORM_GRP_NFKC,OPTION_NORM_GRP_NFKD);
     private final static List<String> OPTION_SAMPLE_KEYWORD_LIST = Arrays.asList("HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA");
 
     private final static Map<String, List<String>> argsOptPtn = new LinkedHashMap<>(){{
@@ -151,27 +135,23 @@ public class App {
         put(OPTION_WORD_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_SEARCH_KEY_WORD));
         put(OPTION_NGRAM_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_NGRAM_CNT,OPTION_SEARCH_KEY_WORD));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_SEARCH_KEY_WORD));
-        //ASIS
-//        put(OPTION_RANGE, Arrays.asList(OPTION_START_RN,OPTION_END_RN));
-//        put(OPTION_WORD_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_NORM_GRP,OPTION_SEARCH_KEY_WORD));
-//        put(OPTION_NGRAM_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_NORM_GRP,OPTION_NGRAM_CNT,OPTION_SEARCH_KEY_WORD));
-//        put(OPTION_HASH_KEY_SEARCH, Arrays.asList(OPTION_SEARCH_MODE,OPTION_IDX_INPUT_PTN,OPTION_NORM_GRP,OPTION_SEARCH_KEY_WORD));
     }};
     private final static Map<String, Map<String,String>> argsRangeChk = new LinkedHashMap<>(){{
         put(OPTION_RANGE, Map.of(OPTION_START_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN),OPTION_END_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN)));
         put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3"));
         put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3",OPTION_NGRAM_CNT,"0"+":"+DEFAULT_NGRAM_CNT));
         put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3"));
-        //ASIS
-//        put(OPTION_RANGE, Map.of(OPTION_START_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN),OPTION_END_RN,String.valueOf(DEFAULT_START_RN)+":"+String.valueOf(DEFAULT_END_RN)));
-//        put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3",OPTION_NORM_GRP,"0:4"));
-//        put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3",OPTION_NORM_GRP,"0:4",OPTION_NGRAM_CNT,"0:7"));
-//        put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_MODE,"1:3",OPTION_IDX_INPUT_PTN,"1:3",OPTION_NORM_GRP,"0:4"));
     }};
     private final static Map<String, Map<String,String>> argsGraphChk = new LinkedHashMap<>(){{
         put(OPTION_WORD_SEARCH, Map.of(OPTION_SEARCH_KEY_WORD,"[A-Z]+"));
         put(OPTION_NGRAM_SEARCH, Map.of(OPTION_SEARCH_KEY_WORD,"[A-Z]+"));
         put(OPTION_HASH_KEY_SEARCH, Map.of(OPTION_SEARCH_KEY_WORD,"[A-Z]+"));
+    }};
+    private final static Map<String, Normalizer.Form> normMap = new HashMap<>(){{
+        put(OPTION_NORM_GRP_NFC, Normalizer.Form.NFC);
+        put(OPTION_NORM_GRP_NFD, Normalizer.Form.NFD);
+        put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
+        put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
     }};
     private static void optionUsage(String... optionPtn){
         for(String option : optionPtn){
