@@ -171,6 +171,9 @@ public class App {
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT";
     private static final String OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT="MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT";
 
+    private static final String OPTION_MK_IDX_SHAPE="MK_IDX_SHAPE";
+    private static final String OPTION_MK_IDX_FILTER="MK_IDX_FILTER";
+
     private static final String OPTION_SEARCH_KEYWORD_PTN="[A-Z]+";
 
     //helpで使用予定
@@ -527,18 +530,18 @@ public class App {
         }
         return rt;
     }
-    private static Map<Integer, String> mkInputUnicodeName(Integer s,Integer e) {
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeName = (s,e) -> {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    }
-    private static Map<Integer, String> mkInputUnicodeScriptName(Integer s,Integer e) {
+    };
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeScriptName = (s,e) -> {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeScriptName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    }
-    private static Map<Integer, String> mkInputUnicodeBlockName(Integer s,Integer e) {
+    };
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeBlockName = (s,e) -> {
         return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeBlockName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
                 .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    }
+    };
     private static String repeat(String str, int n) {
         return Stream.generate(() -> str).limit(n).collect(Collectors.joining());
     }
@@ -555,7 +558,7 @@ public class App {
         }
         return rt;
     }
-    private static Map<String, List<String>> mkWordIdxNonWordSplit(Map<Integer, String> m){
+    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordSplit = (m) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().collect(Collectors.toList());
@@ -565,8 +568,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkWordIdxNonWordHyphenSplit(Map<Integer, String> m){
+    };
+    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordHyphenSplit = (m) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -576,8 +579,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkWordIdxNonWordUnderScoreSplit(Map<Integer, String> m){
+    };
+    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordUnderScoreSplit = (m) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).collect(Collectors.toList());
@@ -587,8 +590,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkWordIdxNonWordUnderScoreHyphenSplit(Map<Integer, String> m){
+    };
+    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordUnderScoreHyphenSplit = (m) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -598,8 +601,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkNgramIdxNonWordSplit(Map<Integer, String> m,Integer n){
+    };
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkNgramIdxNonWordSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W"));
@@ -613,8 +616,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkNgramIdxNonWordHyphenSplit(Map<Integer, String> m,Integer n){
+    };
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkNgramIdxNonWordHyphenSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -628,8 +631,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkNgramIdxNonWordUnderScoreSplit(Map<Integer, String> m,Integer n){
+    };
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkNgramIdxNonWordUnderScoreSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).collect(Collectors.toList());
@@ -643,8 +646,8 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Map<String, List<String>> mkNgramIdxNonWordUnderScoreHyphenSplit(Map<Integer, String> m,Integer n){
+    };
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkNgramIdxNonWordUnderScoreHyphenSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -658,15 +661,18 @@ public class App {
             }
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
-    }
-    private static Set<Integer> mkIdxShape(List<String> l){
+    };
+
+    static Function<List<String>,Set<Integer>> mkIdxShape = (l) -> {
         //mkIdxShape
         return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
-    }
-    private static Set<Integer> mkIdxFilter(Map<Integer,String> m,String s){
+    };
+    static BiFunction<Map<Integer,String>,String,Set<Integer>> mkIdxFilter = (m,s) -> {
         return m.entrySet().stream()
                 .filter(v->v.getValue().contains(s)).map(ee->ee.getKey()).collect(Collectors.toSet());
-    }
+    };
+
+    //単一の関数にマージする START
     private static <K,V,N,S,R> Set<N> executeNgramSearch(
             K startRn
             ,V endRn
@@ -723,6 +729,8 @@ public class App {
             System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue().stream().collect(Collectors.joining("\t")));
         }
     }
+    //単一の関数にマージする END
+
     private static List<List<String>> grpKeTsuBanMnMx(List<Integer> r){
         Map<Integer,Integer> m = r.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toMap(e->e,e->e+1,(pre,post)->post,LinkedHashMap::new));
         StringBuilder sb = new StringBuilder();
@@ -765,17 +773,55 @@ public class App {
         //https://qiita.com/kiida/items/9d26b850194fa1a02e67
         System.exit(0);
     }
+
+    private static Set<Integer> wrapperExecuteSearch(){
+        //hash or non-hash
+        return rt;
+    }
+
     private static Set<Integer> searchCodePointStartEnd(List<Map<String,List<String>>> searchArgsMapList){
 
         Set<Integer> rt = null;
-
+        int mx = searchArgsMapList.size();
         searchArgsMapList.stream().forEach(e-> System.out.println(e));
-        //ここはオプション方式にするかも。記述量が少なくてすむ。
-        //関数リストを用意 インプットリストとスプリットリスト
-        //ラッパーえぐぜを用意
-//        rt = executeWordNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkWordIdxNonWordSplit,App::mkIdxShape);
-//        rt = executeNgramSearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(Integer.parseInt(searchCondition.get(OPTION_NGRAM_CNT))).orElse(DEFAULT_NGRAM_CNT),Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),Arrays.asList(DEFAULT_NONE_KEYWORD),App::mkInputUnicodeName,App::mkNgramIdxNonWordSplit,App::mkIdxShape);
-//        rt = executeHashKeySearch(DEFAULT_START_RN,DEFAULT_END_RN,Optional.ofNullable(searchCondition.get(OPTION_SEARCH_KEYWORD)).orElse(DEFAULT_SEARCH_KEYWORD),App::mkInputUnicodeName,App::mkIdxFilter);
+
+        Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
+            put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
+            put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
+            put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
+        }};
+        Map<String,Function<Map<Integer, String>,Map<String, List<String>>>> wordSplitProcessFunctionMap = new LinkedHashMap<>(){{
+//            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
+            put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
+            put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
+            put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
+            put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
+        }};
+        Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> ngramSplitProcessFunctionMap = new LinkedHashMap<>(){{
+//            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
+            put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
+            put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
+            put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,mkNgramIdxNonWordUnderScoreSplit);
+            put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkNgramIdxNonWordUnderScoreHyphenSplit);
+        }};
+        Map<String,Function<List<String>,Set<Integer>>> shapeProcessFunctionMap = new LinkedHashMap<>(){{
+            put(OPTION_MK_IDX_SHAPE, mkIdxShape);
+        }};
+        Map<String,BiFunction<Map<Integer,String>,String,Set<Integer>>> filterProcessFunctionMap = new LinkedHashMap<>(){{
+            put(OPTION_MK_IDX_FILTER, mkIdxFilter);
+        }};
+
+        for(int i=0;i<mx;i++){
+
+            if(searchArgsMapList.get(i).keySet().stream().limit(1).anyMatch(e->e.contains("WORD"))){
+                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,wordSplitProcessFunctionMap,shapeProcessFunctionMap);
+            }else if(searchArgsMapList.get(i).keySet().stream().limit(1).anyMatch(e->e.contains("NGRAM"))){
+                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,ngramSplitProcessFunctionMap,shapeProcessFunctionMap);
+            }else{
+                //hash
+                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,ngramSplitProcessFunctionMap,filterProcessFunctionMap);
+            }
+        }
 
         return rt;
     }
