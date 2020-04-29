@@ -36,6 +36,8 @@ import java.util.stream.Stream;
 //14. 入力で与えた引数がユニコードの第何群第何面に属しているかチェックし、サマリ情報を出力
 //15. 指定した文字数までのランダムな文字列生成。日本語。タミル語。ハングル文字。
 //18. mk***Split 系の関数は適用順序をもったストリームないしはコレクションを引数に受け取り、順次適用していく形で汎用化できる
+//19. range-onlyの際のmin-cp:max-cpのレスが遅過ぎ
+
 
 //echo -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} | xargs -n1
 
