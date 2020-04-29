@@ -122,7 +122,6 @@ public class App {
     private static final String OPTION_IDX_INPUT_PTN="IDX_INPUT_PTN";
     private static final String OPTION_SEARCH_KEYWORD="SEARCH_KEYWORD";
 
-    private static String DEFAULT_SEARCH_KEYWORD="KATAKANA";
     private static Integer DEFAULT_START_RN=Character.MIN_CODE_POINT;
     private static Integer DEFAULT_END_RN=Character.MAX_CODE_POINT;
     private static String DEFAULT_NONE_KEYWORD="ウンコもりもり森鴎外";
@@ -156,8 +155,6 @@ public class App {
     private static final String OPTION_STR_TO_UTF32="STR_TO_UTF32";
     private static final String OPTION_STR_TO_UNICODE="STR_TO_UNICODE";
 
-    private static final String MK_IDX = ON;
-    private static final String NON_MK_IDX = OFF;
     private static final String OPTION_MK_WORD_IDX_NON_SPLIT="MK_WORD_IDX_NON_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_SPLIT="MK_WORD_IDX_NON_WORD_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT="MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT";
@@ -298,15 +295,6 @@ public class App {
             put(OPTION_USAGE,Arrays.asList(OFF));
         }});
     }};
-
-    //executeNgramSearch,executeWordNgramSearch,executeHashKeySearch 3つの関数を単一のインターフェース関数にマージする際の参照用マップ
-    //switch文消すに伴っていらなくなる START
-    private static final Map<String, String> searchPtnMap = new LinkedHashMap<>(){{
-        put(OPTION_WORD_SEARCH, MK_IDX);
-        put(OPTION_NGRAM_SEARCH, MK_IDX);
-        put(OPTION_HASH_KEY_SEARCH, NON_MK_IDX);
-    }};
-    //switch文消すに伴っていらなくなる END
 
     private static void optionUsage(Integer status,String... optionPtn){
         for(String option : optionPtn){
