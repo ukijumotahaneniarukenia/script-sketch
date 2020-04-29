@@ -14,6 +14,11 @@ import java.util.stream.Stream;
 
 // TODO https://ja.wikipedia.org/wiki/Unicode
 
+
+//Const Define
+//Function Define
+//Option-Function Define
+
 //TODO
 //1. 全件取得機能 DONE
 //2. 取得列のサプレス機能 DONE
@@ -21,7 +26,7 @@ import java.util.stream.Stream;
 //4. 新規検索方法の追加随時
 //5. インデックスデータのユーザー指定機能
 //6. 5.のデータに対するUnicodeテーブルへの突合せ結果の一覧表示
-//7. ヘルプのリッチ化 DONE
+//7. ヘルプのリッチ化
 //8. 検索結果件数の表示
 //9. 正規表現の変数化 グラム化インデックス粒度を可変にする
 //10. 出現位置を切り捨てないパタンもオプションだす
@@ -39,11 +44,13 @@ import java.util.stream.Stream;
 //echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ' | xargs -n1
 
 //full-pattern
-//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ')
+//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -hash -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ')
 
 //soso-pattern
-//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA" | tr  ',' ' ')
+//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -hash -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA" | tr  ',' ' ')
 
+//-input-unicode-name -hash HAN
+//-input-unicode-name -hash HIRAGANA
 //-input-unicode-name -word-nonsplit HAN
 //-input-unicode-name -word-nonsplit HIRAGANA
 //-input-unicode-name -word-split HAN
@@ -64,6 +71,8 @@ import java.util.stream.Stream;
 //-input-unicode-name -ngram-underscore-split HIRAGANA
 //-input-unicode-name -ngram-all-split HAN
 //-input-unicode-name -ngram-all-split HIRAGANA
+//-input-unicode-script-name -hash HAN
+//-input-unicode-script-name -hash HIRAGANA
 //-input-unicode-script-name -word-nonsplit HAN
 //-input-unicode-script-name -word-nonsplit HIRAGANA
 //-input-unicode-script-name -word-split HAN
@@ -84,6 +93,8 @@ import java.util.stream.Stream;
 //-input-unicode-script-name -ngram-underscore-split HIRAGANA
 //-input-unicode-script-name -ngram-all-split HAN
 //-input-unicode-script-name -ngram-all-split HIRAGANA
+//-input-unicode-block-name -hash HAN
+//-input-unicode-block-name -hash HIRAGANA
 //-input-unicode-block-name -word-nonsplit HAN
 //-input-unicode-block-name -word-nonsplit HIRAGANA
 //-input-unicode-block-name -word-split HAN
@@ -115,7 +126,7 @@ public class App {
     private static Integer SEQ_CNT=0;
     private static Integer GRP_CNT=0;
     private static final String ON = "1";
-    private static final String OFF = "-9999";
+    private static final String OFF = "0";
     private static final String ARTIFACT_ID = "1-0-0";
     private static final String ARGS_SEPARATOR = ":";
 
@@ -154,6 +165,7 @@ public class App {
     private static final String OPTION_STR_TO_UTF16="STR_TO_UTF16";
     private static final String OPTION_STR_TO_UTF32="STR_TO_UTF32";
     private static final String OPTION_STR_TO_UNICODE="STR_TO_UNICODE";
+    private static final String OPTION_STR_TO_NORM="STR_TO_NORM";
 
     private static final String OPTION_MK_WORD_IDX_NON_SPLIT="MK_WORD_IDX_NON_SPLIT";
     private static final String OPTION_MK_WORD_IDX_NON_WORD_SPLIT="MK_WORD_IDX_NON_WORD_SPLIT";
@@ -212,23 +224,63 @@ public class App {
         put(OPTION_USAGE, Arrays.asList("true", "-usage", "--usage", "-Usage", "--Usage"));
 
     }};
-
+    //正規化パタンを定義
     private static final Map<String, Normalizer.Form> normMap = new HashMap<>(){{
         put(OPTION_NORM_GRP_NFC, Normalizer.Form.NFC);
         put(OPTION_NORM_GRP_NFD, Normalizer.Form.NFD);
         put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
         put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
     }};
-
-
     //グループ化対象キーを定義
-    private static final List<String> grpArgsList = new ArrayList<>(Arrays.asList(OPTION_MK_WORD_IDX_NON_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_HASH_KEY_SEARCH,OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME,OPTION_SEARCH_KEYWORD));
+    private static final List<String> grpArgsList = new ArrayList<>(Arrays.asList(
+            OPTION_MK_WORD_IDX_NON_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT
+            ,OPTION_HASH_KEY_SEARCH
+            ,OPTION_IDX_INPUT_UNICODE_NAME
+            ,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME
+            ,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME
+            ,OPTION_SEARCH_KEYWORD
+    ));
     //取得対象列リストを定義
-    private static final List<String> colArgsList = new ArrayList<>(Arrays.asList(OPTION_NUM_TO_STR,OPTION_CP_TO_STR,OPTION_CP_TO_UNICODE_NAME,OPTION_CP_TO_UNICODE_SCRIPT_NAME,OPTION_CP_TO_UNICODE_BLOCK_NAME,OPTION_STR_TO_UTF8,OPTION_STR_TO_UTF16,OPTION_STR_TO_UTF32,OPTION_STR_TO_UNICODE,OPTION_NORM_GRP_NFC,OPTION_NORM_GRP_NFD,OPTION_NORM_GRP_NFKC,OPTION_NORM_GRP_NFKD));
-
-    private static final List<String> wordSplitList = new ArrayList<>(Arrays.asList(OPTION_MK_WORD_IDX_NON_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT));
-    private static final List<String> ngramSplitList = new ArrayList<>(Arrays.asList(OPTION_MK_NGRAM_IDX_NON_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT));
-
+    private static final List<String> colArgsList = new ArrayList<>(Arrays.asList(
+            OPTION_NUM_TO_STR
+            ,OPTION_CP_TO_STR
+            ,OPTION_CP_TO_UNICODE_NAME
+            ,OPTION_CP_TO_UNICODE_SCRIPT_NAME
+            ,OPTION_CP_TO_UNICODE_BLOCK_NAME
+            ,OPTION_STR_TO_UTF8
+            ,OPTION_STR_TO_UTF16
+            ,OPTION_STR_TO_UTF32
+            ,OPTION_STR_TO_UNICODE
+            ,OPTION_NORM_GRP_NFC
+            ,OPTION_NORM_GRP_NFD
+            ,OPTION_NORM_GRP_NFKC
+            ,OPTION_NORM_GRP_NFKD
+    ));
+    //単語分割メソッドリストを定義
+    private static final List<String> wordSplitList = new ArrayList<>(Arrays.asList(
+            OPTION_MK_WORD_IDX_NON_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT
+            ,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT
+    ));
+    //NGRAM分割メソッドリストを定義
+    private static final List<String> ngramSplitList = new ArrayList<>(Arrays.asList(
+            OPTION_MK_NGRAM_IDX_NON_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT
+            ,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT
+    ));
     //引数に指定されたら設定するマップ
     private static final Map<String, Map<String,List<String>>> optionFlgPtn = new HashMap<>(){{
         //ONするマップ
@@ -270,7 +322,6 @@ public class App {
             put(OPTION_NORM_GRP_NFKD,Arrays.asList(OFF));
         }});
     }};
-
     //引数に指定されなかったら設定するマップ
     private static final Map<String, Map<String,List<String>>> defaultOptionFlgPtn = new HashMap<>(){{
         //ONするマップ
@@ -296,82 +347,18 @@ public class App {
             put(OPTION_USAGE,Arrays.asList(OFF));
         }});
     }};
-
-    private static void optionUsage(Integer status,String... optionPtn){
-        for(String option : optionPtn){
-            switch (option){
-                case OPTION_HELP:
-                case OPTION_USAGE:
-                    optionHelp();
-                    break;
-                case OPTION_VERSION:
-                    optionVersion();
-                    break;
-                case OPTION_WORD_SEARCH:
-                    usageWordSearch();
-                    break;
-                case OPTION_NGRAM_SEARCH:
-                    usageNgramSearch();
-                    break;
-                case OPTION_HASH_KEY_SEARCH:
-                    usageHashKeySearch();
-                    break;
-                case OPTION_IDX_INPUT_PTN:
-                    optionHelp();
-                    break;
-                default:
-                    break;
-            }
-        }
-        System.exit(status);
-    }
-    private static void optionHelp(){
-        System.out.println("unidat --range:1:30"); //レンジを絞って出力
-        System.out.println("unidat --range:50:80 -nfc -nfd"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat --range:12354:12390 -nfc -nfd -nfkc"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
-        System.out.println("unidat -input-unicode-name --hashkey HIRAGANA  -input-unicode-name --hashkey HIRAGANA");
-        System.out.println("unidat -input-unicode-script-name --hash KATAKANA -input-unicode-name --hashkey HIRAGANA -nfc -nfd -nfkc");
-        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA -input-unicode-script-name --hash KATAKANA");
-        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-script-name --hash KATAKANA -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA");
-    }
-    private static void optionVersion(){
-        System.out.println(ARTIFACT_ID);
-    }
-    private static void usageWordSearch(){
-        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        System.out.println(methodName);
-    }
-    private static void usageNgramSearch(){
-        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        System.out.println(methodName);
-    }
-    private static void usageHashKeySearch(){
-        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
-        System.out.println(methodName);
-    }
-    @SafeVarargs
-    private static <E> List<E> flattenList(Collection<E>... liz){
-        return Arrays.stream(liz).flatMap(e -> e.stream()).collect(Collectors.toList());
-    }
-    private static String hexToBin(String s){
-        return Integer.toBinaryString(Integer.parseInt(s,16));
-    }
-    private static String binToHex(String s){
-        return Integer.toHexString(Integer.parseInt(s,2));
-    }
-    private static String cpToUnicodeName(Integer n){
-        return Character.getName(n);
-    }
-    private static String cpToUnicodeScriptName(Integer n){
-        return Character.UnicodeScript.of(n).name();
-    }
-    private static String cpToUnicodeBlockName(Integer n){
-        return String.valueOf(Character.UnicodeBlock.of(n));
-    }
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeName = (s,e) -> {
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    };
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeScriptName = (s,e) -> {
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeScriptName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    };
+    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeBlockName = (s,e) -> {
+        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeBlockName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
+                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
+    };
     static Function<Integer, String> cpToStr = (n)-> {
         return new String(Character.toChars(n));
     };
@@ -438,130 +425,6 @@ public class App {
     static Function<String, String> strToUnicode = (s)-> {
         return IntStream.range(0,s.length()).boxed().map(e->String.format("U+%05X",(int)s.charAt(e))).collect(Collectors.joining("-"));
     };
-    private static <N,S> Map<N, List<S>> executeMkTbl(
-            N seq
-            ,N grp
-            ,N grpSeq
-            ,N i
-            ,Map<S,Function<N,S>> singleArgFunctionInNumOutStrMap
-            ,Map<S,Function<S,S>> singleArgFunctionInStrOutStrMap
-            ,BiFunction<S,Normalizer.Form,S> multipleArgFunction
-            ,Map<S,List<S>> suppressColumnsMap
-    ){
-
-        Map<N, List<S>> rt = new LinkedHashMap<>();
-
-        Function<N,S> numToStr = singleArgFunctionInNumOutStrMap.get(OPTION_NUM_TO_STR); //numToStr(i)
-        Function<N,S> cpToStr = singleArgFunctionInNumOutStrMap.get(OPTION_CP_TO_STR); //cpToStr(i)
-
-        // Must Item
-        //grp.grpseq
-        List<S> l = new ArrayList<>();
-        l.add(numToStr.apply(grp));
-        l.add(numToStr.apply(grpSeq));
-
-        //cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName
-        for(Map.Entry<S,Function<N,S>> singleArgFunctionInNumOutStrMapEntry : singleArgFunctionInNumOutStrMap.entrySet()){
-            if(1L==suppressColumnsMap.get(singleArgFunctionInNumOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
-
-            }else{
-                l.add(singleArgFunctionInNumOutStrMapEntry.getValue().apply(i));
-            }
-        }
-        rt.put(seq,l);
-
-        S dest = null;
-        for(Map.Entry<S,List<S>> suppressColumnsMapEntry: suppressColumnsMap.entrySet()){
-            if(normMap.keySet().stream().anyMatch(e->e.equals(suppressColumnsMapEntry.getKey()))){
-                if(1L==suppressColumnsMapEntry.getValue().stream().filter(e->e.equals(OFF)).count()){
-
-                }else{
-                    dest = multipleArgFunction.apply(cpToStr.apply(i),normMap.get(suppressColumnsMapEntry.getKey()));//strToNorm(cpToStr(i), Normalizer.Form.NFD)
-                    l.add(dest);
-                    rt.put(seq,l);
-                    //strToUtf8,strToUtf16,strToUtf32,strToUnicode
-                    for(Map.Entry<S,Function<S,S>> singleArgFunctionInStrOutStrMapEntry : singleArgFunctionInStrOutStrMap.entrySet()){
-                        //デフォルト値の設定
-                        if(rt.containsKey(seq)){
-                            //紐づくキーがあれば、リスト追加
-                            if(dest==null){
-                                //正規化無しの場合
-                                if(1L==suppressColumnsMap.get(singleArgFunctionInStrOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
-
-                                }else{
-                                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrMapEntry.getValue().apply(cpToStr.apply(i)))));
-                                }
-                            }else{
-                                //正規化有りの場合
-                                if(1L==suppressColumnsMap.get(singleArgFunctionInStrOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
-
-                                }else{
-                                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrMapEntry.getValue().apply(dest))));
-                                }
-                            }
-                        }else{
-                            //紐づくキーは直前のループで追加済み
-                        }
-                    }
-                }
-            }else{
-
-            }
-        }
-        return rt;
-    }
-    private static final Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
-        put(OPTION_NUM_TO_STR, numToStr);
-        put(OPTION_CP_TO_STR, cpToStr);
-        put(OPTION_CP_TO_UNICODE_NAME, cpToUnicodeName);
-        put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, cpToUnicodeScriptName);
-        put(OPTION_CP_TO_UNICODE_BLOCK_NAME, cpToUnicodeBlockName);
-    }};
-    private static final Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = new LinkedHashMap<>(){{
-        put(OPTION_STR_TO_UTF8, strToUtf8);
-        put(OPTION_STR_TO_UTF16, strToUtf16);
-        put(OPTION_STR_TO_UTF32, strToUtf32);
-        put(OPTION_STR_TO_UNICODE, strToUnicode);
-    }};
-    private static final BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
-
-    private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap) {
-        Map<Integer, List<String>> rt = new LinkedHashMap<>();
-
-        ++GRP_CNT;
-        for(int i=s;i<=e;i++){
-            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrMap,singleArgFunctionInStrOutStrMap,multipleArgFunction,suppressColumnsMap));
-        }
-        return rt;
-    }
-    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeName = (s,e) -> {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
-                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    };
-    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeScriptName = (s,e) -> {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeScriptName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
-                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    };
-    static BiFunction<Integer,Integer,Map<Integer,String>> mkInputUnicodeBlockName = (s,e) -> {
-        return IntStream.rangeClosed(s,e).boxed().parallel().collect(Collectors.toMap(i->i,i->Optional.ofNullable(cpToUnicodeBlockName(i)).orElse(DEFAULT_NONE_KEYWORD))).entrySet().stream()
-                .collect(Collectors.toMap(ee->ee.getKey(),ee->ee.getValue()));
-    };
-    private static String repeat(String str, int n) {
-        return Stream.generate(() -> str).limit(n).collect(Collectors.joining());
-    }
-    private static String salt(String str,String prefix,String suffix) {
-        return Stream.of(str).collect(Collectors.joining("",prefix,suffix));
-    }
-    private static List<String> ngram (String s,Integer n){
-        List<String> rt = new ArrayList<>();
-        String ngramPtn = Stream.of(repeat(".",n)).map(e->salt(e,"(?=(","))")).collect(Collectors.joining());
-        Pattern p = Pattern.compile(ngramPtn);
-        Matcher m = p.matcher(s);
-        while(m.find()){
-            rt.add(m.group(1));
-        }
-        return rt;
-    }
     static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkWordIdxNonWordSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
@@ -666,7 +529,6 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     };
-
     static Function<List<String>,Set<Integer>> mkIdxShape = (l) -> {
         //mkIdxShape
         return l.stream().map(ee->Integer.valueOf(ee.substring(0,ee.indexOf("-")==-1?ee.length():ee.indexOf("-")))).collect(Collectors.toSet());
@@ -675,7 +537,224 @@ public class App {
         return m.entrySet().stream()
                 .filter(v->v.getValue().contains(s)).map(ee->ee.getKey()).collect(Collectors.toSet());
     };
+    //searchCodePointStartEnで使用 START
+    private static final Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
+        put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
+        put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
+    }};
+    private static final Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> splitProcessFunctionMap = new LinkedHashMap<>(){{
+//            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
+        put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
+//            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,mkNgramIdxNonWordUnderScoreSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkNgramIdxNonWordUnderScoreHyphenSplit);
+    }};
+    private static final Map<String,Function<List<String>,Set<Integer>>> shapeProcessFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_MK_IDX_SHAPE, mkIdxShape);
+    }};
+    private static final Map<String,BiFunction<Map<Integer,String>,String,Set<Integer>>> filterProcessFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_MK_IDX_FILTER, mkIdxFilter);
+    }};
+    //searchCodePointStartEnで使用 END
 
+    //wrapperExecuteMkTblで使用 START
+    private static final Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
+        put(OPTION_NUM_TO_STR, numToStr);
+        put(OPTION_CP_TO_STR, cpToStr);
+        put(OPTION_CP_TO_UNICODE_NAME, cpToUnicodeName);
+        put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, cpToUnicodeScriptName);
+        put(OPTION_CP_TO_UNICODE_BLOCK_NAME, cpToUnicodeBlockName);
+    }};
+    private static final Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = new LinkedHashMap<>(){{
+        put(OPTION_STR_TO_UTF8, strToUtf8);
+        put(OPTION_STR_TO_UTF16, strToUtf16);
+        put(OPTION_STR_TO_UTF32, strToUtf32);
+        put(OPTION_STR_TO_UNICODE, strToUnicode);
+    }};
+    private static final Map<String,BiFunction<String,Normalizer.Form,String>> multipleArgFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_STR_TO_NORM, strToNorm);
+    }};
+    //wrapperExecuteMkTblで使用 END
+
+    private static void optionUsage(Integer status,String... optionPtn){
+        for(String option : optionPtn){
+            switch (option){
+                case OPTION_HELP:
+                case OPTION_USAGE:
+                    optionHelp();
+                    break;
+                case OPTION_VERSION:
+                    optionVersion();
+                    break;
+                case OPTION_WORD_SEARCH:
+                    usageWordSearch();
+                    break;
+                case OPTION_NGRAM_SEARCH:
+                    usageNgramSearch();
+                    break;
+                case OPTION_HASH_KEY_SEARCH:
+                    usageHashKeySearch();
+                    break;
+                case OPTION_IDX_INPUT_PTN:
+                    optionHelp();
+                    break;
+                default:
+                    break;
+            }
+        }
+        System.exit(status);
+    }
+    private static void optionHelp(){
+        System.out.println("unidat --range:1:30"); //レンジを絞って出力
+        System.out.println("unidat --range:50:80 -nfc -nfd"); //レンジ絞ってサプレスして出力
+        System.out.println("unidat --range:12354:12390 -nfc -nfd -nfkc"); //レンジ絞ってサプレスして出力
+        System.out.println("unidat --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
+        System.out.println("unidat -input-unicode-name --hashkey HIRAGANA  -input-unicode-name --hashkey HIRAGANA");
+        System.out.println("unidat -input-unicode-script-name --hash KATAKANA -input-unicode-name --hashkey HIRAGANA -nfc -nfd -nfkc");
+        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA -input-unicode-script-name --hash KATAKANA");
+        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-script-name --hash KATAKANA -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA");
+    }
+    private static void optionVersion(){
+        System.out.println(ARTIFACT_ID);
+    }
+    private static void usageWordSearch(){
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+        System.out.println(methodName);
+    }
+    private static void usageNgramSearch(){
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+        System.out.println(methodName);
+    }
+    private static void usageHashKeySearch(){
+        final String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+        System.out.println(methodName);
+    }
+    private static String hexToBin(String s){
+        return Integer.toBinaryString(Integer.parseInt(s,16));
+    }
+    private static String binToHex(String s){
+        return Integer.toHexString(Integer.parseInt(s,2));
+    }
+    private static String cpToUnicodeName(Integer n){
+        return Character.getName(n);
+    }
+    private static String cpToUnicodeScriptName(Integer n){
+        return Character.UnicodeScript.of(n).name();
+    }
+    private static String cpToUnicodeBlockName(Integer n){
+        return String.valueOf(Character.UnicodeBlock.of(n));
+    }
+    private static <N,S> Map<N, List<S>> executeMkTbl(
+            N seq
+            ,N grp
+            ,N grpSeq
+            ,N i
+            ,Map<S,Function<N,S>> singleArgFunctionInNumOutStrMap
+            ,Map<S,Function<S,S>> singleArgFunctionInStrOutStrMap
+            ,Map<S,BiFunction<S,Normalizer.Form,S>> multipleArgFunctionMap
+            ,Map<S,List<S>> suppressColumnsMap
+    ){
+
+        Map<N, List<S>> rt = new LinkedHashMap<>();
+
+        Function<N,S> numToStr = singleArgFunctionInNumOutStrMap.get(OPTION_NUM_TO_STR); //numToStr(i)
+        Function<N,S> cpToStr = singleArgFunctionInNumOutStrMap.get(OPTION_CP_TO_STR); //cpToStr(i)
+
+        BiFunction<S,Normalizer.Form,S> strToNorm = multipleArgFunctionMap.get(OPTION_STR_TO_NORM);
+
+        // Must Item
+        //grp.grpseq
+        List<S> l = new ArrayList<>();
+        l.add(numToStr.apply(grp));
+        l.add(numToStr.apply(grpSeq));
+
+        //cpToUnicodeName,cpToUnicodeScriptName,cpToUnicodeBlockName
+        for(Map.Entry<S,Function<N,S>> singleArgFunctionInNumOutStrMapEntry : singleArgFunctionInNumOutStrMap.entrySet()){
+            if(1L==suppressColumnsMap.get(singleArgFunctionInNumOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
+
+            }else{
+                l.add(singleArgFunctionInNumOutStrMapEntry.getValue().apply(i));
+            }
+        }
+        rt.put(seq,l);
+
+        S dest = null;
+        for(Map.Entry<S,List<S>> suppressColumnsMapEntry: suppressColumnsMap.entrySet()){
+            if(normMap.keySet().stream().anyMatch(e->e.equals(suppressColumnsMapEntry.getKey()))){
+                if(1L==suppressColumnsMapEntry.getValue().stream().filter(e->e.equals(OFF)).count()){
+
+                }else{
+                    dest = strToNorm.apply(cpToStr.apply(i),normMap.get(suppressColumnsMapEntry.getKey()));//strToNorm(cpToStr(i), Normalizer.Form.NFD)
+                    l.add(dest);
+                    rt.put(seq,l);
+                    //strToUtf8,strToUtf16,strToUtf32,strToUnicode
+                    for(Map.Entry<S,Function<S,S>> singleArgFunctionInStrOutStrMapEntry : singleArgFunctionInStrOutStrMap.entrySet()){
+                        //デフォルト値の設定
+                        if(rt.containsKey(seq)){
+                            //紐づくキーがあれば、リスト追加
+                            if(dest==null){
+                                //正規化無しの場合
+                                if(1L==suppressColumnsMap.get(singleArgFunctionInStrOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
+
+                                }else{
+                                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrMapEntry.getValue().apply(cpToStr.apply(i)))));
+                                }
+                            }else{
+                                //正規化有りの場合
+                                if(1L==suppressColumnsMap.get(singleArgFunctionInStrOutStrMapEntry.getKey()).stream().filter(e->e.equals(OFF)).count()){
+
+                                }else{
+                                    rt.get(seq).addAll(new ArrayList<>(Arrays.asList(singleArgFunctionInStrOutStrMapEntry.getValue().apply(dest))));
+                                }
+                            }
+                        }else{
+                            //紐づくキーは直前のループで追加済み
+                        }
+                    }
+                }
+            }else{
+
+            }
+        }
+        return rt;
+    }
+
+    private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap) {
+        Map<Integer, List<String>> rt = new LinkedHashMap<>();
+        //結果列作成用の取得列定義マップ
+
+        ++GRP_CNT;
+        for(int i=s;i<=e;i++){
+            rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrMap,singleArgFunctionInStrOutStrMap,multipleArgFunctionMap,suppressColumnsMap));
+        }
+        return rt;
+    }
+
+    private static String repeat(String str, int n) {
+        return Stream.generate(() -> str).limit(n).collect(Collectors.joining());
+    }
+    private static String salt(String str,String prefix,String suffix) {
+        return Stream.of(str).collect(Collectors.joining("",prefix,suffix));
+    }
+    private static List<String> ngram (String s,Integer n){
+        List<String> rt = new ArrayList<>();
+        String ngramPtn = Stream.of(repeat(".",n)).map(e->salt(e,"(?=(","))")).collect(Collectors.joining());
+        Pattern p = Pattern.compile(ngramPtn);
+        Matcher m = p.matcher(s);
+        while(m.find()){
+            rt.add(m.group(1));
+        }
+        return rt;
+    }
     private static void debug(Map<Integer,List<String>> map){
         for(Map.Entry<Integer,List<String>> entry : map.entrySet()){
             System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue().stream().collect(Collectors.joining("\t")));
@@ -719,7 +798,6 @@ public class App {
         }
         return ret+cnt;
     }
-
     private static <K,V,N,S> Set<N> wrapperExecuteSearch(
             K startRn
             ,V endRn
@@ -765,29 +843,6 @@ public class App {
         }
         return rt;
     }
-    private static final Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
-        put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
-        put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
-        put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
-    }};
-    private static final Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> splitProcessFunctionMap = new LinkedHashMap<>(){{
-//            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
-        put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
-        put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
-        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
-        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
-//            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
-        put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
-        put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
-        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,mkNgramIdxNonWordUnderScoreSplit);
-        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkNgramIdxNonWordUnderScoreHyphenSplit);
-    }};
-    private static final Map<String,Function<List<String>,Set<Integer>>> shapeProcessFunctionMap = new LinkedHashMap<>(){{
-        put(OPTION_MK_IDX_SHAPE, mkIdxShape);
-    }};
-    private static final Map<String,BiFunction<Map<Integer,String>,String,Set<Integer>>> filterProcessFunctionMap = new LinkedHashMap<>(){{
-        put(OPTION_MK_IDX_FILTER, mkIdxFilter);
-    }};
     private static Set<Integer> searchCodePointStartEnd(List<Map<String,List<String>>> searchArgsMapList){
         Set<Integer> rt = new HashSet<>();
         int mx = searchArgsMapList.size();
