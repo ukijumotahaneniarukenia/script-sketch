@@ -999,15 +999,9 @@ public class App {
         }
     }
 
-    public static void main(String... args) {
-        int ret;
-
-        List<Map<String, List<String>>> mainProcessArgs = execParseOption(Arrays.asList(args),prepareRegexpForParseOption(argsOptPtn));
-
-        canYouHelpMe(mainProcessArgs);
-
+    private static Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs(List<Map<String, List<String>>> mainProcessArgs){
         int grp=0;
-        Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs = new LinkedHashMap<>();
+        Map<Integer,Map<String,List<String>>> rt = new LinkedHashMap<>();
         for(Map<String, List<String>> map : mainProcessArgs){
             for(Map.Entry<String, List<String>> entry : map.entrySet()){
                 if(entry.getKey().contains("INPUT")||entry.getKey().contains("SPLIT")||entry.getKey().contains("HASH")||entry.getKey().contains("KEYWORD")){
@@ -1015,37 +1009,48 @@ public class App {
                     if(entry.getKey().contains("INPUT")){
                         //グルーピングの開始点がある場合
                         grp++;//インクリメントしてから処理
-                        if(mainGroupingProcessArgs.containsKey(grp)){
+                        if(rt.containsKey(grp)){
                             //紐づくキーがあれば、リスト追加
-                            mainGroupingProcessArgs.get(grp).put(entry.getKey(),entry.getValue());
+                            rt.get(grp).put(entry.getKey(),entry.getValue());
                         }else{
                             //紐づくキーがなければ、リスト新規追加
-                            mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
+                            rt.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                         }
                     }else {
                         //グルーピングの開始点がない場合
-                        if(mainGroupingProcessArgs.containsKey(grp)){
+                        if(rt.containsKey(grp)){
                             //紐づくキーがあれば、リスト追加
-                            mainGroupingProcessArgs.get(grp).put(entry.getKey(),entry.getValue());
+                            rt.get(grp).put(entry.getKey(),entry.getValue());
                         }else{
                             //紐づくキーがなければ、リスト新規追加
-                            mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
+                            rt.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                         }
                     }
                 }else{
                     //いずれのグルーピングキーも含んでいない場合
                     grp++;//インクリメントしてから処理
 
-                    if(mainGroupingProcessArgs.containsKey(grp)){
+                    if(rt.containsKey(grp)){
                         //紐づくキーがあれば、リスト追加
-                        mainGroupingProcessArgs.get(grp).put(entry.getKey(),entry.getValue());
+                        rt.get(grp).put(entry.getKey(),entry.getValue());
                     }else{
                         //紐づくキーがなければ、リスト新規追加
-                        mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
+                        rt.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                     }
                 }
             }
         }
+        return rt;
+    }
+
+    public static void main(String... args) {
+        int ret;
+
+        List<Map<String, List<String>>> mainProcessArgs = execParseOption(Arrays.asList(args),prepareRegexpForParseOption(argsOptPtn));
+
+        canYouHelpMe(mainProcessArgs);
+
+        Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs = mainGroupingProcessArgs(mainProcessArgs);
 
         mainProcessArgsGroupingChk(mainGroupingProcessArgs);
 
