@@ -343,7 +343,7 @@ public class App {
         System.out.println("unidat --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
         System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
         System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
-        System.out.println("unidat  -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -517,22 +517,24 @@ public class App {
         }
         return rt;
     }
+    private static final Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
+        put(OPTION_NUM_TO_STR, numToStr);
+        put(OPTION_CP_TO_STR, cpToStr);
+        put(OPTION_CP_TO_UNICODE_NAME, cpToUnicodeName);
+        put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, cpToUnicodeScriptName);
+        put(OPTION_CP_TO_UNICODE_BLOCK_NAME, cpToUnicodeBlockName);
+    }};
+    private static final Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = new LinkedHashMap<>(){{
+        put(OPTION_STR_TO_UTF8, strToUtf8);
+        put(OPTION_STR_TO_UTF16, strToUtf16);
+        put(OPTION_STR_TO_UTF32, strToUtf32);
+        put(OPTION_STR_TO_UNICODE, strToUnicode);
+    }};
+    private static final BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+
     private static Map<Integer, List<String>> wrapperExecuteMkTbl(Integer s,Integer e,Map<String, List<String>> suppressColumnsMap) {
         Map<Integer, List<String>> rt = new LinkedHashMap<>();
-        Map<String,Function<Integer,String>> singleArgFunctionInNumOutStrMap = new LinkedHashMap<>(){{
-            put(OPTION_NUM_TO_STR, numToStr);
-            put(OPTION_CP_TO_STR, cpToStr);
-            put(OPTION_CP_TO_UNICODE_NAME, cpToUnicodeName);
-            put(OPTION_CP_TO_UNICODE_SCRIPT_NAME, cpToUnicodeScriptName);
-            put(OPTION_CP_TO_UNICODE_BLOCK_NAME, cpToUnicodeBlockName);
-        }};
-        Map<String,Function<String,String>> singleArgFunctionInStrOutStrMap = new LinkedHashMap<>(){{
-            put(OPTION_STR_TO_UTF8, strToUtf8);
-            put(OPTION_STR_TO_UTF16, strToUtf16);
-            put(OPTION_STR_TO_UTF32, strToUtf32);
-            put(OPTION_STR_TO_UNICODE, strToUnicode);
-        }};
-        BiFunction<String, Normalizer.Form, String> multipleArgFunction = strToNorm;
+
         ++GRP_CNT;
         for(int i=s;i<=e;i++){
             rt.putAll(executeMkTbl(++SEQ_CNT,GRP_CNT,(i-s+1),i,singleArgFunctionInNumOutStrMap,singleArgFunctionInStrOutStrMap,multipleArgFunction,suppressColumnsMap));
@@ -770,32 +772,32 @@ public class App {
         }
         return rt;
     }
+    private static final Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
+        put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
+        put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
+    }};
+    private static final Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> splitProcessFunctionMap = new LinkedHashMap<>(){{
+//            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
+        put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
+        put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
+//            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,mkNgramIdxNonWordUnderScoreSplit);
+        put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkNgramIdxNonWordUnderScoreHyphenSplit);
+    }};
+    private static final Map<String,Function<List<String>,Set<Integer>>> shapeProcessFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_MK_IDX_SHAPE, mkIdxShape);
+    }};
+    private static final Map<String,BiFunction<Map<Integer,String>,String,Set<Integer>>> filterProcessFunctionMap = new LinkedHashMap<>(){{
+        put(OPTION_MK_IDX_FILTER, mkIdxFilter);
+    }};
     private static Set<Integer> searchCodePointStartEnd(List<Map<String,List<String>>> searchArgsMapList){
         Set<Integer> rt = null;
         int mx = searchArgsMapList.size();
-        Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
-            put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
-            put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
-            put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
-        }};
-        Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> splitProcessFunctionMap = new LinkedHashMap<>(){{
-//            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
-            put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
-            put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
-            put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
-            put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
-//            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
-            put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
-            put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
-            put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,mkNgramIdxNonWordUnderScoreSplit);
-            put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkNgramIdxNonWordUnderScoreHyphenSplit);
-        }};
-        Map<String,Function<List<String>,Set<Integer>>> shapeProcessFunctionMap = new LinkedHashMap<>(){{
-            put(OPTION_MK_IDX_SHAPE, mkIdxShape);
-        }};
-        Map<String,BiFunction<Map<Integer,String>,String,Set<Integer>>> filterProcessFunctionMap = new LinkedHashMap<>(){{
-            put(OPTION_MK_IDX_FILTER, mkIdxFilter);
-        }};
 
         for(int i=0;i<mx;i++){
             Integer ngramCnt = searchArgsMapList.get(i).get(OPTION_SEARCH_KEYWORD).get(0).length();
