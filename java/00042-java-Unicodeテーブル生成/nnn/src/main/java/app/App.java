@@ -27,11 +27,9 @@ import java.util.stream.Stream;
 //10. 出現位置を切り捨てないパタンもオプションだす
 //11. 正規化オプション4パタン DONE
 //12. Web化する https://qiita.com/ota-meshi/items/2c01b118d9d1890cc97b
-//13. 同じオプションの引数違いを後勝ちではなく与えた分だけ処理する -ngram:2:1:4:HIRA -ngram:2:2:4:HIRA
+//13. 同じオプションの引数違いを後勝ちではなく与えた分だけ処理する DONE
 //14. 入力で与えた引数がユニコードの第何群第何面に属しているかチェックし、サマリ情報を出力
 //15. 指定した文字数までのランダムな文字列生成。日本語。タミル語。ハングル文字。
-//16. 引数の名寄せ処理集計処理があれば与えられた引数の先頭何文字かでグルーピンぐできそう。range以外とrangeで分ける -ngram -uniscript HIRA -ngram -uniscript HIRA -ngram -uniname HIRA -hash -uniscript HIRA -hash -uniscript HIRA
-//17. 引数で与えられた文字列の長さからNGRM数をだす
 //18. mk***Split 系の関数は適用順序をもったストリームないしはコレクションを引数に受け取り、順次適用していく形で汎用化できる
 
 //echo -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} | xargs -n1
@@ -40,72 +38,72 @@ import java.util.stream.Stream;
 
 //echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ' | xargs -n1
 
-//too-many
-//parallel echo ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: -input-unicode-{name,script-name,block-name} ::: $(echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ')
+//full-pattern
+//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA","GANA","UNKO","GRAM","POPO","POI","WAN","LUIS","BUTTA","AKASATANA","UBUNTU","QUALITY","RUBY","ZANBIA" | tr  ',' ' ')
 
-//soso-many
-//parallel echo ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: -input-unicode-{name,script-name,block-name} ::: $(echo "HAN","HIRAGANA" | tr  ',' ' ')
+//soso-pattern
+//parallel echo ::: -input-unicode-{name,script-name,block-name} ::: -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} ::: $(echo "HAN","HIRAGANA" | tr  ',' ' ')
 
-//-word-nonsplit -input-unicode-name HAN
-//-word-nonsplit -input-unicode-name HIRAGANA
-//-word-nonsplit -input-unicode-script-name HAN
-//-word-nonsplit -input-unicode-script-name HIRAGANA
-//-word-nonsplit -input-unicode-block-name HAN
-//-word-nonsplit -input-unicode-block-name HIRAGANA
-//-word-split -input-unicode-name HAN
-//-word-split -input-unicode-name HIRAGANA
-//-word-split -input-unicode-script-name HAN
-//-word-split -input-unicode-script-name HIRAGANA
-//-word-split -input-unicode-block-name HAN
-//-word-split -input-unicode-block-name HIRAGANA
-//-word-hyphen-split -input-unicode-name HAN
-//-word-hyphen-split -input-unicode-name HIRAGANA
-//-word-hyphen-split -input-unicode-script-name HAN
-//-word-hyphen-split -input-unicode-script-name HIRAGANA
-//-word-hyphen-split -input-unicode-block-name HAN
-//-word-hyphen-split -input-unicode-block-name HIRAGANA
-//-word-underscore-split -input-unicode-name HAN
-//-word-underscore-split -input-unicode-name HIRAGANA
-//-word-underscore-split -input-unicode-script-name HAN
-//-word-underscore-split -input-unicode-script-name HIRAGANA
-//-word-underscore-split -input-unicode-block-name HAN
-//-word-underscore-split -input-unicode-block-name HIRAGANA
-//-word-all-split -input-unicode-name HAN
-//-word-all-split -input-unicode-name HIRAGANA
-//-word-all-split -input-unicode-script-name HAN
-//-word-all-split -input-unicode-script-name HIRAGANA
-//-word-all-split -input-unicode-block-name HAN
-//-word-all-split -input-unicode-block-name HIRAGANA
-//-ngram-nonsplit -input-unicode-name HAN
-//-ngram-nonsplit -input-unicode-name HIRAGANA
-//-ngram-nonsplit -input-unicode-script-name HAN
-//-ngram-nonsplit -input-unicode-script-name HIRAGANA
-//-ngram-nonsplit -input-unicode-block-name HAN
-//-ngram-nonsplit -input-unicode-block-name HIRAGANA
-//-ngram-split -input-unicode-name HAN
-//-ngram-split -input-unicode-name HIRAGANA
-//-ngram-split -input-unicode-script-name HAN
-//-ngram-split -input-unicode-script-name HIRAGANA
-//-ngram-split -input-unicode-block-name HAN
-//-ngram-split -input-unicode-block-name HIRAGANA
-//-ngram-hyphen-split -input-unicode-name HAN
-//-ngram-hyphen-split -input-unicode-name HIRAGANA
-//-ngram-hyphen-split -input-unicode-script-name HAN
-//-ngram-hyphen-split -input-unicode-script-name HIRAGANA
-//-ngram-hyphen-split -input-unicode-block-name HAN
-//-ngram-hyphen-split -input-unicode-block-name HIRAGANA
-//-ngram-underscore-split -input-unicode-name HAN
-//-ngram-underscore-split -input-unicode-name HIRAGANA
-//-ngram-underscore-split -input-unicode-script-name HAN
-//-ngram-underscore-split -input-unicode-script-name HIRAGANA
-//-ngram-underscore-split -input-unicode-block-name HAN
-//-ngram-underscore-split -input-unicode-block-name HIRAGANA
-//-ngram-all-split -input-unicode-name HAN
-//-ngram-all-split -input-unicode-name HIRAGANA
-//-ngram-all-split -input-unicode-script-name HAN
-//-ngram-all-split -input-unicode-script-name HIRAGANA
-//-ngram-all-split -input-unicode-block-name HAN
-//-ngram-all-split -input-unicode-block-name HIRAGANA
+//-input-unicode-name -word-nonsplit HAN
+//-input-unicode-name -word-nonsplit HIRAGANA
+//-input-unicode-name -word-split HAN
+//-input-unicode-name -word-split HIRAGANA
+//-input-unicode-name -word-hyphen-split HAN
+//-input-unicode-name -word-hyphen-split HIRAGANA
+//-input-unicode-name -word-underscore-split HAN
+//-input-unicode-name -word-underscore-split HIRAGANA
+//-input-unicode-name -word-all-split HAN
+//-input-unicode-name -word-all-split HIRAGANA
+//-input-unicode-name -ngram-nonsplit HAN
+//-input-unicode-name -ngram-nonsplit HIRAGANA
+//-input-unicode-name -ngram-split HAN
+//-input-unicode-name -ngram-split HIRAGANA
+//-input-unicode-name -ngram-hyphen-split HAN
+//-input-unicode-name -ngram-hyphen-split HIRAGANA
+//-input-unicode-name -ngram-underscore-split HAN
+//-input-unicode-name -ngram-underscore-split HIRAGANA
+//-input-unicode-name -ngram-all-split HAN
+//-input-unicode-name -ngram-all-split HIRAGANA
+//-input-unicode-script-name -word-nonsplit HAN
+//-input-unicode-script-name -word-nonsplit HIRAGANA
+//-input-unicode-script-name -word-split HAN
+//-input-unicode-script-name -word-split HIRAGANA
+//-input-unicode-script-name -word-hyphen-split HAN
+//-input-unicode-script-name -word-hyphen-split HIRAGANA
+//-input-unicode-script-name -word-underscore-split HAN
+//-input-unicode-script-name -word-underscore-split HIRAGANA
+//-input-unicode-script-name -word-all-split HAN
+//-input-unicode-script-name -word-all-split HIRAGANA
+//-input-unicode-script-name -ngram-nonsplit HAN
+//-input-unicode-script-name -ngram-nonsplit HIRAGANA
+//-input-unicode-script-name -ngram-split HAN
+//-input-unicode-script-name -ngram-split HIRAGANA
+//-input-unicode-script-name -ngram-hyphen-split HAN
+//-input-unicode-script-name -ngram-hyphen-split HIRAGANA
+//-input-unicode-script-name -ngram-underscore-split HAN
+//-input-unicode-script-name -ngram-underscore-split HIRAGANA
+//-input-unicode-script-name -ngram-all-split HAN
+//-input-unicode-script-name -ngram-all-split HIRAGANA
+//-input-unicode-block-name -word-nonsplit HAN
+//-input-unicode-block-name -word-nonsplit HIRAGANA
+//-input-unicode-block-name -word-split HAN
+//-input-unicode-block-name -word-split HIRAGANA
+//-input-unicode-block-name -word-hyphen-split HAN
+//-input-unicode-block-name -word-hyphen-split HIRAGANA
+//-input-unicode-block-name -word-underscore-split HAN
+//-input-unicode-block-name -word-underscore-split HIRAGANA
+//-input-unicode-block-name -word-all-split HAN
+//-input-unicode-block-name -word-all-split HIRAGANA
+//-input-unicode-block-name -ngram-nonsplit HAN
+//-input-unicode-block-name -ngram-nonsplit HIRAGANA
+//-input-unicode-block-name -ngram-split HAN
+//-input-unicode-block-name -ngram-split HIRAGANA
+//-input-unicode-block-name -ngram-hyphen-split HAN
+//-input-unicode-block-name -ngram-hyphen-split HIRAGANA
+//-input-unicode-block-name -ngram-underscore-split HAN
+//-input-unicode-block-name -ngram-underscore-split HIRAGANA
+//-input-unicode-block-name -ngram-all-split HAN
+//-input-unicode-block-name -ngram-all-split HIRAGANA
 
 public class App {
 
@@ -195,6 +193,10 @@ public class App {
         put(OPTION_NORM_GRP_NFKC, Arrays.asList("true", "-nfkc", "--nfkc"));
         put(OPTION_NORM_GRP_NFKD, Arrays.asList("true", "-nfkd", "--nfkd"));
 
+        put(OPTION_IDX_INPUT_UNICODE_NAME, Arrays.asList("true", "-input-unicode-name", "--input-unicode-name"));
+        put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, Arrays.asList("true", "-input-unicode-script-name", "--input-unicode-script-name"));
+        put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, Arrays.asList("true", "-input-unicode-block-name","--input-unicode-block-name"));
+
         put(OPTION_MK_WORD_IDX_NON_SPLIT, Arrays.asList("true", "-word-nonsplit", "--word-nonsplit"));
         put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT, Arrays.asList("true", "-word-split", "--word-split"));
         put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT, Arrays.asList("true", "-word-hyphen-split","--word-hyphen-split"));
@@ -206,10 +208,6 @@ public class App {
         put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT, Arrays.asList("true", "-ngram-underscore-split", "--ngram-underscore-split"));
         put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT, Arrays.asList("true", "-ngram-all-split", "--ngram-all-split"));
         put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","3", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
-
-        put(OPTION_IDX_INPUT_UNICODE_NAME, Arrays.asList("true", "-input-unicode-name", "--input-unicode-name"));
-        put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, Arrays.asList("true", "-input-unicode-script-name", "--input-unicode-script-name"));
-        put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, Arrays.asList("true", "-input-unicode-block-name","--input-unicode-block-name"));
 
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
@@ -224,6 +222,15 @@ public class App {
         put(OPTION_NORM_GRP_NFKC, Normalizer.Form.NFKC);
         put(OPTION_NORM_GRP_NFKD, Normalizer.Form.NFKD);
     }};
+
+
+    //グループ化対象キーを定義
+    private static final List<String> grpArgsList = new ArrayList<>(Arrays.asList(OPTION_MK_WORD_IDX_NON_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_HASH_KEY_SEARCH,OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME,OPTION_SEARCH_KEYWORD));
+    //取得対象列リストを定義
+    private static final List<String> colArgsList = new ArrayList<>(Arrays.asList(OPTION_NUM_TO_STR,OPTION_CP_TO_STR,OPTION_CP_TO_UNICODE_NAME,OPTION_CP_TO_UNICODE_SCRIPT_NAME,OPTION_CP_TO_UNICODE_BLOCK_NAME,OPTION_STR_TO_UTF8,OPTION_STR_TO_UTF16,OPTION_STR_TO_UTF32,OPTION_STR_TO_UNICODE,OPTION_NORM_GRP_NFC,OPTION_NORM_GRP_NFD,OPTION_NORM_GRP_NFKC,OPTION_NORM_GRP_NFKD));
+
+    private static final List<String> wordSplitList = new ArrayList<>(Arrays.asList(OPTION_MK_WORD_IDX_NON_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT));
+    private static final List<String> ngramSplitList = new ArrayList<>(Arrays.asList(OPTION_MK_NGRAM_IDX_NON_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT));
 
     //引数に指定されたら設定するマップ
     private static final Map<String, Map<String,List<String>>> optionFlgPtn = new HashMap<>(){{
@@ -330,11 +337,13 @@ public class App {
         System.exit(status);
     }
     private static void optionHelp(){
-        System.out.println("unidat -nfc --range:10:19 -word-split -input-unicode-name HIRA -word-hyphen-split -input-unicode-script-name KANA -word-split -input-unicode-name CJK");
         System.out.println("unidat --range:1:30"); //レンジを絞って出力
         System.out.println("unidat --range:50:80 -nfc -nfd"); //レンジ絞ってサプレスして出力
         System.out.println("unidat --range:12354:12390 -nfc -nfd -nfkc"); //レンジ絞ってサプレスして出力
         System.out.println("unidat --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
+        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
+        System.out.println("unidat  -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -558,7 +567,7 @@ public class App {
         }
         return rt;
     }
-    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordSplit = (m) -> {
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkWordIdxNonWordSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().collect(Collectors.toList());
@@ -569,7 +578,7 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     };
-    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordHyphenSplit = (m) -> {
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkWordIdxNonWordHyphenSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -580,7 +589,7 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     };
-    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordUnderScoreSplit = (m) -> {
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkWordIdxNonWordUnderScoreSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).collect(Collectors.toList());
@@ -591,7 +600,7 @@ public class App {
         }
         return tmp.entrySet().stream().collect(Collectors.groupingBy(e->e.getValue(),Collectors.mapping(e->e.getKey(),Collectors.toList())));
     };
-    static Function<Map<Integer, String>,Map<String, List<String>>> mkWordIdxNonWordUnderScoreHyphenSplit = (m) -> {
+    static BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>> mkWordIdxNonWordUnderScoreHyphenSplit = (m,n) -> {
         Map<String, String> tmp = new HashMap<>();
         for(Map.Entry<Integer, String> entry : m.entrySet()){
             List<String> l = Arrays.asList(entry.getValue().split("\\W")).stream().flatMap(e->Arrays.asList(e.split("_")).stream()).flatMap(e->Arrays.asList(e.split("-")).stream()).collect(Collectors.toList());
@@ -672,65 +681,11 @@ public class App {
                 .filter(v->v.getValue().contains(s)).map(ee->ee.getKey()).collect(Collectors.toSet());
     };
 
-    //単一の関数にマージする START
-    private static <K,V,N,S,R> Set<N> executeNgramSearch(
-            K startRn
-            ,V endRn
-            ,N ngramCnt
-            ,S search_key_word
-            ,List<R> noneKeyWord
-            ,BiFunction<K,V,Map<K,R>> mkInputFunction
-            ,BiFunction<Map<K,R>,N,Map<R,List<R>>> mkIdxFunction
-            ,Function<List<R>,Set<N>> mkIdxShapeFunction
-    ){
-        Set<N> rt;
-        Map<K,R> input = mkInputFunction.apply(startRn,endRn);
-        Map<R,List<R>> midput = mkIdxFunction.apply(input,ngramCnt);
-        List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
-        if(output.get(0).equals(noneKeyWord.get(0))){
-            return new HashSet<>();
-        }else{
-            rt = mkIdxShapeFunction.apply(output);
-        }
-        return rt;
-    }
-    private static <K,V,N,S,R> Set<N> executeWordNgramSearch(
-            K startRn
-            ,V endRn
-            ,S search_key_word
-            ,List<R> noneKeyWord
-            ,BiFunction<K,V,Map<K,R>> mkInputFunction
-            ,Function<Map<K,R>,Map<R,List<R>>> mkIdxFunction
-            ,Function<List<R>,Set<N>> mkIdxShapeFunction
-    ){
-        Set<N> rt;
-        Map<K,R> input = mkInputFunction.apply(startRn,endRn);
-        Map<R,List<R>> midput = mkIdxFunction.apply(input);
-        List<R> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
-        if(output.get(0).equals(noneKeyWord.get(0))){
-            return new HashSet<>();
-        }else{
-            rt = mkIdxShapeFunction.apply(output);
-        }
-        return rt;
-    }
-    private static <K,V,N,S,R> Set<N> executeHashKeySearch(
-            K startRn
-            ,V endRn
-            ,S search_key_word
-            ,BiFunction<K,V,Map<K,R>> mkInputFunction
-            ,BiFunction<Map<K,R>,S,Set<N>> mkIdxFilterFunction
-    ){
-        Map<K,R> input = mkInputFunction.apply(startRn,endRn);
-        return mkIdxFilterFunction.apply(input,search_key_word);
-    }
     private static void debug(Map<Integer,List<String>> map){
         for(Map.Entry<Integer,List<String>> entry : map.entrySet()){
             System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue().stream().collect(Collectors.joining("\t")));
         }
     }
-    //単一の関数にマージする END
-
     private static List<List<String>> grpKeTsuBanMnMx(List<Integer> r){
         Map<Integer,Integer> m = r.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toMap(e->e,e->e+1,(pre,post)->post,LinkedHashMap::new));
         StringBuilder sb = new StringBuilder();
@@ -769,35 +724,66 @@ public class App {
         }
         return ret+cnt;
     }
-    private static void subMain(){
-        //https://qiita.com/kiida/items/9d26b850194fa1a02e67
-        System.exit(0);
-    }
 
-    private static Set<Integer> wrapperExecuteSearch(){
-        //hash or non-hash
+    private static <K,V,N,S> Set<N> wrapperExecuteSearch(
+            K startRn
+            ,V endRn
+            ,N ngramCnt
+            ,Map<S,List<S>> searchArgsMap
+            ,List<S> noneKeyWord
+            ,Map<S,BiFunction<K,V,Map<N,S>>> mkInputFunctionMap
+            ,Map<S,BiFunction<Map<N, S>,N,Map<S, List<S>>>> splitProcessFunctionMap
+            ,Map<S,BiFunction<Map<N,S>,S,Set<N>>> filterProcessFunctionMap
+            ,Map<S,Function<List<S>,Set<N>>> shapeProcessFunctionMap
+    ){
+        Set<N> rt;
+        List<S> l = searchArgsMap.keySet().stream().collect(Collectors.toList());
+        BiFunction<K,V,Map<N,S>> mkInputFunction = mkInputFunctionMap.get(l.get(0));
+        BiFunction<Map<N, S>,N,Map<S, List<S>>> splitProcessFunction = splitProcessFunctionMap.get(l.get(1));
+        S search_key_word = searchArgsMap.get(l.get(2)).get(0);//複数検索ワードに対応できるようにしておきたいので、こうした
+
+        //IN
+        Map<N,S> input = mkInputFunction.apply(startRn,endRn);
+
+        //CMD
+        Map<S, List<S>> midput;
+        if(wordSplitList.stream().anyMatch(e->e.equals(l.get(1)))){
+            //word
+            midput = splitProcessFunction.apply(input,ngramCnt);
+        }else if(ngramSplitList.stream().anyMatch(e->e.equals(l.get(1)))){
+            //ngram
+            midput = splitProcessFunction.apply(input,ngramCnt);
+        }else{
+            //hash
+            BiFunction<Map<N,S>,S,Set<N>> filterProcessFunction = filterProcessFunctionMap.get(OPTION_MK_IDX_FILTER);
+            rt = filterProcessFunction.apply(input,search_key_word);
+            return rt;
+        }
+
+        //OUT
+        List<S> output = Optional.ofNullable(midput.get(search_key_word)).orElse(noneKeyWord);
+        if(output.get(0).equals(noneKeyWord.get(0))){
+            return new HashSet<>();
+        }else{
+            Function<List<S>,Set<N>> shapeProcessFunction = shapeProcessFunctionMap.get(OPTION_MK_IDX_SHAPE);
+            rt = shapeProcessFunction.apply(output);
+        }
         return rt;
     }
-
     private static Set<Integer> searchCodePointStartEnd(List<Map<String,List<String>>> searchArgsMapList){
-
         Set<Integer> rt = null;
         int mx = searchArgsMapList.size();
-        searchArgsMapList.stream().forEach(e-> System.out.println(e));
-
         Map<String,BiFunction<Integer,Integer,Map<Integer,String>>> mkInputFunctionMap = new LinkedHashMap<>(){{
             put(OPTION_IDX_INPUT_UNICODE_NAME, mkInputUnicodeName);
             put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME, mkInputUnicodeScriptName);
             put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME, mkInputUnicodeBlockName);
         }};
-        Map<String,Function<Map<Integer, String>,Map<String, List<String>>>> wordSplitProcessFunctionMap = new LinkedHashMap<>(){{
+        Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> splitProcessFunctionMap = new LinkedHashMap<>(){{
 //            put(OPTION_MK_WORD_IDX_NON_SPLIT,);
             put(OPTION_MK_WORD_IDX_NON_WORD_SPLIT,mkWordIdxNonWordSplit);
             put(OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,mkWordIdxNonWordHyphenSplit);
             put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,mkWordIdxNonWordUnderScoreSplit);
             put(OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,mkWordIdxNonWordUnderScoreHyphenSplit);
-        }};
-        Map<String,BiFunction<Map<Integer, String>,Integer,Map<String, List<String>>>> ngramSplitProcessFunctionMap = new LinkedHashMap<>(){{
 //            put(OPTION_MK_NGRAM_IDX_NON_SPLIT,);
             put(OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,mkNgramIdxNonWordSplit);
             put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,mkNgramIdxNonWordHyphenSplit);
@@ -812,17 +798,19 @@ public class App {
         }};
 
         for(int i=0;i<mx;i++){
-
-            if(searchArgsMapList.get(i).keySet().stream().limit(1).anyMatch(e->e.contains("WORD"))){
-                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,wordSplitProcessFunctionMap,shapeProcessFunctionMap);
-            }else if(searchArgsMapList.get(i).keySet().stream().limit(1).anyMatch(e->e.contains("NGRAM"))){
-                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,ngramSplitProcessFunctionMap,shapeProcessFunctionMap);
-            }else{
-                //hash
-                rt = wrapperExecuteSearch(DEFAULT_START_RN,DEFAULT_END_RN,searchArgsMapList.get(i),mkInputFunctionMap,ngramSplitProcessFunctionMap,filterProcessFunctionMap);
-            }
+            Integer ngramCnt = searchArgsMapList.get(i).get(OPTION_SEARCH_KEYWORD).get(0).length();
+            rt = wrapperExecuteSearch(
+                    DEFAULT_START_RN
+                    ,DEFAULT_END_RN
+                    ,ngramCnt
+                    ,searchArgsMapList.get(i)
+                    ,Arrays.asList(DEFAULT_NONE_KEYWORD)
+                    ,mkInputFunctionMap
+                    ,splitProcessFunctionMap
+                    ,filterProcessFunctionMap
+                    ,shapeProcessFunctionMap
+            );
         }
-
         return rt;
     }
 
@@ -891,8 +879,8 @@ public class App {
         //システム全体で参照するコードポイント範囲を設定
         IntStream.range(0,mx).boxed().forEach(i->setRange(cmdLineArgs.get(i),prepareRegexpForParseOption));
 
-        Map<String, List<String>> optionFlgPtnOnMap = new HashMap<>();
-        Map<String, List<String>> optionFlgPtnOffMap = new HashMap<>();
+        Map<String, List<String>> optionFlgPtnOnMap = new LinkedHashMap<>();
+        Map<String, List<String>> optionFlgPtnOffMap = new LinkedHashMap<>();
         for(int i=0;i<mx;i++){
             //オプション引数が与えた際のフラグ設定 ON 与えられた分だけ設定
             for(Map.Entry<String,List<String>> entry : optionFlgPtn.get(ON).entrySet()){
@@ -918,12 +906,12 @@ public class App {
             }
             rt.addAll(optionFlgPtnOnMap.entrySet().stream().parallel().map(e->Map.of(e.getKey(),e.getValue())).collect(Collectors.toList()));
             rt.addAll(optionFlgPtnOffMap.entrySet().stream().parallel().map(e->Map.of(e.getKey(),e.getValue())).collect(Collectors.toList()));
-            optionFlgPtnOnMap = new HashMap<>();
-            optionFlgPtnOffMap = new HashMap<>();
+            optionFlgPtnOnMap = new LinkedHashMap<>();
+            optionFlgPtnOffMap = new LinkedHashMap<>();
         }
 
         //オプション引数が与えられなかった際のデフォルトフラグ設定 ON
-        Map<String, List<String>> defaultOptionFlgPtnOnMap = new HashMap<>();
+        Map<String, List<String>> defaultOptionFlgPtnOnMap = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : defaultOptionFlgPtn.get(ON).entrySet()){
             if(rt.stream().flatMap(map->map.keySet().stream()).noneMatch(key->key.contains(entry.getKey()))){
                 //未登録エントリのみ設定
@@ -934,7 +922,7 @@ public class App {
         rt.addAll(defaultOptionFlgPtnOnMap.entrySet().stream().parallel().map(e->Map.of(e.getKey(),e.getValue())).collect(Collectors.toList()));
 
         //オプション引数が与えられなかった際のデフォルトフラグ設定 OFF
-        Map<String, List<String>> defaultOptionFlgPtnOffMap = new HashMap<>();
+        Map<String, List<String>> defaultOptionFlgPtnOffMap = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : defaultOptionFlgPtn.get(OFF).entrySet()){
             if(rt.stream().flatMap(map->map.keySet().stream()).noneMatch(key->key.contains(entry.getKey()))){
                 //未登録エントリのみ設定
@@ -943,7 +931,6 @@ public class App {
         }
         //Map<String, List<String>> --> List<Map<String, List<String>>>
         rt.addAll(defaultOptionFlgPtnOffMap.entrySet().stream().parallel().map(e->Map.of(e.getKey(),e.getValue())).collect(Collectors.toList()));
-
         return rt;
     }
     private static boolean showCmdInfo(List<Map<String,List<String>>> mainReStyleProcessArgsList,String option){
@@ -959,7 +946,7 @@ public class App {
                         e->e.getKey()
                         ,e->e.getValue()
                         ,(pre,post)->post
-                        ,HashMap::new
+                        ,LinkedHashMap::new
                 ));
         List<Map<String,List<String>>> searchArgsMapList = mainReStyleProcessArgsList.stream().filter(e-> 3==e.values().size()).collect(Collectors.toList());
         finish : {
@@ -985,7 +972,7 @@ public class App {
             }else{
                 //range以外指定（検索）
                 rt = searchCodePointStartEnd(searchArgsMapList);
-//                ret += printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())),suppressColMap);
+                ret += printOut(grpStartEndRn(rt.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList())),suppressColMap);
             }
         }
         return ret;
@@ -1006,11 +993,20 @@ public class App {
         }
     }
 
-    //グループ化対象キーを定義
-    private static final List<String> grpArgsList = new ArrayList<>(Arrays.asList(OPTION_MK_WORD_IDX_NON_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_WORD_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT,OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT,OPTION_HASH_KEY_SEARCH,OPTION_IDX_INPUT_UNICODE_NAME,OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,OPTION_IDX_INPUT_UNICODE_BLOCK_NAME,OPTION_SEARCH_KEYWORD));
+    private static void mainProcessArgsGroupingChk(Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs){
+        for(Map.Entry<Integer,Map<String,List<String>>> map : mainGroupingProcessArgs.entrySet()){
+            if(0L<map.getValue().keySet().stream().filter(e->e.contains("INPUT")||e.contains("SPLIT")||e.contains("KEYWORD")).count()){
+                if(3!=map.getValue().keySet().stream().collect(Collectors.toList()).stream().filter(e->grpArgsList.contains(e)).count()){
+                    int ret=SUCCESS_STATUS;
+                    optionUsage(ret,OPTION_HELP);
+                }else{
 
-    //取得対象列リストを定義
-    private static final List<String> colArgsList = new ArrayList<>(Arrays.asList(OPTION_NUM_TO_STR,OPTION_CP_TO_STR,OPTION_CP_TO_UNICODE_NAME,OPTION_CP_TO_UNICODE_SCRIPT_NAME,OPTION_CP_TO_UNICODE_BLOCK_NAME,OPTION_STR_TO_UTF8,OPTION_STR_TO_UTF16,OPTION_STR_TO_UTF32,OPTION_STR_TO_UNICODE,OPTION_NORM_GRP_NFC,OPTION_NORM_GRP_NFD,OPTION_NORM_GRP_NFKC,OPTION_NORM_GRP_NFKD));
+                }
+            }else{
+
+            }
+        }
+    }
 
     public static void main(String... args) {
         int ret;
@@ -1019,41 +1015,13 @@ public class App {
 
         canYouHelpMe(mainProcessArgs);
 
-        //引数のグルーピング処理
-//        0	false	0	false	0	1	NORM_GRP_NFC	[-9999]
-//        1	true	1	true	1	2	MK_WORD_IDX_NON_WORD_SPLIT	[1]
-//        2	false	0	true	1	2	IDX_INPUT_UNICODE_NAME	[1]
-//        3	false	0	true	1	2	SEARCH_KEYWORD	[HIRA]
-//        4	false	0	false	0	3	NORM_GRP_NFD	[-9999]
-//        5	true	1	true	1	4	MK_WORD_IDX_NON_SPLIT	[1]
-//        6	false	0	true	1	4	IDX_INPUT_UNICODE_NAME	[1]
-//        7	false	0	true	1	4	SEARCH_KEYWORD	[HAN]
-//        8	true	1	true	1	5	MK_WORD_IDX_NON_SPLIT	[1]
-//        9	false	0	true	1	5	IDX_INPUT_UNICODE_NAME	[1]
-//        10	false	0	true	1	5	SEARCH_KEYWORD	[HAN]
-//        11	false	0	false	0	6	STR_TO_UTF8	[1]
-//        12	false	0	false	0	7	CP_TO_UNICODE_BLOCK_NAME	[1]
-//        13	false	0	false	0	8	CP_TO_UNICODE_NAME	[1]
-//        14	false	0	false	0	9	STR_TO_UNICODE	[1]
-//        15	false	0	false	0	10	NUM_TO_STR	[1]
-//        16	false	0	false	0	11	STR_TO_UTF16	[1]
-//        17	false	0	false	0	12	CP_TO_STR	[1]
-//        18	false	0	false	0	13	NORM_GRP_NFKC	[1]
-//        19	false	0	false	0	14	NORM_GRP_NFKD	[1]
-//        20	false	0	false	0	15	CP_TO_UNICODE_SCRIPT_NAME	[1]
-//        21	false	0	false	0	16	STR_TO_UTF32	[1]
-//        22	false	0	false	0	17	OPTION_VERSION	[-9999]
-//        23	false	0	false	0	18	OPTION_HELP	[-9999]
-//        24	false	0	false	0	19	OPTION_USAGE	[-9999]
-//
-        int cnt=0;
         int grp=0;
         Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs = new LinkedHashMap<>();
         for(Map<String, List<String>> map : mainProcessArgs){
             for(Map.Entry<String, List<String>> entry : map.entrySet()){
-                if(entry.getKey().contains("SPLIT") ||entry.getKey().contains("INPUT")||entry.getKey().contains("KEYWORD")){
+                if(entry.getKey().contains("INPUT")||entry.getKey().contains("SPLIT")||entry.getKey().contains("KEYWORD")){
                     //いずれかのグルーピングキーを含んでいる場合
-                    if(entry.getKey().contains("SPLIT")){
+                    if(entry.getKey().contains("INPUT")){
                         //グルーピングの開始点がある場合
                         grp++;//インクリメントしてから処理
                         if(mainGroupingProcessArgs.containsKey(grp)){
@@ -1063,16 +1031,6 @@ public class App {
                             //紐づくキーがなければ、リスト新規追加
                             mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                         }
-//                        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
-//                                , cnt
-//                                , entry.getKey().contains("SPLIT")
-//                                , entry.getKey().contains("SPLIT") ? 1 : 0
-//                                , entry.getKey().contains("SPLIT") || entry.getKey().contains("INPUT") || entry.getKey().contains("KEYWORD")
-//                                , entry.getKey().contains("SPLIT") || entry.getKey().contains("INPUT") || entry.getKey().contains("KEYWORD") ? 1 : 0
-//                                , grp
-//                                , entry.getKey()
-//                                , entry.getValue()
-//                        );
                     }else {
                         //グルーピングの開始点がない場合
                         if(mainGroupingProcessArgs.containsKey(grp)){
@@ -1082,16 +1040,6 @@ public class App {
                             //紐づくキーがなければ、リスト新規追加
                             mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                         }
-//                        System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
-//                                , cnt
-//                                , entry.getKey().contains("SPLIT")
-//                                , entry.getKey().contains("SPLIT") ? 1 : 0
-//                                , entry.getKey().contains("SPLIT") || entry.getKey().contains("INPUT") || entry.getKey().contains("KEYWORD")
-//                                , entry.getKey().contains("SPLIT") || entry.getKey().contains("INPUT") || entry.getKey().contains("KEYWORD") ? 1 : 0
-//                                , grp
-//                                , entry.getKey()
-//                                , entry.getValue()
-//                        );
                     }
                 }else{
                     //いずれのグルーピングキーも含んでいない場合
@@ -1104,25 +1052,16 @@ public class App {
                         //紐づくキーがなければ、リスト新規追加
                         mainGroupingProcessArgs.put(grp,new LinkedHashMap<>(){{put(entry.getKey(),entry.getValue());}});
                     }
-
-//                    System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
-//                            ,cnt
-//                            ,entry.getKey().contains("SPLIT")
-//                            ,entry.getKey().contains("SPLIT") ?1:0
-//                            ,entry.getKey().contains("SPLIT")||entry.getKey().contains("INPUT")||entry.getKey().contains("KEYWORD")
-//                            ,entry.getKey().contains("SPLIT")||entry.getKey().contains("INPUT")|| entry.getKey().contains("KEYWORD") ?1:0
-//                            ,grp
-//                            ,entry.getKey()
-//                            ,entry.getValue()
-//                    );
                 }
-                cnt++;
             }
         }
-//        Map<Integer,Map<String,List<String>>> --> List<Map<String,List<String>>>
+
+        mainProcessArgsGroupingChk(mainGroupingProcessArgs);
+
         int mx = mainGroupingProcessArgs.size();
         List<Map<String,List<String>>> mainReStyleProcessArgs = IntStream.rangeClosed(1,mx).boxed().map(k->mainGroupingProcessArgs.get(k)).collect(Collectors.toList());
+
         ret = mainProcess(mainReStyleProcessArgs);
-//        System.exit(ret);
+        System.exit(ret);
     }
 }
