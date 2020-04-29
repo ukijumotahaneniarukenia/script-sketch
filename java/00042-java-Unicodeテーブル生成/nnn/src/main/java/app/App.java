@@ -204,7 +204,7 @@ public class App {
         put(OPTION_MK_NGRAM_IDX_NON_WORD_HYPHEN_SPLIT, Arrays.asList("true", "-ngram-hyphen-split","--ngram-hyphen-split"));
         put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_SPLIT, Arrays.asList("true", "-ngram-underscore-split", "--ngram-underscore-split"));
         put(OPTION_MK_NGRAM_IDX_NON_WORD_UNDERSCORE_HYPHEN_SPLIT, Arrays.asList("true", "-ngram-all-split", "--ngram-all-split"));
-        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("false","3", "-hh.*", "-hash.*", "--hash.*", "-hash-?key.*", "-hash-?Key.*", "-Hash-?Key.*", "-Hash-?key.*", "--hash-?key.*", "--hash-?Key.*", "--Hash-?Key.*", "--Hash-?key.*"));
+        put(OPTION_HASH_KEY_SEARCH, Arrays.asList("true", "-hash", "--hash", "-hashkey", "-hashKey", "-HashKey", "-Hashkey", "--hashkey", "--hashKey", "--HashKey", "--Hashkey"));
 
         put(OPTION_RANGE, Arrays.asList("false","2","-r.*", "--r.*", "--range.*", "-range.*"));
         put(OPTION_HELP, Arrays.asList("true", "-h", "--h", "--help", "-help"));
@@ -250,6 +250,7 @@ public class App {
             put(OPTION_IDX_INPUT_UNICODE_NAME,Arrays.asList(ON));
             put(OPTION_IDX_INPUT_UNICODE_SCRIPT_NAME,Arrays.asList(ON));
             put(OPTION_IDX_INPUT_UNICODE_BLOCK_NAME,Arrays.asList(ON));
+            put(OPTION_HASH_KEY_SEARCH,Arrays.asList(ON));
             put(OPTION_SEARCH_KEYWORD, Arrays.asList(OPTION_SEARCH_KEYWORD_PTN));
         }});
         //OFFするマップ
@@ -332,6 +333,10 @@ public class App {
         System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
         System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
         System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
+        System.out.println("unidat -input-unicode-name --hashkey HIRAGANA  -input-unicode-name --hashkey HIRAGANA");
+        System.out.println("unidat -input-unicode-script-name --hash KATAKANA -input-unicode-name --hashkey HIRAGANA -nfc -nfd -nfkc");
+        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA -input-unicode-script-name --hash KATAKANA");
+        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-script-name --hash KATAKANA -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
@@ -784,12 +789,11 @@ public class App {
         put(OPTION_MK_IDX_FILTER, mkIdxFilter);
     }};
     private static Set<Integer> searchCodePointStartEnd(List<Map<String,List<String>>> searchArgsMapList){
-        Set<Integer> rt = null;
+        Set<Integer> rt = new HashSet<>();
         int mx = searchArgsMapList.size();
-
         for(int i=0;i<mx;i++){
             Integer ngramCnt = searchArgsMapList.get(i).get(OPTION_SEARCH_KEYWORD).get(0).length();
-            rt = wrapperExecuteSearch(
+            rt.addAll(wrapperExecuteSearch(
                     DEFAULT_START_RN
                     ,DEFAULT_END_RN
                     ,ngramCnt
@@ -799,15 +803,12 @@ public class App {
                     ,splitProcessFunctionMap
                     ,filterProcessFunctionMap
                     ,shapeProcessFunctionMap
-            );
+            ));
         }
         return rt;
     }
 
     private static Map<String, String> prepareRegexpForParseOption(Map<String, List<String>> argsOptPtn){
-//        文字列クラスに備わっているmatchesとパタンクラスに備わっているmatcherの振る舞いはことなる。
-//        ここでは文字列に変換して文字列クラスのmatchesを使うような実装にしている。
-//        正規表現のコンパイル時間がネックそう
         Map<String, String> rt = new LinkedHashMap<>();
         for(Map.Entry<String,List<String>> entry : argsOptPtn.entrySet()){
             if(Boolean.parseBoolean(entry.getValue().get(0))){
@@ -985,7 +986,7 @@ public class App {
 
     private static void mainProcessArgsGroupingChk(Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs){
         for(Map.Entry<Integer,Map<String,List<String>>> map : mainGroupingProcessArgs.entrySet()){
-            if(0L<map.getValue().keySet().stream().filter(e->e.contains("INPUT")||e.contains("SPLIT")||e.contains("KEYWORD")).count()){
+            if(0L<map.getValue().keySet().stream().filter(e->e.contains("INPUT")||e.contains("SPLIT")||e.contains("HASH")||e.contains("KEYWORD")).count()){
                 if(3!=map.getValue().keySet().stream().collect(Collectors.toList()).stream().filter(e->grpArgsList.contains(e)).count()){
                     int ret=SUCCESS_STATUS;
                     optionUsage(ret,OPTION_HELP);
@@ -1009,7 +1010,7 @@ public class App {
         Map<Integer,Map<String,List<String>>> mainGroupingProcessArgs = new LinkedHashMap<>();
         for(Map<String, List<String>> map : mainProcessArgs){
             for(Map.Entry<String, List<String>> entry : map.entrySet()){
-                if(entry.getKey().contains("INPUT")||entry.getKey().contains("SPLIT")||entry.getKey().contains("KEYWORD")){
+                if(entry.getKey().contains("INPUT")||entry.getKey().contains("SPLIT")||entry.getKey().contains("HASH")||entry.getKey().contains("KEYWORD")){
                     //いずれかのグルーピングキーを含んでいる場合
                     if(entry.getKey().contains("INPUT")){
                         //グルーピングの開始点がある場合
