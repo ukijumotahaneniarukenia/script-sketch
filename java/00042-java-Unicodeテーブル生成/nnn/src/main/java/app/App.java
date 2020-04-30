@@ -37,6 +37,7 @@ import java.util.stream.Stream;
 //15. 指定した文字数までのランダムな文字列生成。日本語。タミル語。ハングル文字。
 //18. mk***Split 系の関数は適用順序をもったストリームないしはコレクションを引数に受け取り、順次適用していく形で汎用化できる
 //19. range-onlyの際のmin-cp:max-cpのレスが遅過ぎ
+//20. word別に集計結果を一覧表示 --summary min,max,average,count,listagg...
 
 
 //echo -{word,ngram}-{nonsplit,split,hyphen-split,underscore-split,all-split} | xargs -n1
@@ -613,17 +614,22 @@ public class App {
         System.exit(status);
     }
     private static void optionHelp(){
-        System.out.println("unidat --range:1:30"); //レンジを絞って出力
-        System.out.println("unidat --range:50:80 -nfc -nfd"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat --range:12354:12390 -nfc -nfd -nfkc"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA");
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
-        System.out.println("unidat -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
-        System.out.println("unidat -input-unicode-name --hashkey HIRAGANA  -input-unicode-name --hashkey HIRAGANA");
-        System.out.println("unidat -input-unicode-script-name --hash KATAKANA -input-unicode-name --hashkey HIRAGANA -nfc -nfd -nfkc");
-        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA -input-unicode-script-name --hash KATAKANA");
-        System.out.println("unidat -nfc -nfd -nfkc -input-unicode-script-name --hash KATAKANA -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA");
+        System.out.println(PROGRAM_NAME + " --range:1:30"); //レンジを絞って出力
+        System.out.println(PROGRAM_NAME + " --range:50:80 -nfc -nfd"); //レンジ絞ってサプレスして出力
+        System.out.println(PROGRAM_NAME + " --range:12354:12390 -nfc -nfd -nfkc"); //レンジ絞ってサプレスして出力
+        System.out.println(PROGRAM_NAME + " --range:12354:12390 -cp -usc -ubl -u8 -u32 --unicode"); //レンジ絞ってサプレスして出力
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split HIRAGANA");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split HIRAGANA -input-unicode-block-name -ngram-hyphen-split HAN -nfc -nfd -nfkc");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split HIRAGANA -input-unicode-name -word-split KATAKANA -input-unicode-name -word-split HIRAGANA  -cp -usc -ubl -u8 -u32 --unicode");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name --hashkey HIRAGANA  -input-unicode-name --hashkey HIRAGANA");
+        System.out.println(PROGRAM_NAME + " -input-unicode-script-name --hash KATAKANA -input-unicode-name --hashkey HIRAGANA -nfc -nfd -nfkc");
+        System.out.println(PROGRAM_NAME + " -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA -input-unicode-script-name --hash KATAKANA");
+        System.out.println(PROGRAM_NAME + " -nfc -nfd -nfkc -input-unicode-script-name --hash KATAKANA -nfc -nfd -nfkc -input-unicode-block-name --hashkey HIRAGANA");
+        System.out.println(PROGRAM_NAME + " -input-unicode-block-name -word-underscore-split MISCELLANEOUS -u32 --nfd -nfc -nfkc -u16 -u32 -unicode");
+        System.out.println(PROGRAM_NAME + " -input-unicode-block-name -word-underscore-split PICTOGRAPHS -u32 --nfd -nfc -nfkc -u16 -u32 -unicode");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split MOYAI -u32 --nfd -nfc -nfkc -u16 -u32 -unicode");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split SILHOUETTE -u32 --nfd -nfc -nfkc -u16 -u32");
+        System.out.println(PROGRAM_NAME + " -input-unicode-name -word-split SILHOUETTE -u32 --nfd -nfc -nfkc -u16 -u32  -input-unicode-name -word-split MOYAI -u32 --nfd -nfc -nfkc -u16 -u32 -unicode");
     }
     private static void optionVersion(){
         System.out.println(ARTIFACT_ID);
