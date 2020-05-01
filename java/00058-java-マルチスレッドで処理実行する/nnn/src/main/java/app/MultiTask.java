@@ -18,7 +18,7 @@ public class MultiTask implements Runnable {
     private static final String SALT_RGT ="]";
     private static final String DATE_TIME_FORMAT ="uuuu-MM-dd HH:mm:ss.SSS";
     private static final String SEPARATOR ="\t";
-    private static final Long SLEEP_TIME =2000L;//2秒
+    private static final Long SLEEP_TIME =5000L;//5秒
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 

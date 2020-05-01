@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class App {
-    private static final Integer MAX_THREAD_POOL_SIZE = 2;// 最大スレッドプール数 こっちが律速 使用できるモニター領域を調節できる
+
+    //個別の処理時間と全体の処理時間と最大スレッドプール数の関係
+
+    private static final Integer MAX_THREAD_POOL_SIZE = 10;// 最大スレッドプール数 こっちが律速 使用できるモニター領域を調節できる
     private static final Integer EXEC_TASK_SIZE = 5;// 実行タスク数
     private static final String START_MSG ="START";// 開始メッセージ
     private static final String END_MSG ="END";// 終了メッセージ
