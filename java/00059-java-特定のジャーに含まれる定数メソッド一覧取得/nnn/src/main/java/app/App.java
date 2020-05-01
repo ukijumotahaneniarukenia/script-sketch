@@ -16,15 +16,7 @@ import static java.util.stream.Collectors.toList;
 
 public class App {
 
-//    echo 'export CLASS_PATH="$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')"' >>~/.bashrc
-//    echo alias jardump=\""$(which java) -cp \""$(find $(pwd)/nnn-1.0-SNAPSHOT -name nnn-1.0-SNAPSHOT.jar):\$CLASS_PATH"\" app/App" >>~/.bashrc
 
-//    --jarだとだめで--cpで指定。javaの仕様。
-//    java -cp "target/nnn-1.0-SNAPSHOT.jar" app/App
-//    java -cp "target/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App
-//    java -cp "target/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App /home/kuraine/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar
-//    java -cp "target/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App /home/kuraine/.m2/repository/com/google/guava/guava/19.0/guava-19.0.jar
-//    java -cp "target/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.m2 -type f -name "*jar"|xargs|tr ' ' ':')" app/App /home/kuraine/.m2/repository/com/google/guava/guava/19.0/guava-19.0.jar /home/kuraine/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar
 
     private static final String PROGRAM_NAME = "jardump";
 
@@ -265,8 +257,7 @@ public class App {
         List<File> cmdLineArgs = Arrays.asList(args).stream().parallel().map(e->new File(e)).collect(Collectors.toList());
         int ret = SUCCESS_STATUS;
         if(cmdLineArgs.size()==0){
-            System.out.printf("Usage\n"+PROGRAM_NAME +" "+ Stream.of("/home/kuraine/.m2/repository/com/google/guava/guava/19.0/guava-19.0.jar"
-                    ,"/home/kuraine/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar").collect(Collectors.joining(" "))+"\n");
+            System.out.printf("Usage\n"+PROGRAM_NAME +" "+ Stream.of("/home/kuraine/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar").collect(Collectors.joining(" "))+"\n");
             System.exit(SUCCESS_STATUS);
         }
 
