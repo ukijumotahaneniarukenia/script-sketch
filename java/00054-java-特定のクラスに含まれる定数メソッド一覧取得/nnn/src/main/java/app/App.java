@@ -12,20 +12,42 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class App {
-    private final static String F = "---";
-    private final static String R = "###";
-    private final static String C = ",";
-    private final static String CONST_SIGN = "CCCCC";
-    private final static String METHOD_SIGN = "MMMMM";
-    private final static String CLASS_GRP_DIGIT = "5";
-    private final static String CLASS_GRPSEQ_DIGIT = "5";
-    private final static String SIGNATURE_GRP_DIGIT = "2";
-    private final static String SIGNATURE_GRPSEQ_DIGIT = "2";
+
+    private static final String PROGRAM_NAME = "jazdump";
+
+    private static Integer SEQ = 0;
+    private static final Integer SUCCESS_STATUS = 0;
+    private static final Integer ERROR_STATUS = 1;
+    private static final String F = "---";
+    private static final String R = "###";
+    private static final String C = ",";
+    private static final String CONST_SIGN = "CCCCC";
+    private static final String METHOD_SIGN = "MMMMM";
+    private static final String CLASS_SEQ_DIGIT = "5";
+    private static final String CLASS_GRP_DIGIT = "5";
+    private static final String CLASS_GRPSEQ_DIGIT = "5";
+    private static final String SIGNATURE_GRP_DIGIT = "2";
+    private static final String SIGNATURE_GRPSEQ_DIGIT = "2";
 
     private static final String A1 = "行番号";
     private static final String COL_NAME_SEPARATOR = "-";
     private static final String COL_SEPARATOR = "\t";
     private static final String COL_VALUE_SEPARATOR = ",";
+
+    private static final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    private static final Map<Integer,String> CONST_COL_NAME_LIST = mkColHashMap(IntStream.rangeClosed(0,1).boxed().collect(toList()), Arrays.asList("クラス名" ,"定数名"));
+    private static final Map<Integer,String> METHOD_COL_NAME_LIST = mkColHashMap(IntStream.rangeClosed(0,9).boxed().collect(toList()), Arrays.asList(
+            "クラス名"
+            ,"アクセス修飾子"
+            ,"戻り値の型"
+            ,"メソッド名"
+            ,"可変長引数があるか"
+            ,"引数の個数"
+            ,"型パラメータリスト"
+            ,"型パラメータ記号リスト"
+            ,"引数の型リスト"
+            ,"仮引数の変数名リスト")
+    );
 
     public static class CrossTab{
         private String tblHead;//表頭
@@ -43,21 +65,8 @@ public class App {
             return tblBody;
         }
     }
-
-    public static Map<Integer,String> ccc = hhh(IntStream.rangeClosed(0,1).boxed().collect(toList()), Arrays.asList("クラス名" ,"定数名"));
-    public static Map<Integer,String> mmm = hhh(IntStream.rangeClosed(0,9).boxed().collect(toList()), Arrays.asList(
-            "クラス名"
-            ,"アクセス修飾子"
-            ,"戻り値の型"
-            ,"メソッド名"
-            ,"可変長引数があるか"
-            ,"引数の個数"
-            ,"型パラメータリスト"
-            ,"型パラメータ記号リスト"
-            ,"引数の型リスト"
-            ,"仮引数の変数名リスト")
-    );
-    private static Map<Integer,String> hhh(List<Integer> k,List<String> v){
+    
+    private static Map<Integer,String> mkColHashMap(List<Integer> k,List<String> v){
         if(k.size()!=v.size()){
             return new HashMap<>();
         }else{
@@ -74,31 +83,30 @@ public class App {
             throw new RuntimeException(e);
         }
     }
-    private static final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-    public static void main( String[] args ){
-        Map<Class<?>,String> m = Arrays.asList("java.lang.Thread","java.lang.ClassLoader").stream()
-                .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
-        List<List<String>> ll = unnest(uuu(m)).entrySet().stream().map(e-> flattenList(Arrays.asList(e.getKey().split(F)).subList(0,e.getKey().split(F).length-1).stream().collect(Collectors.toList()),e.getValue())).collect(Collectors.toList());
-
+    private static List<List<String>> preProcess(Map<Class<?>,String> m ) {
+        return unnest(wrapperClassInfo(m)).entrySet().stream()
+                    .map(e-> flattenList(new ArrayList<>(Arrays.asList(e.getKey().split(F)).subList(0, e.getKey().split(F).length - 1)),e.getValue())).collect(Collectors.toList());
+    }
+    private static List<List<String>> midProcess(List<List<String>> ll) {
         int row = ll.size();
-
-        List<List<String>> ll_rearrange = IntStream.range(0, row).boxed().map(e -> Arrays.asList(
-                ll.get(e).get(0)
-                , ll.get(e).get(2)
-                , ll.get(e).get(3)
-                , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4)
-                , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4) + COL_NAME_SEPARATOR + ll.get(e).get(5)
-                , ll.get(e).get(6)
-        )).collect(Collectors.toList());
-
-        CrossTab crossTab = new CrossTab();
+        return IntStream.range(0, row).boxed().parallel().map(e -> Arrays.asList(
+                                                                            ll.get(e).get(0)
+                                                                            , ll.get(e).get(2)
+                                                                            , ll.get(e).get(3)
+                                                                            , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4)
+                                                                            , ll.get(e).get(1) + COL_NAME_SEPARATOR + ll.get(e).get(4) + COL_NAME_SEPARATOR + ll.get(e).get(5)
+                                                                            , ll.get(e).get(6)
+                                                                    )).collect(Collectors.toList());
+    }
+    private static void postProcess(List<List<String>> ll_rearrange,CrossTab crossTab){
         crossTab(ll_rearrange,4,6,crossTab);
-
         Stream.of(crossTab.getTblHead()).forEach(e-> System.out.println(e));
         crossTab.getTblBody().entrySet().stream()
                 .sorted(Comparator.comparing(e->e.getKey()))
-                .forEach(e->System.out.println(e.getKey()+COL_SEPARATOR+e.getValue()));
+                .forEach(e->{
+                    ++SEQ;
+                    System.out.println(String.format("%0"+CLASS_SEQ_DIGIT+"d",SEQ)+COL_NAME_SEPARATOR+e.getKey()+COL_SEPARATOR+e.getValue());
+                });
     }
     @SafeVarargs
     private static <E> List<E> flattenList(Collection<E>... liz){
@@ -117,7 +125,6 @@ public class App {
         if(grpColIdx <= endGrpColIdx){
             return null;
         }
-
         //表頭
         Map<String, Set<String>> ms = IntStream.range(0,row).boxed().collect(Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
                 ,Collectors.mapping(i->ll.get(i).get(endGrpColIdx),Collectors.toSet())));
@@ -145,7 +152,7 @@ public class App {
         //PostProcess
         Map<String,String> tblBody = midBody.entrySet().stream()
                 .collect(Collectors.toMap(e->e.getKey()
-                        ,e->(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)==mmm.size()?
+                        ,e->(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)==METHOD_COL_NAME_LIST.size()?
                                 COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)-1)+e.getValue()
                                 :e.getValue()+COL_SEPARATOR.repeat(mx-(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)-1)));
 
@@ -165,55 +172,83 @@ public class App {
                     rt.put(
                             entry.getKey()+F+String.format("%0"+SIGNATURE_GRP_DIGIT+"d",i)+F+String.format("%0"+SIGNATURE_GRPSEQ_DIGIT+"d",j)
                             ,Arrays.asList(
-                                    entry.getKey().contains(CONST_SIGN)?ccc.get(i):mmm.get(i)
+                                    entry.getKey().contains(CONST_SIGN)?CONST_COL_NAME_LIST.get(i):METHOD_COL_NAME_LIST.get(i)
                                     ,liz.get(j).replace(R,C)));
                 }
             }
         }
         return rt;
     }
-    private static Map<Method,Class<?>> ggg(Class<?> e){
+    private static Map<Method,Class<?>> getMethodInfo(Class<?> e){
         List<Method> l = Arrays.asList(e.getMethods());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<Field,Class<?>> ddd(Class<?> e){
+    private static Map<Field,Class<?>> getFieldInfo(Class<?> e){
         List<Field> l = Arrays.asList(e.getFields());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<String,List<String>> uuu(Map<Class<?>,String> m){
+    private static Map<String,List<String>> wrapperFieldInfo(Integer grp,Map.Entry<Class<?>,String> entryClass,Class<?> clz){
         Map<String,List<String>> rt = new LinkedHashMap<>();
-        int grp=0;
-        int cnt=0;
-        for(Map.Entry<Class<?>,String> eeeee : m.entrySet()){
-            Class<?> clz = eeeee.getKey();
-            Map<Field,Class<?>> rtF = ddd(clz);
-            ++grp;
-            for(Map.Entry<Field,Class<?>> entry : rtF.entrySet()){
-                ++cnt;
-                rt.put(eeeee.getValue()+F+CONST_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
-                        , Arrays.asList(
-                                String.valueOf(entry.getValue().getName())//クラス名
-                                ,String.valueOf(entry.getKey().getName()))//定数名
-                );
-            }
-            Map<Method,Class<?>> rtM = ggg(clz);
-            for(Map.Entry<Method,Class<?>> entry : rtM.entrySet()){
-                ++cnt;
-                rt.put(eeeee.getValue()+F+METHOD_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
+        int cnt = 0;
+        for(Map.Entry<Field,Class<?>> entryField : getFieldInfo(clz).entrySet()){
+            ++cnt;
+            rt.put(entryClass.getValue()+F+CONST_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
                         ,Arrays.asList(
-                                entry.getValue().getName()//クラス名
-                                , Modifier.toString(entry.getKey().getModifiers())//アクセス修飾子
-                                ,entry.getKey().getGenericReturnType().getTypeName()//戻り値の型
-                                ,entry.getKey().getName()//メソッド名
-                                ,String.valueOf(entry.getKey().isVarArgs())//可変長引数があるか
-                                ,String.valueOf(entry.getKey().getParameterCount())//引数の個数
-                                ,Arrays.stream(entry.getKey().getTypeParameters()).flatMap(e->Arrays.asList(e.getBounds()).stream()).map(ee->ee.getTypeName().replace(C,R)).collect(Collectors.joining(C))//型パラメータリスト
-                                ,Arrays.stream(entry.getKey().getTypeParameters()).map(e->e.getTypeName().replace(C,R)).collect(Collectors.joining(C))//型パラメータで使用しているアルファベット大文字記号リスト
-                                ,Arrays.stream(entry.getKey().getGenericParameterTypes()).map(e->e.getTypeName().replace(C,R)).collect(Collectors.joining(C)) //引数の型リスト
-                                ,Arrays.stream(entry.getKey().getParameters()).map(e->e.getName()).collect(Collectors.joining(C))//仮引数の変数名リスト
-                        ));
-            }
+                            String.valueOf(entryField.getValue().getName())//クラス名
+                            ,String.valueOf(entryField.getKey().getName())//定数名
+                        )
+            );
         }
         return rt;
+    }
+    private static Map<String,List<String>> wrapperMethodInfo(Integer grp,Map.Entry<Class<?>,String> entryClass,Class<?> clz){
+        Map<String,List<String>> rt = new LinkedHashMap<>();
+        int cnt = 0;
+        for(Map.Entry<Method,Class<?>> entryMethod : getMethodInfo(clz).entrySet()){
+            ++cnt;
+            rt.put(entryClass.getValue()+F+METHOD_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
+                    ,Arrays.asList(
+                            entryMethod.getValue().getName()//クラス名
+                            , Modifier.toString(entryMethod.getKey().getModifiers())//アクセス修飾子
+                            ,entryMethod.getKey().getGenericReturnType().getTypeName()//戻り値の型
+                            ,entryMethod.getKey().getName()//メソッド名
+                            ,String.valueOf(entryMethod.getKey().isVarArgs())//可変長引数があるか
+                            ,String.valueOf(entryMethod.getKey().getParameterCount())//引数の個数
+                            ,Arrays.stream(entryMethod.getKey().getTypeParameters()).flatMap(e->Arrays.asList(e.getBounds()).stream()).map(ee->ee.getTypeName().replace(C,R)).collect(Collectors.joining(C))//型パラメータリスト
+                            ,Arrays.stream(entryMethod.getKey().getTypeParameters()).map(e->e.getTypeName().replace(C,R)).collect(Collectors.joining(C))//型パラメータで使用しているアルファベット大文字記号リスト
+                            ,Arrays.stream(entryMethod.getKey().getGenericParameterTypes()).map(e->e.getTypeName().replace(C,R)).collect(Collectors.joining(C)) //引数の型リスト
+                            ,Arrays.stream(entryMethod.getKey().getParameters()).map(e->e.getName()).collect(Collectors.joining(C))//仮引数の変数名リスト
+                    ));
+        }
+        return rt;
+    }
+    private static Map<String,List<String>> wrapperClassInfo(Map<Class<?>,String> classsInfoMap){
+        Map<String,List<String>> rt = new LinkedHashMap<>();
+        int grp=0;
+        for(Map.Entry<Class<?>,String> entryClass : classsInfoMap.entrySet()){
+            Class<?> clz = entryClass.getKey();
+            ++grp;
+            rt.putAll(wrapperFieldInfo(grp,entryClass,clz));
+            rt.putAll(wrapperMethodInfo(grp,entryClass,clz));
+        }
+        return rt;
+    }
+    public static void main(String... args){
+        int ret = SUCCESS_STATUS;
+        List<String> cmdLineArgs = Arrays.asList(args);
+        if(cmdLineArgs.size()==0){
+            System.out.printf("Usage\n"+PROGRAM_NAME +" "+ Stream.of("java.lang.Thread","java.lang.ClassLoader").collect(Collectors.joining(" "))+"\n");
+            System.exit(SUCCESS_STATUS);
+        }
+        Map<Class<?>,String> m = cmdLineArgs.stream()
+                .map(e->uncheckCall(()->classLoader.loadClass(e))).collect(Collectors.toMap(ee->ee,ee->ee.getName()));
+
+        List<List<String>> ll = preProcess(m);
+
+        List<List<String>> ll_rearrange = midProcess(ll);
+
+        CrossTab crossTab = new CrossTab();
+        postProcess(ll_rearrange,crossTab);
+        System.exit(ret);
     }
 }

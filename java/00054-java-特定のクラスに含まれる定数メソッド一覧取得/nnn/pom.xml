@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>app</groupId>
-  <artifactId>nnn</artifactId>
+  <artifactId>jazdump</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>nnn</name>
@@ -69,6 +69,21 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>app.App</mainClass>
+                <!-- Class-Path属性の自動設定 -->
+                <addClasspath>true</addClasspath>
+                <!-- Class-Path属性で"lib/"などprefixを付けたい時に指定 -->
+                <!--                <classpathPrefix>lib</classpathPrefix>-->
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -79,6 +94,24 @@
           <source>11</source>
           <target>11</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assemble/bin.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
