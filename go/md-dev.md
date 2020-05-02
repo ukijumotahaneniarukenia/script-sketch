@@ -25,7 +25,6 @@ func main() {
 EOS
 ```
 
-
 - 動作確認
 
 ```
@@ -45,23 +44,6 @@ $cd 00004-go-テキスト処理
 $mkdir -p src/github.com/ukijumotahaneniarukenia/go-repo
 $find src -maxdepth 1 -type d | grep -vP 'main|github' | grep -P '/' | xargs -I@ mv @ src/github.com/ukijumotahaneniarukenia/gone
 $find . -name "*go" | grep -vP 'main' | perl -anlE 's/.\/src\///g and s/(.*)(\/.*.go)/\1/g and say'
-```
-
-- ローカルモジュールをコミット
-```
-$cd $GOPATH/src/github.com/ukijumotahaneniarukenia/go-repo
-$git init
-$git add .
-$git commit -m 'sketch'
-$git remote add origin https://github.com/ukijumotahaneniarukenia/go-repo.git
-$git push -u origin master
-```
-
-- ローカルサブモジュールを削除
-
-```
-$cd 00004-go-テキスト処理
-$rm -rf src/github.com
 ```
 
 - リモートサブモジュールを取得
