@@ -50,7 +50,7 @@ $rm -rf src/github.com
 - リモートサブモジュールを取得
 
 ```
-$cd 00004-go-テキスト処理
+$cd 00004-go-テキスト処理/src
 $go get github.com/ukijumotahaneniarukenia/go-repo
 ```
 
