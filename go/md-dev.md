@@ -14,7 +14,7 @@ $echo '/bin/* /pkg/* /github.com/* /main' | xargs -n1 >.gitignore
 ```
 $cd 00004-go-テキスト処理
 $export GOPATH=$(pwd)
-$src/main
+$cd src/main
 $go install
 $export PATH=$PATH:$GOPATH/bin
 $main
