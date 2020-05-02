@@ -25,18 +25,18 @@ $main
   - goのソースは別レポジトリで管理するようにする
 ```
 $cd 00004-go-テキスト処理
-$mkdir -p src/github.com/ukijumotahaneniarukenia/gone
+$mkdir -p src/github.com/ukijumotahaneniarukenia/go-repo
 $find src -maxdepth 1 -type d | grep -vP 'main|github' | grep -P '/' | xargs -I@ mv @ src/github.com/ukijumotahaneniarukenia/gone
 $find . -name "*go" | grep -vP 'main' | perl -anlE 's/.\/src\///g and s/(.*)(\/.*.go)/\1/g and say'
 ```
 
 - ローカルモジュールをコミット
 ```
-$cd $GOPATH/src/github.com/ukijumotahaneniarukenia/gone
+$cd $GOPATH/src/github.com/ukijumotahaneniarukenia/go-repo
 $git init
 $git add .
 $git commit -m 'sketch'
-$git remote add origin https://github.com/ukijumotahaneniarukenia/gone.git
+$git remote add origin https://github.com/ukijumotahaneniarukenia/go-repo.git
 $git push -u origin master
 ```
 
@@ -51,7 +51,7 @@ $rm -rf src/github.com
 
 ```
 $cd 00004-go-テキスト処理
-$go get github.com/ukijumotahaneniarukenia/gone
+$go get github.com/ukijumotahaneniarukenia/go-repo
 ```
 
 - 動作確認
