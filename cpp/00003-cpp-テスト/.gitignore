@@ -1,4 +1,3 @@
-/app/app.*
-/build/*
+/app/build/*
 /*.kdev4
 /.kdev4/*
