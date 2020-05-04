@@ -26,7 +26,7 @@ $cd ~/script-sketch/nim/00026-nim-kdevelopによるサンプルプロジェク�
 ```
 
 ```
-kuraine docker-container-ubuntu-19-10-nim-kdevelop ~$tree projects/
+$tree projects/
 projects/
 └── app
     ├── _gitignore
@@ -45,7 +45,7 @@ projects/
         └── runTests.nim
 
 5 directories, 10 files
-kuraine docker-container-ubuntu-19-10-nim-kdevelop ~$find projects/
+$find projects/
 projects/
 projects/app
 projects/app/nimble_nim.desktop
@@ -64,7 +64,8 @@ projects/app/.kdev4/app.kdev4
 projects/app/src
 projects/app/src/app.nim
 projects/app/src/app.nim.cfg
-kuraine docker-container-ubuntu-19-10-nim-kdevelop ~$cat projects/app/src/app.nim
+
+$cat projects/app/src/app.nim
 
 proc hello() =
   var unko="just another unko world"
@@ -74,8 +75,7 @@ when isMainModule:
   hello()
 
 
-
-kuraine docker-container-ubuntu-19-10-nim-kdevelop ~$cat projects/app/nim.cfg
+$cat projects/app/nim.cfg
 ## gdb debugging
 ## uncomment this and use the GDB debugger in kdevelop
 debugger:native
