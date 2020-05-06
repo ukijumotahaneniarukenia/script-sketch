@@ -2,13 +2,15 @@
 import sys
 
 def usage():
-    usage="""
+  filename=__file__
+  usage="""
 Usage:
+IN:  echo うんこ | xargs -n1 | {filename}
+OUT:
+""".format(filename=filename)
 
-"""
-    print(usage)
-    sys.exit(0)
-
+  print(usage)
+  sys.exit(0)
 
 def mock(args):
   for e in args:
@@ -26,4 +28,5 @@ def main():
     usage()
 
 if __name__=="__main__":
-    main()
+  main()
+  sys.exit(0)
