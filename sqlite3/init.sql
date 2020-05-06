@@ -1,29 +1,40 @@
 drop table test_tbl;
-create table test_tbl(col1 text,col2 text,col3 text);
-insert into test_tbl values("aa","ab","ac");
-insert into test_tbl values("ba","bb","bc");
-insert into test_tbl values("ca","cb","cc");
-insert into test_tbl values("ab","ac","ba");
-insert into test_tbl values("bb","bc","ca");
-insert into test_tbl values("cb","cc","aa");
-insert into test_tbl values("ac","ba","bb");
-insert into test_tbl values("bc","ca","cb");
-insert into test_tbl values("cc","aa","ab");
-insert into test_tbl values("ba","bb","bc");
-insert into test_tbl values("ca","cb","cc");
-insert into test_tbl values("aa","ab","ac");
-insert into test_tbl values("bb","bc","ca");
-insert into test_tbl values("cb","cc","aa");
-insert into test_tbl values("ab","ac","ba");
-insert into test_tbl values("bc","ca","cb");
-insert into test_tbl values("cc","aa","ab");
-insert into test_tbl values("ac","ba","bb");
-insert into test_tbl values("ca","cb","cc");
-insert into test_tbl values("aa","ab","ac");
-insert into test_tbl values("ba","bb","bc");
-insert into test_tbl values("cb","cc","aa");
-insert into test_tbl values("ab","ac","ba");
-insert into test_tbl values("bb","bc","ca");
-insert into test_tbl values("cc","aa","ab");
-insert into test_tbl values("ac","ba","bb");
-insert into test_tbl values("bc","ca","cb");
+
+create table test_tbl (
+  id text
+  ,item text
+  ,qty int
+  ,dtm date
+);
+
+drop table test1_tbl;
+
+create table test1_tbl (
+  id text
+  ,item text
+  ,qty int
+  ,dtm date
+);
+
+drop table test2_tbl;
+
+create table test2_tbl (
+  id text
+  ,item text
+  ,qty int
+  ,dtm date
+);
+
+drop table test3_tbl;
+
+create table test3_tbl (
+  id text
+  ,item text
+  ,qty int
+  ,dtm date
+);
+
+select * from PRAGMA_table_info('test_tbl');
+select * from PRAGMA_table_info('test1_tbl');
+select * from PRAGMA_table_info('test2_tbl');
+select * from PRAGMA_table_info('test3_tbl');
