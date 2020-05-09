@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,7 +45,15 @@ public class MyCrawler extends WebCrawler {
         HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
         String html = htmlParseData.getHtml();
 
-        System.out.println(html);
+
+        Pattern p = Pattern.compile("(?<startTag><meta)(?<text>.+)(?<endTag>/>)");
+
+        Matcher mc = p.matcher(html);
+
+
+        String done = mc.replaceAll("${startTag} ${text}></meta>");
+
+//        System.out.println(done);
 
 //        strToDom()を呼ぶ前に前処理が必要そう
         //$echo '<meta charset="utf-8" />' | perl -nlE 's;(\<meta)(.+)(/>);<meta \2></meta>;g and say'
@@ -60,20 +69,30 @@ public class MyCrawler extends WebCrawler {
 //        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
 //        at java.base/java.lang.Thread.run(Thread.java:834)
 
+//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>".
+//                org.xml.sax.SAXParseException; lineNumber: 5; columnNumber: 346; The element type "link" must be terminated by the matching end-tag "</link>".
+//                at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)
+//        at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+//        at java.xml/javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:122)
+//        at app.MyCrawler.strToDom(MyCrawler.java:31)
+//        at app.MyCrawler.visit(MyCrawler.java:74)
+//        at edu.uci.ics.crawler4j.crawler.WebCrawler.processPage(WebCrawler.java:403)
+//        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
+//        at java.base/java.lang.Thread.run(Thread.java:834)
 
-//        try {
-//            Document doc = strToDom(html);
-//
-//            System.out.println(doc);
-//
-//
-//
-//        } catch (ParserConfigurationException e) {
-//            e.printStackTrace();
-//        } catch (SAXException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Document doc = strToDom(done);
+
+            System.out.println(doc);
+
+
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
