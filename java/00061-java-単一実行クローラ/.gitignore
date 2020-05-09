@@ -4,3 +4,5 @@
 /nnn/gradlew
 /nnn/gradlew.bat
 /nnn/gradle/wrapper/*
+/nnn/test-*
+/nnn/logs/*
