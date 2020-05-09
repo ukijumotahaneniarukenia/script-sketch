@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '2.0.3'
     id 'java'
 }
 
@@ -12,7 +13,15 @@ repositories {
 }
 
 dependencies {
-    compile group: 'edu.uci.ics', name: 'crawler4j', version: '4.1'//このバージョンが安定している
+    compile files('/home/kuraine/dom4j-2.1.3.jar') //curl -LO https://repo1.maven.org/maven2/org/dom4j/dom4j/2.1.3/dom4j-2.1.3.jar
+    compile files('/home/kuraine/xmlpull-xpp3-1.1.4c.jar') //curl -LO http://www.java2s.com/Code/JarDownload/xmlpull/xmlpull-xpp3-1.1.4c.jar.zip dom4jの依存性解決用にインストール
+    compile files('/home/kuraine/javax.xml.bind.jar') //curl -LO http://www.java2s.com/Code/JarDownload/javax.xml/javax.xml.bind.jar.zip dom4jの依存性解決用にインストール
+    compile('edu.uci.ics:crawler4j:4.1')//このバージョンが安定している
+    compile('org.jsoup:jsoup:1.12.1')
+//    compile('dom4j:dom4j:2.1.1') これは泥臭くローカルに用意した
+    compile group: 'jaxen', name: 'jaxen', version: '1.1.6'
+    compile group: 'com.sun.msv.datatype.xsd', name: 'xsdlib', version: '2013.2'
+    compile group: 'pull-parser', name: 'pull-parser', version: '2.1.10'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
