@@ -46,12 +46,34 @@ public class MyCrawler extends WebCrawler {
 
         System.out.println(html);
 
-        Document doc = new DOMDocument();
+//        strToDom()を呼ぶ前に前処理が必要そう
+        //$echo '<meta charset="utf-8" />' | perl -nlE 's;(\<meta)(.+)(/>);<meta \2></meta>;g and say'
+
+//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>".
+//                org.xml.sax.SAXParseException; lineNumber: 88; columnNumber: 11; The element type "meta" must be terminated by the matching end-tag "</meta>".
+//                at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)
+//        at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+//        at java.xml/javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:122)
+//        at app.MyCrawler.strToDom(MyCrawler.java:30)
+//        at app.MyCrawler.visit(MyCrawler.java:49)
+//        at edu.uci.ics.crawler4j.crawler.WebCrawler.processPage(WebCrawler.java:403)
+//        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
+//        at java.base/java.lang.Thread.run(Thread.java:834)
 
 
-//        Elements elements = doc.select(appConfig.getCssSelector());
+//        try {
+//            Document doc = strToDom(html);
 //
-//        for(Element e : elements){
-//            System.out.printf("%s\t%s\n",e.attr("href"),e.text());
+//            System.out.println(doc);
+//
+//
+//
+//        } catch (ParserConfigurationException e) {
+//            e.printStackTrace();
+//        } catch (SAXException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
