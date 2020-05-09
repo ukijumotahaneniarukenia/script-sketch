@@ -30,7 +30,7 @@ public class App{
             ,DEFAULT_CACHE_DIR
     );
 
-    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
+//    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://qiita.com/ukijumotahaneniarukenia"
 ////            ,DEFAULT_CSS_SELECTOR_QUERY
@@ -38,10 +38,11 @@ public class App{
 //            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
 //            ,DEFAULT_CACHE_DIR
 //    );
-//    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
+
+    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://ukijumotahaneniarukenia.site/"
-////            ,DEFAULT_CSS_SELECTOR_QUERY
+//            ,DEFAULT_CSS_SELECTOR_QUERY
 //            ,"a"
 //            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
 //            ,DEFAULT_CACHE_DIR

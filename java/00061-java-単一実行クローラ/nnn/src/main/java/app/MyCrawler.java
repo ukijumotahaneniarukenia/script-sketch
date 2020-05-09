@@ -5,7 +5,6 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.dom4j.Document;
-import org.jsoup.Jsoup;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -30,15 +29,31 @@ import static app.App.APP_CONFIG;
 // リンタなどでもチェックしてみると xmllint --format test-done.html
 // $xmllint --format test-done.html >test-done-done.html 整形
 // $xmllint --xpath /html/head/meta test-done-done.html Xpath式検索
-//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>".
-//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>".
-//[Fatal Error] :1:530: The element type "head" must be terminated by the matching end-tag "</head>".
-//[Fatal Error] :1:31: The markup in the document following the root element must be well-formed.
 
+//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>". -->close tag
+//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>". -->close tag
+//[Fatal Error] :1:530: The element type "head" must be terminated by the matching end-tag "</head>". -->close tag
+//[Fatal Error] :2:18935: The element type "img" must be terminated by the matching end-tag "</img>". -->close tag
+//[Fatal Error] :1:31: The markup in the document following the root element must be well-formed. -->script tag
+//[Fatal Error] :2:35497: The entity "hellip" was referenced, but not declared.
+
+//test.html:2: parser error : Entity 'raquo' not defined -->数値実体参照に置換しないといけない？？？ 文字参照 (character reference) https://so-zou.jp/web-app/tech/html/specification/character-reference.htm
+//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
+//^
+//test.html:2: parser error : Entity 'raquo' not defined
+//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
+//^
+//test.html:2: parser error : Entity 'raquo' not defined
+//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
+//^
+
+//https://dev.to/nickytonline/dev-to-s-frontend-a-brain-dump-in-one-act-7mg
+//[Fatal Error] :2:231068: Attribute name "data-no-instant" associated with an element type "a" must be followed by the ' = ' character. これたいへんそう
+//        org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 231068; Attribute name "data-no-instant" associated with an element type "a" must be followed by the ' = ' character.
 public class MyCrawler extends WebCrawler {
     private AppConfig appConfig = APP_CONFIG;
 
-    private static final List<String> noneCloseTagList = Arrays.asList("meta","link");
+    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img");
 
     private static Document strToDom(String html) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -63,6 +78,14 @@ public class MyCrawler extends WebCrawler {
                 .replace("\r","")
                 .replace("\r\n","")
                 .replaceAll("<script.*?/script>","") //scriptタグの除去 cat test-done.html | grep -o '.' | nl | grep -C10 41285
+                .replaceAll("&apos;","&#39;")//'
+                .replaceAll("&quot;;","&#34;")//"
+                .replaceAll("&lt;","&#60;") //<
+                .replaceAll("&gt;","&#62;") //>
+                .replaceAll("&amp;","&#38;") //&
+                .replaceAll("&nbsp;","&#20;") //
+                .replaceAll("&raquo;","") //対象外
+                .replaceAll("&hellip;","") //対象外
                 .replace("<!DOCTYPE html>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
                 ;
 
@@ -93,7 +116,7 @@ public class MyCrawler extends WebCrawler {
         Path file = Paths.get("test-done.html");
         try {
             String doneHtml = Files.readString(file);
-            Document doc = strToDom(doneHtml);
+            Document doc = strToDom(doneHtml); //Xpath式で攻めたいからここまでがんばっている
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
