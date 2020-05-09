@@ -17,8 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -26,32 +25,10 @@ import java.util.stream.Stream;
 
 import static app.App.APP_CONFIG;
 
-// リンタなどでもチェックしてみると xmllint --format test-done.html
-// $xmllint --format test-done.html >test-done-done.html 整形
-// $xmllint --xpath /html/head/meta test-done-done.html Xpath式検索
-
-//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>". -->close tag
-//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>". -->close tag
-//[Fatal Error] :1:530: The element type "head" must be terminated by the matching end-tag "</head>". -->close tag
-//[Fatal Error] :2:18935: The element type "img" must be terminated by the matching end-tag "</img>". -->close tag
-//[Fatal Error] :1:31: The markup in the document following the root element must be well-formed. -->script tag
-//[Fatal Error] :2:35497: The entity "hellip" was referenced, but not declared.
-
-//test.html:2: parser error : Entity 'raquo' not defined -->数値実体参照に置換しないといけない？？？ 文字参照 (character reference) https://so-zou.jp/web-app/tech/html/specification/character-reference.htm
-//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
-//^
-//test.html:2: parser error : Entity 'raquo' not defined
-//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
-//^
-//test.html:2: parser error : Entity 'raquo' not defined
-//el="alternate" type="application/rss+xml" title="ukijumotahaneniarukenia &raquo;
-//^
-
-//https://dev.to/nickytonline/dev-to-s-frontend-a-brain-dump-in-one-act-7mg
-//[Fatal Error] :2:231068: Attribute name "data-no-instant" associated with an element type "a" must be followed by the ' = ' character. これたいへんそう
-//        org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 231068; Attribute name "data-no-instant" associated with an element type "a" must be followed by the ' = ' character.
 public class MyCrawler extends WebCrawler {
     private AppConfig appConfig = APP_CONFIG;
+
+    private static final String SUFFIX = ".xml";
 
     private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img");
 
@@ -68,6 +45,16 @@ public class MyCrawler extends WebCrawler {
         return !Pattern.compile(appConfig.getIgnoreSuffixMap()).matcher(hrefUrl).matches() && hrefUrl.contains(appConfig.getBaseUrl());
     }
 
+    //https://coderanch.com/t/435548/java/entity-nbsp-referenced-declared
+    //スペース以外は宣言しない
+    private static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<!DOCTYPE some_name " +
+                "[<!ENTITY " +
+                        "nbsp \"&#160;\"" + //https://stackoverflow.com/questions/13012327/error-parsing-page-xhtml-error-tracedline-42-the-entity-nbsp-was-referenc
+                ">]" +
+            ">\n"
+            ;
+
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
@@ -78,25 +65,20 @@ public class MyCrawler extends WebCrawler {
                 .replace("\r","")
                 .replace("\r\n","")
                 .replaceAll("<script.*?/script>","") //scriptタグの除去 cat test-done.html | grep -o '.' | nl | grep -C10 41285
-                .replaceAll("&apos;","&#39;")//'
-                .replaceAll("&quot;;","&#34;")//"
-                .replaceAll("&lt;","&#60;") //<
-                .replaceAll("&gt;","&#62;") //>
-                .replaceAll("&amp;","&#38;") //&
-                .replaceAll("&nbsp;","&#20;") //
-                .replaceAll("&raquo;","") //対象外
-                .replaceAll("&hellip;","") //対象外
-                .replace("<!DOCTYPE html>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+                .replace("&raquo;","") //対象外
+                .replace("&hellip;","") //対象外
+                .replace("<!DOCTYPE html>",XML_HEADER) //空白の参照定義
                 ;
 
         try {
-            FileWriter fw = new FileWriter("test.html");
+            FileWriter fw = new FileWriter("test"+SUFFIX);
             fw.write(html);
             fw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
+        //閉じタグの補完
         for(String tag:noneCloseTagList){
             String detectNoneCloseTagRegexpPattern = "(?<startTag>(?<=<)"+tag+")(?<text>.*?)(?<endTag>/?>)";
             String completeNoneCloseTagRegexpPattern = "${startTag} ${text}></${startTag}>";
@@ -106,17 +88,26 @@ public class MyCrawler extends WebCrawler {
         }
 
         try {
-            FileWriter fw = new FileWriter("test-done.html");
+            FileWriter fw = new FileWriter("test-done"+SUFFIX);
             fw.write(html);
             fw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        Path file = Paths.get("test-done.html");
+        Path file = Paths.get("test-done"+SUFFIX);
         try {
-            String doneHtml = Files.readString(file);
-            Document doc = strToDom(doneHtml); //Xpath式で攻めたいからここまでがんばっている
+            //属性名単一を属性名=属性値の形式に正規化
+            String doneHtml = Files.readString(file)
+                    .replace("data-no-instant","data-no-instant=\"true\"")//dev.to個別対応
+                    .replace("data-reaction-count","data-reaction-count=\"0\"") //dev.to個別対応
+            ;
+
+            FileWriter fw = new FileWriter("test-done-done"+SUFFIX);
+            fw.write(doneHtml);
+            fw.close();
+
+            Document doc = strToDom(doneHtml); //Xpath式で攻めたいからここまでがんばっている フォーマットエラー検出できる
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();

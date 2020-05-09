@@ -7,8 +7,17 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 //Usage:
-// kuraine docker-container-centos-7-6-18-10-java-gradle-idea ~$java -cp "$HOME/script-sketch/java/00061-java-単一実行クローラ/nnn/build/libs/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.gradle/caches/modules-2/files-2.1 -name "*jar"|xargs|tr ' ' ':')" app/App
-
+//kuraine docker-container-centos-7-6-18-10-java-gradle-idea ~/script-sketch/java/00061-java-単一実行クローラ/nnn$gradle build
+//
+//        BUILD SUCCESSFUL in 0s
+//        2 actionable tasks: 2 executed
+//kuraine docker-container-centos-7-6-18-10-java-gradle-idea ~/script-sketch/java/00061-java-単一実行クローラ/nnn$java -cp "$HOME/script-sketch/java/00061-java-単一実行クローラ/nnn/build/libs/nnn-1.0-SNAPSHOT.jar:$(find $HOME/.gradle/caches/modules-2/files-2.1 -name "*jar"|xargs|tr ' ' ':')" app/App | grep -v DEBUG
+//        SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+//        SLF4J: Defaulting to no-operation (NOP) logger implementation
+//        SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+//        Start Crawler
+//        ＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠
+//        ^C
 public class App{
 
     private static final Integer REQUEST_TIME_INTERVAL=10000;  // 10秒ごとにリクエスト
@@ -17,15 +26,11 @@ public class App{
 
     private static final String DEFAULT_CACHE_DIR = "/home/kuraine/cache";
 
-    private static final String DEFAULT_CSS_SELECTOR_QUERY = ".section .block dl dt,a"; // sectionクラスの下のblockクラスの下のdlノードの下のdtまたはaノードを抽出
-
     private static final String DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN = ".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$";
 
     //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
     public static final AppConfig APP_CONFIG = new AppConfig(
             "https://dev.to/t/python"
-//            ,DEFAULT_CSS_SELECTOR_QUERY
-            ,".small-pic-link-wrapper"
             ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
             ,DEFAULT_CACHE_DIR
     );
@@ -33,8 +38,6 @@ public class App{
 //    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://qiita.com/ukijumotahaneniarukenia"
-////            ,DEFAULT_CSS_SELECTOR_QUERY
-//            ,"a"
 //            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
 //            ,DEFAULT_CACHE_DIR
 //    );
@@ -42,8 +45,6 @@ public class App{
     //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://ukijumotahaneniarukenia.site/"
-//            ,DEFAULT_CSS_SELECTOR_QUERY
-//            ,"a"
 //            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
 //            ,DEFAULT_CACHE_DIR
 //    );
