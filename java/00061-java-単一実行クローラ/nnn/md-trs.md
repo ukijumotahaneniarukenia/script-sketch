@@ -8,6 +8,67 @@
 
 
 ```
+kuraine docker-container-centos-7-6-18-10-java-gradle-idea ~/script-sketch/java/00061-java-単一実行クローラ/nnn$cat test-done-done.xml | xmllint --format -
+-:3: parser error : Opening and ending tag mismatch: body line 3 and div
+s-truncate css-truncate-target width-fit p-2"></div>                      </div>
+                                                                               ^
+                                                                               -:3: parser error : Opening and ending tag mismatch: html line 3 and div
+                                                                               13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg>          </button>        </div>
+                                                                                                                                                              ^
+                                                                                                                                                              -:3: parser error : Extra content at the end of the document
+                                                                                                                                                               12.59 0 12c0-.59 0-1 .59-1z"></path></svg>          </button>        </div>    
+                                                                                                                                                                                                                                              ^
+
+```
+
+
+
+```
+
+
+
+
+
+[Fatal Error] :3:5041: Attribute name "data-pjax-transient" associated with an element type "meta" must be followed by the ' = ' character.
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 5041; Attribute name "data-pjax-transient" associated with an element type "meta" must be followed by the ' = ' character.
+
+
+[Fatal Error] :3:4332: Element type "meta" must be followed by either attribute specifications, ">" or "/>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 4332; Element type "meta" must be followed by either attribute specifications, ">" or "/>".
+
+
+[Fatal Error] :3:12313: The entity "rarr" was referenced, but not declared.
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 12313; The entity "rarr" was referenced, but not declared.
+
+
+
+[Fatal Error] :2:37: The character reference must end with the ';' delimiter.
+org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 37; The character reference must end with the ';' delimiter.
+
+
+
+[Fatal Error] :3:22400: The element type "div" must be terminated by the matching end-tag "</div>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 22400; The element type "div" must be terminated by the matching end-tag "</div>".
+
+
+[Fatal Error] :3:8795: The element type "header" must be terminated by the matching end-tag "</header>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 8795; The element type "header" must be terminated by the matching end-tag "</header>".
+
+
+あやしすぎる
+
+[Fatal Error] :3:8813: The element type "html" must be terminated by the matching end-tag "</html>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 8813; The element type "html" must be terminated by the matching end-tag "</html>".
+
+
+あやしすぎる
+[Fatal Error] :3:8805: The element type "body" must be terminated by the matching end-tag "</body>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 8805; The element type "body" must be terminated by the matching end-tag "</body>".
+
+
+
+
+
 //[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>". -->close tag
 //[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>". -->close tag
 //[Fatal Error] :1:530: The element type "head" must be terminated by the matching end-tag "</head>". -->close tag

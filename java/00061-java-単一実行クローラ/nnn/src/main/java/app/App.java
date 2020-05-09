@@ -18,6 +18,17 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 //        Start Crawler
 //        ＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠＠
 //        ^C
+
+
+//リンタで整形
+//$xmllint --format test-done-done.xml > test-done-done-finish.xml
+
+//自家製のxml2jsonコマンドでjsonにしてjqでいなす
+
+//$echo test-done-done-finish.xml | xml2json
+
+//$cat test-done-done-finish.json | jq --stream -c
+
 public class App{
 
     private static final Integer REQUEST_TIME_INTERVAL=10000;  // 10秒ごとにリクエスト
@@ -29,6 +40,21 @@ public class App{
     private static final String DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN = ".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$";
 
     //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
+    //ページャ等を考量すると、URLは複数になると思われる 検索キーワードなど
+//    public static final AppConfig APP_CONFIG = new AppConfig(
+//            "https://github.com/search?p=1&q=nuxtjs&type=Repositories"
+//            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
+//            ,DEFAULT_CACHE_DIR
+//    );
+//    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
+//    //ページャ等を考量すると、URLは複数になると思われる
+//    public static final AppConfig APP_CONFIG = new AppConfig(
+//            "https://jp.quora.com/topic/C%EF%BC%88%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E%EF%BC%89" //chrominuimが必要 続行するにはJavascriptを有効にして、ページを再読み込みしてください
+//            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
+//            ,DEFAULT_CACHE_DIR
+//    );
+
+//    単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
     public static final AppConfig APP_CONFIG = new AppConfig(
             "https://dev.to/t/python"
             ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
