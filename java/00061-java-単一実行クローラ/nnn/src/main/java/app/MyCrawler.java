@@ -5,14 +5,21 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.dom4j.Document;
-import org.dom4j.dom.DOMDocument;
+import org.jsoup.Jsoup;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -20,15 +27,23 @@ import java.util.stream.Stream;
 
 import static app.App.APP_CONFIG;
 
-//個人的に単一ファイルですべて終わらせたくてAppクラスにstaticクラスとして置いておきたかったけど、呼出側の引数エラーになったので、分けた。無念。
+// リンタなどでもチェックしてみると xmllint --format test-done.html
+// $xmllint --format test-done.html >test-done-done.html 整形
+// $xmllint --xpath /html/head/meta test-done-done.html Xpath式検索
+//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>".
+//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>".
+//[Fatal Error] :1:530: The element type "head" must be terminated by the matching end-tag "</head>".
+//[Fatal Error] :1:31: The markup in the document following the root element must be well-formed.
 
 public class MyCrawler extends WebCrawler {
     private AppConfig appConfig = APP_CONFIG;
 
+    private static final List<String> noneCloseTagList = Arrays.asList("meta","link");
+
     private static Document strToDom(String html) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        return (Document) builder.parse(new ByteArrayInputStream(html.getBytes("UTF-8")));
+        return (Document) builder.parse(new ByteArrayInputStream(html.getBytes(StandardCharsets.UTF_8)));
     }
 
     @Override
@@ -43,49 +58,42 @@ public class MyCrawler extends WebCrawler {
         String url = page.getWebURL().getURL();
         System.out.println(Stream.generate(()->"＠").limit(100).collect(Collectors.joining()));
         HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-        String html = htmlParseData.getHtml();
-
-
-        Pattern p = Pattern.compile("(?<startTag><meta)(?<text>.+)(?<endTag>/>)");
-
-        Matcher mc = p.matcher(html);
-
-
-        String done = mc.replaceAll("${startTag} ${text}></meta>");
-
-//        System.out.println(done);
-
-//        strToDom()を呼ぶ前に前処理が必要そう
-        //$echo '<meta charset="utf-8" />' | perl -nlE 's;(\<meta)(.+)(/>);<meta \2></meta>;g and say'
-
-//[Fatal Error] :88:11: The element type "meta" must be terminated by the matching end-tag "</meta>".
-//                org.xml.sax.SAXParseException; lineNumber: 88; columnNumber: 11; The element type "meta" must be terminated by the matching end-tag "</meta>".
-//                at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)
-//        at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)
-//        at java.xml/javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:122)
-//        at app.MyCrawler.strToDom(MyCrawler.java:30)
-//        at app.MyCrawler.visit(MyCrawler.java:49)
-//        at edu.uci.ics.crawler4j.crawler.WebCrawler.processPage(WebCrawler.java:403)
-//        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
-//        at java.base/java.lang.Thread.run(Thread.java:834)
-
-//[Fatal Error] :5:346: The element type "link" must be terminated by the matching end-tag "</link>".
-//                org.xml.sax.SAXParseException; lineNumber: 5; columnNumber: 346; The element type "link" must be terminated by the matching end-tag "</link>".
-//                at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)
-//        at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)
-//        at java.xml/javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:122)
-//        at app.MyCrawler.strToDom(MyCrawler.java:31)
-//        at app.MyCrawler.visit(MyCrawler.java:74)
-//        at edu.uci.ics.crawler4j.crawler.WebCrawler.processPage(WebCrawler.java:403)
-//        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
-//        at java.base/java.lang.Thread.run(Thread.java:834)
+        String html = htmlParseData.getHtml()
+                .replace("\n","")
+                .replace("\r","")
+                .replace("\r\n","")
+                .replaceAll("<script.*?/script>","") //scriptタグの除去 cat test-done.html | grep -o '.' | nl | grep -C10 41285
+                .replace("<!DOCTYPE html>","<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+                ;
 
         try {
-            Document doc = strToDom(done);
+            FileWriter fw = new FileWriter("test.html");
+            fw.write(html);
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-            System.out.println(doc);
+        for(String tag:noneCloseTagList){
+            String detectNoneCloseTagRegexpPattern = "(?<startTag>(?<=<)"+tag+")(?<text>.*?)(?<endTag>/?>)";
+            String completeNoneCloseTagRegexpPattern = "${startTag} ${text}></${startTag}>";
+            Pattern p = Pattern.compile(detectNoneCloseTagRegexpPattern);
+            Matcher mc = p.matcher(html);
+            html = mc.replaceAll(completeNoneCloseTagRegexpPattern);
+        }
 
+        try {
+            FileWriter fw = new FileWriter("test-done.html");
+            fw.write(html);
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
+        Path file = Paths.get("test-done.html");
+        try {
+            String doneHtml = Files.readString(file);
+            Document doc = strToDom(doneHtml);
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();

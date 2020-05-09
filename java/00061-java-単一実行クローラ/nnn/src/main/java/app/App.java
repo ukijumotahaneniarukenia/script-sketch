@@ -22,22 +22,22 @@ public class App{
     private static final String DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN = ".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$";
 
     //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
-//    public static final AppConfig APP_CONFIG = new AppConfig(
-//            "https://dev.to/t/python"
-////            ,DEFAULT_CSS_SELECTOR_QUERY
-//            ,".small-pic-link-wrapper"
-//            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
-//            ,DEFAULT_CACHE_DIR
-//    );
-
-    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
     public static final AppConfig APP_CONFIG = new AppConfig(
-            "https://qiita.com/ukijumotahaneniarukenia"
+            "https://dev.to/t/python"
 //            ,DEFAULT_CSS_SELECTOR_QUERY
-            ,"a"
+            ,".small-pic-link-wrapper"
             ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
             ,DEFAULT_CACHE_DIR
     );
+
+    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
+//    public static final AppConfig APP_CONFIG = new AppConfig(
+//            "https://qiita.com/ukijumotahaneniarukenia"
+////            ,DEFAULT_CSS_SELECTOR_QUERY
+//            ,"a"
+//            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
+//            ,DEFAULT_CACHE_DIR
+//    );
 //    //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://ukijumotahaneniarukenia.site/"
