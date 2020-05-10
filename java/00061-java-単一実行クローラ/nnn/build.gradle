@@ -18,6 +18,7 @@ dependencies {
     compile files('/home/kuraine/javax.xml.bind.jar') //curl -LO http://www.java2s.com/Code/JarDownload/javax.xml/javax.xml.bind.jar.zip dom4jの依存性解決用にインストール
     compile('edu.uci.ics:crawler4j:4.1')//このバージョンが安定している
     compile('org.jsoup:jsoup:1.12.1')
+    compile('ch.qos.logback:logback-classic:1.2.3')
 //    compile('dom4j:dom4j:2.1.1') これは泥臭くローカルに用意した
     compile group: 'jaxen', name: 'jaxen', version: '1.1.6'
     compile group: 'com.sun.msv.datatype.xsd', name: 'xsdlib', version: '2013.2'

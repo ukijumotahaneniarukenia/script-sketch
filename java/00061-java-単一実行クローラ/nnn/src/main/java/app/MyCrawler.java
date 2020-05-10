@@ -5,6 +5,8 @@ import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.dom4j.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,22 +22,25 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static app.App.APP_CONFIG;
 
 public class MyCrawler extends WebCrawler {
     private AppConfig appConfig = APP_CONFIG;
 
+    private static final Logger log = LoggerFactory.getLogger(MyCrawler.class);
+
     private static final String SUFFIX = ".xml";
 
     private static final String GITHUB_COM = "github.com";
     private static final String DEV_TO = "dev.to";
 
-//    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img"); //dev.toはいける
-    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img","div");
-//    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img","div","header");
+//    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img","div","title","form","a","title","style","img","h4","p","path","a","title"); //dev.toはいける
+    private static final List<String> noneCloseTagList = Arrays.asList("meta","link","img"); //dev.toはいける
+
+    private static final List<String> noneStartTagList = Arrays.asList("option");
+
+    private static final List<String> incorrectPairTagList = Arrays.asList("meta","link","img");
 
     private static Document strToDom(String html) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -267,10 +272,11 @@ public class MyCrawler extends WebCrawler {
             ">\n";
 
     private static final Map<String,Map<Pattern,String>> irregularCloseTagRegexpPattern = new LinkedHashMap<>(){{
-        put(GITHUB_COM,new HashMap<>(){{
+        //属性名単一を属性名=属性値の形式に正規化
+        put(GITHUB_COM,new HashMap<>(){{//dev.to個別対応
             put(Pattern.compile("data-pjax-transient(?!=\"true\")"),"data-pjax-transient=\"true\"");
         }});
-        put(DEV_TO,new HashMap<>(){{
+        put(DEV_TO,new HashMap<>(){{//github個別対応
             put(Pattern.compile("data-no-instant(?!=\"true\")"),"data-no-instant=\"true\"");
             put(Pattern.compile("data-reaction-count(?!=\"0\")"),"data-reaction-count=\"0\"");
         }});
@@ -280,18 +286,18 @@ public class MyCrawler extends WebCrawler {
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
         System.out.println(url);
-        System.out.println(Stream.generate(()->"＠").limit(100).collect(Collectors.joining()));
         HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
         String html = htmlParseData.getHtml()
                 .replace("\n","")
                 .replace("\r","")
                 .replace("\r\n","")
                 .replaceAll("<script.*?/script>","") //scriptタグの除去 cat test-done.html | grep -o '.' | nl | grep -C10 41285
-                .replace("&raquo;","") //対象外
-                .replace("&hellip;","") //対象外
+                .replaceAll("<!(?:--.*?--\\s*)*>","") //HTML,XMLのコメント削除
                 .replace("<!DOCTYPE html>",XML_HEADER) //空白の参照定義
                 ;
 
+        log.info("もとデータの退避開始");
+        //もとデータの退避
         try {
             FileWriter fw = new FileWriter("test"+SUFFIX);
             fw.write(html);
@@ -299,16 +305,53 @@ public class MyCrawler extends WebCrawler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        log.info("もとデータの退避終了");
 
-        //閉じタグの補完
+        log.info("タグ正規化開始");
+//        //閉じタグの補完
         for(String tag:noneCloseTagList){
             String detectNoneCloseTagRegexpPattern = "(?<startTag>(?<=<)"+tag+")(?<text>.*?)(?<endTag>/?>)";
             String completeNoneCloseTagRegexpPattern = "${startTag} ${text}></${startTag}>";
             Pattern p = Pattern.compile(detectNoneCloseTagRegexpPattern);
             Matcher mc = p.matcher(html);
-            html = mc.replaceAll(completeNoneCloseTagRegexpPattern);
-        }
+            while(mc.find()){
+                if(mc.group("endTag").equals("/>")){
+                    html = mc.replaceAll(completeNoneCloseTagRegexpPattern);
+                }else{
 
+                }
+            }
+        }
+//
+//        //タグの不一致
+//        for(String tag : incorrectPairTagList){
+//            String detectIncorrectPairTagRegexpPattern = "(?<startTag>(?<=<)"+tag+")(?<text>.*?)(?<closeTag>(?<=</).*?(?=>))";
+//            Pattern p = Pattern.compile(detectIncorrectPairTagRegexpPattern);
+//            Matcher mc = p.matcher(html);
+//            String completeIncorrectPairTagRegexpPattern = "${startTag}${text}${startTag}";
+//            while(mc.find()){
+//                if(mc.group("startTag").equals(mc.group("closeTag"))){
+//
+//                }else{
+//                    html = mc.replaceAll(completeIncorrectPairTagRegexpPattern);
+//                }
+//            }
+//        }
+//        //開始タグの補完
+//        とても重い
+//        for(String tag:noneStartTagList){
+//            String detectNoneStartTagRegexpPattern = "(?<preCloseTag></.*?>)(?<text>.*?)(?<closeTag>(?<=</)"+tag+"(?=>))";
+//            String completeNoneStartTagRegexpPattern = "${preCloseTag}<${closeTag}>${text}${closeTag}";
+//            Pattern p = Pattern.compile(detectNoneStartTagRegexpPattern);
+//            Matcher mc = p.matcher(html);
+//            while (mc.find()){
+//                if(mc.group("text").matches("[^<>]*</$")){
+//                    html = mc.replaceAll(completeNoneStartTagRegexpPattern);
+//                }else{
+//
+//                }
+//            }
+//        }
         try {
             FileWriter fw = new FileWriter("test-done"+SUFFIX);
             fw.write(html);
@@ -316,15 +359,13 @@ public class MyCrawler extends WebCrawler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        log.info("タグ正規化終了");
 
+        log.info("サイト個別対応開始");
         Path file = Paths.get("test-done"+SUFFIX);
+        String doneHtml = null;
         try {
-            //属性名単一を属性名=属性値の形式に正規化
-            String doneHtml = Files.readString(file)
-//                    .replace("data-no-instant","data-no-instant=\"true\"")//dev.to個別対応
-//                    .replace("data-reaction-count","data-reaction-count=\"0\"") //dev.to個別対応
-//                    .replace("data-pjax-transient","data-pjax-transient=\"true\"") //github個別対応
-            ;
+            doneHtml = Files.readString(file);
 
             for(Map.Entry<String,Map<Pattern,String>> entry : irregularCloseTagRegexpPattern.entrySet()){
                 if(url.contains(entry.getKey())){
@@ -338,14 +379,18 @@ public class MyCrawler extends WebCrawler {
                 }
             }
 
-
-
             FileWriter fw = new FileWriter("test-done-done"+SUFFIX);
             fw.write(doneHtml);
             fw.close();
 
-            Document doc = strToDom(doneHtml); //Xpath式で攻めたいからここまでがんばっている フォーマットエラー検出できる
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("サイト個別対応終了");
 
+        log.info("フォーマットチェック開始");
+        try {
+            Document doc = strToDom(doneHtml);
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -353,5 +398,6 @@ public class MyCrawler extends WebCrawler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        log.info("フォーマットチェック終了");
     }
 }

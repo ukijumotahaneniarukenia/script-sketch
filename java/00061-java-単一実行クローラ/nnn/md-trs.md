@@ -1,3 +1,49 @@
+
+
+```
+
+[Fatal Error] :3:233474: The element type "h4" must be terminated by the matching end-tag "</h4>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 233474; The element type "h4" must be terminated by the matching end-tag "</h4>".
+
+
+[Fatal Error] :3:232578: The element type "img" must be terminated by the matching end-tag "</img>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 232578; The element type "img" must be terminated by the matching end-tag "</img>".
+
+
+[Fatal Error] :3:228316: The element type "form" must be terminated by the matching end-tag "</form>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 228316; The element type "form" must be terminated by the matching end-tag "</form>".
+
+
+[Fatal Error] :3:7292: The element type "a" must be terminated by the matching end-tag "</a>".
+org.xml.sax.SAXParseException; lineNumber: 3; columnNumber: 7292; The element type "a" must be terminated by the matching end-tag "</a>".
+
+
+```
+
+
+以下のエラーでるがふぉー待ったにはうまくとおる
+
+```
+17:11:16 ERROR [Crawler 1] - [WebCrawler]- class org.apache.xerces.dom.DeferredDocumentImpl cannot be cast to class org.dom4j.Document (org.apache.xerces.dom.DeferredDocumentImpl and org.dom4j.Document are in unnamed module of loader 'app'), while processing: https://dev.to/t/python
+17:11:16 DEBUG [Crawler 1] - [WebCrawler]- Stacktrace
+java.lang.ClassCastException: class org.apache.xerces.dom.DeferredDocumentImpl cannot be cast to class org.dom4j.Document (org.apache.xerces.dom.DeferredDocumentImpl and org.dom4j.Document are in unnamed module of loader 'app')
+  at app.MyCrawler.strToDom(MyCrawler.java:52)
+    at app.MyCrawler.visit(MyCrawler.java:404)
+      at edu.uci.ics.crawler4j.crawler.WebCrawler.processPage(WebCrawler.java:403)
+        at edu.uci.ics.crawler4j.crawler.WebCrawler.run(WebCrawler.java:261)
+          at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+
+```
+
+
+
+
+
+
+
+
 ```
 
 // リンタなどでもチェックしてみると xmllint --format test-done.html

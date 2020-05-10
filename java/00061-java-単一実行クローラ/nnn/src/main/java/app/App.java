@@ -6,6 +6,11 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //Usage:
 //kuraine docker-container-centos-7-6-18-10-java-gradle-idea ~/script-sketch/java/00061-java-単一実行クローラ/nnn$gradle build
 //
@@ -22,6 +27,8 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 //リンタで整形
 //$xmllint --format test-done-done.xml > test-done-done-finish.xml
+
+//$cat test-done-done.xml | xmllint --format - > test-done-done-finish.xml
 
 //自家製のxml2jsonコマンドでjsonにしてjqでいなす
 
@@ -40,7 +47,7 @@ public class App{
     private static final String DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN = ".*(\\.(css|js|gif|jpg|png|mp3|mp3|zip|gz))$";
 
     //単一設定のみハンドリングできる模様 呼出側のシェルで複数件対応する
-    //ページャ等を考量すると、URLは複数になると思われる 検索キーワードなど
+//    //ページャ等を考量すると、URLは複数になると思われる 検索キーワードなど
 //    public static final AppConfig APP_CONFIG = new AppConfig(
 //            "https://github.com/search?p=1&q=nuxtjs&type=Repositories"
 //            ,DEFAULT_IGNORE_SUFFIX_REGEXP_PATTERN
@@ -76,6 +83,18 @@ public class App{
 //    );
 
     public static void main(String[] args) throws Exception {
+
+        List<String> fileList = new ArrayList<>(Arrays.asList("test.xml","test-done.xml","test-done-done.xml","test-done-done-finish.xml","test-done-done-finish.json"));
+
+        for(String fileName : fileList){
+            File file = new File(fileName);
+            if(file.exists()){
+                file.delete();
+            }else{
+
+            }
+        }
+
         CrawlController controller = setCrawlConfig(APP_CONFIG);
         System.out.println("Start Crawler");
         controller.start(MyCrawler.class, THREAD_CNT);
