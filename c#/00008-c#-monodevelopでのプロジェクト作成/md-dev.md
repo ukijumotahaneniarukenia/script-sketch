@@ -5,6 +5,11 @@ monoコマンド等も梱包されている
 bash centos-7-6-18-10-install-monodevelop-X-X-X.sh
 ```
 
+monodevelope起動方法
+
+```
+$monodevelop 1>$HOME/launch-monodevelop.log 2>&1 &
+```
 
 プロジェクト作成後
 
