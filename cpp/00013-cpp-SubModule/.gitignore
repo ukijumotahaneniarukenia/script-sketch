@@ -1,3 +1,4 @@
+/build/*
 /src/*so
 /src/*a
 /test/*out

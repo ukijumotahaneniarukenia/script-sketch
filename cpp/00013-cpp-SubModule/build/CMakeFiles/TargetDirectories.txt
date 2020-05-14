@@ -1,8 +1,0 @@
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/CMakeFiles/rebuild_cache.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/CMakeFiles/edit_cache.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/src/CMakeFiles/rebuild_cache.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/src/CMakeFiles/greetings.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/src/CMakeFiles/edit_cache.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/test/CMakeFiles/rebuild_cache.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/test/CMakeFiles/a.out.dir
-/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/test/CMakeFiles/edit_cache.dir
