@@ -1,0 +1,1 @@
+/bin/c++     CMakeFiles/a.out.dir/main.cpp.o  -o a.out -Wl,-rpath,/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/build/src ../src/libgreetings.so 

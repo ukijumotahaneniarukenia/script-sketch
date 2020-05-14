@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/good-morning.hpp
+
+../include/hello.hpp
+
+/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/src/good-morning.cpp
+iostream
+-
+good-morning.hpp
+/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/src/good-morning.hpp
+
+/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/src/hello.cpp
+iostream
+-
+hello.hpp
+/home/kuraine/script-sketch/cpp/00013-cpp-SubModule/src/hello.hpp
+
