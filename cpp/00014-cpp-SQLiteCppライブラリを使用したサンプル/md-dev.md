@@ -133,7 +133,7 @@ SELECT * FROM test :
 row (1, "test")
 row (2, "second-updated")
 everything ok, quitting
-
+```
 
 この静的ライブラリ(.a)とヘッダファイル(.h)があれば独自のプロジェクトに組み込める
 
@@ -207,6 +207,9 @@ wrksp/
 
 6 directories, 15 files
 
+
+
+```
 
 
 ```
