@@ -1,4 +1,23 @@
 ```
+
+$cmake --version
+cmake version 3.13.4
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+
+
+$gcc --version
+gcc (Ubuntu 9.2.1-9ubuntu2) 9.2.1 20191008
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+```
+
+
+```
 $cd /tmp
 
 $git clone https://github.com/SRombauts/SQLiteCpp_Example.git
@@ -119,11 +138,13 @@ everything ok, quitting
 この静的ライブラリ(.a)とヘッダファイル(.h)があれば独自のプロジェクトに組み込める
 
 
-$find /tmp/SQLiteCpp_Example | grep -P 'lib*a$'
-/tmp/SQLiteCpp_Example/SQLiteCpp/build/sqlite3/libsqlite3.a
-/tmp/SQLiteCpp_Example/SQLiteCpp/build/SQLiteCpp/libSQLiteCpp.a
+```
+$find /tmp/SQLiteCpp_Example | grep -vP '\.git' | grep -P '.*a$'
+/tmp/SQLiteCpp_Example/build/SQLiteCpp/sqlite3/libsqlite3.a
+/tmp/SQLiteCpp_Example/build/SQLiteCpp/libSQLiteCpp.a
 
-$find /tmp/SQLiteCpp_Example | grep -P '*h$'
+
+$find /tmp/SQLiteCpp_Example | grep -P '.*\.h$'
 /tmp/SQLiteCpp_Example/SQLiteCpp/sqlite3/sqlite3.h
 /tmp/SQLiteCpp_Example/SQLiteCpp/include/SQLiteCpp/Transaction.h
 /tmp/SQLiteCpp_Example/SQLiteCpp/include/SQLiteCpp/Column.h
@@ -136,7 +157,59 @@ $find /tmp/SQLiteCpp_Example | grep -P '*h$'
 /tmp/SQLiteCpp_Example/SQLiteCpp/include/SQLiteCpp/Backup.h
 /tmp/SQLiteCpp_Example/SQLiteCpp/include/SQLiteCpp/Assertion.h
 /tmp/SQLiteCpp_Example/SQLiteCpp/include/SQLiteCpp/Statement.h
+```
 
+
+プロジェクト作成
+
+```
+$mkdir wrksp
+
+
+$mkdir -p wrksp/{src,lib,bin,include}
+
+
+$touch wrksp/src/main.cpp
+
+
+$find /tmp/SQLiteCpp_Example | grep -vP '\.git' | grep -P '.*a$' | xargs -I@ bash -c 'mkdir -p ~/wrksp/lib && cp @ ~/wrksp/lib/'
+
+
+$find /tmp/SQLiteCpp_Example | grep -P '.*\.h$' | grep sqlite3 | xargs -I@ bash -c 'mkdir -p ~/wrksp/include/sqlite3 && cp @ ~/wrksp/include/sqlite3/'
+
+
+$find /tmp/SQLiteCpp_Example | grep -P '.*\.h$' | grep -v sqlite3 | xargs -I@ bash -c 'mkdir -p ~/wrksp/include/SQLiteCpp && cp @ ~/wrksp/include/SQLiteCpp/'
+
+
+$tree wrksp/
+wrksp/
+├── bin
+├── include
+│   ├── SQLiteCpp
+│   │   ├── Assertion.h
+│   │   ├── Backup.h
+│   │   ├── Column.h
+│   │   ├── Database.h
+│   │   ├── Exception.h
+│   │   ├── ExecuteMany.h
+│   │   ├── SQLiteCpp.h
+│   │   ├── Statement.h
+│   │   ├── Transaction.h
+│   │   ├── Utils.h
+│   │   └── VariadicBind.h
+│   └── sqlite3
+│       └── sqlite3.h
+├── lib
+│   ├── libSQLiteCpp.a
+│   └── libsqlite3.a
+└── src
+    └── main.cpp
+
+6 directories, 15 files
+
+
+
+```
 $g++ src/main.cpp -I/home/kuraine/wrksp/include -L/home/kuraine/wrksp/lib -lSQLiteCpp -lsqlite3 -lpthread -ldl -o bin/main
 
 $tree
@@ -166,44 +239,152 @@ $tree
 
 7 directories, 17 files
 
+
 $./bin/main
 SQlite3 version 3.30.1 (3.30.1)
+SQliteC++ version 3.00.00
+SQLite database file 'test.db' opened successfully
+INSERT INTO test_tbl VALUES (1, "test")", returned 1
+INSERT INTO test_tbl VALUES (2, "second")", returned 1
+UPDATE test_tbl SET value="second-updated" WHERE id='2', returned 1
+SELECT * FROM test_tbl :
+row (1, "test")
+row (2, "second-updated")
+everything ok, quitting
 ```
-
-
-以下書いていたけどふっとんだので、TODO
-
-ubuntu19-10-c-cpp-vscodeでやっていた
 
 
 CPUアーキテクチャ
 
 ```
 
+$arch
+x86_64
+
+
 
 ```
 
 
-システム単位のsqlite3
+システム単位のsqlite3ヘッダファイルないしコマンド
 
 
 ```
+$sqlite3 --version
+bash: sqlite3: command not found
 
 
+$find / -name "sqlite3.h" 2>/dev/null
+/usr/include/sqlite3.h
+/home/kuraine/wrksp/include/sqlite3/sqlite3.h
+/tmp/SQLiteCpp_Example/SQLiteCpp/sqlite3/sqlite3.h
+```
+
+
+```
+$grep VERSION /home/kuraine/wrksp/include/sqlite3/sqlite3.h
+#ifdef SQLITE_VERSION
+# undef SQLITE_VERSION
+#ifdef SQLITE_VERSION_NUMBER
+# undef SQLITE_VERSION_NUMBER
+** ^(The [SQLITE_VERSION] C preprocessor macro in the sqlite3.h header
+** ^(The [SQLITE_VERSION_NUMBER] C preprocessor macro resolves to an integer
+** numbers used in [SQLITE_VERSION].)^
+** The SQLITE_VERSION_NUMBER for any given release of SQLite will also
+#define SQLITE_VERSION        "3.30.1"
+#define SQLITE_VERSION_NUMBER 3030001
+** These interfaces provide the same information as the [SQLITE_VERSION],
+** [SQLITE_VERSION_NUMBER], and [SQLITE_SOURCE_ID] C preprocessor macros
+** assert( sqlite3_libversion_number()==SQLITE_VERSION_NUMBER );
+** assert( strcmp(sqlite3_libversion(),SQLITE_VERSION)==0 );
+** ^The sqlite3_version[] string constant contains the text of [SQLITE_VERSION]
+** [SQLITE_VERSION_NUMBER].  ^(The sqlite3_sourceid() function returns 
+** <li>[[SQLITE_FCNTL_DATA_VERSION]]
+** The [SQLITE_FCNTL_DATA_VERSION] opcode is used to detect changes to
+#define SQLITE_FCNTL_DATA_VERSION           35
+** [SQLITE_FCNTL_DATA_VERSION] [file control].
+** <li> the [SQLITE_FCNTL_DATA_VERSION] [file control]
+** The [SQLITE_FCNTL_DATA_VERSION] returns the data version counter
+```
+
+静的リンクライブラリないし動的リンクライブラリ
+
+```
+$find / -name "*sqlite3*" 2>/dev/null | grep -P '(a|so)(\.[0-9])*$' | grep sqlite
+/usr/lib/x86_64-linux-gnu/libsqlite3.so
+/usr/lib/x86_64-linux-gnu/libsqlite3.la
+/usr/lib/x86_64-linux-gnu/libsqlite3.a
+/usr/lib/x86_64-linux-gnu/libsqlite3.so.0
+/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6
+/usr/lib/python2.7/lib-dynload/_sqlite3.x86_64-linux-gnu.so
+/usr/lib/python3.7/lib-dynload/_sqlite3.cpython-37m-x86_64-linux-gnu.so
+/usr/local/lib/python3.7/lib-dynload/_sqlite3.cpython-37m-x86_64-linux-gnu.so
+/usr/local/src/Python-3.7.4/build/lib.linux-x86_64-3.7/_sqlite3.cpython-37m-x86_64-linux-gnu.so
+/home/kuraine/wrksp/lib/libsqlite3.a
+/tmp/SQLiteCpp_Example/build/SQLiteCpp/sqlite3/libsqlite3.a
 ```
 
 
 g++のライブラリ検索フォルダパス一覧
 
 ```
-
-
+$g++ -print-search-dirs | tr ':' '\n'
+install
+ /usr/lib/gcc/x86_64-linux-gnu/9/
+programs
+ =/usr/lib/gcc/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/
+/usr/lib/gcc/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/bin/
+libraries
+ =/usr/lib/gcc/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/lib/../lib/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/9/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../lib/
+/lib/x86_64-linux-gnu/9/
+/lib/x86_64-linux-gnu/
+/lib/../lib/
+/usr/lib/x86_64-linux-gnu/9/
+/usr/lib/x86_64-linux-gnu/
+/usr/lib/../lib/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../../x86_64-linux-gnu/lib/
+/usr/lib/gcc/x86_64-linux-gnu/9/../../../
+/lib/
+/usr/lib/
 ```
 
 プロジェクト固有で使用しているsqlite3.hファイルのバージョン
 
 
 ```
-
-
+$grep VERSION /usr/include/sqlite3.h
+#ifdef SQLITE_VERSION
+# undef SQLITE_VERSION
+#ifdef SQLITE_VERSION_NUMBER
+# undef SQLITE_VERSION_NUMBER
+** ^(The [SQLITE_VERSION] C preprocessor macro in the sqlite3.h header
+** ^(The [SQLITE_VERSION_NUMBER] C preprocessor macro resolves to an integer
+** numbers used in [SQLITE_VERSION].)^
+** The SQLITE_VERSION_NUMBER for any given release of SQLite will also
+#define SQLITE_VERSION        "3.29.0"
+#define SQLITE_VERSION_NUMBER 3029000
+** These interfaces provide the same information as the [SQLITE_VERSION],
+** [SQLITE_VERSION_NUMBER], and [SQLITE_SOURCE_ID] C preprocessor macros
+** assert( sqlite3_libversion_number()==SQLITE_VERSION_NUMBER );
+** assert( strcmp(sqlite3_libversion(),SQLITE_VERSION)==0 );
+** ^The sqlite3_version[] string constant contains the text of [SQLITE_VERSION]
+** [SQLITE_VERSION_NUMBER].  ^(The sqlite3_sourceid() function returns 
+** <li>[[SQLITE_FCNTL_DATA_VERSION]]
+** The [SQLITE_FCNTL_DATA_VERSION] opcode is used to detect changes to
+#define SQLITE_FCNTL_DATA_VERSION           35
+** [SQLITE_FCNTL_DATA_VERSION] [file control].
+** <li> the [SQLITE_FCNTL_DATA_VERSION] [file control]
+** The [SQLITE_FCNTL_DATA_VERSION] returns the data version counter
 ```
