@@ -1,7 +1,6 @@
-- 辞書作成とかはこれを分割してまとめておくのがよさそう
+[辞書作成とかはこれを分割してまとめておくのがよさそう](http://aoba.cc.saga-u.ac.jp/lecture/TclTk/text.pdf)
 
 [エディタはこれがよさそう](http://vtcl.sourceforge.net/)
-
 
 GUIアプリを起動する際のモック作成にtclちょうどいい
 
@@ -76,4 +75,22 @@ export PATH_TO_WISH
 export VTCL_HOME
 
 exec ${PATH_TO_WISH} ${VTCL_HOME}/vtcl.tcl $*
+```
+
+
+起動方法
+
+コマンドライン引数なしの場合
+
+```
+$./$HOME/vtcl.vtcl-8.6/vtcl.tcl
+```
+
+or
+
+
+コマンドライン引数ありの場合
+
+```
+$./$HOME/vtcl.vtcl-8.6/vtcl.tcl 森 鴎外
 ```
