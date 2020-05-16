@@ -1,0 +1,5 @@
+#!/usr/bin/env wish
+
+message .msg -width "200" -text "hello, world!"
+button .btn -text "終了" -command exit
+pack .msg .btn
