@@ -13,3 +13,67 @@ GUIアプリを起動する際のモック作成にtclちょうどいい
 chmod 755 00001-tk-メッセージと終了ボタン.tk
 ./00001-tk-メッセージと終了ボタン.tk
 ```
+
+
+vtclエディタの起動
+
+
+ちょっと年季があるが便利で手作り感がすごく好きなので、微調整して使えるようにする
+
+
+```
+git clone https://github.com/hpheidinger/vtcl.vtcl-8.6.git
+cd vtcl.vtcl-8.6
+
+```
+
+configureする
+
+```
+./configure 
+```
+
+以下が標準出力に出力される
+
+```
+
+Using /bin/wish8.5
+
+```
+
+
+vtcl.tclファイルがエディタの起動ファイル
+
+修正前
+
+```
+$cat vtcl
+#!/bin/sh
+
+PATH_TO_WISH=/bin/wish8.5
+VTCL_HOME=/usr/local/vtcl-8.6
+
+export PATH_TO_WISH
+export VTCL_HOME
+
+exec ${PATH_TO_WISH} ${VTCL_HOME}/vtcl.tcl $*
+
+```
+
+
+修正後
+
+ホームの環境変数値を修正した
+
+```
+$cat vtcl
+#!/bin/sh
+
+PATH_TO_WISH=/bin/wish8.5
+VTCL_HOME=$HOME/vtcl.vtcl-8.6
+
+export PATH_TO_WISH
+export VTCL_HOME
+
+exec ${PATH_TO_WISH} ${VTCL_HOME}/vtcl.tcl $*
+```
