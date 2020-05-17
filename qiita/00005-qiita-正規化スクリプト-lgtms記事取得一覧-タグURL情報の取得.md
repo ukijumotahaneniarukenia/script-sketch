@@ -35,18 +35,18 @@ $cat a.json
 
 
 ```
-$cat a.json | jq -c 'select(.key|(test("tags")))|{grp:.key|gsub(".*items-";"")|gsub("-.+";""),subgrp:.key|gsub(".*tags-";"")|gsub("-.+";""),label:.key|gsub(".*-";""),value:.value}'| jq -s 'map({grp:.grp,subgrp:.subgrp,label:.label,value:(if .label=="urlName" then "https://qiita.com/tags/"+.value else .value end)})|.[]'|jq -c 'select(.label|test("urlName"))'
+$cat a.json | jq -c 'select(.key|(test("tags")))|{grp:.key|gsub(".*items-";"")|gsub("-.+";""),subgrp:.key|gsub(".*tags-";"")|gsub("-.+";""),label:.key|gsub(".*-";""),value:.value}'| jq -s 'map({grp:.grp,subgrp:.subgrp,label:.label,value:(if .label=="urlName" then "https://qiita.com/tags/"+.value else .value end)})|.[]'|jq -c 'select(.label|test("urlName"))' | jq -c '{grp:.grp,subgrp:.subgrp,label:"tagUrlName",value:.value}'
 ```
 
 
 - OUT
 
 ```
-{"grp":"29","subgrp":"0","label":"urlName","value":"https://qiita.com/tags/r"}
-{"grp":"30","subgrp":"0","label":"urlName","value":"https://qiita.com/tags/r"}
-{"grp":"31","subgrp":"0","label":"urlName","value":"https://qiita.com/tags/r"}
-{"grp":"32","subgrp":"0","label":"urlName","value":"https://qiita.com/tags/javascript"}
-{"grp":"32","subgrp":"1","label":"urlName","value":"https://qiita.com/tags/github"}
-{"grp":"32","subgrp":"2","label":"urlName","value":"https://qiita.com/tags/%e6%97%a5%e6%9c%ac%e8%aa%9e%e8%a8%b3"}
-{"grp":"32","subgrp":"3","label":"urlName","value":"https://qiita.com/tags/bestofjs"}
+{"grp":"29","subgrp":"0","label":"tagUrlName","value":"https://qiita.com/tags/r"}
+{"grp":"30","subgrp":"0","label":"tagUrlName","value":"https://qiita.com/tags/r"}
+{"grp":"31","subgrp":"0","label":"tagUrlName","value":"https://qiita.com/tags/r"}
+{"grp":"32","subgrp":"0","label":"tagUrlName","value":"https://qiita.com/tags/javascript"}
+{"grp":"32","subgrp":"1","label":"tagUrlName","value":"https://qiita.com/tags/github"}
+{"grp":"32","subgrp":"2","label":"tagUrlName","value":"https://qiita.com/tags/%e6%97%a5%e6%9c%ac%e8%aa%9e%e8%a8%b3"}
+{"grp":"32","subgrp":"3","label":"tagUrlName","value":"https://qiita.com/tags/bestofjs"}
 ```
