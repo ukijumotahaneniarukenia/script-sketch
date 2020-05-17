@@ -12,6 +12,8 @@ INPUT_FILE_NAME=nnn
 INPUT_FILE_SUFFIX=.json
 OUTPUT_FILE_NAME=nnn
 OUTPUT_FILE_SUFFIX=.tsv
+OUTPUT_VIEW_FILE_NAME=nnn
+OUTPUT_VIEW_FILE_SUFFIX=.md
 CROSSTAB_FILE_NAME=crosstab
 CROSSTAB_FILE_SUFFIX=.tsv
 
@@ -51,14 +53,22 @@ seq $START_PAGE $END_PAGE | while read n;do
 
    } | tee -a $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX 1>/dev/null
 
+    #サブグルーピングし直し
+    jq -s -R 'split("\n")|map(.|select(.!=""))|map(split("\t"))|map({"grp":.[0],"subgrp":.[1],"label":.[2],"value":.[3]})' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | jq 'length as $cnt|. as $items|[range(0;$cnt)]|foreach .[] as $idx({};.+{grp:$items[$idx].grp,subgrp:(if $items[$idx]|.label|test("title") then $items[$idx].subgrp else ($items[$idx].subgrp|tonumber + 1) | tostring end ),label:$items[$idx].label,value:$items[$idx].value})'| jq -s 'group_by(.grp+.subgrp)[]|.[].grp as $grp|.[].subgrp as $subgrp |reduce .[].value as $item ([];.+[$item])|{grp:$grp,subgrp:$subgrp,items:("["+.[0]+"]("+.[1]+")")}'|jq -s 'unique[]' | jq -r '[.grp,.subgrp,.items]|@tsv' >a.tsv
+
    #並べ替え
-   cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | sort -nk1 -k2 -k3 -o $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   cat a.tsv | sort -nk1 -k2 -o $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ヘッダ挿入
-   sed -i '1igrp\tsubgrp\tlabel\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ダブルクォートの除去 git でbeautyにならない
    sed -i 's/\x22//g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+
+   #参照用
+   cp $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
+
+   sed -i -r 's/\t/\|/g;s/^/|/;s/$/|/;2i|:--|:--|:--|' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
    #クロス集計用に列整形
    #cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | awk -v FS='\t' '{printf "%03d-%02d\t%s\t%s\n",$1,$2,NR%2,$4}' > a.tsv
@@ -72,4 +82,4 @@ seq $START_PAGE $END_PAGE | while read n;do
 done
 
 
-#rm a.tsv
+rm -f a.tsv
