@@ -58,5 +58,8 @@ seq $START_PAGE $END_PAGE | while read n;do
 
    #ヘッダ挿入
    sed -i '1igrp\tsubgrp\tlabel\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
-done
 
+   #ダブルクォートの除去 git でbeautyにならない
+   sed -i 's/\x22//g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+
+done

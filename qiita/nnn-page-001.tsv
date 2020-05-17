@@ -25,7 +25,7 @@ grp	subgrp	label	value
 4	0	04-tagUrlName	https://qiita.com/tags/bash
 4	1	03-tag	SQLite3
 4	1	04-tagUrlName	https://qiita.com/tags/sqlite3
-5	0	01-title	vscodeで"Ruby Solargraph"を使用可能にするまで
+5	0	01-title	vscodeでRuby Solargraphを使用可能にするまで
 5	0	02-titleUrlName	https://qiita.com/tequila0725/items/8e93dc894e0ab67d322f
 5	0	03-tag	Ruby
 5	0	04-tagUrlName	https://qiita.com/tags/ruby
