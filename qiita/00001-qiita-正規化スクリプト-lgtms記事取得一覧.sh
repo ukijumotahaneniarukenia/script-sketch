@@ -65,4 +65,11 @@ seq $START_PAGE $END_PAGE | while read n;do
 
    #クロス集計
    datamash -s crosstab 1,2 unique 3 < a.tsv > $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
+
+   sed -i '1d;' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
+
+   sed -i '1i行番号\tキー\tバリュー' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
 done
+
+
+rm a.tsv
