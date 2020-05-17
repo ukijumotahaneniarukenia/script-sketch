@@ -60,13 +60,19 @@ seq $START_PAGE $END_PAGE | while read n;do
    cat a.tsv | sort -nk1 -k2 -o $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ヘッダ挿入
-   sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   sed -i '1igrp\tsubgrp\tkey\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ダブルクォートの除去 git でbeautyにならない
-   sed -i 's/\x22//g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   sed -i -r 's/\x22//g;' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+
+   #ダブルクォートの除去 git でbeautyにならない
+   sed -i -r 's/\t\[/\t/g;s/\)$//g;s/\]\(/\t/g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #参照用
    cp $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
+
+   #ヘッダ挿入
+   sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
    sed -i -r 's/\t/\|/g;s/^/|/;s/$/|/;2i|:--|:--|:--|' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
