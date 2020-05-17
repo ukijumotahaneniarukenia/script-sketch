@@ -61,15 +61,15 @@ seq $START_PAGE $END_PAGE | while read n;do
    sed -i 's/\x22//g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #クロス集計用に列整形
-   cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | awk -v FS='\t' '{printf "%03d-%02d\t%s\t%s\n",$1,$2,NR%2,$4}' > a.tsv
+   #cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | awk -v FS='\t' '{printf "%03d-%02d\t%s\t%s\n",$1,$2,NR%2,$4}' > a.tsv
 
-   #クロス集計
-   datamash -s crosstab 1,2 unique 3 < a.tsv > $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
+   ##クロス集計
+   #datamash -s crosstab 1,2 unique 3 < a.tsv > $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
 
-   sed -i '1d;' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
+   #sed -i '1d;' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
 
-   sed -i '1i行番号\tキー\tバリュー' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
+   #sed -i '1i行番号\tキー\tバリュー' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
 done
 
 
-rm a.tsv
+#rm a.tsv
