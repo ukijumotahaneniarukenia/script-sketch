@@ -14,11 +14,11 @@ OUTPUT_FILE_NAME=lgtms
 OUTPUT_FILE_SUFFIX=.tsv
 OUTPUT_VIEW_FILE_NAME=lgtms
 OUTPUT_VIEW_FILE_SUFFIX=.md
-CROSSTAB_FILE_NAME=crosstab
-CROSSTAB_FILE_SUFFIX=.tsv
 
 START_PAGE=$1;shift
 END_PAGE=$1;shift
+
+TOTAL_PAGE=$(curl -sSL https://qiita.com/ukijumotahaneniarukenia/lgtms | grep -Po '(?<="totalPages":)[0-9]+')
 
 [ -z $START_PAGE ] && usage
 [ -z $END_PAGE ] && usage
@@ -59,33 +59,33 @@ seq $START_PAGE $END_PAGE | while read n;do
    #並べ替え
    cat a.tsv | sort -nk1 -k2 -o $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
-   #ヘッダ挿入
-   sed -i '1igrp\tsubgrp\tkey\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   #参照用
+   cp $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
    #ダブルクォートの除去 git でbeautyにならない
    sed -i -r 's/\x22//g;' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
-   #ダブルクォートの除去 git でbeautyにならない
+   #マークダウン用の装飾を削る
    sed -i -r 's/\t\[/\t/g;s/\)$//g;s/\]\(/\t/g' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
-   #参照用
-   cp $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
+   #WPA用データ作成
+   cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | awk -v OFS='\t' -v FS='\t' -v PAGE=$n -v TOTAL_PAGE=$TOTAL_PAGE '{print "qiita",PAGE,TOTAL_PAGE,$3,$4}' >>$OUTPUT_FILE_NAME$OUTPUT_FILE_SUFFIX
+
+   if [ $n -eq 1 ];then
+     #ヘッダ挿入
+     sed -i '1isource\tpage\ttotal-page\ttitle\turl' $OUTPUT_FILE_NAME$OUTPUT_FILE_SUFFIX
+   else
+     :
+   fi
+
+   #ヘッダ挿入
+   sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ヘッダ挿入
    sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
    sed -i -r 's/\t/\|/g;s/^/|/;s/$/|/;2i|:--|:--|:--|' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
 
-   #クロス集計用に列整形
-   #cat $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX | awk -v FS='\t' '{printf "%03d-%02d\t%s\t%s\n",$1,$2,NR%2,$4}' > a.tsv
-
-   ##クロス集計
-   #datamash -s crosstab 1,2 unique 3 < a.tsv > $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
-
-   #sed -i '1d;' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
-
-   #sed -i '1i行番号\tキー\tバリュー' $CROSSTAB_FILE_NAME-page-$(printf "%03d" $n)$CROSSTAB_FILE_SUFFIX
 done
-
 
 rm -f a.tsv
