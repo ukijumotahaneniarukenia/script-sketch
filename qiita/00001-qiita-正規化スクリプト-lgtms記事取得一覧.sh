@@ -3,7 +3,7 @@
 usage(){
 cat <<EOS
 Usage:
-  $0 1 3
+  $0 1 33
 EOS
 exit 0
 }
