@@ -312,7 +312,7 @@ Debian10をRyzen 3800X環境で動かそうとしてハマった内容(グラボ
 Defining bash function dynamically using eval	https://unix.stackexchange.com/questions/282636/defining-bash-function-dynamically-using-eval
 Dense vector datatypeedit	https://www.elastic.co/guide/en/elasticsearch/reference/master/dense-vector.html
 Design Pattern Factory Pattern	https://www.tutorialspoint.com/design_pattern/factory_pattern.htm
-Diff for "About/Product"	https://wiki.centos.org/About/Product
+Diff for About/Product	https://wiki.centos.org/About/Product
 DiskStation Manager	https://www.synology.com/ja-jp/knowledgebase/DSM/help/VPNCenter/vpn_setup#dynamic
 DiskStation Manager	https://www.synology.com/ja-jp/knowledgebase/DSM/tutorial/File_Sharing/How_to_access_files_on_Synology_NAS_within_the_local_network_NFS#t4
 DiskStation Manager	https://www.synology.com/ja-jp/knowledgebase/DSM/tutorial/Network/How_to_connect_to_Synology_s_VPN_Server_using_a_Windows_PC_or_Mac
@@ -431,7 +431,7 @@ Emoji Unicode Tables	https://apps.timwhitlock.info/emoji/tables/unicode
 Emulate Oracle's LISTAGG() in SQL Server using STUFF · Issue #1277 · jOOQ/jOOQ	https://github.com/jOOQ/jOOQ/issues/1277
 Encoding	https://encoding.spec.whatwg.org/#decode
 Encoding converter	https://r12a.github.io/app-encodings/
-Error detected while processing VimEnter Autocommands for "*" · Issue #915 · scrooloose/nerdtree	https://github.com/scrooloose/nerdtree/issues/915
+Error detected while processing VimEnter Autocommands for * · Issue #915 · scrooloose/nerdtree	https://github.com/scrooloose/nerdtree/issues/915
 Error: undefined reference to `sqlite3_open'	https://stackoverflow.com/questions/9389344/error-undefined-reference-to-sqlite3-open
 Essential AWK Commands for Next Generation Sequence Analysis	http://bioinformatics.cvr.ac.uk/blog/essential-awk-commands-for-next-generation-sequence-analysis/
 FIFO試してみた	https://blog.freedom-man.com/linux-fifo/
@@ -522,7 +522,7 @@ How to Install Komodo Edit 10.2 in Ubuntu 16.04 / 16.10	http://tipsonubuntu.com/
 How to Install and use Open vSwitch 2.9 with KVM on CentOS 7 / RHEL 7 Server	https://www.linuxtechi.com/install-use-openvswitch-kvm-centos-7-rhel-7/
 How to Make a CentOS 7 Router	https://linuxhint.com/centos7_router/
 How to create CSV file without unnecessary spaces? [closed]	https://unix.stackexchange.com/questions/147016/how-to-create-csv-file-without-unnecessary-spaces
-How to emulate SQL "partition by" in R?	https://stackoverflow.com/questions/11446254/how-to-emulate-sql-partition-by-in-r
+How to emulate SQL partition by in R?	https://stackoverflow.com/questions/11446254/how-to-emulate-sql-partition-by-in-r
 How to install padre ubuntu package on Ubuntu 18.04/Ubuntu 17.10/Ubuntu 16.04	http://zoomadmin.com/HowToInstall/UbuntuPackage/padre
 How to paste clipboard in Vim :terminal	https://ujihisa.wordpress.com/2018/10/08/how-to-paste-clipboard-in-terminal/
 How to perform listagg functionality without using it	https://www.codeproject.com/Questions/1017921/How-to-perform-listagg-functionality-without-using
@@ -1303,7 +1303,7 @@ Webサイトの表示速度をさらに高速化！「HTTP/3」とは？	https:/
 Webデザインの知識がなくてもOK！Bootstrapの使い方【入門者向け】	https://techacademy.jp/magazine/6270
 Welcome to Common-Lisp.net	https://common-lisp.net/
 What can EHCC do for you?	http://www.oaktable.net/blog/what-can-ehcc-do-you#comment-253
-What is ".xsession" for?	https://unix.stackexchange.com/questions/47359/what-is-xsession-for
+What is .xsession for?	https://unix.stackexchange.com/questions/47359/what-is-xsession-for
 What's New in Maven	https://mvnrepository.com/
 What's the difference between eval, exec, and compile?	https://stackoverflow.com/questions/2220699/whats-the-difference-between-eval-exec-and-compile
 What’s New in Oracle Database 18c	https://modern-sql.com/blog/2018-11/whats-new-in-oracle-database-18c
@@ -1457,7 +1457,7 @@ bash引数を使う位置パラメータについてのまとめ	http://takuya-1
 bc	http://www.mlb.co.jp/linux/science/bc/index.html
 bcコマンドで16進数変換	https://blog.toshimaru.net/bc-decimal-hex/
 blog.鶯梭庵	https://blog.ousaan.com/index.cgi/links/20170518.html
-build fail "checkSpace.sh: ERROR"	https://github.com/oracle/docker-images/issues/781
+build fail checkSpace.sh: ERROR	https://github.com/oracle/docker-images/issues/781
 busyboxの使い方	https://www.hiroom2.com/2014/02/21/busybox%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9/
 codic - プログラマーのためのネーミング辞書	https://codic.jp/engine
 collect function on clobs	https://stackoverflow.com/questions/20124625/collect-function-on-clobs
@@ -2051,7 +2051,7 @@ yum｜パッケージの検索	http://kazmax.zpp.jp/linux_beginner/yum_search.ht
 すべてのプログラマーあるいはデータサイエンティストが身につけるべきソフトスキル	https://ainow.ai/2019/09/13/175230/
 すべてのレベルの人に推奨されるデータ構造およびアルゴリズムに関する優れた 8 冊	https://www.tableau.com/ja-jp/learn/articles/books-about-data-structures-algorithms
 ぜんぜん分からない、俺たちは雰囲気で Docker のネットワークを使っている	https://kiririmode.hatenablog.jp/entry/20180607/1528336096
-その発想はなかった! "ファイル名を指定して実行"の新しい使い方	http://ryoichi0102.hatenablog.com/entry/2016/06/06/232228
+その発想はなかった! ファイル名を指定して実行の新しい使い方	http://ryoichi0102.hatenablog.com/entry/2016/06/06/232228
 そもそもビジネスの現場ではどういう「レベル」の統計学を使うべきなのか	http://tjo.hatenablog.com/entry/2014/01/21/190651
 そろそろ、自分のdocker-compose.yml周りを公開	https://gendosu.jp/archives/3024
 そろそろ知っておきたい！！コンテナ技術とDockerのキホン	http://www.slideshare.net/ngzm/lxc-and-dockerbasic
@@ -2374,7 +2374,7 @@ yum｜パッケージの検索	http://kazmax.zpp.jp/linux_beginner/yum_search.ht
 仮想マシンのGuestOSでルータを構築する	http://oswald.hatenablog.com/entry/20100417/1271462542
 仮想マシン構築(KVM)	https://centossrv.com/kvm.shtml
 仮想環境のネットワーク接続をMACVLANとMACVTAPに切り替えてみた	http://kesaranpa.hatenablog.com/entry/2018/03/17/203309
-位置パラメーターの一括展開 $* $@ "$*" "$@" の違いを知れ!! : Shell Script Advent Calendar 2016 : ダメ出し Blog	https://fumiyas.github.io/2016/12/15/positional-parameters.sh-advent-calendar.html
+位置パラメーターの一括展開 $* $@ $* $@ の違いを知れ!! : Shell Script Advent Calendar 2016 : ダメ出し Blog	https://fumiyas.github.io/2016/12/15/positional-parameters.sh-advent-calendar.html
 便利すぎて、もうヤミツキ。WordPressプラグインSNS Count Cacheの設定方法と有効的な使い方	http://requlog.com/self-branding/wordpress/sns-count-cache/
 俺的にはずせない【Vim】こだわりのmap（説明付き）	https://qiita.com/itmammoth/items/312246b4b7688875d023
 個人的によく使うVimテクニック5選	https://cloudear.jp/blog/?p=1352
