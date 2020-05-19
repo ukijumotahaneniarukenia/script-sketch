@@ -1,12 +1,26 @@
-task pre_proc { doLast { println("pre_proc has done") } }
-task pre_sub_proc { doLast { println("pre_sub_proc has done") } }
-task main_proc { doLast { println("main_proc has done") } }
-task post_sub_proc { doLast { println("post_sub_proc has done") } }
-task post_proc { doLast { println("post_proc has done") } }
+configurations {
+    domaGenRuntime
+}
 
-post_proc.dependsOn post_sub_proc
-post_sub_proc.dependsOn main_proc
-main_proc.dependsOn pre_sub_proc
-pre_sub_proc.dependsOn pre_proc
+repositories {
+    mavenCentral()
+    maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+}
 
-//$ gradle -q -b build.gradle main_proc
+dependencies {
+    domaGenRuntime 'org.seasar.doma:doma-gen:2.26.0'
+    domaGenRuntime 'mysql:mysql-connector-java:8.0.18'
+}
+
+task gen {
+    group = 'doma-gen'
+    doLast {
+        ant.taskdef(resource: 'domagentask.properties',
+            classpath: configurations.domaGenRuntime.asPath)
+        ant.gen(url: 'jdbc:mysql://127.0.0.1/sakila', user: 'root', password: 'Mysql3306') {
+            entityConfig()
+            daoConfig()
+            sqlConfig()
+        }
+    }
+}
