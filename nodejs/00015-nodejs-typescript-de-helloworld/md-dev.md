@@ -8,6 +8,8 @@ mkdir -p 00015-nodejs-typescript-de-helloworld
 
 npm init -y
 
+echo '/node_modules/*' >.gitignore
+
 npm install --save-dev ts-node typescript
 ```
 
