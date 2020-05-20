@@ -4,6 +4,9 @@ const app: express.Express = express()
 
 const router: express.Router = express.Router()
 
+//webフォルダ配下を公開する
+app.use(express.static('web'))
+
 router.get('/api/v1/list', (req:express.Request, res:express.Response) => {
     const word = [
         { title: 'うんこ', done: true },
