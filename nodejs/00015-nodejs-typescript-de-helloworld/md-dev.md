@@ -26,7 +26,7 @@ drwxr-xr-x. 12 kuraine kuraine 4096  5月 21 00:13 node_modules/
 実行
 
 ```
-kuraine doc-ubuntu-19-10-go-vscode ~/script-sketch/nodejs/00015-nodejs-typescript-de-helloworld$npm start helloworld.ts
+$npm start helloworld.ts
 npm ERR! missing script: start
 
 npm ERR! A complete log of this run can be found in:
@@ -36,7 +36,7 @@ npm ERR!     /home/kuraine/.npm/_logs/2020-05-20T15_18_38_768Z-debug.log
 これならいける
 
 ```
-kuraine doc-ubuntu-19-10-go-vscode ~/script-sketch/nodejs/00015-nodejs-typescript-de-helloworld$npx ts-node helloworld.ts
+$npx ts-node helloworld.ts
 ハローワールド
 ```
 
