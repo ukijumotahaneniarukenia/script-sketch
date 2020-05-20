@@ -27,3 +27,9 @@ $./eclipse-installer/eclipse-inst
 ```
 $$HOME/eclipse/javascript-2020-03/eclipse/eclipse 1>$HOME/launch-eclipse.log 2>&1 &
 ```
+
+
+マーケットプレイスから**nodeeclipse**で検索し、プラグインをインストール
+
+
+通信状況にもよるが20分ぐらいはみつもっておく
