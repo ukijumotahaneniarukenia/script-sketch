@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+   <head>
+       <meta charset="UTF-8">
+       <title>ファイルのアップロード</title>
+       <style>
+           html {
+               background-color: rgb(240, 240, 240);
+           }
+       </style>
+   </head>
+   <body>
+       <h1>TODO List</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit">送信</button>
+        </form>
+        <div>
+           <ul id="item-container"></ul>
+       </div>
+
+       <script>
+           // アイテムコンテナを描画する関数
+           function renderItemList(itemList) {
+               // id="item-container"要素を取得する
+               const todoContainer = document.querySelector('#item-container');
+
+               // コンテナの中身を全部消す
+               todoContainer.innerHTML = '';
+
+               // JSONの各要素に対して
+               for(const item of itemList) {
+                //    console.log(item.Text)
+                   const li = document.createElement('li');          // リスト要素
+                   const label = document.createElement('label');    // ラベル
+
+                   const text = new Text(item);                // 項目名
+
+                   // ラベルにテキストを追加する
+                   label.appendChild(text);
+
+                   // リスト要素に先ほどのラベルを追加する
+                   li.appendChild(label);
+
+                   // TODOリストにリスト要素を追加する
+                   todoContainer.appendChild(li);
+               }
+           }
+
+           // APIからTODOリストを取得して描画する関数
+           async function fetchTodoList() {
+               // APIからJSONを取得する
+               return fetch('./api/v1/list')
+                   .then((response) => response.json())
+                   .then((itemList) => {
+                       renderItemList(itemList);
+                   })
+           }
+
+           // 初回データ読み込み
+           fetchTodoList();
+       </script>
+   </body>
+</html>
