@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1131</width>
+    <height>823</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,14 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>70</y>
-     <width>421</width>
-     <height>341</height>
+     <x>10</x>
+     <y>10</y>
+     <width>1111</width>
+     <height>801</height>
     </rect>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
    </property>
    <attribute name="horizontalHeaderVisible">
     <bool>true</bool>
@@ -35,12 +38,21 @@
     <bool>true</bool>
    </attribute>
    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderStretchLastSection">
     <bool>false</bool>
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>true</bool>
    </attribute>
    <attribute name="verticalHeaderCascadingSectionResizes">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderStretchLastSection">
     <bool>false</bool>
    </attribute>
    <row>
@@ -91,6 +103,13 @@
    <item row="0" column="0">
     <property name="text">
      <string>0001</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
    </item>
    <item row="0" column="1">
