@@ -34,7 +34,7 @@ cat tbl-def | juni | \
     fi
   done
 
-paste -d' ' done-* >done
+paste -d'\t' done-* >test.tsv
 
 rm -rf done-*
 
