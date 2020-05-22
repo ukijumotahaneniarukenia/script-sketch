@@ -50,9 +50,9 @@ class Ui_Form(object):
         mx_col=max(rt)[1]
 
         Form.setObjectName(widgetName)
-        Form.resize(640, 480)
+        Form.resize(1280, 780)
         self.tableWidget = QtWidgets.QTableWidget(Form)
-        self.tableWidget.setGeometry(QtCore.QRect(70, 80, 411, 341))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 10, 1260, 760))
         self.tableWidget.setObjectName("tableWidget")
 
         self.tableWidget.setColumnCount(mx_col+1)

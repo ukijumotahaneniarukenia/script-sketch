@@ -13,9 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(640, 480)
+        Form.resize(1131, 823)
         self.tableWidget = QtWidgets.QTableWidget(Form)
-        self.tableWidget.setGeometry(QtCore.QRect(130, 70, 421, 341))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 10, 1111, 801))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(5)
@@ -38,6 +38,11 @@ class Ui_Form(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(False)
+        font.setWeight(50)
+        item.setFont(font)
         self.tableWidget.setItem(0, 0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setItem(0, 1, item)
@@ -81,9 +86,12 @@ class Ui_Form(object):
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
         self.tableWidget.horizontalHeader().setMinimumSectionSize(10)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(True)
+        self.tableWidget.horizontalHeader().setStretchLastSection(False)
         self.tableWidget.verticalHeader().setVisible(True)
-        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.verticalHeader().setSortIndicatorShown(True)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -91,6 +99,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("Form", "1"))
         item = self.tableWidget.verticalHeaderItem(1)
