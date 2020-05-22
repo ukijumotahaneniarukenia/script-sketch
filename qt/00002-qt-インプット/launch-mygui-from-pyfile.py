@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 
 from PyQt5.QtWidgets import *
 
-from input import Ui_Form
+from input2 import Ui_Form
 
 class Test(QDialog):
     def __init__(self,parent=None):
