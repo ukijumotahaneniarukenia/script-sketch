@@ -13,37 +13,34 @@ import sqlite3
 import sys
 import os
 
+def setUpUiData(args):
+    rt=[];
+    tgt_db='testdb'
+    script_filepath='test.sql'
+    conn=sqlite3.connect(tgt_db)
+    with open(script_filepath) as f:
+      sql_txt=f.read()
+    row_cnt=len(conn.execute(sql_txt).fetchall())
+    for i,row in enumerate(conn.execute(sql_txt).fetchall()):
+      for j,dat in enumerate(row):
+        rt.append([i,j,dat])
+    conn.close()
+    return rt
+
+def retranslateUiData(args):
+    rt=[];
+    tgt_db='testdb'
+    conn=sqlite3.connect(tgt_db)
+    for key,items in enumerate(conn.execute('select name from PRAGMA_table_info(\'test_tbl\')').fetchall()):
+        rt.append([key,items[0]])
+    conn.close()
+    return rt
+
 #たぶんいける
 class Ui_Form(object):
-    def setUpUiData(args):
-        rt=[];
-        tgt_db='testdb'
-        script_filepath='test.sql'
-        conn=sqlite3.connect(tgt_db)
-        with open(script_filepath) as f:
-          sql_txt=f.read()
-        row_cnt=len(conn.execute(sql_txt).fetchall())
-        for i,row in enumerate(conn.execute(sql_txt).fetchall()):
-          for j,dat in enumerate(row):
-            rt.append([i,j,dat])
-        conn.close()
-        return rt
-
-    def retranslateUiData(args):
-        rt=[];
-        tgt_db='testdb'
-        script_filepath='test.sql'
-        conn=sqlite3.connect(tgt_db)
-        with open(script_filepath) as f:
-          sql_txt=f.read()
-        row_cnt=len(conn.execute(sql_txt).fetchall())
-        for key,items in enumerate(conn.execute('select name from PRAGMA_table_info(\'test_tbl\')').fetchall()):
-            rt.append([key,items[0]])
-        conn.close()
-        return rt
 
     def setupUi(self, Form):
-        widgetName='Form'
+        widgetName="Form"
 
         rt=setUpUiData('')
 
@@ -61,18 +58,18 @@ class Ui_Form(object):
         self.tableWidget.setColumnCount(mx_col+1)
         self.tableWidget.setRowCount(mx_row+1)
 
-        for row in range(mn_row,mx_row):
-          item = QtWidgets.QTableWidgetItem()
-          self.tableWidget.setVerticalHeaderItem(row, item)
+        for row in range(mn_row,mx_row+1):
+          item_row = QtWidgets.QTableWidgetItem()
+          self.tableWidget.setVerticalHeaderItem(row, item_row)
 
-        for col in range(mn_col,mx_col):
-          item = QtWidgets.QTableWidgetItem()
-          self.tableWidget.setHorizontalHeaderItem(col, item)
+        for col in range(mn_col,mx_col+1):
+          item_col = QtWidgets.QTableWidgetItem()
+          self.tableWidget.setHorizontalHeaderItem(col, item_col)
 
-        for row in range(mn_row,mx_row):
-            for col in range(mn_col,mx_col):
-              self.tableWidget.setItem(row, col, item)
-              item = QtWidgets.QTableWidgetItem()
+        for row in range(mn_row,mx_row+1):
+            for col in range(mn_col,mx_col+1):
+              item_cell = QtWidgets.QTableWidgetItem()
+              self.tableWidget.setItem(row, col, item_cell)
 
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
@@ -86,7 +83,7 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        widgetName='Form'
+        widgetName="Form"
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate(widgetName, widgetName))
 
@@ -98,20 +95,22 @@ class Ui_Form(object):
 
         rtColHeader=retranslateUiData('')
 
-        for row in range(mn_row,mx_row):
-          item = self.tableWidget.verticalHeaderItem(row)
-          item.setText(_translate(widgetName, str(row+1)))
+        for row in range(mn_row,mx_row+1):
+          item_row = self.tableWidget.verticalHeaderItem(row)
+          item_row.setText(_translate(widgetName, str(row+1)))
 
-        for key,val in rtColHeader:
-          item = self.tableWidget.horizontalHeaderItem(key)
-          item.setText(_translate(widgetName, val))
+        for h in rtColHeader:
+          item_header = self.tableWidget.horizontalHeaderItem(h[0])
+          item_header.setText(_translate(widgetName, str(h[1])))
 
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
 
-        for row in range(mn_row,mx_row):
-            for col in range(mn_col,mx_col):
-              item = self.tableWidget.item(row, col)
-              item.setText(_translate(widgetName, rt[row][2]))
+        for e in rt:
+          row=e[0]
+          col=e[1]
+          dat=e[2]
+          item_data = self.tableWidget.item(row, col)
+          item_data.setText(_translate(widgetName, str(dat)))
 
         self.tableWidget.setSortingEnabled(__sortingEnabled)
