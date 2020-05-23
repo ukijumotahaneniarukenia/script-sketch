@@ -14,18 +14,6 @@ curl -s "https://get.sdkman.io" | bash
 sdk install gradle
 ```
 
-```
-/root/.sdkman/candidates/gradle/6.4.1/bin/gradle
-```
-
-一度ダウンロードしたらアーカイブされる
-
-これも実行者単位
-
-```
-/root/.sdkman/archives/gradle-6.4.1.zip
-```
-
 特定のコマンドのインストール可能なバージョン一覧取得
 
 ```
@@ -63,4 +51,111 @@ Available Gradle Versions
 * - installed
 > - currently in use
 ================================================================================
+```
+
+
+```
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$sdk install gradle
+
+Downloading: gradle 6.4.1
+
+In progress...
+
+######################################################################## 100.0%
+
+Installing: gradle 6.4.1
+Done installing!
+
+
+Setting gradle 6.4.1 as default.
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$sdk install gradle 6.1.1
+
+Downloading: gradle 6.1.1
+
+In progress...
+
+######################################################################## 100.0%
+
+Installing: gradle 6.1.1
+Done installing!
+
+
+Setting gradle 6.1.1 as default.
+
+```
+
+
+一度ダウンロードしたらアーカイブされる
+
+これも実行者単位
+
+```
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$find / -name "*gradle*" 2>/dev/null | grep archive
+/home/mysql/.sdkman/archives/gradle-6.1.1.zip
+/home/mysql/.sdkman/archives/gradle-6.4.1.zip
+```
+
+```
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$find / -type f -name "*gradle" 2>/dev/null
+/home/mysql/.sdkman/candidates/gradle/6.1.1/bin/gradle
+/home/mysql/.sdkman/candidates/gradle/6.4.1/bin/gradle
+
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$/home/mysql/.sdkman/candidates/gradle/6.4.1/bin/gradle -version
+
+Welcome to Gradle 6.4.1!
+
+Here are the highlights of this release:
+ - Support for building, testing and running Java Modules
+ - Precompiled script plugins for Groovy DSL
+ - Single dependency lock file per project
+
+For more details see https://docs.gradle.org/6.4.1/release-notes.html
+
+
+------------------------------------------------------------
+Gradle 6.4.1
+------------------------------------------------------------
+
+Build time:   2020-05-15 19:43:40 UTC
+Revision:     1a04183c502614b5c80e33d603074e0b4a2777c5
+
+Kotlin:       1.3.71
+Groovy:       2.5.10
+Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
+JVM:          11 (Oracle Corporation 11+28)
+OS:           Linux 3.10.0-1062.el7.x86_64 amd64
+
+mysql doc-centos-7-6-18-10-mysql-dbeaver ~$/home/mysql/.sdkman/candidates/gradle/6.1.1/bin/gradle -version
+
+Welcome to Gradle 6.1.1!
+
+Here are the highlights of this release:
+ - Reusable dependency cache
+ - Configurable compilation order between Groovy/Kotlin/Java/Scala
+ - New sample projects in Gradle's documentation
+
+For more details see https://docs.gradle.org/6.1.1/release-notes.html
+
+
+------------------------------------------------------------
+Gradle 6.1.1
+------------------------------------------------------------
+
+Build time:   2020-01-24 22:30:24 UTC
+Revision:     a8c3750babb99d1894378073499d6716a1a1fa5d
+
+Kotlin:       1.3.61
+Groovy:       2.5.8
+Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
+JVM:          11 (Oracle Corporation 11+28)
+OS:           Linux 3.10.0-1062.el7.x86_64 amd64
+
+```
+
+
+短く実行したい場合はパス通す
+
+```
+export GRADLE_HOME=/home/mysql/.sdkman/candidates/gradle/6.1.1
+export PATH=$GRADLE_HOME/bin:$PATH
 ```
