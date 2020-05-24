@@ -1,6 +1,17 @@
+以下の作業はすべｔrootユーザー
+
+nginxのインストール
+
+```
+bash /usr/local/src/script-repo/ubuntu-18-04-install-nginx.sh
+```
+
+
 CGIファイル格納ディレクトリの作成
 
 cgiスクリプトの実行ユーザーがwww-dataなので、配下全てその人の持ち物にしておく
+
+fcgiソフトのインストールでwww-dataユーザーないしグループが自動で追加される
 
 ```
 mkdir -p /var/www/cgi-bin
