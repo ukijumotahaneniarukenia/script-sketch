@@ -310,3 +310,14 @@ Connection: keep-alive
 * Connection #0 to host localhost left intact
 ```
 
+
+
+調べてみると
+
+- try_files句をコンフにかけばよさげ？？？
+
+- 来そうなURLパターンを複数定義できるぽい
+
+- https://neos21.hatenablog.com/entry/2020/03/06/080000
+
+- https://gist.github.com/kenjiskywalker/4596258
