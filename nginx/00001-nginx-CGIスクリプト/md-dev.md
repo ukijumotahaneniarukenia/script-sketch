@@ -218,3 +218,95 @@ $cat /var/log/nginx/error.log
 2020/05/24 20:05:58 [error] 2864#2864: *3 FastCGI sent in stderr: "Cannot get script name, are DOCUMENT_ROOT and SCRIPT_NAME (or SCRIPT_FILENAME) set and is the script executable?" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /b.sh HTTP/1.1", upstream: "fastcgi://unix:/var/run/fcgiwrap.socket:", host: "localhost:8888"
 ```
 
+
+エラーページなどの設定を追加
+
+```
+$mkdir -p /var/www/cgi-bin/error-page
+$touch /var/www/cgi-bin/error-page/50X.html
+$echo '50Xだよーん' >> /var/www/cgi-bin/error-page/50X.html
+$touch /var/www/cgi-bin/error-page/40X.html
+$echo '40Xだよーん' >> /var/www/cgi-bin/error-page/40X.html
+$chown -R www-data:www-data /var/www/cgi-bin
+```
+
+```
+$cat /etc/nginx/conf.d/cgi-bash.conf
+server {
+    listen       8888;
+    server_name  localhost;
+
+    location ~ \.(pl|sh|cgi)$ {
+      root   /var/www/cgi-bin;
+      fastcgi_pass      unix:/var/run/fcgiwrap.socket; #ソケットファイルによるnginxとfcgi側の通信方法を採用
+      include           /etc/nginx/fastcgi_params; #CGIスクリプトで使用できる環境変数をインクルード
+      fastcgi_param     SCRIPT_FILENAME   \$document_root\$fastcgi_script_name;  #rootディレクトリ配下のCGIスクリプトが環境変数を使用できるように設定
+    }
+
+    error_page 500 502 503 504 /50X.html;
+
+    location = /50X.html {
+      root /var/www/cgi-bin/error-page;
+    }
+
+    error_page 400 402 403 404 /40X.html;
+
+    location = /40X.html {
+      root /var/www/cgi-bin/error-page;
+    }
+}
+```
+
+apacheの.htaccessみたいなのないんかなnginx
+
+そのままででもえぐみあっていいかも
+
+- https://www.futomi.com/lecture/htaccess/error_document.html
+
+```
+$curl -i http://localhost:8888/a.sh
+HTTP/1.1 200 OK
+Server: nginx/1.18.0
+Date: Sun, 24 May 2020 11:40:09 GMT
+Content-Type: text/html
+Transfer-Encoding: chunked
+Connection: keep-alive
+
+うんこ
+
+$curl -i http://localhost:8888/l.sh
+HTTP/1.1 403 Forbidden
+Server: nginx/1.18.0
+Date: Sun, 24 May 2020 11:40:14 GMT
+Content-Type: text/plain
+Transfer-Encoding: chunked
+Connection: keep-alive
+
+403 Forbidden
+$curl -vi http://localhost:8888/l.sh
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 8888 (#0)
+> GET /l.sh HTTP/1.1
+> Host: localhost:8888
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+< Server: nginx/1.18.0
+Server: nginx/1.18.0
+< Date: Sun, 24 May 2020 11:40:19 GMT
+Date: Sun, 24 May 2020 11:40:19 GMT
+< Content-Type: text/plain
+Content-Type: text/plain
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Connection: keep-alive
+Connection: keep-alive
+
+< 
+403 Forbidden
+* Connection #0 to host localhost left intact
+```
+
