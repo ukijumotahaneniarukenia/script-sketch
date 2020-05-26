@@ -1,3 +1,5 @@
+- https://blogs.osdn.jp/2018/03/26/jre-minimize.html
+
 バージョン
 
 ```
