@@ -28,37 +28,21 @@ EOS
 - 動作確認
 
 ```
-$cd 00004-go-テキスト処理
-$export GOPATH=$(pwd)
-$cd src/main
-$go install
-$export PATH=$PATH:$GOPATH/bin
-$main
+$ cd 00004-go-テキスト処理
+$ ( export GOPATH=$(pwd) && cd src/main && go install )
+$ ./bin/main
 ```
 
 - 外部パッケージ化
-  - mainファイルの参照を書き換える
   - goのソースは別レポジトリで管理するようにする
-```
-$cd 00004-go-テキスト処理
-$mkdir -p src/github.com/ukijumotahaneniarukenia/go-repo
-$find src -maxdepth 1 -type d | grep -vP 'main|github' | grep -P '/' | xargs -I@ mv @ src/github.com/ukijumotahaneniarukenia/gone
-$find . -name "*go" | grep -vP 'main' | perl -anlE 's/.\/src\///g and s/(.*)(\/.*.go)/\1/g and say'
-```
 
-- リモートサブモジュールを取得
+- go-repoからサブモジュールを取得
 
 ```
-$cd 00004-go-テキスト処理/src
-$go get github.com/ukijumotahaneniarukenia/go-repo
+$ cd 00004-go-テキスト処理
+$ export GOPATH=$(pwd)
+$ go get github.com/ukijumotahaneniarukenia/go-repo
 ```
 
 - 動作確認
-
-```
-$cd 00004-go-テキスト処理
-$export GOPATH=$(pwd)
-$go install
-$export PATH=$PATH:$GOPATH/bin
-$main
-```
+  - 00002などを参照
