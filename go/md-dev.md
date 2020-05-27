@@ -1,3 +1,43 @@
+- ショートカット手順
+
+
+スクリプトディレクトリ名を引数に渡してNow On Airが標準出力にしゅつりょくされればおｋ
+
+```
+
+$ ./T01-go-テンプレート作成.sh XXXXX-go-マイスペ
+Now On Air
+
+```
+
+そのあとは
+
+修正
+
+パス通し
+
+```
+
+$ cd  XXXXX-go-マイスペ
+
+$ ( export GOPATH=$(pwd) && cd src/main && go install )
+
+$ ./bin/main
+
+
+```
+
+動作確認
+
+
+
+
+```
+
+```
+
+
+
 - REF
   - http://gihyo.jp/dev/feature/01/go_4beginners/0001?page=3
 
