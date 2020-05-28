@@ -85,4 +85,4 @@ $ go get github.com/ukijumotahaneniarukenia/go-repo
 ```
 
 - 動作確認
-  - 00002などを参照
+  - 00030などを参照
