@@ -26,7 +26,7 @@ cd $ENV_REPO
 
 
 
-echo '/bin/* /pkg/* /github.com/* /main' | xargs -n1 >.gitignore
+echo '/bin/* /pkg/* /src/github.com/* /main' | xargs -n1 >.gitignore
 
 
 if [ -f src/main/main.go ];then
