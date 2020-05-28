@@ -25,11 +25,14 @@ fi
 cd $ENV_REPO
 
 
-touch src/main/main.go
-
 
 echo '/bin/* /pkg/* /github.com/* /main' | xargs -n1 >.gitignore
 
+
+if [ -f src/main/main.go ];then
+  :
+else
+  touch src/main/main.go
 
 cat <<EOS >src/main/main.go
 package main
@@ -42,6 +45,9 @@ func main() {
 	fmt.Println("Now On Air")
 }
 EOS
+
+
+fi
 
 
 #このシェルスクリプト内でのみ有効な変数
