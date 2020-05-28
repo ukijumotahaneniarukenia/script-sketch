@@ -1,3 +1,9 @@
+go.modファイルがあるとgo install時に実行バイナリを作成する際にソースファイルが参照してる外部ライブラリのインクルードを自動化できる。
+
+maven gradleなどと似た考えとおもわれ。
+
+go 便利。
+
 ```
 $ env | grep GO
 GOPATH=/home/kuraine/.local
