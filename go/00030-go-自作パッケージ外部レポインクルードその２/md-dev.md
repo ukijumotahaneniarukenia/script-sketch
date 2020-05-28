@@ -18,18 +18,18 @@ $ tree
 
 $ export GOPATH=$(pwd)
 
-$ go get github.com/ukijumotahaneniarukenia/go-repo2
+$ go get github.com/ukijumotahaneniarukenia/go-repo
 
 $ tree
 .
 ├── bin
-│   ├── go-repo2
+│   ├── go-repo
 │   └── main
 ├── pkg
 └── src
     ├── github.com
     │   └── ukijumotahaneniarukenia
-    │       └── go-repo2
+    │       └── go-repo
     │           ├── README.md
     │           ├── a.go
     │           └── go_script
@@ -45,7 +45,7 @@ $ ./bin/main
 Now On Air
 
 
-$ ./bin/go-repo2
+$ ./bin/go-repo
 うんこだよーん
 
 
