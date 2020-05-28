@@ -3,7 +3,7 @@ package main
 
 import (
     "fmt"
-    go_script "github.com/ukijumotahaneniarukenia/go-repo2/go_script"
+    go_script "github.com/ukijumotahaneniarukenia/go-repo/go_script"
 )
 
 func main() {
