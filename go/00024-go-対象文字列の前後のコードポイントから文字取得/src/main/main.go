@@ -5,7 +5,10 @@ import (
 )
 
 func main() {
-	s := "スペシャル"
+	// s := "スペシャル"
+
+	s := "💩"
+
 	for _, r := range s {
 		rr := int(r - '1')
 		rrr := int(r + '1')
