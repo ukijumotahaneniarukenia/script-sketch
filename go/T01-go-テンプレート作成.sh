@@ -26,7 +26,7 @@ cd $ENV_REPO
 
 
 
-echo '/bin/* /pkg/* /src/github.com/* /main' | xargs -n1 >.gitignore
+echo '/bin/* /pkg/* /src/github.com/* /src/golang.org/* /main' | xargs -n1 >.gitignore
 
 
 touch src/main/main.go
