@@ -1,0 +1,1 @@
+/home/kuraine/script-sketch/kotlin/00003-kotlin-外部ライブラリなどを使用したリベンジ/nnn/build/classes/kotlin/main/AppKt.class
