@@ -1,0 +1,272 @@
+= 見出し =
+
+* IN
+
+<source lang=""># 見出し1
+## 見出し2
+### 見出し3
+#### 見出し4
+##### 見出し5
+###### 見出し6</source>
+* OUT
+
+= 見出し1 =
+
+== 見出し2 ==
+
+=== 見出し3 ===
+
+==== 見出し4 ====
+
+===== 見出し5 =====
+
+====== 見出し6 ======
+
+
+
+= 色コード =
+
+* IN
+
+<source lang="">![](https://via.placeholder.com/16/c7e7f6/FFFFFF/?text=%20) `#c7e7f6`
+![](https://via.placeholder.com/16/abdbf1/FFFFFF/?text=%20) `#abdbf1`
+![](https://via.placeholder.com/16/6ec1e9/FFFFFF/?text=%20) `#6ec1e9`
+![](https://via.placeholder.com/16/47b1e1/FFFFFF/?text=%20) `#47b1e1`
+![](https://via.placeholder.com/16/0093d6/FFFFFF/?text=%20) `#0093d6`
+![](https://via.placeholder.com/16/221816/FFFFFF/?text=%20) `#221816`</source>
+* OUT
+
+[[File:https://via.placeholder.com/16/c7e7f6/FFFFFF/?text= |fig:]] <code>#c7e7f6</code><br />
+[[File:https://via.placeholder.com/16/abdbf1/FFFFFF/?text= |fig:]] <code>#abdbf1</code><br />
+[[File:https://via.placeholder.com/16/6ec1e9/FFFFFF/?text= |fig:]] <code>#6ec1e9</code><br />
+[[File:https://via.placeholder.com/16/47b1e1/FFFFFF/?text= |fig:]] <code>#47b1e1</code><br />
+[[File:https://via.placeholder.com/16/0093d6/FFFFFF/?text= |fig:]] <code>#0093d6</code><br />
+[[File:https://via.placeholder.com/16/221816/FFFFFF/?text= |fig:]] <code>#221816</code>
+
+= インラインコード =
+
+* IN
+
+<source lang="">これは `echo うんこ`です。</source>
+* OUT
+
+これは <code>echo うんこ</code>です。
+
+= ノンインラインコード =
+
+* IN
+
+<source lang="">
+```
+
+#!/usr/bin/env bash
+
+
+echo うんこ
+
+```
+</source>
+* OUT
+
+<source lang="">
+#!/usr/bin/env bash
+
+
+echo うんこ
+</source>
+
+
+= ノンオーダリスト =
+
+* IN
+
+<source lang="">- リスト1
+    - リスト1-1
+        - リスト1-1-1
+        - リスト1-1-2
+    - リスト1-2
+- リスト2
+- リスト3</source>
+* OUT
+* リスト1
+** リスト1-1
+*** リスト1-1-1
+*** リスト1-1-2
+** リスト1-2
+* リスト2
+* リスト3
+
+= オーダリスト =
+
+* IN
+
+<source lang="">1. 番号付きリスト1
+    1. 番号付きリスト1-1
+    1. 番号付きリスト1-2
+1. 番号付きリスト2
+1. 番号付きリスト3</source>
+* OUT
+
+# 番号付きリスト1
+## 番号付きリスト1-1
+## 番号付きリスト1-2
+# 番号付きリスト2
+# 番号付きリスト3
+
+= 引用 =
+
+* IN
+
+<source lang="">
+> **Note:**  Interfere when the enemy is making a mistake.
+</source>
+* OUT
+
+<blockquote>'''Note:''' Interfere when the enemy is making a mistake.
+</blockquote>
+= リンク =
+
+* IN
+
+<source lang="">[pngフリー画像集](https://www.pngonly.com/owl-png/)</source>
+* OUT
+
+[https://www.pngonly.com/owl-png/ pngフリー画像集]
+
+= 強調表示 =
+
+* IN
+
+<source lang="">これは **うんこ** です</source>
+* OUT
+
+これは '''うんこ''' です
+
+= 画像 =
+
+<pre class="shell">curl -sSLO https://www.pngonly.com/wp-content/uploads/2017/06/Owl-Close-PNG-Photo.png</pre>
+* IN
+
+<source lang="">
+![フクロウ](./Owl-Close-PNG-Photo.png "Owl")
+</source>
+* OUT
+
+[[File:/home/kuraine/script-sketch/Typora/Owl-Close-PNG-Photo.png|frame|none|alt=|caption Owl]]
+
+
+
+= テーブル =
+
+* IN
+
+<source lang="">|                  | ASCII                           | HTML                          |
+| ---------------- | ------------------------------- | ----------------------------- |
+| Single backticks | `'Isn't this fun?'`             | 'Isn't this fun?'             |
+| Quotes           | `"Isn't this fun?"`             | "Isn't this fun?"             |
+| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
+</source>
+* OUT
+
+{|
+! 
+! ASCII
+! HTML
+|-
+| Single backticks
+| <code>'Isn't this fun?'</code>
+| 'Isn't this fun?'
+|-
+| Quotes
+| <code>&quot;Isn't this fun?&quot;</code>
+| &quot;Isn't this fun?&quot;
+|-
+| Dashes
+| <code>-- is en-dash, --- is em-dash</code>
+| -- is en-dash, --- is em-dash
+|}
+
+* IN
+
+<source lang="">| 左揃え | 中央揃え | 右揃え |
+|:--|:--:|--:|
+|1 |2 |3 |
+|4 |5 |6 |
+</source>
+* OUT
+
+{|
+! 左揃え
+! 中央揃え
+! 右揃え
+|-
+| 1
+| 2
+| 3
+|-
+| 4
+| 5
+| 6
+|}
+
+
+
+* IN
+
+
+
+<source lang="">
+|`code`    |*italic*                  |
+|:--:|:--:|
+|**bold**  |***bold italic***         |
+|$ omega $|[Qiita](http://qiita.com)|</source>
+* OUT
+
+texうまくいかんな
+
+{|
+! <code>code</code>
+! ''italic''
+|-
+| '''bold'''
+| '''''bold italic'''''
+|-
+| $ omega $
+| [http://qiita.com Qiita]
+|}
+
+
+
+
+
+= tex =
+
+* https://qiita.com/MuAuan/items/64dc82030a9ec4f5cef9
+
+The ''Gamma function'' satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
+
+<math>\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.</math>
+<blockquote>You can find more information about '''LaTeX''' mathematical expressions [http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference here].
+</blockquote>
+= UML diagrams =
+
+これはvscodeでdraw.ioができるようになったから、あんま使わんかも？？
+
+You can render UML diagrams using [https://mermaidjs.github.io/ Mermaid]. For example, this will produce a sequence diagram:
+
+<pre class="mermaid">sequenceDiagram
+Alice -&gt;&gt; Bob: Hello Bob, how are you?
+Bob--&gt;&gt;John: How about you John?
+Bob--x Alice: I am good thanks!
+Bob-x John: I am good thanks!
+Note right of John: Bob thinks a long&lt;br/&gt;long time, so long&lt;br/&gt;that the text does&lt;br/&gt;not fit on a row.
+
+Bob--&gt;Alice: Checking with John...
+Alice-&gt;John: Yes... John, how are you?</pre>
+And this will produce a flow chart:
+
+<pre class="mermaid">graph LR
+A[Square Rect] -- Link text --&gt; B((Circle))
+A --&gt; C(Round Rect)
+B --&gt; D{Rhombus}
+C --&gt; D</pre>

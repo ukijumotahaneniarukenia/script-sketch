@@ -1,0 +1,285 @@
+h1. 見出し
+
+* IN
+
+bc(). # 見出し1
+## 見出し2
+### 見出し3
+#### 見出し4
+##### 見出し5
+###### 見出し6
+
+
+* OUT
+
+h1. 見出し1
+
+h2. 見出し2
+
+h3. 見出し3
+
+h4. 見出し4
+
+h5. 見出し5
+
+h6. 見出し6
+
+
+
+h1. 色コード
+
+* IN
+
+bc(). ![](https://via.placeholder.com/16/c7e7f6/FFFFFF/?text=%20) `#c7e7f6`
+![](https://via.placeholder.com/16/abdbf1/FFFFFF/?text=%20) `#abdbf1`
+![](https://via.placeholder.com/16/6ec1e9/FFFFFF/?text=%20) `#6ec1e9`
+![](https://via.placeholder.com/16/47b1e1/FFFFFF/?text=%20) `#47b1e1`
+![](https://via.placeholder.com/16/0093d6/FFFFFF/?text=%20) `#0093d6`
+![](https://via.placeholder.com/16/221816/FFFFFF/?text=%20) `#221816`
+
+
+* OUT
+
+!https://via.placeholder.com/16/c7e7f6/FFFFFF/?text= (fig:)! @#c7e7f6@
+!https://via.placeholder.com/16/abdbf1/FFFFFF/?text= (fig:)! @#abdbf1@
+!https://via.placeholder.com/16/6ec1e9/FFFFFF/?text= (fig:)! @#6ec1e9@
+!https://via.placeholder.com/16/47b1e1/FFFFFF/?text= (fig:)! @#47b1e1@
+!https://via.placeholder.com/16/0093d6/FFFFFF/?text= (fig:)! @#0093d6@
+!https://via.placeholder.com/16/221816/FFFFFF/?text= (fig:)! @#221816@
+
+h1. インラインコード
+
+* IN
+
+bc(). これは `echo うんこ`です。
+
+
+* OUT
+
+これは @echo うんこ@です。
+
+h1. ノンインラインコード
+
+* IN
+
+<pre class="">
+
+```
+
+#!/usr/bin/env bash
+
+
+echo うんこ
+
+```
+
+</pre>
+
+* OUT
+
+<pre class="">
+
+#!/usr/bin/env bash
+
+
+echo うんこ
+
+</pre>
+
+
+
+h1. ノンオーダリスト
+
+* IN
+
+bc(). - リスト1
+    - リスト1-1
+        - リスト1-1-1
+        - リスト1-1-2
+    - リスト1-2
+- リスト2
+- リスト3
+
+
+* OUT
+* リスト1
+** リスト1&#45;1
+*** リスト1&#45;1&#45;1
+*** リスト1&#45;1&#45;2
+** リスト1&#45;2
+* リスト2
+* リスト3
+
+h1. オーダリスト
+
+* IN
+
+bc(). 1. 番号付きリスト1
+    1. 番号付きリスト1-1
+    1. 番号付きリスト1-2
+1. 番号付きリスト2
+1. 番号付きリスト3
+
+
+* OUT
+
+# 番号付きリスト1
+## 番号付きリスト1&#45;1
+## 番号付きリスト1&#45;2
+# 番号付きリスト2
+# 番号付きリスト3
+
+h1. 引用
+
+* IN
+
+<pre class="">
+
+&gt; **Note:**  Interfere when the enemy is making a mistake.
+
+</pre>
+
+* OUT
+
+bq. *Note:* Interfere when the enemy is making a mistake.
+
+
+
+h1. リンク
+
+* IN
+
+bc(). [pngフリー画像集](https://www.pngonly.com/owl-png/)
+
+
+* OUT
+
+"pngフリー画像集":https://www.pngonly.com/owl-png/
+
+h1. 強調表示
+
+* IN
+
+bc(). これは **うんこ** です
+
+
+* OUT
+
+これは *うんこ* です
+
+h1. 画像
+
+bc(shell). curl -sSLO https://www.pngonly.com/wp-content/uploads/2017/06/Owl-Close-PNG-Photo.png
+
+
+* IN
+
+<pre class="">
+
+![フクロウ](./Owl-Close-PNG-Photo.png &quot;Owl&quot;)
+
+</pre>
+
+* OUT
+
+!/home/kuraine/script-sketch/Typora/Owl-Close-PNG-Photo.png(Owl)!
+Owl
+
+
+
+h1. テーブル
+
+* IN
+
+bc(). |                  | ASCII                           | HTML                          |
+| ---------------- | ------------------------------- | ----------------------------- |
+| Single backticks | `'Isn't this fun?'`             | 'Isn't this fun?'             |
+| Quotes           | `"Isn't this fun?"`             | "Isn't this fun?"             |
+| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
+
+
+
+* OUT
+
+|_. |_. ASCII|_. HTML|
+|Single backticks|@'Isn't this fun?'@|'Isn't this fun?'|
+|Quotes|@"Isn't this fun?"@|&quot;Isn't this fun?&quot;|
+|Dashes|@-- is en-dash, --- is em-dash@|&#45;&#45; is en&#45;dash, &#45;&#45;&#45; is em&#45;dash|
+
+* IN
+
+bc(). | 左揃え | 中央揃え | 右揃え |
+|:--|:--:|--:|
+|1 |2 |3 |
+|4 |5 |6 |
+
+
+
+* OUT
+
+|_. 左揃え|_. 中央揃え|_. 右揃え|
+|1|2|3|
+|4|5|6|
+
+
+
+* IN
+
+
+
+<pre class="">
+
+|`code`    |*italic*                  |
+|:--:|:--:|
+|**bold**  |***bold italic***         |
+|$ omega $|[Qiita](http://qiita.com)|
+</pre>
+
+* OUT
+
+texうまくいかんな
+
+|_. @code@|_. _italic_|
+|*bold*|*_bold italic_*|
+|$ omega $|"Qiita":http://qiita.com|
+
+
+
+
+
+h1. tex
+
+* https://qiita.com/MuAuan/items/64dc82030a9ec4f5cef9
+
+The _Gamma function_ satisfying $\Gamma(n) = (n&#45;1)!\quad\forall n\in\mathbb N$ is via the Euler integral
+
+<span class="math">\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.</math>
+bq. You can find more information about *LaTeX* mathematical expressions "here":http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference.
+
+
+
+h1. UML diagrams
+
+これはvscodeでdraw.ioができるようになったから、あんま使わんかも？？
+
+You can render UML diagrams using "Mermaid":https://mermaidjs.github.io/. For example, this will produce a sequence diagram:
+
+<pre class="mermaid">
+sequenceDiagram
+Alice -&gt;&gt; Bob: Hello Bob, how are you?
+Bob--&gt;&gt;John: How about you John?
+Bob--x Alice: I am good thanks!
+Bob-x John: I am good thanks!
+Note right of John: Bob thinks a long&lt;br/&gt;long time, so long&lt;br/&gt;that the text does&lt;br/&gt;not fit on a row.
+
+Bob--&gt;Alice: Checking with John...
+Alice-&gt;John: Yes... John, how are you?
+</pre>
+
+And this will produce a flow chart:
+
+bc(mermaid). graph LR
+A[Square Rect] -- Link text --> B((Circle))
+A --> C(Round Rect)
+B --> D{Rhombus}
+C --> D

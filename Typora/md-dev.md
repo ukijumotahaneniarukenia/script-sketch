@@ -1,3 +1,9 @@
+pandocも同時にインストールしておくとはかどる
+
+```
+apt install -y pandoc
+```
+
 
 マークダウン記法で記載しEnterするたびにレンダラうごく便利。python-qt製。
 - https://typora.io/
