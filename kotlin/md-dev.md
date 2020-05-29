@@ -37,7 +37,7 @@ Kotlin version 1.3.72-release-468 (JRE 11+28)
 $ mkdir -p ./00001-kotlin-ハローワールド/nnn/{out,bin}
 
 
-$ echo '/nnn/bin/* /nnn/out/*  /.idea/* ' | xargs -n1 >./00001-kotlin-ハローワールド/.gitignore
+$ echo '/nnn/bin/* /nnn/out/* /nnn/nnn.iml /.idea/* ' | xargs -n1 >./00001-kotlin-ハローワールド/.gitignore
 
 $ find
 .
