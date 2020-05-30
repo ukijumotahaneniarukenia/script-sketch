@@ -1,7 +1,0 @@
-/nnn/bin/*
-/nnn/out/*
-/nnn/nnn.iml
-/nnn/build/kotlin/*
-/nnn/build/classes/*
-/nnn/build/libs/*
-/.idea/*
