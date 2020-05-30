@@ -1,9 +1,0 @@
-
-> Configure project :nnn
-Kotlin Multiplatform Projects are an experimental feature.
-
-> Task :nnn:runDebugExecutableLinux
-Hello, Kotlin/Native!
-
-BUILD SUCCESSFUL in 7s
-2 actionable tasks: 2 executed
