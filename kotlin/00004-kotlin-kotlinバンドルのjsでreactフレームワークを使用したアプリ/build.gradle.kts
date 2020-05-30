@@ -28,9 +28,11 @@ dependencies {
     implementation(npm("inline-style-prefixer"))
 
     //Video Player (chapter 7)
+    // ﾋﾞﾃﾞｵﾌﾟﾚｲﾔなどnpmパッケージ管理ツールでインストール
     implementation(npm("react-player"))
 
     //Share Buttons (chapter 7)
+    //ソーシャルシェアボタンなどをnpm経由でインストール
     implementation(npm("react-share"))
 
     //Coroutines (chapter 8)
