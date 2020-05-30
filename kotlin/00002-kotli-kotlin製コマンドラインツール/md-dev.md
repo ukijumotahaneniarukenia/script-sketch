@@ -47,7 +47,7 @@ $ mkdir -p 00002-kotli-kotlin製コマンドラインツール
 
 $ cd 00002-kotli-kotlin製コマンドラインツール
 
-$ echo '/.idea/* ' | xargs -n1 >.gitignore
+$ echo '/.idea/* /.gradle/*' | xargs -n1 >.gitignore
 
 $ tree
 .
