@@ -4,7 +4,17 @@ import react.dom.*
 import styled.css
 import styled.styledDiv
 
-class App : RComponent<RProps, RState>() {
+//現状まだ見ていないリストと見たリストの両方から１つずつ選択できるので、
+//それらを選択された要素として単一管理するために型定義
+//メモリ領域を複数ではなく、単一に変更
+//Rstateを継承させておく
+
+external interface AppState: RState {
+    var currentVideo: Video?
+}
+
+//定義したインターフェースを継承するように修正
+class App : RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
         h1 {
             +"KotlinConf Explorer"
@@ -15,6 +25,12 @@ class App : RComponent<RProps, RState>() {
             }
             videoList {
                 videos = unwatchedVideos
+                selectedVideo = state.currentVideo
+                onSelectVideo = { video ->
+                    setState {
+                        currentVideo = video
+                    }
+                }
             }
 
             h3 {
@@ -22,6 +38,12 @@ class App : RComponent<RProps, RState>() {
             }
             videoList {
                 videos = watchedVideos
+                selectedVideo = state.currentVideo
+                onSelectVideo = { video ->
+                    setState {
+                        currentVideo = video
+                    }
+                }
             }
         }
         styledDiv {
