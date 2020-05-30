@@ -5,23 +5,38 @@ fun main() {
 //    document.bgColor = "blue"
     render(document.getElementById("root")){
         h1 {
-            + "へろーワールド。React + Kotlin JS!💩"
+            +"KotlinConf Explorer"
         }
-        h2 {
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9\uD83D\uDCA9"
+        div {
+            h3 {
+                +"Videos to watch"
+            }
+            p {
+                +"John Doe: Building and breaking things"
+            }
+            p {
+                +"Jane Smith: The development process"
+            }
+            p {
+                +"Matt Miller: The Web 7.0"
+            }
+
+            h3 {
+                +"Videos watched"
+            }
+            p {
+                +"Tom Jerry: Mouseless development"
+            }
         }
-        h3 {
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9\uD83D\uDCA9"
-        }
-        h4 {
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9"
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9"
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9"
-            + "へろーワールド。React + Kotlin JS!\uD83D\uDCA9"
-        }
-        h5 {
-            + "へろーワールド。React + Kotlin JS!💩"
+        div {
+            h3 {
+                +"John Doe: Building and breaking things"
+            }
+            img {
+                attrs {
+                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
+                }
+            }
         }
     }
-
 }
