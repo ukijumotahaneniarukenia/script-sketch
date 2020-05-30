@@ -2,6 +2,8 @@
 
 使い勝手的なのはkotlinの文法で、単一実行可能なコマンドラインアプリなどがハンディに作れるということか。
 
+- https://kotlinlang.org/docs/reference/native-overview.html
+
 ```
 $ mkdir -p 00002-kotlin-外部ライブラリなど使用した
 
