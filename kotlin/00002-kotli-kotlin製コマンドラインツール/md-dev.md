@@ -4,6 +4,10 @@
 
 - https://kotlinlang.org/docs/reference/native-overview.html
 
+
+jarをインクルードしてどうのこうのという話ではなさそう
+
+
 ```
 $ gradle -version
 
