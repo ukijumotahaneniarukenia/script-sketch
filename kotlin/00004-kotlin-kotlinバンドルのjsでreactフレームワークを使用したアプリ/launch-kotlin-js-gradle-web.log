@@ -1,20 +1,11 @@
-Starting a Gradle Daemon, 1 busy and 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
-> Task :packageJson
+> Task :packageJson UP-TO-DATE
 > Task :kotlinNodeJsSetup SKIPPED
-
 > Task :kotlinNpmInstall
-warning workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > webpack-dev-server > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
-warning workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > webpack-dev-server > chokidar > fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
-warning workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > webpack > watchpack > watchpack-chokidar2 > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
-warning workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > webpack-cli > findup-sync > micromatch > snapdragon > source-map-resolve > resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
-warning workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > webpack-cli > findup-sync > micromatch > snapdragon > source-map-resolve > urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
-warning "workspace-aggregator-8ba28d98-cf53-4d24-8a0e-07aeea2cfc1d > confexplorer > styled-components@5.1.1" has unmet peer dependency "react-is@>= 16.8.0".
-
 > Task :compileKotlinJs
-> Task :processResources
+> Task :processResources UP-TO-DATE
 > Task :browserDevelopmentRun
 
-BUILD SUCCESSFUL in 35s
-5 actionable tasks: 5 executed
+BUILD SUCCESSFUL in 2s
+5 actionable tasks: 3 executed, 2 up-to-date
 
 Waiting for changes to input files of tasks...

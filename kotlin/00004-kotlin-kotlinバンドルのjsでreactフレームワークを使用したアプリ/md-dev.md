@@ -20,10 +20,22 @@ $ rm -rf build
 ```
 
 
-起動
+フォアグランド起動
+
+動作確認はこっちでいい
+
+```
+$ ./gradlew browserDevelopmentRun --continuous 1>launch-kotlin-js-gradle-web.log 2>&1 </dev/null
+```
+
+バッググランド起動
+
+デプロイはこっち
+
 ```
 $ ./gradlew browserDevelopmentRun --continuous 1>launch-kotlin-js-gradle-web.log 2>&1 </dev/null &
 ```
+
 
 ポートはdockerコンテナ内で完結できたので、外部に公開する必要はない。EXPOSEする必要はない。
 
