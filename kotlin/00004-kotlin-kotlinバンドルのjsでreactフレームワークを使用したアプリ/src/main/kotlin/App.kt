@@ -1,32 +1,43 @@
-import kotlinx.css.*
 import react.*
-import react.dom.*
-import styled.css
-import styled.styledDiv
+import react.dom.div
+import react.dom.h1
+import react.dom.h3
 
-//現状まだ見ていないリストと見たリストの両方から１つずつ選択できるので、
-//それらを選択された要素として単一管理するために型定義
-//メモリ領域を複数ではなく、単一に変更
-//Rstateを継承させておく
-
-external interface AppState: RState {
-    var currentVideo: Video?
+//RStateを継承しておくと、変数の一元管理ができる
+external interface AppState : RState {
+    var currentVideo: Video? //0件 ないし 1件という意味ではてなマーク。未選択状態と単一選択状態を表現している
+    var unwatchedVideos: List<Video>
+    var watchedVideos: List<Video>
 }
 
 //定義したインターフェースを継承するように修正
 class App : RComponent<RProps, AppState>() {
+
+    //初期表示イベント
+    //データなどを設定
+    override fun AppState.init() {
+        unwatchedVideos = listOf(
+            Video(1, "Building and breaking things", "John Doe", "https://youtu.be/PsaFVLr8t4E"),
+            Video(2, "The development process", "Jane Smith", "https://youtu.be/PsaFVLr8t4E"),
+            Video(3, "The Web 7.0", "Matt Miller", "https://youtu.be/PsaFVLr8t4E")
+        )
+        watchedVideos = listOf(
+            Video(4, "Mouseless development", "Tom Jerry", "https://youtu.be/PsaFVLr8t4E")
+        )
+    }
+
     override fun RBuilder.render() {
         h1 {
             +"KotlinConf Explorer"
         }
         div {
             h3 {
-                +"Videos to watch"
+                +"Videos to watch" //まだ見ていないリスト
             }
             videoList {
-                videos = unwatchedVideos
+                videos = state.unwatchedVideos
                 selectedVideo = state.currentVideo
-                onSelectVideo = { video ->
+                onSelectVideo = { video -> //独自タグクラスで設定したイベント定義をsetState関数経由で設定 -->イベント定義はsetState関数経由で設定
                     setState {
                         currentVideo = video
                     }
@@ -34,31 +45,40 @@ class App : RComponent<RProps, AppState>() {
             }
 
             h3 {
-                +"Videos watched"
+                +"Videos watched" //見たリスト
             }
             videoList {
-                videos = watchedVideos
+                videos = state.watchedVideos
                 selectedVideo = state.currentVideo
-                onSelectVideo = { video ->
+                onSelectVideo = { video -> //独自タグクラスで設定したイベント定義をsetState関数経由で設定 -->イベント定義はsetState関数経由で設定
+                    //ラムダ式でかけるところがメリット
                     setState {
                         currentVideo = video
                     }
                 }
             }
         }
-        styledDiv {
-            //タグの位置を定義したい場合はstyledDivブロックで定義スタイルを定義したいタグを囲む
-            css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
-            }
-            h3 {
-                +"John Doe: Building and breaking things"
-            }
-            img {
-                attrs {
-                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
+
+        //letで呼ばれるのはcurrentVideo変数に値が設定されていたら、その意味ではてなまーくがついている
+        state.currentVideo?.let { currentVideo ->
+            //ラムダ式でかけるところがメリット
+            videoPlayer {
+                video = currentVideo //仮引数を管理変数へ再定義
+                unwatchedVideo = currentVideo in state.unwatchedVideos
+                onWatchedButtonPressed = {
+                    if (video in state.unwatchedVideos) {
+                        //クリック対象のビデオがまだ見ていないビデオリストに含まれていた場合
+                        setState {
+                            unwatchedVideos -= video //まだ見ていないリストから対象のビデオを削除し、
+                            watchedVideos += video //見たリストに対象のビデオを追加する
+                        }
+                    } else {
+                        //クリック対象のビデオが見たリストに含まれている場合
+                        setState {
+                            watchedVideos -= video //見たリストから対象ビデオを削除し、
+                            unwatchedVideos += video //まだ見ていないリストに対象ビデオを追加する
+                        }
+                    }
                 }
             }
         }
