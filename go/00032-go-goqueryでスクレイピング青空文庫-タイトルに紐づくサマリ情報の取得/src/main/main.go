@@ -17,7 +17,7 @@ func main() {
 	//https://github.com/aozorahack/pubserver
 	titleName := "ドグラ・マグラ"
 	prefix := "NNN"
-	suffix := ".txt"
+	suffix := ".json"
 	separator := "-"
 	outFileName := prefix + separator + titleName + separator + suffix
 
