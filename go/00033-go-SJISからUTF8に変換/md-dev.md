@@ -52,3 +52,6 @@ $ diff -y sjis.txt utf8.txt
 ������							      |	うんこ
 
 ```
+
+
+goはデフォでutf8
