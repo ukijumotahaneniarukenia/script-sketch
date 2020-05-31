@@ -6,3 +6,9 @@
 /build/reports/*
 /build/kotlin/*
 /build/js/*
+
+
+
+#開発環境では以下は除外しておく
+
+/build/distributions/*
