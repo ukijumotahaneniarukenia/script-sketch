@@ -16,6 +16,7 @@ dependencies {
     implementation(kotlin("stdlib-js"))
 
     //React, React DOM + Wrappers (chapter 3)
+    //reactライクなdom操作ライブラリを使用
     implementation("org.jetbrains:kotlin-react:16.13.0-pre.94-kotlin-1.3.70")
     implementation("org.jetbrains:kotlin-react-dom:16.13.0-pre.94-kotlin-1.3.70")
     implementation(npm("react", "16.13.1"))
@@ -36,6 +37,7 @@ dependencies {
     implementation(npm("react-share"))
 
     //Coroutines (chapter 8)
+    //コールバックよりKotlinのコルーチンを使ってみる
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.5")
 }
 

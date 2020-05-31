@@ -5,7 +5,7 @@
 > Task :processResources UP-TO-DATE
 > Task :browserDevelopmentRun
 
-BUILD SUCCESSFUL in 479ms
+BUILD SUCCESSFUL in 3s
 5 actionable tasks: 2 executed, 3 up-to-date
 
 Waiting for changes to input files of tasks...
