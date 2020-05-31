@@ -11,33 +11,39 @@ import (
 )
 
 func main() {
-	// ShiftJISファイルを開く
+	// ファイルオープン
 	sjisFile, err := os.Open("./sjis.txt")
 	if err != nil {
 		log.Fatal(err)
 		panic(err)
+		os.Exit(1)
 	}
+	// ファイル遅延クローズ
 	defer sjisFile.Close()
 
-	// ShiftJISのデコーダーを噛ませたReaderを作成する
+	// 指定したエンコーディングでファイル読み込み
 	reader := transform.NewReader(sjisFile, japanese.ShiftJIS.NewDecoder())
 
-	// 書き込み先ファイルを用意
-	utf8File, err := os.Create("./utf-8.txt")
+	// ファイル作成
+	utf8File, err := os.Create("./utf8.txt")
 	if err != nil {
 		log.Fatal(err)
 		panic(err)
+		os.Exit(1)
 	}
+	// ファイル遅延クローズ
 	defer utf8File.Close()
 
-	// 書き込み
+	// ファイル書き込み
 	tee := io.TeeReader(reader, utf8File)
 	s := bufio.NewScanner(tee)
 	for s.Scan() {
+		//バッファーからスキャンできなくなるまでfor文回さないと、書き込まれない
 	}
 	if err := s.Err(); err != nil {
 		log.Fatal(err)
 		panic(err)
+		os.Exit(1)
 	}
 	log.Println("done")
 }
