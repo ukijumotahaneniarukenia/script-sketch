@@ -33,12 +33,12 @@ $ ./bin/main
 
 
 $ ls
-bin  md-dev.md  pkg  sjis.txt  src  utf-8.txt
+bin  md-dev.md  pkg  sjis.txt  src  utf8.txt
 
-$ nkf -g utf-8.txt
+$ nkf -g utf8.txt
 UTF-8
 
-$ diff -y sjis.txt utf-8.txt
+$ diff -y sjis.txt utf8.txt
 ������							      |	うんこ
 ������							      |	うんこ
 ������							      |	うんこ

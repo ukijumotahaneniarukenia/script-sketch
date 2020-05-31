@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -11,31 +12,47 @@ import (
 )
 
 func main() {
+
+	inFileName := "./sjis.txt"
+	outFileName := "./utf8.txt"
+
+	//ファイル削除
+	_, err := os.Stat(outFileName)
+	if err != nil {
+		log.Fatal(err)
+		panic(err)
+		os.Exit(1)
+	} else {
+		if err := os.Remove(outFileName); err != nil {
+			fmt.Println(err)
+		}
+	}
+
 	// ファイルオープン
-	sjisFile, err := os.Open("./sjis.txt")
+	inFile, err := os.Open(inFileName)
 	if err != nil {
 		log.Fatal(err)
 		panic(err)
 		os.Exit(1)
 	}
 	// ファイル遅延クローズ
-	defer sjisFile.Close()
+	defer inFile.Close()
 
 	// 指定したエンコーディングでファイル読み込み
-	reader := transform.NewReader(sjisFile, japanese.ShiftJIS.NewDecoder())
+	reader := transform.NewReader(inFile, japanese.ShiftJIS.NewDecoder())
 
 	// ファイル作成
-	utf8File, err := os.Create("./utf8.txt")
+	outFile, err := os.Create(outFileName)
 	if err != nil {
 		log.Fatal(err)
 		panic(err)
 		os.Exit(1)
 	}
 	// ファイル遅延クローズ
-	defer utf8File.Close()
+	defer outFile.Close()
 
 	// ファイル書き込み
-	tee := io.TeeReader(reader, utf8File)
+	tee := io.TeeReader(reader, outFile)
 	s := bufio.NewScanner(tee)
 	for s.Scan() {
 		//バッファーからスキャンできなくなるまでfor文回さないと、書き込まれない
