@@ -3,3 +3,4 @@
 /src/github.com/*
 /src/golang.org/*
 /main
+/*.txt
