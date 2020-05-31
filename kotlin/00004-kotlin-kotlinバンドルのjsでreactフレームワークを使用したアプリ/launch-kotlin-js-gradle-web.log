@@ -1,11 +1,12 @@
+Starting a Gradle Daemon, 2 busy and 2 incompatible and 2 stopped Daemons could not be reused, use --status for details
 > Task :packageJson UP-TO-DATE
 > Task :kotlinNodeJsSetup SKIPPED
-> Task :kotlinNpmInstall UP-TO-DATE
+> Task :kotlinNpmInstall
 > Task :compileKotlinJs
 > Task :processResources UP-TO-DATE
 > Task :browserDevelopmentRun
 
-BUILD SUCCESSFUL in 3s
-5 actionable tasks: 2 executed, 3 up-to-date
+BUILD SUCCESSFUL in 4s
+5 actionable tasks: 3 executed, 2 up-to-date
 
 Waiting for changes to input files of tasks...
