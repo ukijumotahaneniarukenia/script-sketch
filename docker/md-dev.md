@@ -150,4 +150,10 @@ CONTAINER ID        IMAGE                                                       
 
 X転送もできた。便利。
 
+
+
+イメージの削除
+
+$ docker rmi ubuntu-18-04-aws_workspaces-vscode:snap-2020-05-31T19-44-56
+
 ```
