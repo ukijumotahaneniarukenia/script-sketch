@@ -1,5 +1,7 @@
 package app;
 
+import org.apache.lucene.search.spell.JaroWinklerDistance;
+import org.apache.lucene.search.spell.LevensteinDistance;
 import sun.misc.Signal;
 
 import java.util.*;
@@ -15,11 +17,22 @@ public class App {
         if(cmdLineArgs.length > 0){
             usage();
         }else{
-            HashMap<Integer, List<String>> m = sub_process(pre_process(new Scanner(System.in)));
-            for(Map.Entry<Integer, List<String>> entry : m.entrySet()){
-                System.out.printf("%s\t%s\n",entry.getKey(),entry.getValue());
+            List<String> l = pre_process(new Scanner(System.in));
+            if(l.size()!=2){
+                usage();
             }
+            System.out.printf("%s\t%s\t%s\t%s\n","レーベンシュタイン距離",l.get(0),l.get(1),getSimilarScoreByLevenshteinDistance(l.get(0),l.get(1)));
+            System.out.printf("%s\t%s\t%s\t%s\n","ジャロ・ウィンクラー距離",l.get(0),l.get(1),getSimilarScoreByJaroWinklerDistance(l.get(0),l.get(1)));
         }
+    }
+    //https://qiita.com/hakozaki/items/856230d3f8e29d3302d6
+    private static int getSimilarScoreByLevenshteinDistance(String s1, String s2){
+        LevensteinDistance dis =  new LevensteinDistance();
+        return (int) (dis.getDistance(s1, s2) * 100);
+    }
+    private static int getSimilarScoreByJaroWinklerDistance(String s1, String s2){
+        JaroWinklerDistance dis =  new JaroWinklerDistance();
+        return (int) (dis.getDistance(s1, s2) * 100);
     }
     private static void trap(List<String> liz){
         for (String ele:liz) {
