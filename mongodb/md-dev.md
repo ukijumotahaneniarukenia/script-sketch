@@ -579,3 +579,11 @@ doc-centos-7-6-18-10-vim (root)  01:57:54  ~   mongo testdb -u user01 -p u
 
 
 ```
+
+
+
+大量データ作成
+
+
+- https://www.webprofessional.jp/mock-rest-apis-using-json-server/
+
