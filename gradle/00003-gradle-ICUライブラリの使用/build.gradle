@@ -1,0 +1,51 @@
+import com.ibm.icu.text.Transliterator
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath group: 'com.ibm.icu', name: 'icu4j', version: '67.1' }
+}
+
+task weatherReport {
+    doLast {
+
+        String rt = "";
+
+        String halfKana = "ｳﾝｺﾓﾘﾓﾘﾓﾘｵｳｶﾞｲ";
+        String fullKana = "ウンコモリモリモリオウガイ";
+
+        String hira = "うんこもりもりもりおうがい";
+
+        Transliterator full2halfTranslator = Transliterator.getInstance("Fullwidth-Halfwidth");
+        Transliterator half2fullTranslator = Transliterator.getInstance("Halfwidth-Fullwidth");
+        Transliterator kana2hiraTranslator = Transliterator.getInstance("Katakana-Hiragana");
+        Transliterator hira2kanaTranslator = Transliterator.getInstance("Hiragana-Katakana");
+
+        rt = full2halfTranslator.transliterate(halfKana);
+        println "$halfKana-->$rt"
+        rt = half2fullTranslator.transliterate(halfKana);
+        println "$halfKana-->$rt"
+
+        rt = full2halfTranslator.transliterate(fullKana);
+        println "$fullKana-->$rt"
+        rt = half2fullTranslator.transliterate(fullKana);
+        println "$fullKana-->$rt"
+
+
+        rt = kana2hiraTranslator.transliterate(halfKana);
+        println "$halfKana-->$rt"
+        rt = kana2hiraTranslator.transliterate(halfKana);
+        println "$halfKana-->$rt"
+
+        rt = kana2hiraTranslator.transliterate(fullKana);
+        println "$fullKana-->$rt"
+        rt = kana2hiraTranslator.transliterate(fullKana);
+        println "$fullKana-->$rt"
+
+
+        rt = hira2kanaTranslator.transliterate(hira);
+        println "$hira-->$rt"
+
+    }
+}
+
+
