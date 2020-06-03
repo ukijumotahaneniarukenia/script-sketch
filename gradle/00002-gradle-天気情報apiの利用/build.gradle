@@ -1,0 +1,24 @@
+import org.json.JSONObject;
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'org.json:json:20090211' }
+}
+
+task weatherReport {
+    description = "今日の東京のお天気をお伝えします"
+
+    doLast {
+        // Livedoorのお天気情報APIを利用してJSON形式のデータを取得する
+        URL url = new URL("http://weather.livedoor.com/forecast/webservice/json/v1?city=130010");
+        URLConnection connection = url.openConnection();
+        InputStream is = connection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        JSONObject json = new JSONObject(reader.readLine());
+
+        String cityName = json.getJSONObject("location").getString("city");
+        String weather = json.getJSONArray("forecasts").getJSONObject(0).getString("telop");
+        println "${cityName}の今日のお天気は${weather}です！"
+    }
+}
+
