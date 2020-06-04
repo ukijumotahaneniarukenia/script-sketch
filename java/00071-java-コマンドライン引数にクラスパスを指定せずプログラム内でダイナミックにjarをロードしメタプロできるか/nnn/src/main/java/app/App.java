@@ -18,13 +18,13 @@ import java.util.stream.IntStream;
 
 //gradleタスクでcleanしてshadowJarからのjava -jar ./nnn/build/libs/nnn-1.0-SNAPSHOT-all.jar
 
+//shadowjar作成後、cacheレポディレクトリはすべて削除し、調査したいjarのみ入れておくようにする
+
 //https://www.gwtcenter.com/howto-determine-class-path-or-jar
 //https://www.gwtcenter.com/dynamic-classpath
 public class App {
 
     private static final ClassLoader parent = ClassLoader.getSystemClassLoader();;
-
-
 
     private static Map<Method,Class<?>> getMethodInfo(Class<?> e){
         List<Method> l = Arrays.asList(e.getMethods());
@@ -58,6 +58,9 @@ public class App {
             throw new RuntimeException(ex);
         }
     }
+
+    //TODO 除外単語ファイルをリスト化してパッケージ名に含まれていれば除外する
+
     public static void main(String... args) throws IOException, ReflectiveOperationException {
 
         String defaultBaseDir = "/home/kuraine/.gradle/caches/modules-2/files-2.1";
@@ -90,39 +93,23 @@ public class App {
                     if(
                             //パッケージ名などから除外対象をある程度予測する
                             //その時点での依存関係をすべて解決できる必要はないので
+
+                            //xmlやjmsとか絡んできたら、泥試合確定なので、割りっきって
+
                             jarEntry.getName().contains("module-info")
                             ||jarEntry.getName().contains("META-INF") //Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/logging/log4j/core/util/SystemClock (wrong name: META-INF/versions/9/org/apache/logging/log4j/core/util/SystemClock)
-                            ||jarEntry.getName().contains("jdbc") //Caused by: java.lang.ClassNotFoundException: javax.sql.DataSource
-                            ||jarEntry.getName().contains("JDBC") //Caused by: java.lang.ClassNotFoundException: java.sql.SQLException
-                            ||jarEntry.getName().contains("SQL") //Caused by: java.lang.ClassNotFoundException: java.sql.SQLException
-                            ||jarEntry.getName().contains("async") //Caused by: java.lang.ClassNotFoundException: com.lmax.disruptor.EventTranslatorTwoArg
-                            ||jarEntry.getName().contains("jackson") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.databind.ser.std.StdSerializer
-                            ||jarEntry.getName().contains("osgi") //Caused by: java.lang.ClassNotFoundException: org.osgi.framework.BundleActivator
-                            ||jarEntry.getName().contains("plugins") //Caused by: java.lang.ClassNotFoundException: javax.annotation.processing.AbstractProcessor
-                            ||jarEntry.getName().contains("appender") //Caused by: java.lang.ClassNotFoundException: javax.annotation.processing.AbstractProcessor
-                            ||jarEntry.getName().contains("net") //Caused by: java.lang.ClassNotFoundException: javax.mail.Authenticator
-                            ||jarEntry.getName().contains("log4j") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter
-                            ||jarEntry.getName().contains("layout") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter
-                            ||jarEntry.getName().contains("jaxen") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter
-                            ||jarEntry.getName().contains("codehaus") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter
+                            ||jarEntry.getName().contains("plugin") //Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/logging/log4j/core/util/SystemClock (wrong name: META-INF/versions/9/org/apache/logging/log4j/core/util/SystemClock)
+
                     ){
                         //個別対応でいいか、複数のjarの機能を一気にすべて知りたいことあんまないし
-//                        System.out.println(className);
-//                        System.out.println("スキップした");
                         jarFileClassLoadSkipCnt++;
                         continue;
                     }else{
-//                        System.out.println(className);
                         Class<?> loadClass = classLoader.loadClass(className);
 
-                        //コマンドライン引数にクラスパスを指定せず、プログラム内でダイナミックにロードし、メタプロできるか
-
                         System.out.println(getFieldInfo(loadClass));
-
                         System.out.println(getMethodInfo(loadClass));
 
-
-//                        System.out.println("ロードできた");
                         jarFileClassLoadCnt++;
                     }
                 }
