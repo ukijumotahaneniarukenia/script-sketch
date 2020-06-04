@@ -21,6 +21,11 @@ import java.util.stream.IntStream;
 //https://www.gwtcenter.com/howto-determine-class-path-or-jar
 //https://www.gwtcenter.com/dynamic-classpath
 public class App {
+
+    private static final ClassLoader parent = ClassLoader.getSystemClassLoader();;
+
+
+
     private static Map<Method,Class<?>> getMethodInfo(Class<?> e){
         List<Method> l = Arrays.asList(e.getMethods());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
@@ -44,7 +49,7 @@ public class App {
     }
     private static URLClassLoader newClassLoader(Set<File> files) {
         URL[]urls = files.stream().map(file->getURL(file)).collect(Collectors.toList()).toArray(new URL[files.size()]);
-        return new URLClassLoader(urls, null); // これについては下記の※を参照のこと
+        return new URLClassLoader(urls, parent);
     }
     private static URL getURL(File file) {
         try {
@@ -53,15 +58,22 @@ public class App {
             throw new RuntimeException(ex);
         }
     }
-    public static void main(String[] args) throws IOException, ReflectiveOperationException {
+    public static void main(String... args) throws IOException, ReflectiveOperationException {
 
-        ClassLoader classLoader;
+        String defaultBaseDir = "/home/kuraine/.gradle/caches/modules-2/files-2.1";
 
-        Set<File> jarFileList = getJarFileList(new File("/home/kuraine/.gradle/caches/modules-2/files-2.1"));
+        if(args.length>2){
+            System.exit(1);
+        }else if(args.length==1){
+            //デフォを上書き
+            defaultBaseDir = args[0];
+        }else{
+            //デフォでいく
+        }
 
-        classLoader = newClassLoader(jarFileList);
+        Set<File> jarFileList = getJarFileList(new File(defaultBaseDir));
 
-        System.out.println("ロードできた？？");
+        ClassLoader classLoader = newClassLoader(jarFileList);
 
         int jarFileListCnt = jarFileList.size();
         int jarFileClassCnt = 0;
@@ -79,7 +91,7 @@ public class App {
                             //パッケージ名などから除外対象をある程度予測する
                             //その時点での依存関係をすべて解決できる必要はないので
                             jarEntry.getName().contains("module-info")
-                            || jarEntry.getName().contains("META-INF") //Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/logging/log4j/core/util/SystemClock (wrong name: META-INF/versions/9/org/apache/logging/log4j/core/util/SystemClock)
+                            ||jarEntry.getName().contains("META-INF") //Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/logging/log4j/core/util/SystemClock (wrong name: META-INF/versions/9/org/apache/logging/log4j/core/util/SystemClock)
                             ||jarEntry.getName().contains("jdbc") //Caused by: java.lang.ClassNotFoundException: javax.sql.DataSource
                             ||jarEntry.getName().contains("JDBC") //Caused by: java.lang.ClassNotFoundException: java.sql.SQLException
                             ||jarEntry.getName().contains("SQL") //Caused by: java.lang.ClassNotFoundException: java.sql.SQLException
@@ -95,12 +107,12 @@ public class App {
                             ||jarEntry.getName().contains("codehaus") //Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter
                     ){
                         //個別対応でいいか、複数のjarの機能を一気にすべて知りたいことあんまないし
-                        System.out.println(className);
-                        System.out.println("スキップした");
+//                        System.out.println(className);
+//                        System.out.println("スキップした");
                         jarFileClassLoadSkipCnt++;
                         continue;
                     }else{
-                        System.out.println(className);
+//                        System.out.println(className);
                         Class<?> loadClass = classLoader.loadClass(className);
 
                         //コマンドライン引数にクラスパスを指定せず、プログラム内でダイナミックにロードし、メタプロできるか
@@ -110,7 +122,7 @@ public class App {
                         System.out.println(getMethodInfo(loadClass));
 
 
-                        System.out.println("ロードできた");
+//                        System.out.println("ロードできた");
                         jarFileClassLoadCnt++;
                     }
                 }
