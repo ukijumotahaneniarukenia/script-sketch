@@ -4,9 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,17 +29,37 @@ public class App {
         List<Field> l = Arrays.asList(e.getFields());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    public static void main(String[] args) throws IOException, ReflectiveOperationException {
+    private static Set<File> getJarFileList(File dir) throws IOException {
+        Path baseDir = Paths.get(dir.getAbsolutePath());
+        String targetExtension = "jar";
 
-        File classPath = ClassPathLocator.getLocation();
+        String includeExtensionPtn = ("(?i)^.*\\." + Pattern.quote(targetExtension) + "$"); //完全一致パタンを作成している
+
+        return Files.walk(baseDir)
+                .parallel()
+                .map(e -> e.toFile())
+                .filter(e -> e.isFile())
+                .filter(e -> e.getAbsolutePath().matches(includeExtensionPtn))
+                .collect(Collectors.toSet());
+    }
+    private static URLClassLoader newClassLoader(Set<File> files) {
+        URL[]urls = files.stream().map(file->getURL(file)).collect(Collectors.toList()).toArray(new URL[files.size()]);
+        return new URLClassLoader(urls, null); // これについては下記の※を参照のこと
+    }
+    private static URL getURL(File file) {
+        try {
+            return file.toURI().toURL();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    public static void main(String[] args) throws IOException, ReflectiveOperationException {
 
         ClassLoader classLoader;
 
-        Set<File> jarFileList = LibraryUtil.getJarFileList(new File("/home/kuraine/.gradle/caches/modules-2/files-2.1"));
+        Set<File> jarFileList = getJarFileList(new File("/home/kuraine/.gradle/caches/modules-2/files-2.1"));
 
-        jarFileList.add(classPath);
-
-        classLoader = ClassLoaderUtil.newClassLoader(jarFileList);
+        classLoader = newClassLoader(jarFileList);
 
         System.out.println("ロードできた？？");
 
