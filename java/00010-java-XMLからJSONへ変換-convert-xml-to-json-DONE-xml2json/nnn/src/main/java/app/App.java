@@ -1,58 +1,96 @@
 package app;
 
+import org.json.XML;
+import sun.misc.Signal;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-
-import org.json.XML;
+import java.util.*;
 
 public class App {
-    public static final String suffix = ".json";
-    public static final String className = new Object(){}.getClass().getEnclosingClass().getName();
-    public static final String cmdInput="ls *xml |";
-    public static void main(String[] cmdline_args) {
-        XXX xxx = new XXX();
-        HashMap<Integer, List<String>> maz;
-        maz=xxx.KKK(className,cmdInput,cmdline_args,new Scanner(System.in),Arrays.asList("INT"));
-        xml2json(maz);
-    }
-    private static void xml2json(HashMap<Integer, List<String>> maz){
-        maz.forEach((k,v)->{
-            //前回成果物ファイルを削除
-            File destFile = new File(v.get(0).replaceAll("\\..*", "")+suffix);
-            destFile.delete();
 
-            File srcFile = new File(v.get(0));
-            if(srcFile.exists()){
-                //ファイルの場合
-                Path path = Paths.get(v.get(0));
-                String str = null;
-                FileWriter fw = null;
-                try {
-                    fw = new FileWriter(v.get(0).replaceAll("\\..*", "")+suffix, true);
-                    str = Files.readString(path);
-                    fw.write(XML.toJSONObject(str).toString());
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                //ファイルでない場合
-                System.out.println("#1. java "+className+"\n"
-                        + "#2. Enter" + "\n"
-                        + "#3. Ctrl+C" + "\n"
-                );
+    private static final String DEFAULT_SEPARATOR = " ";
+    private static final String SIGNAL_HANDLE_INT = "INT";
+
+    private static final String PRE_SUFFIX = ".xml";
+    private static final String POST_SUFFIX = ".json";
+
+    public static void main( String... cmdLineArgs ) {
+        trap(new ArrayList<>(Arrays.asList(SIGNAL_HANDLE_INT)));
+
+        if(cmdLineArgs.length > 0){
+            usage();
+        }else{
+            Map<Integer, List<String>> m = sub_process(pre_process(new Scanner(System.in)));
+
+            try{
+                subMainProcess(m);
+            }catch (IOException e){
+                e.printStackTrace();
                 System.exit(1);
             }
-            v.add(v.get(0).replaceAll("\\..*", "")+suffix);
-            System.out.printf("%s:%s\n",k,v);
+        }
+    }
+
+    private static void subMainProcess(Map<Integer, List<String>> m) throws IOException {
+        if(m.size()!=1){
+            //単一行チェック
+            usage();
+        }
+        if(m.get(0).size()!=1){
+            //単一列チェック
+            usage();
+        }
+
+        String srcFileName = m.get(0).get(0).replaceAll("\\..*", "")+PRE_SUFFIX;
+        String dstFileName = m.get(0).get(0).replaceAll("\\..*", "")+POST_SUFFIX;
+
+        File dstFile = new File(dstFileName);
+
+        if(dstFile.exists()){
+            dstFile.delete();
+        }else{
+            FileWriter fw = new FileWriter(dstFileName, true);
+            String str = Files.readString(Paths.get(srcFileName));
+            fw.write(XML.toJSONObject(str).toString());
+            fw.close();
+        }
+    }
+
+    private static void trap(List<String> liz){
+        for (String ele:liz) {
+            catch_sig(ele);
+        }
+    }
+    private static void catch_sig(String str) {
+        Signal sig = new Signal(str);
+        Signal.handle(sig, Signal -> {
+            if ("INT".equals(sig.getName())) {
+                usage();
+            }
         });
+    }
+    private static void usage() {
+        System.out.println("Usageだよーん");
+        System.exit(0);
+    }
+    private static List<String> pre_process(Scanner stdin){
+        List<String> rt = new ArrayList<>();
+        while (stdin.hasNextLine()) {
+            rt.add(stdin.nextLine());
+        }
+        stdin.close();
+        return rt;
+    }
+    private static Map<Integer, List<String>> sub_process(List<String> liz){
+        Map<Integer, List<String>> rt= new LinkedHashMap<>();
+        for (int i=0;i<liz.size();i++){
+            List<String> l = new ArrayList<>(Arrays.asList(liz.get(i).split(DEFAULT_SEPARATOR)));
+            rt.put(i,l);
+        }
+        return rt;
     }
 }
