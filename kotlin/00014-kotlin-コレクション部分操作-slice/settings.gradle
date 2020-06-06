@@ -1,0 +1,3 @@
+rootProject.name = 'nnn'
+include 'nnn'
+
