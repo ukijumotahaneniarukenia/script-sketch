@@ -1,0 +1,10 @@
+
+Welcome to Gradle 6.1!
+
+Here are the highlights of this release:
+ - Dependency cache is relocatable
+ - Configurable compilation order between Groovy, Java & Scala
+ - New sample projects in Gradle's documentation
+
+For more details see https://docs.gradle.org/6.1/release-notes.html
+
