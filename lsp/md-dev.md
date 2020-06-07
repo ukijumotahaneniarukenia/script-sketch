@@ -8,6 +8,8 @@
 
 - サーバーソフトをインストールする際、やり直したいときは以下のディレクトリ配下の対象言語フォルダを削除
 
+そんなこともしなくても再インストールできた。:LspInstallServer
+
 ```
 cd /home/aine/.local/share/vim-lsp-settings/servers
 
