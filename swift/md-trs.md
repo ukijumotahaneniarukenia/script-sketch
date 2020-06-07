@@ -32,6 +32,24 @@ apt-get install -y libpython2.7
 ```
 
 
+replできた
+
+```
+$ swift
+Welcome to Swift version 5.2.4 (swift-5.2.4-RELEASE).
+Type :help for assistance.
+  1> let numbers = [1...10]
+numbers: [ClosedRange<Int>] = {
+  [0] = 1...10
+}
+  2> for n in numbers.reversed(){ 
+  3.     print(n) 
+  4. } 
+1...10
+
+
+```
+
 - 予防
 
 
