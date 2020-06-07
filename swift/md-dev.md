@@ -77,3 +77,26 @@ $ cat ~/.vim/coc-settings.json
 
 ```
 
+
+
+動作確認
+
+- https://qiita.com/naokits/items/8f09ffc8bbc78ade366c
+
+
+```
+cat <<EOS > main.swift
+#!/usr/bin/evn swift
+
+
+let s = "こんにちは森鴎外さん"
+
+print(s)
+EOS
+
+
+chmod 755 main.swift
+
+
+./main.swift
+```
