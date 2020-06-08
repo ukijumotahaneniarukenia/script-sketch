@@ -35,8 +35,8 @@ apache2 746 www-data    3u  IPv4 1808350      0t0  TCP *:http (LISTEN)
 ```
 
 - 動作確認
-以下のURLをクリックし、ページが表示されるか
-  - http://localhost
+  -以下のURLをクリックし、ページが表示されるか
+    - http://localhost
 
 
 以下の手順に従いOAuth認証
@@ -62,6 +62,7 @@ https://github.com/settings/applications/new
 
 以下を入力後、Register Applicationボタンを押下
 
+|key|value|
 |:-:|:-:|
 |Application name|app|
 |Homepage URL|http://localhost|
@@ -79,6 +80,7 @@ REDIRECT_URI=http://localhost:80
 
 https://github.com/login/oauth/authorize?client_id=CLIENT_ID&redirect_uri=REDIRECT_URI
 ```
+
 githubのログイン画面が表示されるので、ユーザー名とパスワードを入力する
 
 ログイン後、リダイレクト先ページのアドレスバーにアクセストークンがついたURLが返却されるので、それをメモ
@@ -109,8 +111,8 @@ $ cat /tmp/mozilla_root0/access_token
 access_token=e79956c865f55da8380529d2165bdff2cca72811&scope=&token_type=bearer
 ```
 
-あとは規約に従いいろいろ取得
-- https://developer.github.com/v3/gists/#list-gists-for-a-user
+- あとは規約に従いいろいろ取得
+  - https://developer.github.com/v3/gists/#list-gists-for-a-user
 
 ```
 ACCESS_TOKEN=e79956c865f55da8380529d2165bdff2cca72811
@@ -135,7 +137,7 @@ raw_url一覧取得できたら、
 
 dockerコンテナ内で起動したブラウザのURL欄に以下を入力
 
-https://github.com/settings/developers
+  - https://github.com/settings/developers
 
 
 appを削除し、作業終了
