@@ -33,7 +33,7 @@ $ mkdir $HOME/wrksp
 
 $ cd  $HOME/wrksp
 
-$ cp /home/kuraine/00072-java-chrome-selenium-ツイート取得/nnn/target/nnn-1.0-SNAPSHOT-bin.tar.bz2 .
+$ cp /home/kuraine/script-sketch/java/00072-java-chrome-selenium-ツイート取得/nnn/target/nnn-1.0-SNAPSHOT-bin.tar.bz2 .
 
 $ tar xvf nnn-1.0-SNAPSHOT-bin.tar.bz2
 
