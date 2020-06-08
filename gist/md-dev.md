@@ -135,7 +135,7 @@ raw_url一覧取得できたら、
 
 dockerコンテナ内で起動したブラウザのURL欄に以下を入力
 
-https://github.com/settings/applications/
+https://github.com/settings/developers
 
 
 appを削除し、作業終了
