@@ -8,16 +8,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class App {
 
-    private static final String OUTPUT_DIR = new File(".").getAbsoluteFile().getParent() + "/pic/";
-
     private static final String SHELL_GEI_BOT_URL = "https://twitter.com/minyoruminyon";
     private static final String SHELL_GEI_BOT_SCRIPT_WHO_XPATH_PATTERN_VALUE = "//body/div/div/div/div/main/div/div/div/div/div/div/div/div/div/section/div/div/div/div/div/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div[1]/div/div/div/div/div/div[1]/span";
-    private static final String SHELL_GEI_BOT_SCRIPT_XPATH_PATTERN_VALUE = "//body/div/div/div/div/main/div/div/div/div/div/div/div/div/div/section/div/div/div/div/div/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div[1]/span";
+    private static final String SHELL_GEI_BOT_SCRIPT_XPATH_PATTERN_VALUE = "//body/div/div/div/div/main/div/div/div/div/div/div/div/div/div/section/div/div/div/div/div/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div";
 
-    private static Integer DEFAULT_MAX_SCRAPING_CNT = 100;
+    private static Integer DEFAULT_MAX_SCRAPING_CNT = 10;
     private static final Integer DEFAULT_WAIT_TIME_SECONDS = 1000;
     private static Integer DEFAULT_TIMEOUT_SECONDS = DEFAULT_WAIT_TIME_SECONDS * DEFAULT_MAX_SCRAPING_CNT;
 
@@ -28,15 +29,14 @@ public class App {
 
     public static void main( String... args ) throws InterruptedException {
 
-        if (args.length != 1){
+//        List<String> cmdLineArgs = Arrays.asList("10"); //モック用
+        List<String> cmdLineArgs = Arrays.asList(args);
+
+        if (cmdLineArgs.size() != 1){
             usage();
         }else{
-            DEFAULT_TIMEOUT_SECONDS = DEFAULT_WAIT_TIME_SECONDS * Integer.parseInt(args[0]);
+            DEFAULT_TIMEOUT_SECONDS = DEFAULT_WAIT_TIME_SECONDS * Integer.parseInt(cmdLineArgs.get(0));
         }
-
-        File dir = new File(OUTPUT_DIR);
-
-        dir.mkdir();
 
         System.setProperty("webdriver.chrome.driver", "/usr/local/src/chromedriver_linux64/chromedriver");
 
@@ -45,9 +45,6 @@ public class App {
 
         //https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
         options.addArguments("--no-sandbox"); // Bypass OS security model これだけで一応立つ
-
-        //https://stackoverrun.com/ja/q/4295893
-        options.addArguments("--log-level=3"); // 起動時のメッセージをミュート
 
         WebDriver driver = new ChromeDriver(options);// Chromeドライバーインスタンスを作成する
 
@@ -67,8 +64,19 @@ public class App {
 
             //対象要素のテキストを標準出力に垂れ流す
             System.out.println(driver.findElement(By.xpath(SHELL_GEI_BOT_SCRIPT_WHO_XPATH_PATTERN_VALUE)).getText());
-            //対象要素のテキストを標準出力に垂れ流す
-            System.out.println(driver.findElement(By.xpath(SHELL_GEI_BOT_SCRIPT_XPATH_PATTERN_VALUE)).getText());
+
+            //対象要素のテキストを標準出力に垂れ流す（）
+            int n = driver.findElements(By.xpath(SHELL_GEI_BOT_SCRIPT_XPATH_PATTERN_VALUE)).size();
+
+            for(int i=0;i<n;i++){
+                try{
+                    System.out.println(driver.findElements(By.xpath(SHELL_GEI_BOT_SCRIPT_XPATH_PATTERN_VALUE)).get(i).getText());
+                }catch(IndexOutOfBoundsException e){
+                    //スナップショット取る時間と全エレメントを出力する時間の関係がいい感じにならない。
+                    //全要素を取得できるようにするために、ハンドリングしてなくなったところでスキップ
+                    break;
+                }
+            }
 
             scrollYAfter = scrollYBefore;
 
