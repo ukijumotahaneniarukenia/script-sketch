@@ -5,9 +5,15 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.Callable;
+import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -16,21 +22,15 @@ import static java.util.stream.Collectors.toList;
 
 public class App {
 
-
-
-    private static final String PROGRAM_NAME = "jardump";
-
     private static Integer SEQ = 0;
-    private static final Integer SUCCESS_STATUS = 0;
-    private static final Integer ERROR_STATUS = 1;
     private static final String F = "---";
     private static final String R = "###";
     private static final String C = ",";
     private static final String CONST_SIGN = "CCCCC";
     private static final String METHOD_SIGN = "MMMMM";
-    private static final String CLASS_SEQ_DIGIT = "5";
-    private static final String CLASS_GRP_DIGIT = "5";
-    private static final String CLASS_GRPSEQ_DIGIT = "5";
+    private static final String CLASS_SEQ_DIGIT = "12";
+    private static final String CLASS_GRP_DIGIT = "8";
+    private static final String CLASS_GRPSEQ_DIGIT = "4";
     private static final String SIGNATURE_GRP_DIGIT = "2";
     private static final String SIGNATURE_GRPSEQ_DIGIT = "2";
 
@@ -39,8 +39,12 @@ public class App {
     private static final String COL_SEPARATOR = "\t";
     private static final String COL_VALUE_SEPARATOR = ",";
 
-    private static final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    private static final Map<Integer,String> CONST_COL_NAME_LIST = mkColHashMap(IntStream.rangeClosed(0,1).boxed().collect(toList()), Arrays.asList("クラス名" ,"定数名"));
+    private static final ClassLoader parent = ClassLoader.getSystemClassLoader();;
+
+    private static final Map<Integer,String> CONST_COL_NAME_LIST = mkColHashMap(IntStream.rangeClosed(0,1).boxed().collect(toList()), Arrays.asList(
+            "クラス名"
+            ,"定数名"
+    ));
     private static final Map<Integer,String> METHOD_COL_NAME_LIST = mkColHashMap(IntStream.rangeClosed(0,9).boxed().collect(toList()), Arrays.asList(
             "クラス名"
             ,"アクセス修飾子"
@@ -51,9 +55,8 @@ public class App {
             ,"型パラメータリスト"
             ,"型パラメータ記号リスト"
             ,"引数の型リスト"
-            ,"仮引数の変数名リスト")
-    );
-
+            ,"仮引数の変数名リスト"
+    ));
     public static class CrossTab{
         private String tblHead;//表頭
         private Map<String,String> tblBody;//表側
@@ -78,21 +81,13 @@ public class App {
             return k.stream().collect(Collectors.toMap(e->e, e->v.get(e)));
         }
     }
-    public static <T> T uncheckCall(Callable<T> callable) {
-        //パールの暗黙の変数みたいなものだろう。すべてのコンテキストに含まれている隠しオブジェクト。callableはすべての例外をグルーピングしている
-        //これがいちばんすごいわ
-        //https://blog1.mammb.com/entry/2015/03/31/001620
-        try {
-            return callable.call();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    private static List<List<String>> getClassInfo(Integer grp,Map<Class<?>,String> m ) {
+        return unnest(wrapperClassInfo(grp,m)).entrySet().stream()
+                .map(e-> flattenList(new ArrayList<>(Arrays.asList(e.getKey().split(F))
+                            .subList(0, e.getKey().split(F).length - 1)),e.getValue()))
+                .collect(Collectors.toList());
     }
-    private static List<List<String>> preProcess(Map<Class<?>,String> m ) {
-        return unnest(wrapperClassInfo(m)).entrySet().stream()
-                .map(e-> flattenList(new ArrayList<>(Arrays.asList(e.getKey().split(F)).subList(0, e.getKey().split(F).length - 1)),e.getValue())).collect(Collectors.toList());
-    }
-    private static List<List<String>> midProcess(List<List<String>> ll) {
+    private static List<List<String>> rearrange(List<List<String>> ll) {
         int row = ll.size();
         return IntStream.range(0, row).boxed().parallel().map(e -> Arrays.asList(
                 ll.get(e).get(0).replace(COL_NAME_SEPARATOR,R)
@@ -103,14 +98,22 @@ public class App {
                 , ll.get(e).get(6)
         )).collect(Collectors.toList());
     }
-    private static void postProcess(List<List<String>> ll_rearrange,CrossTab crossTab){
-        crossTab(ll_rearrange,4,6,crossTab);
+    private static void crossTablation(CrossTab crossTab,List<List<String>> rearrangeList){
+        crossTab(rearrangeList,4,6,crossTab);
+    }
+    private static void outputHeadRecord(CrossTab crossTab){
         Stream.of(crossTab.getTblHead()).forEach(e-> System.out.println(e));
+    }
+    private static void outputBodyRecord(CrossTab crossTab){
         crossTab.getTblBody().entrySet().stream()
                 .sorted(Comparator.comparing(e->e.getKey()))
                 .forEach(e->{
                     ++SEQ;
-                    System.out.println(String.format("%0"+CLASS_SEQ_DIGIT+"d",SEQ)+COL_NAME_SEPARATOR+e.getKey().replace(R,COL_NAME_SEPARATOR)+COL_SEPARATOR+e.getValue());
+                    System.out.println(String.format("%0"+CLASS_SEQ_DIGIT+"d",SEQ)
+                            +COL_NAME_SEPARATOR
+                            +e.getKey().replace(R,COL_NAME_SEPARATOR)
+                            +COL_SEPARATOR
+                            +e.getValue());
                 });
     }
     @SafeVarargs
@@ -119,17 +122,7 @@ public class App {
     }
     private static CrossTab crossTab(List<List<String>> ll,Integer endGrpColIdx,Integer grpColIdx,CrossTab crossTab){
         int row = ll.size();
-        int col = IntStream.range(0,row).boxed().map(i->ll.get(i).size()).min(Comparator.comparingInt(e->e)).get();
 
-        if(Stream.of(endGrpColIdx,grpColIdx).anyMatch(e->e<=0)){
-            return null;
-        }
-        if(col<grpColIdx||col <= endGrpColIdx){
-            return null;
-        }
-        if(grpColIdx <= endGrpColIdx){
-            return null;
-        }
         //表頭
         Map<String, Set<String>> ms = IntStream.range(0,row).boxed().collect(Collectors.groupingBy(i->ll.get(i).get(endGrpColIdx-1)
                 ,Collectors.mapping(i->ll.get(i).get(endGrpColIdx),Collectors.toSet())));
@@ -155,6 +148,7 @@ public class App {
         Integer mx = tblHead.length()-tblHead.replace(COL_SEPARATOR,"").length()+1;
 
         //PostProcess
+        //定数の場合とメソッドの場合で取得できる列数が異なるので、列数の多い方に寄せている
         Map<String,String> tblBody = midBody.entrySet().stream()
                 .collect(Collectors.toMap(e->e.getKey()
                         ,e->(e.getValue().length()-e.getValue().replace(COL_SEPARATOR,"").length()+1)==METHOD_COL_NAME_LIST.size()?
@@ -184,23 +178,23 @@ public class App {
         }
         return rt;
     }
-    private static Map<Method,Class<?>> getMethodInfo(Class<?> e){
+    private static Map<Method,Class<?>> getMethodInfo(Class<?> e) throws NoClassDefFoundError, VerifyError, IncompatibleClassChangeError, InternalError{
         List<Method> l = Arrays.asList(e.getMethods());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<Field,Class<?>> getFieldInfo(Class<?> e){
+    private static Map<Field,Class<?>> getFieldInfo(Class<?> e) throws NoClassDefFoundError, VerifyError, IncompatibleClassChangeError, InternalError{
         List<Field> l = Arrays.asList(e.getFields());
         return IntStream.rangeClosed(0,l.size()-1).boxed().parallel().collect(Collectors.toMap(i->l.get(i),i->e));
     }
-    private static Map<String,List<String>> wrapperFieldInfo(Integer grp,Map.Entry<Class<?>,String> entryClass,Class<?> clz){
+    private static Map<String,List<String>> wrapperFieldInfo(Integer grp,Map.Entry<Class<?>,String> entryClass,Class<?> clz)  throws NoClassDefFoundError, VerifyError, IncompatibleClassChangeError, InternalError{
         Map<String,List<String>> rt = new LinkedHashMap<>();
         int cnt = 0;
         for(Map.Entry<Field,Class<?>> entryField : getFieldInfo(clz).entrySet()){
             ++cnt;
             rt.put(entryClass.getValue()+F+CONST_SIGN+F+String.format("%0"+CLASS_GRP_DIGIT+"d",grp)+F+String.format("%0"+CLASS_GRPSEQ_DIGIT+"d",cnt)
                     ,Arrays.asList(
-                            String.valueOf(entryField.getValue().getName())//クラス名
-                            ,String.valueOf(entryField.getKey().getName())//定数名
+                            entryField.getValue().getName()//クラス名
+                            ,entryField.getKey().getName()//定数名
                     )
             );
         }
@@ -227,48 +221,161 @@ public class App {
         }
         return rt;
     }
-    private static Map<String,List<String>> wrapperClassInfo(Map<Class<?>,String> classsInfoMap){
+    private static Map<String,List<String>> wrapperClassInfo(Integer grp,Map<Class<?>,String> classsInfoMap){
         Map<String,List<String>> rt = new LinkedHashMap<>();
-        int grp=0;
         for(Map.Entry<Class<?>,String> entryClass : classsInfoMap.entrySet()){
             Class<?> clz = entryClass.getKey();
-            ++grp;
             rt.putAll(wrapperFieldInfo(grp,entryClass,clz));
             rt.putAll(wrapperMethodInfo(grp,entryClass,clz));
         }
         return rt;
     }
-    private static Map<Class<?>,String> mkJarInfo2ClazzInfo(File f) throws IOException {
-        String path = f.getPath();
-        if(path.endsWith(".class")){
-            return new LinkedHashMap<>();
-        }else{
-            JarFile jarFile = new JarFile(path);
-            return Collections.list(jarFile.entries()).stream()
-                    .parallel()
-                    .map(e->e.getName())
-                    .filter(e->e.endsWith(".class"))
-                    .map(e -> e.replace('/', '.').replaceAll(".class$", ""))
-                    .map(e->uncheckCall(()->classLoader.loadClass(e)))
-                    .collect(Collectors.toMap(e->e, e->f.getName()));
+    private static Set<File> getJarFileList(File dir) throws IOException {
+        Path baseDir = Paths.get(dir.getAbsolutePath());
+        String targetExtension = "jar";
+
+        String includeExtensionPtn = ("(?i)^.*\\." + Pattern.quote(targetExtension) + "$"); //完全一致パタンを作成している
+
+        return Files.walk(baseDir)
+                .parallel()
+                .map(e -> e.toFile())
+                .filter(e ->e.isFile())
+                .filter(e ->e.getAbsolutePath().matches(includeExtensionPtn))
+                .filter(e->!e.getAbsolutePath().contains("sources"))
+                .collect(Collectors.toSet());
+    }
+    private static URLClassLoader newClassLoader(Set<File> files) {
+        URL[]urls = files.stream().map(file->getURL(file)).collect(Collectors.toList()).toArray(new URL[files.size()]);
+        return new URLClassLoader(urls, parent);
+    }
+    private static URL getURL(File file) {
+        try {
+            return file.toURI().toURL();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
-    public static void main(String... args){
-        List<File> cmdLineArgs = Arrays.asList(args).stream().parallel().map(e->new File(e)).collect(Collectors.toList());
-        int ret = SUCCESS_STATUS;
-        if(cmdLineArgs.size()==0){
-            System.out.printf("Usage\n"+PROGRAM_NAME +" "+ Stream.of("/home/kuraine/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar").collect(Collectors.joining(" "))+"\n");
-            System.exit(SUCCESS_STATUS);
+    public static void main(String... args) throws IOException {
+        String defaultBaseDir = "/home/kuraine/.m2/repository/";
+
+        Set<File> jarFileList = new LinkedHashSet<>();
+
+        if(args.length>0){
+            jarFileList.addAll(Arrays.asList(args).stream().map(jarFileName->new File(jarFileName)).collect(Collectors.toList()));
+        }else{
+            jarFileList = getJarFileList(new File(defaultBaseDir));
         }
 
-        Map<Class<?>,String> m = cmdLineArgs.stream().flatMap(e->uncheckCall(()->mkJarInfo2ClazzInfo(e)).entrySet().stream()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(pre,post)->post,LinkedHashMap::new));
+        ClassLoader classLoader = newClassLoader(jarFileList);
 
-        List<List<String>> ll = preProcess(m);
+        int jarFileListCnt = jarFileList.size();
+        int jarFileClassCnt = 0;
 
-        List<List<String>> ll_rearrange = midProcess(ll);
+
+        List<Map<Class<?>,String>> loadClassJarFileNameMapList = new LinkedList<>();
+
+        List<String> classLoadList = new LinkedList<>();
+        List<String> classLoadSkipList = new LinkedList<>();
+        List<String> classExecuteList = new LinkedList<>();
+        List<String> classExecuteSkipList = new LinkedList<>();
+
+        Map<String,List<String>> classLoadDoneResult = new LinkedHashMap<>();
+        Map<String,List<String>> classLoadSkipResult = new LinkedHashMap<>();
+        Map<String,List<String>> classExecuteDoneResult = new LinkedHashMap<>();
+        Map<String,List<String>> classExecuteSkipResult = new LinkedHashMap<>();
+
+        Map<String,Set<String>> classLoadSkipResultOnlyLoad = new TreeMap<>();
+        Map<String,Set<String>> classExecuteSkipResultOnlyExecute = new TreeMap<>();
+
+        for (File f : jarFileList) {
+
+            JarFile jarFile = new JarFile(f.getPath());
+            List<JarEntry> jarEntries = Collections.list(jarFile.entries());
+
+            for (JarEntry jarEntry : jarEntries) {
+                if (jarEntry.getName().endsWith(".class")) {
+                    jarFileClassCnt++;
+                    String className = jarEntry.getName().replace('/', '.').replaceAll(".class$", "");
+                    try {
+
+                        Class<?> loadClass = classLoader.loadClass(className);
+                        Map<Class<?>,String> loadClassJarFileNameMap = new LinkedHashMap(){{
+                            put(loadClass,f.getPath());
+                        }};
+                        loadClassJarFileNameMapList.add(loadClassJarFileNameMap);
+
+                        classLoadList.add(className);
+
+                    }catch (ClassNotFoundException | NoClassDefFoundError | VerifyError | IncompatibleClassChangeError | InternalError e){
+                        //クラスパスロード時のハンドリング
+                        classLoadSkipList.add(className);
+                    }
+                }
+            }
+            classLoadDoneResult.put(f.getPath(),classLoadList);
+            classLoadSkipResult.put(f.getPath(),classLoadSkipList);
+        }
 
         CrossTab crossTab = new CrossTab();
-        postProcess(ll_rearrange,crossTab);
-        System.exit(ret);
+
+        int cnt = loadClassJarFileNameMapList.size();
+        int grp = 0;
+        List<List<String>> classInfoList = new LinkedList<>();
+        for(int i=0;i<cnt;i++){
+            try{
+                grp++;
+                classInfoList = getClassInfo(grp,loadClassJarFileNameMapList.get(i));
+                List<List<String>> rearrangeList = rearrange(classInfoList);
+                crossTablation(crossTab,rearrangeList);
+                if(i==0){
+                    outputHeadRecord(crossTab);
+                }else{
+                    outputBodyRecord(crossTab);
+                }
+
+                classExecuteList.addAll(classInfoList.stream().map(r->r.get(0)).collect(Collectors.toList()));
+
+            }catch (NoClassDefFoundError | VerifyError | IncompatibleClassChangeError | InternalError e){
+                //実行時のハンドリング
+                classExecuteSkipList.addAll(classInfoList.stream().filter(r->r.contains("クラス名")).map(r->r.get(6)).collect(Collectors.toSet()));
+            }
+            classExecuteDoneResult.put(classInfoList.stream().map(r->r.get(0)).limit(1).collect(Collectors.joining()), classExecuteList);
+            classExecuteSkipResult.put(classInfoList.stream().map(r->r.get(0)).limit(1).collect(Collectors.joining()), classExecuteSkipList);
+        }
+
+        System.out.printf(
+                "%s\t%s\n" +
+                        "%s\t%s\n" +
+                        "%s\t%s\n" +
+                        "%s\t%s\n" +
+                        "%s\t%s\n" +
+                        "%s\t%s\n" +
+                        "\n"
+                ,"jarFileListCnt",jarFileListCnt
+                ,"jarFileClassCnt",jarFileClassCnt
+                ,"jarFileClassLoadDoneCnt",classLoadList.size()
+                ,"jarFileClassLoadSkipCnt",classLoadSkipList.size()
+                ,"jarFileClassExecuteDoneCnt",classExecuteList.size()
+                ,"jarFileClassExecuteSkipCnt",classExecuteSkipList.size()
+        );
+
+        //クラスロード時にコケるクラスと実行時にコケるクラスの分類
+
+//        for(Map.Entry<String,List<String>> entry : classLoadSkipResult.entrySet()){
+//            classLoadSkipResultOnlyLoad.put(entry.getKey(),entry.getValue().stream().collect(Collectors.toSet()));
+//        }
+//
+//        for(Map.Entry<String,List<String>> entry : classExecuteSkipResult.entrySet()){
+//            classExecuteSkipResultOnlyExecute.put(entry.getKey(),entry.getValue().stream().collect(Collectors.toSet()));
+//        }
+//
+//        System.out.printf(
+//                "%s\t%s\n" +
+//                        "\n" +
+//                        "%s\t%s\n" +
+//                        "\n"
+//                ,"classLoadSkipResultOnlyLoad",classLoadSkipResultOnlyLoad
+//                ,"classExecuteSkipResultOnlyExecute",classExecuteSkipResultOnlyExecute
+//        );
     }
 }
