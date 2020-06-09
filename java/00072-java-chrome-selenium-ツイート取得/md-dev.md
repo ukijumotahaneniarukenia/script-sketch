@@ -1,4 +1,7 @@
 - 実行方法
+
+  - 一部ちょちょぎれちゃっているので、いい感じにする
+
 ```
 
 $ java -cp "nnn-1.0-SNAPSHOT/*:nnn-1.0-SNAPSHOT/nnn-1.0-SNAPSHOT.jar" app.App 10 2>/dev/null | tee shellgei-twitter.log &
