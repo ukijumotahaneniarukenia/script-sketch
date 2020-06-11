@@ -1,5 +1,10 @@
-s = 'AAA:100 BBB:200 CCC:300'
+require 'uconv'
 
-ary=s.scan(/([A-Z]+):([0-9]+)/)
+#apt install -y ruby-uconv
 
-ary.each{|x| p x[0],x[1]}
+#https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html
+
+s="うんこ"
+
+p Uconv.u8tou16(s).bytes
+p Uconv.u8tou4(s).bytes
