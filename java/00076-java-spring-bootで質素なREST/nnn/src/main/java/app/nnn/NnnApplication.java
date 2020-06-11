@@ -132,8 +132,7 @@ public class NnnApplication {
 		}
 	}
 
-	
-	//downloadがうまくいっていない
+	// downloadがうまくいっていない
 	@PostMapping("/download")
 	public String download(@RequestBody String body, HttpServletResponse response) {
 
@@ -172,9 +171,25 @@ public class NnnApplication {
 			outputStream = response.getOutputStream();
 			FileCopyUtils.copy(inputStream, outputStream);
 			outputStream.flush();
+
+			switch (downloadFileExtension) {
+			case "txt":
+				response.setContentType("text/plain");
+			case "md":
+				response.setContentType("text/plain");
+			case "pdf":
+				response.setContentType("application/pdf");
+			default:
+				response.setContentType("application/octet");
+			}
+
+			response.setContentLength((int) file.length());
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodeDownloadFileName + "\";filename*=UTF-8");
+
 			inputStream.close();
 			outputStream.close();
 //			response.flushBuffer();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			rtVal = FAIL_STATUS;
@@ -182,20 +197,6 @@ public class NnnApplication {
 			e.printStackTrace();
 			rtVal = FAIL_STATUS;
 		}
-
-		switch (downloadFileExtension) {
-		case "txt":
-			response.setContentType("text/plain");
-		case "md":
-			response.setContentType("text/plain");
-		case "pdf":
-			response.setContentType("application/pdf");
-		default:
-			response.setContentType("application/octet");
-		}
-
-		response.setContentLength((int) file.length());
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodeDownloadFileName + "\"");
 
 		if (rtVal == FAIL_STATUS) {
 			return showIndexPage("ダウンロードが失敗しました");
