@@ -1,0 +1,1 @@
+- https://github.com/prabirshrestha/vim-lsp/wiki/Servers-Ruby
