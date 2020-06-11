@@ -166,10 +166,15 @@ public class NnnApplication {
 		File file = new File(RESOURCE_DIR + "/" + decodeDownloadFileName);
 
 		FileInputStream inputStream = null;
+		ServletOutputStream outputStream = null;
 		try {
 			inputStream = new FileInputStream(file);
-			FileCopyUtils.copy(inputStream, response.getOutputStream());
-			response.flushBuffer();
+			outputStream = response.getOutputStream();
+			FileCopyUtils.copy(inputStream, outputStream);
+			outputStream.flush();
+			inputStream.close();
+			outputStream.close();
+//			response.flushBuffer();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			rtVal = FAIL_STATUS;
