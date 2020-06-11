@@ -132,7 +132,6 @@ public class NnnApplication {
 		}
 	}
 
-	// downloadがうまくいっていない
 	@PostMapping("/download")
 	public String download(@RequestBody String body, HttpServletResponse response) {
 
@@ -160,8 +159,6 @@ public class NnnApplication {
 
 		System.out.println(decodeDownloadFileName); // %E3%81%86%E3%82%93%E3%81%93%E3%82%82%E3%82%8A%E3%82%82%E3%82%8A%E6%A3%AE%E9%B4%8E%E5%A4%96.txt
 
-		// URLデコードしないとだめ日本語ファイル名など
-
 		File file = new File(RESOURCE_DIR + "/" + decodeDownloadFileName);
 
 		FileInputStream inputStream = null;
@@ -169,8 +166,10 @@ public class NnnApplication {
 		try {
 			inputStream = new FileInputStream(file);
 			outputStream = response.getOutputStream();
+			response.setContentLength((int) file.length());
+			response.setHeader("Content-Disposition",
+					"attachment; filename=\"" + encodeDownloadFileName + "\";filename*=UTF-8");
 			FileCopyUtils.copy(inputStream, outputStream);
-			outputStream.flush();
 
 			switch (downloadFileExtension) {
 			case "txt":
@@ -183,12 +182,10 @@ public class NnnApplication {
 				response.setContentType("application/octet");
 			}
 
-			response.setContentLength((int) file.length());
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodeDownloadFileName + "\";filename*=UTF-8");
-
+			outputStream.flush();
 			inputStream.close();
 			outputStream.close();
-//			response.flushBuffer();
+			response.flushBuffer();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
