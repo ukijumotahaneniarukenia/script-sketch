@@ -172,10 +172,50 @@ public class NnnApplication {
 			FileCopyUtils.copy(inputStream, outputStream);
 
 			switch (downloadFileExtension) {
+			//テキスト系
 			case "txt":
 				response.setContentType("text/plain");
 			case "md":
 				response.setContentType("text/plain");
+			case "xml":
+				response.setContentType("text/xml");
+			
+				
+				//画像系
+			case "jpeg":
+				response.setContentType("image/jpeg");
+			case "png":
+				response.setContentType("image/png");
+			case "svg":
+				response.setContentType("image/svg+xml");
+			case "gif":
+				response.setContentType("image/gif");
+			
+				//音声系
+			case "mp3":
+				response.setContentType("audio/mpeg");
+			case "ogg":
+				response.setContentType("audio/ogg");
+			case "wav":
+				response.setContentType("audio/wav");
+			
+				//動画系
+			case "mp4":
+				response.setContentType("video/mp4");
+			case "mpg":
+				response.setContentType("video/mpeg");
+			case "mpeg":
+				response.setContentType("video/mpeg");
+			case "webm":
+				response.setContentType("video/webm");
+			case "ogv":
+				response.setContentType("video/ogg");
+
+				//アプリ系
+			case "json":
+				response.setContentType("application/json");
+			case "zip":
+				response.setContentType("application/zip");
 			case "pdf":
 				response.setContentType("application/pdf");
 			default:
