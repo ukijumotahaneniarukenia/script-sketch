@@ -1,10 +1,5 @@
-require 'uconv'
+s='123-4567-89'
 
-#apt install -y ruby-uconv
+mc=s.match(/(\d+)-(\d+)-(\d+)/)
 
-#https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html
-
-s="うんこ"
-
-p Uconv.u8tou16(s).bytes
-p Uconv.u8tou4(s).bytes
+p mc.values_at(1..(mc.size-1))
