@@ -4,7 +4,7 @@ public class Telegram {
 
 	private String content;
 
-	//引数なしのコンストラクタが必要
+	// 引数なしのコンストラクタが必要
 	public Telegram() {
 	}
 

@@ -3,11 +3,11 @@ package app.nnn;
 public class Who {
 	private String name;
 
-	//引数なしのコンストラクタが必要
+	// 引数なしのコンストラクタが必要
 	public Who() {
 	}
 
-	//フィールドを設定するコンストラクタが必要
+	// フィールドを設定するコンストラクタが必要
 	public Who(String name) {
 		this.name = name;
 	}
