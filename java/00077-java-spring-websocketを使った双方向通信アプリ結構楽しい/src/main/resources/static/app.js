@@ -24,7 +24,7 @@ function connect() {
 	stompClient.connect({}, function(frame) {
 		setConnected(true);
 		console.log('Connected: ' + frame);
-		stompClient.subscribe('/topic/greetings', function(greeting) { //待受状態で、レスポンス来たら、反応してHTTPのコンテンツをjson形式から文字列に変換してDOM化し、ブラウザにレンダラdelegate（処理依頼）
+		stompClient.subscribe('/topic/greetings', function(greeting) { //待受状態で、レスポンス来たら、反応してHTTPのコンテンツを文字列からjson形式に変換してDOM化し、ブラウザにレンダラdelegate（処理依頼）
 			showGreeting(JSON.parse(greeting.body).content);
 		});
 	});
