@@ -1,22 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-
-#key用
-#cat test.json | jq -c 'to_entries|map({"grp":.key|gsub("[a-zA-Z]{1,}";"")|gsub("^\\.";"")|gsub("\\..*";""),"item":.key|gsub("\\.";"-")|gsub("-[0-9]{1,}-";"-")})'
-
-#value用
-#cat test.json | jq -c 'to_entries|map({"grp":.key|gsub("[a-zA-Z]{1,}";"")|gsub("^\\.";"")|gsub("\\..*";""),"item":.value})'
-
-#key-value合体用
-cat test.json | jq -c 'to_entries|map({"grp":.key|gsub("[a-zA-Z]{1,}";"")|gsub("^\\.";"")|gsub("\\..*";""),"item":
-
-
-{"key":.key|gsub("\\.";"-")|gsub("-[0-9]{1,}-";"-"),"value":.value}})
-
-
-
-
-
-
-'
-
+echo ポルコ 紅の豚 ジーナ マルコ| while read l;do
+  r=2
+  cmd="echo $l | jq -s -cRr  'split(\" \")|map(sub(\"\n$\";\"\")) as \$a|(\$a|length) as \$n|[range(1;(\$n+1))]|[combinations($r)|sort]|unique|map(select(unique|length==$r))|.[]|map(\$a[.-1])|join(\"\t\")'"
+  echo $cmd
+done
