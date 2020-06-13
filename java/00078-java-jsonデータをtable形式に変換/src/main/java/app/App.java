@@ -101,7 +101,7 @@ public class App {
     private static void select(Connection con,String str,String fileName){
         Statement stmt = null;
         ResultSet rs = null;
-        List<String> columnList = null;
+        List<String> columnList = new ArrayList<>();
 
         //シングルクォーテーションのエスケープ対応
         String build_sql="select * from json_tree(" + "'" + str.replaceAll(PRE_REPLACE_SIGNATURE,POST_REPLACE_SIGNATURE) + "'" + ")";
@@ -112,18 +112,29 @@ public class App {
             rs = stmt.executeQuery(build_sql);
 
             while (rs.next()) {
-                if (columnList == null) {
-                    columnList = new ArrayList<>();
+                if (columnList.size()==0) {
+                    //初回
                     ResultSetMetaData header = rs.getMetaData();
                     int cnt = header.getColumnCount();
                     for (int i = 0; i < cnt; i++) {
-                        System.out.print(header.getColumnName(i + 1)+OFS);
+                        if(i==cnt-1){
+                            System.out.print(header.getColumnName(i + 1));
+                        }else{
+                            System.out.print(header.getColumnName(i + 1)+OFS);
+                        }
                         columnList.add(header.getColumnName(i + 1));
                     }
-                }
-                System.out.print(ORS);
-                for (String col : columnList) {
-                    System.out.print(rs.getObject(col)+OFS);
+                }else{
+                    //２回目以降
+                    int cnt = columnList.size();
+                    System.out.print(ORS);
+                    for (int i = 0; i < cnt; i++) {
+                        if(i==cnt-1){
+                            System.out.print(rs.getObject(columnList.get(i)));
+                        }else{
+                            System.out.print(rs.getObject(columnList.get(i))+OFS);
+                        }
+                    }
                 }
             }
             System.out.print(ORS);
