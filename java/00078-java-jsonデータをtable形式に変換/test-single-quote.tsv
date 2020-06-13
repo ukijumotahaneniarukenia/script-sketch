@@ -1,0 +1,7 @@
+key	value	type	atom	id	parent	fullkey	path
+imdb-info	{"score":8.6,"synopsis":"A team of explorers travel through a wormhole in space in an\n                attempt to ensure humanity's survival.","url":"http://www.imdb.com/title/tt0816692/"}	object	null	2	0	$.imdb-info	$
+score	8.6	real	8.6	4	2	$.imdb-info.score	$.imdb-info
+synopsis	A team of explorers travel through a wormhole in space in an
+                attempt to ensure humanity's survival.	text	A team of explorers travel through a wormhole in space in an
+                attempt to ensure humanity's survival.	6	2	$.imdb-info.synopsis	$.imdb-info
+url	http://www.imdb.com/title/tt0816692/	text	http://www.imdb.com/title/tt0816692/	8	2	$.imdb-info.url	$.imdb-info

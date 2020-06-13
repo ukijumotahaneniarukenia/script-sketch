@@ -2,8 +2,7 @@ package app;
 
 import sun.misc.Signal;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
@@ -20,6 +19,8 @@ public class App {
     private static final String SIGNAL_HANDLE_INT = "INT";
     private static final String ORS = "\n";
     private static final String OFS = "\t";
+    private static final String PRE_SUFFIX = ".json";
+    private static final String POST_SUFFIX = ".tsv";
     private static final String PRE_REPLACE_SIGNATURE = "\'";
     private static final String POST_REPLACE_SIGNATURE = "\'\'";
     private static final Integer SUCCESS_STATUS = 0;
@@ -106,7 +107,23 @@ public class App {
         //シングルクォーテーションのエスケープ対応
         String build_sql="select * from json_tree(" + "'" + str.replaceAll(PRE_REPLACE_SIGNATURE,POST_REPLACE_SIGNATURE) + "'" + ")";
 
+        StringBuilder s = new StringBuilder();
+
+        File dstFile  = null;
+        FileWriter fileWriter = null;
+        PrintWriter printWriter = null;
+
         try {
+
+            dstFile = new File(fileName.replace(PRE_SUFFIX,POST_SUFFIX));
+            if(dstFile.exists()){
+                dstFile.delete();
+            }else{
+                dstFile.createNewFile();
+            }
+
+            fileWriter = new FileWriter(dstFile, true);
+            printWriter = new PrintWriter(new BufferedWriter(fileWriter));
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(build_sql);
@@ -118,27 +135,27 @@ public class App {
                     int cnt = header.getColumnCount();
                     for (int i = 0; i < cnt; i++) {
                         if(i==cnt-1){
-                            System.out.print(header.getColumnName(i + 1));
+                            s.append(header.getColumnName(i + 1));
                         }else{
-                            System.out.print(header.getColumnName(i + 1)+OFS);
+                            s.append(header.getColumnName(i + 1)).append(OFS);
                         }
                         columnList.add(header.getColumnName(i + 1));
                     }
                 }else{
                     //２回目以降
                     int cnt = columnList.size();
-                    System.out.print(ORS);
+                    s.append(ORS);
                     for (int i = 0; i < cnt; i++) {
                         if(i==cnt-1){
-                            System.out.print(rs.getObject(columnList.get(i)));
+                            s.append(rs.getObject(columnList.get(i)));
                         }else{
-                            System.out.print(rs.getObject(columnList.get(i))+OFS);
+                            s.append(rs.getObject(columnList.get(i))+OFS);
                         }
                     }
                 }
             }
-            System.out.print(ORS);
-        } catch (SQLException e) {
+            s.append(ORS);
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
             exit(FAIL_STATUS);
         } finally {
@@ -154,6 +171,10 @@ public class App {
                 exit(FAIL_STATUS);
             }
         }
+
+        printWriter.print(s);
+
+        printWriter.close();
     }
 
     private static void trap(List<String> liz){
