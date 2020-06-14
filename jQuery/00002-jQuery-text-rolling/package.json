@@ -1,7 +1,8 @@
 {
-  "name": "00001-jQuery-Use-jquery-via-nodejs",
+  "name": "00002-jQuery-text-rolling",
   "version": "1.0.0",
-  "main": "app.js",
+  "description": "",
+  "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +14,5 @@
   },
   "devDependencies": {
     "browserify": "^16.5.1"
-  },
-  "description": ""
+  }
 }
