@@ -66,5 +66,5 @@ if [ $OPTION_FLG == "--deploy" ];then
 
    sudo $(npm bin)/browserify test.js -o /var/www/html/test.js
 
-   firefox test.html
+   firefox --new-window http:/localhost:80/test.html
 fi
