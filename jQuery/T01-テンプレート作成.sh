@@ -3,11 +3,11 @@
 usage(){
 cat <<EOS
 Usage:
-  $0 $(pwd|perl -pe 's;.*/;;') --init
+  $0 00003-jQuery-text-rolling --init
 
   or
 
-  $0 $(pwd|perl -pe 's;.*/;;') --deploy
+  $0 00003-jQuery-text-rolling --deploy
 EOS
 exit 0
 }
@@ -24,6 +24,7 @@ echo '/node_modules/*' > $SKETCH_DIR/.gitignore
 
 if [ $OPTION_FLG == "--init" ];then
 
+  (
    cd $SKETCH_DIR
 
    npm --yes init
@@ -38,12 +39,13 @@ if [ $OPTION_FLG == "--init" ];then
    npm bin
 
    ls -lh $(npm bin)/browserify
+  )
 
-   cp test.html /var/www/html/test.html
+   cp test.html $SKETCH_DIR/test.html
 
-   cp test.css /var/www/html/test.css
+   cp test.css $SKETCH_DIR/test.css
 
-   cp test.js /var/www/html/test.js
+   cp test.js $SKETCH_DIR/test.js
 
 
    sudo apachectl stop
