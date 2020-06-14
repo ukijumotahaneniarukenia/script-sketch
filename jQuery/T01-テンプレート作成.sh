@@ -3,11 +3,11 @@
 usage(){
 cat <<EOS
 Usage:
-  $0 00001-jQuery-Use-jquery-via-nodejs --init
+  $0 $(pwd|perl -pe 's;.*/;;') --init
 
   or
 
-  $0 00001-jQuery-Use-jquery-via-nodejs --deploy
+  $0 $(pwd|perl -pe 's;.*/;;') --deploy
 EOS
 exit 0
 }
