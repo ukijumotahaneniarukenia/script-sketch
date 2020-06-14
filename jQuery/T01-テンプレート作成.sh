@@ -39,6 +39,13 @@ if [ $OPTION_FLG == "--init" ];then
 
    ls -lh $(npm bin)/browserify
 
+   cp test.html /var/www/html/test.html
+
+   cp test.css /var/www/html/test.css
+
+   cp test.js /var/www/html/test.js
+
+
    sudo apachectl stop
 
 
