@@ -18,12 +18,15 @@ OPTION_FLG=$1;shift
 
 TMP_SKETCH_DIR=$SKETCH_DIR
 
+if [ $OPTION_FLG == "--init" ];then
+
 SKETCH_DIR_LATIN=$(echo $SKETCH_DIR | mecab | awk '{print $1}' | head -n-1 | \
   while read s;do
     echo $s | grep -P '\p{Hiragana}|\p{Katakana}|\p{Han}'| mecab -Oyomi| uconv -x katakana-hiragana | uconv -x hiragana-latin;
     echo $s | grep -vP '\p{Hiragana}|\p{Katakana}|\p{Han}';
   done | xargs | tr -d  ' ' | tee -a pre2post)
 
+fi
 
 SKETCH_DIR=$SKETCH_DIR_LATIN
 
