@@ -1,9 +1,7 @@
-eclipseのweb-deveploerが使いやすい
+https://docs.emmet.io/cheatsheet-a5.pdf
 
-css補完は以下のプラグインを入れると便利
+https://technical-creator.com/vscode-emmet/
 
+https://haniwaman.com/emmet/
 
-Eclipse Web Develper Tools
-
-
-デフォルトはハイフン入力し始めると補完出る
+https://zukulog098r.com/cord-vscode/
