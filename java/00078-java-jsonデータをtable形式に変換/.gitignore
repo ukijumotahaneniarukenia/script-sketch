@@ -1,0 +1,12 @@
+/.gradle/*
+
+/.idea/*
+
+
+/build/*
+
+
+/*jar
+
+
+/stale_outputs_checked
