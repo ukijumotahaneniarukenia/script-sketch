@@ -1,3 +1,5 @@
+- https://github.com/codenvy/codenvy/issues/2427
+
 事前にブラウザをインストール
 
 ```
