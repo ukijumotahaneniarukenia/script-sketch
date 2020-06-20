@@ -54,6 +54,23 @@ OUT:
 ジーナ	ポルコ
 サボイア	ジーナ
 
+or
+
+IN:
+
+echo 2 {A..D} | ./App.groovy
+
+
+OUT:
+
+A	B
+A	C
+A	D
+B	C
+B	D
+C	D
+
+
 """
     println(usage)
 }
