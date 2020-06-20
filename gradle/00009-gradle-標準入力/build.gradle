@@ -1,0 +1,16 @@
+task entryPoint {
+    doLast {
+        List<String> l1 = new ArrayList<>(Arrays.asList("ポルコ","サボイア","ジーナ"))
+
+        println(l1)
+
+        List<String> combinations = l1.combinations()
+
+        for (String s : combinations){
+            println(s)
+        }
+
+        println(l1.size())
+        println(combinations.size())
+    }
+}
