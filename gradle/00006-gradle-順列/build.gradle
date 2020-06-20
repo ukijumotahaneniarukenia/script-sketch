@@ -1,0 +1,15 @@
+task entryPoint {
+    doLast {
+        List<String> l2 = new ArrayList<>(Arrays.asList("ポルコ","サボイア","ジーナ"))
+
+        Set<List<String>> permutations = l2.permutations()
+
+        for (String s : permutations){
+            println(s)
+        }
+
+        println(l2)
+        println(l2.size())
+        println(permutations.size())
+    }
+}
