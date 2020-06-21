@@ -1,0 +1,70 @@
+パッケージ名	キー	バリュー
+math	div-dl-dd-0-a	Constants
+math	div-dl-dd-1-a	func Abs(x float64) float64
+math	div-dl-dd-2-a	func Acos(x float64) float64
+math	div-dl-dd-3-a	func Acosh(x float64) float64
+math	div-dl-dd-4-a	func Asin(x float64) float64
+math	div-dl-dd-5-a	func Asinh(x float64) float64
+math	div-dl-dd-6-a	func Atan(x float64) float64
+math	div-dl-dd-7-a	func Atan2(y, x float64) float64
+math	div-dl-dd-8-a	func Atanh(x float64) float64
+math	div-dl-dd-9-a	func Cbrt(x float64) float64
+math	div-dl-dd-10-a	func Ceil(x float64) float64
+math	div-dl-dd-11-a	func Copysign(x, y float64) float64
+math	div-dl-dd-12-a	func Cos(x float64) float64
+math	div-dl-dd-13-a	func Cosh(x float64) float64
+math	div-dl-dd-14-a	func Dim(x, y float64) float64
+math	div-dl-dd-15-a	func Erf(x float64) float64
+math	div-dl-dd-16-a	func Erfc(x float64) float64
+math	div-dl-dd-17-a	func Erfcinv(x float64) float64
+math	div-dl-dd-18-a	func Erfinv(x float64) float64
+math	div-dl-dd-19-a	func Exp(x float64) float64
+math	div-dl-dd-20-a	func Exp2(x float64) float64
+math	div-dl-dd-21-a	func Expm1(x float64) float64
+math	div-dl-dd-22-a	func FMA(x, y, z float64) float64
+math	div-dl-dd-23-a	func Float32bits(f float32) uint32
+math	div-dl-dd-24-a	func Float32frombits(b uint32) float32
+math	div-dl-dd-25-a	func Float64bits(f float64) uint64
+math	div-dl-dd-26-a	func Float64frombits(b uint64) float64
+math	div-dl-dd-27-a	func Floor(x float64) float64
+math	div-dl-dd-28-a	func Frexp(f float64) (frac float64, exp int)
+math	div-dl-dd-29-a	func Gamma(x float64) float64
+math	div-dl-dd-30-a	func Hypot(p, q float64) float64
+math	div-dl-dd-31-a	func Ilogb(x float64) int
+math	div-dl-dd-32-a	func Inf(sign int) float64
+math	div-dl-dd-33-a	func IsInf(f float64, sign int) bool
+math	div-dl-dd-34-a	func IsNaN(f float64) (is bool)
+math	div-dl-dd-35-a	func J0(x float64) float64
+math	div-dl-dd-36-a	func J1(x float64) float64
+math	div-dl-dd-37-a	func Jn(n int, x float64) float64
+math	div-dl-dd-38-a	func Ldexp(frac float64, exp int) float64
+math	div-dl-dd-39-a	func Lgamma(x float64) (lgamma float64, sign int)
+math	div-dl-dd-40-a	func Log(x float64) float64
+math	div-dl-dd-41-a	func Log10(x float64) float64
+math	div-dl-dd-42-a	func Log1p(x float64) float64
+math	div-dl-dd-43-a	func Log2(x float64) float64
+math	div-dl-dd-44-a	func Logb(x float64) float64
+math	div-dl-dd-45-a	func Max(x, y float64) float64
+math	div-dl-dd-46-a	func Min(x, y float64) float64
+math	div-dl-dd-47-a	func Mod(x, y float64) float64
+math	div-dl-dd-48-a	func Modf(f float64) (int float64, frac float64)
+math	div-dl-dd-49-a	func NaN() float64
+math	div-dl-dd-50-a	func Nextafter(x, y float64) (r float64)
+math	div-dl-dd-51-a	func Nextafter32(x, y float32) (r float32)
+math	div-dl-dd-52-a	func Pow(x, y float64) float64
+math	div-dl-dd-53-a	func Pow10(n int) float64
+math	div-dl-dd-54-a	func Remainder(x, y float64) float64
+math	div-dl-dd-55-a	func Round(x float64) float64
+math	div-dl-dd-56-a	func RoundToEven(x float64) float64
+math	div-dl-dd-57-a	func Signbit(x float64) bool
+math	div-dl-dd-58-a	func Sin(x float64) float64
+math	div-dl-dd-59-a	func Sincos(x float64) (sin, cos float64)
+math	div-dl-dd-60-a	func Sinh(x float64) float64
+math	div-dl-dd-61-a	func Sqrt(x float64) float64
+math	div-dl-dd-62-a	func Tan(x float64) float64
+math	div-dl-dd-63-a	func Tanh(x float64) float64
+math	div-dl-dd-64-a	func Trunc(x float64) float64
+math	div-dl-dd-65-a	func Y0(x float64) float64
+math	div-dl-dd-66-a	func Y1(x float64) float64
+math	div-dl-dd-67-a	func Yn(n int, x float64) float64
+math	div-id	manual-nav

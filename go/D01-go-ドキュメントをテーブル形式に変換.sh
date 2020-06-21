@@ -1,9 +1,44 @@
 #!/usr/bin/env bash
 
-echo "https://golang.org/pkg/strings/" | ruby -ruri -rnet/http -anle '$F.map{|e|Net::HTTP.get_print(URI.parse(e))}' >golang-pkg-strings.html
+usage(){
+cat <<EOS
 
-cat golang-pkg-strings.html | pup '#manual-nav' | sed '1i<?xml version="1.0" encoding="UTF-8"?>' >golang-pkg-strings.xml
+Usage:
+bash $0 math
 
-echo golang-pkg-strings.xml | xml2json
+or
 
-cat golang-pkg-strings.json | jq --stream -c '{key:.[0]|map(if type == "number" then tostring else . end)|join("-"),value:.[1]}|select(.value!=null)' | jq -sr 'map({key:.key,value:.value|gsub("^\n +";"")|gsub("\n +$";"")})|.[]|[.key,.value]|@tsv'
+bash $0 io
+
+or
+
+bash $0 strings
+
+or
+
+bash $0 text/scanner
+
+EOS
+
+exit 0
+}
+
+PKG_NAME=$1;shift
+
+[ -z $PKG_NAME ] && usage
+
+
+FILE_NAME=$(echo $PKG_NAME | tr '/' '-')
+
+echo "https://golang.org/pkg/$PKG_NAME/" | ruby -ruri -rnet/http -anle '$F.map{|e|Net::HTTP.get_print(URI.parse(e))}' >golang-pkg-$FILE_NAME.html
+
+cat golang-pkg-$FILE_NAME.html | pup '#manual-nav' | sed '1i<?xml version="1.0" encoding="UTF-8"?>' >golang-pkg-$FILE_NAME.xml
+
+echo golang-pkg-$FILE_NAME.xml | xml2json
+
+cat golang-pkg-$FILE_NAME.json | jq --stream -c '{key:.[0]|map(if type == "number" then tostring else . end)|join("-"),value:.[1]}|select(.value!=null)' | \
+  jq -sr "map({pkg:\"$PKG_NAME\",key:.key,value:.value|gsub(\"^\n +\";\"\")|gsub(\"\n +$\";\"\")})|.[]|[.pkg,.key,.value]|@tsv" | \
+  sed '1iパッケージ名\tキー\tバリュー' >golang-pkg-$FILE_NAME.tsv
+
+
+ls golang* | grep -v tsv | xargs rm
