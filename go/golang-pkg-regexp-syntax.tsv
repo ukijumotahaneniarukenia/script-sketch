@@ -1,0 +1,31 @@
+パッケージ名	キー	バリュー
+regexp/syntax	div-dl-dd-0-a	func IsWordChar(r rune) bool
+regexp/syntax	div-dl-dd-1-a	type EmptyOp
+regexp/syntax	div-dl-dd-2-a	func EmptyOpContext(r1, r2 rune) EmptyOp
+regexp/syntax	div-dl-dd-3-a	type Error
+regexp/syntax	div-dl-dd-4-a	func (e *Error) Error() string
+regexp/syntax	div-dl-dd-5-a	type ErrorCode
+regexp/syntax	div-dl-dd-6-a	func (e ErrorCode) String() string
+regexp/syntax	div-dl-dd-7-a	type Flags
+regexp/syntax	div-dl-dd-8-a	type Inst
+regexp/syntax	div-dl-dd-9-a	func (i *Inst) MatchEmptyWidth(before rune, after rune) bool
+regexp/syntax	div-dl-dd-10-a	func (i *Inst) MatchRune(r rune) bool
+regexp/syntax	div-dl-dd-11-a	func (i *Inst) MatchRunePos(r rune) int
+regexp/syntax	div-dl-dd-12-a	func (i *Inst) String() string
+regexp/syntax	div-dl-dd-13-a	type InstOp
+regexp/syntax	div-dl-dd-14-a	func (i InstOp) String() string
+regexp/syntax	div-dl-dd-15-a	type Op
+regexp/syntax	div-dl-dd-16-a	func (i Op) String() string
+regexp/syntax	div-dl-dd-17-a	type Prog
+regexp/syntax	div-dl-dd-18-a	func Compile(re *Regexp) (*Prog, error)
+regexp/syntax	div-dl-dd-19-a	func (p *Prog) Prefix() (prefix string, complete bool)
+regexp/syntax	div-dl-dd-20-a	func (p *Prog) StartCond() EmptyOp
+regexp/syntax	div-dl-dd-21-a	func (p *Prog) String() string
+regexp/syntax	div-dl-dd-22-a	type Regexp
+regexp/syntax	div-dl-dd-23-a	func Parse(s string, flags Flags) (*Regexp, error)
+regexp/syntax	div-dl-dd-24-a	func (re *Regexp) CapNames() []string
+regexp/syntax	div-dl-dd-25-a	func (x *Regexp) Equal(y *Regexp) bool
+regexp/syntax	div-dl-dd-26-a	func (re *Regexp) MaxCap() int
+regexp/syntax	div-dl-dd-27-a	func (re *Regexp) Simplify() *Regexp
+regexp/syntax	div-dl-dd-28-a	func (re *Regexp) String() string
+regexp/syntax	div-id	manual-nav
