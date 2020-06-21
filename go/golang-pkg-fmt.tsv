@@ -1,0 +1,28 @@
+パッケージ名	キー	バリュー
+fmt	div-url	https://golang.org/pkg/fmt/
+fmt	div-dl-dd-0-a	func Errorf(format string, a ...interface{}) error
+fmt	div-dl-dd-1-a	func Fprint(w io.Writer, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-2-a	func Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-3-a	func Fprintln(w io.Writer, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-4-a	func Fscan(r io.Reader, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-5-a	func Fscanf(r io.Reader, format string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-6-a	func Fscanln(r io.Reader, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-7-a	func Print(a ...interface{}) (n int, err error)
+fmt	div-dl-dd-8-a	func Printf(format string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-9-a	func Println(a ...interface{}) (n int, err error)
+fmt	div-dl-dd-10-a	func Scan(a ...interface{}) (n int, err error)
+fmt	div-dl-dd-11-a	func Scanf(format string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-12-a	func Scanln(a ...interface{}) (n int, err error)
+fmt	div-dl-dd-13-a	func Sprint(a ...interface{}) string
+fmt	div-dl-dd-14-a	func Sprintf(format string, a ...interfac\ne{}) string
+fmt	div-dl-dd-15-a	func Sprintln(a ...interface{}) string
+fmt	div-dl-dd-16-a	func Sscan(str string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-17-a	func Sscanf(str string, format string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-18-a	func Sscanln(str string, a ...interface{}) (n int, err error)
+fmt	div-dl-dd-19-a	type Formatter
+fmt	div-dl-dd-20-a	type GoStringer
+fmt	div-dl-dd-21-a	type ScanState
+fmt	div-dl-dd-22-a	type Scanner
+fmt	div-dl-dd-23-a	type State
+fmt	div-dl-dd-24-a	type Stringer
+fmt	div-id	manual-nav
