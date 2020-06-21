@@ -1,0 +1,39 @@
+パッケージ名	キー	バリュー
+strconv	div-url	https://golang.org/pkg/strconv/
+strconv	div-dl-dd-0-a	Constants
+strconv	div-dl-dd-1-a	Variables
+strconv	div-dl-dd-2-a	func AppendBool(dst []byte, b bool) []byte
+strconv	div-dl-dd-3-a	func AppendFloat(dst []byte, f float64, fmt byte, prec, bitSize int) []byte
+strconv	div-dl-dd-4-a	func AppendInt(dst []byte, i int64, base int) []byte
+strconv	div-dl-dd-5-a	func AppendQuote(dst []byte, s string) []byte
+strconv	div-dl-dd-6-a	func AppendQuoteRune(dst []byte, r rune) []byte
+strconv	div-dl-dd-7-a	func AppendQuoteRuneToASCII(dst []byte, r rune) []byte
+strconv	div-dl-dd-8-a	func AppendQuoteRuneToGraphic(dst []byte, r rune) []byte
+strconv	div-dl-dd-9-a	func AppendQuoteToASCII(dst []byte, s string) []byte
+strconv	div-dl-dd-10-a	func AppendQuoteToGraphic(dst []byte, s string) []byte
+strconv	div-dl-dd-11-a	func AppendUint(dst []byte, i uint64, base int) []byte
+strconv	div-dl-dd-12-a	func Atoi(s string) (int, error)
+strconv	div-dl-dd-13-a	func CanBackquote(s string) bool
+strconv	div-dl-dd-14-a	func FormatBool(b bool) string
+strconv	div-dl-dd-15-a	func FormatFloat(f float64, fmt byte, prec, bitSize int) string
+strconv	div-dl-dd-16-a	func FormatInt(i int64, base int) string
+strconv	div-dl-dd-17-a	func FormatUint(i uint64, base int) string
+strconv	div-dl-dd-18-a	func IsGraphic(r rune) bool
+strconv	div-dl-dd-19-a	func IsPrint(r rune) bool
+strconv	div-dl-dd-20-a	func Itoa(i int) string
+strconv	div-dl-dd-21-a	func ParseBool(str string) (bool, error)
+strconv	div-dl-dd-22-a	func ParseFloat(s string, bitSize int) (float64, error)
+strconv	div-dl-dd-23-a	func ParseInt(s string, base int, bitSize int) (i int64, err error)
+strconv	div-dl-dd-24-a	func ParseUint(s string, base int, bitSize int) (uint64, error)
+strconv	div-dl-dd-25-a	func Quote(s string) string
+strconv	div-dl-dd-26-a	func QuoteRune(r rune) string
+strconv	div-dl-dd-27-a	func QuoteRuneToASCII(r rune) string
+strconv	div-dl-dd-28-a	func QuoteRuneToGraphic(r rune) string
+strconv	div-dl-dd-29-a	func QuoteToASCII(s string) string
+strconv	div-dl-dd-30-a	func QuoteToGraphic(s string) string
+strconv	div-dl-dd-31-a	func Unquote(s string) (string, error)
+strconv	div-dl-dd-32-a	func UnquoteChar(s string, quote byte) (value rune, multibyte bool, tail string, err error)
+strconv	div-dl-dd-33-a	type NumError
+strconv	div-dl-dd-34-a	func (e *NumError) Error() string
+strconv	div-dl-dd-35-a	func (e *NumError) Unwrap() error
+strconv	div-id	manual-nav
