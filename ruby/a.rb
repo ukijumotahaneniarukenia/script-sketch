@@ -1,14 +1,37 @@
-input = "caffelatte"
+#!/usr/bin/env ruby
 
-#ptn=""
-ptn="\\B"
+require 'active_support'
+require 'active_support/core_ext'
+ActiveSupport::XmlMini.backend = 'Nokogiri'
 
-search_word_list = input.split(/#{ptn}/)
+def usage
+  f = File.basename(__FILE__)
+  puts <<~EOF
+Usage:
+  IN : echo test.xml | #{f}
+  MID: cat test.json | jq --stream -c
+  OUT:
+EOF
+  return 0
+end
 
-reg = search_word_list.map {|s| Regexp.new(s)}
+def mock(ary)
+  ary.map{|e|
+    txt=Hash.from_xml(File.read(e)).to_json
+    f=e.slice!(/.*(?=\.xml)/);
+    File.open(f+".json","w") do |file|
+      file.puts txt;
+    end
+  }
+  return 0
+end
 
-p reg #[/a/, /c/, /e/, /f/, /l/, /t/]
-
-p input.scan(Regexp.union(*reg)) #["c", "a", "f", "f", "e", "l", "a", "t", "t", "e"]
-
-p input.scan(Regexp.union(*reg)).group_by(& :itself).map{|k,v| [k, v.size]}.to_h
+if ARGV.length > 0
+  usage
+elsif FileTest.pipe?(STDIN)
+  n = STDIN.readlines.map {|e|e.split(/\s{1,}/)}
+  pipe_args = n.flatten
+  mock(pipe_args)
+else
+  usage
+end
