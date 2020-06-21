@@ -1,0 +1,37 @@
+パッケージ名	キー	バリュー
+golang.org/x/net/html	div-url	https://godoc.org/golang.org/x/net/html/
+golang.org/x/net/html	ul-li-0-a	Variables
+golang.org/x/net/html	ul-li-1-a	func EscapeString(s string) string
+golang.org/x/net/html	ul-li-2-a	func Render(w io.Writer, n *Node) error
+golang.org/x/net/html	ul-li-3-a	func UnescapeString(s string) string
+golang.org/x/net/html	ul-li-4-a	type Attribute
+golang.org/x/net/html	ul-li-5-a	type Node
+golang.org/x/net/html	ul-li-6-a	func Parse(r io.Reader) (*Node, error)
+golang.org/x/net/html	ul-li-7-a	func ParseFragment(r io.Reader, context *Node) ([]*Node, error)
+golang.org/x/net/html	ul-li-8-a	func ParseFragmentWithOptions(r io.Reader, context *Node, opts ...ParseOption) ([]*Node, error)
+golang.org/x/net/html	ul-li-9-a	func ParseWithOptions(r io.Reader, opts ...ParseOption) (*Node, error)
+golang.org/x/net/html	ul-li-10-a	func (n *Node) AppendChild(c *Node)
+golang.org/x/net/html	ul-li-11-a	func (n *Node) InsertBefore(newChild, oldChild *Node)
+golang.org/x/net/html	ul-li-12-a	func (n *Node) RemoveChild(c *Node)
+golang.org/x/net/html	ul-li-13-a	type NodeType
+golang.org/x/net/html	ul-li-14-a	type ParseOption
+golang.org/x/net/html	ul-li-15-a	func ParseOptionEnableScripting(enable bool) ParseOption
+golang.org/x/net/html	ul-li-16-a	type Token
+golang.org/x/net/html	ul-li-17-a	func (t Token) String() string
+golang.org/x/net/html	ul-li-18-a	type TokenType
+golang.org/x/net/html	ul-li-19-a	func (t TokenType) String() string
+golang.org/x/net/html	ul-li-20-a	type Tokenizer
+golang.org/x/net/html	ul-li-21-a	func NewTokenizer(r io.Reader) *Tokenizer
+golang.org/x/net/html	ul-li-22-a	func NewTokenizerFragment(r io.Reader, contextTag string) *Tokenizer
+golang.org/x/net/html	ul-li-23-a	func (z *Tokenizer) AllowCDATA(allowCDATA bool)
+golang.org/x/net/html	ul-li-24-a	func (z *Tokenizer) Buffered() []byte
+golang.org/x/net/html	ul-li-25-a	func (z *Tokenizer) Err() error
+golang.org/x/net/html	ul-li-26-a	func (z *Tokenizer) Next() TokenType
+golang.org/x/net/html	ul-li-27-a	func (z *Tokenizer) NextIsNotRawText()
+golang.org/x/net/html	ul-li-28-a	func (z *Tokenizer) Raw() []byte
+golang.org/x/net/html	ul-li-29-a	func (z *Tokenizer) SetMaxBuf(n int)
+golang.org/x/net/html	ul-li-30-a	func (z *Tokenizer) TagAttr() (key, val []byte, moreAttr bool)
+golang.org/x/net/html	ul-li-31-a	func (z *Tokenizer) TagName() (name []byte, hasAttr bool)
+golang.org/x/net/html	ul-li-32-a	func (z *Tokenizer) Text() []byte
+golang.org/x/net/html	ul-li-33-a	func (z *Tokenizer) Token() Token
+golang.org/x/net/html	ul-li-34-a	Parse

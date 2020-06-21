@@ -1,0 +1,38 @@
+パッケージ名	キー	バリュー
+golang.org/x/net/websocket	div-url	https://godoc.org/golang.org/x/net/websocket/
+golang.org/x/net/websocket	ul-li-0-a	Constants
+golang.org/x/net/websocket	ul-li-1-a	Variables
+golang.org/x/net/websocket	ul-li-2-a	func Origin(config *Config, req *http.Request) (*url.URL, error)
+golang.org/x/net/websocket	ul-li-3-a	type Addr
+golang.org/x/net/websocket	ul-li-4-a	func (addr *Addr) Network() string
+golang.org/x/net/websocket	ul-li-5-a	type Codec
+golang.org/x/net/websocket	ul-li-6-a	func (cd Codec) Receive(ws *Conn, v interface{}) (err error)
+golang.org/x/net/websocket	ul-li-7-a	func (cd Codec) Send(ws *Conn, v interface{}) (err error)
+golang.org/x/net/websocket	ul-li-8-a	type Config
+golang.org/x/net/websocket	ul-li-9-a	func NewConfig(server, origin string) (config *Config, err error)
+golang.org/x/net/websocket	ul-li-10-a	type Conn
+golang.org/x/net/websocket	ul-li-11-a	func Dial(url_, protocol, origin string) (ws *Conn, err error)
+golang.org/x/net/websocket	ul-li-12-a	func DialConfig(config *Config) (ws *Conn, err error)
+golang.org/x/net/websocket	ul-li-13-a	func NewClient(config *Config, rwc io.ReadWriteCloser) (ws *Conn, err error)
+golang.org/x/net/websocket	ul-li-14-a	func (ws *Conn) Close() error
+golang.org/x/net/websocket	ul-li-15-a	func (ws *Conn) Config() *Config
+golang.org/x/net/websocket	ul-li-16-a	func (ws *Conn) IsClientConn() bool
+golang.org/x/net/websocket	ul-li-17-a	func (ws *Conn) IsServerConn() bool
+golang.org/x/net/websocket	ul-li-18-a	func (ws *Conn) LocalAddr() net.Addr
+golang.org/x/net/websocket	ul-li-19-a	func (ws *Conn) Read(msg []byte) (n int, err error)
+golang.org/x/net/websocket	ul-li-20-a	func (ws *Conn) RemoteAddr() net.Addr
+golang.org/x/net/websocket	ul-li-21-a	func (ws *Conn) Request() *http.Request
+golang.org/x/net/websocket	ul-li-22-a	func (ws *Conn) SetDeadline(t time.Time) error
+golang.org/x/net/websocket	ul-li-23-a	func (ws *Conn) SetReadDeadline(t time.Time) error
+golang.org/x/net/websocket	ul-li-24-a	func (ws *Conn) SetWriteDeadline(t time.Time) error
+golang.org/x/net/websocket	ul-li-25-a	func (ws *Conn) Write(msg []byte) (n int, err error)
+golang.org/x/net/websocket	ul-li-26-a	type DialError
+golang.org/x/net/websocket	ul-li-27-a	func (e *DialError) Error() string
+golang.org/x/net/websocket	ul-li-28-a	type Handler
+golang.org/x/net/websocket	ul-li-29-a	func (h Handler) ServeHTTP(w http.ResponseWriter, req *http.Request)
+golang.org/x/net/websocket	ul-li-30-a	type ProtocolError
+golang.org/x/net/websocket	ul-li-31-a	func (err *ProtocolError) Error() string
+golang.org/x/net/websocket	ul-li-32-a	type Server
+golang.org/x/net/websocket	ul-li-33-a	func (s Server) ServeHTTP(w http.ResponseWriter, req *http.Request)
+golang.org/x/net/websocket	ul-li-34-a	Dial
+golang.org/x/net/websocket	ul-li-35-a	Handler

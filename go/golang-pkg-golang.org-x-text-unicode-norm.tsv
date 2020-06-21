@@ -1,0 +1,42 @@
+パッケージ名	キー	バリュー
+golang.org/x/text/unicode/norm	div-url	https://godoc.org/golang.org/x/text/unicode/norm/
+golang.org/x/text/unicode/norm	ul-li-0-a	Constants
+golang.org/x/text/unicode/norm	ul-li-1-a	type Form
+golang.org/x/text/unicode/norm	ul-li-2-a	func (f Form) Append(out []byte, src ...byte) []byte
+golang.org/x/text/unicode/norm	ul-li-3-a	func (f Form) AppendString(out []byte, src string) []byte
+golang.org/x/text/unicode/norm	ul-li-4-a	func (f Form) Bytes(b []byte) []byte
+golang.org/x/text/unicode/norm	ul-li-5-a	func (f Form) FirstBoundary(b []byte) int
+golang.org/x/text/unicode/norm	ul-li-6-a	func (f Form) FirstBoundaryInString(s string) int
+golang.org/x/text/unicode/norm	ul-li-7-a	func (f Form) IsNormal(b []byte) bool
+golang.org/x/text/unicode/norm	ul-li-8-a	func (f Form) IsNormalString(s string) bool
+golang.org/x/text/unicode/norm	ul-li-9-a	func (f Form) LastBoundary(b []byte) int
+golang.org/x/text/unicode/norm	ul-li-10-a	func (f Form) NextBoundary(b []byte, atEOF bool) int
+golang.org/x/text/unicode/norm	ul-li-11-a	func (f Form) NextBoundaryInString(s string, atEOF bool) int
+golang.org/x/text/unicode/norm	ul-li-12-a	func (f Form) Properties(s []byte) Properties
+golang.org/x/text/unicode/norm	ul-li-13-a	func (f Form) PropertiesString(s string) Properties
+golang.org/x/text/unicode/norm	ul-li-14-a	func (f Form) QuickSpan(b []byte) int
+golang.org/x/text/unicode/norm	ul-li-15-a	func (f Form) QuickSpanString(s string) int
+golang.org/x/text/unicode/norm	ul-li-16-a	func (f Form) Reader(r io.Reader) io.Reader
+golang.org/x/text/unicode/norm	ul-li-17-a	func (Form) Reset()
+golang.org/x/text/unicode/norm	ul-li-18-a	func (f Form) Span(b []byte, atEOF bool) (n int, err error)
+golang.org/x/text/unicode/norm	ul-li-19-a	func (f Form) SpanString(s string, atEOF bool) (n int, err error)
+golang.org/x/text/unicode/norm	ul-li-20-a	func (f Form) String(s string) string
+golang.org/x/text/unicode/norm	ul-li-21-a	func (f Form) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error)
+golang.org/x/text/unicode/norm	ul-li-22-a	func (f Form) Writer(w io.Writer) io.WriteCloser
+golang.org/x/text/unicode/norm	ul-li-23-a	type Iter
+golang.org/x/text/unicode/norm	ul-li-24-a	func (i *Iter) Done() bool
+golang.org/x/text/unicode/norm	ul-li-25-a	func (i *Iter) Init(f Form, src []byte)
+golang.org/x/text/unicode/norm	ul-li-26-a	func (i *Iter) InitString(f Form, src string)
+golang.org/x/text/unicode/norm	ul-li-27-a	func (i *Iter) Next() []byte
+golang.org/x/text/unicode/norm	ul-li-28-a	func (i *Iter) Pos() int
+golang.org/x/text/unicode/norm	ul-li-29-a	func (i *Iter) Seek(offset int64, whence int) (int64, error)
+golang.org/x/text/unicode/norm	ul-li-30-a	type Properties
+golang.org/x/text/unicode/norm	ul-li-31-a	func (p Properties) BoundaryAfter() bool
+golang.org/x/text/unicode/norm	ul-li-32-a	func (p Properties) BoundaryBefore() bool
+golang.org/x/text/unicode/norm	ul-li-33-a	func (p Properties) CCC() uint8
+golang.org/x/text/unicode/norm	ul-li-34-a	func (p Properties) Decomposition() []byte
+golang.org/x/text/unicode/norm	ul-li-35-a	func (p Properties) LeadCCC() uint8
+golang.org/x/text/unicode/norm	ul-li-36-a	func (p Properties) Size() int
+golang.org/x/text/unicode/norm	ul-li-37-a	func (p Properties) TrailCCC() uint8
+golang.org/x/text/unicode/norm	ul-li-38-a	Form.NextBoundary
+golang.org/x/text/unicode/norm	ul-li-39-a	Iter
