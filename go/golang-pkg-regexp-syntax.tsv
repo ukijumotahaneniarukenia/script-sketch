@@ -1,4 +1,5 @@
 パッケージ名	キー	バリュー
+regexp/syntax	div-url	https://golang.org/pkg/regexp/syntax/
 regexp/syntax	div-dl-dd-0-a	func IsWordChar(r rune) bool
 regexp/syntax	div-dl-dd-1-a	type EmptyOp
 regexp/syntax	div-dl-dd-2-a	func EmptyOpContext(r1, r2 rune) EmptyOp

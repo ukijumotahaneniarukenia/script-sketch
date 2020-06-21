@@ -1,4 +1,5 @@
 パッケージ名	キー	バリュー
+math	div-url	https://golang.org/pkg/math/
 math	div-dl-dd-0-a	Constants
 math	div-dl-dd-1-a	func Abs(x float64) float64
 math	div-dl-dd-2-a	func Acos(x float64) float64

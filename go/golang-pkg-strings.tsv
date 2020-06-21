@@ -1,0 +1,76 @@
+パッケージ名	キー	バリュー
+strings	div-url	https://golang.org/pkg/strings/
+strings	div-dl-dd-0-a	func Compare(a, b string) int
+strings	div-dl-dd-1-a	func Contains(s, substr string) bool
+strings	div-dl-dd-2-a	func ContainsAny(s, chars string) bool
+strings	div-dl-dd-3-a	func ContainsRune(s string, r rune) bool
+strings	div-dl-dd-4-a	func Count(s, substr string) int
+strings	div-dl-dd-5-a	func EqualFold(s, t string) bool
+strings	div-dl-dd-6-a	func Fields(s string) []string
+strings	div-dl-dd-7-a	func FieldsFunc(s string, f func(rune) bool) []string
+strings	div-dl-dd-8-a	func HasPrefix(s, prefix string) bool
+strings	div-dl-dd-9-a	func HasSuffix(s, suffix string) bool
+strings	div-dl-dd-10-a	func Index(s, substr string) int
+strings	div-dl-dd-11-a	func IndexAny(s, chars string) int
+strings	div-dl-dd-12-a	func IndexByte(s string, c byte) int
+strings	div-dl-dd-13-a	func IndexFunc(s string, f func(rune) bool) int
+strings	div-dl-dd-14-a	func IndexRune(s string, r rune) int
+strings	div-dl-dd-15-a	func Join(elems []string, sep string) string
+strings	div-dl-dd-16-a	func LastIndex(s, substr string) int
+strings	div-dl-dd-17-a	func LastIndexAny(s, chars string) int
+strings	div-dl-dd-18-a	func LastIndexByte(s string, c byte) int
+strings	div-dl-dd-19-a	func LastIndexFunc(s string, f func(rune) bool) int
+strings	div-dl-dd-20-a	func Map(mapping func(rune) rune, s string) string
+strings	div-dl-dd-21-a	func Repeat(s string, count int) string
+strings	div-dl-dd-22-a	func Replace(s, old, new string, n int) string
+strings	div-dl-dd-23-a	func ReplaceAll(s, old, new string) string
+strings	div-dl-dd-24-a	func Split(s, sep string) []string
+strings	div-dl-dd-25-a	func SplitAfter(s, sep string) []string
+strings	div-dl-dd-26-a	func SplitAfterN(s, sep string, n int) []string
+strings	div-dl-dd-27-a	func SplitN(s, sep string, n int) []string
+strings	div-dl-dd-28-a	func Title(s string) string
+strings	div-dl-dd-29-a	func ToLower(s string) string
+strings	div-dl-dd-30-a	func ToLowerSpecial(c unicode.SpecialCase, s string) string
+strings	div-dl-dd-31-a	func ToTitle(s string) string
+strings	div-dl-dd-32-a	func ToTitleSpecial(c unicode.SpecialCase, s string) string
+strings	div-dl-dd-33-a	func ToUpper(s string) string
+strings	div-dl-dd-34-a	func ToUpperSpecial(c unicode.SpecialCase, s string) string
+strings	div-dl-dd-35-a	func ToValidUTF8(s, replacement string) string
+strings	div-dl-dd-36-a	func Trim(s string, cutset string) string
+strings	div-dl-dd-37-a	func TrimFunc(s string, f func(rune) bool) string
+strings	div-dl-dd-38-a	func TrimLeft(s string, cutset string) string
+strings	div-dl-dd-39-a	func TrimLeftFunc(s string, f func(rune) bool) string
+strings	div-dl-dd-40-a	func TrimPrefix(s, prefix string) string
+strings	div-dl-dd-41-a	func TrimRight(s string, cutset string) string
+strings	div-dl-dd-42-a	func TrimRightFunc(s string, f func(rune) bool) string
+strings	div-dl-dd-43-a	func TrimSpace(s string) string
+strings	div-dl-dd-44-a	func TrimSuffix(s, suffix string) string
+strings	div-dl-dd-45-a	type Builder
+strings	div-dl-dd-46-a	func (b *Builder) Cap() int
+strings	div-dl-dd-47-a	func (b *Builder) Grow(n int)
+strings	div-dl-dd-48-a	func (b *Builder) Len() int
+strings	div-dl-dd-49-a	func (b *Builder) Reset()
+strings	div-dl-dd-50-a	func (b *Builder) String() string
+strings	div-dl-dd-51-a	func (b *Builder) Write(p []byte) (int, error)
+strings	div-dl-dd-52-a	func (b *Builder) WriteByte(c byte) error
+strings	div-dl-dd-53-a	func (b *Builder) WriteRune(r rune) (int, error)
+strings	div-dl-dd-54-a	func (b *Builder) WriteString(s string) (int, error)
+strings	div-dl-dd-55-a	type Reader
+strings	div-dl-dd-56-a	func NewReader(s string) *Reader
+strings	div-dl-dd-57-a	func (r *Reader) Len() int
+strings	div-dl-dd-58-a	func (r *Reader) Read(b []byte) (n int, err error)
+strings	div-dl-dd-59-a	func (r *Reader) ReadAt(b []byte, off int64) (n int, err error)
+strings	div-dl-dd-60-a	func (r *Reader) ReadByte() (byte, error)
+strings	div-dl-dd-61-a	func (r *Reader) ReadRune() (ch rune, size int, err error)
+strings	div-dl-dd-62-a	func (r *Reader) Reset(s string)
+strings	div-dl-dd-63-a	func (r *Reader) Seek(offset int64, whence int) (int64, error)
+strings	div-dl-dd-64-a	func (r *Reader) Size() int64
+strings	div-dl-dd-65-a	func (r *Reader) UnreadByte() error
+strings	div-dl-dd-66-a	func (r *Reader) UnreadRune() error
+strings	div-dl-dd-67-a	func (r *Reader) WriteTo(w io.Writer) (n int64, err error)
+strings	div-dl-dd-68-a	type Replacer
+strings	div-dl-dd-69-a	func NewReplacer(oldnew ...string) *Replacer
+strings	div-dl-dd-70-a	func (r *Replacer) Replace(s string) string
+strings	div-dl-dd-71-a	func (r *Replacer) WriteString(w io.Writer, s string) (n int, err error)
+strings	div-dl-dd-72-a	Bugs
+strings	div-id	manual-nav
