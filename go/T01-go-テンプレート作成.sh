@@ -3,7 +3,7 @@
 usage(){
 cat <<EOS
 Usage:
-  $0 XXXXX-go-マイスペ
+  bash $0 XXXXX-go-マイスペ
 EOS
 exit 0
 }
