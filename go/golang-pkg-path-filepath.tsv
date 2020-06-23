@@ -1,0 +1,24 @@
+パッケージ名	キー	バリュー
+path/filepath	div-url	https://golang.org/pkg/path/filepath/
+path/filepath	div-dl-dd-0-a	Constants
+path/filepath	div-dl-dd-1-a	Variables
+path/filepath	div-dl-dd-2-a	func Abs(path string) (string, error)
+path/filepath	div-dl-dd-3-a	func Base(path string) string
+path/filepath	div-dl-dd-4-a	func Clean(path string) string
+path/filepath	div-dl-dd-5-a	func Dir(path string) string
+path/filepath	div-dl-dd-6-a	func EvalSymlinks(path string) (string, error)
+path/filepath	div-dl-dd-7-a	func Ext(path string) string
+path/filepath	div-dl-dd-8-a	func FromSlash(path string) string
+path/filepath	div-dl-dd-9-a	func Glob(pattern string) (matches []string, err error)
+path/filepath	div-dl-dd-10-a	func HasPrefix(p, prefix string) bool
+path/filepath	div-dl-dd-11-a	func IsAbs(path string) bool
+path/filepath	div-dl-dd-12-a	func Join(elem ...string) string
+path/filepath	div-dl-dd-13-a	func Match(pattern, name string) (matched bool, err error)
+path/filepath	div-dl-dd-14-a	func Rel(basepath, targpath string) (string, error)
+path/filepath	div-dl-dd-15-a	func Split(path string) (dir, file string)
+path/filepath	div-dl-dd-16-a	func SplitList(path string) []string
+path/filepath	div-dl-dd-17-a	func ToSlash(path string) string
+path/filepath	div-dl-dd-18-a	func VolumeName(path string) string
+path/filepath	div-dl-dd-19-a	func Walk(root string, walkFn WalkFunc) error
+path/filepath	div-dl-dd-20-a	type WalkFunc
+path/filepath	div-id	manual-nav
