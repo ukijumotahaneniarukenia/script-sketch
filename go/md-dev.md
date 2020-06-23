@@ -1,3 +1,8 @@
+- golangのIDE
+
+  - http://liteide.org/en/
+
+
 - ショートカット手順
 
 
