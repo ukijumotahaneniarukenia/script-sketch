@@ -97,3 +97,42 @@ find /usr/local/src/javafx-sdk-11.0.2/lib | grep -P jar$
 /usr/local/src/javafx-sdk-11.0.2/lib/javafx.swing.jar
 /usr/local/src/javafx-sdk-11.0.2/lib/javafx.graphics.jar
 ```
+
+
+
+
+外部依存なしの最小ポータブルJRE環境の作成
+
+最小構成のJREを作成するため、依存関係を出力
+
+```
+$ jdeps --module-path /usr/local/src/javafx-sdk-11.0.2/lib nnn-1.0-SNAPSHOT.jar
+app
+ [file:///home/kuraine/script-sketch/javafx/wrksp/nnn-1.0-SNAPSHOT.jar]
+   requires mandated java.base (@11)
+   requires javafx.controls
+   requires javafx.fxml
+app -> java.base
+app -> javafx.fxml
+app -> javafx.graphics
+   app                                                -> java.io                                            java.base
+   app                                                -> java.lang                                          java.base
+   app                                                -> java.lang.invoke                                   java.base
+   app                                                -> java.net                                           java.base
+   app                                                -> javafx.application                                 javafx.graphics
+   app                                                -> javafx.fxml                                        javafx.fxml
+   app                                                -> javafx.scene                                       javafx.graphics
+   app                                                -> javafx.stage                                       javafx.graphics
+```
+
+外部ライブラリ依存なしのポータブルJRE
+
+```
+$ jlink --compress=2 --module-path /usr/local/src/javafx-jmods-11.0.2 --add-modules java.base,javafx.controls,javafx.fxml,javafx.graphics --output jre-min
+```
+
+実行
+
+```
+$ jre-min/bin/java -jar nnn-1.0-SNAPSHOT.jar
+```
