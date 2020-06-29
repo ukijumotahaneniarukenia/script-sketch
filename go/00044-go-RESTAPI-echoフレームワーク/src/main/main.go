@@ -9,10 +9,8 @@ import (
 func main() {
 	e := echo.New()
 
-	e.Static("/", "static")
-
 	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "index", nil)
+		return c.String(http.StatusOK, "hello")
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))

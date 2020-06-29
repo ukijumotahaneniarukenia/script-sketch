@@ -13,7 +13,7 @@
 
 #ライブラリイントール
 cd 00044-go-RESTAPI-echoフレームワーク
-export GOPATH=$(pwd)
+export GOPATH=$(pwd) //gopath変えんでもいけたので、変えずにいったほうがよさげ
 go get github.com/labstack/echo
 
 
@@ -39,8 +39,9 @@ func main() {
 #外部ライブラリありの単一実行バイナリ作成
 
 cd 00044-go-RESTAPI-echoフレームワーク
- ( export GOPATH=$(pwd) && cd src/main && go install )
+ ( export GOPATH=$(pwd) && cd src/main && go install ) //gopath変えんでもいけたので、変えずにいったほうがよさげ
 
+ ( cd src/main && go install ) //gopath変えんでもいけたので、変えずにいったほうがよさげ
 
 #起動
 
