@@ -1,5 +1,11 @@
 外部ライブラリを交えて単一バイナリ生成できた。便利。
 
+- https://github.com/labstack/echo
+
+
+- https://echo.labstack.com/guide
+
+
 ```
 #ディレクトリ作成
 ./T01-go-テンプレート作成.sh 00044-go-RESTAPI-echoフレームワーク
@@ -54,4 +60,13 @@ ____________________________________O/_______
 
 #アクセス
 firefox http://localhost:1323/
+```
+
+
+
+- プロセスkill
+
+
+```
+lsof -P -i:1323 | awk '{print $2}' | tail -n-1 | xargs sudo kill -9
 ```
