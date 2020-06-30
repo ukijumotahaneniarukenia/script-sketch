@@ -1,5 +1,6 @@
 - nim デバッグ
   - https://qiita.com/6in/items/379bc1ba18241ddf5404
+  - https://vimeo.com/135918228
 
 - クローラ
   - https://blog.mamansoft.net/2018/04/22/nim-github-search-tool/
