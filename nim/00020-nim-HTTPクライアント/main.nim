@@ -7,3 +7,4 @@ var client = newHttpClient()
 var response = client.get(url)
 
 echo response.body
+
