@@ -1,3 +1,10 @@
+jupyter関連コマンドインストール
+
+```
+pip3 install --user jupyter
+```
+
+
 - jupyter-notebookの起動
 
   - https://github.com/codenvy/codenvy/issues/2427
