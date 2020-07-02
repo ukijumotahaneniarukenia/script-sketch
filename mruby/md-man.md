@@ -116,7 +116,7 @@ $ ./mruby/build/x86_64-pc-linux-gnu/bin/app
 Hello World
 ```
 
-外部ライブラリありの場合は、mrubyちゃんといれて試す
+外部ライブラリありの場合は、dockerコンテナ内のヘッダファイル等を見直す必要がありそう
 
 ```
 
@@ -220,7 +220,7 @@ Tasks: TOP => compile => all => /home/mruby/code/mruby/build/host/lib/libmruby.f
 
 apt install libcurl4-openssl-dev
 
-
+これはdockerホスト
 $ find / 2>/dev/null | grep curl.h
 /home/aine/wrksp/app/mruby/build/mrbgems/mruby-curl/src/mrb_curl.h
 /usr/include/x86_64-linux-gnu/curl/curl.h
