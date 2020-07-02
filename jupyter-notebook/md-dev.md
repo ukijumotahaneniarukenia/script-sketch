@@ -4,6 +4,14 @@ jupyter関連コマンドインストール
 pip3 install --user jupyter
 ```
 
+jupyter notebook起動
+
+- https://qiita.com/tand826/items/0c478bf63ead75427782
+
+```
+jupyter notebook --port 8000 --ip=0.0.0.0 --allow-root
+```
+
 
 - jupyter-notebookの起動
 
