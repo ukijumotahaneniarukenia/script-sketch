@@ -1,5 +1,11 @@
 - https://www.xmisao.com/2016/08/12/mruby-cli.html
 
+- https://qiita.com/ore_public/items/ea62c934839c5e2f87ef
+
+これを頼りに進めれば小さく始められそう
+
+- http://blog.matsumoto-r.jp/?p=3310
+
 テンプレート作成
 
 ```
