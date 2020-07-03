@@ -124,6 +124,8 @@ Hello World
 
 外部ライブラリありの場合は、dockerコンテナ内のヘッダファイル等を見直す必要がありそう
 
+あらかじめパッケージをインストールした状態のコンテナを作成する必要がある。これは大変そう。
+
 ```
 
 修正前
@@ -232,4 +234,105 @@ $ find / 2>/dev/null | grep curl.h
 /usr/include/x86_64-linux-gnu/curl/curl.h
 
 
+```
+
+
+
+mrubyのコマンドラインツール作成フロー
+
+mrubyのコンパイルないしは実行バイナリに予め必要なライブラリを組み込んでおくことで、作成できる。
+
+スクリプトを書く際にインクルードするという話ではなく、決め打ちという意味で静的
+
+```
+mkdir -p wrksp
+
+cd wrksp
+
+git clone git://github.com/mruby/mruby.git
+
+
+cd mruby
+
+sudo gem install mgem
+
+mgem update
+
+mgem size
+
+mgem list
+
+mgem add mruby-random
+
+mgem add mruby-sleep
+
+mgem config
+
+
+cp build_config.rb bk_build_config.rb
+
+mgem config default >build_config.rb
+
+
+
+mgem rm mruby-random
+
+
+mgem rm mruby-sleep
+
+rake
+
+mgem add mruby-curl
+mgem config default >build_config.rb
+
+$ cat build_config.rb
+
+############################
+# Start of your build_config
+
+MRuby::Build.new do |conf|
+  toolchain :gcc
+
+  # mruby's Core GEMs
+  conf.gembox 'default'
+
+  # user-defined GEMs
+  conf.gem :git => 'https://github.com/mattn/mruby-curl.git'
+
+  # Testing environment
+  # Deactivated!
+
+  # Debug Flags
+  # Deactivated!
+end
+
+# End of your build_config
+############################
+
+rake
+
+
+
+$ cat app.rb
+curl = Curl.new
+
+headers = {
+  'User-Agent' => 'mruby-curl'
+}
+
+response = curl.get("http://www.ruby-lang.org/ja/", headers)
+
+puts response.body
+
+
+
+./mruby/bin/mrbc app.rb
+
+$ ls
+app.mrb  app.rb  mruby
+
+$ ./mruby/bin/mruby -b app.mrb
+
+
+```
 ```
