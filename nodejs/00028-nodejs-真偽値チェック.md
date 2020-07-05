@@ -46,4 +46,17 @@ node -e 'a=[];console.log(a.length)'
 
 node -e 'a="";console.log(a.length)'
 0
+
+node -e 'a=true;if(a){console.log(true)}else{console.log(false)}'
+true
+
+node -e 'a=false;if(a){console.log(true)}else{console.log(false)}'
+false
+
+node -e 'a=true;if(!a){console.log(true)}else{console.log(false)}'
+false
+
+node -e 'a=false;if(!a){console.log(true)}else{console.log(false)}'
+true
+
 ```
