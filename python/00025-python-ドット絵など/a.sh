@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+#https://qiita.com/x-color/items/ce4fe4e5e2ae07974549
 
 LFT_VERTICAL=2807
 LFT_CORNER=280b
@@ -12,7 +14,7 @@ SLEEP_TIME=0.2
 
 while :
 do
-    printf "\e[32m\r\u$LFT_VERTICAL\e[0m"
+    printf "\e[32m\r\u$LFT_VERTICAL\e[0m $MESSAGE"
     sleep $SLEEP_TIME
     printf "\e[32m\r\u$LFT_CORNER\e[0m $MESSAGE"
     sleep $SLEEP_TIME
