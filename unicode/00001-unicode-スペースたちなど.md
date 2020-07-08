@@ -1,0 +1,156 @@
+```
+curl -fsSLO https://www.unicode.org/Public/12.1.0/ucd/NamesList.txt
+
+ls -lh
+total 4.0M
+-rw-r--r-- 1 kuraine kuraine 1.5M  7月  8 10:45 NamesList.txt
+-rw-r--r-- 1 kuraine kuraine 2.5M  7月  8 10:37 NormalizationTest.txt
+-rw-r--r-- 1 kuraine kuraine 3.1K  7月  8 10:44 md-dev.md
+
+
+cat NamesList.txt | grep "FACE" | ruby -anle 'p $F[0],$F[1,$F.length].join(",")' | xargs -n2 | awk '{print $2,$1}' | grep -P '^FACE'
+FACE,MASSAGE 1F486
+FACE,WITH,TEARS,OF,JOY 1F602
+FACE,SAVOURING,DELICIOUS,FOOD 1F60B
+FACE,WITH,COLD,SWEAT 1F613
+FACE,THROWING,A,KISS 1F618
+FACE,WITH,STUCK-OUT,TONGUE 1F61B
+FACE,WITH,STUCK-OUT,TONGUE,AND,WINKING,EYE 1F61C
+FACE,WITH,STUCK-OUT,TONGUE,AND,TIGHTLY-CLOSED,EYES 1F61D
+FACE,WITH,LOOK,OF,TRIUMPH 1F624
+FACE,WITH,OPEN,MOUTH 1F62E
+FACE,WITH,OPEN,MOUTH,AND,COLD,SWEAT 1F630
+FACE,SCREAMING,IN,FEAR 1F631
+FACE,WITHOUT,MOUTH 1F636
+FACE,WITH,MEDICAL,MASK 1F637
+FACE,WITH,ROLLING,EYES 1F644
+FACE,WITH,NO,GOOD,GESTURE 1F645
+FACE,WITH,OK,GESTURE 1F646
+FACE,WITH,THERMOMETER 1F912
+FACE,WITH,HEAD-BANDAGE 1F915
+FACE,WITH,COWBOY,HAT 1F920
+FACE,PALM 1F926
+FACE,WITH,ONE,EYEBROW,RAISED 1F928
+FACE,WITH,FINGER,COVERING,CLOSED,LIPS 1F92B
+FACE,WITH,OPEN,MOUTH,VOMITING 1F92E
+FACE,WITH,PARTY,HORN,AND,PARTY,HAT 1F973
+FACE,WITH,UNEVEN,EYES,AND,WAVY,MOUTH 1F974
+FACE,WITH,PLEADING,EYES 1F97A
+FACE,WITH,MONOCLE 1F9D0
+
+
+
+cat NamesList.txt | grep "FACE" | ruby -anle 'p $F[0],$F[1,$F.length].join(",")' | xargs -n2 | awk '{print $2,$1}' | grep -P '^FACE' | awk '{print $2}' | awk '{print "&#x"$1";"}'
+&#x1F486;
+&#x1F602;
+&#x1F60B;
+&#x1F613;
+&#x1F618;
+&#x1F61B;
+&#x1F61C;
+&#x1F61D;
+&#x1F624;
+&#x1F62E;
+&#x1F630;
+&#x1F631;
+&#x1F636;
+&#x1F637;
+&#x1F644;
+&#x1F645;
+&#x1F646;
+&#x1F912;
+&#x1F915;
+&#x1F920;
+&#x1F926;
+&#x1F928;
+&#x1F92B;
+&#x1F92E;
+&#x1F973;
+&#x1F974;
+&#x1F97A;
+&#x1F9D0;
+
+
+cat NamesList.txt | grep "FACE" | ruby -anle 'p $F[0],$F[1,$F.length].join(",")' | xargs -n2 | awk '{print $2,$1}' | grep -P '^FACE' | awk '{print $2}' | awk '{print "&#x"$1";"}' | nkf --numchar-input
+💆
+😂
+😋
+😓
+😘
+😛
+😜
+😝
+😤
+😮
+😰
+😱
+😶
+😷
+🙄
+🙅
+🙆
+🤒
+🤕
+🤠
+🤦
+🤨
+🤫
+🤮
+🥳
+🥴
+🥺
+🧐
+
+cat NamesList.txt | grep "SPACE$" | ruby -anle 'p $F[0],$F[1,$F.length].join(",")' | xargs -n2 | nl -w1
+1	= BACKSPACE
+2	0020 SPACE
+3	00A0 NO-BREAK,SPACE
+4	1361 ETHIOPIC,WORDSPACE
+5	2002 EN,SPACE
+6	2003 EM,SPACE
+7	2004 THREE-PER-EM,SPACE
+8	2005 FOUR-PER-EM,SPACE
+9	2006 SIX-PER-EM,SPACE
+10	2007 FIGURE,SPACE
+11	2008 PUNCTUATION,SPACE
+12	2009 THIN,SPACE
+13	200A HAIR,SPACE
+14	200B ZERO,WIDTH,SPACE
+15	202F NARROW,NO-BREAK,SPACE
+16	205F MEDIUM,MATHEMATICAL,SPACE
+17	2408 SYMBOL,FOR,BACKSPACE
+18	2420 SYMBOL,FOR,SPACE
+19	3000 IDEOGRAPHIC,SPACE
+20	303F IDEOGRAPHIC,HALF,FILL,SPACE
+21	FEFF ZERO,WIDTH,NO-BREAK,SPACE
+22	1DA7F SIGNWRITING,LOCATION-WALLPLANE,SPACE
+23	1DA80 SIGNWRITING,LOCATION-FLOORPLANE,SPACE
+24	E0020 TAG,SPACE
+
+
+cat NamesList.txt | grep "SPACE$" | ruby -anle 'p $F[0],$F[1,$F.length].join(",")' | xargs -n2 | awk '{print $2,$1}' | grep -P 'SPACE' | awk '{print $2}' | awk '{print "&#x"$1";"}' | nkf --numchar-input | nl -w1
+1	&#x=;
+2	 
+3	 
+4	፡
+5	 
+6	 
+7	 
+8	 
+9	 
+10	 
+11	 
+12	 
+13	 
+14	
+15	 
+16	 
+17	␈
+18	␠
+19	　
+20	〿
+21	
+22	𝩿
+23	𝪀
+24	
+```
