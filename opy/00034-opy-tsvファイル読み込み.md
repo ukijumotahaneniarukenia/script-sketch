@@ -1,7 +1,7 @@
 - IN
 
 ```
-echo a.py
+echo a.tsv
 ```
 
 - CMD
