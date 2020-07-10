@@ -1,10 +1,5 @@
-import httpclient
-import json
+import sequtils
 
-const url = "https://ja.wikipedia.org/wiki/特別:新着ファイル"
+let s = repeat(5,3)
 
-var client = newHttpClient()
-var response = client.get(url)
-
-echo response.body
-
+echo s
