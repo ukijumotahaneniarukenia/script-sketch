@@ -1,0 +1,7 @@
+mirrored	N	name	HIRAGANA LETTER A	unicode10		numeric		combining	0	bidi	L	digit		comment		code	3042	script	Hiragana	title		decimal		block	Hiragana	upper		category	Lo	lower		decomposition	
+bidi	L	digit		comment		code	3043	script	Hiragana	title		decimal		block	Hiragana	name	HIRAGANA LETTER SMALL I	mirrored	N	unicode10		numeric		combining	0	category	Lo	lower		decomposition		upper	
+numeric		combining	0	name	HIRAGANA LETTER I	mirrored	N	unicode10		decimal		script	Hiragana	title		block	Hiragana	bidi	L	digit		comment		code	3044	upper		category	Lo	lower		decomposition	
+upper		lower		category	Lo	decomposition		unicode10		mirrored	N	name	HIRAGANA LETTER SMALL U	numeric		combining	0	digit		bidi	L	code	3045	comment		block	Hiragana	script	Hiragana	title		decimal	
+comment		code	3046	bidi	L	digit		script	Hiragana	decimal		title		block	Hiragana	name	HIRAGANA LETTER U	mirrored	N	unicode10		combining	0	numeric		decomposition		category	Lo	lower		upper	
+combining	0	numeric		unicode10		mirrored	N	name	HIRAGANA LETTER SMALL E	block	Hiragana	script	Hiragana	decimal		title		comment		code	3047	digit		bidi	L	upper		decomposition		lower		category	Lo
+combining	0	numeric		mirrored	N	name	HIRAGANA LETTER E	unicode10		script	Hiragana	decimal		title		block	Hiragana	comment		code	3048	bidi	L	digit		upper		decomposition		category	Lo	lower	
