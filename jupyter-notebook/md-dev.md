@@ -47,3 +47,8 @@ jupyter-notebook --ip=0.0.0.0 --port=8080
 - Rstudioのインストール40分ぐらいかかった。なぞ。
 
 
+停止
+
+```
+jupyter-notebook stop --NbserverStopApp.port=8080
+```
