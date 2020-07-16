@@ -52,3 +52,18 @@ jupyter-notebook --ip=0.0.0.0 --port=8080
 ```
 jupyter-notebook stop --NbserverStopApp.port=8080
 ```
+
+
+目次の追加
+
+- 停止した状態で以下のコマンドを実行。実行後、起動し、拡張機能でTOCを選択。各ノートブック単位で、TOCの自動生成ボタンを押下すると、左側にTOCが出力される。
+
+```
+pip3 install --user jupyter_contrib_nbextensions
+
+
+jupyter contrib nbextension install --user
+
+
+jupyter nbextension enable codefolding/main
+```
