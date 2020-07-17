@@ -15,6 +15,8 @@ xpath='/html/body/div[1]/div[3]/div/div[2]/div/div/div[3]/div'
 
 zeropad='{0:05d}'
 
+prefix="lgtms"
+
 suffix=".tsv"
 
 ors="\n"
@@ -26,7 +28,7 @@ for page in range(min_page,max_page+1):
 
     page_info=[]
 
-    output_file_name=zeropad.format(page)+suffix
+    output_file_name=prefix+zeropad.format(page)+suffix
 
     driver.get(root_url+str(page))
 
