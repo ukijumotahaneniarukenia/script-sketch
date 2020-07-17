@@ -41,4 +41,6 @@ drwxr-xr-x 2 kuraine kuraine 4.0K  7月 17 05:26 .ipynb_checkpoints/
 -rw------- 1 kuraine kuraine 9.2K  7月 17 16:38 output_60_1.png
 -rw-r--r-- 1 kuraine kuraine  28K  7月 16 21:08 test.csv
 -rw-r--r-- 1 kuraine kuraine  60K  7月 16 20:15 train.csv
+
+$ firefox main.html
 ```
