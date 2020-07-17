@@ -67,3 +67,10 @@ jupyter contrib nbextension install --user
 
 jupyter nbextension enable codefolding/main
 ```
+
+
+- 特定のディレクトリをマウントしてjupyter notebookを起動する
+
+```
+firefox http://0.0.0.0:8000/notebooks/script-sketch/kaggle
+```
