@@ -79,7 +79,7 @@ seq $START_PAGE $END_PAGE | while read n;do
    fi
 
    #ヘッダ挿入
-   sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
+   sed -i '1igrp\tsubgrp\tname\turl' $OUTPUT_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_FILE_SUFFIX
 
    #ヘッダ挿入
    sed -i '1igrp\tsubgrp\tvalue' $OUTPUT_VIEW_FILE_NAME-page-$(printf "%03d" $n)$OUTPUT_VIEW_FILE_SUFFIX
