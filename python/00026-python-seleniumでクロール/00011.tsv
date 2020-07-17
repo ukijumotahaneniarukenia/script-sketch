@@ -1,0 +1,40 @@
+PHPのlist()はタプル展開のための機能	https://qiita.com/tadsan/items/0beaf61747397c1e3db8	2014/08/13		tadsan
+sizeof演算子にまつわるアレコレ	https://qiita.com/yohhoy/items/a2ab2900a2bd36c31879	2016/12/21		yohhoy
+PostgreSQLの文字コード変換で Hello World!!	https://qiita.com/fujii_masao/items/3e5480b69a71cf67bc50	2018/12/15	AdventCalendar,PostgreSQL,encoding	fujii_masao
+MySQLでテーブル構造の縦横を変換する	https://qiita.com/ka215/items/fd8f4291b32a9aa96149	2017/11/23		ka215
+コード中にUnicode文字列を表現する	https://qiita.com/tadsan/items/ca20d76b756e2e2b63f1	2014/09/10	PHP	tadsan
+初心者を戒めるPHP	https://qiita.com/tadsan/items/fb496e450fc27c8c4494	2016/06/16		tadsan
+フレキシブルなheredocがやってくる	https://qiita.com/tadsan/items/3e5a094cd57e430b6ea9	2018/02/07		tadsan
+PHPで文字列リテラルに式展開	https://qiita.com/tadsan/items/e4796449c736cfb5c9bd	2018/02/10		tadsan
+[初心者向け] プログラムの計算量を求める方法	https://qiita.com/cotrpepe/items/1f4c38cc9d3e3a5f5e9c	2015/07/31	C,アルゴリズム	cotrpepe
+PHPのトレイトを使うならおさえておきたい５つのこと	https://qiita.com/sasakure-kei@github/items/212637b2f32197441a3a	2015/11/29		sasakure-kei@github
+PHPのいろんな機能でFizzBuzz	https://qiita.com/tadsan/items/13fd5b66e9ea4627c22c	2019/09/21		tadsan
+PHPでネストした連想配列を <input type="hidden"> の配列に組み立てる	https://qiita.com/mpyw/items/0c5ec554bd628c3f0ccd	2019/09/20	PHP,HTML,Laravel	mpyw
+sqlite3でsplit	https://qiita.com/qoAop/items/528d24cad2dced436811	2017/01/14		qoAop
+Java12新機能まとめ	https://qiita.com/nowokay/items/0e860819b6ffb1aca90a	2019/01/14	Java,JDK	nowokay
+JShellで始めるJava - Javaの世界を覗いてみる	https://qiita.com/nowokay/items/e0b9c676567134e4a622	2018/05/02	Jav	nowokay
+JavaでListの要素を初期化・追加する方法	https://qiita.com/yuki2006/items/be1433c50002cc24603b	2015/08/15		yuki2006
+Javaのジェネリクスな話	https://qiita.com/b1ueskydragon/items/f6d42cd25847d1a50528	2018/03/10	Jav	b1ueskydragon
+java.util.stream.Collectorの活用法	https://qiita.com/disc99/items/e6a880617f3cc009defa	2017/01/20		disc99
+[memo] Java の FizzBuzz コードゴルフ	https://qiita.com/yoshi389111/items/c4d04ee000897412fcca	2019/09/08	Java,FizzBuzz	yoshi389111
+[java8] 8回目：文字列結合に新しい仲間が追加	https://qiita.com/yuusuke_s/items/247219160d5fe22c18d8	2015/08/24		yuusuke_s
+Java8での文字列連結	https://qiita.com/lonerydeveloper/items/9f7c977c039ad4d24d30	2014/09/16		lonerydeveloper
+Java8 stream APIサンプルコード	https://qiita.com/rubytomato@github/items/93011c75ee4af6b59452	2015/09/11		rubytomato@github
+いまさら始めるJava8 ～forEachとラムダ式～	https://qiita.com/uchi_y/items/b292e231b0fe3c6032ee	2017/10/22	J	uchi_y
+それ PowerShell でできるよ	https://qiita.com/cd01/items/da9a36582372e7d0a7f6	2014/02/15		cd01
+Java SE 13(JSR388)がリリースされたので試してみた	https://qiita.com/forests-k/items/83fb39866c01cfc77de1	2019/09/18		forests-k
+Java ジェネリクス（クラス、メソッドを定義する）	https://qiita.com/rodentia6/items/b36d134fa24867ba4d63	2018/05/27		rodentia6
+Haskell個人メモ :: 1.基本	https://qiita.com/YusukeHosonuma/items/41ad9346b6e3a4d3789c	2016/05/05		YusukeHosonuma
+Java8のStreamで順列を生成	https://qiita.com/saka1029/items/cba9d973888f90cb31de	2015/05/16	J	saka1029
+JavaからJavaソースをevalする	https://qiita.com/tanzaku/items/4da1efe99519ea2c1078	2019/03/28		tanzaku
+Javaで実行中のクラス名・メソッド名を取得する方法	https://qiita.com/munieru_jp/items/02533ebe5c822e6e29bb	2017/01/19		munieru_jp
+組み合わせ計算（パスカルの三角形）(Java)	https://qiita.com/naru7sh/items/7f3f47fbf2e415c0ec86	2019/11/10	Java,競技プログラミング,組み合わせ,オーバーフロー	naru7sh
+WebSocket を Java で。(サーバーもクライアントもJava)	https://qiita.com/oyahiroki/items/dfe148d11fa7132ff076	2016/05/24	Jav	oyahiroki
+JavaでiPhone絵文字	https://qiita.com/oyahiroki/items/80fe7f0e53144c4af27c	2016/06/03	Java,iPhone,emoj	oyahiroki
+JavaのUnicode文字列の変換用メソッド("あ" <-> "\u3042")	https://qiita.com/sifue/items/039846cf8415efdc5c92	2012/04/26		sifue
+コマンドプロンプト、Powershell の文字コードを変更する	https://qiita.com/FmtWeisszwerg/items/ccd34acfb2e88c2fb35f	2014/01/27	PowerShell	FmtWeisszwerg
+[Python]銀河鉄道の夜をWordCloudで可視化してみた！	https://qiita.com/uminchu987/items/07baa1a354cf96d2564b	2019/11/14	Python,スクレイピング,自然言語処理,形態素解析	uminchu987
+Python3系のリスト操作まとめ	https://qiita.com/rsakamot/items/2277e26e3716e8f8f5a2	2016/01/12		rsakamot
+Pythonのヒアドキュメント	https://qiita.com/ykhirao/items/c7cba73a3a563be5eac6	2017/03/09		ykhirao
+Python で Ctrl-C をキャッチする	https://qiita.com/keisuke-nakata/items/e77b123d75d4b52aac77	2017/05/31		keisuke-nakata
+Python 3 での文字列とバイト列の相互変換と16進数表示	https://qiita.com/masakielastic/items/2a04aee632c62536f82c	2017/09/25		masakielastic

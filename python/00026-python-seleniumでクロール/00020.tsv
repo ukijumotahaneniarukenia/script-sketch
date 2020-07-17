@@ -1,0 +1,40 @@
+Linuxでページキャッシュを確認・解放してみた	https://qiita.com/toshihirock/items/e2d187e91ee5446c7a69	2016/02/11		toshihirock
+【R言語】週刊少年ジャンプにおける最も多く表紙を飾った/カラーを飾った作品は何だったのか(1969/11/03～2017/07/31までを振り返る)	https://qiita.com/taro_9674/items/81bd96b7f4711208f57b	2019/07/12	R,スクレイピング	taro_9674
+【R言語】行列事始	https://qiita.com/taro_9674/items/37108d7b52ab7d6dfd5e	2019/05/07		taro_9674
+Rでデータ読み込みから前処理までのTips	https://qiita.com/gigamori/items/0152639dc0a68a400525	2015/09/02		gigamori
+emoji2vec: word2vecを使って絵文字をベクトル化	https://qiita.com/sugiyamath/items/3d446afeee6d83415575	2019/01/29	Python	sugiyamath
+Rの正規表現	https://qiita.com/nozma/items/ea915ef70d697b731f01	2017/12/13	R	nozma
+インフラ屋さんのためのR言語: プログラミング編	https://qiita.com/tomotagwork/items/24d1d11a12bb38aa9f35	2016/10/27		tomotagwork
+結合文字列をUnicode正規化で合成する方法の危険性	https://qiita.com/monokano/items/d4c37d9bc9833eaeda6e	2016/10/10		monokano
+結合文字列を合成する安全な方法を考える	https://qiita.com/monokano/items/15c1d70d2f77bd37d067	2016/10/10	Perl	monokano
+急成長する《現場》の、データエンジニアというお仕事。	https://qiita.com/e-a-st/items/42c03c61e4003c3b3ee5	2019/07/28	初心者,ポエム,データサイエンス,Kudu	e-a-st
+16進文字列と文字列の変換	https://qiita.com/atsaki/items/6120cad2e3c448d774bf	2016/01/28	Ruby,Python	atsaki
+Unicode 絵文字にまつわるあれこれ (絵文字の標準とプログラム上でのハンドリング)	https://qiita.com/_sobataro/items/47989ee4b573e0c2adfc	2016/12/18	Ruby,Rail	_sobataro
+マルチバイト文字を扱う際に気をつけること	https://qiita.com/mpyw/items/a8dba1b80fe68523b8eb	2015/08/17	PHP,UTF-8,文字コード,euc-j	mpyw
+nginx + golangでWeb API開発	https://qiita.com/unokun/items/dcf3ed4fbc4f532f664a	2019/01/02	Go,MySQL,nginx,WebAPI	unokun
+ヘイトが溜まりがちなdcコマンドの活用方法を探る	https://qiita.com/esplo/items/d87324077a93d405cad6	2017/01/27	command,sh	esplo
+文字エンコーディングを変換するとき、対応していない文字を数値実体参照に変換する	https://qiita.com/sounisi5011/items/2d4ba382ba7d28da808d	2015/10/11		sounisi5011
+Google検索を毎日するからこそ知っておきたい検索のコツ7選	https://qiita.com/HiromuMasuda0228/items/9844cd026e45f12cb8bf	2018/06/28	google,検索	HiromuMasuda0228
+ctrlp.vimの使い方まとめ	https://qiita.com/oahiroaki/items/d71337fb9d28303a54a8	2013/07/23		oahiroaki
+dotfilesを管理しよう	https://qiita.com/massy22/items/5bdb97f8d6e93517f916	2015/12/09		massy22
+dotfilesをGitHubで管理	https://qiita.com/okamos/items/7f5461814e8ed8916870	2014/03/09	Vim,GitHub	okamos
+ミニマルに始めるDotfiles自動化計画	https://qiita.com/okamos/items/40966158d0271ae7198b	2015/12/08		okamos
+医薬系データエンジニアのはじめ方、そして、稼ぎ方のイロハ。	https://qiita.com/e-a-st/items/4fffc8daf1a911fac637	2019/07/09	Python,SQL,CSV,初心者	e-a-st
+オレ的vimプラグイン10選	https://qiita.com/reireias/items/beaa3bb0e299ae934217	2018/01/17	Vim,vimrc	reireias
+NeoVim、そしてdein.vimへ	https://qiita.com/okamos/items/2259d5c770d51b88d75b	2016/03/06	Vim,vimrc,ne	okamos
+dein.vim インストール ~ 0から始めるvim ~	https://qiita.com/ymiyamae/items/e14059b77ba1cf0b344c	2016/07/16	Vim,vimrc	ymiyamae
+[vim] NERDTreeで 起動時に開いたときにファイルの方にカーソルを合わせる ~ 0から始めるvim ~	https://qiita.com/ymiyamae/items/3fa77d85163fb734b359	2016/07/22	Vim,vimrc,NERDTr	ymiyamae
+dein.vim で ディレクトリツリーを表示させる方法 ~ 0から始めるvim ~	https://qiita.com/ymiyamae/items/561cb4a5b247deb2ebc1	2016/07/19	Vim,vimrc,NERDTr	ymiyamae
+pythonでsocket通信を勉強しよう	https://qiita.com/__init__/items/5c89fa5b37b8c5ed32a4	2018/03/12	socke	__init__
+font-sizeの単位をvwにしてデバイスサイズに合わせて拡縮する	https://qiita.com/katsunory/items/3bede89cee8e2ded8426	2016/04/23	CSS,CSS3,S	katsunory
+未知の端末に対応するレスポンシブデザイン	https://qiita.com/kenz_firespeed/items/5cab42ad323913957935	2016/02/13	iPhone,Android,HTML5,iPa	kenz_firespeed
+もう逃げない。HTMLのviewportをちゃんと理解する	https://qiita.com/ryounagaoka/items/045b2808a5ed43f96607	2015/06/11		ryounagaoka
+Rのこれだけ覚えておけばいいdata.tableの使い方	https://qiita.com/gigamori/items/3f923cdd188736132237	2015/08/26		gigamori
+細かすぎて使わない R 小技集	https://qiita.com/U25CE/items/1c6c03f06bd8be93230c	2014/10/29		U25CE
+dplyrを使いこなす！Window関数編	https://qiita.com/matsuou1/items/db6e8c48fcfd791dd876	2015/09/07	R	matsuou1
+RStudio Shiny チュートリアル レッスン5 Rスクリプトとデータの利用	https://qiita.com/hoxo_m/items/ff154aa6e94a65089d77	2015/08/18		hoxo_m
+R - ShinyによるWebアプリケーション作成: shinydashboard編	https://qiita.com/tomotagwork/items/0efe3f08ddd1f268c8f8	2016/11/16	R,S	tomotagwork
+R MarkdownのHTMLレポートをブラッシュアップ	https://qiita.com/tomotagwork/items/3061a74e1d25cf46e891	2017/05/22	R,Markd	tomotagwork
+R - ShinyによるWebアプリケーション作成: 基礎編	https://qiita.com/tomotagwork/items/b56071ea2b276ba87476	2016/11/13	R	tomotagwork
+RStudio Shiny チュートリアル レッスン7 Shinyアプリを共有しよう	https://qiita.com/hoxo_m/items/1d30c49694144c371cb6	2015/12/17		hoxo_m
+標準入力で受けたデータをRで加工して標準出力へ渡す	https://qiita.com/satzz/items/d85298f6bdafc2010c37	2015/03/14		satzz

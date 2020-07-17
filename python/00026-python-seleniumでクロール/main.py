@@ -5,19 +5,28 @@ root_url='https://qiita.com/ukijumotahaneniarukenia/lgtms?page='
 
 min_page=1
 
-#max_page=33
-max_page=2
+max_page=33
+#max_page=2
 
 driver = webdriver.Chrome()
 
 #略称形式はNG
 xpath='/html/body/div[1]/div[3]/div/div[2]/div/div/div[3]/div'
 
-page_info=[]
+zeropad='{0:05d}'
+
+suffix=".tsv"
+
+ors="\n"
+
+ofs="\t"
+
 
 for page in range(min_page,max_page+1):
 
-    output_file_name=str(page)+".tsv"
+    page_info=[]
+
+    output_file_name=zeropad.format(page)+suffix
 
     driver.get(root_url+str(page))
 
@@ -52,8 +61,7 @@ for page in range(min_page,max_page+1):
 
     with open(output_file_name, mode='w') as f:
         for line in page_info:
-            print("\t".join(line))
-            f.write("\t".join(line))
-            f.write("\n")
+            f.write(ofs.join(line))
+            f.write(ors)
 
 driver.quit()

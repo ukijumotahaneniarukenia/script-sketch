@@ -1,0 +1,40 @@
+Vagrant + VirtualBoxでWindows上に開発環境をサクッと構築する	https://qiita.com/ozawan/items/160728f7c6b10c73b97e	2016/03/01	Windows,開発環境,Vagr	ozawan
+VirtualBoxにWindows10をインストールする	https://qiita.com/hinataysi29734/items/d4e48ca673bad2f5ea03	2019/03/04	Windows,VirtualBox	hinataysi29734
+[Mac] Vagrant 2.2.6 と Virtualbox 6.1でうまくvagrant up ができなかった時の対処法	https://qiita.com/shuu1222/items/7a6d04172363be44025c	2019/12/20	Vagran	shuu1222
+Arch Linux pacman: Public keyring not found	https://qiita.com/momoto/items/d54dc144e3862c4cec6c	2018/06/10		momoto
+[git reset (--hard/--soft)]ワーキングツリー、インデックス、HEADを使いこなす方法	https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe	2015/03/07	Gi	shuntaro_tamura
+Qtを使った簡単なGUIアプリ(1) マンデルブロー集合を描いてみる	https://qiita.com/y_uehara1011/items/70ee55ce14cd8189e54d	2020/01/28	C++,Qt	y_uehara1011
+【Pandasの勧め】数十万行あるエクセルシートを、n個のCSVに分け各ファイルに連番を1から振る例。	https://qiita.com/e-a-st/items/dc522a6b7e67fe95954f	2020/01/28	Python,初心者,pand	e-a-st
+Visual Studio Code での C++ の初期設定 (Windows x gcc(MinGW) 編)	https://qiita.com/OcoToOo/items/f1d0a125327f5659ad52	2018/09/22	C++,GCC,MinGW	OcoToOo
+C++のvectorまとめ	https://qiita.com/ysuzuki19/items/df872d91c9c89cc31aee	2019/05/02	C++,C++11,C++14,vector	ysuzuki19
+Doma利用時にエラー[DOMA4019]が発生したときの対処法	https://qiita.com/nesheep5/items/37bd1913211fcf3aebf1	2017/06/08	Ecli	nesheep5
+厳選！C++ アルゴリズム実装に使える 25 の STL 機能【前編】	https://qiita.com/e869120/items/518297c6816adb67f9a5	2020/01/26	C++,アルゴリズム,まとめ,競技プログラミン	e869120
+R言語 標準データセットの私的まとめ	https://qiita.com/wakuteka/items/95ac758070f6f4d89a96	2016/12/02		wakuteka
+メモ: Pandoc+LaTeXで気軽に日本語PDFを出力する	https://qiita.com/sky_y/items/15bf7737f4b37da50372	2019/04/30	LaTeX,Pandoc	sky_y
+参考メモ/CentOS7に TeX Live 2016 をインストールして簡単な動作確認をする	https://qiita.com/msakamoto_sf/items/78c322cb8656615ce134	2016/09/18	TeX,TeXLiv	msakamoto_sf
+MarkdownとPandocを用いた簡易Latex環境の構築	https://qiita.com/mountcedar/items/e7603c2eb65661369c3b	2013/10/16	LaTeX,Mac,Markdown,PDF	mountcedar
+MarkdownをPDFに変換する方法	https://qiita.com/ledsun/items/08f411f6a709e1ccecd4	2017/01/27	Node.js,Markdow	ledsun
+"install.packages()"するのはこれが最後！Rのパッケージ管理には「pacman」を使おう	https://qiita.com/taiyodayo/items/e69d997754d55e3d7e4c	2019/05/28	R,pacman,RStu	taiyodayo
+シェルスクリプトで簡易に待ち合わせ処理を書く	https://qiita.com/mazgi/items/15e1fe7e130584343810	2014/01/28	ShellScript,Bash,Zsh	mazgi
+Python 3.8 に OpenCV 4.3 など環境を構築する	https://qiita.com/cointoss1973/items/92d82f9accb239a276a0	2017/10/15	Python3,OpenCV	cointoss1973
+シェル：プログレスバーの作り方	https://qiita.com/toyohama/items/aa093bf0352ea623c670	2015/12/01		toyohama
+定期的に自動でコミットさせるスクリプト	https://qiita.com/narikei/items/b4e1c035c778d4eb2fc9	2016/06/02		narikei
+便利な .gitignore のサンプル集	https://qiita.com/cointoss1973/items/d29b74baa9f57869aa97	2016/03/09	G	cointoss1973
+【Docker】ubuntuの環境で日本語入力を可能にする	https://qiita.com/n_oshiumi/items/cfe91c60730f602b38eb	2018/11/21	Ubunt	n_oshiumi
+30分で始めるDjangoでwebアプリ(hello worldまで)	https://qiita.com/zaki-lknr/items/b89c35d90df96a000256	2019/05/21	Python,Djang	zaki-lknr
+DockerのUbuntu16.04でtimedatectl出来ないときの対処法	https://qiita.com/hashibiroko/items/38046a42b6d0461491d0	2018/01/05	Ubuntu,Docker,timedatectl	hashibiroko
+wineを使って無料でwindowsアプリをmacで動かす方法	https://qiita.com/jibril/items/5041cf8921df996cca17	2019/10/15	Mac,w	jibril
+MacBookでShogiGUI(Windowsソフト)を使う方法	https://qiita.com/nkiw/items/f028ad586f7ff9759d09	2017/10/15	Linux,Ubuntu,VirtualBox,MacBoo	nkiw
+pacman メモ	https://qiita.com/kwi/items/e6d2e24c14bc56ebd4b1	2019/06/13		kwi
+公式のDocker Engine install 手順道理やると keyserver timed out がでて辛い	https://qiita.com/togana/items/cf3bf9bb7cf28923b221	2016/03/29		togana
+VirtualBoxにArchLinuxをインストール、デスクトップ環境を構築する	https://qiita.com/tomi_sheep/items/ddd9c7b0f0f7c774a222	2016/05/19	archLinux,VirtualBox	tomi_sheep
+Arch Linux インストール俺々式完全版	https://qiita.com/TsutomuNakamura/items/b60518f8788e5e998744	2018/05/17		TsutomuNakamura
+Pacmanの使い方	https://qiita.com/MoriokaReimen/items/dbe1448ce6c0f80a6ac1	2016/07/30		MoriokaReimen
+MSYS2における正しいパッケージの更新方法	https://qiita.com/k-takata/items/373ec7f23d5d7541f982	2015/07/07	pacman	k-takata
+MSYS2でパッケージのダウンロードに失敗するときの対処	https://qiita.com/k-takata/items/fcb2f1f9ca564fd78597	2015/01/11		k-takata
+【備忘録】【Docker奮闘記:1】Docker for Windows インストール	https://qiita.com/manamiTakada/items/c1394e5e3358802a9446	2018/06/29	Docker,備忘録	manamiTakada
+Openstack上でWindows10のVMを起動する。（KVM上でWindows10のVMを起動する。）〜MacからWindowsへのRDP接続まで〜	https://qiita.com/D-kun/items/2f7fb1678f62432081a4	2019/10/13	KVM,openstac	D-kun
+Nginx+Expressパフォーマンス計測	https://qiita.com/rysk001/items/db023425ef56ba9bc02a	2020/01/20	nginx,Apache,Expre	rysk001
+日時のフォーマット（ISO 8601）	https://qiita.com/kidatti/items/272eb962b5e6025fc51e	2014/11/23		kidatti
+英語論文を読みたくない大学生(python)	https://qiita.com/7vvXi/items/dff798fe8d910298b1ae	2020/01/21	Python,LSTM,LexRank,文章生成	7vvXi
+Linux(CentOS7)でSSHを利用する。	https://qiita.com/sango/items/816136188387221f05b3	2015/10/28	Linux,CentOS,SSH	sango

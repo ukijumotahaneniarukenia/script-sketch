@@ -1,0 +1,40 @@
+Vimで複数ファイルを一括操作	https://qiita.com/Kuchitama/items/7a6219bc69b235605479	2013/01/17		Kuchitama
+新人達を1ヶ月でガチvimmerにした方法	https://qiita.com/nyantera/items/4bf29ca6f11bc797a9cb	2018/01/04	Vim,新人教育	nyantera
+vimgrepとQuickfix知らないVimmerはちょっとこっち来い	https://qiita.com/yuku_t/items/0c1aff03949cb1b8fe6b	2013/03/11	Vim	yuku_t
+.vimrcの設定	https://qiita.com/yumoni/items/f689bc542fe299a547bb	2018/11/01		yumoni
+vimのすごい便利なのにあまり使われていない「タブページ」機能	https://qiita.com/wadako111/items/755e753677dd72d8036d	2013/07/16	V	wadako111
+面倒くさいVimコマンドにエイリアスを設定する	https://qiita.com/1coin178/items/7262593be49de784861d	2016/02/06	V	1coin178
+【詳解】モテたいVimmer必見　快適にコーディングするためのvimrc解説	https://qiita.com/ahiruman5/items/4f3c845500c172a02935	2016/10/11	Vim,HTML,JavaScript,Linux	ahiruman5
+[Vim] Vim scriptの基本構文	https://qiita.com/mizutsu/items/56d71fc91415cf3293be	2017/05/16	V	mizutsu
+awk > 1列目以外を表示する > awk '{$1=""; print}'	https://qiita.com/7of9/items/42a415edbb5fe040c928	2015/03/18	awk	7of9
+1ヶ月くらいでVimを常用エディタにする	https://qiita.com/itkr/items/896e0e1c1cedf9e5480b	2017/03/20	Vim	itkr
+bash 引数解析のテンプレート（改良版、解説付き）	https://qiita.com/hidekuro/items/f461b683699d264372ee	2016/01/30	ShellScript,Ba	hidekuro
+Unicode と UTF-8 (とその仲間たち) のざっくりした違い	https://qiita.com/QUANON/items/09396ae9c3aab7129ac2	2017/06/02	Pyth	QUANON
+Shellでもbase64	https://qiita.com/sawanoboly/items/461605ab86678053dc8f	2013/02/12	Bash,base64	sawanoboly
+configure, make, make install とは何か	https://qiita.com/chihiro/items/f270744d7e09c58a50a5	2018/12/20	Linux,Makefil	chihiro
+GNU AWK 5.0を早速インストールしてみる	https://qiita.com/ryuichi1208/items/fe625fba0afe0ec46789	2019/04/17		ryuichi1208
+cat | while read line のループがうまく回ってくれないとき	https://qiita.com/10sr/items/9635145f611b9d0ec7bc	2018/01/26		10sr
+gitの管理対象から特定のファイル、ディレクトリを削除する	https://qiita.com/ytkt/items/a2afd6be8e4f06c1ea25	2014/01/07		ytkt
+Gitでコンフリクト対処時の便利コマンド検証	https://qiita.com/mizukmb/items/f12765a9efdaeb2973e5	2014/06/21		mizukmb
+合成数列の和アドベントカレンダー sed 編	https://qiita.com/angel_p_57/items/f54b72e1ab5cae78207b	2018/12/09	sed,ポエム,シェル芸	angel_p_57
+Linuxコマンドは単語の意味を理解するとグッと身近なものになる	https://qiita.com/tetsuya/items/46888bb4dfc8a6bfef02	2014/11/06	Linux	tetsuya
+Java開発の性能改善！ その１ jstatによるヒープ/GCの確認	https://qiita.com/i_matsui/items/4997ebedbdd7a6495509	2015/12/05	Java,jstat,ガベージコレクション,GC	i_matsui
+ファイルディスクリプタについて理解する	https://qiita.com/toshihirock/items/78286fccf07dbe6df38f	2016/04/22	Ruby	toshihirock
+[Linux][開発メモ] C言語ソースの読み方	https://qiita.com/suzutsuki0220/items/15a810fa5eed7356efda	2016/05/13	C,C++,初心者	suzutsuki0220
+シェルスクリプトで名前付きパイプを使い dialog コマンドをパイプラインに組み込む	https://qiita.com/EarthSimilarityIndex/items/e4278786cf705807f01f	2019/06/17	ShellScript,Dialog,mkfifo,Slackw	EarthSimilarityIndex
+mkfifoコマンドって使ってますか？	https://qiita.com/richmikan@github/items/bb660a58690ac01ec295	2014/05/15	ShellScript,UNIX	richmikan@github
+sedで各種コマンドを作ってみよう	https://qiita.com/shima_529/items/e68fc81c341249a0cbaa	2017/02/13		shima_529
+sedのパターンスペース・ホールドスペースの動作を図で学ぶ	https://qiita.com/gin_135/items/773fec1343a69c9f90d6	2016/11/28	Linux,UNIX,sed	gin_135
+AWK のフィールドセパレータの真実	https://qiita.com/ngyuki/items/c9917a9392f834ea7163	2016/01/12		ngyuki
+nkfを使わずにUTF-8↔Unicode相互変換やってみた	https://qiita.com/nyango/items/16aa776a58fe3e26f56f	2015/12/16		nyango
+ブラウザはCSSのセレクタを右から読む、ほんまか？	https://qiita.com/kazatsuyu/items/b94733555f34f2645221	2019/06/14	C++,CSS	kazatsuyu
+ブラウザ君「ワイはCSSのセレクタを右から読むんや」	https://qiita.com/Yametaro/items/5c2d0267156ecc8562e4	2019/06/05	HTML,CSS,bem,セレクタ	Yametaro
+Webアプリ初心者がGo言語でサーバサイド（1. 簡単なHTTPサーバの実装）	https://qiita.com/wsuzume/items/75d5c0cd2dd5a1963b9e	2018/11/06	Go,Web	wsuzume
+Go のクロスコンパイル環境構築	https://qiita.com/Jxck_/items/02185f51162e92759ebe	2014/07/04		Jxck_
+bash: 標準出力、標準エラー出力をファイル、画面それぞれに出力する方法	https://qiita.com/laikuaut/items/e1cc312ffc7ec2c872fc	2016/08/28		laikuaut
+1089桁の奇跡の素数を検証してみる	https://qiita.com/greymd/items/3167325ed7eb3ceb3272	2017/06/17	数学,シェル芸	greymd
+awk(1) 小技	https://qiita.com/bsdhack/items/d6ce4169b911532d47fa	2013/03/11	ShellScript,aw	bsdhack
+【5秒で使える小ネタ】Unicodeエスケープされた文字列をデコードする	https://qiita.com/m_kawaguchi/items/3feaeab510508740c530	2016/08/18	Bas	m_kawaguchi
+primary, secondary, その次は？	https://qiita.com/alg/items/e9bfeb6279d553cee423	2014/08/11		alg
+Linux とかでも Unicode 絵文字を表示するためのフォント	https://qiita.com/polamjag/items/7295a15fca6a9eeb5d84	2014/07/22	Linux,e	polamjag
+RHL7/CentOS7の時代なのでcoreutils 8.22まで追いかけてみた	https://qiita.com/ma2saka/items/4099443efc2b93fe8fcd	2015/01/05	Linux,CentOS,AmazonLinux,coreutil	ma2saka

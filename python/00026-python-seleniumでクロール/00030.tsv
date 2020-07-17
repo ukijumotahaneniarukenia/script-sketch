@@ -1,0 +1,40 @@
+Node.js で Oracle DBのテーブル変更を検知する	https://qiita.com/nekijak/items/a37c3b62638dc123d561	2019/04/11	JavaScript,Node.js	nekijak
+fdiskでDisk容量を拡張する	https://qiita.com/2or3/items/501f206a6091a4ce895f	2014/03/28		2or3
+awkコマンドの基本	https://qiita.com/yamazon/items/563af1b485ff413d381f	2016/03/06	Bash	yamazon
+シェル変数と環境変数の違いをコマンドラインで確認する	https://qiita.com/kure/items/f76d8242b97280a247a1	2014/10/28	Bash	kure
+Linuxの対話がめんどくさい?そんな時こそ自動化だ！-expect編-	https://qiita.com/ine1127/items/cd6bc91174635016db9b	2015/08/08	Linux,Tcl	ine1127
+いまさらだけどDockerに入門したので分かりやすくまとめてみた	https://qiita.com/gold-kou/items/44860fbda1a34a001fc1	2018/08/08		gold-kou
+シェルスクリプトで親・子プロセスを判断する	https://qiita.com/b4b4r07/items/d4b64227084f1209285a	2014/07/15	ShellScript	b4b4r07
+bashで変数を宣言する	https://qiita.com/toshiro3/items/647d7fc4a1d4e3232b66	2014/09/04		toshiro3
+世の中のエンジニアのalias設定	https://qiita.com/reireias/items/d906ab086c3bc4c22147	2019/04/08	B	reireias
+[Bash] scriptを読んだり書いたりする際に頭に入れておきたい基本構文	https://qiita.com/mizutsu/items/04423482273851ec4b8f	2018/03/22	ShellScrip	mizutsu
+Vimで検索した時の選択ハイライトを消す	https://qiita.com/ysti/items/ac9ca59d76fc1d2099f6	2016/01/13		ysti
+curl コマンド 使い方メモ	https://qiita.com/yasuhiroki/items/a569d3371a66e365316f	2015/12/20	ShellScript	yasuhiroki
+シェルスクリプトの中でjoin()とsplit()相当の事をやる	https://qiita.com/piroor/items/55ff672cb9f8e375e659	2016/12/15	Bash	piroor
+bashのブレース展開についてまとめ	https://qiita.com/ine1127/items/6e5fe80f4a9c64509558	2015/07/07	Bash	ine1127
+Linuxのファイルシステムについて	https://qiita.com/kamihork/items/fbcd116a631324aae05d	2018/10/02	Linux,i-node	kamihork
+Linuxのファイルシステムについて勉強したメモ	https://qiita.com/toshihirock/items/ca717f8ad9c66ced4047	2016/04/30		toshihirock
+Linuxディスク関連コマンドまとめ	https://qiita.com/aosho235/items/ad9a4764e77ba43c9d76	2015/05/23		aosho235
+自分のvimでやってきたことのまとめ	https://qiita.com/ykyk1218/items/ab1c89c4eb6a2f90333a	2015/12/11	V	ykyk1218
+vimはなぜjで下に移動するのか？ 〜vim初心者によるvim初心者のためのvim入門〜	https://qiita.com/morikooooo/items/34bb2466f98ab58f2e77	2016/04/08	Vim,開発,vimrc,エディタ	morikooooo
+何も考えず~/.vimrcにこれを書くんだ！ 〜vim初心者によるvim初心者のためのvim入門〜	https://qiita.com/morikooooo/items/9fd41bcd8d1ce9170301	2016/04/08	Vim,開発,vimrc,エディタ	morikooooo
+ほんのちょっとの工夫だけで、一歩便利なシェル生活(とその例)	https://qiita.com/m-yamashita/items/331e3b2634f33b349cc1	2015/06/16	ShellScript,Bash,Git,初心者	m-yamashita
+俺のbash_profileがこんなにキモいわけない	https://qiita.com/joe_hirata/items/3d42a90d0df58a7e8497	2019/01/28	Bash,Mac,Git,ターミナル	joe_hirata
+vimって極めればvscode並のIDEになるんじゃないの？	https://qiita.com/ryuta69/items/98901f4c4f0683e7aa57	2019/04/08	V	ryuta69
+初心者向け、「上手い」シェルスクリプトの書き方メモ	https://qiita.com/m-yamashita/items/889c116b92dc0bf4ea7d	2015/02/02	ShellScript,Bash,shell,Jenkin	m-yamashita
+Linuxコマンドを連続して使うには	https://qiita.com/egawa_kun/items/714394609eef6be8e0bf	2016/07/08	Linux	egawa_kun
+bashデバッグTips	https://qiita.com/mashumashu/items/ee436b770806e8b8176f	2014/08/16	B	mashumashu
+割りと便利だけど微妙に忘れがちなbashのコマンド・チートシート	https://qiita.com/jpshadowapps/items/d6f9b55026637519347f	2017/01/08	Bash,シェル芸	jpshadowapps
+シェルスクリプトって意外と便利	https://qiita.com/gorilla0513/items/9306d4165637c29370eb	2018/08/09	Bash,シェル芸	gorilla0513
+【たのしいな】様々なコマンド達を何も考えずにつないで遊ぶ	https://qiita.com/greymd/items/a4ecf8e70f11eb1e5f72	2015/12/22	ShellScript,Bash,MacOSX,シェル芸	greymd
+パイプが渡されたかそのまま実行されたかを判定(fd)	https://qiita.com/tukiyo3/items/369a4939c12b5cbf6552	2016/06/18		tukiyo3
+自作コマンドの作り方	https://qiita.com/b4b4r07/items/129f11c80aa34479b764	2013/09/26	ShellScript	b4b4r07
+mysqldumpリカバリの進捗を表示する	https://qiita.com/shouta-dev/items/af9bebecaeabff5fb62f	2014/10/17	MySQL,mysqldum	shouta-dev
+パイプ出力を現在のシェル上のwhileに喰わせる上手いやり方	https://qiita.com/kawaz/items/6fd4cd86ca98af644a05	2013/03/31	ShellScript	kawaz
+ファイルの各行にコールバック関数を適用する汎用関数	https://qiita.com/yz2cm/items/a1c3431f81d730bf32d1	2016/01/10	ShellScript	yz2cm
+bashのあまり知られていないけど便利な話	https://qiita.com/lufia/items/17303c62e8623d8b3a04	2018/01/19		lufia
+標準入力を受け取れるシェルスクリプト、関数の作成（パイプで繋げられるようにする）	https://qiita.com/koara-local/items/7ad01e0692e36627ba2d	2016/02/04	ShellScript,Bash,Linux	koara-local
+bash 配列まとめ	https://qiita.com/b4b4r07/items/e56a8e3471fb45df2f59	2013/09/20	ShellScript	b4b4r07
+【シェル芸人への道】Bashの変数展開と真摯に向き合う	https://qiita.com/t_nakayama0714/items/80b4c94de43643f4be51	2017/11/18	ShellScript,Bash,シェル芸	t_nakayama0714
+Bash $((算術式)) のすべて - A 基本編	https://qiita.com/akinomyoga/items/9761031c551d43307374	2016/12/04	ShellScript,B	akinomyoga
+Bash $((算術式)) のすべて - C 応用編	https://qiita.com/akinomyoga/items/1e9799d71ce4102c8ab6	2016/12/04	ShellScript,B	akinomyoga

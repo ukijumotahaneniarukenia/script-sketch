@@ -1,0 +1,40 @@
+シェル上で🍣🍣（Unicode絵文字）を表示させる	https://qiita.com/nyango/items/671a14ae2834c045fe27	2014/09/18	ShellScript,Bash,Ubuntu,font	nyango
+たまに見ると便利なシェル芸集	https://qiita.com/tukapai/items/38892c20dceaf4aa8a3a	2018/05/08	シェル芸	tukapai
+Linuxのファイルディスクリプタをハックする	https://qiita.com/tajima_taso/items/7e696944cb521958e63d	2016/10/04	C,Linux,システムコール,ハック	tajima_taso
+シェルスクリプトで複数のコマンド出力を結合する	https://qiita.com/takeoverjp/items/3f111c57453c51666958	2018/01/30	ShellScript,Bash,Linux,shell	takeoverjp
+bash で配列、連想配列をシェル関数の引数として渡す	https://qiita.com/pu_ri/items/f1a2e098fb8ae8e978d4	2018/11/21	Bash	pu_ri
+すごいC言語のマクロ __is_constexpr	https://qiita.com/tomabou/items/a3d2b7436b3c7da8fc9f	2018/04/19	Linux,macro,kernel	tomabou
+Bashで変数を大文字小文字変換(uppercase/lowercase)する	https://qiita.com/kawaz/items/211266021515b3f033a3	2013/04/23	ShellScript	kawaz
+覚えておきたいカーネルパラメータの変更方法	https://qiita.com/masahixixi/items/14630b501d8fb8aee477	2014/08/13	Linu	masahixixi
+仮想マシンに NIC を追加する	https://qiita.com/masahixixi/items/4eb014eff723d39552ec	2014/08/04	libvir	masahixixi
+awkコマンドへ値を渡す手法のまとめ	https://qiita.com/gin_135/items/39baa6426cb342d3370f	2016/01/01	awk	gin_135
+(今更)Linux で HW(MAC)アドレスを取得する方法	https://qiita.com/p_cub/items/b0b4351c52c876aaa095	2018/06/29	Linux,コマンドライン,ネットワーク,shellスクリプト	p_cub
+Oracle 12cのマルチテナント機能を使ってプラガブル・データベース（PDB）を一気に60個作成する方法	https://qiita.com/nkjm/items/c3a647bd89f11f0b2005	2016/03/07	oracle	nkjm
+KVM仮想サーバ用bonding・VLAN・ブリッジ設定	https://qiita.com/papillon/items/76c0555ef158e962d349	2018/02/21	KVM,vlan,centos7	papillon
+vagrantでゲストOSからホストOSにファイルを同期する	https://qiita.com/ritukiii/items/502f2b69ff4aca4e0754	2016/08/12		ritukiii
+openvswitchのvxlanで、KVM(libvirt)ホストの仮想ネットワークを接続する	https://qiita.com/Kaz_K/items/d9d50ac70c02a09c498f	2018/03/10	Linux,KVM,vxl	Kaz_K
+KVMでゲストOSをブリッジ接続する	https://qiita.com/yoshiyasu1111/items/8d07a4fd55116fba07f7	2018/09/16		yoshiyasu1111
+KVMで使うブリッジをOpenvSwitchにしてみた	https://qiita.com/homines22/items/02d3e2c5a6ba6b42455f	2018/07/06	CentOS,KVM	homines22
+KVM環境で仮想マシンを外部ネットワークと接続する	https://qiita.com/toshiro3/items/9bfece0501d6963a3275	2014/09/04	KVM	toshiro3
+iptablesの基本的な使い方	https://qiita.com/dtanimoto00/items/1d0a9b02867add646ea5	2018/10/24		dtanimoto00
+vagrantでmountエラーの解決方法	https://qiita.com/osamu1203/items/10e19c74c912d303ca0b	2013/11/30	CentOS	osamu1203
+VagrantのNFSを3.7倍速くする設定	https://qiita.com/suin/items/a441acfc15504ee89722	2019/05/02		suin
+/vagrantフォルダをmountしない	https://qiita.com/reflet/items/df21347818d48ce01996	2018/06/11	Vagran	reflet
+Vagrantメモ セグメントを分ける	https://qiita.com/htakahashi/items/5f3cf917b1cffa8ea1ec	2016/06/13		htakahashi
+vagrantのネットワークについて	https://qiita.com/ftakao2007/items/0ec05c2ef3c14cdbea11	2014/08/12		ftakao2007
+Vagrant ssh-configでvagrant sshを快適にする	https://qiita.com/Sanche/items/43d615beef05cd9417e2	2014/06/04	SSH	Sanche
+Vagrantで複数の仮想マシンを立ち上げる　マルチマシン(Malti-Machine)設定	https://qiita.com/zum/items/03da94291ffbc9af2244	2015/09/16	Vagrant	zum
+KVMでホストオンリーネットワークを作る	https://qiita.com/knqyf263/items/6865d0a61a23cb359476	2014/10/11	Linux,Network,Ubuntu,Vagrant	knqyf263
+KVM環境で、OpenvSwitchでゲストVMを外部ネットワークと接続するメモ	https://qiita.com/kure/items/8645c28cba67aae49519	2015/02/23	Linux,KVM,仮想化	kure
+CentOS7でKVMを使って仮想マシンをつくってみた	https://qiita.com/homines22/items/502b17a2eb2bedc89447	2018/06/18	CentOS,KVM	homines22
+VagrantコマンドとVagrantfileの設定メモ	https://qiita.com/pugiemonn/items/bcd95a35c3ec7624cd61	2015/03/05		pugiemonn
+Vagrant + Ansibleで環境構築をコード化する(1)導入	https://qiita.com/hidekuro/items/81ae801b3cc5f72f0cc5	2015/08/04	Vagrant	hidekuro
+Linuxでコマンドラインからマシンスペックを確認する方法	https://qiita.com/DaisukeMiyamoto/items/98ef077ddf44b5727c29	2017/05/10	Bash,Linux,CentOS,Ubun	DaisukeMiyamoto
+SMTPサーバとPOPサーバの実験を交えた詳解	https://qiita.com/d-ebi/items/0809dd1aaed763b7eb66	2018/02/28	SMTP	d-ebi
+DockerでSMTPサーバを30秒で構築する	https://qiita.com/South_/items/a4041f6e393de6ff556b	2018/03/07	SMTP,postfix	South_
+最短でZabbix 4.0をDockerで試す手順	https://qiita.com/zembutsu/items/32f27fa8136b86620baf	2018/10/03		zembutsu
+Ansibleとは何か　構成管理ツールの目的〜Ansible導入まで最速で理解する	https://qiita.com/Brutus/items/1894629105d61f4854bc	2019/01/23	Python,Linux,CentOS,CI	Brutus
+Docker + KVM 上で Xubuntu を動かす	https://qiita.com/nikola-f/items/ba1ac612d6bea11387ad	2016/02/20	KVM,Docker,Xfce,xubuntu	nikola-f
+KVMをインストールする	https://qiita.com/TsutomuNakamura/items/bb5cd1bcbf1b998941ed	2015/05/28	Linux,CentOS,Ubun	TsutomuNakamura
+Fluentdで各サーバからログ収集し、1箇所に集約してS3ログやElasticSearch Serviceに転送	https://qiita.com/hayashier/items/b20a909fc94a9579bfa0	2016/09/08	AWS,Fluentd,S3,fluent-plugin-	hayashier
+yumリポジトリ追加リスト 完全版	https://qiita.com/bezeklik/items/9766003c19f9664602fe	2015/07/09	CentOS,Yum,rpm,EPEL	bezeklik

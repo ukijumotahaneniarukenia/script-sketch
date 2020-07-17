@@ -27,9 +27,13 @@ source $HOME/.bashrc
 
 
 - 実行
-
+  - 33ページで５分
 ```
-python3 a.py
+time python3 main.py
+
+real	5m19.036s
+user	0m54.864s
+sys	0m18.975s
 ```
 
 

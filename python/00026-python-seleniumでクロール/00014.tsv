@@ -1,0 +1,40 @@
+Vim script から標準出力に出す	https://qiita.com/watiko/items/3ce5086c0defc0c148bf	2015/12/16	V	watiko
+python 組み込み関数を全て(69個)紹介する	https://qiita.com/anieca/items/5afa1787aa0c7cd3ab49	2019/10/25		anieca
+sedもawkも使えないけどpythonでパイプに参加テク	https://qiita.com/apollo_program/items/44adb2b5aaea90fb2150	2018/02/01	Python,Bash,Python3	apollo_program
+Python3の標準入力やり方まとめ	https://qiita.com/yasu_teco/items/e8db933ac4f647166996	2018/12/24	Python	yasu_teco
+高階関数（map, filter, reduce）	https://qiita.com/matsui2019/items/81bfec06798ab572c7ae	2019/05/16	Python3	matsui2019
+Pythonでこんなことできちゃうんです	https://qiita.com/Namibillow/items/954c7f9f53682d6dd9c9	2018/10/23	Python,tips,tutor	Namibillow
+Common Lisp で Fizz Buzz	https://qiita.com/oieioi/items/e4eaa78a4894ef549a23	2019/06/18	FizzBuzz	oieioi
+Python　ラムダ式　map	https://qiita.com/nbmngw/items/40b6d47556b28ee46890	2019/07/23	Python,map,ラムダ式,関数	nbmngw
+map関数	https://qiita.com/knknkn1162/items/92de8dd250ff94cd86f1	2016/10/20		knknkn1162
+map, unordered_map, flat_map の速度比較(operator[]編)	https://qiita.com/Nabetani/items/f2aa22d57f60907132d7	2018/12/29	C++,boost,C++11,連想配列	Nabetani
+カンマ区切り出力時の末尾カンマ削除	https://qiita.com/yaju/items/9747b90f55c29bb5bcf4	2016/06/26	C#	yaju
+Perl の変数・リスト・配列・ハッシュ・リファレンス・デリファレンス	https://qiita.com/jike37/items/0ca3f517225e3b8fd0f0	2019/10/16		jike37
+$_と関数型Perl	https://qiita.com/debug-ito/items/f5b90c6e2c86bf97a66f	2015/02/08	Per	debug-ito
+SQLite3でのCSVファイルのインポート	https://qiita.com/Kunikata/items/61b5ee2c6a715f610493	2018/01/03		Kunikata
+forループの深さを動的に変える方法	https://qiita.com/sanmanyannyan/items/2213f75b6bf757d01034	2015/10/03		sanmanyannyan
+bisonとflexで自作パーサーを作る	https://qiita.com/nomunomu0504/items/60f759524567d002d522	2018/11/26	C++,Parser,構文	nomunomu0504
+シェルスクリプト(bash)のif文とtestコマンド([])自分メモ	https://qiita.com/toshihirock/items/461da0f60f975f6acb10	2015/10/28	ShellScrip	toshihirock
+Bash: 変数のデフォルト値の定義は`${変数名:-初期値}`でやる	https://qiita.com/suin/items/a51a5cba17ee568c8b01	2018/11/19		suin
+awkで重複行を排除する方法	https://qiita.com/pocket8137/items/a6de22d0be6b26f7bcac	2017/11/05	Linux	pocket8137
+Perlのsortの基本的なやつ	https://qiita.com/otaka/items/af69693e68052e7ca02c	2014/05/30		otaka
+Perlで1レコード複数行のデータを処理するためのメモ	https://qiita.com/uniqrow/items/e1fab393113d32e3a7cb	2017/01/08		uniqrow
+配列の基礎的なメソッド集【Ruby超入門】	https://qiita.com/yyykms123/items/e1bcb838f56100d12025	2019/04/28	Rub	yyykms123
+nimbleでパッケージ管理	https://qiita.com/honeytrap15/items/9daa648efe373fbcb1fe	2018/02/18		honeytrap15
+Nimで地味に便利な関数とか	https://qiita.com/mkanenobu/items/d99878ce5b5e94787d57	2018/11/08	Ni	mkanenobu
+実践Nimマクロ	https://qiita.com/gmShiba/items/b06fff4c4ef98769c781	2018/12/10	macro	gmShiba
+NimのCLIツール作成用ライブラリcligenがとても便利	https://qiita.com/jiro4989/items/d5476b3dce3c4b3d6523	2019/07/23	command,cli,library	jiro4989
+【git stash】コミットはせずに変更を退避したいとき	https://qiita.com/chihiro/items/f373873d5c2dfbd03250	2017/04/28		chihiro
+4歳娘「パパ、セッションとCookieってなあに？」	https://qiita.com/Yametaro/items/9b65a21940e001554719	2019/10/22	HTTP,cooki	Yametaro
+Nim Tutorial Part Iを日本語訳してみた（前編）	https://qiita.com/KTakahiro1729/items/f4776f3a072c01f9086b	2017/01/01	tutorial	KTakahiro1729
+至高の言語、Nimを始めるエンジニアへ	https://qiita.com/rigani/items/6e87c7cee6903ed65ed2	2018/01/21	入門	rigani
+至高の言語Nimの欠点	https://qiita.com/shinjikato/items/c40501dbcb746737b561	2019/06/24		shinjikato
+JSONからNimのObject定義を生成するコマンドnimjsonを作った	https://qiita.com/jiro4989/items/86bc5e86b721f93eee49	2019/06/25	command,JSON,cl	jiro4989
+stackを使ってhaskellで最小のWeb Applicationしてみる	https://qiita.com/eielh/items/09b9f1c21f7d16e09ede	2015/11/03	Haskell,CircleCI,Docker	eielh
+language server protocolについて (前編)	https://qiita.com/atsushieno/items/ce31df9bd88e98eec5c4	2016/08/19	editor,MonoDevelop,VisualStudioCod	atsushieno
+asyncomplete.vim を使い始めた	https://qiita.com/hokorobi/items/b4be36253262373fbefc	2018/10/06		hokorobi
+jqで連続するオブジェクトを配列にする	https://qiita.com/eielh/items/aff045e1689be8e89972	2015/12/16	JSON	eielh
+JSONオブジェクトの並びから連結された配列を得る（jq コマンド利用）	https://qiita.com/kkdd/items/be1ccf867d78d15c417b	2018/05/20	JSON	kkdd
+昔の人はどんなダジャレを本のタイトルに仕込んだのか	https://qiita.com/khsk/items/02699ec1936fbfc5a1eb	2018/01/29	ShellScript,シェル芸,jq,青空文庫	khsk
+jqが使えなくても大丈夫なJavaScriptシェル芸	https://qiita.com/amanoese/items/c9af690abd2e568c5117	2018/11/27	JavaScript,Node.js,シェル芸,jq	amanoese
+最近の流行、メタプログラミング（とDSL）について	https://qiita.com/aya_eiya/items/07d89eb6c15317eeb68f	2015/12/16	Scala,Groovy,Closure,lisp	aya_eiya

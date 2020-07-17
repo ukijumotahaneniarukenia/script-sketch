@@ -1,0 +1,40 @@
+プログラミング言語Rustのススメ	https://qiita.com/elipmoc101/items/3c8b6d8332a9019e578c	2018/11/04	C++,プログラミング,Rust,入門	elipmoc101
+正規表現の先読み/後読みを「絞り込み」と理解してみる	https://qiita.com/blackenedgold/items/382704cc54c8e42819d0	2016/01/30	正規表現	blackenedgold
+Vimmerな人たちのためのCommonLisp環境構築（slimv編）	https://qiita.com/kedama17/items/93ae7ccd1839f4bbb567	2017/06/11	V	kedama17
+VimmerのためのCommon Lisp環境構築（Neovim + vlime編）	https://qiita.com/kedama17/items/8c6f068c0cf90a5b481a	2019/08/11	common-lisp,neo	kedama17
+Common Lisp入門	https://qiita.com/HaruoWakakusa/items/64f1b9a3f15ce85f0d0c	2018/08/04	CommonL	HaruoWakakusa
+Nimを知ってほしい	https://qiita.com/happy_packet/items/3c59abf9875f4f6869c9	2019/10/08		happy_packet
+Lispって何？[Lisp入門の入門]	https://qiita.com/minekai374/items/f146009b403ed9395fe0	2018/11/30		minekai374
+Perl入門・基本的な書き方	https://qiita.com/arashida/items/f28035d81f98985fcf2b	2016/04/10		arashida
+数値計算を含む置換をperlのワンライナーでやってみた	https://qiita.com/ryooku/items/cbb00897f9d2b0ac5c80	2019/01/16	Perl,正規表現	ryooku
+PerlとGolangの対応表っぽいもの	https://qiita.com/belq/items/96cffacb9665d3ad40d9	2019/02/03	Per	belq
+UTF-8からSJISに文字化けすると糸偏の漢字がよく出てくる	https://qiita.com/kaityo256/items/878cbe35d4c8444b045a	2018/02/15	文字化け	kaityo256
+Haskellのヒアドキュメントもどき	https://qiita.com/matoruru/items/0e9334388eca3ef9e999	2019/08/17		matoruru
+全体の行数がわからないデータからランダムにN行取り出す	https://qiita.com/takeda25/items/767b32aff7930984083b	2019/04/16	P	takeda25
+splitとjoinで文字列のリスト分割と結合(Perl/PowerShell/Java/Kotlin/Python)	https://qiita.com/zaki-lknr/items/b213a77adfd7d9d65c36	2019/04/21	Java,Python,Perl,Kot	zaki-lknr
+perlで正規表現 肯定先読み、否定後読みなど	https://qiita.com/ryuichi1208/items/6c9da6485174cfb793a5	2019/05/06	Perl	ryuichi1208
+Perl One Linerのススメ	https://qiita.com/charon/items/6fe482eaa44df1354c3c	2019/05/13		charon
+OAuth 2.0 の勉強のために認可サーバーを自作する	https://qiita.com/TakahikoKawasaki/items/e508a14ed960347cff11	2019/10/17		TakahikoKawasaki
+Elasticsearch + Sudachi + Docker でユーザー辞書を作ってみるハンズオン	https://qiita.com/po3rin/items/d9a0cc9d8202ff16ed3f	2019/10/18	Elasticsearch	po3rin
+こわくないHaskell入門(初級その2)	https://qiita.com/arowM/items/33245802f9305a73082e	2015/02/01	Haskell,関数型言語	arowM
+こわくないHaskell入門（初級）	https://qiita.com/arowM/items/9ebfb7cafecd99290663	2015/01/04	Haskell,関数型言語,入門	arowM
+Haskellで自然言語処理100本ノックの第2章を解いてみる。【前編】	https://qiita.com/ayase/items/a03e9e8484b492e6bc08	2019/01/08	Haskell	ayase
+圏論入門前の準備運動―集合と写像―	https://qiita.com/norkron/items/237735106ee6e5333678	2019/09/16	Haskell,圏論	norkron
+シェルの弱点を補おう！"まさに"なCLIツール、egzact	https://qiita.com/greymd/items/3515869d9ed2a1a61a49	2016/05/03	Bash,Linux,シェル芸,egison	greymd
+Tcl/Tkでプログラムを書く(1)	https://qiita.com/akinori-ito/items/92ca39617773a2f48e0b	2018/04/30	T	akinori-ito
+Tcl/Tkでプログラムを書く(2)	https://qiita.com/akinori-ito/items/a6abe82f4c814272f06c	2018/04/30	T	akinori-ito
+Python3.8の新機能(2) - 代入式の導入	https://qiita.com/ksato9700/items/d37efc6982365e24f6af	2019/02/02		ksato9700
+愛おしすぎるMandelbrot集合をProcessingで描く	https://qiita.com/ryunryunryun/items/85a7e95186af4490198b	2017/12/22	Java,processing,math	ryunryunryun
+マンデルブロ集合の３次元への拡張が見たい！	https://qiita.com/exp/items/a4bbcb8273a184eff41f	2019/03/30	Python,数学	exp
+SQLite3を試食する	https://qiita.com/kitfactory/items/a8a3c2d0349bbb3e041f	2014/11/20	DB,SQLite3	kitfactory
+PythonとRのデータの連携にSQLiteを使う	https://qiita.com/tatekaiten/items/fde94c2efaf754b50fe7	2019/06/09	Python,R,SQLite3	tatekaiten
+jupyter + SQLite	https://qiita.com/kaz2018/items/b89d82f591c961b1b9e8	2019/06/20	Python,SQLite3	kaz2018
+JavaScriptで絵文字とサロゲートペアと結合文字とgrapheme clusterを正しく扱うのに少し苦労した話	https://qiita.com/amanoese/items/68bb9999829de4323302	2019/08/26	JavaScript,Node.js,emoji,unicod	amanoese
+画像っぽい素数をシェル芸でつくる	https://qiita.com/amanoese/items/0f9f1628bbac891d3837	2019/10/12	Bash,ImageMagick,ワンライナー,シェル芸	amanoese
+pandasで条件分岐(case when的な)によるデータ加工を網羅したい	https://qiita.com/Hyperion13fleet/items/98c31744e66ac1fc1e9f	2018/03/02	SQL,pandas	Hyperion13fleet
+[python] pandasのDataFrameからpostgresにテーブルを作成	https://qiita.com/ko-da-k/items/60788f7422cf5e521ddf	2016/03/09	Python,PostgreSQL	ko-da-k
+pandas で PostgreSQL の読み書き	https://qiita.com/ekzemplaro/items/ce0768d2102c6ef3c82e	2018/10/01	PostgreSQL,pandas	ekzemplaro
+indexからcolumnへ、columnからindexへ	https://qiita.com/kyoro1/items/56c1606e0218fbfae32d	2017/12/14	Pyth	kyoro1
+(別解) Pythonで川渡り問題「宣教師と人喰い」を解く 【探索的（発見的）プログラム・再帰】	https://qiita.com/shiracamus/items/ce536aaad95932dbbfb5	2016/07/23		shiracamus
+Pythonでフォルダ内のファイルリストを取得する	https://qiita.com/amowwee/items/e63b3610ea750f7dba1b	2017/10/30		amowwee
+[Python]リスト、タプル、辞書、集合の違い	https://qiita.com/taro-ari/items/9f54536fe3c623813db1	2018/11/16	Python,Python3	taro-ari

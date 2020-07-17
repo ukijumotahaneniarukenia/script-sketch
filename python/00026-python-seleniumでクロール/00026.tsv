@@ -1,0 +1,40 @@
+xargsでコマンドを並列実行	https://qiita.com/aosho235/items/231d6d12f56debc515f9	2016/06/01	Linux,コマンド	aosho235
+Linux で任意のサイズのファイルを作る	https://qiita.com/toshihirock/items/6cb99a85d86f524bc153	2018/04/07	Linux,ファイル	toshihirock
+巨大なファイルをシェルスクリプトで読む時	https://qiita.com/arc279/items/9ca18f5c76ed365265c6	2014/10/30	Bash	arc279
+AWKのこういう時はどう書く?	https://qiita.com/hirohiro77/items/713d5bcf60fef7e88dfa	2016/03/01	Linux,awk	hirohiro77
+シェル芸力向上のため moreutils を一通り試してみた	https://qiita.com/ngyuki/items/ad7d52186a84cc973438	2016/01/14	ShellScript,Linux	ngyuki
+bashシェルスクリプトの記述の仕方に関するメモ書き	https://qiita.com/d_shimizu/items/c01f29f8398cc7f5c396	2015/10/31	ShellScript	d_shimizu
+[初心者向け]Awkの使い方	https://qiita.com/tofu511/items/3ecf9c5361d08b5c6eae	2017/08/22	ShellScript,Linux,awk	tofu511
+プログラマーの君！ 勘違いするな！ シェルスクリプトでは読みやすさのためにスペースを置くな！！ という話	https://qiita.com/piroor/items/0cb44663430bfc66c204	2018/07/15	Bash	piroor
+Bashで自身の関数名と呼び出し元の関数名を取得する	https://qiita.com/koara-local/items/5e3fd1d0c9080ea61b5b	2015/12/02	ShellScript	koara-local
+よく使う 9 つの便利なシェル芸	https://qiita.com/b4b4r07/items/8c1911092002d0b457a6	2015/08/17	ShellScript,Bash,awk,UNIX	b4b4r07
+ソートしないで重複行を削除する	https://qiita.com/arcizan/items/9cf19cd982fa65f87546	2014/09/27	ShellScript,Linux	arcizan
+シェルスクリプトで "set -o pipefail" を付けるとSIGPIPEで死ぬ	https://qiita.com/progrhyme/items/6e522d83de3c94aadec9	2018/09/14	ShellScript	progrhyme
+bashでshellを作るとき参考になるサイト集	https://qiita.com/ponsuke0531/items/a56126b8b218f74faa10	2017/03/11	Bash,Linux	ponsuke0531
+実用 awk ワンライナー	https://qiita.com/b4b4r07/items/45d34a434f05aa896d69	2015/09/08	Ruby,Perl,ShellScript,awk	b4b4r07
+Linuxコマンド(Bash)でバックグラウンド実行する方法のまとめメモ	https://qiita.com/inosy22/items/341cfc589494b8211844	2016/12/03	Bash,非同期処理	inosy22
+OracleのSQLで便利だと思った9の機能	https://qiita.com/AketiJyuuzou/items/8e3f34c2e775906a28cb	2019/01/12	SQL	AketiJyuuzou
+Raspberry Pi 3 Model Bの初期セットアップのまとめ	https://qiita.com/rubytomato@github/items/07c16a631cee1e9a68be	2017/10/19		rubytomato@github
+Raspberry Pi 3 Model B+の初回セットアップ（購入から起動まで）	https://qiita.com/Higemal/items/c817b96c3806f23b35f6	2018/09/23	RaspberryPi,ラズベリーパイ,ラズパイ	Higemal
+Bashで文字列をエスケープをする	https://qiita.com/kawaz/items/f8d68f11d31aa3ea3d1c	2014/09/26		kawaz
+シェルでASCII制御文字を扱う	https://qiita.com/rtakasuke/items/5331d3e851c0ae4c9bd4	2016/12/10	Linux,UNIX,shell	rtakasuke
+manやtreeコマンド等の出力結果から特殊文字を除去するcolコマンド	https://qiita.com/jpshadowapps/items/702e70a878a1d8cc0e5a	2014/10/03		jpshadowapps
+Ctrl+CとCtrl+Zやkillなどの挙動の違いを確認する	https://qiita.com/toshihirock/items/bc6a9a4091afa9bb61f1	2016/04/01		toshihirock
+原理原則で理解するフォアグラウンドプロセスとバックグラウンドプロセスの違い	https://qiita.com/tajima_taso/items/c5553762af5e1a599fed	2016/11/08	C,Bash,Linux,CentOS	tajima_taso
+shellのtrapについて覚え書き	https://qiita.com/ine1127/items/5523b1b674492f14532a	2015/04/28	ShellScript,Bash,Linux	ine1127
+Linuxのforkシステムコールをハックする	https://qiita.com/tajima_taso/items/d3c8d516fe8995613c67	2016/09/21	C,Linux	tajima_taso
+psコマンドの使い方	https://qiita.com/hana_shin/items/a1c5400458f8ca04a809	2017/07/25	centos7	hana_shin
+timeコマンドでプログラムの実行時間を知る	https://qiita.com/tossh/items/659e5934e52b38183200	2014/07/31		tossh
+Linuxのpeekfdコマンドが面白い（全ファイル入出力を盗聴）	https://qiita.com/aosho235/items/9ed2d69b2913033cf95c	2016/01/20		aosho235
+CentOS7を最小インストールしたらpstreeがなかった	https://qiita.com/nekootoko3/items/b9159d13cd4d3e689aca	2018/03/13	CentOS	nekootoko3
+[Linux]ファイルの圧縮、解凍方法	https://qiita.com/supersaiakujin/items/c6b54e9add21d375161f	2016/02/10		supersaiakujin
+プログラムのネーミングに迷ったら GitHub でコード検索すると参考になる説	https://qiita.com/kyoshidajp/items/c5d4f060df636ea20cbb	2018/02/04	Go,GitHub,プログラミング,初心者	kyoshidajp
+bash: コマンドライン引数のオプション解析(optgets)	https://qiita.com/laikuaut/items/adf35ecb14c55f6fde92	2016/09/01		laikuaut
+ttyとかptsとかについて確認してみる	https://qiita.com/toshihirock/items/22de12f99b5c40365369	2016/04/28		toshihirock
+親プロセス・子プロセス間通信	https://qiita.com/penkopenko/items/f28d0b5ef404afd339fa	2015/05/18		penkopenko
+bashでのPID取得方法まとめ($$、$PPID、$!、$BASHPID)	https://qiita.com/laikuaut/items/1daa06900ad045d119b4	2016/08/24		laikuaut
+Vimのコマンドラインモードでできること	https://qiita.com/gorilla0513/items/f4a5fd835201cf49fda1	2019/04/23		gorilla0513
+文字列をタブ区切りで分割するけど、スペース分割はしたくないとき	https://qiita.com/usakoyama/items/52a68e135bae17de68fd	2014/08/20		usakoyama
+readするときはIFS=を付けておくとstrictな感じで気持ちが良い	https://qiita.com/kawaz/items/00a4b1693bf4cf67e8ca	2013/03/31	ShellScript	kawaz
+Linuxプロセスとカーネル読解のとっかかり	https://qiita.com/ftakao2007/items/d0fbecd3873054f603f5	2016/12/17		ftakao2007
+便利だが理解を要する制御演算子 `&&` と `||`	https://qiita.com/miyu/items/f467c3fd693b5a8d5472	2015/12/19	ShellScript	miyu

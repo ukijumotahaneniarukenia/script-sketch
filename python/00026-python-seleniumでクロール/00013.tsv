@@ -1,0 +1,40 @@
+Perlヒアドキュメント	https://qiita.com/gosshys/items/1e4c1d6bb0099b80701a	2017/08/06		gosshys
+Bashのストリーム/パイプ処理を視覚的に理解する	https://qiita.com/genzouw/items/87f8db46cebc8c4f9ae7	2016/12/08	ShellScript,Bash,Linux	genzouw
+bashでストリームデータ処理	https://qiita.com/debug-ito/items/1bc877d62ec04dfa938a	2015/01/25	ShellScrip	debug-ito
+標準入力・標準出力ってなに?	https://qiita.com/angel_p_57/items/03582181e9f7a69f8168	2017/12/17	Linux,初心者,標準入	angel_p_57
+シェルとファイルデスクリプタのお話	https://qiita.com/ueokande/items/c75de7c9df2bcceda7a9	2016/12/01	ShellScript,Linux	ueokande
+Perl の真偽値について	https://qiita.com/xtetsuji/items/e584b819d3cd1604a91f	2017/08/02		xtetsuji
+標準入力にデータを与えられているかどうか調べる方法	https://qiita.com/xtetsuji/items/d9800864c23af47c1443	2018/08/06	Ruby,Perl	xtetsuji
+Twitterで@（アットマーク）をエスケープする方法	https://qiita.com/innossh/items/f719dc78816c2d5fbcfa	2016/12/05	Twitter	innossh
+環境に依存しないワンライナーを書くならsedよりperlの方がいい	https://qiita.com/takc923/items/8654d69008e921c9c9fb	2015/02/22	Perl	takc923
+[C言語] 共有ライブラリと静的ライブラリを整理する	https://qiita.com/edo_m18/items/b9765ff3313d5a13f82f	2015/04/23		edo_m18
+SQLite C言語向けAPI チートシート	https://qiita.com/katsugeneration/items/26a76f66a1c9cb1710f4	2014/09/28	SQLite3	katsugeneration
+いい加減テーブル定義書を手動で更新するのなんかやめたらいい	https://qiita.com/arc279/items/0a3895a04fc814512baf	2015/08/18	PHP,Bash	arc279
+mysqlのデータをsqliteに流し込む	https://qiita.com/arc279/items/74b6ed6bfbcb308b651b	2014/04/23	My	arc279
+Wikipediaを使ったお手軽名寄せ辞書	https://qiita.com/dcm_shiramizu/items/881f9faf6c515c621308	2018/11/26	Python,SQL,自然言語処理,Wikipe	dcm_shiramizu
+Perl の文法上の新機能が使える feature プラグマ詳解	https://qiita.com/xtetsuji/items/a21c718ca37799d11c7c	2018/07/17		xtetsuji
+itertoolsによる順列、組み合わせ、直積のお勉強	https://qiita.com/junkls/items/10384950963056cc8e08	2014/02/25		junkls
+Pythonで順列と組み合わせ	https://qiita.com/zaburo/items/9a8564edfb81e02599ce	2015/12/26		zaburo
+配列の組み合わせの作成	https://qiita.com/yama-t/items/d533f3385a53f887a3b0	2017/02/08	JavaScrip	yama-t
+Pythonで組み合わせの問題	https://qiita.com/sou81821/items/35ed42c5caf98dce6538	2015/11/02	Python,プログラミング	sou81821
+全組み合わせの列挙 Java	https://qiita.com/masakinpo/items/b6ae147d9a61b592240a	2017/01/04		masakinpo
+組み合わせの列挙	https://qiita.com/7shi/items/b627930944df6495165e	2016/12/20		7shi
+perlにおける配列要素数の取得	https://qiita.com/hatt0519/items/198af8866ac5a424be03	2014/03/05		hatt0519
+C#:全ての要素を使った順列を求める	https://qiita.com/gushwell/items/8780fc2b71f2182f36ac	2016/11/27	C#,アルゴリズム,数学,再帰処理	gushwell
+順列列挙(再帰版)	https://qiita.com/satzz/items/2fbefff07df3cb052240	2013/01/12	Pe	satzz
+順列列挙	https://qiita.com/satzz/items/9805cfd62cc30bb2b754	2012/06/29		satzz
+CSVファイルにカンマの含まれる項目を分割せずに読み込む（Java）	https://qiita.com/takashi-fki/items/c7095ccb41fe169db5f4	2017/06/23	Java,CSV,Split,カンマ	takashi-fki
+CSVの解説と各プログラミング言語での実装例	https://qiita.com/mima_ita/items/f6b68d23ec9727badf96	2014/07/23	Python,Node.js,.NET,VBA	mima_ita
+クローラ作成に必須！XPATHの記法まとめ	https://qiita.com/rllllho/items/cb1187cec0fb17fc650a	2016/11/18	xpat	rllllho
+100サイト以上のクローラ・スクレイパを効率的に作る方法	https://qiita.com/ohkawa/items/ff2c7d18fc96f178cf4d	2015/12/02	HTML,スクレイピング,xpath,スクレイピングツール	ohkawa
+プリキュアで学ぶワンライナーWebスクレイピング	https://qiita.com/greymd/items/368faf898c161165fee7	2015/12/07	HTML,スクレイピング,UNIX,シェル芸	greymd
+vim中級者未満が捗った設定やプラグイン[gif付き]	https://qiita.com/Sa2Knight/items/b8e4f1af5222e54cd006	2018/04/21	Vim,vimrc	Sa2Knight
+[vim] バッファ 入門	https://qiita.com/Sa2Knight/items/8a5d3b63dc45b02fc8c9	2018/05/26	Vim	Sa2Knight
+Nim初心者が始めるNimとnimpy	https://qiita.com/k4saNova/items/5bb67d1cb40ba90431af	2019/10/17	Python,初心者	k4saNova
+再帰関数はどんなときに嬉しいのか	https://qiita.com/tadsan/items/eddf708c8fb3862d5539	2018/12/13		tadsan
+Ruby 正規表現の使い方	https://qiita.com/shizuma/items/4279104026964f1efca6	2015/07/27	Ruby,Rails,正規表現	shizuma
+vim の マクロ記録、閲覧、削除	https://qiita.com/Go-zen-chu/items/5464fb6b9e6b38c958bd	2016/05/22		Go-zen-chu
+PHPで標準入力から値を受け取る(競技プログラミングとか)	https://qiita.com/dev100kg/items/d49c855b1400e35164ec	2016/10/14	PHP,AtCoder,AOJ,paiza	dev100kg
+PHPで標準入力から値を取得して表示する方法を解説	https://qiita.com/yuhei_umeda/items/552c3f2f19e55f80fdfb	2019/01/31	PHP	yuhei_umeda
+PHPで標準入力	https://qiita.com/kiimiiis/items/89ac68e5f7451bf64d1a	2014/05/17		kiimiiis
+kubernetes on Docker Desktop がstableになったので、installしてみる	https://qiita.com/nassy20/items/c5c91d268ba9a1a43edf	2018/07/29	Doc	nassy20
