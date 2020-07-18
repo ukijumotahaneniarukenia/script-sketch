@@ -22,6 +22,11 @@ function App(props:any) {
 
   }
 
+  //タスク完了イベント用のイベントハンドリング関数
+  function toggleTaskCompleted(id:any) {
+    console.log(tasks[0]) //Object { id: "task-0", name: "Eat", completed: true }
+  }
+
   //propsから直接取得するのではなく、分割代入していたtasksを参照するように修正
   const taskList = tasks.map((task:any) => (
     <Todo
@@ -29,8 +34,16 @@ function App(props:any) {
       name={task.name}
       completed={task.completed}
       key={task.id} //Reactエンジンが一意のキーとしてハンドリングするためのおまじない。コンポーネントをきり、参照する際は指定が必要。html側で参照したりしてはだめ。
+      toggleTaskCompleted={toggleTaskCompleted}
     />
   ));
+
+
+  //残タスク数が複数件ないのにtasks remainingと表示されるのが嫌だから、表示文言をタスク数の件数で住み分け
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+
+  //残タスク件数
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   return (
     <div className="todoapp stack-large">
@@ -41,9 +54,7 @@ function App(props:any) {
         <FilterButton />
         <FilterButton />
       </div>
-      <h2 id="list-heading">
-        3 tasks remaining
-      </h2>
+      <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
