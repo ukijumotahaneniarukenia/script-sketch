@@ -37,3 +37,17 @@ node -p "['caffelatte'].map(s=>s)"
 ```
 [ 'caffelatte' ]
 ```
+
+
+- CMD
+
+```
+node -p 'a=[1,2,3,4,5];Math.max(...a)'
+```
+
+
+- OUT
+
+```
+5
+```

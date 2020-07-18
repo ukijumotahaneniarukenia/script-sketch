@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import logo from './logo.svg';
 import './App.css';
 
@@ -6,13 +6,25 @@ import Todo from "./components/Todo";
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 
+
+
+
 function App(props:any) {
 
+  //index.tsxで渡された引数をpropsで受け取っている Beanみたいなもん
+  const [tasks, setTasks] = useState(props.tasks); //Reactの特徴は状態を保持する変数と変数を更新する設定関数をuseStateから定義できる
+
+
   function addTask(name:any) {
+    const newTask = {id:"id",name:name,colmpleted:false}
+
+    setTasks([...tasks,newTask])
+
     alert(name);
   }
 
-  const taskList = props.tasks.map((task:any) => (
+  //propsから直接取得するのではなく、分割代入していたtasksを参照するように修正
+  const taskList = tasks.map((task:any) => (
     <Todo
       id={task.id}
       name={task.name}
