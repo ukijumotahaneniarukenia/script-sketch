@@ -6,7 +6,7 @@ import Todo from "./components/Todo";
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 
-
+import { nanoid } from "nanoid"; //id生成用
 
 
 function App(props:any) {
@@ -16,11 +16,10 @@ function App(props:any) {
 
 
   function addTask(name:any) {
-    const newTask = {id:"id",name:name,colmpleted:false}
+    const newTask = {id:"todo-"+nanoid(),name:name,colmpleted:false}
 
-    setTasks([...tasks,newTask])
+    setTasks([...tasks,newTask]) //配列のスプレッド展開でflatten
 
-    alert(name);
   }
 
   //propsから直接取得するのではなく、分割代入していたtasksを参照するように修正
