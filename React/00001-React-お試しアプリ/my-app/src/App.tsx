@@ -8,33 +8,46 @@ import FilterButton from "./components/FilterButton";
 
 import { nanoid } from "nanoid"; //id生成用
 
-
+//Appがコントローラ
+//index.tsxで渡された引数をpropsで受け取っている Beanみたいなもん
 function App(props:any) {
 
-  //index.tsxで渡された引数をpropsで受け取っている Beanみたいなもん
   const [tasks, setTasks] = useState(props.tasks); //Reactの特徴は状態を保持する変数と変数を更新する設定関数をuseStateから定義できる
 
-
+  //タスク追加処理
   function addTask(name:any) {
-    const newTask = {id:"todo-"+nanoid(),name:name,colmpleted:false}
-
+    const newTask = {id:"todo-"+nanoid(),name:name,colmpleted:false} //idは一意にしたいので、ライブラリのちから借りて番号フル
     setTasks([...tasks,newTask]) //配列のスプレッド展開でflatten
-
   }
 
-  //タスク完了イベント用のイベントハンドリング関数
+  //タスク削除処理
+  function deleteTask(id:any) {
+    const remainingTasks = tasks.filter((task:any) => id !== task.id);//削除対象タスクID以外は残タスクに表示しないことで、削除したことにする
+    setTasks(remainingTasks);
+  }
+
+  //タスクチェック・アンチェック処理
   function toggleTaskCompleted(id:any) {
-    console.log(tasks[0]) //Object { id: "task-0", name: "Eat", completed: true }
+    const updatedTasks = tasks.map((task:any) => {
+      if (id === task.id) {
+        //単一用の配列なので、スプレッドでflatten
+        return {...task, completed: !task.completed}//チェックされるたび、状態が反転
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
   }
 
   //propsから直接取得するのではなく、分割代入していたtasksを参照するように修正
   const taskList = tasks.map((task:any) => (
+    //初期処理index.tsx側で連携されてきたデータをBeanコンポーネントにマッピング
     <Todo
       id={task.id}
       name={task.name}
       completed={task.completed}
       key={task.id} //Reactエンジンが一意のキーとしてハンドリングするためのおまじない。コンポーネントをきり、参照する際は指定が必要。html側で参照したりしてはだめ。
-      toggleTaskCompleted={toggleTaskCompleted}
+      toggleTaskCompleted={toggleTaskCompleted}//Beanと処理を紐付ける
+      deleteTask={deleteTask}//Beanと処理を紐付ける
     />
   ));
 
