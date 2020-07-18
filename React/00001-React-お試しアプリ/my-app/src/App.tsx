@@ -8,7 +8,12 @@ function App(props:any) {
 
   
   const taskList = props.tasks.map((task:any) => (
-    <Todo id={task.id} name={task.name} completed={task.completed} />
+    <Todo
+      id={task.id}
+      name={task.name}
+      completed={task.completed}
+      key={task.id} //Reactエンジンが一意のキーとしてハンドリングするためのおまじない。コンポーネントをきり、参照する際は指定が必要。html側で参照したりしてはだめ。
+    />
   ));
 
   return (
