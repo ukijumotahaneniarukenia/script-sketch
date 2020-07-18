@@ -1,3 +1,7 @@
+- REF
+
+  - https://future-architect.github.io/typescript-guide/index.html#indices-and-tables
+
 - 関数型ファンクション郡
   - https://lodash.com/
 
