@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import Todo from "./components/Todo";
+import Form from "./components/Form";
+import FilterButton from "./components/FilterButton";
 
 function App(props:any) {
 
@@ -19,7 +21,8 @@ function App(props:any) {
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <form>
+      <Form />
+      {/* <form>
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?
@@ -35,9 +38,12 @@ function App(props:any) {
         <button type="submit" className="btn btn__primary btn__lg">
           Add
         </button>
-      </form>
+      </form> */}
       <div className="filters btn-group stack-exception">
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
+        <FilterButton />
+        <FilterButton />
+        <FilterButton />
+        {/* <button type="button" className="btn toggle-btn" aria-pressed="true">
           <span className="visually-hidden">Show </span>
           <span>all</span>
           <span className="visually-hidden"> tasks</span>
@@ -51,7 +57,7 @@ function App(props:any) {
           <span className="visually-hidden">Show </span>
           <span>Completed</span>
           <span className="visually-hidden"> tasks</span>
-        </button>
+        </button> */}
       </div>
       <h2 id="list-heading">
         3 tasks remaining
