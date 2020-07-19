@@ -26,6 +26,20 @@ function App(props:any) {
     setTasks(remainingTasks);
   }
 
+  //タスク編集処理
+  function editTask(id:any, newName:any) {
+    const editedTaskList = tasks.map((task:any) => {
+    // if this task has the same ID as the edited task
+      if (id === task.id) {
+        //
+        return {...task, name: newName}
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
+  }
+
+
   //タスクチェック・アンチェック処理
   function toggleTaskCompleted(id:any) {
     const updatedTasks = tasks.map((task:any) => {
@@ -48,6 +62,7 @@ function App(props:any) {
       key={task.id} //Reactエンジンが一意のキーとしてハンドリングするためのおまじない。コンポーネントをきり、参照する際は指定が必要。html側で参照したりしてはだめ。
       toggleTaskCompleted={toggleTaskCompleted}//Beanと処理を紐付ける
       deleteTask={deleteTask}//Beanと処理を紐付ける
+      editTask={editTask}//Beanと処理を紐付ける
     />
   ));
 
