@@ -12,18 +12,12 @@ function Form(props:any) {
     }
   
     function handleSubmit(e:any) {
-
-      //Addボタンをはじめとする、送信処理時にApp.tsx側で宣言した際の引数から、ポップアップイベントを実施
-
-      
       e.preventDefault();//submitイベントのデフォルトの動きを抑止
-      props.addTask(name);////nameプロパティをタスクとして追加
+      props.addTask(name);//nameを引数にeditTask処理を呼び出す
       setName("");//nameプロパティ初期化
     }
 
-
     //reactで管理する関数名ないしはプロパティ名は{}でくくる
-
     return (
       <form onSubmit={handleSubmit}>
         <h2 className="label-wrapper">
