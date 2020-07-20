@@ -9,9 +9,9 @@ apt-get install -y nodejs
 
 
 ```
-mkdir -p 00004-React-ルーティング設定-Routersコンポーネント/
+mkdir -p 00005-React-ルーティング設定-Route_Matchersコンポーネント/
 
-cd 00004-React-ルーティング設定-Routersコンポーネント/
+cd 00005-React-ルーティング設定-Route_Matchersコンポーネント/
 
 npx create-react-app my-app --use-npm --template typescript
 
@@ -25,3 +25,6 @@ npm install --save @types/react-router-dom
 
 code .
 ```
+
+
+
