@@ -131,3 +131,61 @@ $ cat package.json
   }
 }
 ```
+
+
+
+
+chroniumでも「React Developer Tools」が使えた。便利。
+
+「google翻訳」も使えた。
+
+左下らへんにあるchromeストアから検索すること。
+
+
+インストール後、ピン留めしてサーバ再起動
+```
+$npm start
+```
+
+実行後、F12でComponentsタグないしはProfilerタグでReact管理オブジェクトをinspectできる
+
+
+配備方法
+```
+
+ビルドアセット作成 build/ディレクトリ配下が資産全部
+$ npm run build
+
+
+Webサーバ起動
+$ sudo apt install -y apache2
+
+
+ポートオープン確認
+$ sudo lsof -i:80 -P
+COMMAND   PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+chrome  47596  kuraine  130u  IPv4 929106      0t0  TCP doc-ubuntu-18-04-vim:38124->104.26.8.29:80 (ESTABLISHED)
+apache2 48190     root    3u  IPv4 923273      0t0  TCP *:80 (LISTEN)
+apache2 48191 www-data    3u  IPv4 923273      0t0  TCP *:80 (LISTEN)
+apache2 48192 www-data    3u  IPv4 923273      0t0  TCP *:80 (LISTEN)
+
+サービス確認 ページ表示されたおk
+$ firefox http://localhost/index.html
+
+資産配備
+$ sudo cp -r build/* /var/www/html/
+
+
+ページ表示されているか確認
+$ firefox http://localhost:80/index.html
+
+ページ表示されているか確認
+$ chrome http://localhost:80/index.html
+
+```
+
+アイコン活性していれば、いい感じ
+
+- https://reactjs.org/docs/optimizing-performance.html#use-the-production-build
+
+
