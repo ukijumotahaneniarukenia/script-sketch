@@ -5,7 +5,9 @@ apt-get install -y nodejs
 
 
 ```
-mkdir -p 00002-React-ルーティング設定
+mkdir -p 00002-React-ルーティング設定-Basic_Routing/
+
+cd 00002-React-ルーティング設定-Basic_Routing/
 
 npx create-react-app my-app --use-npm --template typescript
 
