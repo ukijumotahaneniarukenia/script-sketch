@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {Switch,Router} from 'react-router-dom';
+import {
+  Switch
+  ,BrowserRouter as Router
+  ,Route
+} from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
@@ -16,14 +20,27 @@ import Default from './components/Default'
 
 function App(){
     return (
-      <div className="app">
+      <Router>
         <NavBar />
-        <ProductList />
-        <Details />
-        <Cart />
-        <Default />
-        <NavBar />
-      </div>
+        <div className="app">
+          <Switch>
+            <Route exact path="/">
+              <ProductList />
+            </Route>
+            <Route exact path="/details">
+              <Details />
+            </Route>
+            <Route exact path="/cart">
+              <Cart />
+            </Route>
+            <Route>
+              {/* 上記URLのいずれでもない場合 */}
+              <Default />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+
     );
 }
 
