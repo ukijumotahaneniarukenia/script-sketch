@@ -2,7 +2,7 @@ VueとTypescriptでCRUDアプリ作成チュートリアル
 
 - https://bezkoder.com/vue-typescript-crud/ これだめだけど、雰囲気分かった
 
-  ```
+```
   - Vueコマンドラインをインストール
     - https://jp.vuejs.org/v2/guide/installation.html
     - https://qiita.com/567000/items/dde495d6a8ad1c25fa43
