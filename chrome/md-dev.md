@@ -17,3 +17,6 @@ yum install -y google-chrome-stable
 
 
 
+- 拡張
+
+  - SmaSurf for Webブラウザ拡張機能
