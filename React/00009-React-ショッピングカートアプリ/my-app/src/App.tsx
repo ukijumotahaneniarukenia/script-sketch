@@ -4,18 +4,22 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import NavBar from './components/NavBar'
+import ProductList from './components/ProductList'
+import Details from './components/Details'
+import Cart from './components/Cart'
+import Default from './components/Default'
+
 
 function App(){
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-6">column number one</div>
-          <div className="col-6">
-            <span>
-              <i className="fas fa-home" />
-            </span>
-          </div>
-        </div>
+      <div className="app">
+        <NavBar />
+        <ProductList />
+        <Details />
+        <Cart />
+        <Default />
+        <NavBar />
       </div>
     );
 }
