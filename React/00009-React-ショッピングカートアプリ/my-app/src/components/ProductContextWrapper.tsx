@@ -13,7 +13,9 @@ class ProductProvider extends Component{
     state = {
         storeProductList:storeProductListData,
         storeProductDetail:storeProductDetailData,
-        cart:[]
+        cart:[],
+        modalOpen:true,
+        modalProduct:storeProductDetailData
     }
 
     setStoreProducts = ()=>{
@@ -38,12 +40,24 @@ class ProductProvider extends Component{
         return item;
     }
 
+    openModal = (id:any) =>{
+        const targetItem = this.getItem(id);
+        this.setState(()=>{
+            return {modalProduct:targetItem,modalOpen:true}
+        })
+    }
+
+
+    closeModal = (id:any) => {
+        this.setState(()=>{
+            return {modalOpen:false}
+        })
+    }
 
     handleDetail = (id:any) => {
-        const item = this.getItem(id);
-        console.log(item)
+        const targetItem = this.getItem(id);
         this.setState(()=>{
-            return {storeProductDetail:item};
+            return {storeProductDetail:targetItem};
         })
     }
 
@@ -51,6 +65,7 @@ class ProductProvider extends Component{
     addToCart = (id:any) => {
 
         //idに紐づくアイテムを外部から取得してきたイメージ
+        //型推論よしなにしてもらうため、any型にしておく
         const targetItem:any = this.getItem(id)
 
         let itemList = [...this.state.storeProductList];
@@ -71,8 +86,6 @@ class ProductProvider extends Component{
             //状態更新後の処理を記載
             console.log(this.state)
         })
-
-        // console.log(`かごに追加 id:${id}`)    
     }
     
     render(){
@@ -83,6 +96,8 @@ class ProductProvider extends Component{
                 ...this.state
                 ,handleDetail:this.handleDetail
                 ,addToCart:this.addToCart
+                ,openModal:this.openModal
+                ,closeModal:this.closeModal
             }}>
                 {this.props.children}
             </ProductContext.Provider>

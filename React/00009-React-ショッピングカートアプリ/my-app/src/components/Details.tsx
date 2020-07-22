@@ -13,8 +13,6 @@ export default function Details(){
             {(context:any)=>{
                 const {id,company,img,info,price,title,inCart} = context.storeProductDetail
 
-                    // console.log(context.storeProductDetail)
-                    
                     return (
                         <div className="container py-5">
                             
@@ -70,7 +68,10 @@ export default function Details(){
                                         </Link>
                                         <ButtonContainer
                                             disabled={inCart?true:false}
-                                            onClick={()=>context.addToCart(id)}
+                                            onClick={()=>{
+                                                context.addToCart(id)
+                                                context.openModal(id)
+                                            }}
                                         >
                                             {inCart ? "inCart" : "add to Cart"}
                                         </ButtonContainer>
@@ -83,7 +84,6 @@ export default function Details(){
                             {/* end product info */}
                         </div>
                     )
-                    // return <Product product={item} key={index}/>
             }}
         </ProductConsumer>
 
