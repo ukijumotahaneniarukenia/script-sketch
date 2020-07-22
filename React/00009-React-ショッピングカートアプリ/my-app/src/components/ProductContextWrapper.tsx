@@ -15,7 +15,11 @@ class ProductProvider extends Component{
         storeProductDetail:storeProductDetailData,
         cart:[],
         modalOpen:false,
-        modalProduct:storeProductDetailData
+        modalProduct:storeProductDetailData,
+        cartSubTotal: 0,
+        cartTax: 0,
+        cartTotal: 0
+
     }
 
     setStoreProducts = ()=>{
@@ -53,6 +57,25 @@ class ProductProvider extends Component{
             return {modalOpen:false}
         })
     }
+
+
+    increment = (id:any) => {
+        console.log("incre")
+    }
+
+    decrement = (id:any) => {
+        console.log("decre")
+    }
+
+    removeItem = (id:any) => {
+        console.log("rm item")
+    }
+
+    clearItem = (id:any) => {
+        console.log("clear item")
+    }
+
+
 
     handleDetail = (id:any) => {
         const targetItem = this.getItem(id);
@@ -98,6 +121,9 @@ class ProductProvider extends Component{
                 ,addToCart:this.addToCart
                 ,openModal:this.openModal
                 ,closeModal:this.closeModal
+                ,increment:this.increment
+                ,decrement:this.decrement
+                ,removeItem:this.removeItem
             }}>
                 {this.props.children}
             </ProductContext.Provider>
