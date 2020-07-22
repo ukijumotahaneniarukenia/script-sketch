@@ -6,59 +6,52 @@ import {Link} from 'react-router-dom';
 
 import {ProductConsumer} from '../components/ProductContextWrapper'
 
-
 import PropTypes from 'prop-types'
 
 export default function Product(props:any){
 
-    // console.log(props.product)
-
-    // const {id,title,img,price,inCart} = props.product;
-    
-    function handleXXX (e:any) {
-        e.preventDefault()
-        console.log("You Clicked Me by handleXXX")
-    }
-
-    function handleYYY (e:any) {
-        e.preventDefault()
-        console.log("You Clicked Me by handleYYY")
-    }
+    const {id,title,img,price,inCart} = props.product;
 
     return (
         <ProductStyleWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
             <div className="card">
-                <div
-                    className="img-container p-5"
-                    onClick={handleXXX}
-                >
-                    <Link to="/details">
-                        <img src={props.product.img} alt="product" className="card-img-top"/>
-                    </Link>
+                
+                <ProductConsumer>
+                    {(context:any)=>{
+                        return(
+                                <div
+                                    className="img-container p-5"
+                                    //https://ja.stackoverflow.com/questions/57002/%E4%BD%95%E6%95%85-uncaught-invariant-violation-maximum-update-depth-exceeded-%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E5%87%BA%E3%82%8B%E3%81%AE%E3%81%8B%E3%82%8F%E3%81%8B%E3%82%8A%E3%81%BE%E3%81%9B
+                                    onClick={()=>context.handleDetail(id)}
+                                >
+                                    <Link to="/details">
+                                        <img src={img} alt="product" className="card-img-top"/>
+                                    </Link>
 
-                    <button
-                        className="cart-btn"
-                        disabled={props.product.inCart?true:false} //追加されていれば非活性、追加されていなければ活性
-                        onClick={handleYYY}
-                    >
-                        {props.product.inCart?(<p className="text-capitalize mb-0">{" "} in inCart</p>):(<i className="fas fa-cart-plus"/>)}
+                                    <button
+                                        className="cart-btn"
+                                        disabled={inCart?true:false} //追加されていれば非活性、追加されていなければ活性
+                                        onClick={()=>context.addToCart(id)}
+                                    >
+                                        {inCart?(<p className="text-capitalize mb-0">{" "} in inCart</p>):(<i className="fas fa-cart-plus"/>)}
 
-                    </button>
+                                    </button>
+                                </div>
+                        )
+                    }}
 
+                </ProductConsumer>
+                    <div className="card-footer d-flex justify-content-between">
+                        <p className="align-self-center mb-0">
+                            {title}
+                        </p>
 
-                </div>
-
-                <div className="card-footer d-flex justify-content-between">
-                    <p className="align-self-center mb-0">
-                        {props.product.title}
-                    </p>
-
-                    <h5 className="text-blue font-italic mb-0">
-                        <span className="mr-l">
-                            ${props.product.price}
-                        </span>
-                    </h5>
-                </div>
+                        <h5 className="text-blue font-italic mb-0">
+                            <span className="mr-l">
+                                ${price}
+                            </span>
+                        </h5>
+                    </div>
             </div>
         </ProductStyleWrapper>
     )
@@ -67,11 +60,15 @@ export default function Product(props:any){
 
 Product.propTypes = {
     product:PropTypes.shape({
-        id:PropTypes.number,
-        img:PropTypes.string,
-        title:PropTypes.string,
-        price:PropTypes.number,
-        inCart:PropTypes.bool
+        id: PropTypes.number,
+        title: PropTypes.string,
+        img: PropTypes.string,
+        price: PropTypes.number,
+        // company: PropTypes.string,
+        // info: PropTypes.string,
+        inCart: PropTypes.bool,
+        // count: PropTypes.number,
+        // total: PropTypes.number,
     }).isRequired
 }
 
@@ -79,13 +76,13 @@ const ProductStyleWrapper = styled.div`
 
     .card {
         border-color: transparent;
-        transition: all is linear;
+        transition: all 1s linear;
     }
 
     .card-footer{
         background: transparent;
         border-top: transparent;
-        transition: all is linear;
+        transition: all 1s linear;
     }
 
     &:hover{
@@ -107,7 +104,7 @@ const ProductStyleWrapper = styled.div`
     }
 
     .card-img-top{
-        transition: all is linear;
+        transition: all 1s linear;
     }
 
     .img-container:hover .card-img-top{
@@ -125,7 +122,7 @@ const ProductStyleWrapper = styled.div`
         font-size:1.4rem;
         border-radius:0.5rem 0 0 0;
         transform: translate(100%,100%);
-        transition: all is linear;
+        transition: all 1s linear;
     }
 
 

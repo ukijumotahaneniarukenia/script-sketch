@@ -4,19 +4,9 @@ import Product from './Product';
 
 import Title from './Title'
 
-import {storeProductListData, storeProductDetailData} from '../data'
-
-
 import {ProductConsumer} from '../components/ProductContextWrapper'
 
-let state = {
-    storeProductList : storeProductListData
-}
-
 export default function ProductList(){
-
-    // console.log(state.storeProductList)
-
 
     return (
         <div>
@@ -35,8 +25,6 @@ export default function ProductList(){
                     </div>
                 </div>
             </div>
-
-
         </div>
     )
 }
