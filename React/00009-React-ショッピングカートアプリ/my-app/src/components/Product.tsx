@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 
 export default function Product(props:any){
 
-    console.log(props.product)
+    // console.log(props.product)
 
     // const {id,title,img,price,inCart} = props.product;
     
@@ -64,6 +64,16 @@ export default function Product(props:any){
     )
 }
 
+
+Product.propTypes = {
+    product:PropTypes.shape({
+        id:PropTypes.number,
+        img:PropTypes.string,
+        title:PropTypes.string,
+        price:PropTypes.number,
+        inCart:PropTypes.bool
+    }).isRequired
+}
 
 const ProductStyleWrapper = styled.div`
 
