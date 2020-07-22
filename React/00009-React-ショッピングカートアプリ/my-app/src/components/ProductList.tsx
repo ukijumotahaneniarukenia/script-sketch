@@ -17,7 +17,6 @@ export default function ProductList(){
                         <ProductConsumer>
                             {(context:any)=>{
                                 return context.storeProductList.map((item:any,index:any)=>{
-                                    // console.log(item)
                                     return <Product product={item} key={index}/>
                                 })
                             }}

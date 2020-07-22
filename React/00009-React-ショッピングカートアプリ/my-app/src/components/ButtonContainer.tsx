@@ -1,12 +1,7 @@
 import styled from 'styled-components'
 
-import React ,{Component} from "react";
-
-//https://styled-components.com/docs/basics
-// $ grep -l ButtonContainer -r .  | grep tsx
-// ./src/components/NavBar.tsx
-// ./src/components/Details.tsx
-// ./src/components/ButtonContainer.tsx
+//こういうふうに実装したいが、うまくいっていない
+//https://github.com/styled-components/styled-components/issues/630#issuecomment-446650341
 
 export const ButtonContainer = styled.button`
     text-transform : capitalize;

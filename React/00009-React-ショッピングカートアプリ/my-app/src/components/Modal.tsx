@@ -49,9 +49,6 @@ export default function Modal(){
                         </ModalContainer>
                     )
                 }
-
-
-                return null;
             }}
         </ProductConsumer>
     )

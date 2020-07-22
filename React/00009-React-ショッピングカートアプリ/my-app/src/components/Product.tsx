@@ -30,13 +30,15 @@ export default function Product(props:any){
 
                                     <button
                                         className="cart-btn"
-                                        disabled={inCart?true:false} //追加されていれば非活性、追加されていなければ活性
+                                        disabled={inCart ? true : false} //追加されていれば非活性、追加されていなければ活性
                                         onClick={()=>{
                                             context.addToCart(id)
                                             context.openModal(id)
                                         }}
                                     >
-                                        {inCart?(<p className="text-capitalize mb-0">{" "} in inCart</p>):(<i className="fas fa-cart-plus"/>)}
+                                        {inCart ?
+                                            (<p className="text-capitalize mb-0">{" "} in inCart</p>)
+                                            :(<i className="fas fa-cart-plus"/>)}
 
                                     </button>
                                 </div>
@@ -67,11 +69,7 @@ Product.propTypes = {
         title: PropTypes.string,
         img: PropTypes.string,
         price: PropTypes.number,
-        // company: PropTypes.string,
-        // info: PropTypes.string,
         inCart: PropTypes.bool,
-        // count: PropTypes.number,
-        // total: PropTypes.number,
     }).isRequired
 }
 
