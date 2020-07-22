@@ -7,12 +7,17 @@ import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router} from 'react-router-dom';
 
+import {ProductProvider} from './components/ProductContextWrapper'
+
 
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ProductProvider>
+    <Router>
+      <App />
+    </Router>
+    {/* , */}
+  </ProductProvider>,
   document.getElementById('root')
 );
 
