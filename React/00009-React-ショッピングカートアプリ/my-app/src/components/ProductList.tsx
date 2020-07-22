@@ -4,31 +4,32 @@ import Product from './Product';
 
 import Title from './Title'
 
-import {storeProducts} from '../data'
+import {storeProductListData, storeProductDetailData} from '../data'
 
 
 import {ProductConsumer} from '../components/ProductContextWrapper'
 
 let state = {
-    products : storeProducts
+    storeProductList : storeProductListData
 }
 
 export default function ProductList(){
 
-    console.log(state.products)
+    // console.log(state.storeProductList)
 
 
     return (
         <div>
-            <Product />
-
             <div className="py-5">
                 <div className="container">
                     <Title name="our" title="products"/>
                     <div className="row">
                         <ProductConsumer>
                             {(context:any)=>{
-                                return <h1>{context}</h1>
+                                return context.storeProductList.map((item:any,index:any)=>{
+                                    // console.log(item)
+                                    return <Product product={item} key={index}/>
+                                })
                             }}
                         </ProductConsumer>
                     </div>
