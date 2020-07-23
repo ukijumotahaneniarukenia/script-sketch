@@ -22,6 +22,7 @@ yum install -y google-chrome-stable
   - SmaSurf for Webブラウザ拡張機能
 
   - Speed Dial 2
+    - https://yossense.com/extension_speed_dial2/
 
   - Mouse Dictionary
 
