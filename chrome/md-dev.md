@@ -31,3 +31,7 @@ yum install -y google-chrome-stable
   - XPath Helper
 
   - RSS Feed Reader
+
+  - React Developer Tools
+
+  - JSON Formatter
