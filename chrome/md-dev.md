@@ -20,3 +20,13 @@ yum install -y google-chrome-stable
 - 拡張
 
   - SmaSurf for Webブラウザ拡張機能
+
+  - Speed Dial 2
+
+  - Mouse Dictionary
+
+  - google翻訳
+
+  - XPath Helper
+
+  - RSS Feed Reader
