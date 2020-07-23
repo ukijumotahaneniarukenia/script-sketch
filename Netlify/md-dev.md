@@ -1,0 +1,3 @@
+- Netlify + GitHub 環境で簡単にサイトを公開する方法
+  - 便利やわ
+  - https://wlaboratory.com/entry/category/services/netlify/site-publish-by-netlify+github
