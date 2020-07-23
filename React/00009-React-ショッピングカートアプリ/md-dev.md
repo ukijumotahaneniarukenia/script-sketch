@@ -1,4 +1,5 @@
 ```
+
 - https://www.youtube.com/watch?v=wPQ1-33teR4
 
 - https://github.com/john-smilga/setup-filese-react-phone-e-commerce-project
@@ -30,15 +31,11 @@ $ npm install --save bootstrap
 
 - https://fonts.google.com/specimen/Permanent+Marker?query=perma&sidebar.open&selection.family=Permanent+Marker#standard-styles
 
-```
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-```
 
 ページフォントを取得
 
 - https://fontawesome.com/
-
-
 
 コンポーネント作成
 $ mkdir -p src/components
@@ -113,4 +110,7 @@ paypalの決済はfirebaseなどに移譲したほうがよさげ
 
 
 Reactはクラス単位かファンクション単位で管理できるが、historyのブラウザオブジェク卜をどちらで保持できるかがボトルネックになりそう
+
+デフォでもち回れるプロパティを拡張するばあいは当該クラスでinterface切って継承する感じらしい。プロパティないなどのエラーはこれに帰着しそう
+
 ```
