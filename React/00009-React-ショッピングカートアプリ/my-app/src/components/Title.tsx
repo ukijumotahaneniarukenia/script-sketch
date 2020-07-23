@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default function Title({name,title}:any){
     return (
         <div className="row">
