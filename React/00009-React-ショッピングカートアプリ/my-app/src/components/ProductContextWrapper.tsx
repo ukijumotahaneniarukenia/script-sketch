@@ -60,17 +60,58 @@ class ProductProvider extends Component{
 
 
     increment = (id:any) => {
-        console.log("incre")
+
+        let tempCart:any = [...this.state.cart]
+
+        const selectedProduct = tempCart.find((item:any)=>item.id===id)
+        const index= tempCart.indexOf(selectedProduct)
+
+        const product = tempCart[index]
+
+        product.count = product.count + 1;
+        product.total = product.count * product.price;
+
+        this.setState(()=>{
+            return {
+                cart:[...tempCart]
+            }
+        },()=>{
+            this.addTotals();
+        })
     }
 
     decrement = (id:any) => {
-        console.log("decre")
+        let tempCart:any = [...this.state.cart]
+
+        const selectedProduct = tempCart.find((item:any)=>item.id===id)
+        const index= tempCart.indexOf(selectedProduct)
+
+        const product = tempCart[index]
+
+        product.count = product.count - 1;
+
+
+        if(product.count === 0){
+            console.log("zerro")
+            return this.removeItem(id)
+        }else{
+            product.total = product.count * product.price;
+        }
+
+        this.setState(()=>{
+            return {
+                cart:[...tempCart]
+            }
+        },()=>{
+            this.addTotals();
+        })
     }
 
     removeItem = (id:any) => {
         //https://stackoverflow.com/questions/52423842/what-is-not-assignable-to-parameter-of-type-never-error-in-typescript
         let tempProducts:any = [...this.state.storeProductList]
         let tempCart:any = [...this.state.cart]
+        console.log(tempCart)
 
         tempCart = tempCart.filter((item:any)=>item.id !== id)
 
@@ -82,6 +123,8 @@ class ProductProvider extends Component{
         removeProduct.inCart = false
         removeProduct.count = 0
         removeProduct.total = 0
+
+        console.log(tempCart)
 
         this.setState(()=>{
             return{
@@ -109,7 +152,7 @@ class ProductProvider extends Component{
         let subTotal = 0;
 
         this.state.cart.map((item:any)=>{
-            (subTotal += item.total)
+            return (subTotal += item.total)
         })
 
         const tempTax = subTotal * 0.1;
@@ -145,9 +188,6 @@ class ProductProvider extends Component{
 
         let itemList = [...this.state.storeProductList];
 
-        //状態管理するため、React管理のオブジェクトのうち取得したアイテムを逆引き
-        // const index = itemList.indexOf(targetItem)
-
         targetItem.inCart = true;
         targetItem.count = 1;
 
@@ -159,7 +199,6 @@ class ProductProvider extends Component{
             return {storeProductList:itemList,cart:[...this.state.cart,targetItem]}
         },()=>{
             //状態更新後の処理を記載
-            console.log(this.state)
             this.addTotals()
         })
     }

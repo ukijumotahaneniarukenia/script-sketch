@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Component } from "react";
 
 import {
   Switch
-  ,BrowserRouter as Router
   ,Route
 } from 'react-router-dom';
 
@@ -12,39 +11,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './components/NavBar'
 import ProductList from './components/ProductList'
-import Details from './components/Details'
 import Cart from './components/Cart/Cart'
+import Details from './components/Details'
 import Default from './components/Default'
 
 import Modal from './components/Modal'
 
-
-
-function App(){
+//エントリはクラス管理したほうがブラウザの情報をよしなに持ち回ってくれているので、便利
+class App extends Component {
+  render() {
     return (
-      <Router>
+      <React.Fragment>
         <NavBar />
-        <div className="app">
-          <Switch>
-            <Route exact path="/">
-              <ProductList />
-            </Route>
-            <Route exact path="/details">
-              <Details />
-            </Route>
-            <Route exact path="/cart">
-              <Cart />
-            </Route>
-            <Route>
-              {/* 上記URLのいずれでもない場合 */}
-              <Default />
-            </Route>
-          </Switch>
-          <Modal />
-        </div>
-      </Router>
-
+        <Switch>
+          <Route exact path="/" component={ProductList} />
+          <Route exact path="/details" component={Details} />
+          <Route exact path="/cart" component={Cart} />
+          <Route component={Default} />
+        </Switch>
+        <Modal />
+      </React.Fragment>
     );
+  }
 }
 
 export default App;
