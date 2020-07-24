@@ -35,3 +35,5 @@ yum install -y google-chrome-stable
   - React Developer Tools
 
   - JSON Formatter
+
+  - QRコード作成器 (Quick QR)
