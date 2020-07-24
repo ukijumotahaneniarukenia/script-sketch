@@ -244,3 +244,12 @@ ext install bmewburn.vscode-intelephense-client
 ext install manasxx.background-cover
 ```
 
+
+- Live Server
+
+  - htmlファイルをプレビューするやつ
+  - https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+
+```
+ext install ritwickdey.LiveServer
+```
