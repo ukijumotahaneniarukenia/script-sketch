@@ -63,3 +63,5 @@ $ cat c | xargs -I@ wget -q 'https://script.google.com/macros/s/AKfycbwScG8AAKZa
 
   - 作業終わり次第プロジェクト削除
 
+  - ゴミ箱ではだめで、完全に削除で
+
