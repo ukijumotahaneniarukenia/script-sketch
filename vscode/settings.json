@@ -1,0 +1,18 @@
+{
+    "backgroundCover.autoStatus": true,
+    "backgroundCover.opacity": 0.4,
+    "backgroundCover.randomImageFolder": "/home/aine/Downloads/pic",
+    "editor.minimap.maxColumn": 200,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.showSlider": "always",
+    "editor.mouseWheelZoom": true,// Ctrl + マウスホイールでのズーム操作
+    "editor.renderControlCharacters": true, //制御文字の表示
+    "editor.renderWhitespace": "all",// 空白文字の可視化
+    "editor.wordWrap": "on",//折り返し表示
+    "files.autoGuessEncoding": true, // ファイルオープン時のエンコードの自動判別
+    "files.autoSave": "afterDelay",// 自動保存
+    "files.insertFinalNewline": true, //最終行に改行を自動挿入
+    "trailing-spaces.trimOnSave": true, //ファイル保存時に自動で末尾の空白を削除
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons", // ファイルアイコン有効化
+}
