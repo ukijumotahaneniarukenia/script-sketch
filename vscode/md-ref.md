@@ -253,3 +253,13 @@ ext install manasxx.background-cover
 ```
 ext install ritwickdey.LiveServer
 ```
+
+
+- Ruby Solargraph
+
+  - rubyの補完するやつ
+  - https://marketplace.visualstudio.com/items?itemName=castwide.solargraph
+
+```
+ext install castwide.solargraph
+```
