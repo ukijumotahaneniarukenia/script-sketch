@@ -257,6 +257,9 @@ $ machinectl terminate vir-ubuntu-20-04
 ```
 
 コンテナゲスト起動
+
+デフォルトの実行ユーザーはrootらしい。firefox起動して気づいた。
+
 ```
 ソケットファイル共有すればこれでうごく
 $ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
@@ -277,6 +280,15 @@ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/
 Container vir-ubuntu-20-04 exited successfully.
 
 ```
+
+フォアグランド起動の場合は**Ctrl+]**を３回連打でexit
+
+一般ユーザーで起動
+
+```
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+```
+
 
 
 - POST
