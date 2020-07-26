@@ -189,3 +189,58 @@ root@aine-MS-7B98:~# tracepath 172.217.175.228
 ```
 
 よさげ、後はX転送
+
+
+- POST
+
+```
+コンテナゲストの自動起動解除
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl disable systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+Removed /etc/systemd/system/dbus-org.freedesktop.network1.service.
+Removed /etc/systemd/system/sockets.target.wants/systemd-networkd.socket.
+Removed /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service.
+Removed /etc/systemd/system/multi-user.target.wants/systemd-networkd.service.
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+コンテナゲストのネットワークサービス停止（ソケット）
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl stop systemd-networkd.socket
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+コンテナゲストのネットワークサービス停止（ソケット以外）
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl stop systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+コンテナゲストのネットワークサービス強制停止
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl kill systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+
+コンテナホスト側でのコンテナゲストの自動起動解除
+$ systemctl disable systemd-nspawn@vir-ubuntu-20-04.service
+Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-04.service.
+
+コンテナホスト側でのコンテナゲストの停止
+$ systemctl stop systemd-nspawn@vir-ubuntu-20-04.service
+
+コンテナホスト側でのコンテナゲストの強制停止
+$ systemctl kill systemd-nspawn@vir-ubuntu-20-04.service
+Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-04.service.
+
+コンテナゲストファイルの物理削除
+
+$ cd /var/lib/machines
+$ rm -rf vir-ubuntu-20-04
+
+
+```
