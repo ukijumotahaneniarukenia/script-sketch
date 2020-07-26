@@ -177,6 +177,8 @@ root@aine-MS-7B98:~# tracepath 172.217.175.228
 
 X転送
 
+- https://nosada.hatenablog.com/entry/2018/03/24/232855
+
 コンテナホスト側でX転送許可
 
 ```
@@ -192,7 +194,7 @@ $ machinectl terminate vir-ubuntu-20-04
 コンテナゲスト起動
 ```
 ソケットファイル共有すればこれでうごく
-$ systemd-nspawn --setenv=DISPLAY=:0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+$ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
 ```
 
 
