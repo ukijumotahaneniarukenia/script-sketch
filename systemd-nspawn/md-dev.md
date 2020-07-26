@@ -359,6 +359,9 @@ $ machinectl list
 No machines.
 
 GUIは起動できたが、検索はできなかった。ネットワークの問題になった。
+
+おそらくfirefoxのプロキシ設定。（勘）
+
 $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
 
 ```
