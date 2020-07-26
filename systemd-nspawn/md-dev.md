@@ -125,6 +125,15 @@ sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 
 ```
 
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
+
+1 machines listed.
+
+
 root@aine-MS-7B98:~# apt update
 
 
