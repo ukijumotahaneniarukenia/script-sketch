@@ -6,6 +6,31 @@ $ sudo apt install -y systemd-container
 $ which systemd-nspawn
 ```
 
+- VER
+
+```
+$ dpkg --print-architecture
+amd64
+
+$ lsb_release -cs
+focal
+
+$ lsb_release -r|awk -F'\t' '{print $2}'|tr '.' '-'
+20-04
+
+$ machinectl --version
+systemd 245 (245.4-4ubuntu3.2)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+
+$ debootstrap --version
+debootstrap 1.0.118ubuntu1.1
+
+$ systemd-nspawn --version
+systemd 245 (245.4-4ubuntu3.2)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+
+```
+
 ポイントは自動起動設定後の再起動
 
 コンテナホストOSとコンテナゲストOSのバージョン同じなら、事前にコピーしておけばおｋ
@@ -16,6 +41,8 @@ $ cp /etc/apt/sources.list /var/lib/machines/vir-ubuntu-20-04/etc/apt/sources.li
 ```
 
 コンテナの作成
+  - https://www.debian.org/releases/jessie/powerpc/apds03.html.ja
+  - https://wiki.debian.org/Debootstrap
 
 ```
 $ mkdir -p /var/lib/machines/vir-ubuntu-20-04
@@ -121,6 +148,34 @@ DNSの設定など
 sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 ```
 
+一般ユーザーの作成とrootユーザーのパスワードを設定
+
+```
+DEFAULT_USER_ID=9999
+DEFAULT_USER_NAME=kuraine
+DEFAULT_GROUP_ID=9999
+DEFAULT_GROUP_NAME=kuraine
+
+
+groupadd -g $DEFAULT_GROUP_ID $DEFAULT_GROUP_NAME && \
+useradd -m -g $DEFAULT_GROUP_NAME -u $DEFAULT_USER_ID $DEFAULT_USER_NAME && \
+chsh -s /bin/bash $DEFAULT_USER_NAME && \
+echo $DEFAULT_USER_NAME':'$DEFAULT_USER_NAME'_pwd' | chpasswd && \
+echo "$DEFAULT_USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+echo 'root:root_pwd' | chpasswd
+
+
+一般ユーザーでsudoが使えるように
+
+- https://qiita.com/tukiyo3/items/3642a99bd971fa829246
+
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+
+```
+
+
+
 疎通確認
 
 確認する前に一度、コンテナホストを再起動しておく
@@ -136,6 +191,16 @@ MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
 vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
 
 1 machines listed.
+
+
+$ machinectl shell kuraine@vir-ubuntu-20-04 /bin/bash
+
+kuraine@aine-MS-7B98:~$ sudo echo うんこ
+うんこ
+
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
 
 
 root@aine-MS-7B98:~# apt update
