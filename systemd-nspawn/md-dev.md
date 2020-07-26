@@ -197,15 +197,20 @@ $ machinectl terminate vir-ubuntu-20-04
 $ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
 ```
 
-バッググラウンド起動がハンディか
+バッググラウンドはちょっとめんどいことなったので、やめ。
+
 
 ```
-
 $ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes &
 
+$ jobs
+[1]+  停止                  systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
 
-プロセス消すとき
-$ ps aux | grep vir-ubuntu-20-04 | grep -v grep | awk '{print $2}' | xargs kill
+$ fg 1
+systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+
+Container vir-ubuntu-20-04 exited successfully.
+
 ```
 
 
