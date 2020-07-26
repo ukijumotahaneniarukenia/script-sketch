@@ -8,6 +8,9 @@ $ which systemd-nspawn
 
 ポイントは自動起動設定後の再起動
 
+コンテナホストOSとコンテナゲストOSのバージョン同じなら、事前にコピーしておけばおｋ
+
+
 コンテナの作成
 
 ```
@@ -121,36 +124,12 @@ sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 コンテナ内から外部へ出ていけるか
 
 ```
-root@aine-MS-7B98:~# ping 8.8.8.8
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=6.76 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=6.51 ms
-64 bytes from 8.8.8.8: icmp_seq=3 ttl=115 time=13.9 ms
-64 bytes from 8.8.8.8: icmp_seq=4 ttl=115 time=6.51 ms
-64 bytes from 8.8.8.8: icmp_seq=5 ttl=115 time=6.68 ms
-^C
---- 8.8.8.8 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4006ms
-rtt min/avg/max/mdev = 6.507/8.068/13.889/2.911 ms
-
-root@aine-MS-7B98:~# ip route
-default via 192.168.96.113 dev host0 proto dhcp src 192.168.96.119 metric 1024 
-169.254.0.0/16 dev host0 proto kernel scope link src 169.254.193.228 
-192.168.96.112/28 dev host0 proto kernel scope link src 192.168.96.119 
-192.168.96.113 dev host0 proto dhcp scope link src 192.168.96.119 metric 1024 
 
 root@aine-MS-7B98:~# apt update
-Get:1 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal InRelease [265 kB]
-Get:2 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main amd64 Packages [970 kB]
-Get:3 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main Translation-en [506 kB]
-Fetched 1741 kB in 3s (570 kB/s)                              
-Reading package lists... Done
-Building dependency tree... Done
-All packages are up to date.
 
-root@aine-MS-7B98:~# apt install -y iputils-tracepath
 
-root@aine-MS-7B98:~# apt install -y dnsutils
+root@aine-MS-7B98:~# apt install -y iputils-tracepath  dnsutils x11-apps
+
 
 root@aine-MS-7B98:~# nslookup www.google.com
 Server:		127.0.0.53
