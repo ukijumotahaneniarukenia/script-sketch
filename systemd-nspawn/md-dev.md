@@ -10,6 +10,10 @@ $ which systemd-nspawn
 
 コンテナホストOSとコンテナゲストOSのバージョン同じなら、事前にコピーしておけばおｋ
 
+こんな感じ
+```
+$ cp /etc/apt/sources.list /var/lib/machines/vir-ubuntu-20-04/etc/apt/sources.list
+```
 
 コンテナの作成
 
@@ -169,14 +173,27 @@ root@aine-MS-7B98:~# tracepath 172.217.175.228
 13:  no reply
 14:  no reply
 15:  no reply
-
-
-
-
-
 ```
 
-よさげ、後はX転送
+X転送
+
+コンテナホスト側でX転送許可
+
+```
+$ xhost +local:
+non-network local connections being added to access control list
+```
+
+コンテナゲスト停止
+```
+$ machinectl terminate vir-ubuntu-20-04
+```
+
+コンテナゲスト起動
+```
+ソケットファイル共有すればこれでうごく
+$ systemd-nspawn --setenv=DISPLAY=:0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+```
 
 
 - POST
