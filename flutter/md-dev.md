@@ -1,1 +1,0 @@
-- https://snapcraft.io/blog/canonical%e3%81%8cflutter%e3%81%ablinux%e3%83%87%e3%82%b9%e3%82%af%e3%83%88%e3%83%83%e3%83%97%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e3%82%b5%e3%83%9d%e3%83%bc%e3%83%88%e3%82%92%e6%8f%90%e4%be%9b
