@@ -289,6 +289,79 @@ Container vir-ubuntu-20-04 exited successfully.
 $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
 ```
 
+一般ユーザーで起動
+
+firefox起動時はディレクトリ周りの権限整備
+
+```
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
+```
+
+以下のエラーでた
+
+```
+(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+(firefox:1): dconf-CRITICAL **: 20:04:18.416: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+```
+
+デバッグ
+
+```
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
+
+1 machines listed.
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+
+
+root@aine-MS-7B98:~# ls- l /home
+total 12
+drwxr-xr-x  3 root    root    4096 Jul 26 19:59 ./
+drwxr-xr-x 17 root    root    4096 Jul 26 19:14 ../
+drwxr-xr-x  2 kuraine kuraine 4096 Jul 26 19:59 kuraine/
+
+root@aine-MS-7B98:~# ls -l /home/kuraine/
+total 24
+drwxr-xr-x 2 kuraine kuraine 4096 Jul 26 19:59 ./
+drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
+-rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
+-rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
+-rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
+
+フルコンつけてみた
+
+root@aine-MS-7B98:~# chmod 777 /home/kuraine/
+root@aine-MS-7B98:~# ls -l /home/kuraine/
+total 24
+drwxrwxrwx 2 kuraine kuraine 4096 Jul 26 19:59 ./
+drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
+-rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
+-rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
+-rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
+
+
+
+
+$ machinectl terminate vir-ubuntu-20-04
+root ukijumotahaneniarukenia aine-MS-7B98 20:09:55 /var/lib/machines$
+
+$ machinectl list
+No machines.
+
+GUIは起動できたが、検索はできなかった。ネットワークの問題になった。
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
+
+```
 
 
 - POST
