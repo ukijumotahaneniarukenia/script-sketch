@@ -175,87 +175,74 @@ vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -
 
 1 machines listed.
 
-
-$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
-
-#マシン名の変更がうまく行ってないんだよな。machinectlの場合
-aine@aine-MS-7B98:~$ sudo echo うんこ
-うんこ
-
-
-$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/which echo
 Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/echo
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/which sudo
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/sudo
+Connection to machine vir-ubuntu-20-04 terminated.
 
 
-root@aine-MS-7B98:~# apt update
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/which apt
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/apt
+Connection to machine vir-ubuntu-20-04 terminated.
 
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt update
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+Get:1 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal InRelease [265 kB]
+Get:2 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main amd64 Packages [970 kB]
+Get:3 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main Translation-en [506 kB]
+Fetched 1741 kB in 1s (1352 kB/s)                             
+Reading package lists... Done
+Building dependency tree... Done
+All packages are up to date.
+Connection to machine vir-ubuntu-20-04 terminated.
 
-root@aine-MS-7B98:~# apt install -y iputils-tracepath  dnsutils x11-apps traceroute
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y iputils-tracepath  dnsutils x11-apps
 
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which nslookup
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/nslookup
+Connection to machine vir-ubuntu-20-04 terminated.
 
-root@aine-MS-7B98:~# nslookup www.google.com
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/nslookup www.google.com
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
 Server:		127.0.0.53
 Address:	127.0.0.53#53
 
 Non-authoritative answer:
 Name:	www.google.com
-Address: 172.217.175.228
+Address: 172.217.26.36
 Name:	www.google.com
 Address: 2404:6800:4004:80f::2004
 
-root@aine-MS-7B98:~# tracepath 172.217.175.228
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which tracepath
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/tracepath
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/tracepath 172.217.26.36
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
  1?: [LOCALHOST]                      pmtu 1500
- 1:  _gateway                                              0.102ms 
- 1:  _gateway                                              0.028ms 
- 2:  192.168.1.1                                           0.595ms 
- 3:  192.168.1.1                                           0.698ms pmtu 1454
- 3:  nas827.p-kanagawa.nttpc.ne.jp                        17.375ms 
- 4:  210.139.125.173                                      17.809ms 
- 5:  210.165.249.181                                      19.048ms 
- 6:  p254--504.tky-nk-acr02.sphere.ad.jp                  17.518ms 
- 7:  no reply
- 8:  72.14.213.57                                         22.189ms asymm 13 
- 9:  no reply
-10:  no reply
-11:  no reply
-12:  no reply
-13:  no reply
-14:  no reply
-15:  no reply
-
-root@aine-MS-7B98:~# traceroute www.google.com
-traceroute to www.google.com (172.217.175.4), 30 hops max, 60 byte packets
- 1  _gateway (192.168.106.129)  0.055 ms  0.022 ms  0.017 ms
- 2  192.168.1.1 (192.168.1.1)  0.381 ms  1.294 ms  1.228 ms
- 3  nas827.p-kanagawa.nttpc.ne.jp (210.153.251.235)  13.117 ms  13.065 ms  13.011 ms
- 4  210.139.125.173 (210.139.125.173)  12.935 ms  13.238 ms  13.287 ms
- 5  210.165.249.181 (210.165.249.181)  13.730 ms  13.823 ms  13.771 ms
- 6  p254--504.tky-nk-acr02.sphere.ad.jp (210.153.241.113)  14.526 ms  16.182 ms  16.072 ms
- 7  * * *
- 8  210.150.215.242 (210.150.215.242)  9.633 ms 72.14.213.57 (72.14.213.57)  9.404 ms 72.14.205.32 (72.14.205.32)  9.672 ms
- 9  * 108.170.242.193 (108.170.242.193)  10.512 ms *
-10  142.250.226.58 (142.250.226.58)  9.619 ms 142.250.226.6 (142.250.226.6)  9.567 ms 108.170.227.93 (108.170.227.93)  10.469 ms
-11  72.14.233.35 (72.14.233.35)  10.501 ms nrt20s18-in-f4.1e100.net (172.217.175.4)  9.386 ms  9.994 ms
-
-root@aine-MS-7B98:~# traceroute ukijumotahaneniarukenia.site
-traceroute to ukijumotahaneniarukenia.site (133.18.59.242), 30 hops max, 60 byte packets
- 1  _gateway (192.168.106.129)  0.058 ms  0.020 ms  0.017 ms
- 2  192.168.1.1 (192.168.1.1)  1.294 ms  1.235 ms  1.187 ms
- 3  nas827.p-kanagawa.nttpc.ne.jp (210.153.251.235)  5.296 ms  5.257 ms  5.201 ms
- 4  210.139.125.173 (210.139.125.173)  5.432 ms  5.389 ms  5.211 ms
- 5  210.165.249.181 (210.165.249.181)  5.605 ms  5.566 ms  5.510 ms
- 6  p254--504.tky-nk-acr02.sphere.ad.jp (210.153.241.113)  7.271 ms  7.936 ms  11.762 ms
- 7  * p102--2026.k-otemachi-core1.sphere.ad.jp (202.239.117.33)  10.271 ms *
- 8  210.150.215.190 (210.150.215.190)  10.102 ms  10.104 ms 128.22.12.5 (128.22.12.5)  10.030 ms
- 9  60.56.5.137 (60.56.5.137)  16.200 ms  16.117 ms  16.371 ms
-10  203.140.81.222 (203.140.81.222)  16.446 ms 219.122.245.2 (219.122.245.2)  16.529 ms 219.122.245.6 (219.122.245.6)  16.470 ms
-11  180.145.255.170 (180.145.255.170)  16.080 ms 121.83.169.50 (121.83.169.50)  16.164 ms  16.263 ms
-12  218.228.247.78 (218.228.247.78)  17.347 ms  15.851 ms  19.656 ms
-13  124.248.144.41 (124.248.144.41)  20.205 ms  15.736 ms 124.248.144.35 (124.248.144.35)  19.602 ms
-14  124.248.144.201 (124.248.144.201)  20.031 ms 124.248.144.205 (124.248.144.205)  19.970 ms 124.248.144.201 (124.248.144.201)  20.265 ms
-15  124.248.155.2 (124.248.155.2)  92.022 ms  92.280 ms  92.554 ms
-16  vps-wp03.kagoya.net (133.18.58.12)  19.066 ms  19.499 ms  19.443 ms
-17  vwp0484.kagoya.net (133.18.59.242)  19.267 ms  15.746 ms  15.686 ms
+ 1:  _gateway                                              0.039ms 
+ 1:  _gateway                                              0.079ms 
+ 2:  192.168.1.1                                           0.662ms 
+ 3:  192.168.1.1                                           0.615ms pmtu 1454
+ 3:  nas827.p-kanagawa.nttpc.ne.jp                         4.788ms 
+ 4:  210.139.125.169                                       5.248ms 
+ 5:  210.165.249.177                                       5.289ms 
+ 6:  210.165.249.181                                       5.803ms asymm  5 
+ 7:  p254--504.tky-nk-acr02.sphere.ad.jp                   7.499ms asymm  6 
+ 8:  no reply
+ 9:  72.14.205.32                                          7.918ms asymm 13 
+^C
+Connection to machine vir-ubuntu-20-04 terminated.
 
 ```
 
@@ -332,7 +319,6 @@ USER=aine
 LOGNAME=aine
 container_uuid=35dd48b2-1f80-4cf7-953e-1ae292de544a
 NOTIFY_SOCKET=/run/systemd/nspawn/notify
-
 ```
 
 
@@ -406,25 +392,24 @@ root         105  0.0  0.0  18172  8660 ?        Ss   23:49   0:00 /lib/systemd/
 root         106  0.0  0.0  22372  3432 ?        S    23:49   0:00  \_ (sd-pam)
 Connection to machine vir-ubuntu-20-04 terminated.
 
-$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
+$ machinectl shell aine@vir-ubuntu-20-04 /usr/bin/ps auxwwf
 Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
-aine@aine-MS-7B98:~$ ps aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root           1  0.0  0.0 169808 11740 ?        Ss   22:58   0:00 /usr/lib/systemd/systemd
-root          16  0.0  0.0  51624 15540 ?        Ss   22:58   0:00 /lib/systemd/systemd-journald
-systemd+      46  0.0  0.0  26740  8052 ?        Ss   22:58   0:00 /lib/systemd/systemd-networkd
-systemd+      52  0.0  0.0  24112 12428 ?        Ss   22:58   0:00 /lib/systemd/systemd-resolved
-root          54  0.0  0.0   5568  2824 ?        Ss   22:58   0:00 /usr/sbin/cron -f
-message+      55  0.0  0.0   7376  3996 ?        Ss   22:58   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
-root          57  0.0  0.0  26196 17744 ?        Ss   22:58   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
-syslog        58  0.0  0.0 224476  4468 ?        Ssl  22:58   0:00 /usr/sbin/rsyslogd -n -iNONE
-root          59  0.0  0.0  16956  7632 ?        Ss   22:58   0:00 /lib/systemd/systemd-logind
-root          67  0.0  0.0   4384  2176 pts/0    Ss+  22:58   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
-aine        8071  0.0  0.0   5992  3840 pts/1    Ss   23:11   0:00 /bin/bash
-aine        8073  0.0  0.0  18172  8848 ?        Ss   23:11   0:00 /lib/systemd/systemd --user
-aine        8074  0.0  0.0 171004  4612 ?        S    23:11   0:00 (sd-pam)
-aine        8078  0.0  0.0 171196  4684 pts/1    S    23:11   0:00 (sd-pa
-aine        8085  0.0  0.0   7632  3200 pts/1    R+   23:11   0:00 ps aux
+root           1  0.0  0.0 169804 11904 ?        Ss   Jul27   0:00 /usr/lib/systemd/systemd
+root          16  0.0  0.0  51620 16460 ?        Ds   Jul27   0:00 /lib/systemd/systemd-journald
+systemd+      51  0.0  0.0  24112 12500 ?        Ss   Jul27   0:00 /lib/systemd/systemd-resolved
+root          53  0.0  0.0   5568  2584 ?        Ss   Jul27   0:00 /usr/sbin/cron -f
+message+      54  0.0  0.0   7376  4536 ?        Ss   Jul27   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          56  0.0  0.0  26196 17720 ?        Ss   Jul27   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        57  0.0  0.0 224476  4448 ?        Ssl  Jul27   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          58  0.0  0.0  16956  7748 ?        Ss   Jul27   0:00 /lib/systemd/systemd-logind
+root          60  0.0  0.0   4384  2040 pts/0    Ss+  Jul27   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+systemd+     192  0.0  0.0  26740  7984 ?        Ss   00:01   0:00 /lib/systemd/systemd-networkd
+aine        8295  0.0  0.0   7632  3348 pts/1    Rs+  00:18   0:00 /usr/bin/ps auxwwf
+aine        8302  0.0  0.0 171192  4840 pts/1    S+   00:18   0:00  \_ (sd-
+aine        8297  0.0  0.0  18172  8656 ?        Ss   00:18   0:00 /lib/systemd/systemd --user
+aine        8298  0.0  0.0 171000  4768 ?        S    00:18   0:00  \_ (sd-pam)
+Connection to machine vir-ubuntu-20-04 terminated.
 ```
 
 systemd-nspawnの場合は、rootPIDがsystemdになっっていない
@@ -440,26 +425,13 @@ Container vir-ubuntu-20-04 exited successfully.
 
 一般ユーザー
 
-$ systemd-nspawn --user=aine --chdir=/home/aine --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+$ systemd-nspawn --user=aine --chdir=/home/aine --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/ps auxwwf
 Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
 Press ^] three times within 1s to kill container.
-aine@vir-ubuntu-20-04:~$ ps uax
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-aine           1  0.2  0.0   4240  3436 pts/0    Ss   23:33   0:00 /bin/bash
-aine          10  0.0  0.0   5880  2892 pts/0    R+   23:34   0:00 ps uax
-
-
-
+aine           1  0.0  0.0   5800  1156 pts/0    Rs+  00:19   0:00 /usr/bin/ps auxwwf
+Container vir-ubuntu-20-04 exited successfully.
 ```
-
-
-
-
-
-
-
-
-
 
 X転送
 
@@ -476,6 +448,15 @@ non-network local connections being added to access control list
 machinectlの場合
 
 ```
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES       
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   192.168.105.130…
+
+1 machines listed.
+
+
 $ machinectl shell root@vir-ubuntu-20-04 /bin/which firefox
 Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
 
@@ -556,102 +537,39 @@ $ machinectl terminate vir-ubuntu-20-04
 $ machinectl list 
 No machines.
 
+rootユーザーで起動（基本起動しない）
 
-コンテナゲスト起動
+検索できる
 
-
-フォアグランド起動の場合は**Ctrl+]**を３回連打でexit
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/firefox
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+Selected user namespace base 1547173888 and range 65536.
+Gtk-Message: 00:26:20.428: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:20.429: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.445: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.445: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.523: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.524: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.735: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:21.740: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:22.448: Failed to load module "canberra-gtk-module"
+Gtk-Message: 00:26:22.449: Failed to load module "canberra-gtk-module"
+Container vir-ubuntu-20-04 exited successfully.
 
 一般ユーザーで起動
 
-$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
-```
+$ id aine
+uid=1000(aine) gid=1000(aine) groups=1000(aine),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare),998(docker)
 
-一般ユーザーで起動
+$ id aine -u
+1000
 
-firefox起動時はディレクトリ周りの権限整備
+以下のエラーが山のように出るが、一応検索できる。標準出力に出力されている。
 
-```
-$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
-```
+(firefox:1): dconf-CRITICAL **: 00:28:23.223: unable to create directory '/run/user/1000/dconf': Permission denied.  dconf will not work properly.
 
-以下のエラーでた
-
-```
-(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
-
-(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
-
-(firefox:1): dconf-CRITICAL **: 20:04:18.416: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
-
-```
-
-デバッグ
-
-```
-$ machinectl start vir-ubuntu-20-04
-
-$ machinectl list
-MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
-vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
-
-1 machines listed.
-
-$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
-
-
-root@aine-MS-7B98:~# ls- l /home
-total 12
-drwxr-xr-x  3 root    root    4096 Jul 26 19:59 ./
-drwxr-xr-x 17 root    root    4096 Jul 26 19:14 ../
-drwxr-xr-x  2 kuraine kuraine 4096 Jul 26 19:59 kuraine/
-
-root@aine-MS-7B98:~# ls -l /home/kuraine/
-total 24
-drwxr-xr-x 2 kuraine kuraine 4096 Jul 26 19:59 ./
-drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
--rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
--rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
--rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
--rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
-
-フルコンつけてみた
-
-root@aine-MS-7B98:~# chmod 777 /home/kuraine/
-root@aine-MS-7B98:~# ls -l /home/kuraine/
-total 24
-drwxrwxrwx 2 kuraine kuraine 4096 Jul 26 19:59 ./
-drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
--rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
--rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
--rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
--rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
-
-
-
-
-$ machinectl terminate vir-ubuntu-20-04
-root ukijumotahaneniarukenia aine-MS-7B98 20:09:55 /var/lib/machines$
-
-$ machinectl list
-No machines.
-
-GUIは起動できたが、検索はできなかった。ネットワークの問題になった。
-
-$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
-
-
-これででた。日本語フォントいれてないが。--bind=/run/systemdをマウントしていると出た。/run/systemdはreadonlyだと怒られた。
-$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/run/udev --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id -D /var/lib/machines/vir-ubuntu-20-04 firefox
-
-ブラウザの挙動の違いかと思い、brave-browserでも試した。これはアドレス周りの問題になった。
-
-基本dbusソケットのセッションが実行ユーザー単位の制御になっているので、コンテナホストと同じファイルをコンテナゲストにマウントして借用させて上げる場合は
-コンテナホストとコンテナゲストのユーザーは同一人物にしておくといける
-
-brave-browserはこれでいけた。--bind-ro=/dev/dri
-$ systemd-nspawn --user=aine --setenv=DISPLAY=:0.0 --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 brave-browser
-
+$ systemd-nspawn --user=aine --chdir=/home/aine --setenv=XDG_RUNTIME_DIR=/run/user/$(id aine -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/firefox 1>/dev/null 2>&1
 
 ```
 
@@ -669,98 +587,159 @@ $ systemd-nspawn --user=aine --setenv=DISPLAY=:0.0 --bind=/run/systemd --bind-ro
 コンテナホスト側
 
 $ ls -alh vir-ubuntu-20-04/home/aine
-合計 52K
-drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
-drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
--rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
--rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
--rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
-drwx------ 7 aine       aine       4.0K  7月 27 11:03 .cache/
-drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
-drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
-drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
-drwxr-xr-x 3 aine       aine       4.0K  7月 27 11:01 .local/
-drwx------ 5 aine       aine       4.0K  7月 27 10:58 .mozilla/
-drwx------ 3 aine       aine       4.0K  7月 27 11:01 .pki/
--rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
-
-$ chown -R 1547174888:1547174888 vir-ubuntu-20-04/home/aine/{.cache,.local,.mozilla,.pki}
-
-
-$ ls -alh vir-ubuntu-20-04/home/aine
-合計 52K
-drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
-drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
--rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
--rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
--rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
-drwx------ 7 1547174888 1547174888 4.0K  7月 27 11:03 .cache/
-drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
-drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
-drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
-drwxr-xr-x 3 1547174888 1547174888 4.0K  7月 27 11:01 .local/
-drwx------ 5 1547174888 1547174888 4.0K  7月 27 10:58 .mozilla/
-drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .pki/
--rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
+合計 32K
+drwxr-xr-x 4 1547174888 1547174888 4.0K  7月 28 00:28 ./
+drwxr-xr-x 3 1547173888 1547173888 4.0K  7月 27 23:54 ../
+-rw------- 1 1547174888 1547174888   20  7月 27 23:57 .bash_history
+-rw-r--r-- 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout
+-rw-r--r-- 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc
+drwx------ 3 1547174888 1547174888 4.0K  7月 28 00:28 .cache/
+drwx------ 5 1547174888 1547174888 4.0K  7月 28 00:28 .mozilla/
+-rw-r--r-- 1 1547174888 1547174888  807  2月 25 21:03 .profile
 
 コンテナゲスト側
-$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ systemd-nspawn --user=aine --chdir=/home/aine -D /var/lib/machines/vir-ubuntu-20-04 ls -alh /home/aine
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+total 32K
+drwxr-xr-x 4 1547174888 1547174888 4.0K Jul 28 00:28 .
+drwxr-xr-x 3 1547173888 1547173888 4.0K Jul 27 23:54 ..
+-rw------- 1 1547174888 1547174888   20 Jul 27 23:57 .bash_history
+-rw-r--r-- 1 1547174888 1547174888  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 1547174888 1547174888 3.7K Feb 25 21:03 .bashrc
+drwx------ 3 1547174888 1547174888 4.0K Jul 28 00:28 .cache
+drwx------ 5 1547174888 1547174888 4.0K Jul 28 00:28 .mozilla
+-rw-r--r-- 1 1547174888 1547174888  807 Feb 25 21:03 .profile
+Container vir-ubuntu-20-04 exited successfully.
+
+$ systemd-nspawn --user=aine --chdir=/home/aine -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+
+aine@vir-ubuntu-20-04:~$ pwd
+/home/aine
+
+aine@vir-ubuntu-20-04:~$ ls -lha
+total 32K
+drwxr-xr-x 4 1547174888 1547174888 4.0K Jul 28 00:28 .
+drwxr-xr-x 3 1547173888 1547173888 4.0K Jul 27 23:54 ..
+-rw------- 1 1547174888 1547174888   20 Jul 27 23:57 .bash_history
+-rw-r--r-- 1 1547174888 1547174888  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 1547174888 1547174888 3.7K Feb 25 21:03 .bashrc
+drwx------ 3 1547174888 1547174888 4.0K Jul 28 00:28 .cache
+drwx------ 5 1547174888 1547174888 4.0K Jul 28 00:28 .mozilla
+-rw-r--r-- 1 1547174888 1547174888  807 Feb 25 21:03 .profile
+
+不便
+aine@vir-ubuntu-20-04:~$ cd .cache/
+bash: cd: .cache/: Permission denied
+
+コンテナホスト側から実行
+$ chown -R aine:aine vir-ubuntu-20-04/home/aine
+
+$ systemd-nspawn --user=aine --chdir=/home/aine -D /var/lib/machines/vir-ubuntu-20-04 ls -alh /home/aine
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+total 32K
+drwxr-xr-x 4 aine       aine       4.0K Jul 28 00:28 .
+drwxr-xr-x 3 1547173888 1547173888 4.0K Jul 27 23:54 ..
+-rw------- 1 aine       aine         20 Jul 27 23:57 .bash_history
+-rw-r--r-- 1 aine       aine        220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 aine       aine       3.7K Feb 25 21:03 .bashrc
+drwx------ 3 aine       aine       4.0K Jul 28 00:28 .cache
+drwx------ 5 aine       aine       4.0K Jul 28 00:28 .mozilla
+-rw-r--r-- 1 aine       aine        807 Feb 25 21:03 .profile
+Container vir-ubuntu-20-04 exited successfully.
 
 
-aine@aine-MS-7B98:~$ ls -alh
-total 52K
-drwxr-xrwx 9 aine aine 4.0K Jul 27 12:01 .
-drwxr-xr-x 4 root root 4.0K Jul 27 10:53 ..
--rwxr-xrwx 1 aine aine  439 Jul 27 12:19 .bash_history
--rwxr-xrwx 1 aine aine  220 Feb 25 21:03 .bash_logout
--rwxr-xrwx 1 aine aine 3.7K Feb 25 21:03 .bashrc
-drwx------ 7 aine aine 4.0K Jul 27 11:03 .cache
-drwx------ 3 aine aine 4.0K Jul 27 11:01 .config
-drwxr-xr-x 2 aine aine 4.0K Jul 27 12:01 .fontconfig
-drwxrwxr-x 3 aine aine 4.0K Jul 27 12:00 .fonts
-drwxr-xr-x 3 aine aine 4.0K Jul 27 11:01 .local
-drwx------ 5 aine aine 4.0K Jul 27 10:58 .mozilla
-drwx------ 3 aine aine 4.0K Jul 27 11:01 .pki
--rwxr-xrwx 1 aine aine  807 Feb 25 21:03 .profile
+コンテナゲスト側
+$ systemd-nspawn --user=aine --chdir=/home/aine -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+
+便利になった
+aine@vir-ubuntu-20-04:cd .cache/
+aine@vir-ubuntu-20-04:~/.cache$ pwd
+/home/aine/.cache
+
+```
+
+日本語化
+
+```
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which apt
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+/usr/bin/apt
+Container vir-ubuntu-20-04 exited successfully.
 
 
-コンテナホスト側
-$ ls -lah vir-ubuntu-20-04/home
-合計 16K
-drwxr-xr-x  4 1547173888 1547173888 4.0K  7月 27 10:53 ./
-drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
-drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
-drwxrwxrwx  8 1547173888 1547173888 4.0K  7月 27 10:49 kuraine/
+
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/apt install -y locales
 
 
-$ rm -rf  vir-ubuntu-20-04/home/kuraine
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which locale-gen
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+/usr/sbin/locale-gen
+Container vir-ubuntu-20-04 exited successfully.
 
 
-$ ls -lah vir-ubuntu-20-04/home
-合計 12K
-drwxr-xr-x  3 1547173888 1547173888 4.0K  7月 27 12:48 ./
-drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
-drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/sbin/locale-gen ja_JP.UTF-8
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+Generating locales (this might take a while)...
+  ja_JP.UTF-8... done
+Generation complete.
+Container vir-ubuntu-20-04 exited successfully.
 
 
-ただし、ブラウザなど、実行時ユーザーに依存するようなGUIを起動する際は権限をコンテナホスト側でもどしておく。少々めんどいが、これだけなので、いい。
-$ chown -R aine:aine /var/lib/machines/vir-ubuntu-20-04/home/aine
-
-日本語化してはいる
-$ systemd-nspawn --quiet --user=root --chdir=/root --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
-
-$ systemd-nspawn --quiet --user=aine --chdir=/home/aine --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which echo
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+/usr/bin/echo
+Container vir-ubuntu-20-04 exited successfully.
 
 
-machinectlではいるとsystemdが
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which bash
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+/usr/bin/bash
+Container vir-ubuntu-20-04 exited successfully.
+
+これ意味ない
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/bash -c 'echo "export LANG=ja_JP.UTF-8" >> /etc/profile.d/99-locale-ja.sh'
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+
+Container vir-ubuntu-20-04 exited successfully.
+
+
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/cat /etc/profile.d/99-locale-ja.sh
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+export LANG=ja_JP.UTF-8
+Container vir-ubuntu-20-04 exited successfully.
+
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/echo $LANG
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+ja_JP.utf8
+Container vir-ubuntu-20-04 exited successfully.
+
+環境変数は渡さないとだめ
+$ systemd-nspawn --setenv=LANG=ja_JP.UTF-8 -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+root@vir-ubuntu-20-04:/# echo うんこ
+うんこ
 
 ```
 
 
-
-
 - POST
+
+物理削除したら、この作業いらんことに気づいた。
 
 ```
 コンテナゲストの自動起動解除
@@ -794,7 +773,6 @@ Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit se
 Connection to machine vir-ubuntu-20-04 terminated.
 
 
-
 コンテナホスト側でのコンテナゲストの自動起動解除
 $ systemctl disable systemd-nspawn@vir-ubuntu-20-04.service
 Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-04.service.
@@ -810,6 +788,4 @@ Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-0
 
 $ cd /var/lib/machines
 $ rm -rf vir-ubuntu-20-04
-
-
 ```
