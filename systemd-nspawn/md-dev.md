@@ -789,3 +789,11 @@ Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-0
 $ cd /var/lib/machines
 $ rm -rf vir-ubuntu-20-04
 ```
+
+課題
+
+```
+IMEの常駐化（日本語入力できんときつい）
+
+systemdが使えるのは便利。dockerだとdbusで弾かれることが多かった。systemdで使う場合は、sshは常駐化しておくのが便利そう。
+```
