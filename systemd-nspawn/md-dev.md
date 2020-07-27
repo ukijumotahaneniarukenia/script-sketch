@@ -6,9 +6,43 @@ $ sudo apt install -y systemd-container
 $ which systemd-nspawn
 ```
 
+- VER
+
+```
+$ dpkg --print-architecture
+amd64
+
+$ lsb_release -cs
+focal
+
+$ lsb_release -r|awk -F'\t' '{print $2}'|tr '.' '-'
+20-04
+
+$ machinectl --version
+systemd 245 (245.4-4ubuntu3.2)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+
+$ debootstrap --version
+debootstrap 1.0.118ubuntu1.1
+
+$ systemd-nspawn --version
+systemd 245 (245.4-4ubuntu3.2)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+
+```
+
 ポイントは自動起動設定後の再起動
 
+コンテナホストOSとコンテナゲストOSのバージョン同じなら、事前にコピーしておけばおｋ
+
+こんな感じ
+```
+$ cp /etc/apt/sources.list /var/lib/machines/vir-ubuntu-20-04/etc/apt/sources.list
+```
+
 コンテナの作成
+  - https://www.debian.org/releases/jessie/powerpc/apds03.html.ja
+  - https://wiki.debian.org/Debootstrap
 
 ```
 $ mkdir -p /var/lib/machines/vir-ubuntu-20-04
@@ -114,6 +148,36 @@ DNSの設定など
 sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 ```
 
+一般ユーザーの作成とrootユーザーのパスワードを設定
+
+dbusのセッションエラーを避けるため、コンテナホストとコンテナゲストは同じユーザを作成
+
+```
+DEFAULT_USER_ID=1000
+DEFAULT_USER_NAME=aine
+DEFAULT_GROUP_ID=1000
+DEFAULT_GROUP_NAME=aine
+
+
+groupadd -g $DEFAULT_GROUP_ID $DEFAULT_GROUP_NAME && \
+useradd -m -g $DEFAULT_GROUP_NAME -u $DEFAULT_USER_ID $DEFAULT_USER_NAME && \
+chsh -s /bin/bash $DEFAULT_USER_NAME && \
+echo $DEFAULT_USER_NAME':'$DEFAULT_USER_NAME'_pwd' | chpasswd && \
+echo "$DEFAULT_USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+echo 'root:root_pwd' | chpasswd
+
+
+一般ユーザーでsudoが使えるように
+
+- https://qiita.com/tukiyo3/items/3642a99bd971fa829246
+
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+
+```
+
+
+
 疎通確認
 
 確認する前に一度、コンテナホストを再起動しておく
@@ -121,36 +185,31 @@ sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 コンテナ内から外部へ出ていけるか
 
 ```
-root@aine-MS-7B98:~# ping 8.8.8.8
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=6.76 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=6.51 ms
-64 bytes from 8.8.8.8: icmp_seq=3 ttl=115 time=13.9 ms
-64 bytes from 8.8.8.8: icmp_seq=4 ttl=115 time=6.51 ms
-64 bytes from 8.8.8.8: icmp_seq=5 ttl=115 time=6.68 ms
-^C
---- 8.8.8.8 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4006ms
-rtt min/avg/max/mdev = 6.507/8.068/13.889/2.911 ms
 
-root@aine-MS-7B98:~# ip route
-default via 192.168.96.113 dev host0 proto dhcp src 192.168.96.119 metric 1024 
-169.254.0.0/16 dev host0 proto kernel scope link src 169.254.193.228 
-192.168.96.112/28 dev host0 proto kernel scope link src 192.168.96.119 
-192.168.96.113 dev host0 proto dhcp scope link src 192.168.96.119 metric 1024 
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
+
+1 machines listed.
+
+
+$ machinectl shell kuraine@vir-ubuntu-20-04 /bin/bash
+
+kuraine@aine-MS-7B98:~$ sudo echo うんこ
+うんこ
+
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
 
 root@aine-MS-7B98:~# apt update
-Get:1 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal InRelease [265 kB]
-Get:2 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main amd64 Packages [970 kB]
-Get:3 http://ftp.jaist.ac.jp/pub/Linux/ubuntu focal/main Translation-en [506 kB]
-Fetched 1741 kB in 3s (570 kB/s)                              
-Reading package lists... Done
-Building dependency tree... Done
-All packages are up to date.
 
-root@aine-MS-7B98:~# apt install -y iputils-tracepath
 
-root@aine-MS-7B98:~# apt install -y dnsutils
+root@aine-MS-7B98:~# apt install -y iputils-tracepath  dnsutils x11-apps traceroute
+
 
 root@aine-MS-7B98:~# nslookup www.google.com
 Server:		127.0.0.53
@@ -182,10 +241,326 @@ root@aine-MS-7B98:~# tracepath 172.217.175.228
 14:  no reply
 15:  no reply
 
+root@aine-MS-7B98:~# traceroute www.google.com
+traceroute to www.google.com (172.217.175.4), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.106.129)  0.055 ms  0.022 ms  0.017 ms
+ 2  192.168.1.1 (192.168.1.1)  0.381 ms  1.294 ms  1.228 ms
+ 3  nas827.p-kanagawa.nttpc.ne.jp (210.153.251.235)  13.117 ms  13.065 ms  13.011 ms
+ 4  210.139.125.173 (210.139.125.173)  12.935 ms  13.238 ms  13.287 ms
+ 5  210.165.249.181 (210.165.249.181)  13.730 ms  13.823 ms  13.771 ms
+ 6  p254--504.tky-nk-acr02.sphere.ad.jp (210.153.241.113)  14.526 ms  16.182 ms  16.072 ms
+ 7  * * *
+ 8  210.150.215.242 (210.150.215.242)  9.633 ms 72.14.213.57 (72.14.213.57)  9.404 ms 72.14.205.32 (72.14.205.32)  9.672 ms
+ 9  * 108.170.242.193 (108.170.242.193)  10.512 ms *
+10  142.250.226.58 (142.250.226.58)  9.619 ms 142.250.226.6 (142.250.226.6)  9.567 ms 108.170.227.93 (108.170.227.93)  10.469 ms
+11  72.14.233.35 (72.14.233.35)  10.501 ms nrt20s18-in-f4.1e100.net (172.217.175.4)  9.386 ms  9.994 ms
+
+root@aine-MS-7B98:~# traceroute ukijumotahaneniarukenia.site
+traceroute to ukijumotahaneniarukenia.site (133.18.59.242), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.106.129)  0.058 ms  0.020 ms  0.017 ms
+ 2  192.168.1.1 (192.168.1.1)  1.294 ms  1.235 ms  1.187 ms
+ 3  nas827.p-kanagawa.nttpc.ne.jp (210.153.251.235)  5.296 ms  5.257 ms  5.201 ms
+ 4  210.139.125.173 (210.139.125.173)  5.432 ms  5.389 ms  5.211 ms
+ 5  210.165.249.181 (210.165.249.181)  5.605 ms  5.566 ms  5.510 ms
+ 6  p254--504.tky-nk-acr02.sphere.ad.jp (210.153.241.113)  7.271 ms  7.936 ms  11.762 ms
+ 7  * p102--2026.k-otemachi-core1.sphere.ad.jp (202.239.117.33)  10.271 ms *
+ 8  210.150.215.190 (210.150.215.190)  10.102 ms  10.104 ms 128.22.12.5 (128.22.12.5)  10.030 ms
+ 9  60.56.5.137 (60.56.5.137)  16.200 ms  16.117 ms  16.371 ms
+10  203.140.81.222 (203.140.81.222)  16.446 ms 219.122.245.2 (219.122.245.2)  16.529 ms 219.122.245.6 (219.122.245.6)  16.470 ms
+11  180.145.255.170 (180.145.255.170)  16.080 ms 121.83.169.50 (121.83.169.50)  16.164 ms  16.263 ms
+12  218.228.247.78 (218.228.247.78)  17.347 ms  15.851 ms  19.656 ms
+13  124.248.144.41 (124.248.144.41)  20.205 ms  15.736 ms 124.248.144.35 (124.248.144.35)  19.602 ms
+14  124.248.144.201 (124.248.144.201)  20.031 ms 124.248.144.205 (124.248.144.205)  19.970 ms 124.248.144.201 (124.248.144.201)  20.265 ms
+15  124.248.155.2 (124.248.155.2)  92.022 ms  92.280 ms  92.554 ms
+16  vps-wp03.kagoya.net (133.18.58.12)  19.066 ms  19.499 ms  19.443 ms
+17  vwp0484.kagoya.net (133.18.59.242)  19.267 ms  15.746 ms  15.686 ms
+
+```
+
+X転送
+
+- https://nosada.hatenablog.com/entry/2018/03/24/232855
+
+コンテナホスト側でX転送許可
+
+```
+$ xhost +local:
+non-network local connections being added to access control list
+```
+
+コンテナゲスト停止
+```
+$ machinectl terminate vir-ubuntu-20-04
+```
+
+コンテナゲスト起動
+
+デフォルトの実行ユーザーはrootらしい。firefox起動して気づいた。
+
+```
+ソケットファイル共有すればこれでうごく
+$ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+```
+
+バッググラウンドはちょっとめんどいことなったので、やめ。
 
 
+```
+$ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes &
+
+$ jobs
+[1]+  停止                  systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+
+$ fg 1
+systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+
+Container vir-ubuntu-20-04 exited successfully.
+
+```
+
+フォアグランド起動の場合は**Ctrl+]**を３回連打でexit
+
+一般ユーザーで起動
+
+```
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
+```
+
+一般ユーザーで起動
+
+firefox起動時はディレクトリ周りの権限整備
+
+```
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
+```
+
+以下のエラーでた
+
+```
+(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+(firefox:1): dconf-CRITICAL **: 20:04:18.414: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+(firefox:1): dconf-CRITICAL **: 20:04:18.416: unable to create directory '/home/kuraine/.cache/dconf': Permission denied.  dconf will not work properly.
+
+```
+
+デバッグ
+
+```
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
+
+1 machines listed.
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+
+
+root@aine-MS-7B98:~# ls- l /home
+total 12
+drwxr-xr-x  3 root    root    4096 Jul 26 19:59 ./
+drwxr-xr-x 17 root    root    4096 Jul 26 19:14 ../
+drwxr-xr-x  2 kuraine kuraine 4096 Jul 26 19:59 kuraine/
+
+root@aine-MS-7B98:~# ls -l /home/kuraine/
+total 24
+drwxr-xr-x 2 kuraine kuraine 4096 Jul 26 19:59 ./
+drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
+-rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
+-rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
+-rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
+
+フルコンつけてみた
+
+root@aine-MS-7B98:~# chmod 777 /home/kuraine/
+root@aine-MS-7B98:~# ls -l /home/kuraine/
+total 24
+drwxrwxrwx 2 kuraine kuraine 4096 Jul 26 19:59 ./
+drwxr-xr-x 3 root    root    4096 Jul 26 19:59 ../
+-rw------- 1 kuraine kuraine   20 Jul 26 19:59 .bash_history
+-rw-r--r-- 1 kuraine kuraine  220 Feb 25 21:03 .bash_logout
+-rw-r--r-- 1 kuraine kuraine 3771 Feb 25 21:03 .bashrc
+-rw-r--r-- 1 kuraine kuraine  807 Feb 25 21:03 .profile
+
+
+
+
+$ machinectl terminate vir-ubuntu-20-04
+root ukijumotahaneniarukenia aine-MS-7B98 20:09:55 /var/lib/machines$
+
+$ machinectl list
+No machines.
+
+GUIは起動できたが、検索はできなかった。ネットワークの問題になった。
+
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
+
+
+これででた。日本語フォントいれてないが。--bind=/run/systemdをマウントしていると出た。/run/systemdはreadonlyだと怒られた。
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/run/udev --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id -D /var/lib/machines/vir-ubuntu-20-04 firefox
+
+ブラウザの挙動の違いかと思い、brave-browserでも試した。これはアドレス周りの問題になった。
+
+基本dbusソケットのセッションが実行ユーザー単位の制御になっているので、コンテナホストと同じファイルをコンテナゲストにマウントして借用させて上げる場合は
+コンテナホストとコンテナゲストのユーザーは同一人物にしておくといける
+
+brave-browserはこれでいけた。--bind-ro=/dev/dri
+$ systemd-nspawn --user=aine --setenv=DISPLAY=:0.0 --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 brave-browser
 
 
 ```
 
-よさげ、後はX転送
+権限周り
+
+実行時ユーザーに一般ユーザーをしていしても、nobody nogroupの持ち物になり、かつ所有者のみ触れるファイルやディレクトリができるため、メンテできなくなる
+
+コンテナホストから実行者ユーザーの権限再整備することで対応。コンテナホストとコンテナゲストのUIDとGIDはあべこべなので、面白い
+
+コンテナホストから見ると、aineだが、コンテナゲストから見るとこれはnobody nogroupである。
+
+これらのファイルないしディレクトリを都度、再整備してやる。
+
+```
+コンテナホスト側
+
+$ ls -alh vir-ubuntu-20-04/home/aine
+合計 52K
+drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
+drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
+-rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
+-rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
+-rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
+drwx------ 7 aine       aine       4.0K  7月 27 11:03 .cache/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
+drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
+drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
+drwxr-xr-x 3 aine       aine       4.0K  7月 27 11:01 .local/
+drwx------ 5 aine       aine       4.0K  7月 27 10:58 .mozilla/
+drwx------ 3 aine       aine       4.0K  7月 27 11:01 .pki/
+-rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
+
+$ chown -R 1547174888:1547174888 vir-ubuntu-20-04/home/aine/{.cache,.local,.mozilla,.pki}
+
+
+$ ls -alh vir-ubuntu-20-04/home/aine
+合計 52K
+drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
+drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
+-rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
+-rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
+-rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
+drwx------ 7 1547174888 1547174888 4.0K  7月 27 11:03 .cache/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
+drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
+drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
+drwxr-xr-x 3 1547174888 1547174888 4.0K  7月 27 11:01 .local/
+drwx------ 5 1547174888 1547174888 4.0K  7月 27 10:58 .mozilla/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .pki/
+-rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
+
+コンテナゲスト側
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+
+aine@aine-MS-7B98:~$ ls -alh
+total 52K
+drwxr-xrwx 9 aine aine 4.0K Jul 27 12:01 .
+drwxr-xr-x 4 root root 4.0K Jul 27 10:53 ..
+-rwxr-xrwx 1 aine aine  439 Jul 27 12:19 .bash_history
+-rwxr-xrwx 1 aine aine  220 Feb 25 21:03 .bash_logout
+-rwxr-xrwx 1 aine aine 3.7K Feb 25 21:03 .bashrc
+drwx------ 7 aine aine 4.0K Jul 27 11:03 .cache
+drwx------ 3 aine aine 4.0K Jul 27 11:01 .config
+drwxr-xr-x 2 aine aine 4.0K Jul 27 12:01 .fontconfig
+drwxrwxr-x 3 aine aine 4.0K Jul 27 12:00 .fonts
+drwxr-xr-x 3 aine aine 4.0K Jul 27 11:01 .local
+drwx------ 5 aine aine 4.0K Jul 27 10:58 .mozilla
+drwx------ 3 aine aine 4.0K Jul 27 11:01 .pki
+-rwxr-xrwx 1 aine aine  807 Feb 25 21:03 .profile
+
+
+コンテナホスト側
+$ ls -lah vir-ubuntu-20-04/home
+合計 16K
+drwxr-xr-x  4 1547173888 1547173888 4.0K  7月 27 10:53 ./
+drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
+drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
+drwxrwxrwx  8 1547173888 1547173888 4.0K  7月 27 10:49 kuraine/
+
+
+$ rm -rf  vir-ubuntu-20-04/home/kuraine
+
+
+$ ls -lah vir-ubuntu-20-04/home
+合計 12K
+drwxr-xr-x  3 1547173888 1547173888 4.0K  7月 27 12:48 ./
+drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
+drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
+
+
+ただし、ブラウザなど、実行時ユーザーに依存するようなGUIを起動する際は権限をコンテナホスト側でもどしておく。少々めんどいが、これだけなので、いい。
+$ chown -R aine:aine /var/lib/machines/vir-ubuntu-20-04/home/aine
+
+```
+
+
+
+
+- POST
+
+```
+コンテナゲストの自動起動解除
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl disable systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+Removed /etc/systemd/system/dbus-org.freedesktop.network1.service.
+Removed /etc/systemd/system/sockets.target.wants/systemd-networkd.socket.
+Removed /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service.
+Removed /etc/systemd/system/multi-user.target.wants/systemd-networkd.service.
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+コンテナゲストのネットワークサービス停止（ソケット）
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl stop systemd-networkd.socket
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+コンテナゲストのネットワークサービス停止（ソケット以外）
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl stop systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+コンテナゲストのネットワークサービス強制停止
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl kill systemd-networkd
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+
+コンテナホスト側でのコンテナゲストの自動起動解除
+$ systemctl disable systemd-nspawn@vir-ubuntu-20-04.service
+Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-04.service.
+
+コンテナホスト側でのコンテナゲストの停止
+$ systemctl stop systemd-nspawn@vir-ubuntu-20-04.service
+
+コンテナホスト側でのコンテナゲストの強制停止
+$ systemctl kill systemd-nspawn@vir-ubuntu-20-04.service
+Removed /etc/systemd/system/machines.target.wants/systemd-nspawn@vir-ubuntu-20-04.service.
+
+コンテナゲストファイルの物理削除
+
+$ cd /var/lib/machines
+$ rm -rf vir-ubuntu-20-04
+
+
+```
