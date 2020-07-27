@@ -97,17 +97,36 @@ $ cd /var/lib/machines
 $ machinectl start vir-ubuntu-20-04
 root ukijumotahaneniarukenia aine-MS-7B98 17:04:31 /var/lib/machines$
 
-$ machinectl list
-MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES
-vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -        
+これでもいい
+$ systemctl start systemd-nspawn@vir-ubuntu-20-04.service
 
-1 machines listed.
+
+$ machinectl list -all
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES                
+.host            host      -              ubuntu 20.04   192.168.1.109            
+                                                         172.17.0.1               
+                                                         192.168.80.161           
+                                                         169.254.31.62            
+                                                         fe80::b3e4:7419:ec90:108e
+                                                         fe80::42:b9ff:fed3:d9bf  
+                                                         fe80::20dd:feff:fe74:4ac0
+                                                         fe80::340a:adff:fe1d:51eb
+                                                         fe80::30fd:acff:fe9c:2a3a
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   192.168.80.162           
+                                                         169.254.193.228          
+                                                         fe80::40b7:1bff:fe41:636a
+
+2 machines listed.
 ```
 
 コンテナホスト起動時にコンテナゲストも自動起動するように設定
 
+
+
 ```
+systemctl start systemd-nspawn@vir-ubuntu-20-04.service
 systemctl enable systemd-nspawn@vir-ubuntu-20-04.service
+systemctl stop systemd-nspawn@vir-ubuntu-20-04.service #ラグが少しある。２分ぐらい。
 ```
 
 
