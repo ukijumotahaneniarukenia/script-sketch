@@ -939,8 +939,11 @@ $ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(
 
 一日アップ
 $ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal && sleep 86400'
+`
+LANG tukereba ikesou
+--setenv=LANG=ja_JP.UTF-8
 
-
+$ systemd-nspawn --setenv=LANG=ja_JP.UTF-8 --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal && sleep 86400'
 
 ```
 
