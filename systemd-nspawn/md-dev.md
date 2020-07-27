@@ -395,9 +395,13 @@ No machines.
 
 GUIは起動できたが、検索はできなかった。ネットワークの問題になった。
 
-おそらくfirefoxのプロキシ設定。（勘）
-
 $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 firefox
+
+
+これででた。日本語フォントいれてないが。--bind=/run/systemdをマウントしていると出た。/run/systemdはreadonlyだと怒られた。
+$ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/run/udev --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id -D /var/lib/machines/vir-ubuntu-20-04 firefox
+
+ブラウザの挙動の違いかと思い、brave-browserでも試した。これはアドレス周りの問題になった。
 
 ```
 
