@@ -58,7 +58,6 @@ I: Base system installed successfully.
 テンプレート作成
 $ cp -a vir-ubuntu-20-04/ vir-ubuntu-20-04-template
 
-
 以下のように最小構成のコンテナが入った。
 
 $ ls -lh /var/lib/machines/vir-ubuntu-20-04/
@@ -86,6 +85,34 @@ drwxr-xr-x 13 root root 4.0K  7月 26 13:03 usr/
 drwxr-xr-x 11 root root 4.0K  7月 26 13:03 var/
 
 ```
+
+
+やり直す場合
+
+停止してからテンプレートから複製
+```
+root ukijumotahaneniarukenia aine-MS-7B98 23:45:19 /var/lib/machines$
+$ ls
+vir-ubuntu-20-04/  vir-ubuntu-20-04-template/
+
+root ukijumotahaneniarukenia aine-MS-7B98 23:45:54 /var/lib/machines$
+$ machinectl terminate vir-ubuntu-20-04
+
+$ machinectl terminate vir-ubuntu-20-04
+Could not terminate machine: No machine 'vir-ubuntu-20-04' known
+
+$ rm -rf vir-ubuntu-20-04
+
+$ cp -a vir-ubuntu-20-04-template vir-ubuntu-20-04
+
+$ ls
+vir-ubuntu-20-04/  vir-ubuntu-20-04-template/
+
+```
+
+
+
+
 
 コンテナに入る
 
@@ -219,9 +246,10 @@ vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   -
 1 machines listed.
 
 
-$ machinectl shell kuraine@vir-ubuntu-20-04 /bin/bash
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
 
-kuraine@aine-MS-7B98:~$ sudo echo うんこ
+#マシン名の変更がうまく行ってないんだよな。machinectlの場合
+aine@aine-MS-7B98:~$ sudo echo うんこ
 うんこ
 
 
@@ -301,6 +329,208 @@ traceroute to ukijumotahaneniarukenia.site (133.18.59.242), 30 hops max, 60 byte
 
 ```
 
+環境変数
+
+machinectlの場合
+
+```
+オプション未指定のroot
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/env
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+LANG=C.UTF-8
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+HOME=/root
+LOGNAME=root
+USER=root
+SHELL=/bin/sh
+INVOCATION_ID=181894398c9847af90dc827872ff68f8
+TERM=xterm-256color
+MAIL=/var/mail/root
+XDG_SESSION_ID=12
+XDG_RUNTIME_DIR=/run/user/0
+XDG_SESSION_TYPE=tty
+XDG_SESSION_CLASS=user
+Connection to machine vir-ubuntu-20-04 terminated.
+
+オプション未指定の一般ユーザー
+$ machinectl shell aine@vir-ubuntu-20-04 /usr/bin/env
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+LANG=C.UTF-8
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+HOME=/home/aine
+LOGNAME=aine
+USER=aine
+SHELL=/bin/bash
+INVOCATION_ID=01fcd433665b403cad02c017ddae6899
+TERM=xterm-256color
+MAIL=/var/mail/aine
+XDG_SESSION_ID=16
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_TYPE=tty
+XDG_SESSION_CLASS=user
+Connection to machine vir-ubuntu-20-04 terminated.
+```
+
+systemd-nspawnの場合
+
+X関連の変数が引き継がれてない印象（コマンド引数で指定する必要がある）
+
+```
+オプション未指定のroot
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 env
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+container=systemd-nspawn
+TERM=xterm-256color
+HOME=/root
+USER=root
+LOGNAME=root
+container_uuid=35dd48b2-1f80-4cf7-953e-1ae292de544a
+NOTIFY_SOCKET=/run/systemd/nspawn/notify
+Container vir-ubuntu-20-04 exited successfully.
+
+オプション未指定の一般ユーザー（userオプションを除いて）
+$ systemd-nspawn --user=aine -D /var/lib/machines/vir-ubuntu-20-04 env
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+container=systemd-nspawn
+TERM=xterm-256color
+HOME=/home/aine
+USER=aine
+LOGNAME=aine
+container_uuid=35dd48b2-1f80-4cf7-953e-1ae292de544a
+NOTIFY_SOCKET=/run/systemd/nspawn/notify
+
+```
+
+
+
+
+ホスト名
+
+machinectlの場合
+
+よくない
+
+```
+$ machinectl terminate vir-ubuntu-20-04
+root ukijumotahaneniarukenia aine-MS-7B98 23:37:55 /var/lib/machines$
+
+$ machinectl list
+No machines.
+
+$ machinectl start vir-ubuntu-20-04
+
+$ machinectl start vir-ubuntu-20-04
+root ukijumotahaneniarukenia aine-MS-7B98 23:37:08 /var/lib/machines$
+
+$ machinectl list
+MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES       
+vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   192.168.161.114…
+
+1 machines listed.
+
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/hostname
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+aine-MS-7B98
+Connection to machine vir-ubuntu-20-04 terminated.
+```
+
+systemd-nspawnの場合
+
+いいかんじ
+
+```
+$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 hostname
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+vir-ubuntu-20-04
+Container vir-ubuntu-20-04 exited successfully.
+```
+
+
+
+プロセス
+
+machinectlの場合は、rootPIDがsystemdになっっている
+
+```
+rootユーザーの場合
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/ps auxwwf
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.1  0.0  21036 10656 ?        Ss   23:48   0:00 /usr/lib/systemd/systemd
+root          16  0.2  0.0  35232 11452 ?        Ss   23:48   0:00 /lib/systemd/systemd-journald
+systemd+      51  0.2  0.0  24112 12804 ?        Ss   23:48   0:00 /lib/systemd/systemd-resolved
+root          53  0.0  0.0   5568  2668 ?        Ss   23:48   0:00 /usr/sbin/cron -f
+message+      54  0.0  0.0   7376  4164 ?        Ss   23:48   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          56  0.0  0.0  26196 17912 ?        Ss   23:48   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        57  0.0  0.0 224476  4488 ?        Ssl  23:48   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          58  0.2  0.0  16956  7744 ?        Ss   23:48   0:00 /lib/systemd/systemd-logind
+root          63  0.0  0.0   4384  2212 pts/0    Ss+  23:48   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root         103  0.0  0.0   7632  3400 pts/1    Rs+  23:49   0:00 /usr/bin/ps auxwwf
+root         110  0.0  0.0  22564  3508 pts/1    S+   23:49   0:00  \_ (sd-
+root         105  0.0  0.0  18172  8660 ?        Ss   23:49   0:00 /lib/systemd/systemd --user
+root         106  0.0  0.0  22372  3432 ?        S    23:49   0:00  \_ (sd-pam)
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+aine@aine-MS-7B98:~$ ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 169808 11740 ?        Ss   22:58   0:00 /usr/lib/systemd/systemd
+root          16  0.0  0.0  51624 15540 ?        Ss   22:58   0:00 /lib/systemd/systemd-journald
+systemd+      46  0.0  0.0  26740  8052 ?        Ss   22:58   0:00 /lib/systemd/systemd-networkd
+systemd+      52  0.0  0.0  24112 12428 ?        Ss   22:58   0:00 /lib/systemd/systemd-resolved
+root          54  0.0  0.0   5568  2824 ?        Ss   22:58   0:00 /usr/sbin/cron -f
+message+      55  0.0  0.0   7376  3996 ?        Ss   22:58   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          57  0.0  0.0  26196 17744 ?        Ss   22:58   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        58  0.0  0.0 224476  4468 ?        Ssl  22:58   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          59  0.0  0.0  16956  7632 ?        Ss   22:58   0:00 /lib/systemd/systemd-logind
+root          67  0.0  0.0   4384  2176 pts/0    Ss+  22:58   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+aine        8071  0.0  0.0   5992  3840 pts/1    Ss   23:11   0:00 /bin/bash
+aine        8073  0.0  0.0  18172  8848 ?        Ss   23:11   0:00 /lib/systemd/systemd --user
+aine        8074  0.0  0.0 171004  4612 ?        S    23:11   0:00 (sd-pam)
+aine        8078  0.0  0.0 171196  4684 pts/1    S    23:11   0:00 (sd-pa
+aine        8085  0.0  0.0   7632  3200 pts/1    R+   23:11   0:00 ps aux
+```
+
+systemd-nspawnの場合は、rootPIDがsystemdになっっていない
+
+```
+rootユーザー
+$ systemd-nspawn --user=root --chdir=/root --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/ps auxwwf
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0   5800  1168 pts/0    Rs+  23:51   0:00 /usr/bin/ps auxwwf
+Container vir-ubuntu-20-04 exited successfully.
+
+一般ユーザー
+
+$ systemd-nspawn --user=aine --chdir=/home/aine --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+aine@vir-ubuntu-20-04:~$ ps uax
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+aine           1  0.2  0.0   4240  3436 pts/0    Ss   23:33   0:00 /bin/bash
+aine          10  0.0  0.0   5880  2892 pts/0    R+   23:34   0:00 ps uax
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
 X転送
 
 - https://nosada.hatenablog.com/entry/2018/03/24/232855
@@ -312,41 +542,98 @@ $ xhost +local:
 non-network local connections being added to access control list
 ```
 
+
+machinectlの場合
+
+```
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which firefox
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+ないので、いれる
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which apt
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/apt
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ time machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y firefox
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which firefox
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/firefox
+Connection to machine vir-ubuntu-20-04 terminated.
+
+DISPLAY環境変数設定
+$ machinectl --setenv=DISPLAY=:0.0 shell aine@vir-ubuntu-20-04 /usr/bin/env
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+LANG=C.UTF-8
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+HOME=/home/aine
+LOGNAME=aine
+USER=aine
+SHELL=/bin/bash
+INVOCATION_ID=4af92f8ab6154b7e8feda468af891cd4
+DISPLAY=:0.0
+TERM=xterm-256color
+MAIL=/var/mail/aine
+XDG_SESSION_ID=31
+XDG_RUNTIME_DIR=/run/user/1000
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+XDG_SESSION_TYPE=tty
+XDG_SESSION_CLASS=user
+Connection to machine vir-ubuntu-20-04 terminated.
+
+エラー
+
+$ machinectl --setenv=DISPLAY=:0.0 shell aine@vir-ubuntu-20-04 /usr/bin/firefox
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+Unable to init server: Could not connect: Connection refused
+Error: cannot open display: :0.0
+Connection to machine vir-ubuntu-20-04 terminated.
+
+システム関連パスをマウント
+
+ユーザーの名前空間を使用していない場合のみbind可能らしいので、machinectlではX転送は今の所難しそう。
+- https://www.freedesktop.org/software/systemd/man/machinectl.html
+bind NAME PATH [PATH]
+
+Note that this option is currently only supported for systemd-nspawn(1) containers, and only if user namespacing (--private-users) is not used. 
+
+
+$ machinectl bind vir-ubuntu-20-04 /run/systemd
+Failed to bind mount: Can't bind mount on container with user namespacing applied.
+root ukijumotahaneniarukenia aine-MS-7B98 23:23:52 /var/lib/machines$
+$ machinectl bind vir-ubuntu-20-04 /run/systemd /run/systemd
+Failed to bind mount: Can't bind mount on container with user namespacing applied.
+root ukijumotahaneniarukenia aine-MS-7B98 23:24:05 /var/lib/machines$
+$ machinectl bind vir-ubuntu-20-04 /run/systemd /run/systemd --read-only
+Failed to bind mount: Can't bind mount on container with user namespacing applied.
+
+マウントできない
+
+```
+
+systemd-nspawnの場合
+
+バッググラウンドはちょっとめんどいことなったので、やめ。やるなら、サービス化。
+
+```
 コンテナゲスト停止
-```
 $ machinectl terminate vir-ubuntu-20-04
-```
+
+$ machinectl list 
+No machines.
+
 
 コンテナゲスト起動
 
-デフォルトの実行ユーザーはrootらしい。firefox起動して気づいた。
-
-```
-ソケットファイル共有すればこれでうごく
-$ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
-```
-
-バッググラウンドはちょっとめんどいことなったので、やめ。
-
-
-```
-$ systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes &
-
-$ jobs
-[1]+  停止                  systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
-
-$ fg 1
-systemd-nspawn --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
-
-Container vir-ubuntu-20-04 exited successfully.
-
-```
 
 フォアグランド起動の場合は**Ctrl+]**を３回連打でexit
 
 一般ユーザーで起動
 
-```
 $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /var/lib/machines/vir-ubuntu-20-04 xeyes
 ```
 
