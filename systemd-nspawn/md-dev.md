@@ -25,19 +25,18 @@ systemd 245 (245.4-4ubuntu3.2)
 $ debootstrap --version
 debootstrap 1.0.118ubuntu1.1
 
+コンテナホスト
 $ systemd-nspawn --version
 systemd 245 (245.4-4ubuntu3.2)
 +PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
 
-```
+コンテナゲスト
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemd --version
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+systemd 245 (245.4-4ubuntu3)
++PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+Connection to machine vir-ubuntu-20-04 terminated.
 
-ポイントは自動起動設定後の再起動
-
-コンテナホストOSとコンテナゲストOSのバージョン同じなら、事前にコピーしておけばおｋ
-
-こんな感じ
-```
-$ cp /etc/apt/sources.list /var/lib/machines/vir-ubuntu-20-04/etc/apt/sources.list
 ```
 
 コンテナの作成
@@ -45,7 +44,10 @@ $ cp /etc/apt/sources.list /var/lib/machines/vir-ubuntu-20-04/etc/apt/sources.li
   - https://wiki.debian.org/Debootstrap
 
 ```
-$ mkdir -p /var/lib/machines/vir-ubuntu-20-04
+このディレクトリはrootユーザーのみ入れる
+$ cd /var/lib/machines
+
+$ mkdir -p vir-ubuntu-20-04
 
 ５分ぐらいかかる
 $ time debootstrap --arch=amd64 focal /var/lib/machines/vir-ubuntu-20-04 http://archive.ubuntu.com/ubuntu
@@ -54,44 +56,18 @@ $ time debootstrap --arch=amd64 focal /var/lib/machines/vir-ubuntu-20-04 http://
 
 I: Base system installed successfully.
 
-
-テンプレート作成
+テンプレート作成（隠しファイルごとコピー）
 $ cp -a vir-ubuntu-20-04/ vir-ubuntu-20-04-template
 
-以下のように最小構成のコンテナが入った。
-
-$ ls -lh /var/lib/machines/vir-ubuntu-20-04/
-合計 60K
-lrwxrwxrwx  1 root root    7  7月 26 13:03 bin -> usr/bin/
-drwxr-xr-x  2 root root 4.0K  4月 15 20:09 boot/
-drwxr-xr-x  4 root root 4.0K  7月 26 13:03 dev/
-drwxr-xr-x 59 root root 4.0K  7月 26 13:04 etc/
-drwxr-xr-x  2 root root 4.0K  4月 15 20:09 home/
-lrwxrwxrwx  1 root root    7  7月 26 13:03 lib -> usr/lib/
-lrwxrwxrwx  1 root root    9  7月 26 13:03 lib32 -> usr/lib32/
-lrwxrwxrwx  1 root root    9  7月 26 13:03 lib64 -> usr/lib64/
-lrwxrwxrwx  1 root root   10  7月 26 13:03 libx32 -> usr/libx32/
-drwxr-xr-x  2 root root 4.0K  7月 26 13:03 media/
-drwxr-xr-x  2 root root 4.0K  7月 26 13:03 mnt/
-drwxr-xr-x  2 root root 4.0K  7月 26 13:03 opt/
-drwxr-xr-x  2 root root 4.0K  4月 15 20:09 proc/
-drwx------  2 root root 4.0K  7月 26 13:03 root/
-drwxr-xr-x  8 root root 4.0K  7月 26 13:04 run/
-lrwxrwxrwx  1 root root    8  7月 26 13:03 sbin -> usr/sbin/
-drwxr-xr-x  2 root root 4.0K  7月 26 13:03 srv/
-drwxr-xr-x  2 root root 4.0K  4月 15 20:09 sys/
-drwxrwxrwt  2 root root 4.0K  7月 26 13:04 tmp/
-drwxr-xr-x 13 root root 4.0K  7月 26 13:03 usr/
-drwxr-xr-x 11 root root 4.0K  7月 26 13:03 var/
-
 ```
-
 
 やり直す場合
 
 停止してからテンプレートから複製
+
 ```
-root ukijumotahaneniarukenia aine-MS-7B98 23:45:19 /var/lib/machines$
+$ cd /var/lib/machines
+
 $ ls
 vir-ubuntu-20-04/  vir-ubuntu-20-04-template/
 
@@ -108,25 +84,61 @@ $ cp -a vir-ubuntu-20-04-template vir-ubuntu-20-04
 $ ls
 vir-ubuntu-20-04/  vir-ubuntu-20-04-template/
 
+コンテナホスト起動時にコンテナゲストも自動起動するように設定（ディレクトリ名が同じであれば、毎回する必要はないと思う）
+$ systemctl stop systemd-nspawn@vir-ubuntu-20-04.service #ラグが少しある。２分ぐらい。
+$ systemctl start systemd-nspawn@vir-ubuntu-20-04.service
+$ systemctl enable systemd-nspawn@vir-ubuntu-20-04.service
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which sed
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/sed
+Connection to machine vir-ubuntu-20-04 terminated.
+
+レポジトリの設定
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
+
+DNSの設定など
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
+
+コンテナゲスト上でネットワークサービスの自動起動設定と開始、状態確認
+- https://wiki.debian.org/nspawn
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl enable systemd-networkd
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl start systemd-networkd
+$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl status systemd-networkd
+
+ワンラインはきついか
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+
+一般ユーザーの作成とrootユーザーのパスワードを設定
+
+dbusのセッションエラーを避けるため、コンテナホストとコンテナゲストは同じユーザを作成
+
+DEFAULT_USER_ID=1000
+DEFAULT_USER_NAME=aine
+DEFAULT_GROUP_ID=1000
+DEFAULT_GROUP_NAME=aine
+
+groupadd -g $DEFAULT_GROUP_ID $DEFAULT_GROUP_NAME && \
+useradd -m -g $DEFAULT_GROUP_NAME -u $DEFAULT_USER_ID $DEFAULT_USER_NAME && \
+chsh -s /bin/bash $DEFAULT_USER_NAME && \
+echo $DEFAULT_USER_NAME':'$DEFAULT_USER_NAME'_pwd' | chpasswd && \
+echo "$DEFAULT_USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+echo 'root:root_pwd' | chpasswd
+
+
+一般ユーザーでsudoが使えるように
+
+- https://qiita.com/tukiyo3/items/3642a99bd971fa829246
+
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+ネットワーク自動起動設定後のコンテナホストを再起動
 ```
 
-
-
-
-
-コンテナに入る
-
-- https://qiita.com/n01e0/items/3146b9a749907e93ab93
+再起動後の状態確認
 
 ```
 $ cd /var/lib/machines
-
-$ machinectl start vir-ubuntu-20-04
-root ukijumotahaneniarukenia aine-MS-7B98 17:04:31 /var/lib/machines$
-
-これでもいい
-$ systemctl start systemd-nspawn@vir-ubuntu-20-04.service
-
 
 $ machinectl list -all
 MACHINE          CLASS     SERVICE        OS     VERSION ADDRESSES                
@@ -145,88 +157,6 @@ vir-ubuntu-20-04 container systemd-nspawn ubuntu 20.04   192.168.80.162
 
 2 machines listed.
 ```
-
-コンテナホスト起動時にコンテナゲストも自動起動するように設定
-
-
-
-```
-systemctl start systemd-nspawn@vir-ubuntu-20-04.service
-systemctl enable systemd-nspawn@vir-ubuntu-20-04.service
-systemctl stop systemd-nspawn@vir-ubuntu-20-04.service #ラグが少しある。２分ぐらい。
-```
-
-
-コンテナホスト上でネットワークサービスの自動起動設定と開始、状態確認
-
-- https://wiki.debian.org/nspawn
-
-```
-$ systemctl enable systemd-networkd
-$ systemctl start systemd-networkd
-$ systemctl status systemd-networkd
-```
-
-
-コンテナゲスト上でネットワークサービスの自動起動設定と開始、状態確認
-
-```
-$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl enable systemd-networkd
-$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl start systemd-networkd
-$ machinectl shell root@vir-ubuntu-20-04 /bin/systemctl status systemd-networkd
-```
-
-
-
-コンテナにログイン
-
-
-```
-machinectl shell root@vir-ubuntu-20-04 /bin/bash
-```
-
-コンテナ側での操作
-
-レポジトリの設定
-
-```
-sed -i.bak 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
-```
-
-DNSの設定など
-
-```
-sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
-```
-
-一般ユーザーの作成とrootユーザーのパスワードを設定
-
-dbusのセッションエラーを避けるため、コンテナホストとコンテナゲストは同じユーザを作成
-
-```
-DEFAULT_USER_ID=1000
-DEFAULT_USER_NAME=aine
-DEFAULT_GROUP_ID=1000
-DEFAULT_GROUP_NAME=aine
-
-
-groupadd -g $DEFAULT_GROUP_ID $DEFAULT_GROUP_NAME && \
-useradd -m -g $DEFAULT_GROUP_NAME -u $DEFAULT_USER_ID $DEFAULT_USER_NAME && \
-chsh -s /bin/bash $DEFAULT_USER_NAME && \
-echo $DEFAULT_USER_NAME':'$DEFAULT_USER_NAME'_pwd' | chpasswd && \
-echo "$DEFAULT_USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-echo 'root:root_pwd' | chpasswd
-
-
-一般ユーザーでsudoが使えるように
-
-- https://qiita.com/tukiyo3/items/3642a99bd971fa829246
-
-echo "Set disable_coredump false" >> /etc/sudo.conf
-
-
-```
-
 
 
 疎通確認
