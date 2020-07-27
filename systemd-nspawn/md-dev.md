@@ -891,6 +891,57 @@ $ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(
 
 ```
 
+
+ターミナルエミュレータ
+
+起動できた。
+
+起動できたエミュレータからfirefoxも起動できた。
+
+```
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y gnome-terminal
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which gnome-terminal
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/gnome-terminal
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'gnome-terminal'
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+Selected user namespace base 1547173888 and range 65536.
+# Couldn't register with accessibility bus: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+# _g_io_module_get_default: Found default implementation local (GLocalVfs) for ‘gio-vfs’
+# posix_spawn avoided (fd close requested) 
+# _g_io_module_get_default: Found default implementation dconf (DConfSettingsBackend) for ‘gsettings-backend’
+# watch_fast: "/org/gnome/terminal/legacy/" (establishing: 0, active: 0)
+# unwatch_fast: "/org/gnome/terminal/legacy/" (active: 0, establishing: 1)
+# watch_established: "/org/gnome/terminal/legacy/" (establishing: 0)
+Container vir-ubuntu-20-04 exited successfully.
+
+
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal'
+Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
+Press ^] three times within 1s to kill container.
+Selected user namespace base 1547173888 and range 65536.
+# _g_io_module_get_default: Found default implementation local (GLocalVfs) for ‘gio-vfs’
+# posix_spawn avoided (fd close requested) 
+# _g_io_module_get_default: Found default implementation dconf (DConfSettingsBackend) for ‘gsettings-backend’
+# watch_fast: "/org/gnome/terminal/legacy/" (establishing: 0, active: 0)
+# unwatch_fast: "/org/gnome/terminal/legacy/" (active: 0, establishing: 1)
+# watch_established: "/org/gnome/terminal/legacy/" (establishing: 0)
+Container vir-ubuntu-20-04 exited successfully.
+
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal && sleep 10'
+
+一日アップ
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal && sleep 86400'
+
+
+
+```
+
 課題
 
 ```
