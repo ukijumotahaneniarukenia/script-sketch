@@ -870,6 +870,25 @@ aine        9762  0.0  0.0  18320  9356 ?        Ss   01:32   0:00 /lib/systemd/
 aine        9763  0.0  0.0 170976  4752 ?        S    01:32   0:00  \_ (sd-pam)
 Connection to machine vir-ubuntu-20-04 terminated.
 
+
+```
+
+
+ファイラーを開く
+
+なぞ。ちゃんとみえる。xterm開けばいいんじゃないか。
+
+```
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y nautilus
+
+
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which nautilus
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/nautilus
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'nautilus'
+
 ```
 
 課題
