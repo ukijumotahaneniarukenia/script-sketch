@@ -667,6 +667,23 @@ aine@vir-ubuntu-20-04:~/.cache$ pwd
 
 日本語化
 
+machinectlの場合
+
+```
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y locales
+
+$ machinectl shell root@vir-ubuntu-20-04 /usr/sbin/locale-gen ja_JP.UTF-8
+
+環境変数は渡さなくてもでる
+$ machinectl shell root@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+root@aine-MS-7B98:~# echo うんこ
+うんこ
+
+```
+
+systemd-nspawnの場合
+
 ```
 $ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which apt
 Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
@@ -694,39 +711,6 @@ Generating locales (this might take a while)...
 Generation complete.
 Container vir-ubuntu-20-04 exited successfully.
 
-
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which echo
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-/usr/bin/echo
-Container vir-ubuntu-20-04 exited successfully.
-
-
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /bin/which bash
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-/usr/bin/bash
-Container vir-ubuntu-20-04 exited successfully.
-
-これ意味ない
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/bash -c 'echo "export LANG=ja_JP.UTF-8" >> /etc/profile.d/99-locale-ja.sh'
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-
-Container vir-ubuntu-20-04 exited successfully.
-
-
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/cat /etc/profile.d/99-locale-ja.sh
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-export LANG=ja_JP.UTF-8
-Container vir-ubuntu-20-04 exited successfully.
-
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 /usr/bin/echo $LANG
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-ja_JP.utf8
-Container vir-ubuntu-20-04 exited successfully.
 
 環境変数は渡さないとだめ
 $ systemd-nspawn --setenv=LANG=ja_JP.UTF-8 -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
