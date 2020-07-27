@@ -88,6 +88,7 @@ vir-ubuntu-20-04/  vir-ubuntu-20-04-template/
 $ systemctl stop systemd-nspawn@vir-ubuntu-20-04.service #ラグが少しある。２分ぐらい。
 $ systemctl start systemd-nspawn@vir-ubuntu-20-04.service
 $ systemctl enable systemd-nspawn@vir-ubuntu-20-04.service
+$ systemctl status systemd-nspawn@vir-ubuntu-20-04.service
 
 $ machinectl shell root@vir-ubuntu-20-04 /bin/which sed
 Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
