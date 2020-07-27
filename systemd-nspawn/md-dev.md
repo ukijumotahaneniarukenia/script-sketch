@@ -414,6 +414,97 @@ $ systemd-nspawn --user=aine --setenv=DISPLAY=:0.0 --bind=/run/systemd --bind-ro
 
 ```
 
+権限周り
+
+実行時ユーザーに一般ユーザーをしていしても、nobody nogroupの持ち物になり、かつ所有者のみ触れるファイルやディレクトリができるため、メンテできなくなる
+
+コンテナホストから実行者ユーザーの権限再整備することで対応。コンテナホストとコンテナゲストのUIDとGIDはあべこべなので、面白い
+
+コンテナホストから見ると、aineだが、コンテナゲストから見るとこれはnobody nogroupである。
+
+これらのファイルないしディレクトリを都度、再整備してやる。
+
+```
+コンテナホスト側
+
+$ ls -alh vir-ubuntu-20-04/home/aine
+合計 52K
+drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
+drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
+-rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
+-rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
+-rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
+drwx------ 7 aine       aine       4.0K  7月 27 11:03 .cache/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
+drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
+drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
+drwxr-xr-x 3 aine       aine       4.0K  7月 27 11:01 .local/
+drwx------ 5 aine       aine       4.0K  7月 27 10:58 .mozilla/
+drwx------ 3 aine       aine       4.0K  7月 27 11:01 .pki/
+-rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
+
+$ chown -R 1547174888:1547174888 vir-ubuntu-20-04/home/aine/{.cache,.local,.mozilla,.pki}
+
+
+$ ls -alh vir-ubuntu-20-04/home/aine
+合計 52K
+drwxr-xrwx 9 1547174888 1547174888 4.0K  7月 27 12:01 ./
+drwxr-xr-x 4 1547173888 1547173888 4.0K  7月 27 10:53 ../
+-rwxr-xrwx 1 1547174888 1547174888  439  7月 27 12:19 .bash_history*
+-rwxr-xrwx 1 1547174888 1547174888  220  2月 25 21:03 .bash_logout*
+-rwxr-xrwx 1 1547174888 1547174888 3.7K  2月 25 21:03 .bashrc*
+drwx------ 7 1547174888 1547174888 4.0K  7月 27 11:03 .cache/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .config/
+drwxr-xr-x 2 1547174888 1547174888 4.0K  7月 27 12:01 .fontconfig/
+drwxrwxr-x 3 1547174888 1547174888 4.0K  7月 27 12:00 .fonts/
+drwxr-xr-x 3 1547174888 1547174888 4.0K  7月 27 11:01 .local/
+drwx------ 5 1547174888 1547174888 4.0K  7月 27 10:58 .mozilla/
+drwx------ 3 1547174888 1547174888 4.0K  7月 27 11:01 .pki/
+-rwxr-xrwx 1 1547174888 1547174888  807  2月 25 21:03 .profile*
+
+コンテナゲスト側
+$ machinectl shell aine@vir-ubuntu-20-04 /bin/bash
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+
+aine@aine-MS-7B98:~$ ls -alh
+total 52K
+drwxr-xrwx 9 aine aine 4.0K Jul 27 12:01 .
+drwxr-xr-x 4 root root 4.0K Jul 27 10:53 ..
+-rwxr-xrwx 1 aine aine  439 Jul 27 12:19 .bash_history
+-rwxr-xrwx 1 aine aine  220 Feb 25 21:03 .bash_logout
+-rwxr-xrwx 1 aine aine 3.7K Feb 25 21:03 .bashrc
+drwx------ 7 aine aine 4.0K Jul 27 11:03 .cache
+drwx------ 3 aine aine 4.0K Jul 27 11:01 .config
+drwxr-xr-x 2 aine aine 4.0K Jul 27 12:01 .fontconfig
+drwxrwxr-x 3 aine aine 4.0K Jul 27 12:00 .fonts
+drwxr-xr-x 3 aine aine 4.0K Jul 27 11:01 .local
+drwx------ 5 aine aine 4.0K Jul 27 10:58 .mozilla
+drwx------ 3 aine aine 4.0K Jul 27 11:01 .pki
+-rwxr-xrwx 1 aine aine  807 Feb 25 21:03 .profile
+
+
+コンテナホスト側
+$ ls -lah vir-ubuntu-20-04/home
+合計 16K
+drwxr-xr-x  4 1547173888 1547173888 4.0K  7月 27 10:53 ./
+drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
+drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
+drwxrwxrwx  8 1547173888 1547173888 4.0K  7月 27 10:49 kuraine/
+
+
+$ rm -rf  vir-ubuntu-20-04/home/kuraine
+
+
+$ ls -lah vir-ubuntu-20-04/home
+合計 12K
+drwxr-xr-x  3 1547173888 1547173888 4.0K  7月 27 12:48 ./
+drwxr-xr-x 17 1547173888 1547173888 4.0K  7月 26 19:14 ../
+drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
+```
+
+
+
 
 - POST
 
