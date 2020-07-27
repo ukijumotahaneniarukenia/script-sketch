@@ -20,3 +20,12 @@ drracket便利。ファイル保存もできる。
 ![](./1.png)
 ![](./2.png)
 ![](./3.png)
+
+
+
+- drracket起動
+
+```
+$drracket 1>$HOME/launch_drracket.log 2>&1 &
+```
+

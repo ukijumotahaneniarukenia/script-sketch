@@ -1,3 +1,7 @@
+- 機械学習はこのサイト導入に良さげ
+
+  - https://www.kkaneko.jp/dblab/index.html
+
 - pythonのリスト操作
   - https://www.yoheim.net/blog.php?q=20150801
 
