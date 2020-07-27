@@ -920,6 +920,8 @@ Selected user namespace base 1547173888 and range 65536.
 # watch_established: "/org/gnome/terminal/legacy/" (establishing: 0)
 Container vir-ubuntu-20-04 exited successfully.
 
+- https://bbs.archlinux.org/viewtopic.php?pid=1438842#p1438842
+
 
 $ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'export NO_AT_BRIDGE=1 && gnome-terminal'
 Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
