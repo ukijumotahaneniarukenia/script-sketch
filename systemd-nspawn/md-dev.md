@@ -506,6 +506,11 @@ drwxr-xrwx 10 1547174888 1547174888 4.0K  7月 27 12:46 aine/
 ただし、ブラウザなど、実行時ユーザーに依存するようなGUIを起動する際は権限をコンテナホスト側でもどしておく。少々めんどいが、これだけなので、いい。
 $ chown -R aine:aine /var/lib/machines/vir-ubuntu-20-04/home/aine
 
+日本語化してはいる
+$ systemd-nspawn --quiet --user=root --chdir=/root --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+
+$ systemd-nspawn --quiet --user=aine --chdir=/home/aine --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+
 ```
 
 
