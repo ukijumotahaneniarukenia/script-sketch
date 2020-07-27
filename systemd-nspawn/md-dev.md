@@ -54,6 +54,11 @@ $ time debootstrap --arch=amd64 focal /var/lib/machines/vir-ubuntu-20-04 http://
 
 I: Base system installed successfully.
 
+
+テンプレート作成
+$ cp -a vir-ubuntu-20-04/ vir-ubuntu-20-04-template
+
+
 以下のように最小構成のコンテナが入った。
 
 $ ls -lh /var/lib/machines/vir-ubuntu-20-04/
@@ -510,6 +515,9 @@ $ chown -R aine:aine /var/lib/machines/vir-ubuntu-20-04/home/aine
 $ systemd-nspawn --quiet --user=root --chdir=/root --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
 
 $ systemd-nspawn --quiet --user=aine --chdir=/home/aine --setenv=LANG=ja_JP.UTF-8 --setenv=DISPLAY=:0.0 --bind-ro=/etc/localtime --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 /bin/bash
+
+
+machinectlではいるとsystemdが
 
 ```
 
