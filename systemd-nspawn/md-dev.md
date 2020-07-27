@@ -879,4 +879,6 @@ machinectlでのIMEの常駐化はできるが、X転送がきつい
 
 systemd-nspawnではX転送いけるが、IMEの常駐化がムズイ
 
+これでいけたらよかった
+$ systemd-nspawn --user=root --chdir=/root --setenv=XDG_RUNTIME_DIR=/run/user/$(id -u) --setenv=DISPLAY=:0.0 --bind-ro=/sys/fs/cgroup --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -U -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'ibus-daemon -dxr && sleep 5 && export GTK_IM_MODULE=ibus && export XMODIFIERS=@im=ibus && export QT_IM_MODULE=ibus && ps uaxwwf && firefox'
 ```
