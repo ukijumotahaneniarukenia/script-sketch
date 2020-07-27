@@ -775,10 +775,108 @@ $ cd /var/lib/machines
 $ rm -rf vir-ubuntu-20-04
 ```
 
+IME
+
+machinectlの場合
+
+```
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/apt install -y ibus-mozc
+
+root@aine-MS-7B98:~# ibus-daemon -dxr
+
+root         104  0.0  0.0 306240  5892 ?        Ssl  19:10   0:00 ibus-daemon -dxr
+root         107  0.0  0.0 158260  6048 ?        Sl   19:10   0:00 /usr/libexec/ibus-memconf
+root         110  0.0  0.0   7084  3896 ?        Ss   19:10   0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         118  0.0  0.0 232060  6260 ?        Sl   19:10   0:00 /usr/libexec/ibus-portal
+
+
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/ps auxwwf
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 169780 11920 ?        Ss   01:19   0:00 /usr/lib/systemd/systemd
+root          16  0.0  0.0  35172 11996 ?        Ss   01:19   0:00 /lib/systemd/systemd-journald
+systemd+      43  0.0  0.0  26740  7872 ?        Ss   01:19   0:00 /lib/systemd/systemd-networkd
+systemd+      52  0.0  0.0  24112 12672 ?        Ss   01:19   0:00 /lib/systemd/systemd-resolved
+root          54  0.0  0.0   5568  2636 ?        Ss   01:19   0:00 /usr/sbin/cron -f
+message+      55  0.0  0.0   7376  4040 ?        Ss   01:19   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          57  0.0  0.0  26196 17748 ?        Ss   01:19   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        58  0.0  0.0 224476  4432 ?        Ssl  01:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          60  0.0  0.0  16960  7848 ?        Ss   01:19   0:00 /lib/systemd/systemd-logind
+root          67  0.0  0.0   4384  2036 pts/0    Ss+  01:19   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root        9682  0.0  0.0   8768  3316 pts/1    Rs+  01:30   0:00 /usr/bin/ps auxwwf
+root        9691  0.0  0.0 171168  4816 pts/1    S+   01:30   0:00  \_ (sd-
+root        9684  0.0  0.0  18316  9196 ?        Ss   01:30   0:00 /lib/systemd/systemd --user
+root        9685  0.0  0.0 170976  4744 ?        S    01:30   0:00  \_ (sd-pam)
+Connection to machine vir-ubuntu-20-04 terminated.
+
+
+rootユーザーで常駐化
+$ machinectl shell root@vir-ubuntu-20-04 /bin/which ibus-daemon
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+/usr/bin/ibus-daemon
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/ibus-daemon -dxr
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-20-04 terminated.
+
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/ps auxwwf
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 169780 11920 ?        Ss   01:19   0:00 /usr/lib/systemd/systemd
+root          16  0.0  0.0  35172 12100 ?        Ss   01:19   0:00 /lib/systemd/systemd-journald
+systemd+      43  0.0  0.0  26740  7872 ?        Ss   01:19   0:00 /lib/systemd/systemd-networkd
+systemd+      52  0.0  0.0  24112 12672 ?        Ss   01:19   0:00 /lib/systemd/systemd-resolved
+root          54  0.0  0.0   5568  2636 ?        Ss   01:19   0:00 /usr/sbin/cron -f
+message+      55  0.0  0.0   7376  4040 ?        Ss   01:19   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          57  0.0  0.0  26196 17748 ?        Ss   01:19   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        58  0.0  0.0 224476  4432 ?        Ssl  01:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          60  0.0  0.0  16960  7848 ?        Ss   01:19   0:00 /lib/systemd/systemd-logind
+root          67  0.0  0.0   4384  2036 pts/0    Ss+  01:19   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root        9712  0.2  0.0  18316  9444 ?        Ss   01:31   0:00 /lib/systemd/systemd --user
+root        9713  0.0  0.0 170976  4744 ?        S    01:31   0:00  \_ (sd-pam)
+root        9725  0.0  0.0   7084  3804 ?        Ss   01:31   0:00  \_ /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root        9734  0.0  0.0 233196  6044 ?        Sl   01:31   0:00  \_ /usr/libexec/ibus-portal
+root        9720  0.2  0.0 307640  6076 ?        Ssl  01:31   0:00 /usr/bin/ibus-daemon -dxr
+root        9723  0.0  0.0 159396  5972 ?        Sl   01:31   0:00  \_ /usr/libexec/ibus-memconf
+root        9741  0.0  0.0   8768  3356 pts/1    Rs+  01:31   0:00 /usr/bin/ps auxwwf
+root        9742  0.0  0.0 171168  4816 pts/1    S+   01:31   0:00  \_ (sd-
+Connection to machine vir-ubuntu-20-04 terminated.
+
+一般ユーザーからも見える
+$ machinectl shell aine@vir-ubuntu-20-04 /usr/bin/ps auxwwf
+Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 169780 11920 ?        Ss   01:19   0:00 /usr/lib/systemd/systemd
+root          16  0.0  0.0  43368 15876 ?        Ss   01:19   0:00 /lib/systemd/systemd-journald
+systemd+      43  0.0  0.0  26740  7872 ?        Ss   01:19   0:00 /lib/systemd/systemd-networkd
+systemd+      52  0.0  0.0  24112 12672 ?        Ss   01:19   0:00 /lib/systemd/systemd-resolved
+root          54  0.0  0.0   5568  2636 ?        Ss   01:19   0:00 /usr/sbin/cron -f
+message+      55  0.0  0.0   7580  4552 ?        Ss   01:19   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          57  0.0  0.0  26196 17748 ?        Ss   01:19   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+syslog        58  0.0  0.0 224476  4432 ?        Ssl  01:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+root          60  0.0  0.0  16960  7848 ?        Ss   01:19   0:00 /lib/systemd/systemd-logind
+root          67  0.0  0.0   4384  2036 pts/0    Ss+  01:19   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root        9712  0.0  0.0  18316  9480 ?        Ss   01:31   0:00 /lib/systemd/systemd --user
+root        9713  0.0  0.0 170976  4744 ?        S    01:31   0:00  \_ (sd-pam)
+root        9725  0.0  0.0   7084  3804 ?        Ss   01:31   0:00  \_ /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root        9734  0.0  0.0 233196  6120 ?        Sl   01:31   0:00  \_ /usr/libexec/ibus-portal
+root        9720  0.0  0.0 307640  6096 ?        Ssl  01:31   0:00 /usr/bin/ibus-daemon -dxr
+root        9723  0.0  0.0 159396  5972 ?        Sl   01:31   0:00  \_ /usr/libexec/ibus-memconf
+aine        9760  0.0  0.0   8768  3288 pts/1    Rs+  01:32   0:00 /usr/bin/ps auxwwf
+aine        9769  0.0  0.0 171168  4824 pts/1    S+   01:32   0:00  \_ (sd-
+aine        9762  0.0  0.0  18320  9356 ?        Ss   01:32   0:00 /lib/systemd/systemd --user
+aine        9763  0.0  0.0 170976  4752 ?        S    01:32   0:00  \_ (sd-pam)
+Connection to machine vir-ubuntu-20-04 terminated.
+
+```
+
 課題
 
 ```
-IMEの常駐化（日本語入力できんときつい）
+machinectlでのIMEの常駐化はできるが、X転送がきつい
 
-systemdが使えるのは便利。dockerだとdbusで弾かれることが多かった。systemdで使う場合は、sshは常駐化しておくのが便利そう。
+systemd-nspawnではX転送いけるが、IMEの常駐化がムズイ
+
 ```
