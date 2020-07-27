@@ -150,11 +150,13 @@ sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 
 一般ユーザーの作成とrootユーザーのパスワードを設定
 
+dbusのセッションエラーを避けるため、コンテナホストとコンテナゲストは同じユーザを作成
+
 ```
-DEFAULT_USER_ID=9999
-DEFAULT_USER_NAME=kuraine
-DEFAULT_GROUP_ID=9999
-DEFAULT_GROUP_NAME=kuraine
+DEFAULT_USER_ID=1000
+DEFAULT_USER_NAME=aine
+DEFAULT_GROUP_ID=1000
+DEFAULT_GROUP_NAME=aine
 
 
 groupadd -g $DEFAULT_GROUP_ID $DEFAULT_GROUP_NAME && \
@@ -402,6 +404,13 @@ $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/tmp/.X11-unix -D /
 $ systemd-nspawn --user=kuraine --setenv=DISPLAY=:0.0 --bind=/run/udev --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id -D /var/lib/machines/vir-ubuntu-20-04 firefox
 
 ブラウザの挙動の違いかと思い、brave-browserでも試した。これはアドレス周りの問題になった。
+
+基本dbusソケットのセッションが実行ユーザー単位の制御になっているので、コンテナホストと同じファイルをコンテナゲストにマウントして借用させて上げる場合は
+コンテナホストとコンテナゲストのユーザーは同一人物にしておくといける
+
+brave-browserはこれでいけた。--bind-ro=/dev/dri
+$ systemd-nspawn --user=aine --setenv=DISPLAY=:0.0 --bind=/run/systemd --bind-ro=/tmp/.X11-unix --bind-ro=/var/run/dbus --bind-ro=/var/lib/dbus --bind-ro=/etc/machine-id --bind-ro=/dev/dri -D /var/lib/machines/vir-ubuntu-20-04 brave-browser
+
 
 ```
 
