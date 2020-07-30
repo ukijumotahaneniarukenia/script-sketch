@@ -74,8 +74,12 @@ echo 'root:root_pwd' | chpasswd
 
 一般ユーザーでsudoが使えるように
 
+
 ```
 echo "Set disable_coredump false" >> /etc/sudo.conf
+
+
+$ sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user=root bash -c 'echo "Set disable_coredump false" >> /etc/sudo.conf'
 ```
 
 
@@ -83,15 +87,19 @@ echo "Set disable_coredump false" >> /etc/sudo.conf
 
 ```
 sed -i.bak 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
+
+$ sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user=root sed -i.bak 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
 ```
 
 DNSの設定
 
 ```
 sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
+
+$ sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user=root sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
 ```
 
-アップデート（再起動し直す必要はなかった）
+アップデート（コンテナブート後、rootユーザーでログインし、アップデート）
 ```
 apt update
 ```
