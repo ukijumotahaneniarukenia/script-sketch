@@ -58,6 +58,7 @@ root@aine-MS-7B98:~#
 一般ユーザの作成
 
 ```
+cat <<EOS >a.sh
 DEFAULT_USER_ID=1000
 DEFAULT_USER_NAME=aine
 DEFAULT_GROUP_ID=1000
@@ -69,6 +70,13 @@ chsh -s /bin/bash $DEFAULT_USER_NAME && \
 echo $DEFAULT_USER_NAME':'$DEFAULT_USER_NAME'_pwd' | chpasswd && \
 echo "$DEFAULT_USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
 echo 'root:root_pwd' | chpasswd
+EOS
+
+sudo chmod 755 a.sh
+
+sudo cp a.sh vir-ubuntu-20-04/usr/local/src/
+
+sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user=root bash /usr/local/src/a.sh
 ```
 
 
