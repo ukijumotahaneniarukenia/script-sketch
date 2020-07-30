@@ -20,15 +20,9 @@ $ sudo rm -rf vir-ubuntu-20-04
 $ sudo cp -a vir-ubuntu-20-04-template vir-ubuntu-20-04
 ```
 
-
 rootユーザのパスワードを設定するため、ブートせずにログインし、パスワード変更
 ```
-$ sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04
-Spawning container vir-ubuntu-20-04 on /var/lib/machines/vir-ubuntu-20-04.
-Press ^] three times within 1s to kill container.
-root@vir-ubuntu-20-04:~# echo 'root:root_pwd' | chpasswd
-root@vir-ubuntu-20-04:~# logout
-Container vir-ubuntu-20-04 exited successfully.
+$ sudo systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 bash -c 'echo "root:root_pwd" | chpasswd'
 ```
 
 
