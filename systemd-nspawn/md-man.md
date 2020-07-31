@@ -1,3 +1,9 @@
+物理ファイルを先に消してしまってプロセス残ってしまったら、以下のコマンドでサービス停止
+
+```
+systemctl stop systemd-nspawn@vir-ubuntu-20-04.service
+```
+
 デフォルトだとrootしかはいれないので、権限付与
 
 ```
