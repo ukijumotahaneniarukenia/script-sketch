@@ -47,8 +47,8 @@ root@aine-MS-7B98:~# time /opt/systemd-container-entrypoint.sh 1000 aine 1000 ai
 
 一般ユーザーないし、rootユーザーでログイン後、検証したいsystemdサービスをインストールしていく
 
-```
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user root /bin/bash
+ブートしてはいらないと、DNS設定がうまくいっていないので、コンテナ抜けてもう一度入る場合は、ブートする
 
-$ systemd-nspawn -D /var/lib/machines/vir-ubuntu-20-04 --user aine /bin/bash
+```
+$ systemd-nspawn -b -D /var/lib/machines/vir-ubuntu-20-04
 ```
