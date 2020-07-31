@@ -1,0 +1,87 @@
+FROM ubuntu:18.04
+
+RUN echo 'path-include=/usr/share/locale/ja/LC_MESSAGES/*.mo' > /etc/dpkg/dpkg.cfg.d/includes \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+      sudo \
+      lxde \
+      xrdp \
+      ibus \
+      ibus-mozc \
+      language-pack-ja-base \
+      language-pack-ja \
+      fonts-noto-cjk \
+      fonts-noto-color-emoji \
+      supervisor \
+      gosu \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/archives/* \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set locale
+RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && echo 'Asia/Tokyo' > /etc/timezone
+RUN locale-gen ja_JP.UTF-8 \
+    && echo 'LC_ALL=ja_JP.UTF-8' > /etc/default/locale \
+    && echo 'LANG=ja_JP.UTF-8' >> /etc/default/locale
+ENV LANG=ja_JP.UTF-8 \
+    LANGUAGE=ja_JP:ja \
+    LC_ALL=ja_JP.UTF-8
+
+# Set default vars
+ENV DEFAULT_USER=developer \
+    DEFAULT_PASSWD=xrdppasswd
+
+# Set sudoers for any user
+RUN echo "ALL ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/ALL
+
+# Change permission so that non-root user can add users and groups
+RUN chmod u+s /usr/sbin/useradd \
+    && chmod u+s /usr/sbin/groupadd
+
+# Expose RDP port
+EXPOSE 3389
+
+RUN echo "startlxde" > /etc/skel/.xsession \
+    && install -o root -g xrdp -m 2775 -d /var/run/xrdp \
+    && install -o root -g xrdp -m 3777 -d /var/run/xrdp/sockdir \
+    && install -o root -g root -m 0755 -d /var/run/dbus
+
+# Set supervisord conf for xrdp service
+RUN { \
+      echo "[supervisord]"; \
+      echo "user=root"; \
+      echo "nodaemon=true"; \
+      echo "logfile=/var/log/supervisor/supervisord.log"; \
+      echo "childlogdir=/var/log/supervisor"; \
+      echo "[program:dbus]"; \
+      echo "command=/usr/bin/dbus-daemon --system --nofork --nopidfile"; \
+      echo "[program:xrdp-sesman]"; \
+      echo "command=/usr/sbin/xrdp-sesman --nodaemon"; \
+      echo "[program:xrdp]"; \
+      echo "command=/usr/sbin/xrdp --nodaemon"; \
+      echo "user=xrdp"; \
+    } > /etc/supervisor/xrdp.conf
+
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+      xrdp-pulseaudio-installer \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/archives/* \
+    && rm -rf /var/lib/apt/lists/* \
+# Apply a patch
+    && sed -i -E \
+      's@^dget ".*pulseaudio.*\.dsc"$@\dget -u "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/pulseaudio/$pulseaudio_version/pulseaudio_$(echo $pulseaudio_version | sed "s/^.*://").dsc"@' \
+      /usr/sbin/xrdp-build-pulse-modules \
+    && /usr/sbin/xrdp-build-pulse-modules
+
+
+RUN apt install xrdp-pulseaudio-installer && \
+    pulseaudio --version && \
+    xrdp-build-pulse-modules
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
