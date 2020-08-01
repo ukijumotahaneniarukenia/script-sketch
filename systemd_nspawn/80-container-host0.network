@@ -1,0 +1,8 @@
+[Match]
+Virtualization=container
+Name=host0
+
+[Network]
+DNS=GOOGLE_DNS_IP
+Address=SERVER_IP
+Gateway=MY_ROUTER_IP

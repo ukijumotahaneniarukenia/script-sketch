@@ -1,0 +1,11 @@
+[Match]
+Name=host0
+
+[Network]
+DHCP=no
+DNS=MY_ROUTER_IP
+Address=SERVER_IP/24
+
+[Route]
+Gateway=MY_ROUTER_IP
+EOS
