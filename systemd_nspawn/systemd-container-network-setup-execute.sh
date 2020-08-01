@@ -51,3 +51,19 @@ machinectl shell root@vir-ubuntu-20-04-04 /bin/systemctl start systemd-networkd
 machinectl shell root@vir-ubuntu-20-04-04 /bin/systemctl start systemd-resolved
 machinectl shell root@vir-ubuntu-20-04-05 /bin/systemctl start systemd-networkd
 machinectl shell root@vir-ubuntu-20-04-05 /bin/systemctl start systemd-resolved
+systemctl stop systemd-nspawn@vir-ubuntu-20-04-02.service
+systemctl stop systemd-nspawn@vir-ubuntu-20-04-03.service
+systemctl stop systemd-nspawn@vir-ubuntu-20-04-04.service
+systemctl stop systemd-nspawn@vir-ubuntu-20-04-05.service
+systemctl enable systemd-nspawn@vir-ubuntu-20-04-02.service
+systemctl enable systemd-nspawn@vir-ubuntu-20-04-03.service
+systemctl enable systemd-nspawn@vir-ubuntu-20-04-04.service
+systemctl enable systemd-nspawn@vir-ubuntu-20-04-05.service
+systemctl start systemd-nspawn@vir-ubuntu-20-04-02.service
+systemctl start systemd-nspawn@vir-ubuntu-20-04-03.service
+systemctl start systemd-nspawn@vir-ubuntu-20-04-04.service
+systemctl start systemd-nspawn@vir-ubuntu-20-04-05.service
+systemctl status systemd-nspawn@vir-ubuntu-20-04-02.service
+systemctl status systemd-nspawn@vir-ubuntu-20-04-03.service
+systemctl status systemd-nspawn@vir-ubuntu-20-04-04.service
+systemctl status systemd-nspawn@vir-ubuntu-20-04-05.service

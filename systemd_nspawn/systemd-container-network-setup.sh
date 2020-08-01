@@ -87,4 +87,9 @@ SEGMENT_FORTH_OCTET_START_IP=209
       done
 
   done
+
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl stop systemd-nspawn@$REPLICA_NAME-{}.service
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl enable systemd-nspawn@$REPLICA_NAME-{}.service
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl start systemd-nspawn@$REPLICA_NAME-{}.service
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl status systemd-nspawn@$REPLICA_NAME-{}.service
 } #| bash
