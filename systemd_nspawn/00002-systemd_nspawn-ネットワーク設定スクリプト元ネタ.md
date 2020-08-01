@@ -42,6 +42,18 @@ machinectl shell root@vir-ubuntu-20-04 /bin/bash -c 'echo "root:root_pwd" | chpa
 
 ブリッチ構成に変更していく
 
+一覧
+```
+$ ls -l /etc/systemd/network/*
+lrwxrwxrwx 1 root root   9  8月  2 01:15 /etc/systemd/network/80-container-host0.network -> /dev/null
+-rw-r--r-- 1 root root  30  8月  1 22:12 /etc/systemd/network/br0.netdev
+-rw-r--r-- 1 root root 164  8月  1 23:14 /etc/systemd/network/br0.network
+-rw-r--r-- 1 root root  40  8月  1 22:06 /etc/systemd/network/eno1.network
+-rw-r--r-- 1 root root  52  8月  1 22:58 /etc/systemd/network/vb.network
+```
+
+
+詳細
 ```
 ln -sf /dev/null /etc/systemd/network/80-container-host0.network
 
