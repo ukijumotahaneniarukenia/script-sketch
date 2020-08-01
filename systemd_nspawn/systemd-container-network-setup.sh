@@ -34,7 +34,13 @@ RESOLVE_CONF_FILE_PATH=/etc/systemd/resolved.conf
 SEGMENT_THIRD_OCTET_IP=192.168.1
 SEGMENT_FORTH_OCTET_START_IP=209
 
+
+
 {
+  echo "ls $WORKDIR/.#* | xargs rm -rf"
+
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo machinectl terminate $REPLICA_NAME-@
+
   eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo rm -rf $WORKDIR/$REPLICA_NAME-@
 
   eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo cp -a $WORKDIR/$SEED_NAME $WORKDIR/$REPLICA_NAME-@

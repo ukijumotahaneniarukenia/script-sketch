@@ -1,3 +1,8 @@
+ls /var/lib/machines/.#* | xargs rm -rf
+machinectl terminate vir-ubuntu-20-04-02
+machinectl terminate vir-ubuntu-20-04-03
+machinectl terminate vir-ubuntu-20-04-04
+machinectl terminate vir-ubuntu-20-04-05
 rm -rf /var/lib/machines/vir-ubuntu-20-04-02
 rm -rf /var/lib/machines/vir-ubuntu-20-04-03
 rm -rf /var/lib/machines/vir-ubuntu-20-04-04
