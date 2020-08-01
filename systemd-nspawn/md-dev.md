@@ -100,7 +100,7 @@ $ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's@archive.ubuntu.c
 
 DNSの設定など
 通常時（ルータのip指定しておく）
-$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's/#DNS=/DNS=192.168.1.109/' /etc/systemd/resolved.conf
+$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's/#DNS=/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
 緊急時
 $ machinectl shell root@vir-ubuntu-20-04 /usr/bin/sed -i.bak 's/#DNS=/DNS=8.8.8.8/' /etc/systemd/resolved.conf
