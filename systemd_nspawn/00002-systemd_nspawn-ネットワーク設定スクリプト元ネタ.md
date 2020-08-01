@@ -43,6 +43,7 @@ EOS
 
 chmod 644 /etc/systemd/network/br0.netdev
 
+#https://gist.github.com/artizirk/0d800be97bcdb35fb7bfd9755208e0e8#setup
 cat <<EOS >/etc/systemd/network/br0.network
 [Match]
 Name=br0
