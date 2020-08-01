@@ -1,3 +1,7 @@
+rm -rf /var/lib/machines/vir-ubuntu-20-04-02
+rm -rf /var/lib/machines/vir-ubuntu-20-04-03
+rm -rf /var/lib/machines/vir-ubuntu-20-04-04
+rm -rf /var/lib/machines/vir-ubuntu-20-04-05
 cp -a /var/lib/machines/vir-ubuntu-20-04-template /var/lib/machines/vir-ubuntu-20-04-02
 cp -a /var/lib/machines/vir-ubuntu-20-04-template /var/lib/machines/vir-ubuntu-20-04-03
 cp -a /var/lib/machines/vir-ubuntu-20-04-template /var/lib/machines/vir-ubuntu-20-04-04

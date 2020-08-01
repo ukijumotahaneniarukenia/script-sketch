@@ -35,6 +35,8 @@ SEGMENT_THIRD_OCTET_IP=192.168.1
 SEGMENT_FORTH_OCTET_START_IP=209
 
 {
+  eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo rm -rf $WORKDIR/$REPLICA_NAME-@
+
   eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo cp -a $WORKDIR/$SEED_NAME $WORKDIR/$REPLICA_NAME-@
 
   eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | while read n;do printf "machinectl start $REPLICA_NAME-%s\n" $(printf "%02d" $n);done
