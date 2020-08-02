@@ -4,8 +4,21 @@ vscode使う
 
 https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
 
+csharpコード補完
+
+- https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
+
 ```
-ext install ms-dotnettools.csharp
+code --install-extension ms-dotnettools.csharp
+
+```
+
+csharpフォーマッタ
+
+- https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat
+
+```
+code --install-extension Leopotam.csharpfixformat
 ```
 
 installログ
