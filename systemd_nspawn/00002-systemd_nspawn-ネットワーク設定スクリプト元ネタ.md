@@ -64,6 +64,7 @@ Kind=bridge
 EOS
 
 chmod 644 /etc/systemd/network/br0.netdev
+chown root:root /etc/systemd/network/br0.netdev
 
 #https://gist.github.com/artizirk/0d800be97bcdb35fb7bfd9755208e0e8#setup
 cat <<EOS >/etc/systemd/network/br0.network
@@ -81,6 +82,7 @@ EmitLLDP=customer-bridge
 EOS
 
 chmod 644 /etc/systemd/network/br0.network
+chown root:root /etc/systemd/network/br0.network
 
 cat <<EOS >/etc/systemd/network/eno1.network
 [Match]
@@ -91,6 +93,7 @@ Bridge=br0
 EOS
 
 chmod 644 /etc/systemd/network/eno1.network
+chown root:root /etc/systemd/network/eno1.network
 
 #https://github.com/systemd/systemd/issues/575#issuecomment-163810166
 #https://hachune.net/hachunet/2019/09/19/nspawn.html
@@ -104,6 +107,7 @@ LinkLocalAddressing=no
 EOS
 
 chmod 644 /etc/systemd/network/vb.network
+chown root:root /etc/systemd/network/vb.network
 
 sed -i 's/--network-veth/--network-bridge=br0/' /lib/systemd/system/systemd-nspawn@.service
 ```
@@ -137,6 +141,7 @@ Gateway=192.168.1.1
 EOS
 
 chmod 644 /etc/systemd/network/host0.network
+chown root:root /etc/systemd/network/host0.network
 
 cat <<EOS >/etc/systemd/network/80-container-host0.network
 [Match]
@@ -150,11 +155,13 @@ Gateway=192.168.1.1
 EOS
 
 chmod 644 /etc/systemd/network/80-container-host0.network
+chown root:root /etc/systemd/network/80-container-host0.network
 
 
 sed -i 's/#DNS/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
 chmod 644 /etc/systemd/resolved.conf
+chown root:root /etc/systemd/resolved.conf
 
 ```
 
