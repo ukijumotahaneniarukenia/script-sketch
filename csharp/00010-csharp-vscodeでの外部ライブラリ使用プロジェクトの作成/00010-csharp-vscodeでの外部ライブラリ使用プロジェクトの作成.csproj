@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_00010_csharp_vscodeでの外部ライブラリ使用プロジェクトの作成</RootNamespace>
+  </PropertyGroup>
+
+  <!-- 外部ライブラリはここに設定追加 -->
+  <!-- https://www.nuget.org/packages/Newtonsoft.Json/ -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xml.SgmlReader" Version="1.8.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Xml.Linq" Version="3.5.21022.801" />
+  </ItemGroup>
+
+</Project>
