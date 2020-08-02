@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace _00005_c__range
+namespace _00005_csharp_range
 {
     class Program
     {

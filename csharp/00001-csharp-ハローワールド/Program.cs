@@ -7,6 +7,7 @@ namespace _00001_c__ハローワールド
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine("1");
         }
     }
 }

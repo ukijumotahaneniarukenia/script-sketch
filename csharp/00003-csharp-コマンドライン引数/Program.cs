@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _00003_c__コマンドライン引数
+namespace _00003_csharp_コマンドライン引数
 {
     class Program
     {

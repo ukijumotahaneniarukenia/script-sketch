@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace nnn
+namespace _00008_csharp_monodevelopでのプロジェクト作成
 {
     class MainClass
     {

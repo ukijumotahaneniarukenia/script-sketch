@@ -15,6 +15,9 @@ echo '/bin/* /obj/*' | xargs -n1 >.gitignore
 dotnet new console
 
 dotnet run
+
+$ file ./bin/Debug/netcoreapp3.1/00001-c#-ハローワールド
+./bin/Debug/netcoreapp3.1/00001-c#-ハローワールド: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=6644aee648567ad2d7c248a017cbc94d6f5dda3c, stripped
 ```
 
 事前に実行バイナリファイルを作成しておくパタン
@@ -56,14 +59,14 @@ bash: ./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数: Argument l
 $seq 1000000 | xargs ./bin/*/*/00003-c#-コマンドライン引数
 
 $seq 100 | xargs -t -n10 ./bin/*/*/00003-c#-コマンドライン引数 1>/dev/null
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 1 2 3 4 5 6 7 8 9 10 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 11 12 13 14 15 16 17 18 19 20 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 21 22 23 24 25 26 27 28 29 30 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 31 32 33 34 35 36 37 38 39 40 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 41 42 43 44 45 46 47 48 49 50 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 51 52 53 54 55 56 57 58 59 60 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 61 62 63 64 65 66 67 68 69 70 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 71 72 73 74 75 76 77 78 79 80 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 81 82 83 84 85 86 87 88 89 90 
-./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 91 92 93 94 95 96 97 98 99 100 
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 1 2 3 4 5 6 7 8 9 10
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 11 12 13 14 15 16 17 18 19 20
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 21 22 23 24 25 26 27 28 29 30
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 31 32 33 34 35 36 37 38 39 40
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 41 42 43 44 45 46 47 48 49 50
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 51 52 53 54 55 56 57 58 59 60
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 61 62 63 64 65 66 67 68 69 70
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 71 72 73 74 75 76 77 78 79 80
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 81 82 83 84 85 86 87 88 89 90
+./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 91 92 93 94 95 96 97 98 99 100
 ```

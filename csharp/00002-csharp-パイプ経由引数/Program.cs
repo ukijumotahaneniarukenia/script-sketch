@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _00002_c__パイプ経由引数
+namespace _00002_csharp_パイプ経由引数
 {
     class Program
     {
         static void Main(string[] args)
         {
-            if (! Console.IsInputRedirected) 
+            if (! Console.IsInputRedirected)
             {
                 //標準入力からの入力がない場合は、Usage
                 Usage();
-                return; 
+                return;
             }
 
             String s;
             int n=0;
             Dictionary<int, List<String>> map = new Dictionary<int, List<String>>();
-            while ((s = Console.ReadLine())!=null) 
+            while ((s = Console.ReadLine())!=null)
             {
                 List<String> liz = new List<String>();
                 int cnt=s.Split(" ").Length;

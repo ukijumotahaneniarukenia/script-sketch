@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace _00004_c__reduce
+namespace _00004_csharp_reduce
 {
     class Program
     {

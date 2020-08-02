@@ -5,7 +5,7 @@ using Sgml;
 
 //http://neue.cc/2010/03/02_244.html
 
-namespace nnn
+namespace _00009_csharp_monodevelopでの外部ライブラリ使用プロジェクト作成
 {
     class MainClass
     {

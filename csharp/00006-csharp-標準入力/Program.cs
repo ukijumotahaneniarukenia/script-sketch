@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace _00006_c__標準入力
+namespace _00006_csharp_標準入力
 {
     class Program
     {
@@ -11,7 +11,7 @@ namespace _00006_c__標準入力
         {
             if (args.Length == 0)
             {
-                if (! Console.IsInputRedirected) 
+                if (! Console.IsInputRedirected)
                 {
                     //標準入力からの入力がない場合は、Usage
                     Usage();
@@ -21,7 +21,7 @@ namespace _00006_c__標準入力
                 String s;
                 int n=0;
                 Dictionary<int, List<String>> map = new Dictionary<int, List<String>>();
-                while ((s = Console.ReadLine())!=null) 
+                while ((s = Console.ReadLine())!=null)
                 {
                     List<String> liz = new List<String>();
                     int cnt=s.Split(" ").Length;

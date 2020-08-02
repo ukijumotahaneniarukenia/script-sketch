@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace _00007_c__実行ファイル名の取得
+namespace _00007_csharp_実行ファイル名の取得
 {
     class Program
     {
