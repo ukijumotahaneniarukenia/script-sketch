@@ -17,6 +17,10 @@ csharpフォーマッタ
 
 - https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat
 
+フォーマッタを書けたいファイルをオープン->右クリック->Format Document With...->C# Formatterを選択しEnter
+
+便利
+
 ```
 code --install-extension Leopotam.csharpfixformat
 ```
