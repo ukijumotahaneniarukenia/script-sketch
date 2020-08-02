@@ -2,6 +2,7 @@ CoenraadS.bracket-pair-colorizer
 DataWorks.dataworks-intellisense
 IBM.output-colorizer
 ICS.japanese-proofreading
+Leopotam.csharpfixformat
 Tyriar.sort-lines
 bmewburn.vscode-intelephense-client
 castwide.solargraph
@@ -13,6 +14,7 @@ lihui.vs-color-picker
 manasxx.background-cover
 marp-team.marp-vscode
 mosapride.zenkaku
+ms-dotnettools.csharp
 oderwat.indent-rainbow
 oliversturm.fix-json
 rebornix.ruby

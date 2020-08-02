@@ -5,13 +5,14 @@
 エクスポート
 
 ```
-$ cp /home/aine/.config/Code/User/settings.json /home/kuraine/script-sketch/vscode/settings.json
+$ cp /home/aine/.config/Code/User/settings.json /home/aine/script-sketch/vscode/settings.json
 ```
 
 インポート
 
 ```
-$ cp /home/kuraine/script-sketch/vscode/settings.json /home/kuraine/.config/Code/User/settings.json
+$ mkdir -p /home/aine/.config/Code/User
+$ cp /home/aine/script-sketch/vscode/settings.json /home/aine/.config/Code/User/settings.json
 ```
 
 
@@ -27,6 +28,7 @@ $ code --list-extensions | sort
 インストール
   - 単一引数指定のみOK
 ```
+$ cat extension-list.txt | sort | xargs -I@ echo code --install-extension @
 $ code --install-extension  mosapride.zenkaku
 ```
 
