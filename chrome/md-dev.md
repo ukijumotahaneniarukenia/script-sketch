@@ -37,3 +37,5 @@ yum install -y google-chrome-stable
   - JSON Formatter
 
   - QRコード作成器 (Quick QR)
+
+  - DeepL Translator - Translate Selected Text
