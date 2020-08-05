@@ -1,6 +1,18 @@
 - VER
 
 ```
+$ pip3 show selenium
+Name: selenium
+Version: 3.141.0
+Summary: Python bindings for Selenium
+Home-page: https://github.com/SeleniumHQ/selenium/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: Apache 2.0
+Location: /home/aine/.local/lib/python3.7/site-packages
+Requires: urllib3
+Required-by:
+
 $ pip3 --version
 pip 19.0.3 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)
 

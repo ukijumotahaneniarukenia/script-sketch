@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 import sys
 import os
@@ -9,6 +7,7 @@ import os
 import re
 import datetime
 
+#検索クエリキーは可変長引数なので、右端に持ってくる
 root_url_xpath_dict={
         'https://goodkeyword.net/search.php?type=appsuggest&formquery=':'/html/body/div[7]/div[1]/div[4]/div/textarea'
         ,'https://goodkeyword.net/search.php?type=rakutensuggest&formquery=':'/html/body/div[7]/div[1]/div[4]/div/textarea'
@@ -28,10 +27,11 @@ prefix="suggest"
 
 dtm=datetime.datetime.today().strftime("%Y-%m-%dT%H-%M-%S")
 
+wait_time_seconds=45
 
 def usage():
-  filename=__file__
-  usage="""
+  filename = re.sub(".*/", "", __file__)
+  usage_message = """
 Usage:
 
   PRE: pip3 install --user selenium
@@ -46,16 +46,20 @@ Usage:
 
 """.format(filename=filename)
 
-  print(usage)
+  print(usage_message)
   sys.exit(0)
 
 def get_suggest(search_keyword_list):
 
+  from selenium import webdriver
+  from selenium.webdriver.chrome.options import Options
+
   search_keyword=search_keyword_joiner.join(*search_keyword_list)
 
-  options = Options()
-  options.binary_location = '/usr/local/src/chrome-linux/chrome'
+  options = webdriver.ChromeOptions()
   options.add_argument('--headless')
+  options.add_argument('/usr/local/src/chromedriver_linux64/chromedriver')
+  options.add_argument('/usr/local/src/chrome-linux/chrome')
   driver = webdriver.Chrome(options=options)
 
   for root_url,xpath in root_url_xpath_dict.items():
@@ -71,7 +75,7 @@ def get_suggest(search_keyword_list):
 
     driver.get(root_url+search_keyword)
 
-    time.sleep(10)
+    time.sleep(wait_time_seconds) #TODO レンダラ完了するまで待つ
 
     txt=driver.find_element_by_xpath(xpath).text
 
