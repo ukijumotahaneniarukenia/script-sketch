@@ -70,3 +70,14 @@ $seq 100 | xargs -t -n10 ./bin/*/*/00003-c#-コマンドライン引数 1>/dev/n
 ./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 81 82 83 84 85 86 87 88 89 90
 ./bin/Debug/netcoreapp3.1/00003-c#-コマンドライン引数 91 92 93 94 95 96 97 98 99 100
 ```
+
+
+コマンドライン上で実行できるcsharpらしい
+
+jshellみたい
+
+```
+$ sudo apt install mono-csharp-shell
+
+$ csharp -e '1+1'
+```
