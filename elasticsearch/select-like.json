@@ -1,0 +1,10 @@
+{
+  "query": {
+    "more_like_this": {
+      "fields":[
+        "title"
+      ],
+      "like": "Account"
+    }
+  }
+}
