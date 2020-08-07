@@ -1,0 +1,9 @@
+totalcapacity=15642720 KB
+free=15149216 KB
+freeimages=587
+totalcapacity=2000 KB
+free=200 KB
+freeimages=12
+
+
+
