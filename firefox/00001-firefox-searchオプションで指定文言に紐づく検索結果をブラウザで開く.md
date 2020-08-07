@@ -7,9 +7,9 @@
 firefox --search うんこ
 
 複数キーワード
-firefox --search "うんち うんこ"
+firefox --search "うんぽ うんこ"
 
 
 複数キーワード
-firefox --search 'うんち うんこ'
+firefox --search 'うんぽ うんこ'
 ```
