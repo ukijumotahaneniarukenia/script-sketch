@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Document>
+    <name>Hoge</name>
+    <Style id="Mapit">
+      <IconStyle>
+        <color>FFFFFFFF</color>
+        <scale>1.0</scale>
+      </IconStyle>
+    </Style>
+    <Style id="kml">
+      <LineStyle>
+        <color>FF0080FF</color>
+        <width>1</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>AADDDDDD</color>
+      </PolyStyle>
+    </Style>
+  </Document>
+</kml>
