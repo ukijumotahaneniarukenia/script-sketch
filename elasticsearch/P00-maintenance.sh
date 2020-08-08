@@ -2,7 +2,11 @@
 
 sudo apt install -y moreutils
 
-cat test.txt | ruby -anle 'p "col"+($.-1).to_s,case when $F[0].index(/number-positive|number-negative/);"float";when $F[0].index(/number-non-zero-digit|number-digit/);"integer";when $F[0].index(/date|time/);"date";else "text";end,$F[0].gsub(/^faker-/,"").gsub(/-ruby$/,""),$F[0]' | xargs -n4 | tr ' ' '\t' >test-type-mapping.tsv
+dummydat-bash test.txt test.tsv ja 100
+
+tsv2json-jq test.tsv test.json
+
+cat test.txt | ruby -anle 'p format("col%03d",($.)),case when $F[0].index(/number-positive|number-negative/);"float";when $F[0].index(/number-non-zero-digit|number-digit/);"integer";when $F[0].index(/date|time/);"date";else "text";end,$F[0].gsub(/^faker-/,"").gsub(/-ruby$/,""),$F[0]' | xargs -n4 | tr ' ' '\t'>test-type-mapping.tsv
 
 cat test-type-mapping.tsv | jq -rRc './"\t"|"\""+.[0]+"\":{\""+("type")+"\":\""+.[1]+"\"}"'|sed 's/^/,/'|tr -d \\\n | sed 's/^,//' >test-type-mapping-placeholder.json
 

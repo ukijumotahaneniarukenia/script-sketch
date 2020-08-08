@@ -5,37 +5,37 @@
   },
   "mappings": {
     "properties": {
-      "col0": {
+      "col001": {
         "type": "text"
       },
-      "col1": {
+      "col002": {
         "type": "text"
       },
-      "col2": {
+      "col003": {
         "type": "text"
       },
-      "col3": {
+      "col004": {
         "type": "text"
       },
-      "col4": {
+      "col005": {
         "type": "text"
       },
-      "col5": {
+      "col006": {
         "type": "text"
       },
-      "col6": {
+      "col007": {
         "type": "float"
       },
-      "col7": {
+      "col008": {
         "type": "integer"
       },
-      "col8": {
+      "col009": {
         "type": "float"
       },
-      "col9": {
+      "col010": {
         "type": "integer"
       },
-      "col10": {
+      "col011": {
         "type": "date"
       }
     }
