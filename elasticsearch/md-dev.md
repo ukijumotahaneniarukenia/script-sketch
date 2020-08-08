@@ -26,5 +26,5 @@ curl -X GET "localhost:9200/my-index-000001/_mapping?pretty" -H 'Content-Type: a
 - 先頭１０件ほど取得
 
 ```
-curl -X GET "localhost:9200/my-index-000001/_search?pretty" -H 'Content-Type: application/json' -d'@select-00001-条件なしで検索.json'
+curl -X GET "localhost:9200/my-index-000001/_search?pretty" -H 'Content-Type: application/json' -d'@search-00001-条件なしで検索.json'
 ```
