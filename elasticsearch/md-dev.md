@@ -1,7 +1,7 @@
 - データ投入
 
 ```
-$ curl -X POST -H "Content-Type: application/json" "localhost:9200/test-00001-idx/_bulk?pretty&refresh" --data-binary "@test2.json.done"
+$ curl -X POST -H "Content-Type: application/json" "localhost:9200/test-00001-idx/_bulk?pretty&refresh" --data-binary "@test.json.done"
 ```
 
 - 全件取得

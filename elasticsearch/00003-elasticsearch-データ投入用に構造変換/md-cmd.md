@@ -2,7 +2,7 @@
 
 
 ```
-$ cat test2.json
+$ cat test.json
 [
   {
     "col0": "210-7478",
@@ -42,13 +42,13 @@ $ cat test2.json
 - CMD
 
 ```
-cat test2.json | jq -c 'to_entries|map([{index:{"_id":.key|tostring}},.value])|flatten|.[]'>test2.json.done
+cat test.json | jq -c 'to_entries|map([{index:{"_id":.key|tostring}},.value])|flatten|.[]'>test.json.done
 ```
 
 - OUT
 
 ```
-$ cat test2.json.done
+$ cat test.json.done
 {"index":{"_id":"0"}}
 {"col0":"210-7478","col1":"酒井 航","col2":"合資会社石井農林","col3":"Associate","col4":"Commission","col5":"Associates"}
 {"index":{"_id":"1"}}
