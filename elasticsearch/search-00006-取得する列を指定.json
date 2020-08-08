@@ -1,0 +1,9 @@
+{
+  "_source": [
+    "col2",
+    "col3"
+  ],
+  "query": {
+    "match_all": {}
+  }
+}

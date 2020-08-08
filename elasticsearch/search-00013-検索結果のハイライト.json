@@ -1,0 +1,10 @@
+{
+  "query": {
+    "match": { "col005": "Internship" }
+  },
+  "highlight": {
+    "fields": {
+      "content": {}
+    }
+  }
+}

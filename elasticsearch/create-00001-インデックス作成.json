@@ -1,0 +1,43 @@
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+      "col001": {
+        "type": "text"
+      },
+      "col002": {
+        "type": "text"
+      },
+      "col003": {
+        "type": "text"
+      },
+      "col004": {
+        "type": "text"
+      },
+      "col005": {
+        "type": "text"
+      },
+      "col006": {
+        "type": "text"
+      },
+      "col007": {
+        "type": "float"
+      },
+      "col008": {
+        "type": "integer"
+      },
+      "col009": {
+        "type": "float"
+      },
+      "col010": {
+        "type": "integer"
+      },
+      "col011": {
+        "type": "date"
+      }
+    }
+  }
+}

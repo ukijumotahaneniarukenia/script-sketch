@@ -1,0 +1,5 @@
+"mappings": {
+  "properties": {
+    "dummy-column":{"type":"TOBE_REPLACE"}
+  }
+}

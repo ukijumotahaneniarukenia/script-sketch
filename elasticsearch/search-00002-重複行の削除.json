@@ -1,0 +1,8 @@
+{
+  "collapse": {
+    "field": "col008"
+  },
+  "query": {
+    "match_all": {}
+  }
+}
