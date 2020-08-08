@@ -1,0 +1,132 @@
+- IN
+
+```
+$ cat test.xml
+<?xml version="1.0"?>
+<PurchaseOrders>
+  <PurchaseOrder PurchaseOrderNumber="99503"
+  OrderDate="1999-10-20">
+    <Address Type="Shipping">
+      <Name>Ellen Adams</Name>
+      <Street>123 Maple Street</Street>
+      <City>Mill Valley</City>
+      <State>CA</State>
+      <Zip>10999</Zip>
+      <Country>USA</Country>
+    </Address>
+    <Address Type="Billing">
+      <Name>Tai Yee</Name>
+      <Street>8 Oak Avenue</Street>
+      <City>Old Town</City>
+      <State>PA</State>
+      <Zip>95819</Zip>
+      <Country>USA</Country>
+    </Address>
+    <DeliveryNotes>Please leave packages in shed by
+    driveway.</DeliveryNotes>
+    <Items>
+      <Item PartNumber="872-AA">
+        <ProductName>Lawnmower</ProductName>
+        <Quantity>1</Quantity>
+        <USPrice>148.95</USPrice>
+        <Comment>Confirm this is electric</Comment>
+      </Item>
+      <Item PartNumber="926-AA">
+        <ProductName>Baby Monitor</ProductName>
+        <Quantity>2</Quantity>
+        <USPrice>39.98</USPrice>
+        <ShipDate>1999-05-21</ShipDate>
+      </Item>
+    </Items>
+  </PurchaseOrder>
+  <PurchaseOrder PurchaseOrderNumber="99505"
+  OrderDate="1999-10-22">
+    <Address Type="Shipping">
+      <Name>Cristian Osorio</Name>
+      <Street>456 Main Street</Street>
+      <City>Buffalo</City>
+      <State>NY</State>
+      <Zip>98112</Zip>
+      <Country>USA</Country>
+    </Address>
+    <Address Type="Billing">
+      <Name>Cristian Osorio</Name>
+      <Street>456 Main Street</Street>
+      <City>Buffalo</City>
+      <State>NY</State>
+      <Zip>98112</Zip>
+      <Country>USA</Country>
+    </Address>
+    <DeliveryNotes>Please notify me before
+    shipping.</DeliveryNotes>
+    <Items>
+      <Item PartNumber="456-NM">
+        <ProductName>Power Supply</ProductName>
+        <Quantity>1</Quantity>
+        <USPrice>45.99</USPrice>
+      </Item>
+    </Items>
+  </PurchaseOrder>
+</PurchaseOrders>
+```
+
+- CMD
+
+```
+$ cat test.xml | xml el -v
+```
+
+
+- OUT
+
+```
+PurchaseOrders
+PurchaseOrders/PurchaseOrder[@PurchaseOrderNumber='99503' and @OrderDate='1999-10-20']
+PurchaseOrders/PurchaseOrder/Address[@Type='Shipping']
+PurchaseOrders/PurchaseOrder/Address/Name
+PurchaseOrders/PurchaseOrder/Address/Street
+PurchaseOrders/PurchaseOrder/Address/City
+PurchaseOrders/PurchaseOrder/Address/State
+PurchaseOrders/PurchaseOrder/Address/Zip
+PurchaseOrders/PurchaseOrder/Address/Country
+PurchaseOrders/PurchaseOrder/Address[@Type='Billing']
+PurchaseOrders/PurchaseOrder/Address/Name
+PurchaseOrders/PurchaseOrder/Address/Street
+PurchaseOrders/PurchaseOrder/Address/City
+PurchaseOrders/PurchaseOrder/Address/State
+PurchaseOrders/PurchaseOrder/Address/Zip
+PurchaseOrders/PurchaseOrder/Address/Country
+PurchaseOrders/PurchaseOrder/DeliveryNotes
+PurchaseOrders/PurchaseOrder/Items
+PurchaseOrders/PurchaseOrder/Items/Item[@PartNumber='872-AA']
+PurchaseOrders/PurchaseOrder/Items/Item/ProductName
+PurchaseOrders/PurchaseOrder/Items/Item/Quantity
+PurchaseOrders/PurchaseOrder/Items/Item/USPrice
+PurchaseOrders/PurchaseOrder/Items/Item/Comment
+PurchaseOrders/PurchaseOrder/Items/Item[@PartNumber='926-AA']
+PurchaseOrders/PurchaseOrder/Items/Item/ProductName
+PurchaseOrders/PurchaseOrder/Items/Item/Quantity
+PurchaseOrders/PurchaseOrder/Items/Item/USPrice
+PurchaseOrders/PurchaseOrder/Items/Item/ShipDate
+PurchaseOrders/PurchaseOrder[@PurchaseOrderNumber='99505' and @OrderDate='1999-10-22']
+PurchaseOrders/PurchaseOrder/Address[@Type='Shipping']
+PurchaseOrders/PurchaseOrder/Address/Name
+PurchaseOrders/PurchaseOrder/Address/Street
+PurchaseOrders/PurchaseOrder/Address/City
+PurchaseOrders/PurchaseOrder/Address/State
+PurchaseOrders/PurchaseOrder/Address/Zip
+PurchaseOrders/PurchaseOrder/Address/Country
+PurchaseOrders/PurchaseOrder/Address[@Type='Billing']
+PurchaseOrders/PurchaseOrder/Address/Name
+PurchaseOrders/PurchaseOrder/Address/Street
+PurchaseOrders/PurchaseOrder/Address/City
+PurchaseOrders/PurchaseOrder/Address/State
+PurchaseOrders/PurchaseOrder/Address/Zip
+PurchaseOrders/PurchaseOrder/Address/Country
+PurchaseOrders/PurchaseOrder/DeliveryNotes
+PurchaseOrders/PurchaseOrder/Items
+PurchaseOrders/PurchaseOrder/Items/Item[@PartNumber='456-NM']
+PurchaseOrders/PurchaseOrder/Items/Item/ProductName
+PurchaseOrders/PurchaseOrder/Items/Item/Quantity
+PurchaseOrders/PurchaseOrder/Items/Item/USPrice
+```
