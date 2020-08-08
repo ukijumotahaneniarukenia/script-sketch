@@ -1,7 +1,14 @@
 - データ投入
 
 ```
-$ curl -X POST -H "Content-Type: application/json" "localhost:9200/test-00001-idx/_bulk?pretty&refresh" --data-binary "@test.json.done"
+$ curl -s -X POST -H "Content-Type: application/json" "localhost:9200/test-00001-idx/_bulk?pretty&refresh" --data-binary "@test.json.done" | jq '.items|length'
+100
+```
+
+- データ型確認
+
+```
+$ curl -X GET "localhost:9200/test-00001-idx/_mapping?pretty" -H 'Content-Type: application/json'
 ```
 
 - 全件取得

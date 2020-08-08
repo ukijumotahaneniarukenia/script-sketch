@@ -1,0 +1,11 @@
+faker-address-zip-ruby
+faker-name-name-ruby
+faker-company-name-ruby
+faker-job-position-ruby
+faker-job-employment-type-ruby
+faker-job-education-level-ruby
+faker-number-positive-ruby
+faker-number-non-zero-digit-ruby
+faker-number-negative-ruby
+faker-number-digit-ruby
+faker-date-in-date-period-ruby

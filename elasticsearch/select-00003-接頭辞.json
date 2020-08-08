@@ -1,0 +1,9 @@
+{
+  "query": {
+    "prefix": {
+      "col4": {
+        "value": "Full"
+      }
+    }
+  }
+}

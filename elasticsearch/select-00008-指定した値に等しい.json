@@ -1,0 +1,9 @@
+{
+  "query": {
+    "match": {
+      "col3": {
+        "text": "Technician"
+      }
+    }
+  }
+}

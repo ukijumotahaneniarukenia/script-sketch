@@ -29,3 +29,6 @@ Elasticsearchとkibanaの連携
 
 - https://www.elastic.co/jp/downloads/past-releases
 
+型定義一覧
+
+- https://www.elastic.co/guide/en/elasticsearch/reference/7.8/sql-data-types.html
