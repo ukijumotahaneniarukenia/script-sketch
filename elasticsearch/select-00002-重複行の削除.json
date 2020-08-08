@@ -1,6 +1,6 @@
 {
   "collapse": {
-    "field": "col3.keyword"
+    "field": "col008"
   },
   "query": {
     "match_all": {}

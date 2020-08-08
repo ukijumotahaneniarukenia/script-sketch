@@ -1,8 +1,8 @@
 {
   "query": {
-    "match": {
-      "col3": {
-        "text": "Technician"
+    "term": {
+      "col011": {
+        "value": "2020-08-02"
       }
     }
   }
