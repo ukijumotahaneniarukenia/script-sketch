@@ -38,7 +38,7 @@ csprojファイルの編集
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>_00012_csharp_XMLファイルからJSONファイルに変換</RootNamespace>
+    <RootNamespace>xml2json</RootNamespace>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
     <PublishReadyToRun>false</PublishReadyToRun>
