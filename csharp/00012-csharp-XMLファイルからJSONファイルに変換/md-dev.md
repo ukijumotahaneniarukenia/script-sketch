@@ -13,17 +13,13 @@ $ echo '/bin/* /obj/*' | xargs -n1 >.gitignore
 
 
 $ dotnet new console
-```
 
 monodevelopで使用するライブラリを使用したモック作成してバージョン決めた後、vscodeに移植
 
 
 monodevelopのpackage.configにある内容をインストール
 
-```
 <PackageReference Include="Newtonsoft.Json" version="12.0.3"/>
-<PackageReference Include="System.Xml.XDocument" version="4.3.0"/>
-```
 
 $ dotnet add package Newtonsoft.Json --version 12.0.3
 
@@ -35,11 +31,8 @@ monodevelopで書いたコードをvscodeのエディタにコピー
 csprojファイルの編集
 
 
-```
 <PublishReadyToRun>false</PublishReadyToRun>はtrueのほうが良さげだが、ビルドコケるので、false。
-```
 
-```
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
