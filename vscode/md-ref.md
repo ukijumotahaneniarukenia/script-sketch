@@ -293,3 +293,13 @@ ext install matklad.rust-analyzer
 ```
 ext install dunstontc.vscode-rust-syntax
 ```
+
+
+- Nim
+  - ベーシックなシンタックスエラーなど。ライブラリの補完はでない。TODO解決したい。
+  - https://marketplace.visualstudio.com/items?itemName=kosz78.nim
+
+```
+ext install kosz78.nim
+ext install ms-vscode.cpptools
+```
