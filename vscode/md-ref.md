@@ -272,3 +272,13 @@ ext install castwide.solargraph
 ```
 ext install rust-lang.rust
 ```
+
+
+- Rust
+
+  - rustのコードを即時実行するやつ チョー便利
+  - https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer
+  
+```
+ext install matklad.rust-analyzer
+```
