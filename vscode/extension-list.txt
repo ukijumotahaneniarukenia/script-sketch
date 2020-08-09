@@ -29,3 +29,5 @@ wingrunr21.vscode-ruby
 dunstontc.vscode-rust-syntax
 matklad.rust-analyzer
 rust-lang.rust
+kosz78.nim
+ms-vscode.cpptools
