@@ -282,3 +282,14 @@ ext install rust-lang.rust
 ```
 ext install matklad.rust-analyzer
 ```
+
+
+- Rust
+
+  - rustのシンタックスエラーの通知 便利
+  - https://marketplace.visualstudio.com/items?itemName=dunstontc.vscode-rust-syntax
+
+
+```
+ext install dunstontc.vscode-rust-syntax
+```
