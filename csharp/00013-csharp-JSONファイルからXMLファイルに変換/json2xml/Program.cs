@@ -6,13 +6,13 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 
 //https://www.newtonsoft.com/json
-namespace xml2json {
+namespace json2xml {
     class Program {
         private static char FS = ' ';
         private static char RS = '\n';
         private static string EMPTY = "";
-        private static string INPUT_FILE_EXTENSION = "xml";
-        private static string OUTPUT_FILE_EXTENSION = "json";
+        private static string INPUT_FILE_EXTENSION = "json";
+        private static string OUTPUT_FILE_EXTENSION = "xml";
 
         private static void Usage (string appName) {
             Console.WriteLine (EMPTY +
@@ -71,7 +71,7 @@ namespace xml2json {
                     Usage (appName);
                 }
 
-                XmlToJson (map[0][0], map[0][1]);
+                JsonToXml (map[0][0], map[0][1]);
 
             } else {
                 //コマンドライン引数経由からの入力の場合
@@ -90,18 +90,24 @@ namespace xml2json {
                     Usage (appName);
                 }
 
-                XmlToJson (args[0], args[1]);
+                JsonToXml (args[0], args[1]);
             }
 
         }
 
-        // XML => JSON
-        private static void XmlToJson (string xmlFileName, string jsonFileName) {
-            var xdoc = XDocument.Load (xmlFileName);
-            // XDocumentをJSON形式の文字列に変換
-            var json = JsonConvert.SerializeXNode (xdoc, Formatting.Indented);
-
-            File.WriteAllText (jsonFileName, json);
+        // JSON => XML
+        private static void JsonToXml (string jsonFileName, string xmlFileName) {
+            var json = string.Empty;
+            using (var reader = new StreamReader (jsonFileName)) {
+                json = reader.ReadToEnd ();
+            }
+            // JSON形式の文字列をXDocumentに変換
+            var xdoc = JsonConvert.DeserializeXNode (json);
+            if (File.Exists (xmlFileName)) {
+                File.Delete (xmlFileName);
+            }
+            File.AppendAllText (xmlFileName, xdoc.Declaration + Environment.NewLine);
+            File.AppendAllText (xmlFileName, xdoc + Environment.NewLine);
         }
     }
 }
