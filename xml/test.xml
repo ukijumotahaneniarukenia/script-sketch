@@ -1,66 +1,40 @@
 <?xml version="1.0"?>
-<PurchaseOrders>
-  <PurchaseOrder PurchaseOrderNumber="99503"
-  OrderDate="1999-10-20">
-    <Address Type="Shipping">
-      <Name>Ellen Adams</Name>
-      <Street>123 Maple Street</Street>
-      <City>Mill Valley</City>
-      <State>CA</State>
-      <Zip>10999</Zip>
-      <Country>USA</Country>
-    </Address>
-    <Address Type="Billing">
-      <Name>Tai Yee</Name>
-      <Street>8 Oak Avenue</Street>
-      <City>Old Town</City>
-      <State>PA</State>
-      <Zip>95819</Zip>
-      <Country>USA</Country>
-    </Address>
-    <DeliveryNotes>Please leave packages in shed by
-    driveway.</DeliveryNotes>
-    <Items>
-      <Item PartNumber="872-AA">
-        <ProductName>Lawnmower</ProductName>
-        <Quantity>1</Quantity>
-        <USPrice>148.95</USPrice>
-        <Comment>Confirm this is electric</Comment>
-      </Item>
-      <Item PartNumber="926-AA">
-        <ProductName>Baby Monitor</ProductName>
-        <Quantity>2</Quantity>
-        <USPrice>39.98</USPrice>
-        <ShipDate>1999-05-21</ShipDate>
-      </Item>
-    </Items>
-  </PurchaseOrder>
-  <PurchaseOrder PurchaseOrderNumber="99505"
-  OrderDate="1999-10-22">
-    <Address Type="Shipping">
-      <Name>Cristian Osorio</Name>
-      <Street>456 Main Street</Street>
-      <City>Buffalo</City>
-      <State>NY</State>
-      <Zip>98112</Zip>
-      <Country>USA</Country>
-    </Address>
-    <Address Type="Billing">
-      <Name>Cristian Osorio</Name>
-      <Street>456 Main Street</Street>
-      <City>Buffalo</City>
-      <State>NY</State>
-      <Zip>98112</Zip>
-      <Country>USA</Country>
-    </Address>
-    <DeliveryNotes>Please notify me before
-    shipping.</DeliveryNotes>
-    <Items>
-      <Item PartNumber="456-NM">
-        <ProductName>Power Supply</ProductName>
-        <Quantity>1</Quantity>
-        <USPrice>45.99</USPrice>
-      </Item>
-    </Items>
-  </PurchaseOrder>
-</PurchaseOrders>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>app</groupId>
+  <artifactId>nnn</artifactId>
+  <version>0.1.0</version>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.4.RELEASE</version>
+    <relativePath />
+  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
