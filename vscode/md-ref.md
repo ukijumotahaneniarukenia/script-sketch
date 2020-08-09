@@ -263,3 +263,12 @@ ext install ritwickdey.LiveServer
 ```
 ext install castwide.solargraph
 ```
+
+
+- Rust
+  - rustの補完するやつ
+  - https://marketplace.visualstudio.com/items?itemName=rust-lang.rust
+
+```
+ext install rust-lang.rust
+```
