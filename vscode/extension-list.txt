@@ -26,4 +26,6 @@ vincaslt.highlight-matching-tag
 vscode-icons-team.vscode-icons
 wayou.vscode-todo-highlight
 wingrunr21.vscode-ruby
+dunstontc.vscode-rust-syntax
+matklad.rust-analyzer
 rust-lang.rust
