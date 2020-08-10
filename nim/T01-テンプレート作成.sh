@@ -144,12 +144,12 @@ deploy(){
 
   fi
 
-  mkdir -p $HOME/script-cmd/$LANG_NAME/$NIM_VERSION/$APP_NAME
+  mkdir -p $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME
 
   cd $HOME/script-sketch/$LANG_NAME
 
   #ビルドホストはLinuxなので
-  find $PROJECT_DIR_NAME -type f  | xargs file | grep -P 'shared|executable' | cut -d':' -f1 | grep -vP '(?=\.exe)' | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$NIM_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
+  find $PROJECT_DIR_NAME -type f  | xargs file | grep -P 'shared|executable' | cut -d':' -f1 | grep -vP '(?=\.exe)' | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
 
   #パス登録
   find $HOME/script-cmd -type f -name "mysearch-register-bash" -o -name "mycmd-register-bash" | bash
@@ -173,7 +173,7 @@ upload(){
 }
 
 LANG_NAME=nim
-NIM_VERSION=$($LANG_NAME --version | grep Version | grep -Po '(\.?[0-9]+){3}' | tr '.' '-')
+LANG_VERSION=$($LANG_NAME --version | grep Version | grep -Po '(\.?[0-9]+){3}' | tr '.' '-')
 
 SUBCMD=$1;shift;
 PROJECT_DIR_NAME=$1;shift;
