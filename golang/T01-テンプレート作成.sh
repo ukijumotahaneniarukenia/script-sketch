@@ -55,8 +55,7 @@ init(){
   cat <<EOS >$PROJECT_DIR_NAME/$APP_DIR_NAME/src/main/main.go
 package main
 
-import (
-	"fmt"
+import ( "fmt"
 )
 
 func main() {
@@ -88,8 +87,9 @@ build(){
 
   cd $HOME/script-sketch/$LANG_NAME
 
+  rm -rf $HOME/script-sketch/$LANG_NAME/$PROJECT_DIR_NAME/$APP_DIR_NAME/$INSTALL_DIR_NAME/*
 
-  ( cd $PROJECT_DIR_NAME && export GOPATH=$(pwd) && cd $APP_DIR_NAME/src/main && gox )
+  ( cd $PROJECT_DIR_NAME/$APP_DIR_NAME && export GOPATH=$(pwd) && cd src/main && gox )
 
   find $PROJECT_DIR_NAME -type f | xargs file | grep executable | cut -d':' -f1 | ruby -F/ -anle 'a=$F[$F.size-1].gsub(/_/,"-");p $_,a'|xargs -n2 | awk -v PROJECT_DIR_NAME=$PROJECT_DIR_NAME -v APP_DIR_NAME=$APP_DIR_NAME -v INSTALL_DIR_NAME=$INSTALL_DIR_NAME '{print "mv "$1" "PROJECT_DIR_NAME,APP_DIR_NAME,INSTALL_DIR_NAME,$2}' OFS=/ | bash
 
@@ -120,10 +120,11 @@ deploy(){
 
   cd $HOME/script-sketch/$LANG_NAME
 
+  #いいかんじにしたい
   find $PROJECT_DIR_NAME -type f | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
 
   #パス登録
-  find $HOME/script-cmd -type f -name "mysearch-register-bash" -o -name "mycmd-register-bash" | bash
+  find $PROJECT_DIR_NAME -type f | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/.local/script-cmd/bin/$APP_NAME-$LANG_NAME | bash
 
   which $APP_NAME-$LANG_NAME
 
