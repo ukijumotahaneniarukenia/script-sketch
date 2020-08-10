@@ -13,6 +13,8 @@ Usage:
 
     or
 
+  PRE: cd $HOME && git clone https://github.com/ukijumotahaneniarukenia/script-cmd.git
+
   CMD: bash ${0##*/} deploy 00031-nim-テンプレートプロジェクトの作成 app
 
     or
@@ -82,6 +84,10 @@ amd64.windows.gcc.linkerexe = "x86_64-w64-mingw32-gcc"
 amd64.linux.gcc.path = "/usr/bin/"
 amd64.linux.gcc.exe = "gcc"
 amd64.linux.gcc.linkerexe = "gcc"
+
+
+# macosx用
+#うまく出来次第追記したいなど rustのやつうまく流用できないか。Dockerはmustポイ
 EOS
 
   mkdir -p $PROJECT_DIR_NAME/$APP_DIR_NAME/tests
@@ -132,19 +138,27 @@ deploy(){
 
   fi
 
-  cd $HOME/script-sketch/nim
+  if [ ! -d $HOME/script-cmd ];then
+
+    usage
+
+  fi
+
+  mkdir -p $HOME/script-cmd/$LANG_NAME/$NIM_VERSION/$APP_NAME
+
+  cd $HOME/script-sketch/$LANG_NAME
 
   #ビルドホストはLinuxなので
-  find $PROJECT_DIR_NAME -type f  | xargs file | grep -P 'shared|executable' | cut -d':' -f1 | grep -vP '(?=\.exe)' | xargs -I@ echo cp @ $HOME/.local/bin/$APP_NAME | bash
+  find $PROJECT_DIR_NAME -type f  | xargs file | grep -P 'shared|executable' | cut -d':' -f1 | grep -vP '(?=\.exe)' | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$NIM_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
 
-  which $HOME/.local/bin/$APP_DIR_NAME
+  #パス登録
+  find $HOME/script-cmd -type f -name "mysearch-register-bash" -o -name "mycmd-register-bash" | bash
 
-  $APP_DIR_NAME
+  which $APP_NAME-$LANG_NAME
 
   exit 0
 
 }
-
 
 upload(){
 
@@ -157,6 +171,9 @@ upload(){
   exit 0
 
 }
+
+LANG_NAME=nim
+NIM_VERSION=$($LANG_NAME --version | grep Version | grep -Po '(\.?[0-9]+){3}' | tr '.' '-')
 
 SUBCMD=$1;shift;
 PROJECT_DIR_NAME=$1;shift;
