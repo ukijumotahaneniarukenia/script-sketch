@@ -83,11 +83,21 @@ print(numbers.last(where: {$0 < 0})!) //-6
 
 print(numbers.last!) //1
 
-//print(m5["C"]!.filter(isIncluded: (Int) throws -> Bool return isIncluded == 4)) //no warning
-//print(m5["C"]!.reverse()) //no warning
+
+print(m5["C"]!.filter({$0 == 4})) //no warning [4]
+
+m5["C"]!.reverse() //no warning ()
+
+print(m5["C"]) //Optional([5, 4, 3])
 
 
+print(m5["C"]!) // [5, 4, 3]
 
+
+m5["C"]?.append(9)
+
+//https://developer.apple.com/documentation/swift/array
+print(m5["C"]!) //[5, 4, 3, 9]
 
 
 
