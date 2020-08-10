@@ -1,23 +1,23 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "os"
+	"bufio"
+	"fmt"
+	"os"
 )
 
 func main() {
 
-  scanner := bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewScanner(os.Stdin)
 
-  for scanner.Scan() {
-      fmt.Println(scanner.Text())
-  }
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
 
-  err := scanner.Err();
+	err := scanner.Err()
 
-  if err != nil {
-    fmt.Fprintln(os.Stderr, "error:", err)
-    os.Exit(1)
-  }
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "error:", err)
+		os.Exit(1)
+	}
 }

@@ -9,14 +9,14 @@ go get github.com/mitchellh/gox
 
 cd 00042-go-マップinマップ
 
-( export GOPATH=$(pwd) && cd src/main && gox )
+( cd cd 00042-go-マップinマップ && export GOPATH=$(pwd) && cd src/main && gox )
 
 find | grep main_ | ruby -F/ -anle 'a=$F[3].split(/_/);puts "mkdir","-p","./bin/"+a.slice(1..a.size).join("-"),"mv",$F.join("/"),"./bin/"+a.slice(1..a.size).join("-")+"/main"' | xargs -n3
 
 $ file bin/windows-amd64.exe/main
 bin/windows-amd64.exe/main: PE32+ executable (console) x86-64 (stripped to external PDB), for MS Windows
 
-
+j
 $ file bin/windows-386.exe/main
 bin/windows-386.exe/main: PE32 executable (console) Intel 80386 (stripped to external PDB), for MS Windows
 
