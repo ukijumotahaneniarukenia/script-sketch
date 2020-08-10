@@ -121,10 +121,10 @@ deploy(){
   cd $HOME/script-sketch/$LANG_NAME
 
   #いいかんじにしたい
-  find $PROJECT_DIR_NAME -type f | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
+  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
 
   #パス登録
-  find $PROJECT_DIR_NAME -type f | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/.local/script-cmd/bin/$APP_NAME-$LANG_NAME | bash
+  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/.local/script-cmd/bin/$APP_NAME-$LANG_NAME | bash
 
   which $APP_NAME-$LANG_NAME
 
