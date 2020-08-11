@@ -1,45 +1,22 @@
-- 事始め
+テンプレート作成
 ```
-$mkdir -p 00001-nim-ハローワールド
-$cd 00001-nim-ハローワールド
-$echo '/main' | xargs -n1 >.gitignore
-$touch main.nim
-$nim c main.nim
-$./main
-ハローワールド
+bash T01-テンプレート作成.sh init 00031-nim-テンプレートプロジェクトの作成 app
 ```
 
+スケッチ
+
 ```
-$cd 00004-nim-標準入力
+nvim ./00031-nim-テンプレートプロジェクトの作成/app/src/main.nim
+```
 
-$./main $(echo {a..f} | xargs -n2)
-1@["a", "b", "c", "d", "e", "f"]
-
-$./main $(echo {a..f} | xargs -n1)
-1@["a", "b", "c", "d", "e", "f"]
-
-$echo {a..f} | xargs -n1 | ./main
-1@["a"]
-2@["b"]
-3@["c"]
-4@["d"]
-5@["e"]
-6@["f"]
-
-$echo {a..f} | xargs -n2 | ./main
-1@["a", "b"]
-2@["c", "d"]
-3@["e", "f"]
-
-$echo {a..f} | xargs -n3 | ./main
-1@["a", "b", "c"]
-2@["d", "e", "f"]
+ビルド
+```
+bash T01-テンプレート作成.sh build 00031-nim-テンプレートプロジェクトの作成 app
+```
 
 
-$echo {a..f} | xargs -n4 | ./main
-1@["a", "b", "c", "d"]
-2@["e", "f"]
+配備
 
-$echo {a..f} | xargs -n6 | ./main
-1@["a", "b", "c", "d", "e", "f"]
+```
+
 ```

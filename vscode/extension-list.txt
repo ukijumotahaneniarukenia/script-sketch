@@ -31,3 +31,4 @@ matklad.rust-analyzer
 rust-lang.rust
 kosz78.nim
 ms-vscode.cpptools
+golang.go

@@ -1,1 +1,0 @@
-- https://qiita.com/Saayaman/items/e82a09f93bb91409e446
