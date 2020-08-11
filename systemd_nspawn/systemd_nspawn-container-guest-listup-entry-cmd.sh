@@ -70,3 +70,36 @@ echo 'Asia/Tokyo' > /etc/timezone
 locale-gen ja_JP.UTF-8
 echo 'LC_ALL=ja_JP.UTF-8' > /etc/default/locale
 echo 'LANG=ja_JP.UTF-8' >> /etc/default/locale
+
+
+
+
+#開発環境再現
+
+apt install -y git
+
+cd /usr/local/src
+
+git clone https://github.com/ukijumotahaneniarukenia/script-repo.git
+
+cd script-repo
+
+
+#ここは融通きかす
+bash ubuntu-20-04-install-dev-pkg.sh
+
+bash ubuntu-20-04-install-tool-pkg.sh
+
+bash ubuntu-20-04-install-network-pkg.sh
+
+bash ubuntu-20-04-install-vim-system.sh
+
+bash ubuntu-20-04-install-vim-user.sh
+
+bash ubuntu-20-04-install-vim_plug.sh
+
+bash ubuntu-20-04-config-dotfile.sh
+
+bash ubuntu-20-04-config-env.sh
+
+bash ubuntu-20-04-config-ld.sh
