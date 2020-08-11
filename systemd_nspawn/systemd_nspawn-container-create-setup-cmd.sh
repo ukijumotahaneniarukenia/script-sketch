@@ -18,7 +18,7 @@ CONTAINER_HOST0_NETWORK_NAME=80-container-host0.network
 
 HOST0_NETWORK_NAME=host0.network
 
-OUTPUT_FILE_NAME=systemd-container-execute-setup-cmd.sh
+OUTPUT_FILE_NAME=systemd_nspawn-container-execute-setup-cmd.sh
 
 KEYWORDS=($CONTAINER_HOST0_NETWORK_NAME $HOST0_NETWORK_NAME)
 
