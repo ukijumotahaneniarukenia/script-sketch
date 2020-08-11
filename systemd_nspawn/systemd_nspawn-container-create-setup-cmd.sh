@@ -18,7 +18,7 @@ CONTAINER_HOST0_NETWORK_NAME=80-container-host0.network
 
 HOST0_NETWORK_NAME=host0.network
 
-OUTPUT_FILE_NAME=systemd_nspawn-container-execute-setup-cmd.sh
+OUTPUT_FILE_NAME=systemd_nspawn-container-listup-setup-cmd.sh
 
 KEYWORDS=($CONTAINER_HOST0_NETWORK_NAME $HOST0_NETWORK_NAME)
 
@@ -89,7 +89,7 @@ START_HOST_NO=$(printf $SUBGRP_DIGIT $s)
 END_HOST_NO=$(printf $SUBGRP_DIGIT $e)
 
 #ロックファイルの削除
-eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo "ls $WORKDIR/.#$REPLICA_NAME-@ | xargs rm -rf"
+eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo "echo $WORKDIR/.#$REPLICA_NAME-@ | xargs rm -rf"
 
 #仮想コンテナプロセスの停止
 eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I@ echo "cd $WORKDIR && machinectl terminate $REPLICA_NAME-@"
