@@ -32,6 +32,11 @@ if [[ 0 -eq $(id -u) ]];then
   echo 'root:root_pwd' | chpasswd
 fi
 
+#一般ユーザーでもsudoが実行できるように
+#sudo: setrlimit(RLIMIT_CORE): 許可されていない操作です の対策
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+
 #レポジトリの設定
 sed -i.bak 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
 
