@@ -18,7 +18,9 @@ CONTAINER_HOST0_NETWORK_NAME=80-container-host0.network
 
 HOST0_NETWORK_NAME=host0.network
 
-OUTPUT_FILE_NAME=systemd_nspawn-container-listup-setup-cmd.sh
+ENTYR_FILE_NAME=systemd_nspawn-container-guest-listup-entry-cmd.sh
+
+OUTPUT_FILE_NAME=systemd_nspawn-container-guest-listup-setup-cmd.sh
 
 KEYWORDS=($CONTAINER_HOST0_NETWORK_NAME $HOST0_NETWORK_NAME)
 
@@ -156,6 +158,10 @@ eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl
 eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl enable systemd-nspawn@$REPLICA_NAME-{}.service
 eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl start systemd-nspawn@$REPLICA_NAME-{}.service
 eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | xargs -I{} echo systemctl status systemd-nspawn@$REPLICA_NAME-{}.service
+
+#仮想ゲスト側へエントリファイルの配備
+eval echo {$START_HOST_NO..$END_HOST_NO} | xargs -n1 | \
+  xargs -I@ echo cp /home/aine/script-sketch/systemd_nspawn/systemd_nspawn-container-guest-listup-entry-cmd.sh $WORKDIR/$REPLICA_NAME-@/etc/
 
 #実行ファイルのバージョン管理
 cp $WORKDIR/$OUTPUT_FILE_NAME /home/aine/script-sketch/systemd_nspawn/$OUTPUT_FILE_NAME
