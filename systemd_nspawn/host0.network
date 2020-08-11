@@ -8,4 +8,3 @@ Address=SERVER_IP/24
 
 [Route]
 Gateway=MY_ROUTER_IP
-EOS
