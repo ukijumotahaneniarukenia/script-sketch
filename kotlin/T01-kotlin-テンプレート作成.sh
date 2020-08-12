@@ -3,7 +3,7 @@
 usage(){
 cat <<EOS
 Usage:
-  $0 XXXXX-go-マイスペ
+  bash $0 99999-kotlin-テンプレートプロジェクト
 EOS
 exit 0
 }
@@ -12,6 +12,7 @@ ENV_REPO=$1;shift
 
 [ -z $ENV_REPO ] && usage
 
+rm -rf  $ENV_REPO
 
 mkdir -p $ENV_REPO
 
