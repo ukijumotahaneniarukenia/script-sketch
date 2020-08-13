@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "description": "Document",
+  "type": "object",
+  "properties": {
+    "dtm": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
