@@ -1,0 +1,186 @@
+{
+  "playlist": {
+    "movie": [
+      {
+        "title": "Apollo 13",
+        "director": "Ron Howard",
+        "release_date": "1995-06-30",
+        "mpaa_rating": "PG",
+        "running_time": "140",
+        "genre": [
+          "adventure",
+          "drama"
+        ],
+        "cast": {
+          "person": [
+            {
+              "name": "Tom Hanks",
+              "role": "Jim Lovell"
+            },
+            {
+              "name": "Bill Paxton",
+              "role": "Fred Haise"
+            },
+            {
+              "name": "Kevin Bacon",
+              "role": "Jack Swigert"
+            },
+            {
+              "name": "Gary Sinise",
+              "role": "Ken Mattingly"
+            },
+            {
+              "name": "Ed Harris",
+              "role": "Gene Kranz"
+            }
+          ]
+        },
+        "imdb_info": {
+          "synopsis": "\n        NASA must devise a strategy to return Apollo 13 to Earth safely\n        after the spacecraft undergoes massive internal damage putting\n        the lives of the three astronauts on board in jeopardy.\n      ",
+          "score": "7.6",
+          "url": "http://www.imdb.com/title/tt0112384/"
+        },
+        "id": "tt0112384"
+      },
+      {
+        "title": "Solaris",
+        "director": "Steven Soderbergh",
+        "release_date": "2002-11-27",
+        "mpaa_rating": "PG-13",
+        "running_time": "99",
+        "genre": [
+          "drama",
+          "mystery",
+          "romance"
+        ],
+        "cast": {
+          "person": [
+            {
+              "name": "George Clooney",
+              "role": "Chris Kelvin"
+            },
+            {
+              "name": "Natascha McElhone",
+              "role": "Rheya"
+            },
+            {
+              "name": "Ulrich Tukur",
+              "role": "Gibarian"
+            }
+          ]
+        },
+        "imdb_info": {
+          "synopsis": "\n        A troubled psychologist is sent to investigate the crew of an\n        isolated research station orbiting a bizarre planet.\n      ",
+          "score": "6.2",
+          "url": "http://www.imdb.com/title/tt0307479/"
+        },
+        "id": "tt0307479"
+      },
+      {
+        "title": "Ender's Game",
+        "director": "Gavin Hood",
+        "release_date": "2013-11-01",
+        "mpaa_rating": "PG-13",
+        "running_time": "114",
+        "genre": [
+          "action",
+          "scifi"
+        ],
+        "cast": {
+          "person": [
+            {
+              "name": "Asa Butterfield",
+              "role": "Ender Wiggin"
+            },
+            {
+              "name": "Harrison Ford",
+              "role": "Colonel Graff"
+            },
+            {
+              "name": "Hailee Steinfeld",
+              "role": "Petra Arkanian"
+            }
+          ]
+        },
+        "imdb_info": {
+          "synopsis": "\n        Young Ender Wiggin is recruited by the International Military\n        to lead the fight against the Formics, a genocidal alien race\n        which nearly annihilated the human race in a previous invasion.\n      ",
+          "score": "6.7",
+          "url": "http://www.imdb.com/title/tt1731141/"
+        },
+        "id": "tt1731141"
+      },
+      {
+        "title": "Interstellar",
+        "director": "Christopher Nolan",
+        "release_date": "2014-11-07",
+        "mpaa_rating": "PG-13",
+        "running_time": "169",
+        "genre": [
+          "adventure",
+          "drama",
+          "scifi"
+        ],
+        "cast": {
+          "person": [
+            {
+              "name": "Matthew McConaughey",
+              "role": "Cooper"
+            },
+            {
+              "name": "Anne Hathaway",
+              "role": "Brand"
+            },
+            {
+              "name": "Jessica Chastain",
+              "role": "Murph"
+            },
+            {
+              "name": "Michael Caine",
+              "role": "Professor Brand"
+            }
+          ]
+        },
+        "imdb_info": {
+          "synopsis": "\n        A team of explorers travel through a wormhole in space in an\n        attempt to ensure humanity's survival.\n      ",
+          "score": "8.6",
+          "url": "http://www.imdb.com/title/tt0816692/"
+        },
+        "id": "tt0816692"
+      },
+      {
+        "title": "The Martian",
+        "director": "Ridley Scott",
+        "release_date": "2015-10-02",
+        "mpaa_rating": "PG-13",
+        "running_time": "144",
+        "genre": [
+          "adventure",
+          "drama",
+          "scifi"
+        ],
+        "cast": {
+          "person": [
+            {
+              "name": "Matt Damon",
+              "role": "Mark Watney"
+            },
+            {
+              "name": "Jessica Chastain",
+              "role": "Melissa Lewis"
+            },
+            {
+              "name": "Kristen Wiig",
+              "role": "Annie Montrose"
+            }
+          ]
+        },
+        "imdb_info": {
+          "synopsis": "\n        During a manned mission to Mars, Astronaut Mark Watney is\n        presumed dead after a fierce storm and left behind by his crew.\n        But Watney has survived and finds himself stranded and alone on\n        the hostile planet. With only meager supplies, he must draw upon\n        his ingenuity, wit and spirit to subsist and find a way to\n        signal to Earth that he is alive.\n      ",
+          "score": "8.1",
+          "url": "http://www.imdb.com/title/tt3659388/"
+        },
+        "id": "tt3659388"
+      }
+    ]
+  }
+}

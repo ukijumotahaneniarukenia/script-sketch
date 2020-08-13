@@ -1,0 +1,18 @@
+{
+".playlist.movie[0].mpaa_rating": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].release_date": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].running_time": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].title": {
+    "type": "string",
+    "format": ""
+  }
+}
