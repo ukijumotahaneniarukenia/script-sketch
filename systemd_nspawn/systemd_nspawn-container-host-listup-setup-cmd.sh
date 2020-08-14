@@ -19,7 +19,7 @@ reset(){
 prepare(){
 
   apt install -y debootstrap
-  apt install -y systemd-container
+  apt install -y systemd-container #このパッケージをインストール後、cd /var/lib/machines/できるようになる
 
 
   mkdir -p /var/lib/machines/vir-ubuntu-20-04-template
