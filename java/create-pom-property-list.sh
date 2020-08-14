@@ -46,6 +46,9 @@ postprocess(){
   cat $WORKDIR/*tsv | awk -v FS='\t' '$0=$1' | teip -Gog '(?<=\[)\d+(?=\])' -- sed 's/.*/.*/;' | sed 's/\[/\x5c\x5c\x5c\x5c[/g;s/\]/\x5c\x5c\x5c\x5c]/g;' | \
     sort | uniq >$WORKDIR/pattern.txt
 
+  #バージョン管理する
+  cp $WORKDIR/pattern.txt $SCRIPT_SKETCH_DIR/pattern.txt
+
 
   cat $WORKDIR/pattern.txt | while read ptn;do ls $WORKDIR/*tsv | while read file;do grep -P $ptn $file;done;done | \
     sed 's/うんち/ /g' | sort | uniq >$SCRIPT_SKETCH_DIR/$FINALLY_OUTPUT_FILE_NAME$OUT_SUFFIX
