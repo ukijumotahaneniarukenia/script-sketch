@@ -1,0 +1,70 @@
+{
+  ".playlist": {
+    "type": "object",
+    "format": ""
+  },
+  ".playlist.movie": {
+    "type": "array",
+    "format": ""
+  },
+  ".playlist.movie[0]": {
+    "type": "object",
+    "format": ""
+  },
+  ".playlist.movie[0].cast.person": {
+    "type": "array",
+    "format": ""
+  },
+  ".playlist.movie[0].cast.person[0]": {
+    "type": "object",
+    "format": ""
+  },
+  ".playlist.movie[0].cast.person[0].name": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].cast.person[0].role": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].director": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].genre[0]": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].id": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].imdb_info.score": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].imdb_info.synopsis": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].imdb_info.url": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].mpaa_rating": {
+    "type": "string",
+    "format": ""
+  },
+  ".playlist.movie[0].release_date": {
+    "type": "string",
+    "format": "date-time"
+  },
+  ".playlist.movie[0].running_time": {
+    "type": "string",
+    "format": "date-time"
+  },
+  ".playlist.movie[0].title": {
+    "type": "string",
+    "format": ""
+  }
+}
