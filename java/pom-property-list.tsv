@@ -173,7 +173,7 @@
 /project/dependencies/dependency[7]/exclusions/exclusion/groupId	org.junit.vintage
 /project/dependencies/dependency[7]/groupId	org.springframework.boot
 /project/dependencies/dependency[7]/scope	test
-/project/description	Demo	project	for	Spring	Boot
+/project/description	Demo project for Spring Boot
 /project/groupId	app
 /project/modelVersion	4.0.0
 /project/name	nnn

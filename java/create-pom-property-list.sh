@@ -47,7 +47,8 @@ postprocess(){
     sort | uniq >$WORKDIR/pattern.txt
 
 
-  cat $WORKDIR/pattern.txt | while read ptn;do ls $WORKDIR/*tsv | while read file;do grep -P $ptn $file;done;done | sort | uniq >$SCRIPT_SKETCH_DIR/$FINALLY_OUTPUT_FILE_NAME$OUT_SUFFIX
+  cat $WORKDIR/pattern.txt | while read ptn;do ls $WORKDIR/*tsv | while read file;do grep -P $ptn $file;done;done | \
+    sed 's/うんち/ /g' | sort | uniq >$SCRIPT_SKETCH_DIR/$FINALLY_OUTPUT_FILE_NAME$OUT_SUFFIX
 
 }
 
@@ -60,7 +61,7 @@ execute(){
     while read xpath;do
       echo $xpath;
       cat $WORKDIR/$file$MID_SUFFIX | xpup "$xpath"|ruby -anle 'puts $F.join("うんち")'; #ここまでの処理で1分30ぐらいかかる 手動でやるよりははやいのでおけ
-    done |xargs -n2 | sed 's/うんち/ /g' | tr ' ' '\t' >$WORKDIR/$file$OUT_SUFFIX
+    done |xargs -n2 | tr ' ' '\t' >$WORKDIR/$file$OUT_SUFFIX
 }
 
 main(){
