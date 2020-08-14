@@ -2,7 +2,7 @@
 // このファイルは、JavaTM Architecture for XML Binding(JAXB) Reference Implementation、v2.3.1によって生成されました 
 // <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a>を参照してください 
 // ソース・スキーマの再コンパイル時にこのファイルの変更は失われます。 
-// 生成日: 2020.08.14 時間 05:30:45 AM UTC 
+// 生成日: 2020.08.14 時間 05:33:31 AM UTC 
 //
 
 

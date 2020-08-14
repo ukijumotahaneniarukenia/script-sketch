@@ -39,6 +39,16 @@ generated/Items.java
 generated/ObjectFactory.java
 ```
 
+
+このながれでいいとおもう
+```
+xml2xsd-java test.xml test.xsd
+
+
+xjc test.xsd
+```
+
+
 - OUT
 
 ```
