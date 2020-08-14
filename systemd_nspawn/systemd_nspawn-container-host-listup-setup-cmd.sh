@@ -26,7 +26,8 @@ prepare(){
 
   #ここはいれたいイメージダウンロードしてくる
   #接尾時にテンプレー卜の文字列をつける
-  time debootstrap --arch=amd64 focal /var/lib/machines/vir-ubuntu-20-04-template http://archive.ubuntu.com/ubuntu
+  #time debootstrap --arch=amd64 focal /var/lib/machines/vir-ubuntu-20-04-template http://archive.ubuntu.com/ubuntu
+  time debootstrap --arch=amd64 bionic /var/lib/machines/vir-ubuntu-18-04-template http://archive.ubuntu.com/ubuntu
 
 
 }
