@@ -1,22 +1,36 @@
-1	artifactId	jsoup1	version	1.12.2
-2	artifactId	json2	version	20190722
-3	artifactId	javafaker3	version	0.15
-4	artifactId	htmlcleaner4	version	2.23
-5	artifactId	javafaker5	version	0.15
-6	artifactId	javassist6	version	3.12.1.GA
-7	artifactId	icu4j7	version	66.1
-8	artifactId	javassist8	version	3.12.1.GA
-9	artifactId	commons-lang39	version	3.10
-10	artifactId	commons-lang310	version	3.10
-11	artifactId	tablesaw-core11	version	0.38.0
-12	artifactId	pdfbox12	version	2.0.19
-13	artifactId	lucene-core13	version	8.5.1
-14	artifactId	kuromoji-jumandic14	version	0.9.0
-15	artifactId	junit15	version	4.11
-16	artifactId	junit16	version	4.11
-17	artifactId	junit17	version	4.11
-18	artifactId	junit18	version	4.11
-19	artifactId	junit19	version	4.11
-20	artifactId	spring-boot-starter-test		
-21	artifactId	webjars-locator-core		
-22	artifactId	icu4j22	version	67.1
+artifactId	junit	version	4.11
+artifactId	kuromoji-ipadic	version	0.9.0
+artifactId	selenium-java	version	3.141.59
+artifactId	spring-boot-starter-web	-	-
+artifactId	spring-boot-starter-websocket	-	-
+artifactId	commons-lang3	version	3.10
+artifactId	htmlcleaner	version	2.23
+artifactId	icu4j	version	66.1
+artifactId	icu4j	version	67.1
+artifactId	javafaker	version	0.15
+artifactId	javassist	version	3.12.1.GA
+artifactId	json	version	20190722
+artifactId	jsoup	version	1.12.2
+artifactId	junit	version	4.11
+artifactId	kuromoji-jumandic	version	0.9.0
+artifactId	lucene-core	version	8.5.1
+artifactId	pdfbox	version	2.0.19
+artifactId	spring-boot-starter-test	-	-
+artifactId	tablesaw-core	version	0.38.0
+artifactId	webjars-locator-core	-	-
+artifactId	commons-lang3	-	-
+artifactId	guava	version	28.2-jre
+artifactId	javaslang	version	2.0.6
+artifactId	kuromoji-naist-jdic	version	0.9.0
+artifactId	lucene-analyzers-common	version	8.5.1
+artifactId	sockjs-client	version	1.0.2
+artifactId	commons-codec	-	-
+artifactId	jmxtools	version	1.2.1
+artifactId	kuromoji-unidic	version	0.9.0
+artifactId	lucene-spellchecker	version	3.6.2
+artifactId	stomp-websocket	version	2.3.3
+artifactId	bootstrap	version	3.3.7
+artifactId	jms	version	1.1
+artifactId	kuromoji-unidic-kanaaccent	version	0.9.0
+artifactId	jquery	version	3.1.1-1
+artifactId	spring-boot-starter-test	-	-
