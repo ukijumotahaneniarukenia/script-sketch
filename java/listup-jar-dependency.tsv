@@ -1,0 +1,22 @@
+1	artifactId	jsoup1	version	1.12.2
+2	artifactId	json2	version	20190722
+3	artifactId	javafaker3	version	0.15
+4	artifactId	htmlcleaner4	version	2.23
+5	artifactId	javafaker5	version	0.15
+6	artifactId	javassist6	version	3.12.1.GA
+7	artifactId	icu4j7	version	66.1
+8	artifactId	javassist8	version	3.12.1.GA
+9	artifactId	commons-lang39	version	3.10
+10	artifactId	commons-lang310	version	3.10
+11	artifactId	tablesaw-core11	version	0.38.0
+12	artifactId	pdfbox12	version	2.0.19
+13	artifactId	lucene-core13	version	8.5.1
+14	artifactId	kuromoji-jumandic14	version	0.9.0
+15	artifactId	junit15	version	4.11
+16	artifactId	junit16	version	4.11
+17	artifactId	junit17	version	4.11
+18	artifactId	junit18	version	4.11
+19	artifactId	junit19	version	4.11
+20	artifactId	spring-boot-starter-test		
+21	artifactId	webjars-locator-core		
+22	artifactId	icu4j22	version	67.1
