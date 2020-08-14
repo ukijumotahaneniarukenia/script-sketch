@@ -49,6 +49,13 @@ xjc test.xsd
 ```
 
 
+あとはデータファイルからjavaプロパティにマッピングなど
+
+- https://qiita.com/aono-masashi/items/a8b30d1892732e7e5f1b
+- https://qiita.com/opengl-8080/items/f7112240c72d61d4cdf4
+
+
+
 - OUT
 
 ```
