@@ -13,8 +13,6 @@ import static java.lang.System.exit;
 
 public class App {
 
-    //https://bitbucket.org/xerial/sqlite-jdbc/src/default/LICENSE
-
     private static final String DEFAULT_SEPARATOR = " ";
     private static final String SIGNAL_HANDLE_INT = "INT";
     private static final String ORS = "\n";
@@ -192,6 +190,7 @@ public class App {
     }
     private static void usage() {
         System.out.println("Usageだよーん");
+        System.out.println("sudo apt install -y sqlite3");
         exit(SUCCESS_STATUS);
     }
     private static List<String> pre_process(Scanner stdin){
