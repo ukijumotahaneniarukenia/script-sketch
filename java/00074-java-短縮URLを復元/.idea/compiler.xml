@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="00074-java-短縮URLを復元" />
         <module name="nnn" />
       </profile>
     </annotationProcessing>
