@@ -17,7 +17,7 @@ public class App {
         }else{
             Map<Integer, List<String>> map = sub_process(pre_process(new Scanner(System.in)));
 
-            if(isSingleRow(map)){
+            if(!isSingleRow(map)){
                 //単一行チェック
                 usage();
             }
