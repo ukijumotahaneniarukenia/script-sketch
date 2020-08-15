@@ -6,7 +6,7 @@ cat <<EOS
 
 Usage:
 
-  CMD: echo TOBE_REPLACE_INPUT_FILE_NAME | ${0##*/}
+  CMD: ${0##*/} TOBE_REPLACE_INPUT_FILE_NAME
 
 EOS
 
@@ -22,4 +22,4 @@ if [ -z $INPUT_FILE_NAME ];then
 
 fi
 
-echo $INPUT_FILE_NAME | java -jar TOBE_REPLACE_JARFILE_FULL_PATH
+echo  $INPUT_FILE_NAME | java -jar TOBE_REPLACE_JARFILE_FULL_PATH
