@@ -52,16 +52,16 @@ public class App {
 
         if(dstFile.exists()){
             dstFile.delete();
-        }else{
-            FileWriter fw = new FileWriter(dstFileName, true);
-            String str = Files.readString(Paths.get(srcFileName));
-            fw.write(XML.toJSONObject(str).toString());
-            fw.close();
         }
+
+        FileWriter fw = new FileWriter(dstFileName, true);
+        String str = Files.readString(Paths.get(srcFileName));
+        fw.write(XML.toJSONObject(str).toString());
+        fw.close();
     }
 
-    private static void trap(List<String> liz){
-        for (String ele:liz) {
+    private static void trap(List<String> list){
+        for (String ele:list) {
             catch_sig(ele);
         }
     }
@@ -85,10 +85,10 @@ public class App {
         stdin.close();
         return rt;
     }
-    private static Map<Integer, List<String>> sub_process(List<String> liz){
+    private static Map<Integer, List<String>> sub_process(List<String> list){
         Map<Integer, List<String>> rt= new LinkedHashMap<>();
-        for (int i=0;i<liz.size();i++){
-            List<String> l = new ArrayList<>(Arrays.asList(liz.get(i).split(DEFAULT_SEPARATOR)));
+        for (int i=0;i<list.size();i++){
+            List<String> l = new ArrayList<>(Arrays.asList(list.get(i).split(DEFAULT_SEPARATOR)));
             rt.put(i,l);
         }
         return rt;
