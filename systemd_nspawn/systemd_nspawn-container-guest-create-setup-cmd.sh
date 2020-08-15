@@ -4,15 +4,11 @@ WORKDIR=/var/lib/machines
 
 PREFIX=vir-
 
-TEMPLATE_OS=ubuntu-20-04
-
 SUFFIX=-template
 
-SEED_NAME=$PREFIX$TEMPLATE_OS$SUFFIX
-
-REPLICA_NAME=$PREFIX$TEMPLATE_OS
-
 DEPLOY_DIR=/etc/systemd/network
+
+RESOLVE_CONF_FILE_PATH=/etc/systemd/resolved.conf
 
 CONTAINER_HOST0_NETWORK_NAME=80-container-host0.network
 
@@ -22,28 +18,13 @@ ENTYR_FILE_NAME=systemd_nspawn-container-guest-listup-entry-cmd.sh
 
 OUTPUT_FILE_NAME=systemd_nspawn-container-guest-listup-setup-cmd.sh
 
-KEYWORDS=($CONTAINER_HOST0_NETWORK_NAME $HOST0_NETWORK_NAME)
-
-ACTION_LIST=(stop enable start status)
-
-MY_ROUTER_IP=192.168.1.1
-
-GOOGLE_DNS_IP=8.8.8.8
-
-RESOLVE_CONF_FILE_PATH=/etc/systemd/resolved.conf
-
-SEGMENT_THIRD_OCTET_IP=192.168.1
-SEGMENT_FORTH_OCTET_START_IP=209
-
-SUBGRP_DIGIT="%03d"
-
 usage(){
 cat <<EOS
 Usage:
 
   PRE: su root
 
-   IN: $0 1 5 > $WORKDIR/$OUTPUT_FILE_NAME
+   IN: $0 1 5 ubuntu-18-04 > $WORKDIR/$OUTPUT_FILE_NAME
 
   OUT:
 
@@ -54,22 +35,23 @@ exit 0
 
 }
 
+s=$1;shift;
+e=$1;shift;
+TEMPLATE_OS=$1;shift;
+
 if [[ $UID  -ne 0 ]];then
 
   usage
 
 fi
 
-s=$1;shift;
-e=$1;shift;
-
-if [[ -z $s ]];then
+if [ -z $s ];then
 
   usage
 
 fi
 
-if [[ -z $e ]];then
+if [ -z $e ];then
 
   usage
 
@@ -86,6 +68,29 @@ if [[ $e -le 0 ]];then
   usage
 
 fi
+
+if [ -z $TEMPLATE_OS ];then
+
+  usage
+
+fi
+
+SEED_NAME=$PREFIX$TEMPLATE_OS$SUFFIX
+
+REPLICA_NAME=$PREFIX$TEMPLATE_OS
+
+KEYWORDS=($CONTAINER_HOST0_NETWORK_NAME $HOST0_NETWORK_NAME)
+
+ACTION_LIST=(stop enable start status)
+
+MY_ROUTER_IP=192.168.1.1
+
+GOOGLE_DNS_IP=8.8.8.8
+
+SEGMENT_THIRD_OCTET_IP=192.168.1
+SEGMENT_FORTH_OCTET_START_IP=209
+
+SUBGRP_DIGIT="%03d"
 
 START_HOST_NO=$(printf $SUBGRP_DIGIT $s)
 END_HOST_NO=$(printf $SUBGRP_DIGIT $e)

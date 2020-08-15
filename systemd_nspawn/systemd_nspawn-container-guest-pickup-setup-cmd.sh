@@ -25,8 +25,8 @@ if [[ $(echo $MACHINE_NO | bc ) -eq 0 ]];then
 fi
 
 WAIT_TIME=2.5
-INPUT_FILE_NAME=systemd_nspawn-container-listup-setup-cmd.sh
-OUTPUT_FILE_NAME=systemd_nspawn-container-execute-setup-cmd.sh
+INPUT_FILE_NAME=systemd_nspawn-container-guest-listup-setup-cmd.sh
+OUTPUT_FILE_NAME=systemd_nspawn-container-guest-execute-setup-cmd.sh
 
 rm -rf $OUTPUT_FILE_NAME
 
