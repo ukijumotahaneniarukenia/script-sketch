@@ -1,127 +1,30 @@
-依存関係のjarファイル名とバージョンあったりなかったり
+コードポイント生成
+```
+private static void mock(){
+	List<String> l5 =Stream.iterate(Character.MIN_CODE_POINT,n->n-Character.MIN_CODE_POINT<=Character.MAX_CODE_POINT,n->n + 1)
+		.parallel()
+		.filter(e->excludeSurrogate(e))
+		.limit(97+10)
+		.skip(97)
+		.map(e->String.valueOf(Character.toChars(e)))
+		.collect(Collectors.toList());
+	System.out.println(l5.size());
+	System.out.println(l5);
+}
 
-- CMD
+private static boolean excludeSurrogate(Integer n){
+	return n < (int) Character.MIN_HIGH_SURROGATE || (int) Character.MAX_LOW_SURROGATE < n;
+}
+```
+
+ceil関数
 
 ```
-ls $HOME/script-sketch/java/wrksp/*tsv | xargs -I@ grep -P '/project/dependencies/dependency\[.*\]/artifactId|/project/dependencies/dependency\[.*\]/version' @
-```
-
-- OUT
-
-```
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	jsoup
-/project/dependencies/dependency[2]/version	1.12.2
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	json
-/project/dependencies/dependency[2]/version	20190722
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	javafaker
-/project/dependencies/dependency[2]/version	0.15
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	htmlcleaner
-/project/dependencies/dependency[2]/version	2.23
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	javafaker
-/project/dependencies/dependency[2]/version	0.15
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	javassist
-/project/dependencies/dependency[2]/version	3.12.1.GA
-/project/dependencies/dependency[3]/artifactId	javaslang
-/project/dependencies/dependency[3]/version	2.0.6
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	icu4j
-/project/dependencies/dependency[2]/version	66.1
-/project/dependencies/dependency[3]/artifactId	guava
-/project/dependencies/dependency[3]/version	28.2-jre
-/project/dependencies/dependency[4]/artifactId	jmxtools
-/project/dependencies/dependency[4]/version	1.2.1
-/project/dependencies/dependency[5]/artifactId	jms
-/project/dependencies/dependency[5]/version	1.1
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	javassist
-/project/dependencies/dependency[2]/version	3.12.1.GA
-/project/dependencies/dependency[3]/artifactId	javaslang
-/project/dependencies/dependency[3]/version	2.0.6
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	commons-lang3
-/project/dependencies/dependency[2]/version	3.10
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	commons-lang3
-/project/dependencies/dependency[2]/version	3.10
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	tablesaw-core
-/project/dependencies/dependency[2]/version	0.38.0
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	pdfbox
-/project/dependencies/dependency[2]/version	2.0.19
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	lucene-core
-/project/dependencies/dependency[2]/version	8.5.1
-/project/dependencies/dependency[3]/artifactId	lucene-analyzers-common
-/project/dependencies/dependency[3]/version	8.5.1
-/project/dependencies/dependency[4]/artifactId	lucene-spellchecker
-/project/dependencies/dependency[4]/version	3.6.2
-/project/dependencies/dependency[1]/artifactId	kuromoji-ipadic
-/project/dependencies/dependency[1]/version	0.9.0
-/project/dependencies/dependency[2]/artifactId	kuromoji-jumandic
-/project/dependencies/dependency[2]/version	0.9.0
-/project/dependencies/dependency[3]/artifactId	kuromoji-naist-jdic
-/project/dependencies/dependency[3]/version	0.9.0
-/project/dependencies/dependency[4]/artifactId	kuromoji-unidic
-/project/dependencies/dependency[4]/version	0.9.0
-/project/dependencies/dependency[5]/artifactId	kuromoji-unidic-kanaaccent
-/project/dependencies/dependency[5]/version	0.9.0
-/project/dependencies/dependency[1]/artifactId	selenium-java
-/project/dependencies/dependency[1]/version	3.141.59
-/project/dependencies/dependency[2]/artifactId	junit
-/project/dependencies/dependency[2]/version	4.11
-/project/dependencies/dependency[1]/artifactId	selenium-java
-/project/dependencies/dependency[1]/version	3.141.59
-/project/dependencies/dependency[2]/artifactId	junit
-/project/dependencies/dependency[2]/version	4.11
-/project/dependencies/dependency[1]/artifactId	selenium-java
-/project/dependencies/dependency[1]/version	3.141.59
-/project/dependencies/dependency[2]/artifactId	junit
-/project/dependencies/dependency[2]/version	4.11
-/project/dependencies/dependency[1]/artifactId	selenium-java
-/project/dependencies/dependency[1]/version	3.141.59
-/project/dependencies/dependency[2]/artifactId	junit
-/project/dependencies/dependency[2]/version	4.11
-/project/dependencies/dependency[1]/artifactId	selenium-java
-/project/dependencies/dependency[1]/version	3.141.59
-/project/dependencies/dependency[2]/artifactId	junit
-/project/dependencies/dependency[2]/version	4.11
-/project/dependencies/dependency[1]/artifactId	spring-boot-starter-web
-/project/dependencies/dependency[2]/artifactId	spring-boot-starter-test
-/project/dependencies/dependency[3]/artifactId	commons-lang3
-/project/dependencies/dependency[4]/artifactId	commons-codec
-/project/dependencies/dependency[1]/artifactId	spring-boot-starter-websocket
-/project/dependencies/dependency[2]/artifactId	webjars-locator-core
-/project/dependencies/dependency[3]/artifactId	sockjs-client
-/project/dependencies/dependency[3]/version	1.0.2
-/project/dependencies/dependency[4]/artifactId	stomp-websocket
-/project/dependencies/dependency[4]/version	2.3.3
-/project/dependencies/dependency[5]/artifactId	bootstrap
-/project/dependencies/dependency[5]/version	3.3.7
-/project/dependencies/dependency[6]/artifactId	jquery
-/project/dependencies/dependency[6]/version	3.1.1-1
-/project/dependencies/dependency[7]/artifactId	spring-boot-starter-test
-/project/dependencies/dependency[1]/artifactId	junit
-/project/dependencies/dependency[1]/version	4.11
-/project/dependencies/dependency[2]/artifactId	icu4j
-/project/dependencies/dependency[2]/version	67.1
+private static Integer ceil(Integer n,Integer k){
+	if(Math.ceil((double)n/k) == k){
+	    return (int)k;
+	}else{
+	    return (int)Math.ceil((double)n/k);
+	}
+}
 ```
