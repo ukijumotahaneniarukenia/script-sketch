@@ -1,6 +1,0 @@
-/nnn/build/*
-/nnn/.gradle/*
-/nnn/.idea/*
-/nnn/gradlew
-/nnn/gradlew.bat
-/nnn/gradle/wrapper/*
