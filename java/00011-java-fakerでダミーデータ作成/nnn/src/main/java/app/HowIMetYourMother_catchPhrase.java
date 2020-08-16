@@ -6,7 +6,7 @@ import sun.misc.Signal;
 
 import java.util.*;
 
-public class App {
+public class HowIMetYourMother_catchPhrase {
 
     private static final String DEFAULT_SEPARATOR = " ";
     private static final String SIGNAL_HANDLE_INT = "INT";
@@ -33,12 +33,11 @@ public class App {
         }
     }
     private static void wrapperExecute(Map<Integer, List<String>> map){
-        System.out.println(map.get(0).get(0));
         Faker faker = new Faker(new Locale(map.get(0).get(0)));
-        PrincessBride princessBride = faker.princessBride();
+        HowIMetYourMother howIMetYourMother = faker.howIMetYourMother();
         int cnt = Integer.parseInt(map.get(0).get(1));
         for(int i=0;i<cnt;i++){
-            System.out.println(princessBride.quote());
+            System.out.println(howIMetYourMother.catchPhrase());
         }
     }
     private static boolean isSingleRow(Map<Integer, List<String>> map){
@@ -84,7 +83,7 @@ public class App {
                 "v vi\n" +
                 "z zh-CN zh-TW\n" +
                 "\n" +
-                "CMD: echo ja_JP 10 | java -jar /home/aine/script-sketch/java/00011-java-fakerでダミーデータ作成/nnn/target/TOBE_REPLACE_APP_NAME-1.0-SNAPSHOT-jar-with-dependencies.jar" +
+                "CMD: echo ja 10 | java -jar /home/aine/script-sketch/java/00011-java-fakerでダミーデータ作成/nnn/target/howIMetYourMother-catchPhrase-1.0-SNAPSHOT-jar-with-dependencies.jar" +
                 "\n");
         System.exit(0);
     }

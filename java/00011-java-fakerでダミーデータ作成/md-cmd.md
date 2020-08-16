@@ -46,3 +46,45 @@ u uk
 v vi
 z zh-CN zh-TW
 ```
+
+
+
+
+
+ここから自動生成手順
+
+
+作業ディレクトリ
+
+```
+cd ~/script-sketch/java/00011-java-fakerでダミーデータ作成
+```
+
+自動生成ディレクトリ削除
+
+```
+rm -rf generate
+```
+
+自動生成ディレクトリ作成
+
+```
+mkdir -p generate
+```
+
+正規化リスト作成
+
+```
+cat list.tsv | grep -v toString | awk -v FS="\t" '{print $1,$4}'|ruby -anle 'a=$F[0].split("\.");b=a[a.size-1].split(/(?=[A-Z])/);p a[a.size-1],b[0].downcase+b[1..b.size-1].join(""),$F[$F.size-1]'|xargs -n3|awk '{print $1,$2,$3}' OFS="\t" >list-norm.tsv
+```
+
+自動生成
+
+```
+cat list-norm.tsv | while read upcamel downcamel method;do sed "s/TOBE_REPLACE_UPCAMEL/$upcamel/g;s/TOBE_REPLACE_DOWNCAMEL/$downcamel/g;s/TOBE_REPLACE_METHOD/$method/g;s/App/$upcamel"_"$method/g;" template.java > generate/$upcamel"_"$method.java;done
+```
+
+
+１ビルド５秒ぐらいで見積もる
+
+
