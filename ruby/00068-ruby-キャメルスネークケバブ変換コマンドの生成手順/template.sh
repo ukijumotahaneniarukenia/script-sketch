@@ -22,7 +22,7 @@ main(){
 
   for(( i=0;i<${#ARGS[@]};i++ ));do
 
-    echo ${ARGS[$i]} | ruby -F_ -anle 'print $F[0],$F[1..$F.size-1].map(&:capitalize).join("")'
+    echo ${ARGS[$i]} | CMD_STR
 
   done
 
