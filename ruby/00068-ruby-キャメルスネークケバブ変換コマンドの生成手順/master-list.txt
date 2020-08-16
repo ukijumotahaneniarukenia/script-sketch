@@ -1,0 +1,6 @@
+downcamel unkoMoriMori
+upcamel UnkoMoriMori
+snake unko_mori_mori
+screamsnake UNKO_MORI_MORI
+kebab unko-mori-mori
+train Unko-Mori-Mori
