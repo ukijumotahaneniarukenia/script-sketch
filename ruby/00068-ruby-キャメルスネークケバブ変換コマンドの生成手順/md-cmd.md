@@ -81,7 +81,7 @@ $ cat cmd_name-in-out-cmd_str.tsv  | awk '$0=$1' | xargs -I@ echo - [ ] @
 
 コマンド抽出
 ```
-$ cat cmd_name-in-out-cmd_str.tsv | awk '{print $1,$2,$3}' OFS="\t" | while read cmd_name in out;do echo -e "$cmd_name\t$in\t$out"; sed -n 25p $cmd_name/$cmd_name-ruby|sed -r 's/echo\s+"\$\{STR\}"\s+\| //'|sed -r 's/^\s//g;s/^ //';done>cmd_name-in-out-cmd_str.txt
+$ cat cmd_name-in-out-cmd_str.tsv | awk '{print $1,$2,$3}' OFS="\t" | while read cmd_name in out;do echo -e "$cmd_name\t$in\t$out"; sed -n 25p $cmd_name/$cmd_name-ruby|sed -r 's/echo\s+"\$\{ARGS\[\$i\]\}"\s+\| //'|sed -r 's/^\s//g;s/^ //';done>cmd_name-in-out-cmd_str.txt
 ```
 
 テーブル再作成
