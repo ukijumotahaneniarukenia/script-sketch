@@ -33,6 +33,7 @@ public class App {
         }
     }
     private static void wrapperExecute(Map<Integer, List<String>> map){
+        System.out.println(map.get(0).get(0));
         Faker faker = new Faker(new Locale(map.get(0).get(0)));
         PrincessBride princessBride = faker.princessBride();
         int cnt = Integer.parseInt(map.get(0).get(1));
@@ -62,9 +63,28 @@ public class App {
     private static void usage() {
         System.out.println("Usageだよーん");
         System.out.println("\n" +
-                "" +
+                "LOCALE:\n" +
+                "a ar\n" +
+                "b bg by\n" +
+                "c ca ca-CAT cs-CZ\n" +
+                "d da-DK de de-AT de-CH\n" +
+                "e ee en en-AU en-BORK en-CA en-GB en-IND en-MS en-NEP en-NG en-NZ en-PAK en-SG en-UG en-US en-ZA en-au-ocker es es-MX\n" +
+                "f fa fi-FI fr fr-CA fr-CH\n" +
+                "h he hu hy\n" +
+                "i id in-ID it\n" +
+                "j ja\n" +
+                "k ko\n" +
+                "l lv\n" +
+                "n nb-NO nl no-NO\n" +
+                "p pl pt pt-BR\n" +
+                "r ru\n" +
+                "s sk sv sv-SE\n" +
+                "t th tr\n" +
+                "u uk\n" +
+                "v vi\n" +
+                "z zh-CN zh-TW\n" +
+                "\n" +
                 "CMD: echo ja_JP 10 | java -jar /home/aine/script-sketch/java/00011-java-fakerでダミーデータ作成/nnn/target/TOBE_REPLACE_APP_NAME-1.0-SNAPSHOT-jar-with-dependencies.jar" +
-                "" +
                 "\n");
         System.exit(0);
     }
