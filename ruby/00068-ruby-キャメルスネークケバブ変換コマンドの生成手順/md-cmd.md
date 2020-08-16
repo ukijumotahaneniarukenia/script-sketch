@@ -33,7 +33,7 @@ echo {downcamel,upcamel,snake,screamsnake,kebab,train} | ruby -anle 'puts *$F.pe
 置換
 ```
 今回の自動生成
-cat cmd-in-out-cmd_str.tsv | while read cmd_name in out cmd_str;do sed "s/INPUT_STR/$in/g;s/OUTPUT_STR/$out/g;s/CMD_STR/$cmd_str/g;" template.sh>$cmd_name/$cmd_name-ruby;done
+cat cmd_name-in-out-cmd_str.tsv | while read cmd_name in out cmd_str;do sed "s/INPUT_STR/$in/g;s/OUTPUT_STR/$out/g;s/CMD_STR/$cmd_str/g;" template.sh>$cmd_name/$cmd_name-ruby;done
 
 前回までの自動生成（上書き）
 cat cmd-in-out.tsv | while read cmd_name in out cmd_str;do sed "s/INPUT_STR/$in/g;s/OUTPUT_STR/$out/g;s/CMD_STR/$cmd_str/g;" template.sh | sponge $cmd_name/$cmd_name-ruby;done
