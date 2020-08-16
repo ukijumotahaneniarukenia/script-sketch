@@ -58,11 +58,6 @@ ls generate/* | xargs -n2 | \
 
     wait $!
 
-    #デプロイ
-    bash $HOME/script-sketch/java/deploy-maven.sh 00011 $HOME/script-sketch/java/wrapper-template-stdin-via-pipe-args.sh 'ja 10'
-
-    wait $!
-
     cnt=$[$cnt+1]
 
   done
