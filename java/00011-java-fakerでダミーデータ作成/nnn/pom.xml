@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>app</groupId>
-  <artifactId>address-buildingNumber</artifactId>
+  <artifactId>zelda-game</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>nnn</name>
@@ -99,7 +99,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>app.Address_buildingNumber</mainClass>
+              <mainClass>app.Zelda_game</mainClass>
             </manifest>
           </archive>
         </configuration>

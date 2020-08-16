@@ -87,4 +87,17 @@ cat list-norm.tsv | while read upcamel downcamel method;do sed "s/TOBE_REPLACE_U
 
 １ビルド５秒ぐらいで見積もる
 
+334件で18分
+
+1件あたり3秒ぐらい
+
+```
+$ time ./make-jar.sh > launch-make-jar-stdout.log 2> launch-make-jar-stderr.log
+real	18m0.083s
+user	58m18.790s
+sys	2m10.016s
+```
+
+デプロイはシステム共通ではなく個別タスクで切り出す
+
 

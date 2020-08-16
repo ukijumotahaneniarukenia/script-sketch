@@ -25,7 +25,7 @@ import sun.misc.Signal;
 
 import java.util.*;
 
-public class Address_buildingNumber {
+public class Zelda_game {
 
     private static final String DEFAULT_SEPARATOR = " ";
     private static final String SIGNAL_HANDLE_INT = "INT";
@@ -53,10 +53,10 @@ public class Address_buildingNumber {
     }
     private static void wrapperExecute(Map<Integer, List<String>> map){
         Faker faker = new Faker(new Locale(map.get(0).get(0)));
-        Address address = faker.address();
+        Zelda zelda = faker.zelda();
         int cnt = Integer.parseInt(map.get(0).get(1));
         for(int i=0;i<cnt;i++){
-            System.out.println(address.buildingNumber());
+            System.out.println(zelda.game());
         }
     }
     private static boolean isSingleRow(Map<Integer, List<String>> map){
@@ -102,7 +102,7 @@ public class Address_buildingNumber {
                 "v vi\n" +
                 "z zh-CN zh-TW\n" +
                 "\n" +
-                "CMD: echo ja 10 | java -jar /home/aine/script-sketch/java/00011-java-fakerでダミーデータ作成/nnn/target/address-buildingNumber-1.0-SNAPSHOT-jar-with-dependencies.jar" +
+                "CMD: echo ja 10 | java -jar /home/aine/script-sketch/java/00011-java-fakerでダミーデータ作成/nnn/target/zelda-game-1.0-SNAPSHOT-jar-with-dependencies.jar" +
                 "\n");
         System.exit(0);
     }
