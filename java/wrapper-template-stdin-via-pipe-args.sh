@@ -14,12 +14,18 @@ exit 0
 
 }
 
-INPUT_FILE_NAME=$1;shift;
+main(){
+  ARGS=($(cat -));
 
-if [ -z $INPUT_FILE_NAME ];then
+  if [[ 0 -eq ${#ARGS[@]} ]] ;then
 
-  usage
+    usage
 
-fi
+  fi
 
-echo $INPUT_FILE_NAME | java -jar TOBE_REPLACE_JARFILE_FULL_PATH
+  echo ${ARGS[@]} | java -jar TOBE_REPLACE_JARFILE_FULL_PATH
+
+}
+
+[ -p /dev/stdin ] && cat - | main
+[ -p /dev/stdin ] || usage

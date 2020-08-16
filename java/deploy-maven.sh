@@ -12,6 +12,10 @@ Usage:
 
   CMD: bash ${0##*/} 00010 wrapper-template-stdin-via-cmdline-args-non-output-file-name.sh test.xml
 
+    or
+
+  CMD: bash ${0##*/} 00011 wrapper-template-stdin-via-pipe-args.sh 'ja 10'
+
 EOS
 
 exit 0
@@ -34,7 +38,7 @@ if [ -z $PROJECT_DIR_PREFIX_NO ];then
 
 fi
 
-APP_NAME=$(find $PROJECT_DIR_PREFIX_NO* -type f | grep pom.xml | xargs cat | xml c14n --without-comments - | teip -Gog '(?<=<project[^.]).*(?=>)' -- sed 's/.*//' | xmllint --format - | xml2 | grep /project/artifactId | cut -d= -f2 )
+APP_NAME=$(find $PROJECT_DIR_PREFIX_NO* -mindepth 2 -type f | grep pom.xml | xargs cat | xml c14n --without-comments - | teip -Gog '(?<=<project[^.]).*(?=>)' -- sed 's/.*//' | xmllint --format - | xml2 | grep /project/artifactId | cut -d= -f2 )
 
 INSTALL_DIR_NAME=$HOME/script-cmd/java/11/$APP_NAME/
 
