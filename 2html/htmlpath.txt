@@ -1,0 +1,26 @@
+/html/@lang=ja
+/html= 
+/html/head= 
+/html/head/meta/@http-equiv=content-type
+/html/head/meta/@content=text/html; charset=utf-8
+/html/head= 
+/html/head/title=サンプルページダヨーン
+/html/head= 
+/html= 
+/html/body= 
+/html/body/h1=あああああああああ
+/html/body= 
+/html/body/div/@class=wrapper
+/html/body/div= 
+/html/body/div/div=あ
+/html/body/div= 
+/html/body/div/div=い
+/html/body/div= 
+/html/body/div/div=う
+/html/body/div= 
+/html/body/div/div=え
+/html/body/div= 
+/html/body/div/div=お
+/html/body/div= 
+/html/body= 
+/html= 
