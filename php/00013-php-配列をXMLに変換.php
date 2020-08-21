@@ -10,6 +10,9 @@ $test_array = array (
 
 print_r($test_array);
 
+
+print_r(array_flip($test_array));
+
 $xml = new SimpleXMLElement('<root/>');
 array_walk_recursive($test_array, array ($xml, 'addChild'));
 print $xml->asXML();

@@ -7,11 +7,11 @@ $json_txt = '{"project":{"modelVersion":"4.0.0","groupId":"app","artifactId":"nn
 
 $ary = json_decode($json_txt,true);
 
-$xml = new SimpleXMLElement('<root/>');
 
-print_r ($ary); #いろいろ試したが、ユーザー定義関数でフリップフロップだめ
+$xml = new SimpleXMLElement('<root/>');
 
 #関数の部分適用時、引数に与えた関数が引数を必要としている場合、実行時のパーサがないと判断するので、ワーニングログを出力をはく
 array_walk_recursive($ary, array ($xml, 'addChild'));
 
-print $xml->asXML();
+
+print_r($xml->asXML());
