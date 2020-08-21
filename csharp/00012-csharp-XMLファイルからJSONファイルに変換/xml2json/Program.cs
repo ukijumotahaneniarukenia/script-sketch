@@ -18,11 +18,11 @@ namespace xml2json {
             Console.WriteLine (EMPTY +
                 "\nUsage:" +
                 RS +
-                "\n  CMD: " + appName + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "test" + "." + OUTPUT_FILE_EXTENSION +
+                "\n  CMD: " + appName + FS + "test" + "." + INPUT_FILE_EXTENSION +
                 RS +
                 "\n    or" +
                 RS +
-                "\n  CMD: " + "echo" + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "test" + "." + OUTPUT_FILE_EXTENSION + FS + "|" + FS + appName +
+                "\n  CMD: " + "echo" + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "|" + FS + appName +
                 RS
             );
 
@@ -61,45 +61,46 @@ namespace xml2json {
                     Usage (appName);
                 }
 
+                if (map[0].Count != 1){
+                    //単一列でない場合
+                    Usage (appName);
+                }
+
                 var inputFileExtenstion = Regex.Replace (map[0][0], ".*\\.", EMPTY);
-                var outputFileExtenstion = Regex.Replace (map[0][1], ".*\\.", EMPTY);
 
                 if (inputFileExtenstion != INPUT_FILE_EXTENSION) {
                     Usage (appName);
                 }
-                if (outputFileExtenstion != OUTPUT_FILE_EXTENSION) {
-                    Usage (appName);
-                }
 
-                XmlToJson (map[0][0], map[0][1]);
+                XmlToJson (map[0][0]);
 
             } else {
                 //コマンドライン引数経由からの入力の場合
 
-                if (args.Length != 2) {
+                if (args.Length != 1) {
                     Usage (appName);
                 }
 
                 var inputFileExtenstion = Regex.Replace (args[0], ".*\\.", EMPTY);
-                var outputFileExtenstion = Regex.Replace (args[1], ".*\\.", EMPTY);
 
                 if (inputFileExtenstion != INPUT_FILE_EXTENSION) {
                     Usage (appName);
                 }
-                if (outputFileExtenstion != OUTPUT_FILE_EXTENSION) {
-                    Usage (appName);
-                }
 
-                XmlToJson (args[0], args[1]);
+                XmlToJson (args[0]);
             }
 
         }
 
         // XML => JSON
-        private static void XmlToJson (string xmlFileName, string jsonFileName) {
+        private static void XmlToJson (string xmlFileName) {
+            var jsonFileName = Regex.Replace(xmlFileName,"(?<=\\.).*",EMPTY) + OUTPUT_FILE_EXTENSION;
+
             var xdoc = XDocument.Load (xmlFileName);
             // XDocumentをJSON形式の文字列に変換
             var json = JsonConvert.SerializeXNode (xdoc, Formatting.Indented);
+
+            Console.WriteLine(json);
 
             File.WriteAllText (jsonFileName, json);
         }
