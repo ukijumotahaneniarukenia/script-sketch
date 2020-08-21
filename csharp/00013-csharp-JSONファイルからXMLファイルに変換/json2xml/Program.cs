@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 namespace json2xml {
     class Program {
         private static char FS = ' ';
+
+        private static string XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         private static char RS = '\n';
         private static string EMPTY = "";
         private static string INPUT_FILE_EXTENSION = "json";
@@ -107,10 +109,22 @@ namespace json2xml {
                 File.Delete (xmlFileName);
             }
 
-            Console.WriteLine(xdoc.Declaration + Environment.NewLine);
-            Console.WriteLine(xdoc + Environment.NewLine);
+            var xmlDeclaration = xdoc.Declaration;
 
-            File.AppendAllText (xmlFileName, xdoc.Declaration + Environment.NewLine);
+            if(xmlDeclaration != null){
+                Console.WriteLine(xdoc.Declaration);
+            }else{
+                Console.WriteLine(XML_DECLARATION);
+            }
+
+            Console.WriteLine(xdoc);
+
+            if(xmlDeclaration != null){
+                File.AppendAllText (xmlFileName, xdoc.Declaration + Environment.NewLine);
+            }else{
+                File.AppendAllText (xmlFileName, XML_DECLARATION + Environment.NewLine);
+            }
+
             File.AppendAllText (xmlFileName, xdoc + Environment.NewLine);
         }
     }
