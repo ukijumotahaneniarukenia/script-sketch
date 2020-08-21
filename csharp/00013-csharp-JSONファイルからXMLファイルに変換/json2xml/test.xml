@@ -1,0 +1,23 @@
+
+<cast>
+  <person>
+    <role>Jim Lovell</role>
+    <name>Tom Hanks</name>
+  </person>
+  <person>
+    <role>Fred Haise</role>
+    <name>Bill Paxton</name>
+  </person>
+  <person>
+    <role>Jack Swigert</role>
+    <name>Kevin Bacon</name>
+  </person>
+  <person>
+    <role>Ken Mattingly</role>
+    <name>Gary Sinise</name>
+  </person>
+  <person>
+    <role>Gene Kranz</role>
+    <name>Ed Harris</name>
+  </person>
+</cast>

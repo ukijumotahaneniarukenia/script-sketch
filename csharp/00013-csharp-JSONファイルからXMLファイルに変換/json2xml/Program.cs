@@ -18,11 +18,11 @@ namespace json2xml {
             Console.WriteLine (EMPTY +
                 "\nUsage:" +
                 RS +
-                "\n  CMD: " + appName + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "test" + "." + OUTPUT_FILE_EXTENSION +
+                "\n  CMD: " + appName + FS + "test" + "." + INPUT_FILE_EXTENSION +
                 RS +
                 "\n    or" +
                 RS +
-                "\n  CMD: " + "echo" + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "test" + "." + OUTPUT_FILE_EXTENSION + FS + "|" + FS + appName +
+                "\n  CMD: " + "echo" + FS + "test" + "." + INPUT_FILE_EXTENSION + FS + "|" + FS + appName +
                 RS
             );
 
@@ -56,48 +56,48 @@ namespace json2xml {
                     map.Add (n, liz);
                     n++;
                 }
+
                 if (map.Count != 1) {
                     //単一行でない場合
                     Usage (appName);
                 }
 
+                if (map[0].Count != 1){
+                    //単一列でない場合
+                    Usage (appName);
+                }
+
                 var inputFileExtenstion = Regex.Replace (map[0][0], ".*\\.", EMPTY);
-                var outputFileExtenstion = Regex.Replace (map[0][1], ".*\\.", EMPTY);
 
                 if (inputFileExtenstion != INPUT_FILE_EXTENSION) {
                     Usage (appName);
                 }
-                if (outputFileExtenstion != OUTPUT_FILE_EXTENSION) {
-                    Usage (appName);
-                }
 
-                JsonToXml (map[0][0], map[0][1]);
+                JsonToXml (map[0][0]);
 
             } else {
                 //コマンドライン引数経由からの入力の場合
 
-                if (args.Length != 2) {
+                if (args.Length != 1) {
+                    //単一引数でない場合
                     Usage (appName);
                 }
 
                 var inputFileExtenstion = Regex.Replace (args[0], ".*\\.", EMPTY);
-                var outputFileExtenstion = Regex.Replace (args[1], ".*\\.", EMPTY);
 
                 if (inputFileExtenstion != INPUT_FILE_EXTENSION) {
                     Usage (appName);
                 }
-                if (outputFileExtenstion != OUTPUT_FILE_EXTENSION) {
-                    Usage (appName);
-                }
 
-                JsonToXml (args[0], args[1]);
+                JsonToXml (args[0]);
             }
 
         }
 
         // JSON => XML
-        private static void JsonToXml (string jsonFileName, string xmlFileName) {
+        private static void JsonToXml (string jsonFileName) {
             var json = string.Empty;
+            var xmlFileName = Regex.Replace(jsonFileName,"(?<=\\.).*",EMPTY) + OUTPUT_FILE_EXTENSION;
             using (var reader = new StreamReader (jsonFileName)) {
                 json = reader.ReadToEnd ();
             }
@@ -106,6 +106,10 @@ namespace json2xml {
             if (File.Exists (xmlFileName)) {
                 File.Delete (xmlFileName);
             }
+
+            Console.WriteLine(xdoc.Declaration + Environment.NewLine);
+            Console.WriteLine(xdoc + Environment.NewLine);
+
             File.AppendAllText (xmlFileName, xdoc.Declaration + Environment.NewLine);
             File.AppendAllText (xmlFileName, xdoc + Environment.NewLine);
         }

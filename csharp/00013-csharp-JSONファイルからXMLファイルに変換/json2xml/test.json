@@ -1,0 +1,26 @@
+{
+  "cast": {
+    "person": [
+      {
+        "role": "Jim Lovell",
+        "name": "Tom Hanks"
+      },
+      {
+        "role": "Fred Haise",
+        "name": "Bill Paxton"
+      },
+      {
+        "role": "Jack Swigert",
+        "name": "Kevin Bacon"
+      },
+      {
+        "role": "Ken Mattingly",
+        "name": "Gary Sinise"
+      },
+      {
+        "role": "Gene Kranz",
+        "name": "Ed Harris"
+      }
+    ]
+  }
+}
