@@ -296,10 +296,20 @@ ext install dunstontc.vscode-rust-syntax
 
 
 - Nim
-  - ベーシックなシンタックスエラーなど。ライブラリの補完はでない。TODO解決したい。
+  - ベーシックなシンタックスエラーなど。ライブラリの補完はでない。TODO解決したい。 Nvimで解決。
   - https://marketplace.visualstudio.com/items?itemName=kosz78.nim
 
 ```
 ext install kosz78.nim
 ext install ms-vscode.cpptools
+```
+
+
+- 簡易ブラウザ
+
+  - 起動ディレクトリの静的資産を読み込んでくれる。自前でウェブサーバーを用意しなくてすむ。便利。
+  - https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+
+```
+ext install ritwickdey.LiveServer
 ```
