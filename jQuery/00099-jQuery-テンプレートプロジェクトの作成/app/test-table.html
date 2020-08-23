@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="./test.css" rel="stylesheet">
+  <script src="./test-reshape.js"></script>
+  <title>テストページだよーん</title>
+</head>
+<body>
+  <table class="typo-table" border="1">
+    <thead>
+      <tr class="typo-table__row">
+        <th>Kotlin</th>
+        <th>Swift</th>
+        <th>Objective-C</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>class</code></td>
+        <td class="typo-table__column"><code>class</code></td>
+        <td class="typo-table__column"><code>@interface</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#name-translation">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>interface</code></td>
+        <td class="typo-table__column"><code>protocol</code></td>
+        <td class="typo-table__column"><code>@protocol</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>constructor</code> /
+        <code>create</code></td>
+        <td class="typo-table__column">Initializer</td>
+        <td class="typo-table__column">Initializer</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#initializers">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Property</td>
+        <td class="typo-table__column">Property</td>
+        <td class="typo-table__column">Property</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href=
+          "#top-level-functions-and-properties">note</a> <a class=
+          "typo-link" href="#setters">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Method</td>
+        <td class="typo-table__column">Method</td>
+        <td class="typo-table__column">Method</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href=
+          "#top-level-functions-and-properties">note</a> <a class=
+          "typo-link" href="#method-names-translation">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>suspend</code>
+        -&gt;</td>
+        <td class="typo-table__column">
+        <code>completionHandler:</code></td>
+        <td class="typo-table__column"></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href=
+          "#errors-and-exceptions">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>@Throws
+        fun</code></td>
+        <td class="typo-table__column"><code>throws</code></td>
+        <td class="typo-table__column">
+        <code>error:(NSError**)error</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href=
+          "#errors-and-exceptions">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Extension</td>
+        <td class="typo-table__column">Extension</td>
+        <td class="typo-table__column">Category member</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href=
+          "#extensions-and-category-members">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>companion</code>
+        member &lt;-</td>
+        <td class="typo-table__column">Class method or
+        property</td>
+        <td class="typo-table__column">Class method or
+        property</td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>null</code></td>
+        <td class="typo-table__column"><code>nil</code></td>
+        <td class="typo-table__column"><code>nil</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>Singleton</code></td>
+        <td class="typo-table__column">
+        <code>Singleton()</code></td>
+        <td class="typo-table__column"><code>[Singleton
+        singleton]</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#kotlin-singletons">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Primitive type</td>
+        <td class="typo-table__column">Primitive type /
+        <code>NSNumber</code></td>
+        <td class="typo-table__column"></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#nsnumber">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>Unit</code> return
+        type</td>
+        <td class="typo-table__column"><code>Void</code></td>
+        <td class="typo-table__column"><code>void</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>String</code></td>
+        <td class="typo-table__column"><code>String</code></td>
+        <td class="typo-table__column"><code>NSString</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>String</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableString</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableString</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#nsmutablestring">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>List</code></td>
+        <td class="typo-table__column"><code>Array</code></td>
+        <td class="typo-table__column"><code>NSArray</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">
+        <code>MutableList</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableArray</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableArray</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>Set</code></td>
+        <td class="typo-table__column"><code>Set</code></td>
+        <td class="typo-table__column"><code>NSSet</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>MutableSet</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableSet</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableSet</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#collections">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>Map</code></td>
+        <td class="typo-table__column"><code>Dictionary</code></td>
+        <td class="typo-table__column">
+        <code>NSDictionary</code></td>
+        <td class="typo-table__column"></td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column"><code>MutableMap</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableDictionary</code></td>
+        <td class="typo-table__column">
+        <code>NSMutableDictionary</code></td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#collections">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Function type</td>
+        <td class="typo-table__column">Function type</td>
+        <td class="typo-table__column">Block pointer type</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#function-types">note</a>
+        </td>
+      </tr>
+      <tr class="typo-table__row">
+        <td class="typo-table__column">Inline classes</td>
+        <td class="typo-table__column">Unsupported</td>
+        <td class="typo-table__column">Unsupported</td>
+        <td class="typo-table__column">
+          <a class="typo-link" href="#unsupported">note</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
