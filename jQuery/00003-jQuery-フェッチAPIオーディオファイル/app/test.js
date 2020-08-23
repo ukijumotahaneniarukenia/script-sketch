@@ -66,16 +66,4 @@ window.onload = function () {
     };
 
 
-    // pre.innerHTML = myScript.innerHTML
-
-
-
-
-
-    // console.log(audioContext)
-
-
-
-
-
 }
