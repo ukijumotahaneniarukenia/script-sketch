@@ -11,10 +11,13 @@
 <body>
 
   <form method="POST" action="/delete">
-    <input type="button" onclick="confirmChecked();" value="チェックされているフルーツを確認する" />
-    <input type="checkbox" name="fruit" value="apple" /> リンゴ
-    <input type="checkbox" name="fruit" value="melon" /> メロン
-    <input type="checkbox" name="fruit" value="banana" /> バナナ
+    <a href="#" class="allCheck">すべてにチェック</a>
+    <div class="checkbox-list">
+      <input type="checkbox" class="checkbox-grp" value="1">チェック1<br>
+      <input type="checkbox" class="checkbox-grp" value="2">チェック2<br>
+      <input type="checkbox" class="checkbox-grp" value="3">チェック3<br>
+      <input type="checkbox" class="checkbox-grp" value="4">チェック4<br>
+    </div>
   </form>
 
 </body>

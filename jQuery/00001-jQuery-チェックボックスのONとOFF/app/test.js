@@ -1,13 +1,48 @@
 'use strict';
 
-var $ = require('jquery');
+let $ = require('jquery');
 
+function setUpSingleCheckEvent(){
 
-function confirmCheck(){
+    let checkboxList = $('.checkbox-grp')
 
-    let s = $('[name="fruit"]');
+    $('.checkbox-grp').click(function(){
 
-    console.log(s);
+        //クリックされたとき、trueで、再クリックされたとき、falseになる
+        //なので、それ以外をアンチェックしておくと単一チェックできる
+
+        let self = $(this);
+
+        let restCheckboxList = checkboxList.not(self);
+
+        restCheckboxList.prop('checked',false);
+
+    });
+
+}
+
+function setUpAllCheckEvent(){
+
+    //結果トグルみたいな動きになる
+
+    let checkboxList = $('.checkbox-grp')
+
+    let allCheckStatus = true;
+
+    $('.allCheck').click(function(){
+
+        if(!allCheckStatus){
+
+            checkboxList.prop('checked',true);
+
+        } else {
+
+            checkboxList.prop('checked',false);
+
+        }
+
+        allCheckStatus = !allCheckStatus; //状態を入れ替えておくのがみそ
+    });
 
 }
 
@@ -15,13 +50,9 @@ function confirmCheck(){
 //ロード時に読み込まれる
 $(function() {
 
+    setUpAllCheckEvent();
 
-    confirmCheck();
-
-    // let s = $('[name="fruit"]');
-
-    // console.log(s);
-
+    setUpSingleCheckEvent();
 
 })
 
