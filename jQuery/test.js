@@ -7,5 +7,4 @@ var $ = require('jquery');
 $(function() {
 
 
-
 })
