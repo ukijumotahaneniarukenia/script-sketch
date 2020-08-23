@@ -48,7 +48,7 @@ init(){
 
   mkdir -p $ROOT_DIR_NAME/$PROJECT_DIR_NAME/$APP_DIR_NAME
 
-  echo '/node_modules/* package-lock.json' | xargs -n1 > $ROOT_DIR_NAME/$PROJECT_DIR_NAME/$APP_DIR_NAME/.gitignore
+  echo '/node_modules/* /package-lock.json /test-reshape.js' | xargs -n1 > $ROOT_DIR_NAME/$PROJECT_DIR_NAME/$APP_DIR_NAME/.gitignore
 
   cp $ROOT_DIR_NAME/test.css $ROOT_DIR_NAME/$PROJECT_DIR_NAME/$APP_DIR_NAME/test.css
 
