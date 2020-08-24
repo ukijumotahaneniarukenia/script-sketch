@@ -128,5 +128,20 @@ $ echo 'ul>li.item$@-*5' | node app.js | grep -vP 'unko'
 	<li class="item1"></li>
 </ul>
 
+$ echo 'ul>li.item$@3*5' | node app.js | grep -vP 'unko'
+<ul>
+	<li class="item3"></li>
+	<li class="item4"></li>
+	<li class="item5"></li>
+	<li class="item6"></li>
+	<li class="item7"></li>
+</ul>
+
+$ echo 'h$[title=topic$]{へっどらいん $}*3' | node app.js | grep -vP 'unko'
+<h1 title="topic1">へっどらいん 1</h1>
+<h2 title="topic2">へっどらいん 2</h2>
+<h3 title="topic3">へっどらいん 3</h3>
+
+
 
 ```
