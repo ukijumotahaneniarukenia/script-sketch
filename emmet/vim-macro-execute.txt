@@ -1,0 +1,3 @@
+vim +':norm @a' +':w! a.txt' +'q' 
+vim +':norm @b' +':w! b.txt' +'q' 
+vim +':norm @c' +':w! c.txt' +'q' 
