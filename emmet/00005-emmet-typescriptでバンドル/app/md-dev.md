@@ -144,6 +144,7 @@ $ cat package.json <<EOS
 }
 EOS
 
+$ npm start
 
 $ node bundle.js
 <p><a href=""></a></p>
