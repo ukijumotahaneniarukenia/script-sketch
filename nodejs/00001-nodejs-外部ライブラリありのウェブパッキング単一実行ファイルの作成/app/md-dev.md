@@ -7,9 +7,9 @@ $ cd 00001-nodejs-外部ライブラリありのウェブパッキング単一�
 
 $ mkdir -p app
 
-$ echo '/node_modules/* /package-lock.json' | xargs -n1 >.gitignore
-
 $ cd app/
+
+$ echo '/node_modules/* /package-lock.json' | xargs -n1 >.gitignore
 
 
 $ npm init -y
@@ -73,7 +73,7 @@ $ cat <<EOS >package.json
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"pack" : "webpack"
+     "start" : "webpack"
   },
   "keywords": [],
   "author": "",
@@ -106,7 +106,7 @@ Entrypoint main = app.js
     + 4 hidden modules
 
 
-$ echo うんこ | node app.js 
+$ echo うんこ | node app.js
 <p><a href=""></a></p>
 うんこ
 
@@ -117,8 +117,20 @@ $ cp app.js $HOME/
 
 $ cd $HOME
 
-$ echo うんこ | node app.js 
+$ echo うんこ | node app.js
 <p><a href=""></a></p>
 うんこ
+
+$ echo 'body>(ul>li.sample$*5)' | node app.js | grep -vP 'unko'
+<body>
+	<ul>
+		<li class="sample1"></li>
+		<li class="sample2"></li>
+		<li class="sample3"></li>
+		<li class="sample4"></li>
+		<li class="sample5"></li>
+	</ul>
+</body>
+
 
 ```

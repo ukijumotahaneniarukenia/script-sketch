@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nexports.__esModule = true;\n\nlet emmet = __webpack_require__(/*! emmet */ \"./node_modules/emmet/dist/emmet.es.js\");\n\nconsole.log(emmet[\"default\"]('p>a'));\n\nlet fs = __webpack_require__(/*! fs */ \"fs\")\n\nlet input =fs.readFileSync(\"/dev/stdin\",\"utf8\");\n\nconsole.log(input);\n\n\n//# sourceURL=webpack:///./main.js?");
+eval("\n\nexports.__esModule = true;\n\nlet emmet = __webpack_require__(/*! emmet */ \"./node_modules/emmet/dist/emmet.es.js\");\n\nconsole.log(emmet[\"default\"]('p>a'));\n\nlet fs = __webpack_require__(/*! fs */ \"fs\")\n\nlet input =fs.readFileSync(\"/dev/stdin\",\"utf8\");\n\nconsole.log(input);\n\n// let cmd = \"\\\\\\\\'\" + input.replace(/\\n$/,\"\") + \"\\\\\\\\'\"\n// let cmd = \"\\\\'\" + input.replace(/\\n$/,\"\") + \"\\\\'\"\nlet cmd = \"\\\\\" + input.replace(/\\n$/,\"\") + \"\\\\\\0\"\n\nconsole.log(cmd)\n\nconsole.log(emmet[\"default\"]('ul>li*2'));\n\n\nconsole.log(emmet[\"default\"](cmd));\n\n\n//# sourceURL=webpack:///./main.js?");
 
 /***/ }),
 
