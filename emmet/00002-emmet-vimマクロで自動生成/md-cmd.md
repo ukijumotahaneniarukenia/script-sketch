@@ -27,3 +27,27 @@ cat emmet-html-snippet-pretty.tsv | while read grp grpseq key value;do printf "%
 ```
 cat emmetio-html-snippet-pretty.tsv | while read grp grpseq key value;do echo "let @q=\"i$value\<Esc>:call emmet#expandAbbr(3,\\\"\\\")\<Enter>\"">$(printf "%s-%s-emmet-html-snippet-macro.vim\t" $grp $grpseq;);done
 ```
+
+
+- CMD
+
+  - 単一実行はこれで行けた
+
+```
+$ vim -c "so QH014-001-emmet-html-snippet-macro.vim" -c ":norm @q" -c ':wq! a'
+
+
+
+vim便利
+
+$ cat a
+<picture></picture>
+
+#!/usr/bin/env bash
+vim -c "so QH014-001-emmet-html-snippet-macro.vim" -c ":norm @q" -c ':wq! a' && cat a && rm a
+
+
+$ bash b.sh
+<picture></picture>
+
+```
