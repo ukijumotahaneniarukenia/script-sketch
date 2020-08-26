@@ -6,9 +6,9 @@
 - MAN
 
 ```
-mkdir -p 00001-c#-ハローワールド
+mkdir -p 00001-csharp-ハローワールド
 
-cd 00001-c#-ハローワールド
+cd 00001-csharp-ハローワールド
 
 echo '/bin/* /obj/*' | xargs -n1 >.gitignore
 
