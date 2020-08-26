@@ -310,40 +310,56 @@ namespace app {
 
             // Console.WriteLine(String.Join(STRING_JOINER,targetTypeNameHashSet));
 
-            foreach (var item in targetTypeNameHashSet)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine(targetTypeNameHashSet.GetType());
-                Console.WriteLine(targetTypeNameHashSet.Count);
-                Console.WriteLine(item.GetType());
-                Console.WriteLine(DEFAULT_OPTION_VALUE);
-            }
+            // foreach (var item in targetTypeNameHashSet)
+            // {
+            //     Console.WriteLine(item);
+            //     Console.WriteLine(targetTypeNameHashSet.GetType());
+            //     Console.WriteLine(targetTypeNameHashSet.Count);
+            //     Console.WriteLine(item.GetType());
+            //     Console.WriteLine(DEFAULT_OPTION_VALUE);
+            // }
 
-            HashSet<String> typeNameSet = new HashSet<string> {
-                "System.DateTime" //名前空間からのクラス名までのフル名
-            };
-
-            Console.WriteLine(typeNameSet.GetType());
+            // HashSet<string> typeNameSet = new HashSet<string> {
+                // "System.DateTime" //名前空間からのクラス名までのフル名
+            // };
 
             switch (DEFAULT_OPTION_VALUE) {
 
                 case OPTION_PROPERTY_STATIC:
-                    // summaryMap = getPropertyOfStaticSummaryInfoDict(targetTypeNameHashSet);
-                    // getPropertyOfStaticSummaryInfoDict(typeNameSet);
-                    getPropertyOfStaticSummaryInfoDict(targetTypeNameHashSet);
+                    // summaryMap = getPropertyOfStaticSummaryInfoDict(typeNameSet);
+                    summaryMap = getPropertyOfStaticSummaryInfoDict(targetTypeNameHashSet);
                     break;
-                // case OPTION_PROPERTY_INSTANCE:
-                //     summaryMap = getPropertyOfInstanceSummaryInfoDict(targetTypeNameHashSet);
-                //     break;
-                // case OPTION_METHOD_STATIC:
-                //     summaryMap = getMethodOfStaticSummaryInfoDict(targetTypeNameHashSet);
-                //     break;
-                // case OPTION_METHOD_INSTANCE:
-                //     summaryMap = getMethodOfInstanceSummaryInfoDict(targetTypeNameHashSet);
-                //     break;
+                case OPTION_PROPERTY_INSTANCE:
+                    // summaryMap = getPropertyOfInstanceSummaryInfoDict(typeNameSet);
+                    summaryMap = getPropertyOfInstanceSummaryInfoDict(targetTypeNameHashSet);
+                    break;
+                case OPTION_METHOD_STATIC:
+                    // summaryMap = getMethodOfStaticSummaryInfoDict(typeNameSet);
+                    summaryMap = getMethodOfStaticSummaryInfoDict(targetTypeNameHashSet);
+                    break;
+                case OPTION_METHOD_INSTANCE:
+                    // summaryMap = getMethodOfInstanceSummaryInfoDict(typeNameSet);
+                    summaryMap = getMethodOfInstanceSummaryInfoDict(targetTypeNameHashSet);
+                    break;
                 default:
                     Usage(appName);
                     break;
+            }
+
+            foreach (string type in summaryMap.Keys) {
+
+                Dictionary<string, Dictionary<string, string>> detailMap = summaryMap[type];
+
+                foreach (string key in detailMap.Keys) {
+                    {
+                        Console.Write (type);
+                        Console.Write (FS);
+                        Console.Write (key);
+                        Console.Write (FS);
+                        Console.Write (String.Join (FS, detailMap[key].Values));
+                    }
+                    Console.WriteLine ();
+                }
             }
 
             // ハードの動作確認 ok
