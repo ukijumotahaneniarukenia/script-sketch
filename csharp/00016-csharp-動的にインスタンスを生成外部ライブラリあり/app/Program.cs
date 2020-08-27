@@ -283,16 +283,14 @@ namespace app {
 
             foreach (Dictionary<string, string> assemblyNameSpaceTypeDetailDict in assemblyNameSpaceTypeSummaryList) {
 
-                foreach (string key in assemblyNameSpaceTypeDetailDict.Keys) {
-                    {
-                        Console.Write (assemblyNameSpaceTypeDetailDict[key]);
-                        Console.Write (FS);
-                        Console.Write (assemblyNameSpaceTypeDetailDict[key]);
-                        Console.Write (FS);
-                        Console.Write (assemblyNameSpaceTypeDetailDict[key]);
-                    }
-                    Console.WriteLine ();
+                {
+                    Console.Write (assemblyNameSpaceTypeDetailDict[ASSEMBLY_NAME]);
+                    Console.Write (FS);
+                    Console.Write (assemblyNameSpaceTypeDetailDict[NAMESPACE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
                 }
+                Console.WriteLine ();
             }
 
             // List<string> extLibAssemblyList = new List<string> {
