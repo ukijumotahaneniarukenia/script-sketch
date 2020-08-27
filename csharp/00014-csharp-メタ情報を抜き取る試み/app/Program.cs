@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting;
 using System.Text.RegularExpressions;
 
 namespace app {
 
     class Program {
+
+        private static List<Assembly> CURRENT_ASSEMBLY_LIST = AppDomain.CurrentDomain.GetAssemblies ().ToList ();
+
         private static string EMPTY = "";
         private static string USAGE_SAMPLE_ARGUMENT = "System.DataTime";
         private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
@@ -199,7 +203,7 @@ namespace app {
                     methodOfInstanceSummaryInfoDict.Add (String.Format (METHOD_GROUP_DIGIT, grp), methodOfInstanceDetailInfoDict);
                 }
 
-                methodOfInstanceSummaryInfoByTypeDict.Add(typeName,methodOfInstanceSummaryInfoDict);
+                methodOfInstanceSummaryInfoByTypeDict.Add (typeName, methodOfInstanceSummaryInfoDict);
 
             }
 
@@ -225,9 +229,10 @@ namespace app {
 
             Environment.Exit (0);
         }
+
         static void Main (string[] args) {
 
-            HashSet<string> targetTypeNameHashSet = new HashSet<string>();
+            HashSet<string> targetTypeNameHashSet = new HashSet<string> ();
 
             string appName = Environment.GetCommandLineArgs () [0];
             appName = Regex.Replace (appName, ".*/", EMPTY); //ファイル名のみにする
@@ -306,43 +311,32 @@ namespace app {
                 }
             }
 
-            Dictionary<string,Dictionary<string, Dictionary<string, string>>>  summaryMap = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = new Dictionary<string, Dictionary<string, Dictionary<string, string>>> ();
 
-            // Console.WriteLine(String.Join(STRING_JOINER,targetTypeNameHashSet));
-
-            // foreach (var item in targetTypeNameHashSet)
-            // {
-            //     Console.WriteLine(item);
-            //     Console.WriteLine(targetTypeNameHashSet.GetType());
-            //     Console.WriteLine(targetTypeNameHashSet.Count);
-            //     Console.WriteLine(item.GetType());
-            //     Console.WriteLine(DEFAULT_OPTION_VALUE);
-            // }
-
-            // HashSet<string> typeNameSet = new HashSet<string> {
-                // "System.DateTime" //名前空間からのクラス名までのフル名
-            // };
+            HashSet<string> typeNameSet = new HashSet<string> {
+                "System.DateTime" //名前空間からのクラス名までのフル名
+            };
 
             switch (DEFAULT_OPTION_VALUE) {
 
                 case OPTION_PROPERTY_STATIC:
-                    // summaryMap = getPropertyOfStaticSummaryInfoDict(typeNameSet);
-                    summaryMap = getPropertyOfStaticSummaryInfoDict(targetTypeNameHashSet);
+                    summaryMap = getPropertyOfStaticSummaryInfoDict(typeNameSet); //ok
+                    // summaryMap = getPropertyOfStaticSummaryInfoDict (targetTypeNameHashSet); // ng
                     break;
                 case OPTION_PROPERTY_INSTANCE:
-                    // summaryMap = getPropertyOfInstanceSummaryInfoDict(typeNameSet);
-                    summaryMap = getPropertyOfInstanceSummaryInfoDict(targetTypeNameHashSet);
+                    summaryMap = getPropertyOfInstanceSummaryInfoDict(typeNameSet); //ok
+                    // summaryMap = getPropertyOfInstanceSummaryInfoDict (targetTypeNameHashSet);// ng
                     break;
                 case OPTION_METHOD_STATIC:
-                    // summaryMap = getMethodOfStaticSummaryInfoDict(typeNameSet);
-                    summaryMap = getMethodOfStaticSummaryInfoDict(targetTypeNameHashSet);
+                    summaryMap = getMethodOfStaticSummaryInfoDict(typeNameSet); //ok
+                    // summaryMap = getMethodOfStaticSummaryInfoDict (targetTypeNameHashSet);// ng
                     break;
                 case OPTION_METHOD_INSTANCE:
-                    // summaryMap = getMethodOfInstanceSummaryInfoDict(typeNameSet);
-                    summaryMap = getMethodOfInstanceSummaryInfoDict(targetTypeNameHashSet);
+                    summaryMap = getMethodOfInstanceSummaryInfoDict(typeNameSet); //ok
+                    // summaryMap = getMethodOfInstanceSummaryInfoDict (targetTypeNameHashSet);// ng
                     break;
                 default:
-                    Usage(appName);
+                    Usage (appName);
                     break;
             }
 
