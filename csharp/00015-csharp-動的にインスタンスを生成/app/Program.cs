@@ -17,13 +17,13 @@ namespace app {
     class Program {
 
         //https://www.it-swarm.dev/ja/c%23/%E3%83%AA%E3%83%95%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BB%8B%E3%81%97%E3%81%A6%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93%E3%81%AE%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AE%E5%9E%8B%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B/957386241/
-        private static List<Type> CURRENT_ASSEMBLY_LIST = AppDomain.CurrentDomain.GetAssemblies().SelectMany(type =>type.GetTypes()).ToList();
+        private static List<Type> CURRENT_FULL_NAME_TYPE_LIST = AppDomain.CurrentDomain.GetAssemblies().SelectMany(type =>type.GetTypes()).ToList();
 
         static void Main (string[] args) {
 
             String typeName ="System.DateTime";
 
-            foreach(Type type in CURRENT_ASSEMBLY_LIST){
+            foreach(Type type in CURRENT_FULL_NAME_TYPE_LIST){
                 if(type.FullName == typeName){
                     Console.WriteLine(type.FullName);
                 }

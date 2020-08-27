@@ -11,7 +11,7 @@ namespace app {
 
     class Program {
 
-        private static List<Type> CURRENT_ASSEMBLY_LIST = AppDomain.CurrentDomain.GetAssemblies().SelectMany(type =>type.GetTypes()).ToList();
+        private static List<Type> CURRENT_FULL_NAME_TYPE_LIST = AppDomain.CurrentDomain.GetAssemblies().SelectMany(type =>type.GetTypes()).ToList();
         private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
         private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
             "System.DateTime"
