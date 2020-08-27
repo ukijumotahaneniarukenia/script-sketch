@@ -17,11 +17,7 @@ namespace app {
         private static char RS = '\n';
         private static string STRING_JOINER = ",";
         private static string COLUMN_JOINER = "-";
-        private static string GROUP_DIGIT = "{0:00000000}";
         private static string SUB_GROUP_DIGIT = "{0:000000}";
-        private static string GROUP_SEQ_DIGIT = "{0:0000}";
-        private static string GROUP = "グループ番号";
-        private static string GROUP_SEQ = "グループシーケンス番号";
         private const string ASSEMBLY_NAME = "アセンブリ名";
         private const string NAMESPACE_NAME = "名前空間名";
         private static string TYPE_NAME = "型名";
@@ -461,6 +457,10 @@ namespace app {
 
             Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (targetTypeNameHashSet);
 
+            //header
+            outputHeader (DEFAULT_OUTPUT_HEADER_LIST);
+
+            //body
             foreach (string assemblyName in extLibTypeDict.Keys) {
 
                 List<Type> typeList = extLibTypeDict[assemblyName].Where(type => targetTypeNameHashSet.Contains(type.FullName)).ToList();
