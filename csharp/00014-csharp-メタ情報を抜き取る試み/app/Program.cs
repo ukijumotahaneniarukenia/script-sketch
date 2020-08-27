@@ -11,6 +11,7 @@ namespace app {
 
     class Program {
 
+        private static List<Type> CURRENT_ASSEMBLY_LIST = AppDomain.CurrentDomain.GetAssemblies().SelectMany(type =>type.GetTypes()).ToList();
         private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
         private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
             "System.DateTime"
@@ -284,6 +285,8 @@ namespace app {
 
             List<string> cmdLineArgs = args.ToList ();
 
+            //オプション引数が指定したもの以外にマッチした場合は早期リターン オプションリスト作って除外
+
             if (cmdLineArgs.Count == cmdLineArgs.Where (arg => arg.IndexOf ("--") >= 0).ToList ().Count) {
                 //オプション引数指定のみの場合
                 Usage (appName);
@@ -332,7 +335,17 @@ namespace app {
                             DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
                             break;
                         default:
+                            //TODO
                             targetTypeNameHashSet.Add (arg);
+                            Console.WriteLine(CURRENT_ASSEMBLY_LIST.Where(type => type.FullName == arg).ToList().Count);
+
+                            Console.WriteLine();
+
+                            if(arg.IndexOf("--") >= 0){
+                                Usage(appName);
+                            }else{
+                                targetTypeNameHashSet.Add (arg);
+                            }
                             break;
                     }
                 }
@@ -357,6 +370,7 @@ namespace app {
                             DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
                             break;
                         default:
+                            //TODO
                             targetTypeNameHashSet.Add (arg);
                             break;
                     }
