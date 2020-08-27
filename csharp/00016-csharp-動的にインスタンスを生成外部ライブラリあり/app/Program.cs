@@ -26,11 +26,9 @@ namespace app {
         private const string NAMESPACE_NAME = "名前空間名";
         private static string TYPE_NAME = "型名";
         private static List<string> OUTPUT_COMMON_HEADER_LIST = new List<string> {
-            GROUP,
             ASSEMBLY_NAME,
             NAMESPACE_NAME,
-            TYPE_NAME,
-            GROUP_SEQ
+            TYPE_NAME
         };
         private static string PROPERTY_OF_STATIC = "スタティックプロパティ名";
         private static string PROPERTY_OF_STATIC_RETURN_TYPE_NAME = "スタティックプロパティ名の戻り値の型名";
@@ -75,11 +73,28 @@ namespace app {
         private const string DEFAULT_NONE_STRING_VALUE = "ないよーん";
         private static int DEFAULT_NONE_INT_VALUE = 0;
         private static List<string> DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
-        private static string DEFAULT_OPTION_VALUE = "--property-instance";
+        private const string OPTION_INTERNAL_LIB = "--internal-lib";
+        private const string OPTION_EXTERNAL_LIB = "--external-lib";
+        private static string DEFAULT_PATTERN = OPTION_INTERNAL_LIB;
         private const string OPTION_PROPERTY_INSTANCE = "--property-instance";
         private const string OPTION_PROPERTY_STATIC = "--property-static";
         private const string OPTION_METHOD_INSTANCE = "--method-instance";
         private const string OPTION_METHOD_STATIC = "--method-static";
+        private static string DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
+
+        private static List<string> OPTION_LIST = new List<string> {
+            OPTION_PROPERTY_INSTANCE,
+            OPTION_PROPERTY_STATIC,
+            OPTION_METHOD_INSTANCE,
+            OPTION_METHOD_STATIC
+        };
+        private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
+        private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
+            "System.DateTime",
+            "System.Text.NormalizationForm",
+            "System.Text.Rune",
+            "Newtonsoft.Json"
+        };
 
         //クラスのパブリックなスタティックプロパティを取得
         private static Dictionary<string, Dictionary<string, string>> getPropertyOfStaticSummaryInfoDict (Type type) {
@@ -223,11 +238,11 @@ namespace app {
             return assemblyTypeDict;
         }
 
-        private static Dictionary<string, List<Type>> getExtLibTypeList (List<string> extLibAssemblyList) {
+        private static Dictionary<string, List<Type>> getExtLibTypeList (HashSet<string> extLibAssemblyHashSet) {
             //外部ライブラリ指定
             Dictionary<string, List<Type>> assemblyTypeDict = new Dictionary<string, List<Type>> ();
 
-            foreach (string extLibAssembly in extLibAssemblyList) {
+            foreach (string extLibAssembly in extLibAssemblyHashSet) {
 
                 Assembly assembly = Assembly.Load (extLibAssembly);
 
@@ -242,22 +257,41 @@ namespace app {
 
         private static void Usage (string appName) {
             Console.WriteLine (EMPTY +
-                // "\nOption:" + String.Join (SEPARATOR, OPTION_LIST.ToArray ()) +
+                "\nOption:" + String.Join (SEPARATOR, OPTION_LIST.ToArray ()) +
                 RS +
                 "\nUsage:" +
                 RS +
-                // "\n  CMD: " + appName + SEPARATOR + USAGE_SAMPLE_ARGUMENT +
+                "\n  CMD: " + appName + SEPARATOR + USAGE_SAMPLE_ARGUMENT +
                 RS +
+                "\n    or" +
+                "\n  CMD: " + appName + SEPARATOR + USAGE_SAMPLE_ARGUMENT + SEPARATOR + OPTION_METHOD_INSTANCE +
+                RS +
+                "\n    or" +
+                RS +
+                "\n  CMD: " + appName + SEPARATOR + String.Join (SEPARATOR, USAGE_SAMPLE_ARGUMENT_LIST.ToArray ()) +
                 RS
             );
 
             Environment.Exit (0);
         }
 
-        private static void outputPropertyOfStaticSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+        private static void outputHeader (List<string> defaultOutputHeaderList) {
+            //header
+            {
+                {
+                    Console.Write (String.Join (FS, OUTPUT_COMMON_HEADER_LIST.ToArray ()));
+                    Console.Write (FS);
+                    Console.Write (String.Join (FS, defaultOutputHeaderList.ToArray ()));
+                }
+                Console.WriteLine ();
+            }
+        }
+
+        private static void outputPropertyOfStaticSummaryInfoDict (string assemblyName, Type type, Dictionary<string, Dictionary<string, string>> summaryDict) {
+            //body
             foreach (string rowNum in summaryDict.Keys) {
 
-                Dictionary<string, string> detailMap = summaryDict[rowNum];
+                Dictionary<string, string> detailDict = summaryDict[rowNum];
 
                 {
                     Console.Write (assemblyName);
@@ -266,19 +300,20 @@ namespace app {
                     Console.Write (FS);
                     Console.Write (type.FullName);
                     Console.Write (FS);
-                    Console.Write (detailMap[PROPERTY_OF_STATIC]);
+                    Console.Write (detailDict[PROPERTY_OF_STATIC]);
                     Console.Write (FS);
-                    Console.Write (detailMap[PROPERTY_OF_STATIC_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[PROPERTY_OF_STATIC_RETURN_TYPE_NAME]);
                 }
                 Console.WriteLine ();
 
             }
         }
 
-        private static void outputPropertyOfInstanceSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+        private static void outputPropertyOfInstanceSummaryInfoDict (string assemblyName, Type type, Dictionary<string, Dictionary<string, string>> summaryDict) {
+            //body
             foreach (string rowNum in summaryDict.Keys) {
 
-                Dictionary<string, string> detailMap = summaryDict[rowNum];
+                Dictionary<string, string> detailDict = summaryDict[rowNum];
 
                 {
                     Console.Write (assemblyName);
@@ -287,19 +322,20 @@ namespace app {
                     Console.Write (FS);
                     Console.Write (type.FullName);
                     Console.Write (FS);
-                    Console.Write (detailMap[PROPERTY_OF_INSTANCE]);
+                    Console.Write (detailDict[PROPERTY_OF_INSTANCE]);
                     Console.Write (FS);
-                    Console.Write (detailMap[PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME]);
                 }
                 Console.WriteLine ();
 
             }
         }
 
-        private static void outputMethodOfStaticSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+        private static void outputMethodOfStaticSummaryInfoDict (string assemblyName, Type type, Dictionary<string, Dictionary<string, string>> summaryDict) {
+            //body
             foreach (string rowNum in summaryDict.Keys) {
 
-                Dictionary<string, string> detailMap = summaryDict[rowNum];
+                Dictionary<string, string> detailDict = summaryDict[rowNum];
 
                 {
                     Console.Write (assemblyName);
@@ -308,26 +344,27 @@ namespace app {
                     Console.Write (FS);
                     Console.Write (type.FullName);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_NAME]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_RETURN_TYPE_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
                 }
                 Console.WriteLine ();
 
             }
         }
-        private static void outputMethodOfInstanceSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+        private static void outputMethodOfInstanceSummaryInfoDict (string assemblyName, Type type, Dictionary<string, Dictionary<string, string>> summaryDict) {
+            //body
             foreach (string rowNum in summaryDict.Keys) {
 
-                Dictionary<string, string> detailMap = summaryDict[rowNum];
+                Dictionary<string, string> detailDict = summaryDict[rowNum];
 
                 {
                     Console.Write (assemblyName);
@@ -336,42 +373,34 @@ namespace app {
                     Console.Write (FS);
                     Console.Write (type.FullName);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_RETURN_TYPE_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME]);
                     Console.Write (FS);
-                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
+                    Console.Write (detailDict[METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
                 }
                 Console.WriteLine ();
 
             }
         }
 
-        static void Main (string[] args) {
-
-            string appName = Environment.GetCommandLineArgs () [0];
-            appName = Regex.Replace (appName, ".*/", EMPTY); //ファイル名のみにする
-            appName = Regex.Replace (appName, "\\..*", EMPTY); //拡張子を取り除く
-
-
-
-
-
-
-
-
-            List<string> cmdLineArgs = args.ToList ();
+        private static void showInternalLibInfo (string appName,HashSet<string> targetTypeNameHashSet) {
 
             Dictionary<string, List<Type>> stdLibTypeDict = getStdLibTypeList ();
 
+            //header
+            outputHeader (DEFAULT_OUTPUT_HEADER_LIST);
+
+            //body
             foreach (string assemblyName in stdLibTypeDict.Keys) {
 
+                //フィルタリング機能が必要
                 foreach (Type type in stdLibTypeDict[assemblyName]) {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
@@ -382,19 +411,19 @@ namespace app {
 
                         case OPTION_PROPERTY_STATIC:
                             summaryDict = getPropertyOfStaticSummaryInfoDict (type);
-                            outputPropertyOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputPropertyOfStaticSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_PROPERTY_INSTANCE:
                             summaryDict = getPropertyOfInstanceSummaryInfoDict (type);
-                            outputPropertyOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputPropertyOfInstanceSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_METHOD_STATIC:
                             summaryDict = getMethodOfStaticSummaryInfoDict (type);
-                            outputMethodOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputMethodOfStaticSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_METHOD_INSTANCE:
                             summaryDict = getMethodOfInstanceSummaryInfoDict (type);
-                            outputMethodOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputMethodOfInstanceSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         default:
                             Usage (appName);
@@ -402,15 +431,19 @@ namespace app {
                     }
                 }
             }
+        }
 
-            List<string> extLibAssemblyList = new List<string> {
-                "Newtonsoft.Json"
-            };
+        private static void showExternalLibInfo (string appName,HashSet<string> targetTypeNameHashSet) {
 
-            Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (extLibAssemblyList);
+            // List<string> extLibAssemblyList = new List<string> {
+            //     "Newtonsoft.Json"
+            // };
+
+            Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (targetTypeNameHashSet);
 
             foreach (string assemblyName in extLibTypeDict.Keys) {
 
+                //フィルタリング機能が必要
                 foreach (Type type in extLibTypeDict[assemblyName]) {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
@@ -421,22 +454,124 @@ namespace app {
 
                         case OPTION_PROPERTY_STATIC:
                             summaryDict = getPropertyOfStaticSummaryInfoDict (type);
-                            outputPropertyOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputPropertyOfStaticSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_PROPERTY_INSTANCE:
                             summaryDict = getPropertyOfInstanceSummaryInfoDict (type);
-                            outputPropertyOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputPropertyOfInstanceSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_METHOD_STATIC:
                             summaryDict = getMethodOfStaticSummaryInfoDict (type);
-                            outputMethodOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputMethodOfStaticSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         case OPTION_METHOD_INSTANCE:
                             summaryDict = getMethodOfInstanceSummaryInfoDict (type);
-                            outputMethodOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            outputMethodOfInstanceSummaryInfoDict (assemblyName, type, summaryDict);
                             break;
                         default:
                             Usage (appName);
+                            break;
+                    }
+                }
+            }
+        }
+
+        static void Main (string[] args) {
+
+            string appName = Environment.GetCommandLineArgs () [0];
+            appName = Regex.Replace (appName, ".*/", EMPTY); //ファイル名のみにする
+            appName = Regex.Replace (appName, "\\..*", EMPTY); //拡張子を取り除く
+
+            List<string> cmdLineArgs = args.ToList ();
+
+            HashSet<string> targetTypeNameHashSet = new HashSet<string> ();
+
+            //オプション引数が指定したもの以外にマッチした場合は早期リターン オプションリスト作って除外
+
+            if (cmdLineArgs.Count == 0) {
+
+                //パイプ経由からの入力の場合
+                if (!Console.IsInputRedirected) {
+                    //パイプ経由からの入力がない場合
+                    Usage (appName);
+
+                }
+
+                string line;
+                int rowNum = 0;
+
+                Dictionary<int, List<string>> map = new Dictionary<int, List<string>> ();
+
+                while ((line = Console.ReadLine ()) != null) {
+                    //標準入力からの文字列を読み込み、空文字列でない限り、繰り返し処理
+                    rowNum++;
+                    map.Add (rowNum, line.Split (SEPARATOR).ToList ());
+                }
+
+                if (map.Count != 1) {
+                    //単一行でない場合
+                    Usage (appName);
+                }
+
+                foreach (string arg in map[1]) {
+                    switch (arg) {
+                        case OPTION_INTERNAL_LIB:
+                            DEFAULT_PATTERN = OPTION_INTERNAL_LIB;
+                            break;
+                        case OPTION_EXTERNAL_LIB:
+                            DEFAULT_PATTERN = OPTION_EXTERNAL_LIB;
+                            break;
+                        case OPTION_PROPERTY_STATIC:
+                            DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_PROPERTY_HEADER_LIST;
+                            break;
+                        case OPTION_PROPERTY_INSTANCE:
+                            DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
+                            break;
+                        case OPTION_METHOD_STATIC:
+                            DEFAULT_OPTION_VALUE = OPTION_METHOD_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_METHOD_HEADER_LIST;
+                            break;
+                        case OPTION_METHOD_INSTANCE:
+                            DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
+                            break;
+                        default:
+                            //TODO
+                            targetTypeNameHashSet.Add (arg);
+                            break;
+                    }
+                }
+
+            } else {
+                foreach (string arg in cmdLineArgs) {
+                    switch (arg) {
+                        case OPTION_INTERNAL_LIB:
+                            DEFAULT_PATTERN = OPTION_INTERNAL_LIB;
+                            break;
+                        case OPTION_EXTERNAL_LIB:
+                            DEFAULT_PATTERN = OPTION_EXTERNAL_LIB;
+                            break;
+                        case OPTION_PROPERTY_STATIC:
+                            DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_PROPERTY_HEADER_LIST;
+                            break;
+                        case OPTION_PROPERTY_INSTANCE:
+                            DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
+                            break;
+                        case OPTION_METHOD_STATIC:
+                            DEFAULT_OPTION_VALUE = OPTION_METHOD_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_METHOD_HEADER_LIST;
+                            break;
+                        case OPTION_METHOD_INSTANCE:
+                            DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
+                            break;
+                        default:
+                            //TODO
+                            targetTypeNameHashSet.Add (arg);
                             break;
                     }
                 }
