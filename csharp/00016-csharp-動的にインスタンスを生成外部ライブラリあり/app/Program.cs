@@ -26,21 +26,21 @@ namespace app {
         private const string NAMESPACE_NAME = "名前空間名";
         private static string TYPE_NAME = "型名";
         private static List<string> OUTPUT_COMMON_HEADER_LIST = new List<string> {
-            ASSEMBLY_NAME,
-            NAMESPACE_NAME,
-            TYPE_NAME
+            ASSEMBLY_NAME
+            ,NAMESPACE_NAME
+            ,TYPE_NAME
         };
         private static string PROPERTY_OF_STATIC = "スタティックプロパティ名";
         private static string PROPERTY_OF_STATIC_RETURN_TYPE_NAME = "スタティックプロパティ名の戻り値の型名";
         private static List<string> OUTPUT_STATIC_PROPERTY_HEADER_LIST = new List<string> {
-            PROPERTY_OF_STATIC,
-            PROPERTY_OF_STATIC_RETURN_TYPE_NAME
+            PROPERTY_OF_STATIC
+            ,PROPERTY_OF_STATIC_RETURN_TYPE_NAME
         };
         private static string PROPERTY_OF_INSTANCE = "インスタンスプロパティ名";
         private static string PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスプロパティ名の戻り値の型名";
         private static List<string> OUTPUT_INSTANCE_PROPERTY_HEADER_LIST = new List<string> {
-            PROPERTY_OF_INSTANCE,
-            PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME
+            PROPERTY_OF_INSTANCE
+            ,PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME
         };
         private static string METHOD_OF_STATIC_NAME = "スタティックメソッド名";
         private static string METHOD_OF_STATIC_RETURN_TYPE_NAME = "スタティックメソッドの戻り値の型名";
@@ -49,12 +49,12 @@ namespace app {
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME = "スタティックメソッドの仮引数の変数名";
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME = "スタティックメソッドの仮引数の型名";
         private static List<string> OUTPUT_STATIC_METHOD_HEADER_LIST = new List<string> {
-            METHOD_OF_STATIC_NAME,
-            METHOD_OF_STATIC_RETURN_TYPE_NAME,
-            METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT,
-            METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO,
-            METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME,
-            METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME
+            METHOD_OF_STATIC_NAME
+            ,METHOD_OF_STATIC_RETURN_TYPE_NAME
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME
         };
         private static string METHOD_OF_INSTANCE_NAME = "インスタンスメソッド名";
         private static string METHOD_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスメソッドの戻り値の型名";
@@ -63,12 +63,12 @@ namespace app {
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME = "インスタンスメソッドの仮引数の変数名";
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME = "インスタンスメソッドの仮引数の型名";
         private static List<string> OUTPUT_INSTANCE_METHOD_HEADER_LIST = new List<string> {
-            METHOD_OF_INSTANCE_NAME,
-            METHOD_OF_INSTANCE_RETURN_TYPE_NAME,
-            METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT,
-            METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO,
-            METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME,
-            METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME
+            METHOD_OF_INSTANCE_NAME
+            ,METHOD_OF_INSTANCE_RETURN_TYPE_NAME
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME
         };
         private const string DEFAULT_NONE_STRING_VALUE = "ないよーん";
         private static int DEFAULT_NONE_INT_VALUE = 0;
@@ -83,17 +83,12 @@ namespace app {
         private static string DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
 
         private static List<string> OPTION_LIST = new List<string> {
-            OPTION_PROPERTY_INSTANCE,
-            OPTION_PROPERTY_STATIC,
-            OPTION_METHOD_INSTANCE,
-            OPTION_METHOD_STATIC
-        };
-        private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
-        private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
-            "System.DateTime",
-            "System.Text.NormalizationForm",
-            "System.Text.Rune",
-            "Newtonsoft.Json"
+            OPTION_PROPERTY_INSTANCE
+            ,OPTION_PROPERTY_STATIC
+            ,OPTION_METHOD_INSTANCE
+            ,OPTION_METHOD_STATIC
+            ,OPTION_INTERNAL_LIB
+            ,OPTION_EXTERNAL_LIB
         };
 
         //クラスのパブリックなスタティックプロパティを取得
@@ -257,18 +252,48 @@ namespace app {
 
         private static void Usage (string appName) {
             Console.WriteLine (EMPTY +
-                "\nOption:" + String.Join (SEPARATOR, OPTION_LIST.ToArray ()) +
                 RS +
-                "\nUsage:" +
                 RS +
-                "\n  CMD: " + appName + SEPARATOR + USAGE_SAMPLE_ARGUMENT +
+                "Default: --internal-lib mode" +
                 RS +
-                "\n    or" +
-                "\n  CMD: " + appName + SEPARATOR + USAGE_SAMPLE_ARGUMENT + SEPARATOR + OPTION_METHOD_INSTANCE +
                 RS +
-                "\n    or" +
+                "Option: " + String.Join (SEPARATOR, OPTION_LIST.ToArray ()) +
                 RS +
-                "\n  CMD: " + appName + SEPARATOR + String.Join (SEPARATOR, USAGE_SAMPLE_ARGUMENT_LIST.ToArray ()) +
+                RS +
+                "Usage:" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR + "--external-lib Newtonsoft.Json --method-static" +
+                RS +
+                RS +
+                "or" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR  + "--external-lib Newtonsoft.Json --method-instance" +
+                RS +
+                RS +
+                "or" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR  + "--external-lib Newtonsoft.Json --property-static" +
+                RS +
+                RS +
+                "or" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR  + "--external-lib Newtonsoft.Json --property-instance" +
+                RS +
+                RS +
+                "or" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR  + "--internal-lib System.DateTime System.Text.NormalizationForm System.Text.Rune --method-static" +
+                RS +
+                RS +
+                "or" +
+                RS +
+                RS +
+                "CMD: " + appName + SEPARATOR  + "System.DateTime System.Text.NormalizationForm System.Text.Rune --method-static" +
                 RS
             );
 
@@ -400,8 +425,9 @@ namespace app {
             //body
             foreach (string assemblyName in stdLibTypeDict.Keys) {
 
-                //フィルタリング機能が必要
-                foreach (Type type in stdLibTypeDict[assemblyName]) {
+                List<Type> typeList = stdLibTypeDict[assemblyName].Where(type => targetTypeNameHashSet.Contains(type.FullName)).ToList();
+
+                foreach (Type type in typeList) {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
 
@@ -437,7 +463,8 @@ namespace app {
 
             foreach (string assemblyName in extLibTypeDict.Keys) {
 
-                //フィルタリング機能が必要
+                List<Type> typeList = extLibTypeDict[assemblyName].Where(type => targetTypeNameHashSet.Contains(type.FullName)).ToList();
+
                 foreach (Type type in extLibTypeDict[assemblyName]) {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
