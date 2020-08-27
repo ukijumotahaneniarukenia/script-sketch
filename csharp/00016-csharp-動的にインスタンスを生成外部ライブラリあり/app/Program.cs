@@ -203,11 +203,13 @@ namespace app {
             return methodOfInstanceSummaryInfoDict;
 
         }
-        private static List<Dictionary<string, string>> getStdLibAssemblyList (string appName) {
-            //デフォルトの標準ライブラリのみ
-            List<Assembly> stdlibAssemblyList = AppDomain.CurrentDomain.GetAssemblies ().ToList ();
 
-            List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = new List<Dictionary<string, string>> ();
+        private static Dictionary<string, List<Type>> getStdLibTypeList () {
+            //デフォルトの標準ライブラリのみ
+
+            Dictionary<string, List<Type>> assemblyTypeDict = new Dictionary<string, List<Type>> ();
+
+            List<Assembly> stdlibAssemblyList = AppDomain.CurrentDomain.GetAssemblies ().ToList ();
 
             foreach (Assembly assembly in stdlibAssemblyList) {
 
@@ -215,23 +217,15 @@ namespace app {
 
                 List<Type> typeList = assembly.GetTypes ().ToList ();
 
-                foreach (Type type in typeList) {
+                assemblyTypeDict.Add (assemblyName, typeList);
 
-                    Dictionary<string, string> assemblyNameSpaceTypeDetailDict = new Dictionary<string, string> ();
-
-                    assemblyNameSpaceTypeDetailDict.Add (ASSEMBLY_NAME, assemblyName == null ? DEFAULT_NONE_STRING_VALUE : assemblyName);
-                    assemblyNameSpaceTypeDetailDict.Add (NAMESPACE_NAME, type.Namespace == null? DEFAULT_NONE_STRING_VALUE : type.Namespace);
-                    assemblyNameSpaceTypeDetailDict.Add (TYPE_NAME, type.FullName == null ? DEFAULT_NONE_STRING_VALUE : type.FullName);
-
-                    assemblyNameSpaceTypeSummaryList.Add (assemblyNameSpaceTypeDetailDict);
-                }
             }
-            return assemblyNameSpaceTypeSummaryList;
+            return assemblyTypeDict;
         }
 
-        private static List<Dictionary<string, string>> getExtLibAssemblyList (List<string> extLibAssemblyList) {
+        private static Dictionary<string, List<Type>> getExtLibAssemblyList (List<string> extLibAssemblyList) {
             //外部ライブラリ指定
-            List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = new List<Dictionary<string, string>> ();
+            Dictionary<string, List<Type>> assemblyTypeDict = new Dictionary<string, List<Type>> ();
 
             foreach (string extLibAssembly in extLibAssemblyList) {
 
@@ -241,18 +235,9 @@ namespace app {
 
                 List<Type> typeList = assembly.GetTypes ().ToList ();
 
-                foreach (Type type in typeList) {
-                    Dictionary<string, string> assemblyNameSpaceTypeDetailDict = new Dictionary<string, string> ();
-
-                    assemblyNameSpaceTypeDetailDict.Add (ASSEMBLY_NAME, assemblyName == null ? DEFAULT_NONE_STRING_VALUE : assemblyName);
-                    assemblyNameSpaceTypeDetailDict.Add (NAMESPACE_NAME, type.Namespace == null? DEFAULT_NONE_STRING_VALUE : type.Namespace);
-                    assemblyNameSpaceTypeDetailDict.Add (TYPE_NAME, type.FullName == null ? DEFAULT_NONE_STRING_VALUE : type.FullName);
-
-                    assemblyNameSpaceTypeSummaryList.Add (assemblyNameSpaceTypeDetailDict);
-                }
-
+                assemblyTypeDict.Add (assemblyName, typeList);
             }
-            return assemblyNameSpaceTypeSummaryList;
+            return assemblyTypeDict;
         }
 
         private static void Usage (string appName) {
@@ -277,21 +262,91 @@ namespace app {
 
             List<string> cmdLineArgs = args.ToList ();
 
-            // getStdLibAssemblyList (appName);
+            Dictionary<string, List<Type>> stdLibTypeDict = getStdLibTypeList ();
 
-            List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = getStdLibAssemblyList (appName);
+            foreach (string assemblyName in stdLibTypeDict.Keys) {
 
-            foreach (Dictionary<string, string> assemblyNameSpaceTypeDetailDict in assemblyNameSpaceTypeSummaryList) {
+                // Console.WriteLine(assemblyName);
 
-                {
-                    Console.Write (assemblyNameSpaceTypeDetailDict[ASSEMBLY_NAME]);
-                    Console.Write (FS);
-                    Console.Write (assemblyNameSpaceTypeDetailDict[NAMESPACE_NAME]);
-                    Console.Write (FS);
-                    Console.Write (assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
+                foreach (Type type in stdLibTypeDict[assemblyName]) {
+
+                    Dictionary<string, Dictionary<string, string>> summaryMap = null;
+
+                    DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
+
+                    switch (DEFAULT_OPTION_VALUE) {
+
+                        case OPTION_PROPERTY_STATIC:
+                            summaryMap = getPropertyOfStaticSummaryInfoDict (type);
+                            break;
+                        case OPTION_PROPERTY_INSTANCE:
+                            summaryMap = getPropertyOfInstanceSummaryInfoDict (type);
+                            break;
+                        case OPTION_METHOD_STATIC:
+                            summaryMap = getMethodOfStaticSummaryInfoDict (type);
+                            break;
+                        case OPTION_METHOD_INSTANCE:
+                            summaryMap = getMethodOfInstanceSummaryInfoDict (type);
+                            break;
+                        default:
+                            Usage (appName);
+                            break;
+                    }
+
+
+                    foreach (string rowNum in summaryMap.Keys) {
+
+                        Dictionary<string, string> detailMap = summaryMap[rowNum];
+
+                        {
+                            Console.Write (assemblyName);
+                            Console.Write (FS);
+                            Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
+                            Console.Write (FS);
+                            Console.Write (type.FullName);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_NAME]);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_RETURN_TYPE_NAME]);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT]);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO]);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME]);
+                            Console.Write (FS);
+                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
+                        }
+                        Console.WriteLine ();
+
+                    }
+
                 }
-                Console.WriteLine ();
+
             }
+
+            // List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = getStdLibAssemblyList ();
+
+            // foreach (Dictionary<string, string> assemblyNameSpaceTypeDetailDict in assemblyNameSpaceTypeSummaryList) {
+
+            //     {
+            //         Console.Write (assemblyNameSpaceTypeDetailDict[ASSEMBLY_NAME]);
+            //         Console.Write (FS);
+            //         Console.Write (assemblyNameSpaceTypeDetailDict[NAMESPACE_NAME]);
+            //         Console.Write (FS);
+            //         Console.Write (assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
+
+            //         Type type = Type.GetType(assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
+
+            //         if(type ==  null){
+            //             Console.WriteLine("NULLLLLLLLLLLLLLL");
+            //         }else{
+            //             Console.WriteLine("YESSSSSSSSSSSSSSS");
+            //         }
+
+            //     }
+            //     Console.WriteLine ();
+            // }
 
             // List<string> extLibAssemblyList = new List<string> {
             //     "Newtonsoft.Json"
