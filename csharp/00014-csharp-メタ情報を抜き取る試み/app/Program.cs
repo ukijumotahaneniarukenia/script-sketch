@@ -37,16 +37,24 @@ namespace app {
         private static string SEPARATOR = " ";
         private static char RS = '\n';
         private static string STRING_JOINER = ",";
-        private static string METHOD_GROUP_DIGIT = "{0:00000}";
-        private static string PROPERTY_GROUP_DIGIT = "{0:00000}";
-        private static string METHOD_NAME = "メソッド名";
+        private static string GROUP_DIGIT = "{0:00000000}";
+        private static string GROUP_SEQ_DIGIT = "{0:00000}";
+        private static string PROPERTY_OF_STATIC = "スタティックプロパティ名";
+        private static string PROPERTY_OF_STATIC_RETURN_TYPE_NAME = "スタティックプロパティ名の戻り値の型名";
         private static string PROPERTY_OF_INSTANCE = "インスタンスプロパティ名";
         private static string PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスプロパティ名の戻り値の型名";
-        private static string METHOD_RETURN_TYPE_NAME = "メソッドの戻り値の型名";
-        private static string METHOD_PHONY_ARGUMENT_POSITION_NO = "メソッドの仮引数の位置番号";
-        private static string METHOD_PHONY_ARGUMENT_COUNT = "メソッドの仮引数の個数";
-        private static string METHOD_PHONY_ARGUMENT_VARIABLE_NAME = "メソッドの仮引数の変数名";
-        private static string METHOD_PHONY_ARGUMENT_RETURN_TYPE_NAME = "メソッドの仮引数の型名";
+        private static string METHOD_OF_STATIC_NAME = "スタティックメソッド名";
+        private static string METHOD_OF_STATIC_RETURN_TYPE_NAME = "スタティックメソッドの戻り値の型名";
+        private static string METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT = "スタティックメソッドの仮引数の個数";
+        private static string METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO = "スタティックメソッドの仮引数の位置番号";
+        private static string METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME = "スタティックメソッドの仮引数の変数名";
+        private static string METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME = "スタティックメソッドの仮引数の型名";
+        private static string METHOD_OF_INSTANCE_NAME = "インスタンスメソッド名";
+        private static string METHOD_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスメソッドの戻り値の型名";
+        private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT = "インスタンスメソッドの仮引数の個数";
+        private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO = "インスタンスメソッドの仮引数の位置番号";
+        private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME = "インスタンスメソッドの仮引数の変数名";
+        private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME = "インスタンスメソッドの仮引数の型名";
 
         private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> getPropertyOfStaticSummaryInfoDict (HashSet<string> typeNameSet) {
 
@@ -59,19 +67,19 @@ namespace app {
                 //クラスのパブリックなスタティックプロパティを取得
                 Dictionary<string, Dictionary<string, string>> propertyOfStaticSummaryInfoDict = new Dictionary<string, Dictionary<string, string>> ();
 
-                int grp = 0;
+                int grpseq = 0;
 
                 PropertyInfo[] propertyInfoList = type.GetProperties (BindingFlags.Static | BindingFlags.Public);
 
                 foreach (PropertyInfo propertyInfo in propertyInfoList) {
-                    grp++;
+                    grpseq++;
 
                     Dictionary<string, string> propertyOfStaticDetailInfoDict = new Dictionary<string, string> ();
 
-                    propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE, propertyInfo.Name); //インスタンスプロパティ名
-                    propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //インスタンスプロパティ名の戻り値の型名
+                    propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE, propertyInfo.Name); //スタティックプロパティ名
+                    propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //スタティックプロパティ名の戻り値の型名
 
-                    propertyOfStaticSummaryInfoDict.Add (String.Format (PROPERTY_GROUP_DIGIT, grp), propertyOfStaticDetailInfoDict);
+                    propertyOfStaticSummaryInfoDict.Add (String.Format (GROUP_SEQ_DIGIT, grpseq), propertyOfStaticDetailInfoDict);
                 }
 
                 propertyOfStaticSummaryInfoByTypeDict.Add (typeName, propertyOfStaticSummaryInfoDict);
@@ -91,19 +99,19 @@ namespace app {
                 //クラスのパブリックなインスタンスプロパティを取得
                 Dictionary<string, Dictionary<string, string>> propertyOfInstanceSummaryInfoDict = new Dictionary<string, Dictionary<string, string>> ();
 
-                int grp = 0;
+                int grpseq = 0;
 
                 PropertyInfo[] propertyInfoList = type.GetProperties (BindingFlags.Instance | BindingFlags.Public);
 
                 foreach (PropertyInfo propertyInfo in propertyInfoList) {
-                    grp++;
+                    grpseq++;
 
                     Dictionary<string, string> propertyOfInstanceDetailInfoDict = new Dictionary<string, string> ();
 
-                    propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_INSTANCE, propertyInfo.Name); //インスタンスプロパティ名
-                    propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //インスタンスプロパティ名の戻り値の型名
+                    propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_STATIC, propertyInfo.Name); //インスタンスプロパティ名
+                    propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_STATIC_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //インスタンスプロパティ名の戻り値の型名
 
-                    propertyOfInstanceSummaryInfoDict.Add (String.Format (PROPERTY_GROUP_DIGIT, grp), propertyOfInstanceDetailInfoDict);
+                    propertyOfInstanceSummaryInfoDict.Add (String.Format (GROUP_SEQ_DIGIT, grpseq), propertyOfInstanceDetailInfoDict);
                 }
 
                 propertyOfInstanceSummaryInfoByTypeDict.Add (typeName, propertyOfInstanceSummaryInfoDict);
@@ -126,32 +134,32 @@ namespace app {
 
                 Dictionary<string, Dictionary<string, string>> methodOfStaticSummaryInfoDict = new Dictionary<string, Dictionary<string, string>> ();
 
-                int grp = 0;
+                int grpseq = 0;
 
                 foreach (MethodInfo methodOfStaticInfo in methodOfStaticInfoList) {
 
-                    grp++;
+                    grpseq++;
 
                     List<ParameterInfo> parameterOfStaticInfoList = methodOfStaticInfo.GetParameters ().ToList ();
 
                     Dictionary<string, string> methodOfStaticDetailInfoDict = new Dictionary<string, string> ();
 
-                    methodOfStaticDetailInfoDict.Add (METHOD_NAME, methodOfStaticInfo.Name); //メソッド名
-                    methodOfStaticDetailInfoDict.Add (METHOD_RETURN_TYPE_NAME, methodOfStaticInfo.ReturnType.FullName); //メソッドの戻り値の型名
+                    methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_NAME, methodOfStaticInfo.Name); //メソッド名
+                    methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_RETURN_TYPE_NAME, methodOfStaticInfo.ReturnType.FullName); //メソッドの戻り値の型名
 
                     if (parameterOfStaticInfoList.Count == 0) {
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_COUNT, DEFAULT_NONE_INT_VALUE.ToString ()); //メソッドの仮引数の個数
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_POSITION_NO, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の位置番号
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_VARIABLE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の変数名
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_RETURN_TYPE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の型名
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT, DEFAULT_NONE_INT_VALUE.ToString ()); //メソッドの仮引数の個数
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の位置番号
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の変数名
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の型名
                     } else {
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_COUNT, string.Join (STRING_JOINER, parameterOfStaticInfoList.Count.ToString ())); //メソッドの仮引数の個数
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_POSITION_NO, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.Position).ToArray ())); //メソッドの仮引数の位置番号
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_VARIABLE_NAME, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.Name).ToArray ())); //メソッドの仮引数の変数名
-                        methodOfStaticDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_RETURN_TYPE_NAME, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.ParameterType.Name).ToArray ())); //メソッドの仮引数の型名
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT, string.Join (STRING_JOINER, parameterOfStaticInfoList.Count.ToString ())); //メソッドの仮引数の個数
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.Position).ToArray ())); //メソッドの仮引数の位置番号
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.Name).ToArray ())); //メソッドの仮引数の変数名
+                        methodOfStaticDetailInfoDict.Add (METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME, string.Join (STRING_JOINER, parameterOfStaticInfoList.Select (parameterInfo => parameterInfo.ParameterType.Name).ToArray ())); //メソッドの仮引数の型名
                     }
 
-                    methodOfStaticSummaryInfoDict.Add (String.Format (METHOD_GROUP_DIGIT, grp), methodOfStaticDetailInfoDict);
+                    methodOfStaticSummaryInfoDict.Add (String.Format (GROUP_SEQ_DIGIT, grpseq), methodOfStaticDetailInfoDict);
                 }
 
                 methodOfStaticSummaryInfoByTypeDict.Add (typeName, methodOfStaticSummaryInfoDict);
@@ -174,32 +182,32 @@ namespace app {
 
                 Dictionary<string, Dictionary<string, string>> methodOfInstanceSummaryInfoDict = new Dictionary<string, Dictionary<string, string>> ();
 
-                int grp = 0;
+                int grpseq = 0;
 
                 foreach (MethodInfo methodOfInstanceInfo in methodOfInstanceInfoList) {
 
-                    grp++;
+                    grpseq++;
 
                     List<ParameterInfo> parameterOfInstanceInfoList = methodOfInstanceInfo.GetParameters ().ToList ();
 
                     Dictionary<string, string> methodOfInstanceDetailInfoDict = new Dictionary<string, string> ();
 
-                    methodOfInstanceDetailInfoDict.Add (METHOD_NAME, methodOfInstanceInfo.Name); //メソッド名
-                    methodOfInstanceDetailInfoDict.Add (METHOD_RETURN_TYPE_NAME, methodOfInstanceInfo.ReturnType.FullName); //メソッドの戻り値の型名
+                    methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_NAME, methodOfInstanceInfo.Name); //メソッド名
+                    methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_RETURN_TYPE_NAME, methodOfInstanceInfo.ReturnType.FullName); //メソッドの戻り値の型名
 
                     if (parameterOfInstanceInfoList.Count == 0) {
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_COUNT, DEFAULT_NONE_INT_VALUE.ToString ()); //メソッドの仮引数の個数
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_POSITION_NO, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の位置番号
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_VARIABLE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の変数名
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_RETURN_TYPE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の型名
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT, DEFAULT_NONE_INT_VALUE.ToString ()); //メソッドの仮引数の個数
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の位置番号
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の変数名
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME, DEFAULT_NONE_STRING_VALUE); //メソッドの仮引数の型名
                     } else {
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_COUNT, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Count.ToString ())); //メソッドの仮引数の個数
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_POSITION_NO, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.Position).ToArray ())); //メソッドの仮引数の位置番号
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_VARIABLE_NAME, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.Name).ToArray ())); //メソッドの仮引数の変数名
-                        methodOfInstanceDetailInfoDict.Add (METHOD_PHONY_ARGUMENT_RETURN_TYPE_NAME, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.ParameterType.Name).ToArray ())); //メソッドの仮引数の型名
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Count.ToString ())); //メソッドの仮引数の個数
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.Position).ToArray ())); //メソッドの仮引数の位置番号
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.Name).ToArray ())); //メソッドの仮引数の変数名
+                        methodOfInstanceDetailInfoDict.Add (METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME, string.Join (STRING_JOINER, parameterOfInstanceInfoList.Select (parameterInfo => parameterInfo.ParameterType.Name).ToArray ())); //メソッドの仮引数の型名
                     }
 
-                    methodOfInstanceSummaryInfoDict.Add (String.Format (METHOD_GROUP_DIGIT, grp), methodOfInstanceDetailInfoDict);
+                    methodOfInstanceSummaryInfoDict.Add (String.Format (GROUP_SEQ_DIGIT, grpseq), methodOfInstanceDetailInfoDict);
                 }
 
                 methodOfInstanceSummaryInfoByTypeDict.Add (typeName, methodOfInstanceSummaryInfoDict);
@@ -331,12 +339,17 @@ namespace app {
                     break;
             }
 
+            int grp = 0;
             foreach (string type in summaryMap.Keys) {
+
+                grp++;
 
                 Dictionary<string, Dictionary<string, string>> detailMap = summaryMap[type];
 
                 foreach (string key in detailMap.Keys) {
                     {
+                        Console.Write(String.Format (GROUP_DIGIT, grp));
+                        Console.Write (FS);
                         Console.Write (type);
                         Console.Write (FS);
                         Console.Write (key);
