@@ -95,8 +95,8 @@ namespace app {
 
                 Dictionary<string, string> propertyOfStaticDetailInfoDict = new Dictionary<string, string> ();
 
-                propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE, propertyInfo.Name); //スタティックプロパティ名
-                propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //スタティックプロパティ名の戻り値の型名
+                propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_STATIC, propertyInfo.Name); //スタティックプロパティ名
+                propertyOfStaticDetailInfoDict.Add (PROPERTY_OF_STATIC_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //スタティックプロパティ名の戻り値の型名
 
                 propertyOfStaticSummaryInfoDict.Add (String.Format (SUB_GROUP_DIGIT, subgrp) + COLUMN_JOINER + type.FullName, propertyOfStaticDetailInfoDict);
             }
@@ -118,8 +118,8 @@ namespace app {
 
                 Dictionary<string, string> propertyOfInstanceDetailInfoDict = new Dictionary<string, string> ();
 
-                propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_STATIC, propertyInfo.Name); //インスタンスプロパティ名
-                propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_STATIC_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //インスタンスプロパティ名の戻り値の型名
+                propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_INSTANCE, propertyInfo.Name); //インスタンスプロパティ名
+                propertyOfInstanceDetailInfoDict.Add (PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME, propertyInfo.ToString ().Split (SEPARATOR) [0]); //インスタンスプロパティ名の戻り値の型名
 
                 propertyOfInstanceSummaryInfoDict.Add (String.Format (SUB_GROUP_DIGIT, subgrp) + COLUMN_JOINER + type.FullName, propertyOfInstanceDetailInfoDict);
             }
@@ -223,7 +223,7 @@ namespace app {
             return assemblyTypeDict;
         }
 
-        private static Dictionary<string, List<Type>> getExtLibAssemblyList (List<string> extLibAssemblyList) {
+        private static Dictionary<string, List<Type>> getExtLibTypeList (List<string> extLibAssemblyList) {
             //外部ライブラリ指定
             Dictionary<string, List<Type>> assemblyTypeDict = new Dictionary<string, List<Type>> ();
 
@@ -359,6 +359,13 @@ namespace app {
             appName = Regex.Replace (appName, ".*/", EMPTY); //ファイル名のみにする
             appName = Regex.Replace (appName, "\\..*", EMPTY); //拡張子を取り除く
 
+
+
+
+
+
+
+
             List<string> cmdLineArgs = args.ToList ();
 
             Dictionary<string, List<Type>> stdLibTypeDict = getStdLibTypeList ();
@@ -396,45 +403,44 @@ namespace app {
                 }
             }
 
-            // List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = getStdLibAssemblyList ();
+            List<string> extLibAssemblyList = new List<string> {
+                "Newtonsoft.Json"
+            };
 
-            // foreach (Dictionary<string, string> assemblyNameSpaceTypeDetailDict in assemblyNameSpaceTypeSummaryList) {
+            Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (extLibAssemblyList);
 
-            //     {
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[ASSEMBLY_NAME]);
-            //         Console.Write (FS);
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[NAMESPACE_NAME]);
-            //         Console.Write (FS);
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
+            foreach (string assemblyName in extLibTypeDict.Keys) {
 
-            //         Type type = Type.GetType(assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
+                foreach (Type type in extLibTypeDict[assemblyName]) {
 
-            //         if(type ==  null){
-            //             Console.WriteLine("NULLLLLLLLLLLLLLL");
-            //         }else{
-            //             Console.WriteLine("YESSSSSSSSSSSSSSS");
-            //         }
+                    Dictionary<string, Dictionary<string, string>> summaryDict = null;
 
-            //     }
-            //     Console.WriteLine ();
-            // }
+                    DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
 
-            // List<string> extLibAssemblyList = new List<string> {
-            //     "Newtonsoft.Json"
-            // };
+                    switch (DEFAULT_OPTION_VALUE) {
 
-            // List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = getExtLibAssemblyList (extLibAssemblyList);
-
-            // foreach (Dictionary<string, string> assemblyNameSpaceTypeDetailDict in assemblyNameSpaceTypeSummaryList) {
-            //     {
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[ASSEMBLY_NAME]);
-            //         Console.Write (FS);
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[NAMESPACE_NAME]);
-            //         Console.Write (FS);
-            //         Console.Write (assemblyNameSpaceTypeDetailDict[TYPE_NAME]);
-            //     }
-            //     Console.WriteLine ();
-            // }
+                        case OPTION_PROPERTY_STATIC:
+                            summaryDict = getPropertyOfStaticSummaryInfoDict (type);
+                            outputPropertyOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            break;
+                        case OPTION_PROPERTY_INSTANCE:
+                            summaryDict = getPropertyOfInstanceSummaryInfoDict (type);
+                            outputPropertyOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            break;
+                        case OPTION_METHOD_STATIC:
+                            summaryDict = getMethodOfStaticSummaryInfoDict (type);
+                            outputMethodOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
+                            break;
+                        case OPTION_METHOD_INSTANCE:
+                            summaryDict = getMethodOfInstanceSummaryInfoDict (type);
+                            outputMethodOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
+                            break;
+                        default:
+                            Usage (appName);
+                            break;
+                    }
+                }
+            }
         }
     }
 }
