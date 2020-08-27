@@ -254,6 +254,105 @@ namespace app {
             Environment.Exit (0);
         }
 
+        private static void outputPropertyOfStaticSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+            foreach (string rowNum in summaryDict.Keys) {
+
+                Dictionary<string, string> detailMap = summaryDict[rowNum];
+
+                {
+                    Console.Write (assemblyName);
+                    Console.Write (FS);
+                    Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
+                    Console.Write (FS);
+                    Console.Write (type.FullName);
+                    Console.Write (FS);
+                    Console.Write (detailMap[PROPERTY_OF_STATIC]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[PROPERTY_OF_STATIC_RETURN_TYPE_NAME]);
+                }
+                Console.WriteLine ();
+
+            }
+        }
+
+        private static void outputPropertyOfInstanceSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+            foreach (string rowNum in summaryDict.Keys) {
+
+                Dictionary<string, string> detailMap = summaryDict[rowNum];
+
+                {
+                    Console.Write (assemblyName);
+                    Console.Write (FS);
+                    Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
+                    Console.Write (FS);
+                    Console.Write (type.FullName);
+                    Console.Write (FS);
+                    Console.Write (detailMap[PROPERTY_OF_INSTANCE]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME]);
+                }
+                Console.WriteLine ();
+
+            }
+        }
+
+        private static void outputMethodOfStaticSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+            foreach (string rowNum in summaryDict.Keys) {
+
+                Dictionary<string, string> detailMap = summaryDict[rowNum];
+
+                {
+                    Console.Write (assemblyName);
+                    Console.Write (FS);
+                    Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
+                    Console.Write (FS);
+                    Console.Write (type.FullName);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_RETURN_TYPE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
+                }
+                Console.WriteLine ();
+
+            }
+        }
+        private static void outputMethodOfInstanceSummaryInfoDict(string assemblyName,Type type,Dictionary<string, Dictionary<string, string>> summaryDict){
+            foreach (string rowNum in summaryDict.Keys) {
+
+                Dictionary<string, string> detailMap = summaryDict[rowNum];
+
+                {
+                    Console.Write (assemblyName);
+                    Console.Write (FS);
+                    Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
+                    Console.Write (FS);
+                    Console.Write (type.FullName);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_RETURN_TYPE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME]);
+                    Console.Write (FS);
+                    Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
+                }
+                Console.WriteLine ();
+
+            }
+        }
+
         static void Main (string[] args) {
 
             string appName = Environment.GetCommandLineArgs () [0];
@@ -266,63 +365,35 @@ namespace app {
 
             foreach (string assemblyName in stdLibTypeDict.Keys) {
 
-                // Console.WriteLine(assemblyName);
-
                 foreach (Type type in stdLibTypeDict[assemblyName]) {
 
-                    Dictionary<string, Dictionary<string, string>> summaryMap = null;
+                    Dictionary<string, Dictionary<string, string>> summaryDict = null;
 
                     DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
 
                     switch (DEFAULT_OPTION_VALUE) {
 
                         case OPTION_PROPERTY_STATIC:
-                            summaryMap = getPropertyOfStaticSummaryInfoDict (type);
+                            summaryDict = getPropertyOfStaticSummaryInfoDict (type);
+                            outputPropertyOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
                             break;
                         case OPTION_PROPERTY_INSTANCE:
-                            summaryMap = getPropertyOfInstanceSummaryInfoDict (type);
+                            summaryDict = getPropertyOfInstanceSummaryInfoDict (type);
+                            outputPropertyOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
                             break;
                         case OPTION_METHOD_STATIC:
-                            summaryMap = getMethodOfStaticSummaryInfoDict (type);
+                            summaryDict = getMethodOfStaticSummaryInfoDict (type);
+                            outputMethodOfStaticSummaryInfoDict(assemblyName,type,summaryDict);
                             break;
                         case OPTION_METHOD_INSTANCE:
-                            summaryMap = getMethodOfInstanceSummaryInfoDict (type);
+                            summaryDict = getMethodOfInstanceSummaryInfoDict (type);
+                            outputMethodOfInstanceSummaryInfoDict(assemblyName,type,summaryDict);
                             break;
                         default:
                             Usage (appName);
                             break;
                     }
-
-
-                    foreach (string rowNum in summaryMap.Keys) {
-
-                        Dictionary<string, string> detailMap = summaryMap[rowNum];
-
-                        {
-                            Console.Write (assemblyName);
-                            Console.Write (FS);
-                            Console.Write (type.Namespace == null ? DEFAULT_NONE_STRING_VALUE : type.Namespace);
-                            Console.Write (FS);
-                            Console.Write (type.FullName);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_NAME]);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_RETURN_TYPE_NAME]);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT]);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO]);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME]);
-                            Console.Write (FS);
-                            Console.Write (detailMap[METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME]);
-                        }
-                        Console.WriteLine ();
-
-                    }
-
                 }
-
             }
 
             // List<Dictionary<string, string>> assemblyNameSpaceTypeSummaryList = getStdLibAssemblyList ();
