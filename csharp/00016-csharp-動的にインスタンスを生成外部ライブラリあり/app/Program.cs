@@ -390,7 +390,7 @@ namespace app {
             }
         }
 
-        private static void showInternalLibInfo (string appName,HashSet<string> targetTypeNameHashSet) {
+        private static void showInternalLibInfo (string appName, HashSet<string> targetTypeNameHashSet) {
 
             Dictionary<string, List<Type>> stdLibTypeDict = getStdLibTypeList ();
 
@@ -431,7 +431,7 @@ namespace app {
             }
         }
 
-        private static void showExternalLibInfo (string appName,HashSet<string> targetTypeNameHashSet) {
+        private static void showExternalLibInfo (string appName, HashSet<string> targetTypeNameHashSet) {
 
             Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (targetTypeNameHashSet);
 
@@ -477,8 +477,6 @@ namespace app {
             List<string> cmdLineArgs = args.ToList ();
 
             HashSet<string> targetTypeNameHashSet = new HashSet<string> ();
-
-            //オプション引数が指定したもの以外にマッチした場合は早期リターン オプションリスト作って除外
 
             if (cmdLineArgs.Count == 0) {
 
@@ -569,13 +567,18 @@ namespace app {
                 }
             }
 
+            if(targetTypeNameHashSet.Where(e => e.IndexOf("-") == 0).ToList().Count != 0){
+                //オプション引数が指定したもの以外にマッチした場合は除外
+                Usage(appName);
+            }
+
             switch (DEFAULT_PATTERN) {
 
                 case OPTION_INTERNAL_LIB:
-                    showInternalLibInfo (appName,targetTypeNameHashSet);
+                    showInternalLibInfo (appName, targetTypeNameHashSet);
                     break;
                 case OPTION_EXTERNAL_LIB:
-                    showExternalLibInfo (appName,targetTypeNameHashSet);
+                    showExternalLibInfo (appName, targetTypeNameHashSet);
                     break;
                 default:
                     Usage (appName);
