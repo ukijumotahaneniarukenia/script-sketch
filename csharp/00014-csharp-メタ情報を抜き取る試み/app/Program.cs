@@ -11,50 +11,87 @@ namespace app {
 
     class Program {
 
-        private static string EMPTY = "";
         private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
         private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
             "System.DateTime"
             ,"System.Text.NormalizationForm"
             ,"System.Text.Rune"
         };
-        private static int DEFAULT_NONE_INT_VALUE = 0;
-        private static string DEFAULT_NONE_STRING_VALUE = "ないよーん";
-        private static string DEFAULT_OPTION_VALUE = "--property-instance";
-        private const string OPTION_PROPERTY_INSTANCE = "--property-instance";
-        private const string OPTION_PROPERTY_STATIC = "--property-static";
-        private const string OPTION_METHOD_INSTANCE = "--method-instance";
-        private const string OPTION_METHOD_STATIC = "--method-static";
-
-        private static List<string> OPTION_LIST = new List<string> {
-            OPTION_PROPERTY_INSTANCE,
-            OPTION_PROPERTY_STATIC,
-            OPTION_METHOD_INSTANCE,
-            OPTION_METHOD_STATIC
-        };
-
-        private static string FS = "\t";
+        private static string EMPTY = "";
         private static string SEPARATOR = " ";
+        private static string FS = "\t";
         private static char RS = '\n';
         private static string STRING_JOINER = ",";
         private static string GROUP_DIGIT = "{0:00000000}";
         private static string GROUP_SEQ_DIGIT = "{0:00000}";
+
+        private static string GROUP = "グループ番号";
+        private static string GROUP_SEQ = "グループシーケンス番号";
+        private static string TYPE_NAME = "型名";
+        private static List<string> OUTPUT_COMMON_HEADER_LIST = new List<string>{
+            GROUP
+            ,TYPE_NAME
+            ,GROUP_SEQ
+        };
+
         private static string PROPERTY_OF_STATIC = "スタティックプロパティ名";
         private static string PROPERTY_OF_STATIC_RETURN_TYPE_NAME = "スタティックプロパティ名の戻り値の型名";
+        private static List<string> OUTPUT_STATIC_PROPERTY_HEADER_LIST = new List<string>{
+            PROPERTY_OF_STATIC
+            ,PROPERTY_OF_STATIC_RETURN_TYPE_NAME
+        };
+
         private static string PROPERTY_OF_INSTANCE = "インスタンスプロパティ名";
         private static string PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスプロパティ名の戻り値の型名";
+        private static List<string> OUTPUT_INSTANCE_PROPERTY_HEADER_LIST = new List<string>{
+            PROPERTY_OF_INSTANCE
+            ,PROPERTY_OF_INSTANCE_RETURN_TYPE_NAME
+        };
         private static string METHOD_OF_STATIC_NAME = "スタティックメソッド名";
         private static string METHOD_OF_STATIC_RETURN_TYPE_NAME = "スタティックメソッドの戻り値の型名";
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT = "スタティックメソッドの仮引数の個数";
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO = "スタティックメソッドの仮引数の位置番号";
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME = "スタティックメソッドの仮引数の変数名";
         private static string METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME = "スタティックメソッドの仮引数の型名";
+        private static List<string> OUTPUT_STATIC_METHOD_HEADER_LIST = new List<string>{
+            METHOD_OF_STATIC_NAME
+            ,METHOD_OF_STATIC_RETURN_TYPE_NAME
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_COUNT
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_POSITION_NO
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_VARIABLE_NAME
+            ,METHOD_OF_STATIC_PHONY_ARGUMENT_RETURN_TYPE_NAME
+        };
+
         private static string METHOD_OF_INSTANCE_NAME = "インスタンスメソッド名";
         private static string METHOD_OF_INSTANCE_RETURN_TYPE_NAME = "インスタンスメソッドの戻り値の型名";
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT = "インスタンスメソッドの仮引数の個数";
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO = "インスタンスメソッドの仮引数の位置番号";
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME = "インスタンスメソッドの仮引数の変数名";
         private static string METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME = "インスタンスメソッドの仮引数の型名";
+
+        private static List<string> OUTPUT_INSTANCE_METHOD_HEADER_LIST = new List<string>{
+            METHOD_OF_INSTANCE_NAME
+            ,METHOD_OF_INSTANCE_RETURN_TYPE_NAME
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_COUNT
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_POSITION_NO
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_VARIABLE_NAME
+            ,METHOD_OF_INSTANCE_PHONY_ARGUMENT_RETURN_TYPE_NAME
+        };
+
+        private static int DEFAULT_NONE_INT_VALUE = 0;
+        private static string DEFAULT_NONE_STRING_VALUE = "ないよーん";
+        private static List<string> DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
+        private static string DEFAULT_OPTION_VALUE = "--property-instance";
+        private const string OPTION_PROPERTY_INSTANCE = "--property-instance";
+        private const string OPTION_PROPERTY_STATIC = "--property-static";
+        private const string OPTION_METHOD_INSTANCE = "--method-instance";
+        private const string OPTION_METHOD_STATIC = "--method-static";
+        private static List<string> OPTION_LIST = new List<string> {
+            OPTION_PROPERTY_INSTANCE,
+            OPTION_PROPERTY_STATIC,
+            OPTION_METHOD_INSTANCE,
+            OPTION_METHOD_STATIC
+        };
 
         private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> getPropertyOfStaticSummaryInfoDict (HashSet<string> typeNameSet) {
 
@@ -280,15 +317,19 @@ namespace app {
                     switch (arg) {
                         case OPTION_PROPERTY_STATIC:
                             DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_PROPERTY_HEADER_LIST;
                             break;
                         case OPTION_PROPERTY_INSTANCE:
                             DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
                             break;
                         case OPTION_METHOD_STATIC:
                             DEFAULT_OPTION_VALUE = OPTION_METHOD_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_METHOD_HEADER_LIST;
                             break;
                         case OPTION_METHOD_INSTANCE:
                             DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
                             break;
                         default:
                             targetTypeNameHashSet.Add (arg);
@@ -301,15 +342,19 @@ namespace app {
                     switch (arg) {
                         case OPTION_PROPERTY_STATIC:
                             DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_PROPERTY_HEADER_LIST;
                             break;
                         case OPTION_PROPERTY_INSTANCE:
                             DEFAULT_OPTION_VALUE = OPTION_PROPERTY_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_PROPERTY_HEADER_LIST;
                             break;
                         case OPTION_METHOD_STATIC:
                             DEFAULT_OPTION_VALUE = OPTION_METHOD_STATIC;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_STATIC_METHOD_HEADER_LIST;
                             break;
                         case OPTION_METHOD_INSTANCE:
                             DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
+                            DEFAULT_OUTPUT_HEADER_LIST = OUTPUT_INSTANCE_METHOD_HEADER_LIST;
                             break;
                         default:
                             targetTypeNameHashSet.Add (arg);
@@ -340,6 +385,18 @@ namespace app {
             }
 
             int grp = 0;
+
+            //header
+            {
+                {
+                    Console.Write (String.Join(FS,OUTPUT_COMMON_HEADER_LIST.ToArray()));
+                    Console.Write (FS);
+                    Console.Write (String.Join(FS,DEFAULT_OUTPUT_HEADER_LIST.ToArray()));
+                }
+                Console.WriteLine ();
+            }
+
+            //body
             foreach (string type in summaryMap.Keys) {
 
                 grp++;
