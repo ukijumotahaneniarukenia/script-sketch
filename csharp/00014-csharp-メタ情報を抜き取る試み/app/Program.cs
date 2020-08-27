@@ -11,13 +11,12 @@ namespace app {
 
     class Program {
 
-        private static List<Assembly> CURRENT_ASSEMBLY_LIST = AppDomain.CurrentDomain.GetAssemblies ().ToList ();
-
         private static string EMPTY = "";
-        private static string USAGE_SAMPLE_ARGUMENT = "System.DataTime";
+        private static string USAGE_SAMPLE_ARGUMENT = "System.DateTime";
         private static List<string> USAGE_SAMPLE_ARGUMENT_LIST = new List<string> {
-            "System.DataTime",
-            ""
+            "System.DateTime"
+            ,"System.Text.NormalizationForm"
+            ,"System.Text.Rune"
         };
         private static int DEFAULT_NONE_INT_VALUE = 0;
         private static string DEFAULT_NONE_STRING_VALUE = "ないよーん";
@@ -313,27 +312,19 @@ namespace app {
 
             Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = new Dictionary<string, Dictionary<string, Dictionary<string, string>>> ();
 
-            HashSet<string> typeNameSet = new HashSet<string> {
-                "System.DateTime" //名前空間からのクラス名までのフル名
-            };
-
             switch (DEFAULT_OPTION_VALUE) {
 
                 case OPTION_PROPERTY_STATIC:
-                    summaryMap = getPropertyOfStaticSummaryInfoDict(typeNameSet); //ok
-                    // summaryMap = getPropertyOfStaticSummaryInfoDict (targetTypeNameHashSet); // ng
+                    summaryMap = getPropertyOfStaticSummaryInfoDict (targetTypeNameHashSet);
                     break;
                 case OPTION_PROPERTY_INSTANCE:
-                    summaryMap = getPropertyOfInstanceSummaryInfoDict(typeNameSet); //ok
-                    // summaryMap = getPropertyOfInstanceSummaryInfoDict (targetTypeNameHashSet);// ng
+                    summaryMap = getPropertyOfInstanceSummaryInfoDict (targetTypeNameHashSet);
                     break;
                 case OPTION_METHOD_STATIC:
-                    summaryMap = getMethodOfStaticSummaryInfoDict(typeNameSet); //ok
-                    // summaryMap = getMethodOfStaticSummaryInfoDict (targetTypeNameHashSet);// ng
+                    summaryMap = getMethodOfStaticSummaryInfoDict(targetTypeNameHashSet);
                     break;
                 case OPTION_METHOD_INSTANCE:
-                    summaryMap = getMethodOfInstanceSummaryInfoDict(typeNameSet); //ok
-                    // summaryMap = getMethodOfInstanceSummaryInfoDict (targetTypeNameHashSet);// ng
+                    summaryMap = getMethodOfInstanceSummaryInfoDict(targetTypeNameHashSet);
                     break;
                 default:
                     Usage (appName);
@@ -355,39 +346,6 @@ namespace app {
                     Console.WriteLine ();
                 }
             }
-
-            // ハードの動作確認 ok
-
-            // HashSet<String> typeNameSet = new HashSet<string> {
-            //     "System.DateTime" //名前空間からのクラス名までのフル名
-            // };
-
-            // //クラスのパブリックなスタティックプロパティを取得 ok
-            // Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = getPropertyOfStaticSummaryInfoDict (typeNameSet);
-            // //クラスのパブリックなインスタンスプロパティを取得 ok
-            // Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = getPropertyOfInstanceSummaryInfoDict (typeNameSet);
-            // クラスのパブリックなスタティックメソッドを取得 ok
-            // Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = getMethodOfStaticSummaryInfoDict (typeNameSet);
-            // クラスのパブリックなインスタンスメソッドを取得 ok
-            // Dictionary<string, Dictionary<string, Dictionary<string, string>>> summaryMap = getMethodOfInstanceSummaryInfoDict (typeNameSet);
-
-            // foreach (string type in summaryMap.Keys) {
-
-            //     Dictionary<string, Dictionary<string, string>> detailMap = summaryMap[type];
-
-            //     foreach (string key in detailMap.Keys) {
-            //         {
-            //             Console.Write (type);
-            //             Console.Write (FS);
-            //             Console.Write (key);
-            //             Console.Write (FS);
-            //             Console.Write (String.Join (FS, detailMap[key].Values));
-            //         }
-            //         Console.WriteLine ();
-            //     }
-            // }
-
-            // Console.WriteLine ("Hello World!");
         }
     }
 }
