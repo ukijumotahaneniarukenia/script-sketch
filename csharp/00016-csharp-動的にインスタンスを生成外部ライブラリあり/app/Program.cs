@@ -405,8 +405,6 @@ namespace app {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
 
-                    DEFAULT_OPTION_VALUE = OPTION_METHOD_INSTANCE;
-
                     switch (DEFAULT_OPTION_VALUE) {
 
                         case OPTION_PROPERTY_STATIC:
@@ -435,10 +433,6 @@ namespace app {
 
         private static void showExternalLibInfo (string appName,HashSet<string> targetTypeNameHashSet) {
 
-            // List<string> extLibAssemblyList = new List<string> {
-            //     "Newtonsoft.Json"
-            // };
-
             Dictionary<string, List<Type>> extLibTypeDict = getExtLibTypeList (targetTypeNameHashSet);
 
             foreach (string assemblyName in extLibTypeDict.Keys) {
@@ -447,8 +441,6 @@ namespace app {
                 foreach (Type type in extLibTypeDict[assemblyName]) {
 
                     Dictionary<string, Dictionary<string, string>> summaryDict = null;
-
-                    DEFAULT_OPTION_VALUE = OPTION_PROPERTY_STATIC;
 
                     switch (DEFAULT_OPTION_VALUE) {
 
@@ -575,6 +567,19 @@ namespace app {
                             break;
                     }
                 }
+            }
+
+            switch (DEFAULT_PATTERN) {
+
+                case OPTION_INTERNAL_LIB:
+                    showInternalLibInfo (appName,targetTypeNameHashSet);
+                    break;
+                case OPTION_EXTERNAL_LIB:
+                    showExternalLibInfo (appName,targetTypeNameHashSet);
+                    break;
+                default:
+                    Usage (appName);
+                    break;
             }
         }
     }
