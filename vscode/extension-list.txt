@@ -2,6 +2,7 @@ CoenraadS.bracket-pair-colorizer
 DataWorks.dataworks-intellisense
 IBM.output-colorizer
 ICS.japanese-proofreading
+Ionide.Ionide-fsharp
 Leopotam.csharpfixformat
 Tyriar.sort-lines
 bmewburn.vscode-intelephense-client
@@ -9,6 +10,7 @@ castwide.solargraph
 dunstontc.vscode-rust-syntax
 eamodio.gitlens
 esbenp.prettier-vscode
+georgewfraser.fsharp-language-server
 golang.go
 hediet.vscode-drawio
 jebbs.plantuml

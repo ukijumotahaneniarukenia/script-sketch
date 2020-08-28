@@ -1,0 +1,3 @@
+georgewfraser.fsharp-language-server
+Ionide.Ionide-fsharp
+ms-dotnettools.csharp
