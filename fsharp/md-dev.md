@@ -1,31 +1,35 @@
+プロジェクト作成後、改行コードをLFに統一してコミット
 
-
-csharpのライブラリも使える便利
+dotnet系だとこうなるぽい
 
 ```
-cat <<EOS
+$ nkf -Lu --overwrite Program.fs
 
-open System
-
-let a = [ 1; 2; 3 ] ;;
-
-Console.WriteLine(a);;
-
-
-
-
-EOS
+$ nkf -Lu --overwrite app.fsproj
 ```
 
 
-実行
+
 
 ```
-$ dotnet fsi a.fsx
-[1; 2; 3]
+$ mkdir -p 00001-fsharp-はじめのいっぽ
+
+
+$ cd 00001-fsharp-はじめのいっぽ
+
+
+$ mkdir -p app
+
+
+$ cd app
+
+
+$ echo '/obj/* /bin/*' | xargs -n1 >.gitignore
+
+
+$ dotnet new console -lang "F#"
+
+
+$ dotnet run
+Hello World from F#!
 ```
-
-
-拡張子はfsxの方がトラブルすくない
-
-補完効かなくなるときはvscode閉じて開き直しでいい感じ

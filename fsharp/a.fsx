@@ -46,3 +46,10 @@ let d = List.map(fun x-> x%2=0) c
 
 
 Console.WriteLine(d) //[False; True; False; ... ]
+
+
+
+
+let tuple = (1,false,"うんこ");;
+
+
