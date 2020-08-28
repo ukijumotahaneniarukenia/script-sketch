@@ -1,0 +1,3 @@
+dunstontc.vscode-rust-syntax
+matklad.rust-analyzer
+rust-lang.rust

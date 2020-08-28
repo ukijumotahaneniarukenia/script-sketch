@@ -1,0 +1,3 @@
+castwide.solargraph
+rebornix.ruby
+wingrunr21.vscode-ruby
