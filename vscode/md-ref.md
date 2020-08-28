@@ -313,3 +313,29 @@ ext install ms-vscode.cpptools
 ```
 ext install ritwickdey.LiveServer
 ```
+
+- Ionide-fsharp
+
+  - fsharpの補完など ライブラリ補完もろもろ
+
+```
+ext install Ionide.Ionide-fsharp
+```
+
+
+- fsharp-language-server
+
+  - fsharpのLSP
+
+```
+ext install georgewfraser.fsharp-language-server
+```
+
+- csharp
+
+  - csharpの補完など ライブラリ補完もろもｒ
+
+```
+ext install ms-dotnettools.csharp
+```
+ms-dotnettools.csharp
