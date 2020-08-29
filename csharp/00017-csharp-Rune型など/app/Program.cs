@@ -14,7 +14,8 @@ namespace app {
             //https://docs.microsoft.com/ja-jp/dotnet/api/system.char?view=netcore-3.1#Relationship
             //https://github.com/GoldenCrystal/NetUnicodeInfo
             // int s = 0;
-            int s = 160;
+            // int s = 160;
+            int s = 400;
             // int s = 0x1F4A0;
             int c = 200;
 
