@@ -46,57 +46,48 @@ namespace app {
         private const string IS_BMP = "IsBmp";
         private const string PLANE = "Plane";
 
-        private static List<int> enableLowerRangeList = new List<int>(){
-            0,55296
-        };
-        private static List<int> enableUpperRangeList = new List<int>(){
-            57343,1114112
-        };
-
-
         static void Main (string[] args) {
 
             //https://docs.microsoft.com/ja-jp/dotnet/api/system.char?view=netcore-3.1#Relationship
             //https://github.com/GoldenCrystal/NetUnicodeInfo
 
-
-            if(args.Length != 2){
-                Environment.Exit(0);
+            if (args.Length != 2) {
+                Environment.Exit (0);
             }
 
-            int s = int.Parse(args[0]);
-            int e = int.Parse(args[1]);
+            int s = int.Parse (args[0]);
+            int e = int.Parse (args[1]);
 
-            if(s > e){
-                Environment.Exit(0);
+            if (s > e) {
+                Environment.Exit (0);
             }
 
             int c = e - s + 1;
 
-            if(s < 0){
-                Environment.Exit(0);
+            if (s < 0) {
+                Environment.Exit (0);
             }
-            if(e < 0 || e > 1114112){
-                Environment.Exit(0);
+            if (e < 0 || e > 1114112) {
+                Environment.Exit (0);
             }
-            if(c < 0 || c > 1114112){
-                Environment.Exit(0);
-            }
-
-            List<int> lowerCodePointList = Enumerable.Range (s, c).Where (i =>  i < 55296).ToList ();
-            List<int> upperCodePointList = Enumerable.Range (s, c).Where (i =>  i > 57343).ToList ();
-
-            List<int> codePointList = new List<int>();
-
-            if(0!=lowerCodePointList.Count){
-                codePointList.AddRange(lowerCodePointList);
-            }
-            if(0!=upperCodePointList.Count){
-                codePointList.AddRange(upperCodePointList);
+            if (c < 0 || c > 1114112) {
+                Environment.Exit (0);
             }
 
-            if(0 == codePointList.Count){
-                Environment.Exit(0);
+            List<int> lowerCodePointList = Enumerable.Range (s, c).Where (i => i < 55296).ToList ();
+            List<int> upperCodePointList = Enumerable.Range (s, c).Where (i => i > 57343).ToList ();
+
+            List<int> codePointList = new List<int> ();
+
+            if (0 != lowerCodePointList.Count) {
+                codePointList.AddRange (lowerCodePointList);
+            }
+            if (0 != upperCodePointList.Count) {
+                codePointList.AddRange (upperCodePointList);
+            }
+
+            if (0 == codePointList.Count) {
+                Environment.Exit (0);
             }
 
             int grp = 0;
@@ -141,8 +132,8 @@ namespace app {
                     detailDict.Add (JAPANESE_ON_READING, charInfo.JapaneseOnReading == null ? DEFAULT_NONE_STRING_VALUE : charInfo.JapaneseOnReading);
                     detailDict.Add (KOREAN_READING, charInfo.KoreanReading == null ? DEFAULT_NONE_STRING_VALUE : charInfo.KoreanReading);
                     detailDict.Add (MANDARIN_READING, charInfo.MandarinReading == null ? DEFAULT_NONE_STRING_VALUE : charInfo.MandarinReading);
-                    detailDict.Add (ALIAS_NAME,String.Join (ITEM_JOINER, charInfo.NameAliases.Select (unicodeNameAlias => unicodeNameAlias.Name == null ? DEFAULT_NONE_STRING_VALUE : unicodeNameAlias.Name).ToArray ()));
-                    detailDict.Add (ALIAS_KIND,String.Join (ITEM_JOINER, charInfo.NameAliases.Select (unicodeNameAlias => unicodeNameAlias.Kind.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : unicodeNameAlias.Kind.ToString ()).ToArray ()));
+                    detailDict.Add (ALIAS_NAME, String.Join (ITEM_JOINER, charInfo.NameAliases.Select (unicodeNameAlias => unicodeNameAlias.Name == null ? DEFAULT_NONE_STRING_VALUE : unicodeNameAlias.Name).ToArray ()));
+                    detailDict.Add (ALIAS_KIND, String.Join (ITEM_JOINER, charInfo.NameAliases.Select (unicodeNameAlias => unicodeNameAlias.Kind.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : unicodeNameAlias.Kind.ToString ()).ToArray ()));
                     detailDict.Add (NUMERIC_TYPE, charInfo.NumericType.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : charInfo.NumericType.ToString ());
                     detailDict.Add (OLD_NAME, charInfo.OldName == null ? DEFAULT_NONE_STRING_VALUE : charInfo.OldName);
                     detailDict.Add (SIMPLE_LOWER_CASE_MAPPING, charInfo.SimpleLowerCaseMapping == null ? DEFAULT_NONE_STRING_VALUE : charInfo.SimpleLowerCaseMapping);
@@ -150,11 +141,11 @@ namespace app {
                     detailDict.Add (SIMPLE_UPPER_CASE_MAPPING, charInfo.SimpleUpperCaseMapping == null ? DEFAULT_NONE_STRING_VALUE : charInfo.SimpleUpperCaseMapping);
                     detailDict.Add (SIMPLIFIED_VARIANT, charInfo.SimplifiedVariant == null ? DEFAULT_NONE_STRING_VALUE : charInfo.SimplifiedVariant);
                     detailDict.Add (TRADITIONAL_VARIANT, charInfo.TraditionalVariant == null ? DEFAULT_NONE_STRING_VALUE : charInfo.TraditionalVariant);
-                    detailDict.Add (UNICODE_RADICAL_STROKE_COUNTS, String.Join (ITEM_JOINER, charInfo.UnicodeRadicalStrokeCounts.Select(unicodeRadicalStrokeCount => unicodeRadicalStrokeCount.Radical.ToString()== "" ? DEFAULT_NONE_STRING_VALUE : unicodeRadicalStrokeCount.Radical.ToString()).ToArray()));
+                    detailDict.Add (UNICODE_RADICAL_STROKE_COUNTS, String.Join (ITEM_JOINER, charInfo.UnicodeRadicalStrokeCounts.Select (unicodeRadicalStrokeCount => unicodeRadicalStrokeCount.Radical.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : unicodeRadicalStrokeCount.Radical.ToString ()).ToArray ()));
                     detailDict.Add (VIETNAMESE_READING, charInfo.VietnameseReading == null ? DEFAULT_NONE_STRING_VALUE : charInfo.VietnameseReading);
-                    detailDict.Add (IS_ASCII, String.Join(ITEM_JOINER,item.EnumerateRunes ().Select(rune=>rune.IsAscii.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.IsAscii.ToString ()).ToArray()));
-                    detailDict.Add (IS_BMP, String.Join(ITEM_JOINER,item.EnumerateRunes ().Select(rune=>rune.IsBmp.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.IsBmp.ToString ()).ToArray()));
-                    detailDict.Add (PLANE, String.Join(ITEM_JOINER,item.EnumerateRunes ().Select(rune=>rune.Plane.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.Plane.ToString ()).ToArray()));
+                    detailDict.Add (IS_ASCII, String.Join (ITEM_JOINER, item.EnumerateRunes ().Select (rune => rune.IsAscii.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.IsAscii.ToString ()).ToArray ()));
+                    detailDict.Add (IS_BMP, String.Join (ITEM_JOINER, item.EnumerateRunes ().Select (rune => rune.IsBmp.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.IsBmp.ToString ()).ToArray ()));
+                    detailDict.Add (PLANE, String.Join (ITEM_JOINER, item.EnumerateRunes ().Select (rune => rune.Plane.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : rune.Plane.ToString ()).ToArray ()));
 
                     summaryList.Add (detailDict);
                 }
@@ -162,7 +153,7 @@ namespace app {
             }
 
             //header
-            Console.WriteLine(String.Join(FS,summaryList[0].Keys.ToArray()));
+            Console.WriteLine (String.Join (FS, summaryList[0].Keys.ToArray ()));
 
             //body
             foreach (var itemDict in summaryList) {
