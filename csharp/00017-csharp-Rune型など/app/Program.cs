@@ -16,6 +16,7 @@ namespace app {
         private const string NAME = "Name";
         private const string NUMERIC_VALUE = "NumericValue";
         private const string CODEPOINT = "codepoint";
+        private const string GRAPH = "Graph";
         private const string BIDIRECTIONAL_CLASS = "BidirectionalClass";
         private const string BIDIRECTIONAL_MIRRORED = "BidirectionalMirrored";
         private const string BLOCK = "Block";
@@ -60,7 +61,7 @@ namespace app {
             // int s = int.Parse(args[0]);
             // int e = int.Parse(args[1]);
 
-            int s = 60000;
+            int s = 55000;
             int e = 60090;
             int c = e - s + 1;
 
@@ -115,6 +116,7 @@ namespace app {
                     detailDict.Add (GRP, grp.ToString ());
                     detailDict.Add (GRPSEQ, grpseq.ToString ());
                     detailDict.Add (CODEPOINT, codePoint.ToString ());
+                    detailDict.Add (GRAPH, item);
                     detailDict.Add (NAME, charInfo.Name);
                     detailDict.Add (NUMERIC_VALUE, charInfo.NumericValue.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : charInfo.NumericValue.ToString ());
                     detailDict.Add (BIDIRECTIONAL_CLASS, charInfo.BidirectionalClass.ToString () == "" ? DEFAULT_NONE_STRING_VALUE : charInfo.BidirectionalClass.ToString ());
