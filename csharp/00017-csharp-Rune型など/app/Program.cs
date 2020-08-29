@@ -10,7 +10,7 @@ namespace app {
 
         private const string FS = "\t";
         private const string ITEM_JOINER = ",";
-        private const string DEFAULT_NONE_STRING_VALUE = "ないよーん";
+        private const string DEFAULT_NONE_STRING_VALUE = "-";
         private const string GRP = "Grp";
         private const string GRPSEQ = "Grpseq";
         private const string NAME = "Name";
@@ -58,11 +58,19 @@ namespace app {
 
             //https://docs.microsoft.com/ja-jp/dotnet/api/system.char?view=netcore-3.1#Relationship
             //https://github.com/GoldenCrystal/NetUnicodeInfo
-            // int s = int.Parse(args[0]);
-            // int e = int.Parse(args[1]);
 
-            int s = 55000;
-            int e = 60090;
+
+            if(args.Length != 2){
+                Environment.Exit(0);
+            }
+
+            int s = int.Parse(args[0]);
+            int e = int.Parse(args[1]);
+
+            if(s > e){
+                Environment.Exit(0);
+            }
+
             int c = e - s + 1;
 
             if(s < 0){
