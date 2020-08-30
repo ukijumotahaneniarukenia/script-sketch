@@ -68,4 +68,28 @@ $ echo '𝓘𝓷 𝓽𝓱𝓮 𝓼𝓮𝓬𝓸𝓷𝓭 𝔂𝓮𝓪𝓻 𝓸𝓯
 ```
 
 
+CMD
+
+dotnet系は正規表現便利すぎ
+
+```
+$ echo caffelatte | csharp -e 'var l=Console.ReadLine();var c=l.Length;for(var i=0;i<=c;i++){var a=System.Text.RegularExpressions.Regex.Split(l,"(?<=.{"+i+","+c+"})").ToList();Console.WriteLine("{0} {1}",a[0],String.Join("",a.GetRange(1,a.Count-1)));}' | xargs -n2
+```
+
+OUT
+
+```
+caffelatte c
+affelatte ca
+ffelatte caf
+felatte caff
+elatte caffe
+latte caffel
+atte caffela
+tte caffelat
+te caffelatt
+e caffelatte
+```
+
+
 
