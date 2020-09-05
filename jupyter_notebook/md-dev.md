@@ -74,3 +74,25 @@ jupyter nbextension enable codefolding/main
 ```
 firefox http://0.0.0.0:8000/notebooks/script-sketch/kaggle
 ```
+
+拡張機能
+
+別途ライブラリのインストールを要するものも存在している
+
+以下を選択
+
+- table_beautifier
+
+- Hinterland
+
+- Autopep8
+
+- Table of Contents(2)
+
+
+- Autopep8
+
+```
+$ pip3 install --user autopep8
+
+```

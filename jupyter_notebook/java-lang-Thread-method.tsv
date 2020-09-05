@@ -1,0 +1,50 @@
+クラス名	定数かメソッドか	クラス番号	クラスシーケンス番号	クラス名	アクセス修飾子	戻り値の型	メソッド名	可変長引数があるか	引数の個数	型パラメータリスト	型パラメータ記号リスト	引数の型リスト	仮引数の変数名リスト
+java.lang.Thread	MMMMM	00000001	0001	java.lang.Thread	public final	boolean	isDaemon	false	0				
+java.lang.Thread	MMMMM	00000001	0002	java.lang.Thread	public	java.lang.StackTraceElement[]	getStackTrace	false	0				
+java.lang.Thread	MMMMM	00000001	0003	java.lang.Thread	public final	void	join	false	0				
+java.lang.Thread	MMMMM	00000001	0004	java.lang.Thread	public final synchronized	void	join	false	2			long,int	arg0,arg1
+java.lang.Thread	MMMMM	00000001	0005	java.lang.Thread	public final synchronized	void	join	false	1			long	arg0
+java.lang.Thread	MMMMM	00000001	0006	java.lang.Thread	public	boolean	equals	false	1			java.lang.Object	arg0
+java.lang.Thread	MMMMM	00000001	0007	java.lang.Thread	public	void	interrupt	false	0				
+java.lang.Thread	MMMMM	00000001	0008	java.lang.Thread	public final	java.lang.String	getName	false	0				
+java.lang.Thread	MMMMM	00000001	0009	java.lang.Thread	public	void	setContextClassLoader	false	1			java.lang.ClassLoader	arg0
+java.lang.Thread	MMMMM	00000001	0010	java.lang.Thread	public	void	run	false	0				
+java.lang.Thread	MMMMM	00000001	0011	java.lang.Thread	public static	void	onSpinWait	false	0				
+java.lang.Thread	MMMMM	00000001	0012	java.lang.Thread	public	java.lang.ClassLoader	getContextClassLoader	false	0				
+java.lang.Thread	MMMMM	00000001	0013	java.lang.Thread	public final	void	stop	false	0				
+java.lang.Thread	MMMMM	00000001	0014	java.lang.Thread	public final native	boolean	isAlive	false	0				
+java.lang.Thread	MMMMM	00000001	0015	java.lang.Thread	public static	java.lang.Thread$UncaughtExceptionHandler	getDefaultUncaughtExceptionHandler	false	0				
+java.lang.Thread	MMMMM	00000001	0016	java.lang.Thread	public final	void	setPriority	false	1			int	arg0
+java.lang.Thread	MMMMM	00000001	0017	java.lang.Thread	public native	int	hashCode	false	0				
+java.lang.Thread	MMMMM	00000001	0018	java.lang.Thread	public static	void	setDefaultUncaughtExceptionHandler	false	1			java.lang.Thread$UncaughtExceptionHandler	arg0
+java.lang.Thread	MMMMM	00000001	0019	java.lang.Thread	public	void	setUncaughtExceptionHandler	false	1			java.lang.Thread$UncaughtExceptionHandler	arg0
+java.lang.Thread	MMMMM	00000001	0020	java.lang.Thread	public final native	void	notify	false	0				
+java.lang.Thread	MMMMM	00000001	0021	java.lang.Thread	public static native	java.lang.Thread	currentThread	false	0				
+java.lang.Thread	MMMMM	00000001	0022	java.lang.Thread	public final	void	suspend	false	0				
+java.lang.Thread	MMMMM	00000001	0023	java.lang.Thread	public final native	void	wait	false	1			long	arg0
+java.lang.Thread	MMMMM	00000001	0024	java.lang.Thread	public final	void	wait	false	2			long,int	arg0,arg1
+java.lang.Thread	MMMMM	00000001	0025	java.lang.Thread	public final	void	wait	false	0				
+java.lang.Thread	MMMMM	00000001	0026	java.lang.Thread	public final	void	checkAccess	false	0				
+java.lang.Thread	MMMMM	00000001	0027	java.lang.Thread	public static	boolean	interrupted	false	0				
+java.lang.Thread	MMMMM	00000001	0028	java.lang.Thread	public final native	void	notifyAll	false	0				
+java.lang.Thread	MMMMM	00000001	0029	java.lang.Thread	public static native	void	yield	false	0				
+java.lang.Thread	MMMMM	00000001	0030	java.lang.Thread	public static	void	sleep	false	2			long,int	arg0,arg1
+java.lang.Thread	MMMMM	00000001	0031	java.lang.Thread	public static native	void	sleep	false	1			long	arg0
+java.lang.Thread	MMMMM	00000001	0032	java.lang.Thread	public static	int	enumerate	false	1			java.lang.Thread[]	arg0
+java.lang.Thread	MMMMM	00000001	0033	java.lang.Thread	public static	java.util.Map<java.lang.Thread, java.lang.StackTraceElement[]>	getAllStackTraces	false	0				
+java.lang.Thread	MMMMM	00000001	0034	java.lang.Thread	public final	java.lang.ThreadGroup	getThreadGroup	false	0				
+java.lang.Thread	MMMMM	00000001	0035	java.lang.Thread	public final synchronized	void	setName	false	1			java.lang.String	arg0
+java.lang.Thread	MMMMM	00000001	0036	java.lang.Thread	public	long	getId	false	0				
+java.lang.Thread	MMMMM	00000001	0037	java.lang.Thread	public	java.lang.Thread$State	getState	false	0				
+java.lang.Thread	MMMMM	00000001	0038	java.lang.Thread	public static native	boolean	holdsLock	false	1			java.lang.Object	arg0
+java.lang.Thread	MMMMM	00000001	0039	java.lang.Thread	public final	void	setDaemon	false	1			boolean	arg0
+java.lang.Thread	MMMMM	00000001	0040	java.lang.Thread	public	java.lang.String	toString	false	0				
+java.lang.Thread	MMMMM	00000001	0041	java.lang.Thread	public native	int	countStackFrames	false	0				
+java.lang.Thread	MMMMM	00000001	0042	java.lang.Thread	public final	int	getPriority	false	0				
+java.lang.Thread	MMMMM	00000001	0043	java.lang.Thread	public static	void	dumpStack	false	0				
+java.lang.Thread	MMMMM	00000001	0044	java.lang.Thread	public	boolean	isInterrupted	false	0				
+java.lang.Thread	MMMMM	00000001	0045	java.lang.Thread	public final	void	resume	false	0				
+java.lang.Thread	MMMMM	00000001	0046	java.lang.Thread	public static	int	activeCount	false	0				
+java.lang.Thread	MMMMM	00000001	0047	java.lang.Thread	public	java.lang.Thread$UncaughtExceptionHandler	getUncaughtExceptionHandler	false	0				
+java.lang.Thread	MMMMM	00000001	0048	java.lang.Thread	public final native	java.lang.Class<?>	getClass	false	0				
+java.lang.Thread	MMMMM	00000001	0049	java.lang.Thread	public synchronized	void	start	false	0				

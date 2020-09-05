@@ -1,0 +1,4 @@
+クラス名	定数かメソッドか	クラス番号	クラスシーケンス番号	クラス名	定数名
+java.lang.Thread	CCCCC	00000001	0001	java.lang.Thread	NORM_PRIORITY
+java.lang.Thread	CCCCC	00000001	0002	java.lang.Thread	MAX_PRIORITY
+java.lang.Thread	CCCCC	00000001	0003	java.lang.Thread	MIN_PRIORITY
