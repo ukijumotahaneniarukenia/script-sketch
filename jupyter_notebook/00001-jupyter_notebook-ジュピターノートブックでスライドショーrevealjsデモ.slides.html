@@ -13515,68 +13515,6 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-2-6202033bb623&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>df_constant <span class="ansi-blue-fg">=</span> pd<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;java-lang-Thread-constant.tsv&#39;</span><span class="ansi-blue-fg">,</span>sep<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;\t&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="ansi-green-intense-fg ansi-bold">    684</span>     )
-<span class="ansi-green-intense-fg ansi-bold">    685</span> 
-<span class="ansi-green-fg">--&gt; 686</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    687</span> 
-<span class="ansi-green-intense-fg ansi-bold">    688</span> 
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    450</span> 
-<span class="ansi-green-intense-fg ansi-bold">    451</span>     <span class="ansi-red-fg"># Create the parser.</span>
-<span class="ansi-green-fg">--&gt; 452</span><span class="ansi-red-fg">     </span>parser <span class="ansi-blue-fg">=</span> TextFileReader<span class="ansi-blue-fg">(</span>fp_or_buf<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    453</span> 
-<span class="ansi-green-intense-fg ansi-bold">    454</span>     <span class="ansi-green-fg">if</span> chunksize <span class="ansi-green-fg">or</span> iterator<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, f, engine, **kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    934</span>             self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;has_index_names&#34;</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    935</span> 
-<span class="ansi-green-fg">--&gt; 936</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>engine<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    937</span> 
-<span class="ansi-green-intense-fg ansi-bold">    938</span>     <span class="ansi-green-fg">def</span> close<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_make_engine</span><span class="ansi-blue-fg">(self, engine)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1166</span>     <span class="ansi-green-fg">def</span> _make_engine<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> engine<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1167</span>         <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;c&#34;</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1168</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_engine <span class="ansi-blue-fg">=</span> CParserWrapper<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1169</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1170</span>             <span class="ansi-green-fg">if</span> engine <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;python&#34;</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, src, **kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1996</span>         kwds<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;usecols&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>usecols
-<span class="ansi-green-intense-fg ansi-bold">   1997</span> 
-<span class="ansi-green-fg">-&gt; 1998</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_reader <span class="ansi-blue-fg">=</span> parsers<span class="ansi-blue-fg">.</span>TextReader<span class="ansi-blue-fg">(</span>src<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1999</span>         self<span class="ansi-blue-fg">.</span>unnamed_cols <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>unnamed_cols
-<span class="ansi-green-intense-fg ansi-bold">   2000</span> 
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.__cinit__</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;java-lang-Thread-constant.tsv&#39;</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13587,13 +13525,88 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_constant</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数かメソッドか</th>
+      <th>クラス番号</th>
+      <th>クラスシーケンス番号</th>
+      <th>クラス名.1</th>
+      <th>定数名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>1</td>
+      <td>java.lang.Thread</td>
+      <td>NORM_PRIORITY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>2</td>
+      <td>java.lang.Thread</td>
+      <td>MAX_PRIORITY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>3</td>
+      <td>java.lang.Thread</td>
+      <td>MIN_PRIORITY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13607,13 +13620,80 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_constant</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;columnName&quot;</span><span class="p">])</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>columnName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>クラス名</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>定数かメソッドか</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>クラス番号</th>
+      <td>int64</td>
+    </tr>
+    <tr>
+      <th>クラスシーケンス番号</th>
+      <td>int64</td>
+    </tr>
+    <tr>
+      <th>クラス名.1</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>定数名</th>
+      <td>object</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13634,13 +13714,72 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_constant</span><span class="p">[[</span><span class="s1">&#39;クラス名&#39;</span><span class="p">,</span><span class="s1">&#39;定数名&#39;</span><span class="p">]]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>java.lang.Thread</td>
+      <td>NORM_PRIORITY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>java.lang.Thread</td>
+      <td>MAX_PRIORITY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>java.lang.Thread</td>
+      <td>MIN_PRIORITY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13654,13 +13793,79 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_constant</span><span class="p">[</span><span class="n">df_constant</span><span class="p">[</span><span class="s1">&#39;定数名&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;^M&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数かメソッドか</th>
+      <th>クラス番号</th>
+      <th>クラスシーケンス番号</th>
+      <th>クラス名.1</th>
+      <th>定数名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>2</td>
+      <td>java.lang.Thread</td>
+      <td>MAX_PRIORITY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>3</td>
+      <td>java.lang.Thread</td>
+      <td>MIN_PRIORITY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13674,13 +13879,70 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_constant</span><span class="p">[</span> <span class="o">~</span> <span class="n">df_constant</span><span class="p">[</span><span class="s1">&#39;定数名&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;^M&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数かメソッドか</th>
+      <th>クラス番号</th>
+      <th>クラスシーケンス番号</th>
+      <th>クラス名.1</th>
+      <th>定数名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>java.lang.Thread</td>
+      <td>CCCCC</td>
+      <td>1</td>
+      <td>1</td>
+      <td>java.lang.Thread</td>
+      <td>NORM_PRIORITY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13701,7 +13963,7 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_method</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;java-lang-Thread-method.tsv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -13721,13 +13983,239 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_method</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数かメソッドか</th>
+      <th>クラス番号</th>
+      <th>クラスシーケンス番号</th>
+      <th>クラス名.1</th>
+      <th>アクセス修飾子</th>
+      <th>戻り値の型</th>
+      <th>メソッド名</th>
+      <th>可変長引数があるか</th>
+      <th>引数の個数</th>
+      <th>型パラメータリスト</th>
+      <th>型パラメータ記号リスト</th>
+      <th>引数の型リスト</th>
+      <th>仮引数の変数名リスト</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>1</td>
+      <td>java.lang.Thread</td>
+      <td>public final</td>
+      <td>boolean</td>
+      <td>isDaemon</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>2</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>java.lang.StackTraceElement[]</td>
+      <td>getStackTrace</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>3</td>
+      <td>java.lang.Thread</td>
+      <td>public final</td>
+      <td>void</td>
+      <td>join</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>4</td>
+      <td>java.lang.Thread</td>
+      <td>public final synchronized</td>
+      <td>void</td>
+      <td>join</td>
+      <td>False</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>long,int</td>
+      <td>arg0,arg1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>5</td>
+      <td>java.lang.Thread</td>
+      <td>public final synchronized</td>
+      <td>void</td>
+      <td>join</td>
+      <td>False</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>long</td>
+      <td>arg0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>6</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>boolean</td>
+      <td>equals</td>
+      <td>False</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>java.lang.Object</td>
+      <td>arg0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>7</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>void</td>
+      <td>interrupt</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>8</td>
+      <td>java.lang.Thread</td>
+      <td>public final</td>
+      <td>java.lang.String</td>
+      <td>getName</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>9</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>void</td>
+      <td>setContextClassLoader</td>
+      <td>False</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>java.lang.ClassLoader</td>
+      <td>arg0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>10</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>void</td>
+      <td>run</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13741,13 +14229,112 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_method</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;columnName&quot;</span><span class="p">])</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>columnName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>クラス名</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>定数かメソッドか</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>クラス番号</th>
+      <td>int64</td>
+    </tr>
+    <tr>
+      <th>クラスシーケンス番号</th>
+      <td>int64</td>
+    </tr>
+    <tr>
+      <th>クラス名.1</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>アクセス修飾子</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>戻り値の型</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>メソッド名</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>可変長引数があるか</th>
+      <td>bool</td>
+    </tr>
+    <tr>
+      <th>引数の個数</th>
+      <td>int64</td>
+    </tr>
+    <tr>
+      <th>型パラメータリスト</th>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>型パラメータ記号リスト</th>
+      <td>float64</td>
+    </tr>
+    <tr>
+      <th>引数の型リスト</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>仮引数の変数名リスト</th>
+      <td>object</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13768,13 +14355,140 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_method</span><span class="p">[[</span><span class="s1">&#39;クラス名&#39;</span><span class="p">,</span><span class="s1">&#39;メソッド名&#39;</span><span class="p">,</span><span class="s1">&#39;戻り値の型&#39;</span><span class="p">,</span><span class="s1">&#39;引数の個数&#39;</span><span class="p">,</span><span class="s1">&#39;引数の型リスト&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>メソッド名</th>
+      <th>戻り値の型</th>
+      <th>引数の個数</th>
+      <th>引数の型リスト</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>java.lang.Thread</td>
+      <td>isDaemon</td>
+      <td>boolean</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>java.lang.Thread</td>
+      <td>getStackTrace</td>
+      <td>java.lang.StackTraceElement[]</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>java.lang.Thread</td>
+      <td>join</td>
+      <td>void</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>java.lang.Thread</td>
+      <td>join</td>
+      <td>void</td>
+      <td>2</td>
+      <td>long,int</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>java.lang.Thread</td>
+      <td>join</td>
+      <td>void</td>
+      <td>1</td>
+      <td>long</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>java.lang.Thread</td>
+      <td>equals</td>
+      <td>boolean</td>
+      <td>1</td>
+      <td>java.lang.Object</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>java.lang.Thread</td>
+      <td>interrupt</td>
+      <td>void</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>java.lang.Thread</td>
+      <td>getName</td>
+      <td>java.lang.String</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>java.lang.Thread</td>
+      <td>setContextClassLoader</td>
+      <td>void</td>
+      <td>1</td>
+      <td>java.lang.ClassLoader</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>java.lang.Thread</td>
+      <td>run</td>
+      <td>void</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13788,13 +14502,103 @@ java -jar jardump-X-X-X-SNAPSHOT.jar /home/aine/.m2/repository/xmlpull/xmlpull/1
 </div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_method</span><span class="p">[(</span><span class="n">df_method</span><span class="p">[</span><span class="s1">&#39;引数の個数&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_method</span><span class="p">[</span><span class="s1">&#39;戻り値の型&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;java.lang.String&#39;</span><span class="p">)]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>クラス名</th>
+      <th>定数かメソッドか</th>
+      <th>クラス番号</th>
+      <th>クラスシーケンス番号</th>
+      <th>クラス名.1</th>
+      <th>アクセス修飾子</th>
+      <th>戻り値の型</th>
+      <th>メソッド名</th>
+      <th>可変長引数があるか</th>
+      <th>引数の個数</th>
+      <th>型パラメータリスト</th>
+      <th>型パラメータ記号リスト</th>
+      <th>引数の型リスト</th>
+      <th>仮引数の変数名リスト</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>8</td>
+      <td>java.lang.Thread</td>
+      <td>public final</td>
+      <td>java.lang.String</td>
+      <td>getName</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>java.lang.Thread</td>
+      <td>MMMMM</td>
+      <td>1</td>
+      <td>40</td>
+      <td>java.lang.Thread</td>
+      <td>public</td>
+      <td>java.lang.String</td>
+      <td>toString</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
