@@ -93,14 +93,32 @@ Usage:
     print(usage_message)
     sys.exit(0)
 
-def main():
+def crawl(execute_args):
 
     #preprocess
     options = webdriver.ChromeOptions()
-#    options.add_argument('--headless') #コマンドライン引数上でデバッグモードとして指定できるようにする
     options.add_argument('/usr/local/src/chromedriver_linux64/chromedriver')
     options.add_argument('/usr/local/src/chrome-linux/chrome')
     driver = webdriver.Chrome(options=options)
+
+    if execute_args.length == 0:
+        driver.quit()
+        usage()
+
+    if execute_args.length != 1:
+        driver.quit()
+        usage()
+
+    if execute_args[0] != '--debug':
+        driver.quit()
+        usage()
+
+    if execute_args[0] == '--debug':
+        options.add_argument('--headless') #コマンドライン引数上でデバッグモードとして指定できるようにする
+
+    print("crawl")
+
+    print(execute_args)
 
     for site_url,xpath_dict_list in SITE_URL_XPATH_DICT_LIST.items():
 
@@ -159,6 +177,32 @@ def main():
 
     driver.quit()
 
+def main():
+
+    try:
+        if (len(sys.argv[1:])) == 0:
+            # パイプ経由引数の場合
+
+            args_via_pipe = list(map(lambda x: x.strip().split(), sys.stdin.readlines()))
+
+            execute_args = sum(args_via_pipe,[])
+
+            print(execute_args)
+
+            crawl(execute_args)
+
+        else:
+            # コマンドライン経由引数の場合
+
+            execute_args = sys.argv[1:]
+
+            print(execute_args)
+
+            crawl(execute_args)
+
+    except KeyboardInterrupt:
+
+        usage()
 
 if __name__ == '__main__':
     main()
