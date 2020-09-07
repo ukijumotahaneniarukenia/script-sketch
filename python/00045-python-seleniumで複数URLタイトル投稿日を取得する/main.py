@@ -139,17 +139,17 @@ def crawl(execute_args):
 
         output_file_name = DST + '/' + PREFIX + OFS + site_name + OFS + DTM + SUFFIX
 
-        print(output_file_name)
+        print(output_file_name + 'へ結果を保存します')
 
         for xpath_dict in xpath_dict_list:
-
-            print(site_url)
 
             driver.get(site_url)
 
             time.sleep(DEFAULT_WAIT_TIME_SECONDS) #レンダラ完了するまで待つ
 
             if SITE_NAME in xpath_dict:
+
+                print(xpath_dict[SITE_NAME] + 'に対して処理します')
 
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
@@ -158,12 +158,16 @@ def crawl(execute_args):
 
             if list(xpath_dict.keys())[0] == TITLE_NAME:
 
-                xpath = xpath_dict.values()
+                print(TITLE_NAME + 'を取得します')
+
+                xpath = list(xpath_dict.values())
 
                 print(xpath)
 
                 print(xpath[0])
-                #driver.find_element_by_xpath(xpath)
+
+                #複数件
+                #driver.find_elements_by_xpath(xpath)
 
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
@@ -172,6 +176,17 @@ def crawl(execute_args):
 
             if list(xpath_dict.keys())[0] == UPDATE_DATE:
 
+                print(UPDATE_DATE + 'を取得します')
+
+                xpath = list(xpath_dict.values())
+
+                print(xpath)
+
+                print(xpath[0])
+
+                #複数件
+                #driver.find_elements_by_xpath(xpath)
+
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
                 pass
@@ -179,21 +194,43 @@ def crawl(execute_args):
 
             if list(xpath_dict.keys())[0] == UPDATE_TIME:
 
+                print(UPDATE_TIME + 'を取得します')
+
+                xpath = list(xpath_dict.values())
+
+                print(xpath)
+
+                print(xpath[0])
+
+                #複数件
+                #driver.find_elements_by_xpath(xpath)
+
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
                 pass
 
             if list(xpath_dict.keys())[0] == UPDATE_DATE_TIME:
 
+                print(UPDATE_DATE_TIME + 'を取得します')
+
+                xpath = list(xpath_dict.values())
+
+                print(xpath)
+
+                print(xpath[0])
+
+                #複数件
+                #driver.find_elements_by_xpath(xpath)
+
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
                 pass
 
 
-            print(site_name,site_url,xpath_dict,list(xpath_dict.keys())[0],sep='\t')
+#            print(site_name,site_url,xpath_dict,list(xpath_dict.keys())[0],sep='\t')
 
 
-            print('初期表示が完了しました')
+#            print('初期表示が完了しました')
 
     driver.quit()
 
