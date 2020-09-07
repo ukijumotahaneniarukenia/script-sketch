@@ -74,7 +74,7 @@ DTM = datetime.datetime.today().strftime('%Y-%m-%dT%H-%M-%S')
 
 DST = os.getcwd() #実行ディレクトリ
 
-WAIT_TIME_SECONDS=45
+DEFAULT_WAIT_TIME_SECONDS=45
 
 def usage():
     filename = re.sub('.*/', '', __file__)
@@ -91,6 +91,7 @@ Usage:
 '''.format(filename=filename)
 
     print(usage_message)
+
     sys.exit(0)
 
 def crawl(execute_args):
@@ -101,24 +102,21 @@ def crawl(execute_args):
     options.add_argument('/usr/local/src/chrome-linux/chrome')
     driver = webdriver.Chrome(options=options)
 
-    if execute_args.length == 0:
-        driver.quit()
-        usage()
+    for arg in execute_args:
 
-    if execute_args.length != 1:
-        driver.quit()
-        usage()
+        if arg == '--debug':
 
-    if execute_args[0] != '--debug':
-        driver.quit()
-        usage()
+            options.add_argument('--headless') #コマンドライン引数上でデバッグモードとして指定できるようにする
 
-    if execute_args[0] == '--debug':
-        options.add_argument('--headless') #コマンドライン引数上でデバッグモードとして指定できるようにする
+            continue
 
-    print("crawl")
+        WAIT_TIME_SECONDS = re.findall(r'(?<=wait_time_seconds:)[0-9]+',arg)
 
-    print(execute_args)
+        if len(WAIT_TIME_SECONDS) != 1:
+
+            usage()
+
+        DEFAULT_WAIT_TIME_SECONDS = int(WAIT_TIME_SECONDS[0])
 
     for site_url,xpath_dict_list in SITE_URL_XPATH_DICT_LIST.items():
 
@@ -134,7 +132,7 @@ def crawl(execute_args):
 
             driver.get(site_url)
 
-            time.sleep(WAIT_TIME_SECONDS) #レンダラ完了するまで待つ
+            time.sleep(DEFAULT_WAIT_TIME_SECONDS) #レンダラ完了するまで待つ
 
             if SITE_NAME in xpath_dict:
 
@@ -144,6 +142,12 @@ def crawl(execute_args):
 
 
             if list(xpath_dict.keys())[0] == TITLE_NAME:
+
+                xpath=xpath_dict.values()
+
+                print(xpath)
+
+                #driver.find_element_by_xpath(xpath)
 
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
 
