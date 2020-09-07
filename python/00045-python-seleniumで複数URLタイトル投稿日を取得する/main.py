@@ -88,6 +88,16 @@ Usage:
        which chromedriver
        /usr/local/src/chromedriver_linux64/chromedriver
 
+  CMD: {filename} --debug wait_time_seconds:10
+
+    or
+
+  CMD: {filename} --debug
+
+    or
+
+  CMD: {filename} --non-debug
+
 '''.format(filename=filename)
 
     print(usage_message)
@@ -100,13 +110,16 @@ def crawl(execute_args):
     options = webdriver.ChromeOptions()
     options.add_argument('/usr/local/src/chromedriver_linux64/chromedriver')
     options.add_argument('/usr/local/src/chrome-linux/chrome')
-    driver = webdriver.Chrome(options=options)
 
     for arg in execute_args:
 
-        if arg == '--debug':
+        if arg == '--non-debug':
 
             options.add_argument('--headless') #コマンドライン引数上でデバッグモードとして指定できるようにする
+
+            continue
+
+        if arg == '--debug':
 
             continue
 
@@ -117,6 +130,8 @@ def crawl(execute_args):
             usage()
 
         DEFAULT_WAIT_TIME_SECONDS = int(WAIT_TIME_SECONDS[0])
+
+    driver = webdriver.Chrome(options=options)
 
     for site_url,xpath_dict_list in SITE_URL_XPATH_DICT_LIST.items():
 
@@ -143,10 +158,11 @@ def crawl(execute_args):
 
             if list(xpath_dict.keys())[0] == TITLE_NAME:
 
-                xpath=xpath_dict.values()
+                xpath = xpath_dict.values()
 
                 print(xpath)
 
+                print(xpath[0])
                 #driver.find_element_by_xpath(xpath)
 
                 #各取得内容に応じて関数化して前処理メイン処理後処理に工程を分ける
