@@ -2,7 +2,6 @@
 
 var $ = require('jquery');
 
-
 //ステップ１が複数件の処理
 //ステップ２と３が単一件数の処理
 function getXpath(element) {
@@ -39,7 +38,7 @@ function getXpath(element) {
 
         if(s[i] === element) {
 
-          xpath += '[' + (i+1) + ']';
+          xpath += '[' + (i+1) + ']'; // +=なところが直前の再帰蓄積結果へスタックに格納されたカレント要素の結果を追加していることをイメージ
 
           break;
 
