@@ -339,7 +339,7 @@ traceroute to 91.189.88.152 (91.189.88.152), 30 hops max, 60 byte packets
 コンテナゲストから外部への疎通
 
 ```
-machinectl shell root@vir-ubuntu-18-04-001 /bin/tracepath 91.189.88.152
+machinectl shell root@vir-ubuntu-18-04-001 $($(which which) tracepath) 91.189.88.152
 ```
 
 ```
