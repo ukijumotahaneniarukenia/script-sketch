@@ -6,11 +6,9 @@ def XXX:
         .contents[] |
         if ( length == 0)
         then
-            "AAAAAAAAAAAAAAAAA"
-            ,[.type,.name,.mode,.prot,.user,.group]
+            [.type,.name,.mode,.prot,.user,.group]
         else
-            ( "BBBBBBBBBBBBBBBBB"
-            ,[.type,.name,.mode,.prot,.user,.group])
+            ([.type,.name,.mode,.prot,.user,.group])
             , (.contents |
             if ( length == 0 )
             then
