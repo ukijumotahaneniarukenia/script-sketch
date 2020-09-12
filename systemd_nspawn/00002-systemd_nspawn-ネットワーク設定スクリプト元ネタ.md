@@ -27,17 +27,28 @@ sed -i 's/--network-bridge=br0/--network-veth/' /lib/systemd/system/systemd-nspa
 rootユーザーのパスワード設定まで行っておく
 
 ```
-cd /var/lib/machines
+$ cd /var/lib/machines
 
-machinectl terminate vir-ubuntu-20-04
+$ machinectl terminate vir-ubuntu-18-04-001
 
-rm -rf vir-ubuntu-20-04
+$ rm -rf vir-ubuntu-18-04-001
 
-cp -a vir-ubuntu-20-04-template vir-ubuntu-20-04
+$ cp -a vir-ubuntu-18-04-template vir-ubuntu-18-04-001
 
-machinectl start vir-ubuntu-20-04
+$ machinectl start vir-ubuntu-18-04-001
 
-machinectl shell root@vir-ubuntu-20-04 /bin/bash -c 'echo "root:root_pwd" | chpasswd'
+$ machinectl list -a
+MACHINE              CLASS     SERVICE        OS     VERSION ADDRESSES     
+.host                host      -              ubuntu 20.04   192.168.1.109…
+vir-ubuntu-18-04-001 container systemd-nspawn ubuntu 18.04   -             
+
+2 machines listed.
+
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/bash -c 'echo "root:root_pwd" | chpasswd'
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
+
+Connection to machine vir-ubuntu-18-04-001 terminated.
+
 ```
 
 ブリッチ構成に変更していく
@@ -123,11 +134,18 @@ systemctl status systemd-networkd
 - コンテナゲスト側
 
 ```
-machinectl shell root@vir-ubuntu-20-04 /bin/bash
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/bash
 
-ln -sf /dev/null /etc/systemd/network/80-container-host0.network
 
-cat <<EOS >/etc/systemd/network/host0.network
+$ ls -lh /etc/systemd/network/80-container-host0.network
+ls: cannot access '/etc/systemd/network/80-container-host0.network': No such file or directory
+
+$ ln -sf /dev/null /etc/systemd/network/80-container-host0.network
+
+$ ls -lh /etc/systemd/network/80-container-host0.network
+lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
+
+$ cat <<EOS >/etc/systemd/network/host0.network
 [Match]
 Name=host0
 
@@ -140,10 +158,13 @@ Address=192.168.1.209/24
 Gateway=192.168.1.1
 EOS
 
-chmod 644 /etc/systemd/network/host0.network
-chown root:root /etc/systemd/network/host0.network
+$ chmod 644 /etc/systemd/network/host0.network
+$ chown root:root /etc/systemd/network/host0.network
 
-cat <<EOS >/etc/systemd/network/80-container-host0.network
+$ ls -lh /etc/systemd/network/host0.network
+-rw-r--r-- 1 root root 108 Sep 12 17:28 /etc/systemd/network/host0.network
+
+$ cat <<EOS >/etc/systemd/network/80-container-host0.network
 [Match]
 Virtualization=container
 Name=host0
@@ -154,26 +175,31 @@ Address=192.168.1.209
 Gateway=192.168.1.1
 EOS
 
-chmod 644 /etc/systemd/network/80-container-host0.network
-chown root:root /etc/systemd/network/80-container-host0.network
+$ chmod 644 /etc/systemd/network/80-container-host0.network
+$ chown root:root /etc/systemd/network/80-container-host0.network
 
+$ ls -hl /etc/systemd/network/80-container-host0.network
+lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
 
-sed -i 's/#DNS/DNS=192.168.1.1/' /etc/systemd/resolved.conf
+$ sed -i 's/#DNS/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
-chmod 644 /etc/systemd/resolved.conf
-chown root:root /etc/systemd/resolved.conf
+$ chmod 644 /etc/systemd/resolved.conf
+$ chown root:root /etc/systemd/resolved.conf
+
+$ ls -lh /etc/systemd/resolved.conf
+-rw-r--r-- 1 root root 634 Sep 12 17:30 /etc/systemd/resolved.conf
 
 ```
 
 コンテナゲスト上でネットワークサービスの自動起動設定と開始、状態確認
 
 ```
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl enable systemd-networkd
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl start systemd-networkd
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl status systemd-networkd
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl enable systemd-resolved
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl start systemd-resolved
-machinectl shell root@vir-ubuntu-20-04 /bin/systemctl status systemd-resolved
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl enable systemd-networkd
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl start systemd-networkd
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl --no-pager status systemd-networkd
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl enable systemd-resolved
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl start systemd-resolved
+machinectl shell root@vir-ubuntu-18-04-001 /bin/systemctl --no-pager status systemd-resolved
 ```
 
 
@@ -217,8 +243,8 @@ $ ip a show
 コンテナゲスト
 
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /bin/ip a show
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/ip a show
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -256,11 +282,11 @@ rtt 最小/平均/最大/mdev = 0.059/0.097/0.193/0.055ミリ秒
 コンテナゲストからコンテナホストへの疎通
 
 ```
-machinectl shell root@vir-ubuntu-20-04 /bin/ping -c 4 192.168.1.109
+machinectl shell root@vir-ubuntu-18-04-001 /bin/ping -c 4 192.168.1.109
 ```
 
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /bin/ping -c 4 192.168.1.109
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/ping -c 4 192.168.1.109
 Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
 PING 192.168.1.109 (192.168.1.109) 56(84) bytes of data.
 64 bytes from 192.168.1.109: icmp_seq=1 ttl=64 time=0.038 ms
@@ -313,12 +339,12 @@ traceroute to 91.189.88.152 (91.189.88.152), 30 hops max, 60 byte packets
 コンテナゲストから外部への疎通
 
 ```
-machinectl shell root@vir-ubuntu-20-04 /bin/tracepath 91.189.88.152
+machinectl shell root@vir-ubuntu-18-04-001 $($(which which) tracepath) 91.189.88.152
 ```
 
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /bin/tracepath 91.189.88.152
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/tracepath 91.189.88.152
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
  1?: [LOCALHOST]                      pmtu 1454
  1:  _gateway                                              0.523ms 
  1:  _gateway                                              0.596ms 
@@ -341,7 +367,7 @@ Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit se
 18:  SOURCE-MANA.ear2.London1.Level3.net                 257.774ms asymm 20 
 19:  actiontoad.canonical.com                            239.962ms reached
      Resume: pmtu 1454 hops 19 back 15 
-Connection to machine vir-ubuntu-20-04 terminated.
+Connection to machine vir-ubuntu-18-04-001 terminated.
 ```
 
 
@@ -368,19 +394,19 @@ IDX LINK            TYPE     OPERATIONAL SETUP
 - コンテナゲスト側
 
 ```
-machinectl shell root@vir-ubuntu-20-04 /usr/bin/networkctl
+machinectl shell root@vir-ubuntu-18-04-001 /usr/bin/networkctl
 ```
 
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/networkctl
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ machinectl shell root@vir-ubuntu-18-04-001 /usr/bin/networkctl
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
 IDX LINK  TYPE     OPERATIONAL SETUP     
   1 lo    loopback carrier     unmanaged 
   2 host0 ether    routable    configured
 
 2 links listed.
 
-Connection to machine vir-ubuntu-20-04 terminated.
+Connection to machine vir-ubuntu-18-04-001 terminated.
 ```
 
 
@@ -484,8 +510,8 @@ MulticastDNS setting: no
 インターフェースはgoogleのDNSになっていること
 
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /usr/bin/resolvectl
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ machinectl shell root@vir-ubuntu-18-04-001 /usr/bin/resolvectl
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
 Global
        LLMNR setting: no                  
 MulticastDNS setting: no                  
@@ -533,14 +559,14 @@ MulticastDNS setting: no
   Current DNS Server: 8.8.8.8
          DNS Servers: 8.8.8.8
 
-Connection to machine vir-ubuntu-20-04 terminated.
+Connection to machine vir-ubuntu-18-04-001 terminated.
 ```
 
 実行時の/run/systemd/resolve管理のresolve.confにルーターのipとgoogleのipがあること
 ```
-$ machinectl shell root@vir-ubuntu-20-04 /bin/bash -c 'cat /run/systemd/resolve/resolv.conf | grep nameserver'
-Connected to machine vir-ubuntu-20-04. Press ^] three times within 1s to exit session.
+$ machinectl shell root@vir-ubuntu-18-04-001 /bin/bash -c 'cat /run/systemd/resolve/resolv.conf | grep nameserver'
+Connected to machine vir-ubuntu-18-04-001. Press ^] three times within 1s to exit session.
 nameserver 192.168.1.1
 nameserver 8.8.8.8
-Connection to machine vir-ubuntu-20-04 terminated.
+Connection to machine vir-ubuntu-18-04-001 terminated.
 ```
