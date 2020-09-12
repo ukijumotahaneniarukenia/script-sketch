@@ -1,10 +1,9 @@
 def XXX:
 
-  if (select(. != null) | .[].contents|length == 0)
+  select(. != null) | if (.contents|length == 0)
   then
       null
   else
-      .[] |
       if (has("contents"))
       then
           .contents[] |
@@ -12,7 +11,9 @@ def XXX:
           then
               [.type,.name,.mode,.prot,.user,.group]
           else
-              .
+              "AAAAAAAAAAAAAAAAAA"
+              ,[.type,.name,.mode,.prot,.user,.group]
+              ,.
           end
       else
           null
