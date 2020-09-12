@@ -1,3 +1,5 @@
+スクラッチ
+
 ```
 $ mkdir -p wrksp
 
@@ -46,4 +48,12 @@ $ cd ~/script-sketch/electron/wrksp
 $ ./app/node_modules/.bin/electron app/
 Gtk-Message: 14:17:21.740: Failed to load module "canberra-gtk-module"
 Gtk-Message: 14:17:21.740: Failed to load module "canberra-gtk-module"
+```
+
+
+パッケージング
+
+
+```
+
 ```
