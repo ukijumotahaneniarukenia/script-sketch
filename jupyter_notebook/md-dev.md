@@ -96,3 +96,15 @@ firefox http://0.0.0.0:8000/notebooks/script-sketch/kaggle
 $ pip3 install --user autopep8
 
 ```
+
+即時スライドプレビュー拡張機能
+
+- https://qiita.com/cvusk/items/d425751ba663dc8c6517
+
+```
+$ pip3 install --user RISE
+
+$ jupyter-nbextension install --user rise --py
+
+$ jupyter nbextension enable --user rise --py
+```
