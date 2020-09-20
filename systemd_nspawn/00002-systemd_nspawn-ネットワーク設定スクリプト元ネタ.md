@@ -134,6 +134,9 @@ systemctl status systemd-networkd
 - コンテナゲスト側
 
 ```
+$ machinectl start vir-ubuntu-18-04-001 
+
+
 $ machinectl shell root@vir-ubuntu-18-04-001 /bin/bash
 
 
@@ -144,6 +147,9 @@ $ ln -sf /dev/null /etc/systemd/network/80-container-host0.network
 
 $ ls -lh /etc/systemd/network/80-container-host0.network
 lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
+
+$ ls -lh /etc/systemd/network/host0.network
+ls: cannot access '/etc/systemd/network/host0.network': No such file or directory
 
 $ cat <<EOS >/etc/systemd/network/host0.network
 [Match]
@@ -162,8 +168,10 @@ $ chmod 644 /etc/systemd/network/host0.network
 $ chown root:root /etc/systemd/network/host0.network
 
 $ ls -lh /etc/systemd/network/host0.network
--rw-r--r-- 1 root root 108 Sep 12 17:28 /etc/systemd/network/host0.network
+-rw-r--r-- 1 root root 108 Sep 20 19:53 /etc/systemd/network/host0.network
 
+
+#ここから
 $ cat <<EOS >/etc/systemd/network/80-container-host0.network
 [Match]
 Virtualization=container
@@ -180,6 +188,7 @@ $ chown root:root /etc/systemd/network/80-container-host0.network
 
 $ ls -hl /etc/systemd/network/80-container-host0.network
 lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
+#ここまで不要とおもわれ
 
 $ sed -i.bak '/^#DNS=$/s/#DNS=/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
