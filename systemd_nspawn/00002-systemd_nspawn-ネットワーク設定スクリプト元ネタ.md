@@ -181,7 +181,7 @@ $ chown root:root /etc/systemd/network/80-container-host0.network
 $ ls -hl /etc/systemd/network/80-container-host0.network
 lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
 
-$ sed -i 's/#DNS/DNS=192.168.1.1/' /etc/systemd/resolved.conf
+$ sed -i.bak '/^#DNS=$/s/#DNS=/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
 $ chmod 644 /etc/systemd/resolved.conf
 $ chown root:root /etc/systemd/resolved.conf
