@@ -170,26 +170,6 @@ $ chown root:root /etc/systemd/network/host0.network
 $ ls -lh /etc/systemd/network/host0.network
 -rw-r--r-- 1 root root 108 Sep 20 19:53 /etc/systemd/network/host0.network
 
-
-#ここから
-$ cat <<EOS >/etc/systemd/network/80-container-host0.network
-[Match]
-Virtualization=container
-Name=host0
-
-[Network]
-DNS=8.8.8.8
-Address=192.168.1.209
-Gateway=192.168.1.1
-EOS
-
-$ chmod 644 /etc/systemd/network/80-container-host0.network
-$ chown root:root /etc/systemd/network/80-container-host0.network
-
-$ ls -hl /etc/systemd/network/80-container-host0.network
-lrwxrwxrwx 1 root root 9 Sep 12 17:27 /etc/systemd/network/80-container-host0.network -> /dev/null
-#ここまで不要とおもわれ
-
 $ sed -i.bak '/^#DNS=$/s/#DNS=/DNS=192.168.1.1/' /etc/systemd/resolved.conf
 
 $ chmod 644 /etc/systemd/resolved.conf
