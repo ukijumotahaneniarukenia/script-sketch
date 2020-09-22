@@ -1,3 +1,22 @@
+コンテナホストでインストール
+
+なにか聞かれたがはいと答えた
+
+```
+$ sudo apt install wireshark
+```
+
+
+
+
+
+
+
+
+
+
+
+
 - https://kakurasan.blogspot.com/2015/07/debianubuntu-mingw-crosscompile.html
 
 - https://kakurasan.blogspot.com/2015/06/wireshark-capture-httprequests.html
