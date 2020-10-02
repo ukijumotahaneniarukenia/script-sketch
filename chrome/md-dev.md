@@ -28,6 +28,8 @@ yum install -y google-chrome-stable
 
   - google翻訳
 
+  - Vue.js devtools
+
   - XPath Helper
 
   - RSS Feed Reader
