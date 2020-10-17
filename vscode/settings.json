@@ -10,6 +10,7 @@
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
   "editor.wordWrap": "on",
+  "editor.tabSize": 2,
   "files.autoGuessEncoding": true,
   "files.autoSave": "afterDelay",
   "files.insertFinalNewline": true,
