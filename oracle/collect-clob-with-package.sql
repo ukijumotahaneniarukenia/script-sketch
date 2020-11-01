@@ -1,0 +1,13 @@
+SET SERVEROUTPUT ON
+
+CREATE OR REPLACE TYPE item IS OBJECT (val CLOB);
+
+CREATE OR REPLACE TYPE liz IS TABLE OF item;
+
+CREATE OR REPLACE PACKAGE test___clbliz IS FUNCTION clbliz(p_clb IN CLOB) RETURN liz; END;
+
+
+CREATE OR REPLACE PACKAGE BODY test___clbliz IS FUNCTION clbliz(p_clb IN CLOB) RETURN liz IS rt liz; BEGIN SELECT CAST(COLLECT(item(p_clb)) AS liz) INTO rt FROM dual; RETURN rt; END; END;
+
+
+SELECT test___clbliz.clbliz(to_clob('CREATE SESSION,CREATE TABLE,')) as liz FROM dual;
