@@ -1,0 +1,1261 @@
+[
+  {
+    "id": 326165,
+    "date": "2020-11-21T11:44:57",
+    "date_gmt": "2020-11-21T19:44:57",
+    "guid": {
+      "rendered": "https://css-tricks.com/?p=326165"
+    },
+    "modified": "2020-11-21T11:44:59",
+    "modified_gmt": "2020-11-21T19:44:59",
+    "slug": "whats-missing-from-css",
+    "status": "publish",
+    "type": "post",
+    "link": "https://css-tricks.com/whats-missing-from-css/",
+    "title": {
+      "rendered": "What&#8217;s Missing from CSS?"
+    },
+    "content": {
+      "rendered": "\n<p>The survey results from the <a href=\"https://stateofcss.com/\">State of CSS</a> aren&#8217;t out yet, but they made <a href=\"https://whatsmissingfromcss.com/\">this landing page</a> that randomly shows you what one person wrote to answer that question. Just clicking the reload button a bunch, I get the sense that the top answers are:</p>\n\n\n\n<ul><li>Container Queries</li><li>Parent Selectors</li><li>Nesting</li><li>Something extremely odd that doesn&#8217;t really make sense and makes me wonder about people</li></ul>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>The survey results from the State of CSS aren&#8217;t out yet, but they made this landing page that randomly shows you what one person wrote to answer that question. Just clicking the reload button a bunch, I get the sense that the top answers are: Container Queries Parent Selectors Nesting Something extremely odd that doesn&#8217;t [&hellip;]</p>\n",
+      "protected": false
+    },
+    "author": 3,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "_bbp_topic_count": 0,
+      "_bbp_reply_count": 0,
+      "_bbp_total_topic_count": 0,
+      "_bbp_total_reply_count": 0,
+      "_bbp_voice_count": 0,
+      "_bbp_anonymous_reply_count": 0,
+      "_bbp_topic_count_hidden": 0,
+      "_bbp_reply_count_hidden": 0,
+      "_bbp_forum_subforum_count": 0,
+      "spay_email": "",
+      "jetpack_publicize_message": "",
+      "jetpack_is_tweetstorm": false
+    },
+    "categories": [
+      17
+    ],
+    "tags": [],
+    "jetpack_featured_media_url": "",
+    "jetpack_publicize_connections": [],
+    "yoast_head": "<!-- This site is optimized with the Yoast SEO Premium plugin v15.2.1 - https://yoast.com/wordpress/plugins/seo/ -->\n<meta name=\"description\" content=\"The survey results from the State of CSS aren&#039;t out yet, but they made this landing page that randomly shows you what one person wrote to answer that\" />\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://css-tricks.com/whats-missing-from-css/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"What&#039;s Missing from CSS? | CSS-Tricks\" />\n<meta property=\"og:description\" content=\"The survey results from the State of CSS aren&#039;t out yet, but they made this landing page that randomly shows you what one person wrote to answer that\" />\n<meta property=\"og:url\" content=\"https://css-tricks.com/whats-missing-from-css/\" />\n<meta property=\"og:site_name\" content=\"CSS-Tricks\" />\n<meta property=\"article:publisher\" content=\"https://www.facebook.com/CSSTricks\" />\n<meta property=\"article:published_time\" content=\"2020-11-21T19:44:57+00:00\" />\n<meta property=\"article:modified_time\" content=\"2020-11-21T19:44:59+00:00\" />\n<meta property=\"og:image\" content=\"https://i2.wp.com/css-tricks.com/wp-content/uploads/2014/03/css-tricks-star.png?fit=512%2C512&#038;ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"512\" />\n\t<meta property=\"og:image:height\" content=\"512\" />\n<meta name=\"twitter:card\" content=\"summary\" />\n<meta name=\"twitter:creator\" content=\"@chriscoyier\" />\n<meta name=\"twitter:site\" content=\"@CSS\" />\n<meta name=\"twitter:label1\" content=\"Written by\">\n\t<meta name=\"twitter:data1\" content=\"Chris Coyier\">\n\t<meta name=\"twitter:label2\" content=\"Est. reading time\">\n\t<meta name=\"twitter:data2\" content=\"0 minutes\">\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://css-tricks.com/#organization\",\"name\":\"CSS-Tricks\",\"url\":\"https://css-tricks.com/\",\"sameAs\":[\"https://www.facebook.com/CSSTricks\",\"https://twitter.com/CSS\"],\"logo\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#logo\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg?fit=%2C&ssl=1\",\"caption\":\"CSS-Tricks\"},\"image\":{\"@id\":\"https://css-tricks.com/#logo\"}},{\"@type\":\"WebSite\",\"@id\":\"https://css-tricks.com/#website\",\"url\":\"https://css-tricks.com/\",\"name\":\"CSS-Tricks\",\"description\":\"Tips, Tricks, and Techniques on using Cascading Style Sheets.\",\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":\"https://css-tricks.com/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"en-US\"},{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/whats-missing-from-css/#webpage\",\"url\":\"https://css-tricks.com/whats-missing-from-css/\",\"name\":\"What's Missing from CSS? | CSS-Tricks\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/#website\"},\"datePublished\":\"2020-11-21T19:44:57+00:00\",\"dateModified\":\"2020-11-21T19:44:59+00:00\",\"description\":\"The survey results from the State of CSS aren't out yet, but they made this landing page that randomly shows you what one person wrote to answer that\",\"breadcrumb\":{\"@id\":\"https://css-tricks.com/whats-missing-from-css/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://css-tricks.com/whats-missing-from-css/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://css-tricks.com/whats-missing-from-css/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/\",\"url\":\"https://css-tricks.com/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/whats-missing-from-css/\",\"url\":\"https://css-tricks.com/whats-missing-from-css/\",\"name\":\"What&#8217;s Missing from CSS?\"}}]},{\"@type\":\"Article\",\"@id\":\"https://css-tricks.com/whats-missing-from-css/#article\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/whats-missing-from-css/#webpage\"},\"author\":{\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\"},\"headline\":\"What&#8217;s Missing from CSS?\",\"datePublished\":\"2020-11-21T19:44:57+00:00\",\"dateModified\":\"2020-11-21T19:44:59+00:00\",\"mainEntityOfPage\":{\"@id\":\"https://css-tricks.com/whats-missing-from-css/#webpage\"},\"commentCount\":1,\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"articleSection\":\"Link\",\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"https://css-tricks.com/whats-missing-from-css/#respond\"]}]},{\"@type\":\"Person\",\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\",\"name\":\"Chris Coyier\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#personlogo\",\"inLanguage\":\"en-US\",\"url\":\"https://secure.gravatar.com/avatar/8081b26e05bb4354f7d65ffc34cbbd67?s=96&d=retro&r=pg\",\"caption\":\"Chris Coyier\"},\"description\":\"Founder, writer, designer, spam-deleter, email personality\",\"sameAs\":[\"http://chriscoyier.net\",\"https://twitter.com/chriscoyier\"]}]}</script>\n<!-- / Yoast SEO Premium plugin. -->",
+    "jetpack-related-posts": [
+      {
+        "id": 1877,
+        "url": "https://css-tricks.com/dynamic-faq-page/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 0
+        },
+        "title": "Dynamic FAQ Page - A Lesson in Accessibility and Progressive Enhancement",
+        "date": "December 29, 2008",
+        "format": false,
+        "excerpt": "The idea is to make a question & answer style page which is embellished in functionality by JavaScript (jQuery). Each question will be shown in a box with a tag hanging from the bottom of the box. When clicked, the tag will slide out and reveal another box with the…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/csstricks-uploads/faq-example.jpg?resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 314816,
+        "url": "https://css-tricks.com/when-do-you-use-inline-block/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 1
+        },
+        "title": "When do you use inline-block?",
+        "date": "July 20, 2020",
+        "format": false,
+        "excerpt": "The inline-block value for display is a classic! It's not new and browser support is certainly not something you need to worry about. I'm sure many of us reach for it intuitively. But let's put a point on it. What is it actually useful for? When do you pick it…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/07/inline-block-columns.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 148045,
+        "url": "https://css-tricks.com/poll-results-offscreen-nav/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 2
+        },
+        "title": "Poll Results: Off Screen Navigation Use on Mobile/Desktop",
+        "date": "September 2, 2013",
+        "format": false,
+        "excerpt": "The results are in! Nearly 5,000 voters weighed in on the last poll to decide if the off-screen \"drawer\" navigation style that has swept mobile design is appropriate for larger screen (\"desktop\") designs. You could answer: It's not good on any site. It can be good on any site. It's…",
+        "rel": "",
+        "context": "In &quot;Poll&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 264902,
+        "url": "https://css-tricks.com/get-ready-for-display-contents/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 3
+        },
+        "title": "Get Ready for `display: contents;`",
+        "date": "January 18, 2018",
+        "format": false,
+        "excerpt": "Last year I asked, \"Will we be flattening our HTML for CSS Grids?\" The issue is that the only way for elements to participate in the same CSS grid together (or flexbox for that matter) is for them to be siblings. So, in some cases we might be incentivized to…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 291843,
+        "url": "https://css-tricks.com/which-css-is-awesome-makes-the-most-sense-if-you-dont-know-css-well/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 4
+        },
+        "title": "Which CSS IS AWESOME makes the most sense if you don't know CSS well?",
+        "date": "June 27, 2019",
+        "format": false,
+        "excerpt": "Peter-Paul posted this question: Which of the examples in the image do you consider correct?If you know CSS well, don't reply, just retweet. If you don't know CSS too well, please reply to the poll in the next tweet. pic.twitter.com/4bgnf9Wdkc— ppk 🇪🇺 (@ppk) June 17, 2019 Note the interesting caveat:…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/css-is-awesome.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 271136,
+        "url": "https://css-tricks.com/a-strategy-guide-to-css-custom-properties/",
+        "url_meta": {
+          "origin": 326165,
+          "position": 5
+        },
+        "title": "A Strategy Guide To CSS Custom Properties",
+        "date": "May 16, 2018",
+        "format": false,
+        "excerpt": "CSS preprocessor variables and CSS custom properties (often referred to as \"CSS variables\") can do some of the same things, but are not the same. Practical advice from Mike Riethmuller: If it is alright to use static variables inside components, when should we use custom properties? Converting existing preprocessor variables…",
+        "rel": "",
+        "context": "In &quot;Link&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/05/css-variables.jpg?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/326165"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/users/3"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/comments?post=326165"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 1,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/326165/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 326166,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/326165/revisions/326166"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/media?parent=326165"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/categories?post=326165"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/tags?post=326165"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 324346,
+    "date": "2020-11-20T13:18:02",
+    "date_gmt": "2020-11-20T21:18:02",
+    "guid": {
+      "rendered": "https://css-tricks.com/?p=324346"
+    },
+    "modified": "2020-11-20T13:18:04",
+    "modified_gmt": "2020-11-20T21:18:04",
+    "slug": "how-you-might-build-a-modern-day-webring",
+    "status": "publish",
+    "type": "post",
+    "link": "https://css-tricks.com/how-you-might-build-a-modern-day-webring/",
+    "title": {
+      "rendered": "How You Might Build a Modern Day Webring"
+    },
+    "content": {
+      "rendered": "\n<p>I&#8217;m sure different people picture different things when they think about webrings, so let me clarify what I picture. I see an element on a website that:</p>\n\n\n\n<ol><li>Signifies this site is part of a webring</li><li>Allows you to move to the next or previous site of the webring</li><li>Maybe has other functionality like going to a &#8220;random&#8221; site or seeing the complete list</li></ol>\n\n\n\n<p>But then another major thing:</p>\n\n\n\n<ol start=\"4\"><li>Site owners don&#8217;t have to do much. They just plop (it?) on the site and a functional webring UI is there. </li></ol>\n\n\n\n<!--more-->\n\n\n\n<p>So like this:</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" width=\"1024\" height=\"428\" src=\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=1024%2C428&#038;ssl=1\" alt=\"\" class=\"wp-image-324985\" srcset=\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=1024%2C428&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=300%2C126&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=768%2C321&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=1536%2C643&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?resize=1000%2C418&amp;ssl=1 1000w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/j8amu39zkrrz.png?w=1606&amp;ssl=1 1606w\" sizes=\"(min-width: 735px) 864px, 96vw\" data-recalc-dims=\"1\" /><figcaption>A Calvin &amp; Hobbes webring UI that comes up all the time when you search the web about webrings</figcaption></figure>\n\n\n\n<p>How did it used to work? You know what? I have no idea. My guess is that it was an ancient <code>&lt;frameset&gt;&lt;frame /&gt;&lt;/frameset&gt;</code> situation, but this stuff is before my time a bit. How might we do this today?</p>\n\n\n\n<p>Well, we could use an <code>&lt;iframe&gt;</code>, I guess. That&#8217;s what sites like YouTube do when they give &#8220;embed code&#8221; as an HTML snippet. Sites like Twitter and CodePen give you a <code>&lt;div&gt;</code> (or whatever semantic HTML) and a <code>&lt;script&gt;</code>, so that there can be fallback content and the script enhances it into an <code>&lt;iframe&gt;</code>. An <code>&lt;iframe&gt;</code> might be fine, as it asks very little of the site owner, but they are known to be fairly bad for performance. It&#8217;s a whole document inside another document, after all. Plus, they don&#8217;t offer much by the way of customization. You get what you get.</p>\n\n\n\n<p>Another problem with an iframe is that&#8230; how would it know what site it is currently embedded on? Maybe a URL parameter? Maybe a <code>postMessage</code> from the parent page? Not super clean if you ask me.</p>\n\n\n\n<p>I think a Web Component might be the way to go here, as long as we&#8217;re thinking modern. We could make a custom element like <code>&lt;webring-*&gt;</code>. Let&#8217;s do that, and make it for CSS sites specifically. That&#8217;ll give us the opportunity to send in the current site with an attribute, like this:</p>\n\n\n\n<pre rel=\"HTML\" class=\"wp-block-csstricks-code-block language-markup\" data-line=\"\"><code markup=\"tt\">&lt;webring-css site=\"http://css-tricks.com\">\n  This is gonna boot itself up into webring in a minute.\n&lt;/webring-css></code></pre>\n\n\n\n<p>That solves the technology choice. Now we need to figure out the global place to store the <strong>data</strong>. Because, well, a webring needs to be able to be <strong>updated</strong>. Sites need to be able to be added and removed from the webring without the other sites on the webring needing to do anything. </p>\n\n\n\n<p>For fairly simple data like this, a JSON file on GitHub seems to be a perfectly modern choice. <a href=\"https://github.com/CSS-Tricks/css-webring/blob/main/webring.json\">Let&#8217;s do that.</a> </p>\n\n\n\n<figure class=\"wp-block-image size-full\"><img loading=\"lazy\" width=\"1926\" height=\"1874\" src=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=1926%2C1874&#038;ssl=1\" alt=\"\" class=\"wp-image-325708\" srcset=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?w=1926&amp;ssl=1 1926w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=300%2C292&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=1024%2C996&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=768%2C747&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=1536%2C1495&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-2.03.55-PM.png?resize=1000%2C973&amp;ssl=1 1000w\" sizes=\"(min-width: 735px) 864px, 96vw\" data-recalc-dims=\"1\" /></figure>\n\n\n\n<p>Now everyone can see all the sites in the webring in a fairly readable fashion. Plus, they could submit Pull Requests against it to add/remove sites (feel free).</p>\n\n\n\n<p>Getting that data from our web component is a fetch away:</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">fetch(`https://raw.githubusercontent.com/CSS-Tricks/css-webring/main/webring.json`)\n  .then((response) => response.json())\n  .then((sites) => {\n     // Got the data.\n  });</code></pre>\n\n\n\n<p>We&#8217;ll fire that off when our web component mounts. Let&#8217;s scaffold that&#8230;</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">const DATA_FOR_WEBRING = `https://raw.githubusercontent.com/CSS-Tricks/css-webring/main/webring.json`;\n\nconst template = document.createElement(\"template\");\ntemplate.innerHTML = `\n&lt;style>\n  /* styles */\n&lt;/style>\n\n&lt;div class=\"webring\">\n  &lt;!-- content -->\n&lt;/div>`;\n\nclass WebRing extends HTMLElement {\n  connectedCallback() {\n    this.attachShadow({ mode: \"open\" });\n    this.shadowRoot.appendChild(template.content.cloneNode(true));\n\n    fetch(DATA_FOR_WEBRING)\n      .then((response) => response.json())\n      .then((sites) => {\n        // update template with data\n      });\n  }\n}\n\nwindow.customElements.define(\"webring-css\", WebRing);\n</code></pre>\n\n\n\n<p>The rest of this isn&#8217;t so terribly interesting that I feel like we need to go through it step by step. I&#8217;ll just blog-sketch it for you:</p>\n\n\n\n<ol><li>Pull the attribute off the web component so we can see what the current site is</li><li>Match the current site in the data </li><li>Build out Next, Previous, and Random links from the data in a template</li><li>Update the HTML in the template</li></ol>\n\n\n\n<p>And voilà!</p>\n\n\n\n<div class=\"wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper\"><iframe id=\"cp_embed_VwjERBw\" src=\"//codepen.io/anon/embed/VwjERBw?height=450&amp;theme-id=1&amp;slug-hash=VwjERBw&amp;default-tab=result\" height=\"450\" scrolling=\"no\" frameborder=\"0\" allowfullscreen allowpaymentrequest name=\"CodePen Embed VwjERBw\" title=\"CodePen Embed VwjERBw\" class=\"cp_embed_iframe\" style=\"width:100%;overflow:hidden\">CodePen Embed Fallback</iframe></div>\n\n\n\n<details>\n  <summary>\n          Could you do a lot more with this, like error handling, better design, and better everything?      </summary>\n  \n\n<p>Yes.</p>\n\n\n</details>\n\n\n<p></p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>I&#8217;m sure different people picture different things when they think about webrings, so let me clarify what I picture. I see an element on a website that: Signifies this site is part of a webring Allows you to move to the next or previous site of the webring Maybe has other functionality like going to [&hellip;]</p>\n",
+      "protected": false
+    },
+    "author": 3,
+    "featured_media": 325814,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "_bbp_topic_count": 0,
+      "_bbp_reply_count": 0,
+      "_bbp_total_topic_count": 0,
+      "_bbp_total_reply_count": 0,
+      "_bbp_voice_count": 0,
+      "_bbp_anonymous_reply_count": 0,
+      "_bbp_topic_count_hidden": 0,
+      "_bbp_reply_count_hidden": 0,
+      "_bbp_forum_subforum_count": 0,
+      "spay_email": "",
+      "jetpack_publicize_message": "",
+      "jetpack_is_tweetstorm": false
+    },
+    "categories": [
+      4
+    ],
+    "tags": [
+      803
+    ],
+    "jetpack_featured_media_url": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/webring.png?fit=1200%2C600&ssl=1",
+    "jetpack_publicize_connections": [],
+    "yoast_head": "<!-- This site is optimized with the Yoast SEO Premium plugin v15.2.1 - https://yoast.com/wordpress/plugins/seo/ -->\n<meta name=\"description\" content=\"I&#039;m sure different people picture different things when they think about webrings, so let me clarify what I picture. I see an element on a website that:\" />\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"How You Might Build a Modern Day Webring | CSS-Tricks\" />\n<meta property=\"og:description\" content=\"I&#039;m sure different people picture different things when they think about webrings, so let me clarify what I picture. I see an element on a website that:\" />\n<meta property=\"og:url\" content=\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\" />\n<meta property=\"og:site_name\" content=\"CSS-Tricks\" />\n<meta property=\"article:publisher\" content=\"https://www.facebook.com/CSSTricks\" />\n<meta property=\"article:published_time\" content=\"2020-11-20T21:18:02+00:00\" />\n<meta property=\"article:modified_time\" content=\"2020-11-20T21:18:04+00:00\" />\n<meta property=\"og:image\" content=\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/webring.png?fit=1200%2C600&#038;ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"1200\" />\n\t<meta property=\"og:image:height\" content=\"600\" />\n<meta name=\"twitter:card\" content=\"summary\" />\n<meta name=\"twitter:creator\" content=\"@chriscoyier\" />\n<meta name=\"twitter:site\" content=\"@CSS\" />\n<meta name=\"twitter:label1\" content=\"Written by\">\n\t<meta name=\"twitter:data1\" content=\"Chris Coyier\">\n\t<meta name=\"twitter:label2\" content=\"Est. reading time\">\n\t<meta name=\"twitter:data2\" content=\"3 minutes\">\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://css-tricks.com/#organization\",\"name\":\"CSS-Tricks\",\"url\":\"https://css-tricks.com/\",\"sameAs\":[\"https://www.facebook.com/CSSTricks\",\"https://twitter.com/CSS\"],\"logo\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#logo\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg?fit=%2C&ssl=1\",\"caption\":\"CSS-Tricks\"},\"image\":{\"@id\":\"https://css-tricks.com/#logo\"}},{\"@type\":\"WebSite\",\"@id\":\"https://css-tricks.com/#website\",\"url\":\"https://css-tricks.com/\",\"name\":\"CSS-Tricks\",\"description\":\"Tips, Tricks, and Techniques on using Cascading Style Sheets.\",\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":\"https://css-tricks.com/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"en-US\"},{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#primaryimage\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/webring.png?fit=1200%2C600&ssl=1\",\"width\":1200,\"height\":600},{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#webpage\",\"url\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\",\"name\":\"How You Might Build a Modern Day Webring | CSS-Tricks\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#primaryimage\"},\"datePublished\":\"2020-11-20T21:18:02+00:00\",\"dateModified\":\"2020-11-20T21:18:04+00:00\",\"description\":\"I'm sure different people picture different things when they think about webrings, so let me clarify what I picture. I see an element on a website that:\",\"breadcrumb\":{\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/\",\"url\":\"https://css-tricks.com/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\",\"url\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/\",\"name\":\"How You Might Build a Modern Day Webring\"}}]},{\"@type\":\"Article\",\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#article\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#webpage\"},\"author\":{\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\"},\"headline\":\"How You Might Build a Modern Day Webring\",\"datePublished\":\"2020-11-20T21:18:02+00:00\",\"dateModified\":\"2020-11-20T21:18:04+00:00\",\"mainEntityOfPage\":{\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#webpage\"},\"commentCount\":4,\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"image\":{\"@id\":\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#primaryimage\"},\"keywords\":\"web components\",\"articleSection\":\"Article\",\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"https://css-tricks.com/how-you-might-build-a-modern-day-webring/#respond\"]}]},{\"@type\":\"Person\",\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\",\"name\":\"Chris Coyier\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#personlogo\",\"inLanguage\":\"en-US\",\"url\":\"https://secure.gravatar.com/avatar/8081b26e05bb4354f7d65ffc34cbbd67?s=96&d=retro&r=pg\",\"caption\":\"Chris Coyier\"},\"description\":\"Founder, writer, designer, spam-deleter, email personality\",\"sameAs\":[\"http://chriscoyier.net\",\"https://twitter.com/chriscoyier\"]}]}</script>\n<!-- / Yoast SEO Premium plugin. -->",
+    "jetpack-related-posts": [
+      {
+        "id": 313133,
+        "url": "https://css-tricks.com/the-analytics-that-matter/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 0
+        },
+        "title": "The Analytics That Matter",
+        "date": "June 25, 2020",
+        "format": false,
+        "excerpt": "I've long been skeptical of quoting global browser usage percentages to justify their usage of browser features. It doesn't matter what global usage of a browser is, other than nerdy cocktail party fodder. The usage that matters is what users on your site are using, and that can be wildly…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/bar-chart.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 17610,
+        "url": "https://css-tricks.com/squarespace-6/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 1
+        },
+        "title": "Squarespace 6",
+        "date": "August 1, 2012",
+        "format": false,
+        "excerpt": "Squarespace 6 is freshly out. It's really nice and the start of what I hope is a revolution in what building content websites is like.",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2012/08/stats.jpg?resize=350%2C200&ssl=1",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 324466,
+        "url": "https://css-tricks.com/more-on-content-visibility/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 2
+        },
+        "title": "More on content-visibility",
+        "date": "October 28, 2020",
+        "format": false,
+        "excerpt": "Back in August 2020, when the content-visiblity property in CSS trickled its way into Chrome browsers, Una Kravets and Vladimir Levin wrote about it and we covered it. The weirdest part is that to get the performance value out of it, you pair it with contain-intrinsic-size on these big chunks…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/11/devtools-paintbrush.jpg?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 152144,
+        "url": "https://css-tricks.com/just-use-insert-cms-still-love-wordpress/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 3
+        },
+        "title": "Just Use [insert CMS here]! Or, Why I Still Love WordPress",
+        "date": "October 7, 2013",
+        "format": false,
+        "excerpt": "I somewhat regularly ask questions about WordPress stuff on Twitter. Usually when I don't know how to do something or I'm seeing behavior that I didn't expect. I did write a book about WordPress at one time, but even when I was immersed in that, I wasn't an expert on…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 265938,
+        "url": "https://css-tricks.com/best-ux-no-user-interface/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 4
+        },
+        "title": "The Best UX is No User Interface at All",
+        "date": "February 5, 2018",
+        "format": false,
+        "excerpt": "We have to anticipate how the user is going to think or react and everyone is different. Well designed systems can get us close to intuitive. .Even a perfect UI would be less than ideal. The ideal is to have no middleman at all. No translation layer. Historically speaking, this…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/01/siri-interface.jpg?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 261774,
+        "url": "https://css-tricks.com/advocating-for-accessible-ui-design/",
+        "url_meta": {
+          "origin": 324346,
+          "position": 5
+        },
+        "title": "Advocating for Accessible UI Design",
+        "date": "November 21, 2017",
+        "format": false,
+        "excerpt": "Accessibility is a hot topic these days, and the older we web-makers get, the hotter it's going to become! That might be a snarky outlook, but what I'm trying to say is that it's about time we start designing the web for everyone because the web was meant to be…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "Side-by-side example of typography improvements for accessibility.",
+          "src": "https://i1.wp.com/notlaura.com/wp-content/uploads/2017/10/typography-improvements-1200x408.jpg?resize=350%2C200&ssl=1",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/324346"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/users/3"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/comments?post=324346"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 10,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/324346/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 326147,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/324346/revisions/326147"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/media/325814"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/media?parent=324346"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/categories?post=324346"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/tags?post=324346"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 325921,
+    "date": "2020-11-20T07:52:14",
+    "date_gmt": "2020-11-20T15:52:14",
+    "guid": {
+      "rendered": "https://css-tricks.com/?p=325921"
+    },
+    "modified": "2020-11-20T12:26:03",
+    "modified_gmt": "2020-11-20T20:26:03",
+    "slug": "a-dynamically-sized-sticky-sidebar-with-html-and-css",
+    "status": "publish",
+    "type": "post",
+    "link": "https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/",
+    "title": {
+      "rendered": "A Dynamically-Sized Sticky Sidebar with HTML and CSS"
+    },
+    "content": {
+      "rendered": "\n<p>Creating page content that sticks to the viewport as you scroll, something like a jump-to-anchor menu or section headings, has never been easier. Throw a <code>position: sticky</code> into your CSS ruleset, set the directional offset (e.g. <code>top: 0</code>) and you’re ready to impress your teammates with minimal effort. Check out <a href=\"https://css-tricks.com/getting-fancy-with-position-sticky/\">this CSS-Tricks article</a> to see some real fancy sticky positioning use cases.</p>\n\n\n\n<p>But sticky positioning can get a bit tricky, particularly when it comes to height and the dangerous situation of hiding content in a position that can’t be scrolled to. Let me set the stage and show you the problem and how I fixed it.</p>\n\n\n\n<!--more-->\n\n\n\n<p>I recently worked on a desktop layout that we’re all familiar with: a main content area with a sidebar next to it. This particular sidebar contains action items and filters that are pertinent to the main content. As the page section is scrolled, this component remains fixed to the viewport and contextually accessible.</p>\n\n\n\n<div class=\"wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper\"><iframe id=\"cp_embed_oNLZmvV\" src=\"//codepen.io/anon/embed/oNLZmvV?height=750&amp;theme-id=1&amp;slug-hash=oNLZmvV&amp;default-tab=result\" height=\"750\" scrolling=\"no\" frameborder=\"0\" allowfullscreen allowpaymentrequest name=\"CodePen Embed oNLZmvV\" title=\"CodePen Embed oNLZmvV\" class=\"cp_embed_iframe\" style=\"width:100%;overflow:hidden\">CodePen Embed Fallback</iframe></div>\n\n\n\n<p>The layout styling was as easy to implement as I had mentioned earlier. But there was a catch: The height of the component would vary based on its content. I could have capped it with a <code>max-height</code> and set <code>overflow-y: auto</code> to make the component content scrollable. This worked well on my laptop screen and my typical viewport height, but in a smaller viewport with less vertical real estate, the sidebar’s height would exceed the viewport.</p>\n\n\n\n<figure class=\"wp-block-video\"><video controls src=\"https://css-tricks.com/wp-content/uploads/2020/11/sticky-sidebar-component-cutoff.mp4\"></video><figcaption>When the sticky sidebar height is larger than the viewport, some of its content becomes inaccessible until reaching the bottom of the container, when the element is no longer sticky.</figcaption></figure>\n\n\n\n<p>That’s where things got tricky.</p>\n\n\n\n<h3 id=\"h-thinking-through-solutions\">Thinking through solutions</h3>\n\n\n\n<p>I initially considered reaching for a media query. Perhaps I could use a media query to remove the sticky positioning and have the component sit relative to the top of the sidebar container. This would grant access to the entirety of its content. Otherwise, when scrolling the page, the sticky component’s content is cut off at the bottom of the viewport until I reach the end of its parent section.</p>\n\n\n\n<p>Then I remembered that the height of the sticky component is dynamic.</p>\n\n\n\n<blockquote class=\"wp-block-quote\"><p>What magic value could I use for my media query that would handle such a thing? Perhaps instead I could write a JavaScript function to check if the component flows beyond the viewport boundaries on page load? Then I could update the component’s height…</p></blockquote>\n\n\n\n<p>That was a possibility.</p>\n\n\n\n<p>But what if the user resizes their window? Should I use that same function in a resize event handler? That doesn’t feel right. There must be a better way to build this.</p>\n\n\n\n<p>Turns out there was and it involved some CSS trickery to get the job done!</p>\n\n\n\n<h3 id=\"h-setting-up-the-page-section\">Setting up the page section</h3>\n\n\n\n<p>I started with a <code>flex</code> display on the main element. A <code>flex-basis</code> value was set to the sidebar for a fixed desktop width. Then the article element filled the rest of the available horizontal viewport space.</p>\n\n\n\n<p class=\"explanation\">If you’re curious about how I got the two containers to stack for smaller viewports without a media query, check out <a href=\"https://heydonworks.com/article/the-flexbox-holy-albatross/\">The Flexbox Holy Albatross</a> trick.</p>\n\n\n\n<p>I added <code>align-self: start</code> to the sidebar so its height wouldn’t stretch with the main article (<code>stretch</code> &nbsp;is the default value). This gave my positioning properties the ability to cast their magic:</p>\n\n\n\n<pre rel=\"CSS\" class=\"wp-block-csstricks-code-block language-css\" data-line=\"\"><code markup=\"tt\">.sidebar {\n  --offset: var(--space);\n  /* ... */\n  position: sticky;\n  top: var(--offset);\n}</code></pre>\n\n\n\n<p>Check that out! With these two CSS properties, the sidebar element sticks to the top of the viewport with an offset to give it some breathing room. Notice that the <code>top</code> value is set to a <a href=\"https://css-tricks.com/global-and-component-style-settings-with-css-variables/\">scoped CSS custom property</a>. The <code>--offset</code> variable can now be reused on any child element inside the sidebar. This will come in handy later when setting the sticky sidebar component’s maximum height.</p>\n\n\n\n<p class=\"explanation\">You can find a list of global <a href=\"https://css-tricks.com/everything-need-know-css-variables/\">CSS variable</a> declarations in the <a href=\"https://codepen.io/hexagoncircle/pen/oNLZmvV\" target=\"_blank\" rel=\"noreferrer noopener\">CodePen demo</a>, including the <code>--space</code> variable used for the offset value in the <code>:root</code> ruleset.</p>\n\n\n\n<h3 id=\"h-the-sticky-sidebar\">The sticky sidebar</h3>\n\n\n\n<p>Keep in mind that the component itself is not what is sticky; it’s the sidebar itself. General layout and positioning should typically be handled by the parent. This gives the component more flexibility and makes it more modular to use in other areas of the application.</p>\n\n\n\n<p>Let’s dive into the anatomy of this component. In <a href=\"https://codepen.io/hexagoncircle/pen/oNLZmvV\" target=\"_blank\" rel=\"noreferrer noopener\">the demo</a>, I’ve removed the decorative properties below to focus on the layout styles:</p>\n\n\n\n<pre rel=\"CSS\" class=\"wp-block-csstricks-code-block language-css\" data-line=\"\"><code markup=\"tt\">.component {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n}\n \n.component .content {\n  max-height: 500px;\n  overflow-y: auto;\n}</code></pre>\n\n\n\n<ul><li>This component uses CSS Grid and the <a href=\"https://web.dev/one-line-layouts/%2304.-pancake-stack:-grid-template-rows:-auto-1fr-auto\">pancake stack</a> idea from <a href=\"https://1linelayouts.glitch.me/\">1-Line Layouts</a> to configure the rows of this template. Both the header and footer (<code>auto</code>) adjust to the height of their children while the content (<code>1fr</code>, or one <a href=\"https://css-tricks.com/introduction-fr-css-unit/\">fraction unit</a>) fills up the rest of the open vertical space.</li><li>A &nbsp;<code>max-height</code> on the content limits the component’s growth on larger screen sizes. This is unnecessary if it’s preferred that the component stretch to fill the viewport height.</li><li><code>overflow-y: auto</code> allows the content to be scrolled when necessary.</li></ul>\n\n\n\n<p>When the component is being used in the sidebar, a <code>max-height</code> is needed so that it doesn’t exceed the viewport height. The <code>--offset</code> previously scoped to the <code>.sidebar</code> class is doubled to create a margin on the bottom of the element that matches the top offset of the sticky sidebar:</p>\n\n\n\n<pre rel=\"CSS\" class=\"wp-block-csstricks-code-block language-css\" data-line=\"\"><code markup=\"tt\">.sidebar .component {\n  max-height: calc(100vh - var(--offset) * 2);\n}</code></pre>\n\n\n\n<p>That wraps up the assembly of this sticky sidebar component! After some decorative styles were applied, this prototype became ready for testing and review. Give it a try! <a rel=\"noreferrer noopener\" href=\"https://codepen.io/hexagoncircle/pen/oNLZmvV\" target=\"_blank\">Open up the demo in CodePen</a> and click on the grid items to add them to the sidebar. Resize your browser window to see how the component flexes with the viewport while staying in view as you scroll the main content section.</p>\n\n\n\n<hr class=\"wp-block-separator\"/>\n\n\n\n<p>This layout may work well on a desktop browser, but isn’t entirely ideal for smaller devices or viewport widths. However, the code here provides a solid foundation that makes it easy to add improvements to the UI.</p>\n\n\n\n<p>One simple idea: A button could be affixed to the viewport window that, when clicked, jumps the page down to the sidebar content. Another idea: The sidebar could be hidden off-screen and a toggle button could slide it in from the left or right. Iteration and user testing will help drive this experience in the right direction.</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>Creating page content that sticks to the viewport as you scroll, something like a jump-to-anchor menu or section headings, has never been easier. Throw a position: sticky into your CSS ruleset, set the directional offset (e.g. top: 0) and you’re ready to impress your teammates with minimal effort. Check out this CSS-Tricks article to see [&hellip;]</p>\n",
+      "protected": false
+    },
+    "author": 279608,
+    "featured_media": 326053,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "_bbp_topic_count": 0,
+      "_bbp_reply_count": 0,
+      "_bbp_total_topic_count": 0,
+      "_bbp_total_reply_count": 0,
+      "_bbp_voice_count": 0,
+      "_bbp_anonymous_reply_count": 0,
+      "_bbp_topic_count_hidden": 0,
+      "_bbp_reply_count_hidden": 0,
+      "_bbp_forum_subforum_count": 0,
+      "spay_email": "",
+      "jetpack_publicize_message": "A Dynamically-Sized Sticky Sidebar with HTML and CSS by @hexagoncircle",
+      "jetpack_is_tweetstorm": false
+    },
+    "categories": [
+      4
+    ],
+    "tags": [
+      1300
+    ],
+    "jetpack_featured_media_url": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/11/sticky-sidebar.png?fit=1200%2C600&ssl=1",
+    "jetpack_publicize_connections": [],
+    "yoast_head": "<!-- This site is optimized with the Yoast SEO Premium plugin v15.2.1 - https://yoast.com/wordpress/plugins/seo/ -->\n<meta name=\"description\" content=\"Creating page content that sticks to the viewport as you scroll, something like a jump-to-anchor menu or section headings, has never been easier. Throw a\" />\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"A Dynamically-Sized Sticky Sidebar with HTML and CSS | CSS-Tricks\" />\n<meta property=\"og:description\" content=\"Creating page content that sticks to the viewport as you scroll, something like a jump-to-anchor menu or section headings, has never been easier. Throw a\" />\n<meta property=\"og:url\" content=\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\" />\n<meta property=\"og:site_name\" content=\"CSS-Tricks\" />\n<meta property=\"article:publisher\" content=\"https://www.facebook.com/CSSTricks\" />\n<meta property=\"article:published_time\" content=\"2020-11-20T15:52:14+00:00\" />\n<meta property=\"article:modified_time\" content=\"2020-11-20T20:26:03+00:00\" />\n<meta property=\"og:image\" content=\"https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/11/sticky-sidebar.png?fit=1200%2C600&#038;ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"1200\" />\n\t<meta property=\"og:image:height\" content=\"600\" />\n<meta name=\"twitter:card\" content=\"summary\" />\n<meta name=\"twitter:creator\" content=\"@hexagoncircle\" />\n<meta name=\"twitter:site\" content=\"@CSS\" />\n<meta name=\"twitter:label1\" content=\"Written by\">\n\t<meta name=\"twitter:data1\" content=\"Ryan Mulligan\">\n\t<meta name=\"twitter:label2\" content=\"Est. reading time\">\n\t<meta name=\"twitter:data2\" content=\"4 minutes\">\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://css-tricks.com/#organization\",\"name\":\"CSS-Tricks\",\"url\":\"https://css-tricks.com/\",\"sameAs\":[\"https://www.facebook.com/CSSTricks\",\"https://twitter.com/CSS\"],\"logo\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#logo\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg?fit=%2C&ssl=1\",\"caption\":\"CSS-Tricks\"},\"image\":{\"@id\":\"https://css-tricks.com/#logo\"}},{\"@type\":\"WebSite\",\"@id\":\"https://css-tricks.com/#website\",\"url\":\"https://css-tricks.com/\",\"name\":\"CSS-Tricks\",\"description\":\"Tips, Tricks, and Techniques on using Cascading Style Sheets.\",\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":\"https://css-tricks.com/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"en-US\"},{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#primaryimage\",\"inLanguage\":\"en-US\",\"url\":\"https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/11/sticky-sidebar.png?fit=1200%2C600&ssl=1\",\"width\":1200,\"height\":600},{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#webpage\",\"url\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\",\"name\":\"A Dynamically-Sized Sticky Sidebar with HTML and CSS | CSS-Tricks\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#primaryimage\"},\"datePublished\":\"2020-11-20T15:52:14+00:00\",\"dateModified\":\"2020-11-20T20:26:03+00:00\",\"description\":\"Creating page content that sticks to the viewport as you scroll, something like a jump-to-anchor menu or section headings, has never been easier. Throw a\",\"breadcrumb\":{\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/\",\"url\":\"https://css-tricks.com/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\",\"url\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/\",\"name\":\"A Dynamically-Sized Sticky Sidebar with HTML and CSS\"}}]},{\"@type\":\"Article\",\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#article\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#webpage\"},\"author\":{\"@id\":\"https://css-tricks.com/#/schema/person/640ae8d311d29a95f5b3dcca563173ec\"},\"headline\":\"A Dynamically-Sized Sticky Sidebar with HTML and CSS\",\"datePublished\":\"2020-11-20T15:52:14+00:00\",\"dateModified\":\"2020-11-20T20:26:03+00:00\",\"mainEntityOfPage\":{\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#webpage\"},\"commentCount\":3,\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"image\":{\"@id\":\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#primaryimage\"},\"keywords\":\"sticky\",\"articleSection\":\"Article\",\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"https://css-tricks.com/a-dynamically-sized-sticky-sidebar-with-html-and-css/#respond\"]}]},{\"@type\":\"Person\",\"@id\":\"https://css-tricks.com/#/schema/person/640ae8d311d29a95f5b3dcca563173ec\",\"name\":\"Ryan Mulligan\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#personlogo\",\"inLanguage\":\"en-US\",\"url\":\"https://secure.gravatar.com/avatar/8dd1e93360b6d9047b893700ed0de0e8?s=96&d=retro&r=pg\",\"caption\":\"Ryan Mulligan\"},\"sameAs\":[\"https://twitter.com/hexagoncircle\"]}]}</script>\n<!-- / Yoast SEO Premium plugin. -->",
+    "jetpack-related-posts": [
+      {
+        "id": 1191,
+        "url": "https://css-tricks.com/absolute-relative-fixed-positioining-how-do-they-differ/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 0
+        },
+        "title": "Absolute, Relative, Fixed Positioning: How Do They Differ?",
+        "date": "October 14, 2008",
+        "format": false,
+        "excerpt": "Let's talk about the position property. I know beginners are curious about this. Here's a question I got recently: I am fairly new to web design, and haven't mastered the differences in positioning of elements. I know there is absolute, fixed, and relative. Are there any others? Also, do they…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 275805,
+        "url": "https://css-tricks.com/creating-sliding-effects-using-sticky-positioning/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 1
+        },
+        "title": "Creating sliding effects using sticky positioning",
+        "date": "September 10, 2018",
+        "format": false,
+        "excerpt": "Sticky elements are predominantly used for keeping something shown on the screen throughout scrolling. As cool as that is, we can also hide elements in the same way! Here’s a typical (um) sticky situation: See the Pen position:sticky (CSS) by Preethi Sam (@rpsthecoder) on CodePen. Sticky elements (position: sticky;) are…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/08/sticky-featured.gif?fit=800%2C400&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 319886,
+        "url": "https://css-tricks.com/how-to-use-css-grid-for-sticky-headers-and-footers/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 2
+        },
+        "title": "How to Use CSS Grid for Sticky Headers and Footers",
+        "date": "September 2, 2020",
+        "format": false,
+        "excerpt": "CSS Grid is a collection of properties designed to make layout easier than it’s ever been. Like anything, there's a bit of a learning curve, but Grid is honestly fun to work with once you get the hang of it. One area where it shines is dealing with headers and…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/08/sticky-head-footer.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 311477,
+        "url": "https://css-tricks.com/a-primer-on-display-advertising-for-web-designers/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 3
+        },
+        "title": "A Primer on Display Advertising for Web Designers",
+        "date": "June 4, 2020",
+        "format": false,
+        "excerpt": "A lot of websites (this one included) rely on advertising as an important revenue source. Those ad placements directly impact the interfaces we build and interact with every day. Building layouts with ads in them is a dance of handling them in fluid environments, and also balancing the need to…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/11/newspaper-stack.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 302002,
+        "url": "https://css-tricks.com/sticky-table-of-contents-with-scrolling-active-states/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 4
+        },
+        "title": "Sticky Table of Contents with Scrolling Active States",
+        "date": "January 30, 2020",
+        "format": false,
+        "excerpt": "Say you have a two-column layout: a main column with content and a sidebar. Say it has a lot of content, with sections that requires scrolling. The sidebar column that is largely empty, such that you can safely put a position: sticky; table of contents over there for all that…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/03/scroll-position.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 273952,
+        "url": "https://css-tricks.com/sticky-smooth-active-nav/",
+        "url_meta": {
+          "origin": 325921,
+          "position": 5
+        },
+        "title": "Sticky, Smooth, Active Nav",
+        "date": "August 7, 2018",
+        "format": false,
+        "excerpt": "Just like the title says! Here's a sidebar navigation bar that... Uses sticky positioning. It stays on the screen when it can, but won't overlap the header, footer, or ever make any of it's links inaccessible. Scrolls smoothly to the sections you click to. Activates the current nav based on…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/07/smooth-scroll-nav.gif?fit=800%2C400&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325921"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/users/279608"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/comments?post=325921"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 10,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325921/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 326112,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325921/revisions/326112"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/media/326053"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/media?parent=325921"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/categories?post=325921"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/tags?post=325921"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 325977,
+    "date": "2020-11-19T14:30:57",
+    "date_gmt": "2020-11-19T22:30:57",
+    "guid": {
+      "rendered": "https://css-tricks.com/?p=325977"
+    },
+    "modified": "2020-11-19T14:30:58",
+    "modified_gmt": "2020-11-19T22:30:58",
+    "slug": "console-log-myvariable",
+    "status": "publish",
+    "type": "post",
+    "link": "https://css-tricks.com/console-log-myvariable/",
+    "title": {
+      "rendered": "console.log({ myVariable });"
+    },
+    "content": {
+      "rendered": "\n<p>I think <a href=\"https://twitter.com/chriscoyier/status/1326192332518133762\">this</a> might be my most popular tweet of all time, but I&#8217;m not sure how to verify that these days. I&#8217;ll restate this neat little trick here because blogging is cool and fun. </p>\n\n\n\n<p>I used to do this a lot while debugging JavaScript:</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">console.log(\"myVariable: \", myVariable);</code></pre>\n\n\n\n<p>But now I do this because it&#8217;s just easier to type quickly:</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">console.log({ myVariable });</code></pre>\n\n\n\n<!--more-->\n\n\n\n<p>And you don&#8217;t miss out on anything in DevTools:</p>\n\n\n\n<figure class=\"wp-block-image size-large is-resized\"><img loading=\"lazy\" src=\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/EmeU1-DXUAc0EMN.jpeg?resize=531%2C229&#038;ssl=1\" alt=\"\" class=\"wp-image-325978\" width=\"531\" height=\"229\" srcset=\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/EmeU1-DXUAc0EMN.jpeg?w=1002&amp;ssl=1 1002w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/EmeU1-DXUAc0EMN.jpeg?resize=300%2C129&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/EmeU1-DXUAc0EMN.jpeg?resize=768%2C331&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/EmeU1-DXUAc0EMN.jpeg?resize=1000%2C431&amp;ssl=1 1000w\" sizes=\"(min-width: 735px) 864px, 96vw\" data-recalc-dims=\"1\" /></figure>\n\n\n\n<p>Now that this is a blog post, I can elaborate a smidge&#8230; </p>\n\n\n\n<p>The output display there (and really, <code>console.log</code> itself) is a DevTools thing, but the syntax isn&#8217;t. By using curly brackets in JavaScript, I&#8217;m creating an object. I don&#8217;t have to assign an object to anything, it can just <em>be</em>.</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">{\n  foo: \"bar\"\n}</code></pre>\n\n\n\n<p>You see that a lot when passing an object to a function, like <code>myFunction({ config: options });</code>. The &#8220;trick&#8221; is that when you&#8217;re making an object, you can &#8220;shorthand&#8221; it by providing <em>only</em> a variable, which makes it implied). So like:</p>\n\n\n\n<pre rel=\"JavaScript\" class=\"wp-block-csstricks-code-block language-javascript\" data-line=\"\"><code markup=\"tt\">const fruit = \"apple\";\n\n// Shorthand\nlet x = {\n  fruit\n}\n\nconsole.log(x);\n\n// Normal way, literally the same exact thing\nx = {\n  \"fruit\": fruit\n}\n\nconsole.log(x); // identical</code></pre>\n\n\n\n<p>When you have a variable and you log it like <code>console.log({ myVariable });</code> you&#8217;re using that shorthand object creation syntax and it gets logged like the object it becomes. </p>\n\n\n\n<p>One strike against this idea is that <em>sometimes</em> DevTools chooses to output it as &#x25b6; Object and you have to click to open to see the value. I don&#8217;t know what the heuristics are of when it chooses to do that and when it doesn&#8217;t. If you don&#8217;t like that, or the output format of an object in general, you might prefer the <code>console.table({ myVariable });</code> format:</p>\n\n\n\n<figure class=\"wp-block-image size-large is-resized\"><img loading=\"lazy\" src=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?resize=770%2C108&#038;ssl=1\" alt=\"\" class=\"wp-image-325979\" width=\"770\" height=\"108\" srcset=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?resize=1024%2C144&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?resize=300%2C42&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?resize=768%2C108&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?resize=1000%2C140&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-17-at-12.43.48-PM.png?w=1410&amp;ssl=1 1410w\" sizes=\"(min-width: 735px) 864px, 96vw\" data-recalc-dims=\"1\" /></figure>\n\n\n\n<p></p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>I think this might be my most popular tweet of all time, but I&#8217;m not sure how to verify that these days. I&#8217;ll restate this neat little trick here because blogging is cool and fun. I used to do this a lot while debugging JavaScript: But now I do this because it&#8217;s just easier to [&hellip;]</p>\n",
+      "protected": false
+    },
+    "author": 3,
+    "featured_media": 313095,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "_bbp_topic_count": 0,
+      "_bbp_reply_count": 0,
+      "_bbp_total_topic_count": 0,
+      "_bbp_total_reply_count": 0,
+      "_bbp_voice_count": 0,
+      "_bbp_anonymous_reply_count": 0,
+      "_bbp_topic_count_hidden": 0,
+      "_bbp_reply_count_hidden": 0,
+      "_bbp_forum_subforum_count": 0,
+      "spay_email": "",
+      "jetpack_publicize_message": "",
+      "jetpack_is_tweetstorm": false
+    },
+    "categories": [
+      4
+    ],
+    "tags": [],
+    "jetpack_featured_media_url": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/console-commands-1.png?fit=1200%2C600&ssl=1",
+    "jetpack_publicize_connections": [],
+    "yoast_head": "<!-- This site is optimized with the Yoast SEO Premium plugin v15.2.1 - https://yoast.com/wordpress/plugins/seo/ -->\n<meta name=\"description\" content=\"I think this might be my most popular tweet of all time, but I&#039;m not sure how to verify that these days. I&#039;ll restate this neat little trick here because\" />\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://css-tricks.com/console-log-myvariable/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"console.log({ myVariable }); | CSS-Tricks\" />\n<meta property=\"og:description\" content=\"I think this might be my most popular tweet of all time, but I&#039;m not sure how to verify that these days. I&#039;ll restate this neat little trick here because\" />\n<meta property=\"og:url\" content=\"https://css-tricks.com/console-log-myvariable/\" />\n<meta property=\"og:site_name\" content=\"CSS-Tricks\" />\n<meta property=\"article:publisher\" content=\"https://www.facebook.com/CSSTricks\" />\n<meta property=\"article:published_time\" content=\"2020-11-19T22:30:57+00:00\" />\n<meta property=\"article:modified_time\" content=\"2020-11-19T22:30:58+00:00\" />\n<meta property=\"og:image\" content=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/console-commands-1.png?fit=1200%2C600&#038;ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"1200\" />\n\t<meta property=\"og:image:height\" content=\"600\" />\n<meta name=\"twitter:card\" content=\"summary\" />\n<meta name=\"twitter:creator\" content=\"@chriscoyier\" />\n<meta name=\"twitter:site\" content=\"@CSS\" />\n<meta name=\"twitter:label1\" content=\"Written by\">\n\t<meta name=\"twitter:data1\" content=\"Chris Coyier\">\n\t<meta name=\"twitter:label2\" content=\"Est. reading time\">\n\t<meta name=\"twitter:data2\" content=\"1 minute\">\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://css-tricks.com/#organization\",\"name\":\"CSS-Tricks\",\"url\":\"https://css-tricks.com/\",\"sameAs\":[\"https://www.facebook.com/CSSTricks\",\"https://twitter.com/CSS\"],\"logo\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#logo\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg?fit=%2C&ssl=1\",\"caption\":\"CSS-Tricks\"},\"image\":{\"@id\":\"https://css-tricks.com/#logo\"}},{\"@type\":\"WebSite\",\"@id\":\"https://css-tricks.com/#website\",\"url\":\"https://css-tricks.com/\",\"name\":\"CSS-Tricks\",\"description\":\"Tips, Tricks, and Techniques on using Cascading Style Sheets.\",\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":\"https://css-tricks.com/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"en-US\"},{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/console-log-myvariable/#primaryimage\",\"inLanguage\":\"en-US\",\"url\":\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/console-commands-1.png?fit=1200%2C600&ssl=1\",\"width\":1200,\"height\":600},{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/console-log-myvariable/#webpage\",\"url\":\"https://css-tricks.com/console-log-myvariable/\",\"name\":\"console.log({ myVariable }); | CSS-Tricks\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://css-tricks.com/console-log-myvariable/#primaryimage\"},\"datePublished\":\"2020-11-19T22:30:57+00:00\",\"dateModified\":\"2020-11-19T22:30:58+00:00\",\"description\":\"I think this might be my most popular tweet of all time, but I'm not sure how to verify that these days. I'll restate this neat little trick here because\",\"breadcrumb\":{\"@id\":\"https://css-tricks.com/console-log-myvariable/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://css-tricks.com/console-log-myvariable/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://css-tricks.com/console-log-myvariable/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/\",\"url\":\"https://css-tricks.com/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/console-log-myvariable/\",\"url\":\"https://css-tricks.com/console-log-myvariable/\",\"name\":\"console.log({ myVariable });\"}}]},{\"@type\":\"Article\",\"@id\":\"https://css-tricks.com/console-log-myvariable/#article\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/console-log-myvariable/#webpage\"},\"author\":{\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\"},\"headline\":\"console.log({ myVariable });\",\"datePublished\":\"2020-11-19T22:30:57+00:00\",\"dateModified\":\"2020-11-19T22:30:58+00:00\",\"mainEntityOfPage\":{\"@id\":\"https://css-tricks.com/console-log-myvariable/#webpage\"},\"commentCount\":18,\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"image\":{\"@id\":\"https://css-tricks.com/console-log-myvariable/#primaryimage\"},\"articleSection\":\"Article\",\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"https://css-tricks.com/console-log-myvariable/#respond\"]}]},{\"@type\":\"Person\",\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\",\"name\":\"Chris Coyier\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#personlogo\",\"inLanguage\":\"en-US\",\"url\":\"https://secure.gravatar.com/avatar/8081b26e05bb4354f7d65ffc34cbbd67?s=96&d=retro&r=pg\",\"caption\":\"Chris Coyier\"},\"description\":\"Founder, writer, designer, spam-deleter, email personality\",\"sameAs\":[\"http://chriscoyier.net\",\"https://twitter.com/chriscoyier\"]}]}</script>\n<!-- / Yoast SEO Premium plugin. -->",
+    "jetpack-related-posts": [
+      {
+        "id": 303621,
+        "url": "https://css-tricks.com/a-guide-to-console-commands/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 0
+        },
+        "title": "A Guide to Console Commands",
+        "date": "February 20, 2020",
+        "format": false,
+        "excerpt": "The developer’s debugging console has been available in one form or another in web browsers for many years. Starting out as a means for errors to be reported to the developer, its capabilities have increased in many ways; such as automatically logging information like network requests, network responses, security errors…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/console-commands-1.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 320614,
+        "url": "https://css-tricks.com/the-flavors-of-object-oriented-programming-in-javascript/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 1
+        },
+        "title": "The Flavors of Object-Oriented Programming (in JavaScript)",
+        "date": "September 28, 2020",
+        "format": false,
+        "excerpt": "In my research, I've found there are four approaches to Object-Oriented Programming in JavaScript. Which methods should I use? Which one is \"the best\" way? Here I'll present my findings along with information that may help you decide which is right for you.",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/09/js-wacky.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 239837,
+        "url": "https://css-tricks.com/lets-learn-es2015/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 2
+        },
+        "title": "Let's Learn ES2015",
+        "date": "March 29, 2016",
+        "format": false,
+        "excerpt": "The following is a guest post by Ryan Christiani. Ryan is a teacher at HackerYou and has been working on a video series called Let's Learn ES6. He offered to put some of that together into a tutorial format, which I thought was perfect as we haven't covered ES2015 much…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 266127,
+        "url": "https://css-tricks.com/using-default-parameters-es6/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 3
+        },
+        "title": "Using Default Parameters in ES6",
+        "date": "February 8, 2018",
+        "format": false,
+        "excerpt": "I’ve recently begun doing more research into what’s new in JavaScript, catching up on a lot of the new features and syntax improvements that have been included in ES6 (i.e. ES2015 and later). You’ve likely heard about and started using the usual stuff: arrow functions, let and const, rest and…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/02/js-es6.jpg?fit=1200%2C700&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 257627,
+        "url": "https://css-tricks.com/javascript-scope-closures/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 4
+        },
+        "title": "JavaScript Scope and Closures",
+        "date": "August 28, 2017",
+        "format": false,
+        "excerpt": "Scopes and closures are important in JavaScript. But, they were confusing for me when I first started. Here's an explanation of scopes and closures to help you understand what they are. Let's start with scopes. Scope A scope in JavaScript defines what variables you have access to. There are two…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 301107,
+        "url": "https://css-tricks.com/understanding-async-await/",
+        "url_meta": {
+          "origin": 325977,
+          "position": 5
+        },
+        "title": "Understanding Async Await",
+        "date": "January 9, 2020",
+        "format": false,
+        "excerpt": "When writing code for the web, eventually you'll need to do some process that might take a few moments to complete. JavaScript can't really multitask, so we'll need a way to handle those long-running processes. Async/Await is a way to handle this type of time-based sequencing. It’s especially great for…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/01/desk-items.png?fit=1133%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325977"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/users/3"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/comments?post=325977"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 3,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325977/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 325986,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325977/revisions/325986"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/media/313095"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/media?parent=325977"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/categories?post=325977"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/tags?post=325977"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 325627,
+    "date": "2020-11-19T14:05:30",
+    "date_gmt": "2020-11-19T22:05:30",
+    "guid": {
+      "rendered": "https://css-tricks.com/?p=325627"
+    },
+    "modified": "2020-11-19T14:05:32",
+    "modified_gmt": "2020-11-19T22:05:32",
+    "slug": "mediastack",
+    "status": "publish",
+    "type": "post",
+    "link": "https://css-tricks.com/mediastack/",
+    "title": {
+      "rendered": "mediastack"
+    },
+    "content": {
+      "rendered": "\n<p>Have you ever had the idea for a website or new app that involved showing news content? You don&#8217;t have to create content yourself to have the right to build an innovative news reading experience. I remember when <a href=\"https://flipboard.com/\">Flipboard</a> came out. They didn&#8217;t (and still don&#8217;t) actually produce content — they just made a fantastic experience for reading it, and did very well with that.</p>\n\n\n\n<p>Where do you get that news content? <a href=\"https://mediastack.com/\">mediastack</a>. You&#8217;re going to need a great API for delivering news content, and that&#8217;s exactly what mediastack is.</p>\n\n\n\n<!--more-->\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" width=\"1024\" height=\"623\" src=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=1024%2C623&#038;ssl=1\" alt=\"\" class=\"wp-image-325629\" srcset=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=1024%2C623&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=300%2C182&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=768%2C467&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=1536%2C934&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=2048%2C1245&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM-1.png?resize=1000%2C608&amp;ssl=1 1000w\" sizes=\"(min-width: 735px) 864px, 96vw\" data-recalc-dims=\"1\" /></figure>\n\n\n\n<p>You <a href=\"https://mediastack.com/product\">sign up</a> and get an API key. It&#8217;s free to use for 500 requests/month, which is enough to prototype what you&#8217;re building, particularly if you&#8217;re being smart about caching responses. Then, when you need more requests, it scales up very reasonably in price. </p>\n\n\n\n<p>Gotta love a good API that does exactly what you need it to do, so you can get to work.</p>\n\n\n\n<p>Another thing I like about <a href=\"https://mediastack.com/\">mediastack</a> is that it&#8217;s from <a href=\"https://apilayer.com/\">apilayer</a>, who have been doing APIs like this for a long time. Their whole business is about providing purpose-built APIs for tasks that developers need to do. I like it when companies are incentivized to do a good job for you because you&#8217;re very directly their customer and using their product for exactly what it&#8217;s for.</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>Have you ever had the idea for a website or new app that involved showing news content? You don&#8217;t have to create content yourself to have the right to build an innovative news reading experience. I remember when Flipboard came out. They didn&#8217;t (and still don&#8217;t) actually produce content — they just made a fantastic [&hellip;]</p>\n",
+      "protected": false
+    },
+    "author": 3,
+    "featured_media": 325628,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "_bbp_topic_count": 0,
+      "_bbp_reply_count": 0,
+      "_bbp_total_topic_count": 0,
+      "_bbp_total_reply_count": 0,
+      "_bbp_voice_count": 0,
+      "_bbp_anonymous_reply_count": 0,
+      "_bbp_topic_count_hidden": 0,
+      "_bbp_reply_count_hidden": 0,
+      "_bbp_forum_subforum_count": 0,
+      "spay_email": "",
+      "jetpack_publicize_message": "",
+      "jetpack_is_tweetstorm": false
+    },
+    "categories": [
+      4,
+      508
+    ],
+    "tags": [],
+    "jetpack_featured_media_url": "https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM.png?fit=2312%2C1406&ssl=1",
+    "jetpack_publicize_connections": [],
+    "yoast_head": "<!-- This site is optimized with the Yoast SEO Premium plugin v15.2.1 - https://yoast.com/wordpress/plugins/seo/ -->\n<meta name=\"description\" content=\"Have you ever had the idea for a website or new app that involved showing news content? You don&#039;t have to create content yourself to have the right to\" />\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://css-tricks.com/mediastack/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"mediastack | CSS-Tricks\" />\n<meta property=\"og:description\" content=\"Have you ever had the idea for a website or new app that involved showing news content? You don&#039;t have to create content yourself to have the right to\" />\n<meta property=\"og:url\" content=\"https://css-tricks.com/mediastack/\" />\n<meta property=\"og:site_name\" content=\"CSS-Tricks\" />\n<meta property=\"article:publisher\" content=\"https://www.facebook.com/CSSTricks\" />\n<meta property=\"article:published_time\" content=\"2020-11-19T22:05:30+00:00\" />\n<meta property=\"article:modified_time\" content=\"2020-11-19T22:05:32+00:00\" />\n<meta property=\"og:image\" content=\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM.png?fit=2312%2C1406&#038;ssl=1\" />\n\t<meta property=\"og:image:width\" content=\"2312\" />\n\t<meta property=\"og:image:height\" content=\"1406\" />\n<meta name=\"twitter:card\" content=\"summary\" />\n<meta name=\"twitter:creator\" content=\"@chriscoyier\" />\n<meta name=\"twitter:site\" content=\"@CSS\" />\n<meta name=\"twitter:label1\" content=\"Written by\">\n\t<meta name=\"twitter:data1\" content=\"Chris Coyier\">\n\t<meta name=\"twitter:label2\" content=\"Est. reading time\">\n\t<meta name=\"twitter:data2\" content=\"1 minute\">\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https://css-tricks.com/#organization\",\"name\":\"CSS-Tricks\",\"url\":\"https://css-tricks.com/\",\"sameAs\":[\"https://www.facebook.com/CSSTricks\",\"https://twitter.com/CSS\"],\"logo\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#logo\",\"inLanguage\":\"en-US\",\"url\":\"https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/akqRGyta_400x400.jpg?fit=%2C&ssl=1\",\"caption\":\"CSS-Tricks\"},\"image\":{\"@id\":\"https://css-tricks.com/#logo\"}},{\"@type\":\"WebSite\",\"@id\":\"https://css-tricks.com/#website\",\"url\":\"https://css-tricks.com/\",\"name\":\"CSS-Tricks\",\"description\":\"Tips, Tricks, and Techniques on using Cascading Style Sheets.\",\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":\"https://css-tricks.com/?s={search_term_string}\",\"query-input\":\"required name=search_term_string\"}],\"inLanguage\":\"en-US\"},{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/mediastack/#primaryimage\",\"inLanguage\":\"en-US\",\"url\":\"https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/11/Screen-Shot-2020-11-12-at-8.32.48-AM.png?fit=2312%2C1406&ssl=1\",\"width\":2312,\"height\":1406},{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/mediastack/#webpage\",\"url\":\"https://css-tricks.com/mediastack/\",\"name\":\"mediastack | CSS-Tricks\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/#website\"},\"primaryImageOfPage\":{\"@id\":\"https://css-tricks.com/mediastack/#primaryimage\"},\"datePublished\":\"2020-11-19T22:05:30+00:00\",\"dateModified\":\"2020-11-19T22:05:32+00:00\",\"description\":\"Have you ever had the idea for a website or new app that involved showing news content? You don't have to create content yourself to have the right to\",\"breadcrumb\":{\"@id\":\"https://css-tricks.com/mediastack/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://css-tricks.com/mediastack/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://css-tricks.com/mediastack/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/\",\"url\":\"https://css-tricks.com/\",\"name\":\"Home\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@type\":\"WebPage\",\"@id\":\"https://css-tricks.com/mediastack/\",\"url\":\"https://css-tricks.com/mediastack/\",\"name\":\"mediastack\"}}]},{\"@type\":\"Article\",\"@id\":\"https://css-tricks.com/mediastack/#article\",\"isPartOf\":{\"@id\":\"https://css-tricks.com/mediastack/#webpage\"},\"author\":{\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\"},\"headline\":\"mediastack\",\"datePublished\":\"2020-11-19T22:05:30+00:00\",\"dateModified\":\"2020-11-19T22:05:32+00:00\",\"mainEntityOfPage\":{\"@id\":\"https://css-tricks.com/mediastack/#webpage\"},\"commentCount\":0,\"publisher\":{\"@id\":\"https://css-tricks.com/#organization\"},\"image\":{\"@id\":\"https://css-tricks.com/mediastack/#primaryimage\"},\"articleSection\":\"Article,Sponsored\",\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"CommentAction\",\"name\":\"Comment\",\"target\":[\"https://css-tricks.com/mediastack/#respond\"]}]},{\"@type\":\"Person\",\"@id\":\"https://css-tricks.com/#/schema/person/439366a88619858a797824d5498cf50f\",\"name\":\"Chris Coyier\",\"image\":{\"@type\":\"ImageObject\",\"@id\":\"https://css-tricks.com/#personlogo\",\"inLanguage\":\"en-US\",\"url\":\"https://secure.gravatar.com/avatar/8081b26e05bb4354f7d65ffc34cbbd67?s=96&d=retro&r=pg\",\"caption\":\"Chris Coyier\"},\"description\":\"Founder, writer, designer, spam-deleter, email personality\",\"sameAs\":[\"http://chriscoyier.net\",\"https://twitter.com/chriscoyier\"]}]}</script>\n<!-- / Yoast SEO Premium plugin. -->",
+    "jetpack-related-posts": [
+      {
+        "id": 257367,
+        "url": "https://css-tricks.com/improving-conversations-using-perspective-api/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 0
+        },
+        "title": "Improving Conversations using the Perspective API",
+        "date": "August 11, 2017",
+        "format": false,
+        "excerpt": "I recently came across an article by Rory Cellan-Jones about a new technology from Jigsaw, a development group at Google focused on making people safer online through technology. At the time they'd just released the first alpha version of what they call The Perspective API. It's a machine learning tool…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 244280,
+        "url": "https://css-tricks.com/everything-need-know-instagram-api-integration/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 1
+        },
+        "title": "Everything You Need to Know About Instagram API Integration",
+        "date": "August 8, 2016",
+        "format": false,
+        "excerpt": "The following is a guest post by Emerson This. This is a guide for web developers interested in integrating Instagram content on websites. It was only a few months ago when Instagram changed what was possible with their API, so this serves to explain that, what is possible now, and…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 274506,
+        "url": "https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 2
+        },
+        "title": "Using data in React with the Fetch API and axios",
+        "date": "August 3, 2018",
+        "format": false,
+        "excerpt": "If you are new to React, and perhaps have only played with building to-do and counter apps, you may not yet have run across a need to pull in data for your app. There will likely come a time when you’ll need to do this, as React apps are most…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/07/dog-fetch.png?fit=1200%2C600&ssl=1&resize=350%2C200",
+          "width": 350,
+          "height": 200
+        },
+        "classes": []
+      },
+      {
+        "id": 257343,
+        "url": "https://css-tricks.com/paint-timing-api/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 3
+        },
+        "title": "Using the Paint Timing API",
+        "date": "August 16, 2017",
+        "format": false,
+        "excerpt": "It's a great time to be a web performance aficionado, and the arrival of the Paint Timing API in Chrome 60 is proof positive of that fact. The Paint Timing API is yet another addition to the burgeoning Performance API, but instead of capturing page and resource timings, this new…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 201126,
+        "url": "https://css-tricks.com/the-deal-with-wordpress-transients/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 4
+        },
+        "title": "The Deal with WordPress Transients",
+        "date": "April 27, 2015",
+        "format": false,
+        "excerpt": "In this article we dig into an important type of caching that is available to you in WordPress: transients. Like any cache, you use transients to store any kind of data that takes a long time to get, so the next time you need it, it returns super fast. The…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      },
+      {
+        "id": 200657,
+        "url": "https://css-tricks.com/using-the-wp-api-to-fetch-posts/",
+        "url_meta": {
+          "origin": 325627,
+          "position": 5
+        },
+        "title": "Using the WP-API to Fetch Posts",
+        "date": "May 6, 2015",
+        "format": false,
+        "excerpt": "It may be news to you, but there is a nifty resource called Quotes on Design that serves up interesting quotes about design, curated by our very own Chris Coyier. Up to this point, Quotes on Design (QoD) used a bit of custom code to query the WordPress database and…",
+        "rel": "",
+        "context": "In &quot;Article&quot;",
+        "img": {
+          "alt_text": "",
+          "src": "",
+          "width": 0,
+          "height": 0
+        },
+        "classes": []
+      }
+    ],
+    "_links": {
+      "self": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325627"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/users/3"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/comments?post=325627"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 6,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325627/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 325705,
+          "href": "https://css-tricks.com/wp-json/wp/v2/posts/325627/revisions/325705"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/media/325628"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://css-tricks.com/wp-json/wp/v2/media?parent=325627"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/categories?post=325627"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://css-tricks.com/wp-json/wp/v2/tags?post=325627"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]
