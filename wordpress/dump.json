@@ -1,0 +1,308 @@
+[
+  {
+    "id": 5963,
+    "date": "2020-10-10T22:04:37",
+    "date_gmt": "2020-10-10T13:04:37",
+    "guid": {
+      "rendered": "https://ukijumotahaneniarukenia.site/?p=5963"
+    },
+    "modified": "2020-10-10T22:04:37",
+    "modified_gmt": "2020-10-10T13:04:37",
+    "slug": "browser-run%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fjavascript%e3%81%ae%e3%83%8f%e3%83%b3%e3%83%87%e3%82%a3%e3%81%aa%e3%83%96%e3%83%a9%e3%82%a6%e3%82%b6%e5%ae%9f",
+    "status": "publish",
+    "type": "post",
+    "link": "https://ukijumotahaneniarukenia.site/2020/10/10/browser-run%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fjavascript%e3%81%ae%e3%83%8f%e3%83%b3%e3%83%87%e3%82%a3%e3%81%aa%e3%83%96%e3%83%a9%e3%82%a6%e3%82%b6%e5%ae%9f/",
+    "title": {
+      "rendered": "browser-runコマンドを使ったjavascriptのハンディなブラウザ実行環境の整備"
+    },
+    "content": {
+      "rendered": "\n<p>githubぶらぶらしてたまたま見つけた。</p>\n\n\n\n<p>便利そうだと思ったから試してみた。</p>\n\n\n\n<p><a href=\"https://github.com/juliangruber/browser-run\">https://github.com/juliangruber/browser-run</a></p>\n\n\n\n<figure class=\"wp-block-video\"><video controls src=\"https://ukijumotahaneniarukenia.site/wp-content/uploads/2020/10/browser-runの操作感.mp4\"></video></figure>\n\n\n\n<p></p>\n\n\n\n<p>1つのHTMLファイルごとに起動場所を問わず、WEBページをポート指定でサーブできるようなコマンドの印象を受けた。具体的には、ある小さいタスクをこなすHTMLページ（アップロードなどやjavascriptを利用した通信処理）を常駐デーモン化させる状況を想定した場合、1つのHTMLファイルごとに1つのポートを割り当てることができるので、ディレクトリ構造をフラットに保ったままWEB管理できる印象など。便利だと思う。ポート開放上限までといってもほぼ上限を気にしなくて使えそう。</p>\n\n\n\n<p>ポート上限</p>\n\n\n\n<p><a href=\"https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml\">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</a></p>\n\n\n<pre><code class=\"language-bash\">\n$ mkdir -p 00001-javascriptのハンディなブラウザ実行環境の整備\n\n$ cd 00001-javascriptのハンディなブラウザ実行環境の整備/\n\n$ mkdir -p app\n\n$ cd app/\n\n$ npm init -y\nWrote to /home/aine/script-browser/00001-javascriptのハンディなブラウザ実行環境の整備/app/package.json:\n\n{\n  \"name\": \"app\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" &amp;&amp; exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n\n\n$ npm install browser-run\n\n$ cat sample-bundle-javascript.html | node_modules/.bin/browser-run --port 9090 --input html\n\n$ sudo lsof -i:9090 -P\nCOMMAND    PID USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME\nnode    576661 aine   19u  IPv6 8230075      0t0  TCP *:9090 (LISTEN)\n\n$ firefox http://localhost:9090/\n\n$ brave-browser http://localhost:9090/\n\n$ chrome http://localhost:9090/\n</code></pre>",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>githubぶらぶらしてたまたま見つけた。 便利そうだと思ったから試してみた。 https://github.com/juliangruber/browser-run 1つのHTMLファイルごとに起動場所を問わず、WEBページをポート指定でサーブできるようなコマンドの印象を受けた。具体的には、ある小さいタスクをこなすHTMLページ（アップロードなどやjavascriptを利用した通信処理）を常駐デーモン化させる状況を想定した場合、1つのHTMLファイルごとに1つのポートを割り当てることができるので、ディレクトリ構造をフラットに保ったままWEB管理できる印象など。便利だと思う。ポート開放上限までといってもほぼ上限を気にしなくて使えそう。 ポート上限 https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml $ mkdir -p 00001-javascriptのハンディなブラウザ実行環境の整備 $ cd 00001-javascriptのハンディなブラウザ実行環境の整備/ $ mkdir -p app $ cd app/ $ npm init -y Wrote to /home/aine/script-browser/00001-javascriptのハンディなブラウザ実行環境の整備/app/package.json: { &#8220;name&#8221;: &#8220;app&#8221;, &#8220;version&#8221;: &#8220;1.0.0&#8221;, &#8220;description&#8221;: &#8220;&#8221;, &#8220;main&#8221;: &#8220;index.js&#8221;, &#8220;scripts&#8221;: { &#8220;test&#8221;: &#8220;echo \\&#8221;Error: no test specified\\&#8221; &amp;&amp; exit 1&#8243; }, &#8220;keywords&#8221;: [], &#8220;author&#8221;: &#8220;&#8221;, &#8220;license&#8221;: &#8220;ISC&#8221; } &hellip; <a href=\"https://ukijumotahaneniarukenia.site/2020/10/10/browser-run%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fjavascript%e3%81%ae%e3%83%8f%e3%83%b3%e3%83%87%e3%82%a3%e3%81%aa%e3%83%96%e3%83%a9%e3%82%a6%e3%82%b6%e5%ae%9f/\" class=\"more-link\">Continue reading<span class=\"screen-reader-text\"> &#8220;browser-runコマンドを使ったjavascriptのハンディなブラウザ実行環境の整備&#8221;</span></a></p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5963"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/comments?post=5963"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 8,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5963/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 5972,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5963/revisions/5972"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/media?parent=5963"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/categories?post=5963"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/tags?post=5963"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 5958,
+    "date": "2020-10-03T13:31:20",
+    "date_gmt": "2020-10-03T04:31:20",
+    "guid": {
+      "rendered": "https://ukijumotahaneniarukenia.site/?p=5958"
+    },
+    "modified": "2020-10-03T13:31:20",
+    "modified_gmt": "2020-10-03T04:31:20",
+    "slug": "firebase%e3%82%92%e8%a7%a6%e3%81%a3%e3%81%9f%e6%89%80%e6%84%9f%e3%82%92%e3%83%a1%e3%83%a2",
+    "status": "publish",
+    "type": "post",
+    "link": "https://ukijumotahaneniarukenia.site/2020/10/03/firebase%e3%82%92%e8%a7%a6%e3%81%a3%e3%81%9f%e6%89%80%e6%84%9f%e3%82%92%e3%83%a1%e3%83%a2/",
+    "title": {
+      "rendered": "firebaseを触った所感をメモ"
+    },
+    "content": {
+      "rendered": "<p>firebaseのソリューションの一つにfirestoreなどがある。<br />\nfirestoreのデータ構造はコレクションネスト管理（メインコレクションとサブコレクションの関係）で、開発者は提供するサービスのデータ構造に応じてネストの深さを動的に管理することができる。<br />\nデータ構造をサービスに応じてどう管理していくかが重要だ。<br />\nデータ形式はjsonなので、jqでほぼハンドリングしているが、パス式を動的に生成するところはなかなか面白かった。<br />\n親側（メイン）の情報を持ちわまり子側（サブ）へ処理するパタンを繰り返していく。<br />\n最後の子まで行ったら、ラップ剥がしして整形という流れ。<br />\nパイプで変数束縛させていく感覚があれば、やりきれると思った。<br />\nこのパタンを再帰関数で表現したいと取り組んでいく中で感じた。<br />\n汎用さは汎用さで対応していく感覚。<br />\nボトルネックになりそうな部分はオブジェクトと配列の場合のパス式がインデックス処理になったりキー処理になったりする部分をうまくかけるかどうか。<br />\nあとはパイプで変数束縛するコンテキストを見間違えないかどうか。<br />\n調子よかったら、書けそうなど。</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>firebaseのソリューションの一つにfirestoreなどがある。 firestoreのデータ構造はコレクションネスト管理（メインコレクションとサブコレクションの関係）で、開発者は提供するサービスのデータ構造に応じてネストの深さを動的に管理することができる。 データ構造をサービスに応じてどう管理していくかが重要だ。 データ形式はjsonなので、jqでほぼハンドリングしているが、パス式を動的に生成するところはなかなか面白かった。 親側（メイン）の情報を持ちわまり子側（サブ）へ処理するパタンを繰り返していく。 最後の子まで行ったら、ラップ剥がしして整形という流れ。 パイプで変数束縛させていく感覚があれば、やりきれると思った。 このパタンを再帰関数で表現したいと取り組んでいく中で感じた。 汎用さは汎用さで対応していく感覚。 ボトルネックになりそうな部分はオブジェクトと配列の場合のパス式がインデックス処理になったりキー処理になったりする部分をうまくかけるかどうか。 あとはパイプで変数束縛するコンテキストを見間違えないかどうか。 調子よかったら、書けそうなど。</p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5958"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/comments?post=5958"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 4,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5958/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 5962,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/5958/revisions/5962"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/media?parent=5958"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/categories?post=5958"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/tags?post=5958"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 186,
+    "date": "2019-01-04T10:39:41",
+    "date_gmt": "2019-01-04T01:39:41",
+    "guid": {
+      "rendered": "https://ukijumotahaneniarukenia.site/?p=186"
+    },
+    "modified": "2020-11-03T21:46:02",
+    "modified_gmt": "2020-11-03T12:46:02",
+    "slug": "%e8%87%aa%e4%bd%9c%e3%83%9e%e3%82%b7%e3%83%b3%e3%81%a4%e3%81%8f%e3%81%a3%e3%81%9f-centos7",
+    "status": "publish",
+    "type": "post",
+    "link": "https://ukijumotahaneniarukenia.site/2019/01/04/%e8%87%aa%e4%bd%9c%e3%83%9e%e3%82%b7%e3%83%b3%e3%81%a4%e3%81%8f%e3%81%a3%e3%81%9f-centos7/",
+    "title": {
+      "rendered": "自作マシンつくった"
+    },
+    "content": {
+      "rendered": "<p>OSはUSBメモリにWin7から焼いたものを使ってUSBBootでインスト。17万ぐらいかな。。ケースもう少し大きめのにしておけばよかったかも。USB3.0の差込口がケースのケーブルホルダの位置と少しかぶって差しづらかった。ケースとマザボの相性大事ってことが今回で分かった。</p>\n<p>初めてにしてはうまく組み立てることができた。。</p>\n<div id=\"toc_container\" class=\"no_bullets\"><p class=\"toc_title\">目次</p><ul class=\"toc_list\"><li><a href=\"#OS\">OS</a></li><li><a href=\"#PC\">PCケース</a></li><li><a href=\"#CPU\">CPUクーラー</a></li><li><a href=\"#i\">メモリ</a></li><li><a href=\"#i-2\">マザボ</a></li><li><a href=\"#CPU-2\">CPU</a></li><li><a href=\"#i-3\">モニタ</a></li><li><a href=\"#SSD\">SSD</a></li><li><a href=\"#i-4\">電源ユニット</a></li><li><a href=\"#i-5\">備品</a></li></ul></div>\n<h3><span id=\"OS\">OS</span></h3>\n<p>USBboot用のcentos7(isoイメージファイル)</p>\n<h3><span id=\"PC\">PCケース</span></h3>\n<p>優れた拡張性を備えた強化ガラス採用ATX対応ミドルタワーPCケース P110 Luce<br />\n<a>https://www.amazon.co.jp/gp/product/B073XZJ4Z9/ref=oh_aui_detailpage_o08_s00?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"CPU\">CPUクーラー</span></h3>\n<p>Thermaltake Floe Riing RGB 240 TT Premium Edition 一体型水冷CPUクーラー [RGB LED 搭載] FN1116 CL-W157-PL12SW-A<br />\n<a>https://www.amazon.co.jp/gp/product/B076F78ZP6/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"i\">メモリ</span></h3>\n<p>商品名：CORSAIR DDR4 デスクトップPC用 メモリモジュール VENGEANCE LPX Series 16GB×1枚キット CMK16GX4M1A2666C16、数量：2<br />\n<a>https://www.amazon.co.jp/gp/product/B019HVO62A/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"i-2\">マザボ</span></h3>\n<p>MSI Z390-A PRO ATX マザーボード [Intel Z390チップセット搭載] MB4617<br />\n<a>https://www.amazon.co.jp/gp/product/B07J6Q956G/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"CPU-2\">CPU</span></h3>\n<p>Intel CPU Core i7-8700K 3.7GHz 12Mキャッシュ 6コア/12スレッド LGA1151 BX80684I78700K 【BOX】<br />\n<a>https://www.amazon.co.jp/gp/product/B07598VZR8/ref=oh_aui_detailpage_o09_s00?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"i-3\">モニタ</span></h3>\n<p>ASUS ディスプレイ モニター 21.5型 ( VA / 178°広視野角 / フルHD / HDMI, DVI-D, D-Sub / 3年保証 ) VS229HA<br />\n<a>https://www.amazon.co.jp/gp/product/B01DOWUCG2/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"SSD\">SSD</span></h3>\n<p>Samsung SSD 500GB 970 EVO M.2 Type2280 PCIe3.0×4 NVMe1.3 5年保証 正規代理店保証品 MZ-V7E500B/EC<br />\n<a>https://www.amazon.co.jp/gp/product/B07CKX6S7H/ref=ppx_od_dt_b_detailpages01?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"i-4\">電源ユニット</span></h3>\n<p>Thermaltake TOUGHPOWER GRAND RGB -850W -NON DPS- 80+GOLD PC電源ユニット PS673 PS-TPG-0850FPCGJP-R<br />\n<a>https://www.amazon.co.jp/gp/product/B01MXY5350/ref=ppx_od_dt_b_detailpages01?ie=UTF8&amp;psc=1</a></p>\n<h3><span id=\"i-5\">備品</span></h3>\n<p>Wifiに参加させるために一つ買った。<br />\nBUFFALO 11n/a/g/b 300Mbps 簡単無線LAN子機 WLI-UTX-AG300/C<br />\n<a>https://www.amazon.co.jp/gp/product/B008MRUINC/ref=oh_aui_detailpage_o03_s00?ie=UTF8&amp;psc=1</a></p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>OSはUSBメモリにWin7から焼いたものを使ってUSBBootでインスト。17万ぐらいかな。。ケースもう少し大きめのにしておけばよかったかも。USB3.0の差込口がケースのケーブルホルダの位置と少しかぶって差しづらかった。ケースとマザボの相性大事ってことが今回で分かった。 初めてにしてはうまく組み立てることができた。。 目次OSPCケースCPUクーラーメモリマザボCPUモニタSSD電源ユニット備品 OS USBboot用のcentos7(isoイメージファイル) PCケース 優れた拡張性を備えた強化ガラス採用ATX対応ミドルタワーPCケース P110 Luce https://www.amazon.co.jp/gp/product/B073XZJ4Z9/ref=oh_aui_detailpage_o08_s00?ie=UTF8&amp;psc=1 CPUクーラー Thermaltake Floe Riing RGB 240 TT Premium Edition 一体型水冷CPUクーラー [RGB LED 搭載] FN1116 CL-W157-PL12SW-A https://www.amazon.co.jp/gp/product/B076F78ZP6/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1 メモリ 商品名：CORSAIR DDR4 デスクトップPC用 メモリモジュール VENGEANCE LPX Series 16GB×1枚キット CMK16GX4M1A2666C16、数量：2 https://www.amazon.co.jp/gp/product/B019HVO62A/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1 マザボ MSI Z390-A PRO ATX マザーボード [Intel Z390チップセット搭載] MB4617 https://www.amazon.co.jp/gp/product/B07J6Q956G/ref=ppx_yo_dt_b_detailpage_o08_s01?ie=UTF8&amp;psc=1 CPU Intel CPU Core i7-8700K 3.7GHz 12Mキャッシュ 6コア/12スレッド &hellip; <a href=\"https://ukijumotahaneniarukenia.site/2019/01/04/%e8%87%aa%e4%bd%9c%e3%83%9e%e3%82%b7%e3%83%b3%e3%81%a4%e3%81%8f%e3%81%a3%e3%81%9f-centos7/\" class=\"more-link\">Continue reading<span class=\"screen-reader-text\"> &#8220;自作マシンつくった&#8221;</span></a></p>\n",
+      "protected": false
+    },
+    "author": 1,
+    "featured_media": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": [],
+    "categories": [
+      1
+    ],
+    "tags": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/186"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/comments?post=186"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 3,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/186/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 6017,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/posts/186/revisions/6017"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/media?parent=186"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/categories?post=186"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://ukijumotahaneniarukenia.site/wp-json/wp/v2/tags?post=186"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]
