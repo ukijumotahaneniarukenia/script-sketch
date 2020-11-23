@@ -1,20 +1,26 @@
 {
-  "backgroundCover.autoStatus": true,
-  "backgroundCover.opacity": 0.4,
-  "backgroundCover.randomImageFolder": "/home/aine/Downloads/pic",
-  "editor.minimap.maxColumn": 200,
-  "editor.tabSize": 2,
-  "editor.minimap.renderCharacters": false,
-  "editor.minimap.showSlider": "always",
-  "editor.mouseWheelZoom": true,
-  "editor.renderControlCharacters": true,
-  "editor.renderWhitespace": "all",
-  "editor.wordWrap": "on",
-  "editor.tabSize": 2,
-  "files.autoGuessEncoding": true,
-  "files.autoSave": "afterDelay",
-  "files.insertFinalNewline": true,
-  "trailing-spaces.trimOnSave": true,
-  "workbench.colorTheme": "Monokai",
-  "workbench.iconTheme": "vscode-icons"
+    "backgroundCover.autoStatus": true,
+    "backgroundCover.opacity": 0.4,
+    "backgroundCover.randomImageFolder": "/home/aine/Downloads/pic",
+    "editor.minimap.maxColumn": 200,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.showSlider": "always",
+    "editor.mouseWheelZoom": true,// Ctrl + マウスホイールでのズーム操作
+    "editor.renderControlCharacters": true, //制御文字の表示
+    "editor.renderWhitespace": "all",// 空白文字の可視化
+    "editor.wordWrap": "on",//折り返し表示
+    "editor.tabSize": 2, // タブサイズの指定
+    "files.autoGuessEncoding": true, // ファイルオープン時のエンコードの自動判別
+    "files.autoSave": "afterDelay",// 自動保存
+    "files.insertFinalNewline": true, //最終行に改行を自動挿入
+    "trailing-spaces.trimOnSave": true, //ファイル保存時に自動で末尾の空白を削除
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.startupEditor": "newUntitledFile", // ファイルアイコン有効化
+
+    "ruby.intellisense": "rubyLocate", // rubyのコード補完
+    "ruby.useLanguageServer": true, // rubyのコード補完
+    "solargraph.definitions": true, // rubyのコード補完
+    "solargraph.diagnostics": true // rubyのコード補完
 }
