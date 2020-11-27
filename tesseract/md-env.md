@@ -9,3 +9,5 @@ OCR
 - https://mas3lab.net/perl/waza/index.html
 
 - https://gihyo.jp/admin/serial/01/ubuntu-recipe/0577
+
+- https://libraries.io/github/klaxa/OCR-Manga
