@@ -2,6 +2,8 @@
 
 OCR
 
+- https://kaku.fuwafuwa.ca/
+
 - https://www.gis-py.com/entry/py-tesseract
 
 - https://qiita.com/henjiganai/items/7a5e871f652b32b41a18
