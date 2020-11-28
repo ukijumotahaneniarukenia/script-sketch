@@ -1,3 +1,7 @@
+- https://developer.wordpress.org/rest-api/
+
+- https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/
+
 CMD
 
 ```
