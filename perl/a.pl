@@ -1,5 +1,4 @@
 #!/usr/bin/env perl
-
 # 無名関数
 my $f = sub {
           print "無名の世界から、こんにちは\n";
