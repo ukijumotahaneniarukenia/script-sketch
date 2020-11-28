@@ -15,9 +15,13 @@ function doGet(e) {
 
 - CMD
   - 日本語から英語
-  - HTTPクライアントはcurlだとだめだった。よくわからん。
 ```
 wget -q 'https://script.google.com/macros/s/AKfycbwScG8AAKZazwP0pV_ab5I7zOd1YSwS81xXwIhS7fL2ETaXUrQ/exec?text=舌足らずの発音&source=ja&target=en' -O a
+```
+
+```
+$ echo America/Mexico_City | xargs -I@ curl -s -X GET -L 'https://script.google.com/macros/s/AKfycbyOLetU0NY1NF8sJyZTmaYK6YK9O5wotKFx4KfTXq3XAv_nvq4/exec?text=@&source=en&target=ja' | awk 4
+アメリカ/メキシコシティ
 ```
 
 - OUT
