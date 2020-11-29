@@ -122,3 +122,9 @@ OUT
 </body>
 </html>
 ```
+
+POST
+
+```
+for(let ele of document.querySelectorAll("img")){ele.setAttribute("height",16);ele.setAttribute("wegiht",16);}
+```
