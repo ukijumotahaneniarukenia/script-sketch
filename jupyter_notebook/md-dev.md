@@ -108,3 +108,13 @@ $ jupyter-nbextension install --user rise --py
 
 $ jupyter nbextension enable --user rise --py
 ```
+
+カーネルリスト取得
+
+- https://stackoverflow.com/questions/51934528/failed-to-start-the-kernel-on-jupyter-notebook/54917829
+
+```
+$ jupyter kernelspec list
+Available kernels:
+  python3    /home/aine/.local/share/jupyter/kernels/python3
+```
