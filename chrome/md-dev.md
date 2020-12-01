@@ -18,7 +18,14 @@ yum install -y google-chrome-stable
 
 
 - 拡張
-
+  - https://dev.to/developerkaren/chrome-extensions-every-developer-should-have-doh
+  
+  - What Font 
+  
+  - CSSViewer
+  
+  - Page Ruler Redux
+  
   - SmaSurf for Webブラウザ拡張機能
 
   - Speed Dial 2
@@ -41,3 +48,7 @@ yum install -y google-chrome-stable
   - QRコード作成器 (Quick QR)
 
   - DeepL Translator - Translate Selected Text
+
+  - Octotree
+  
+  - Wappalyzer
