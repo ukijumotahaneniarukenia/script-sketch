@@ -19,7 +19,9 @@ yum install -y google-chrome-stable
 
 - 拡張
   - https://dev.to/developerkaren/chrome-extensions-every-developer-should-have-doh
-  
+
+  - Skip Ad
+
   - What Font 
   
   - CSSViewer
