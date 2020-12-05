@@ -24,7 +24,12 @@ $ rm -rf bin/* pkg/* src/github.com
 
 $ export GOPATH=$(pwd)
 
+vscodeのエラーは消えない
 $ time go get github.com/ukijumotahaneniarukenia/script-go-server/script
+
+vscodeのエラーは消える（補完もでる）
+$ time go get -u github.com/ukijumotahaneniarukenia/script-go-server/script
+
 
 $ tree
 .
