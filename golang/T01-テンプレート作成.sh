@@ -52,7 +52,7 @@ init() {
 
   mkdir -p $PROJECT_DIR_NAME/$APP_DIR_NAME
 
-  echo '/bin/* /pkg/* /src/github.com/* /src/golang.org/* /main' | xargs -n1 >$PROJECT_DIR_NAME/$APP_DIR_NAME/.gitignore
+  echo '/bin/* /pkg/* /src/github.com/* /src/golang.org/* ' | xargs -n1 >$PROJECT_DIR_NAME/$APP_DIR_NAME/.gitignore
 
   mkdir -p $PROJECT_DIR_NAME/$APP_DIR_NAME/bin
 
