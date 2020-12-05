@@ -43,6 +43,7 @@ $ cat cgi-bin/php-api.php
 <?php
 
 // レスポンスヘッダの設定
+header("Access-Control-Allow-Origin: https://ukijumotahaneniarukenia.postman.co"); // PostmanからのリクエストはCORSに引っかるので、信頼できるドメインならレスポンスヘッダに許可する
 header('Content-Type: application/json; charset=UTF-8');
 
 // パラメータが空文字でないかつ数字のみで構成されているか
@@ -131,4 +132,24 @@ $ curl -s 'http://localhost:9999/php-api.php'|jq
 
 $ curl -s 'http://localhost:9999/php-info.php'|tidy -i 2>/dev/null
 
+```
+
+
+Postmanからの動作確認
+
+ローカルホストでPostman-Agentを起動しておく。
+右上のステータスバーにオレンジ色のアイコンが現れる。
+
+```
+$ Postman-Agent
+```
+
+WEB画面より動作確認したいURLを入力し、Sendする。
+- https://ukijumotahaneniarukenia.postman.co
+
+
+動作確認対象のエントリポイント
+
+```
+http://localhost:9999/php-api.php?num=10
 ```
