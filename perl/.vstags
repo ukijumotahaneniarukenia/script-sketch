@@ -1,0 +1,29 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+hoge	a.pl	22;"	s
+main	00001-perl-順列-permutation-DONE-perm.pl	28;"	s
+main	00002-perl-組み合わせ-combination-DONE-comb.pl	28;"	s
+main	00003-perl-シャッフル-shuffle-DONE-shuf.pl	32;"	s
+main	00004-perl-順列-permutation-DONE-perm2.pl	61;"	s
+main	00005-perl-排他的論理和-union-all-DONE-uniall.pl	31;"	s
+main	00006-perl-積集合-intersect-DONE-insect.pl	31;"	s
+main	00007-perl-差集合-第一引数結果から第二引数結果を引いた集合-minus-DONE-minus.pl	34;"	s
+mock	00001-perl-順列-permutation-DONE-perm.pl	16;"	s
+mock	00002-perl-組み合わせ-combination-DONE-comb.pl	16;"	s
+mock	00003-perl-シャッフル-shuffle-DONE-shuf.pl	20;"	s
+mock	00004-perl-順列-permutation-DONE-perm2.pl	49;"	s
+mock	00005-perl-排他的論理和-union-all-DONE-uniall.pl	14;"	s
+mock	00006-perl-積集合-intersect-DONE-insect.pl	14;"	s
+mock	00007-perl-差集合-第一引数結果から第二引数結果を引いた集合-minus-DONE-minus.pl	16;"	s
+permutation	00004-perl-順列-permutation-DONE-perm2.pl	29;"	s
+usage	00001-perl-順列-permutation-DONE-perm.pl	5;"	s
+usage	00002-perl-組み合わせ-combination-DONE-comb.pl	5;"	s
+usage	00003-perl-シャッフル-shuffle-DONE-shuf.pl	5;"	s
+usage	00004-perl-順列-permutation-DONE-perm2.pl	3;"	s
+usage	00005-perl-排他的論理和-union-all-DONE-uniall.pl	3;"	s
+usage	00006-perl-積集合-intersect-DONE-insect.pl	3;"	s
+usage	00007-perl-差集合-第一引数結果から第二引数結果を引いた集合-minus-DONE-minus.pl	5;"	s
