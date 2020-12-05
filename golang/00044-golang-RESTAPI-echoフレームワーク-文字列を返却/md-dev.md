@@ -13,10 +13,8 @@
 
 #ライブラリイントール
 cd 00044-go-RESTAPI-echoフレームワーク
-export GOPATH=$(pwd) //gopath変えんでもいけたので、変えずにいったほうがよさげ
-go get github.com/labstack/echo
-
-
+export GOPATH=$(pwd)
+time go get github.com/labstack/echo
 
 $ cat ./src/main/main.go
 package main
