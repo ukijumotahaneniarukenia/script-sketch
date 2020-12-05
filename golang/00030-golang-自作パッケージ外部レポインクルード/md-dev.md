@@ -1,72 +1,115 @@
+プロジェクト作成
+
 ```
-
-$ ./T01-go-テンプレート作成.sh 00030-go-自作パッケージ外部レポインクルード
-
-$ cd 00030-go-自作パッケージ外部レポインクルード
+$ ./T01-テンプレート作成.sh init 00030-golang-自作パッケージ外部レポインクルード app
 
 
 $ tree
 .
 ├── bin
-│   └── main
 ├── pkg
 └── src
     └── main
         └── main.go
 
-4 directories, 2 files
+4 directories, 1 file
+```
+
+自作ライブラリインストール
+
+```
+$ cd 00030-golang-自作パッケージ外部レポインクルード/app
+
+$ rm -rf bin/* pkg/* src/github.com
 
 $ export GOPATH=$(pwd)
 
-$ go get github.com/ukijumotahaneniarukenia/go-repo
+$ time go get github.com/ukijumotahaneniarukenia/script-go-server/script
 
 $ tree
 .
 ├── bin
-│   ├── go-repo
-│   └── main
 ├── pkg
+│   └── linux_amd64
+│       └── github.com
+│           └── ukijumotahaneniarukenia
+│               └── script-go-server
+│                   └── script.a
 └── src
     ├── github.com
-    │   └── ukijumotahaneniarukenia
-    │       └── go-repo
-    │           ├── README.md
-    │           ├── a.go
-    │           └── go_script
-    │               ├── D00001-OPEN-xxxxx-yyyyy-zzzzz.go
-    │               ├── F00001-OPEN-xxxxx-yyyyy-zzzzz.go
-    │               └── F00002-NON-OPEN-xxxxx-yyyyy-zzzzz.go
+    │   └── ukijumotahaneniarukenia
+    │       └── script-go-server
+    │           ├── README.md
+    │           └── script
+    │               ├── D00001-OPEN-xxxxx-yyyyy-zzzzz.go
+    │               ├── F00001-OPEN-xxxxx-yyyyy-zzzzz.go
+    │               └── F00002-NON-OPEN-xxxxx-yyyyy-zzzzz.go
     └── main
         └── main.go
 
-8 directories, 8 files
+12 directories, 6 files
+```
 
-$ ./bin/main
-Now On Air
-
-
-$ ./bin/go-repo
-うんこだよーん
-
-
+ビルド
+```
 $  ( export GOPATH=$(pwd) && cd src/main && go install )
+```
 
+実行
 
+```
 $ ./bin/main
 e.num=100,e.str=kkk
 hello world
 HELLO world
 3
+```
 
 
-$ mv ./bin/main $HOME/.local/go-script/bin/testcmd
+配布用ビルド
 
+```
+$ ./T01-テンプレート作成.sh build 00030-golang-自作パッケージ外部レポインクルード app
+Number of parallel builds: 11
 
-$ testcmd
+-->     windows/386: main
+-->      netbsd/arm: main
+-->   windows/amd64: main
+-->      netbsd/386: main
+-->    netbsd/amd64: main
+-->       linux/arm: main
+-->   freebsd/amd64: main
+-->     freebsd/386: main
+-->      darwin/386: main
+-->     freebsd/arm: main
+-->    linux/mipsle: main
+-->    darwin/amd64: main
+-->     linux/amd64: main
+-->    linux/mips64: main
+-->     linux/s390x: main
+-->       linux/386: main
+-->  linux/mips64le: main
+-->      linux/mips: main
+-->     openbsd/386: main
+-->   openbsd/amd64: main
+
+1 errors occurred:
+--> darwin/386 error: exit status 2
+Stderr: cmd/go: unsupported GOOS/GOARCH pair darwin/386
+```
+
+パス登録
+
+```
+$ ./T01-テンプレート作成.sh deploy 00030-golang-自作パッケージ外部レポインクルード app
+/home/aine/.local/script-cmd/bin/app-golang-1-15-1
+```
+
+実行
+```
+$ app-golang-1-15-1
 e.num=100,e.str=kkk
 hello world
 HELLO world
 3
-
-
 ```
