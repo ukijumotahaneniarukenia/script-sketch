@@ -1,36 +1,48 @@
 #!/usr/bin/env bash
-usage(){
-cat <<EOS
+
+usage() {
+  cat <<EOS
 Usage:
+
   PRE: mkdir -p $HOME/script-sketch/golang && cd $HOME/script-sketch/golang
+
   CMD: bash ${0##*/} init 00099-golang-テンプレートプロジェクトの作成 app
+
     or
+
   CMD: bash ${0##*/} build 00099-golang-テンプレートプロジェクトの作成 app
+
     or
+
   PRE: cd $HOME && git clone https://github.com/ukijumotahaneniarukenia/script-cmd.git
+
   CMD: bash ${0##*/} deploy 00099-golang-テンプレートプロジェクトの作成 app
+
     or
+
   CMD: bash ${0##*/} upload 00099-golang-テンプレートプロジェクトの作成 app
+
 EOS
 
-exit 0
+  exit 0
 
 }
 
-init(){
-  if [ -z $PROJECT_DIR_NAME ];then
+init() {
+
+  if [ -z $PROJECT_DIR_NAME ]; then
 
     usage
 
   fi
 
-  if [ -z $APP_DIR_NAME ];then
+  if [ -z $APP_DIR_NAME ]; then
 
     usage
 
   fi
 
-  if [ -d $PROJECT_DIR_NAME ];then
+  if [ -d $PROJECT_DIR_NAME ]; then
 
     rm -rf $PROJECT_DIR_NAME
 
@@ -64,22 +76,22 @@ func main() {
 EOS
 
   exit 0
+
 }
 
-
-build(){
+build() {
 
   export GOPATH=$HOME/.local/go-repo
 
   go get github.com/mitchellh/gox
 
-  if [ -z $PROJECT_DIR_NAME ];then
+  if [ -z $PROJECT_DIR_NAME ]; then
 
     usage
 
   fi
 
-  if [ -z $APP_DIR_NAME ];then
+  if [ -z $APP_DIR_NAME ]; then
 
     usage
 
@@ -91,26 +103,26 @@ build(){
 
   ( cd $PROJECT_DIR_NAME/$APP_DIR_NAME && export GOPATH=$(pwd) && cd src/main && gox )
 
-  find $PROJECT_DIR_NAME -type f | xargs file | grep executable | cut -d':' -f1 | ruby -F/ -anle 'a=$F[$F.size-1].gsub(/_/,"-");p $_,a'|xargs -n2 | awk -v PROJECT_DIR_NAME=$PROJECT_DIR_NAME -v APP_DIR_NAME=$APP_DIR_NAME -v INSTALL_DIR_NAME=$INSTALL_DIR_NAME '{print "mv "$1" "PROJECT_DIR_NAME,APP_DIR_NAME,INSTALL_DIR_NAME,$2}' OFS=/ | bash
+  find $PROJECT_DIR_NAME -type f | xargs file | grep executable | cut -d':' -f1 | ruby -F/ -anle 'a=$F[$F.size-1].gsub(/_/,"-");p $_,a' | xargs -n2 | awk -v PROJECT_DIR_NAME=$PROJECT_DIR_NAME -v APP_DIR_NAME=$APP_DIR_NAME -v INSTALL_DIR_NAME=$INSTALL_DIR_NAME '{print "mv "$1" "PROJECT_DIR_NAME,APP_DIR_NAME,INSTALL_DIR_NAME,$2}' OFS=/ | bash
 
   exit 0
 }
 
-deploy(){
+deploy() {
 
-  if [ -z $PROJECT_DIR_NAME ];then
-
-    usage
-
-  fi
-
-  if [ -z $APP_DIR_NAME ];then
+  if [ -z $PROJECT_DIR_NAME ]; then
 
     usage
 
   fi
 
-  if [ ! -d $HOME/script-cmd ];then
+  if [ -z $APP_DIR_NAME ]; then
+
+    usage
+
+  fi
+
+  if [ ! -d $HOME/script-cmd ]; then
 
     usage
 
@@ -121,19 +133,19 @@ deploy(){
   cd $HOME/script-sketch/$LANG_NAME
 
   #いいかんじにしたい
-  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME | bash
+  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/script-cmd/$LANG_NAME/$LANG_VERSION/$APP_NAME/$APP_NAME-$LANG_NAME-$LANG_VERSION | bash
 
   #パス登録
-  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/.local/script-cmd/bin/$APP_NAME-$LANG_NAME | bash
+  find $PROJECT_DIR_NAME -type f | grep bin | grep $(dpkg --print-architecture) | grep $(uname -s | tr '[:upper:]' '[:lower:]') | xargs -I@ echo cp @ $HOME/.local/script-cmd/bin/$APP_NAME-$LANG_NAME-$LANG_VERSION | bash
 
-  which $APP_NAME-$LANG_NAME
+  which $APP_NAME-$LANG_NAME-$LANG_VERSION
 
   exit 0
 }
 
-upload(){
+upload() {
 
-  if [ -z $PROJECT_DIR_NAME ];then
+  if [ -z $PROJECT_DIR_NAME ]; then
 
     usage
 
@@ -151,32 +163,36 @@ upload(){
 LANG_NAME=golang
 LANG_VERSION=$(go version | grep -i Version | grep -Po '(\.?[0-9]+){3}' | tr '.' '-')
 
-SUBCMD=$1;shift;
-PROJECT_DIR_NAME=$1;shift;
-APP_DIR_NAME=$1;shift;
+SUBCMD=$1
+shift
+PROJECT_DIR_NAME=$1
+shift
+APP_DIR_NAME=$1
+shift
 INSTALL_DIR_NAME=bin
 APP_NAME=$APP_DIR_NAME
 
 case $SUBCMD in
 
-  *)
-     if [[ $SUBCMD =~ "init"  ]];then
-       init
-     fi
+*)
+  if [[ $SUBCMD =~ "init" ]]; then
+    init
+  fi
 
-     if [[ $SUBCMD =~ "build"  ]];then
-       build
-     fi
+  if [[ $SUBCMD =~ "build" ]]; then
+    build
+  fi
 
-     if [[ $SUBCMD =~ "deploy"  ]];then
-       deploy
-     fi
+  if [[ $SUBCMD =~ "deploy" ]]; then
+    deploy
+  fi
 
-     if [[ $SUBCMD =~ "upload"  ]];then
-       upload
-     fi
+  if [[ $SUBCMD =~ "upload" ]]; then
+    upload
+  fi
 
-     usage
+  usage
+  ;;
 
 esac
 
