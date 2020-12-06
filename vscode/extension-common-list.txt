@@ -3,6 +3,7 @@ DataWorks.dataworks-intellisense
 IBM.output-colorizer
 ICS.japanese-proofreading
 Tyriar.sort-lines
+aaron-bond.better-comments
 bmewburn.vscode-intelephense-client
 eamodio.gitlens
 esbenp.prettier-vscode
