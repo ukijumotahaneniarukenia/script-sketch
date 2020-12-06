@@ -1,7 +1,0 @@
-/bin/*
-/pkg/*
-/src/github.com/*
-/src/golang.org/*
-/*.tsv
-/*.ttf
-/main
