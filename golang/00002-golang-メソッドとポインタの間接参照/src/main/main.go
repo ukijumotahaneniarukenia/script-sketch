@@ -11,13 +11,13 @@ type Vertex struct {
 	X, Y float64
 }
 
-//dot記法できる Vertex型のインスタンスから呼べる ないしはポインタから呼べる
+// Vertex型のポインタから呼べる 型依存の関数
 func (v *Vertex) Scale(f float64) {
 	v.X = v.X * f
 	v.Y = v.Y * f
 }
 
-//dot記法できない 普通の関数 Vertex型のインスタンスを引数に受け取る
+// 普通の関数 Vertex型のポインタを引数に受け取る
 func ScaleFunc(v *Vertex, f float64) {
 	v.X = v.X * f
 	v.Y = v.Y * f
