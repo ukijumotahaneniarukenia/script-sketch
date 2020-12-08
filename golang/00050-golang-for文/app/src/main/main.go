@@ -29,9 +29,42 @@ func main() {
 	sum2 := 1
 	//最大値が1000を超えたら、終了
 	for sum2 < 1000 {
-		fmt.Println(sum2)
 		sum2 += sum2
 	}
 	fmt.Println(sum2)
 
+	for i := 0; i < 10; i++ {
+		if i%2 == 0 {
+			continue
+		}
+		fmt.Println(i)
+	}
+
+	for i := 0; i < 10; i++ {
+		if i == 5 {
+			break
+		}
+		fmt.Println(i)
+	}
+
+	//初期化ステートメント i, j := 0, 9
+	//条件式 i < 10 && j >= 0;
+	//後処理ステートメント i, j = i+1, j-1
+
+	// 多重代入
+
+	for i, j := 0, 9; i < 10 && j >= 0; i, j = i+1, j-1 {
+		fmt.Println(i, j)
+	}
+
+	// ラベルを使ったbreak
+loop:
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if i == 1 && j == 2 {
+				break loop
+			}
+			fmt.Println(i, j)
+		}
+	}
 }
