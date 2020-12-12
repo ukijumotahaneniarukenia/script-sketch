@@ -4,6 +4,7 @@ package main
 
 //遅延評価
 //https://go-tour-jp.appspot.com/flowcontrol/12
+// deferがある文の次のdefer文が現れるまでの間のすべての文が実行され次第、defer文は実行される
 
 import (
 	"fmt"
@@ -16,8 +17,6 @@ func deferGroup() {
 }
 
 func main() {
-	//main関数が終了次第実行される
-	//defer識別子を付与した関数のうち、先に書いたものがあとで実行される
 	defer fmt.Println("world")
 
 	//main関数が終了次第実行される
@@ -27,9 +26,28 @@ func main() {
 
 	fmt.Println("counting")
 
+	// おしゃれ
 	for i := 0; i < 10; i++ {
 		defer fmt.Println(i)
 	}
 
 	fmt.Println("done")
 }
+
+// hello
+// counting
+// done
+// 9
+// 8
+// 7
+// 6
+// 5
+// 4
+// 3
+// 2
+// 1
+// 0
+// う
+// ん
+// こ
+// world
