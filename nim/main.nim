@@ -7,3 +7,4 @@ proc main(): int =
 
 when isMainModule:
   quit main()
+

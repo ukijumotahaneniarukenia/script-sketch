@@ -1,22 +1,8 @@
-テンプレート作成
 ```
-bash T01-テンプレート作成.sh init 00031-nim-テンプレートプロジェクトの作成 app
-```
+$ make clean PROJECT_DIR_NAME=00032-nim-テスト
 
-スケッチ
+$ make create PROJECT_NAME=テスト APP_DIR_NAME=app
 
-```
-nvim ./00031-nim-テンプレートプロジェクトの作成/app/src/main.nim
-```
-
-ビルド
-```
-bash T01-テンプレート作成.sh build 00031-nim-テンプレートプロジェクトの作成 app
-```
-
-
-配備
-
-```
+$ make build PROJECT_DIR_NAME=00032-nim-テスト APP_DIR_NAME=app
 
 ```
