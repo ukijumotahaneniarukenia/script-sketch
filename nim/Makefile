@@ -14,6 +14,8 @@ APP_DIR_NAME=app
 
 APP_NAME=$(APP_DIR_NAME)
 
+INSTALL_CMD_NAME=$(APP_NAME)
+
 TEMPLATE_FILE_NAME=main.nim
 
 clean :
@@ -48,7 +50,9 @@ deploy :
 	#パス登録
 	find ${PROJECT_DIR_NAME} -type f | grep bin | xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
 
-	which ${APP_NAME}-${LANG_NAME}-${LANG_VERSION}
+	mv ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} ${HOME}/.local/script-cmd/bin/${INSTALL_CMD_NAME}-${LANG_NAME}-${LANG_VERSION}
+
+	which ${INSTALL_CMD_NAME}-${LANG_NAME}-${LANG_VERSION}
 
 run :
 	echo $(HOME)
