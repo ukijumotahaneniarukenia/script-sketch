@@ -14,6 +14,8 @@ APP_DIR_NAME=app
 
 APP_NAME=$(APP_DIR_NAME)
 
+CMD_NAME=$(APP_NAME)
+
 TEMPLATE_FILE_NAME=main.go
 
 BUILD_TARGET_OSARCH_LIST="darwin/amd64 linux/386 linux/amd64 linux/arm freebsd/386 freebsd/amd64 openbsd/386 openbsd/amd64 windows/386 windows/amd64 freebsd/arm netbsd/386 netbsd/amd64 netbsd/arm linux/s390x linux/mips64 linux/mips64le linux/mips linux/mipsle"
@@ -57,7 +59,9 @@ deploy :
 	#パス登録
 	find ${PROJECT_DIR_NAME} -type f | grep bin | grep ${MY_ARCH} | grep ${MY_OS}| xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
 
-	which ${APP_NAME}-${LANG_NAME}-${LANG_VERSION}
+	mv ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} ${HOME}/.local/script-cmd/bin/${CMD_NAME}
+
+	which ${CMD_NAME}
 
 run :
 	echo $(HOME)
