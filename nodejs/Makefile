@@ -50,7 +50,7 @@ create :
 
 	cat $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json | jq '.+{"type":"module"}' | sponge $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
 
-	echo '/node_modules/* /dist/main.js' | xargs -n1 >$(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/.gitignore
+	echo '/node_modules/* /dist/*' | xargs -n1 >$(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/.gitignore
 
 	mkdir -p $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist
 
