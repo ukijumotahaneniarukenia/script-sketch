@@ -1,4 +1,4 @@
-import {unko} from './unko.js'
+import {unko} from '../lib/mylib.js'
 
 let result = unko('ぽるこ')
 
