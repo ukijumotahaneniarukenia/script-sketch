@@ -16,6 +16,8 @@ make: *** [Makefile:81: run] エラー 1
 
 $ make build PROJECT_DIR_NAME=00066-nodejs-ファンクション単位でライブラリ化 APP_DIR_NAME=app
 
+$ python3 -m http.server 8000 --directory 00066-nodejs-ファンクション単位でライブラリ化/app
+
 index.htmlを右クリックでLIVE SERVERでWEBサーブ
 
 実配備はWEBサーバ立ててワンファイルdist/main.jsを資産配備
