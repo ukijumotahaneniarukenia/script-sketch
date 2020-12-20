@@ -66,6 +66,8 @@ create :
 
 	cp webpack.config.js $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/webpack.config.js
 
+	cp index.html $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/index.html
+
 deploy :
 
 	./${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist/main.js
