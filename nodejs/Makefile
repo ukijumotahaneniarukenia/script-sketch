@@ -23,22 +23,34 @@ TEMPLATE_LIB_FILE_NAME=mylib.js
 clean :
 	rm -rf ${PROJECT_DIR_NAME}
 
-# build :
+build :
 
-# 	rm -f ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/bin/*
+	rm -f ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist/*
 
-# 	#なにがしかのビルド
+	# webpackビルド時のエラーハンドリングのため、ESMODULE扱いを無効にする
+	cat $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json | jq 'del(.type)' | sponge $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
 
-# 	mv ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/src/main/main_* ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/bin
+	( cd ${PROJECT_DIR_NAME}/${APP_DIR_NAME} && node_modules/webpack/bin/webpack.js )
+
+	chmod 755 $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist/main.js
+
+	sed -i '1i#!/usr/bin/env node' $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist/main.js
+
+	# webpackビルド完了後、ESMODULE扱いを有効にする
+	cat $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json | jq '.+{"type":"module"}' | sponge $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
 
 create :
 	mkdir -p $(PROJECT_DIR_NAME)
 
 	mkdir -p $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)
 
-	echo '/node_modules/*' | xargs -n1 >$(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/.gitignore
+	( cd $(PROJECT_DIR_NAME)/$(APP_DIR_NAME) && npm init -y )
 
-	echo '{"type":"module"}' | jq '' >$(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
+	( cd $(PROJECT_DIR_NAME)/$(APP_DIR_NAME) && npm install webpack webpack-cli --save-dev )
+
+	cat $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json | jq '.+{"type":"module"}' | sponge $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
+
+	echo '/node_modules/*' | xargs -n1 >$(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/.gitignore
 
 	mkdir -p $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist
 
@@ -52,17 +64,18 @@ create :
 
 	cp $(TEMPLATE_LIB_FILE_NAME) $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/lib/mylib.js
 
-# deploy :
-# 	#パス登録
-# 	find ${PROJECT_DIR_NAME} -type f | grep bin | grep ${MY_ARCH} | grep ${MY_OS}| xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
+	cp webpack.config.js $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/webpack.config.js
 
-# 	mv ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} ${HOME}/.local/script-cmd/bin/${CMD_NAME}
+deploy :
 
-# 	which ${CMD_NAME}
+	./${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist/main.js
+
+	#パス登録
+	find ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist -type f | grep main.js | xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
+
+	mv ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} ${HOME}/.local/script-cmd/bin/${CMD_NAME}
+
+	which ${CMD_NAME}
 
 run :
-	echo $(HOME)
-
-	echo $(UNAME)
-
-	echo $(LANG_VERSION)
+	node $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/src/index.js
