@@ -27,7 +27,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		result := fmt.Sprintf("%X", num)
+		result := fmt.Sprintf("%o", num)
 		fmt.Println(result)
 	}
 
