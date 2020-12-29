@@ -1,6 +1,6 @@
 PROJECT_NUMBER=$(shell find -maxdepth 1 -type d | grep -P '[0-9]{5}' | grep -Pv '\.git' | sort | awk -F'-' '$$0=$$1' | cut -c 3- | tail -n1 | xargs -I@ echo @ + 1 | bc | xargs -I@ printf "%05d\n" @)
 
-LANG_NAME=nodejs
+LANG_NAME=TypeScript
 
 LANG_VERSION=$(shell node -v | grep -Po '(\.?[0-9]+){3}' | tr '.' '-')
 
