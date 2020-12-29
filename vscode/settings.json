@@ -18,7 +18,7 @@
     "workbench.iconTheme": "vscode-icons",
     "liveServer.settings.donotShowInfoMsg": true,
     "workbench.startupEditor": "newUntitledFile", // ファイルアイコン有効化
-
+    "deno.enable": true,
     "ruby.intellisense": "rubyLocate", // rubyのコード補完
     "ruby.useLanguageServer": true, // rubyのコード補完
     "solargraph.definitions": true, // rubyのコード補完
