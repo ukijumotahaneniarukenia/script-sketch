@@ -1,27 +1,22 @@
-# script-supervisor
+WEBコンソールがあるがコマンドライン上では</dev/nullしないとバッググラウンド起動ができないようなプロセスを常駐デーモン化すると便利になりそう
 
-WEBコンソールがあるがコマンドライン上では</dev/nullしないとバッググラウンド起動ができないようなプロセスを常駐デーモン化すると便利になる
+WEBコンソールがなければ探す
+
+探してなければ作成する
 
 systemd-nspawnコンテナでなくてもsystemd管理できる環境であればsupervisor化できる
 
 問題を棲み分けるためにもデフォはsystemd-nspawnコンテナで設定する
 
-WEBコンソールなければ[これ](https://github.com/ukijumotahaneniarukenia/node-debug-method)を昇華させる
-
-昇華させる前にGUIで試す
-
-systemd-nspawnコンテナでもコンテナホストとは別にcronが動いたので、うまく活用する
-
-nodejsでアクセスできるかがハンディさの見極めポイント
+systemd-nspawnコンテナでもコンテナホストとは別にcronが動いたので、うまく活用できそう
 
 ポートはコンテナホストとコンテナゲスト間で一意であるようにする
 
 Db ranking
-https://db-engines.com/en/ranking/
+- https://db-engines.com/en/ranking/
 
 No sql
-
-https://hostingdata.co.uk/nosql-database/
+- https://hostingdata.co.uk/nosql-database/
 
 - [✅] jupyter-notebook
 
@@ -31,18 +26,18 @@ https://hostingdata.co.uk/nosql-database/
 
 - [ ] rstudio-server
 
-- [ ] monetdb(WEBコンソールあるかなければ作るか)
+- [ ] monetdb
 
-- [ ] Groonga(WEBコンソールあるかなければ作るか)
+- [ ] Groonga
 
-- [ ] Mroonga(WEBコンソールあるかなければ作るか)
+- [ ] Mroonga
 
-- [ ] PGroonga(WEBコンソールあるかなければ作るか)
+- [ ] PGroonga
 
-- [ ] MySQL(WEBコンソールあるかなければ作るか)
+- [ ] MySQL
 
-- [ ] Elasticsearch(WEBコンソールあるかなければ作るか)
+- [ ] Elasticsearch
 
-- [ ] [sonic-server](https://crates.io/crates/sonic-server)(WEBコンソールあるかなければ作るか)
+- [ ] [sonic-server](https://crates.io/crates/sonic-server)
 
-- [ ] [Sophinx](http://sphinxsearch.com/blog/2020/07/06/sphinx-3-3-1-released/) (WEBコンソールあるかなければ作るか)
+- [ ] [Sophinx](http://sphinxsearch.com/blog/2020/07/06/sphinx-3-3-1-released/)
