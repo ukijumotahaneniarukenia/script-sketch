@@ -1,0 +1,36 @@
+Code	Grp	Name	Description
+100	1XX	Continue	HTTP 100 Continue 情報ステータスレスポンスコードは、これまでのすべてが OK であり、クライアントが要求を続行するか、または要求がすでに終了している場合は無視することを示します。サーバーが要求のヘッダーをチェックするようにするには、クライアントは最初の要求でヘッダーとしてExpect: 100-continue を送信し、本文を送信する前にレスポンスとして 100 Continue ステータスコードを受け取ります。
+101	1XX	Switching Protocols	HTTP の 101 Switching Protocols レスポンスコードは、 Upgrade リクエストヘッダーを含むメッセージが送られたクライアントが要求する際に、サーバーが切り替えようとしているプロトコルを示します。
+200	2XX	OK	HTTP 200 OK はリクエストが成功した場合に返すレスポンスコード。200のレスポンスはデフォルトでキャッシュしてよい。
+201	2XX	Created	HTTP の 201 Created 成功ステータスレスポンスコードは、リクエストが成功してリソースの作成が完了したことを表します。レスポンスが返される前に、新たなリソースが作成され、レスポンスメッセージの本文にて新しいリソースが返されます。その位置はリクエスト URL、または Location ヘッダーの内容となります。
+202	2XX	Accepted	HTTP 202 Accepted レスポンスはリクエストを受け取ったが処理はされていない、ということを表すステータスコードです。これはコミットされていない、リクエストを処理した結果を示すレスポンスを、非同期で送信する方法がHTTPに存在しないことを意味しています。別のプロセスまたはサーバーがリクエストを処理する場合、またはバッチ処理の場合を想定しています。
+203	2XX	Non-Authoritative Information	HTTP の 203 Non-Authoritative Information レスポンスステータスは、リクエストが成功したものの、変換プロキシによって元のサーバーの200 (OK) レスポンスからペイロードが変更されたことを表します。
+204	2XX	No Content	HTTP のレスポンスコード 204 No Content は、リクエストが成功した事を示しますが、クライアントは現在のページから遷移する必要はありません。レスポンスコード 204 が返された場合は、デフォルトでキャッシュ可能になっています。そのようなレスポンスには、ETag ヘッダーが含まれています。
+205	2XX	Reset Content	HTTP 205 Reset Content のレスポンスステータスはクライアントにドキュメントビューをリセットするように指示します。たとえば、フォームの内容をクリアしたり、キャンバスの状態をリセットしたり、UI をリフレッシュすることができます。
+300	3XX	Multiple Choices	HTTP の 300 Multiple Choices リダイレクト状態コードは、リクエストに対して複数のレスポンスがあることを示します。ユーザーエージェントやユーザーは、その内から一つを選択します。レスポンスを一つ選択する方法は標準化されていないため、このレスポンスコードはほとんど使われていません。
+301	3XX	Moved Permanently	The HyperText Transfer Protocol (HTTP) の 301 Moved Permanently リダイレクトステータスコードは、リクエストされたリソースが Location ヘッダーで示された URL へ完全に移動したことを示します。ブラウザーはこのページにリダイレクトし、検索エンジンはリソースへのリンクを更新します (「SEO 用語」では、「リンクジュース」が新しい URL に送られたと言われます)。
+302	3XX	Found	The HyperText Transfer Protocol (HTTP) の 302 Found リダイレクトステータスレスポンスコードは、リクエストされたリソースが一時的に Location で示された URL へ移動したことを示します。ブラウザーはこのページにリダイレクトしますが、検索エンジンはリソースへのリンクを更新しません (「SEO 用語」では、「リンクジュース」が新しい URL に送られなかったと言われます)。
+303	3XX	See Other	HTTP 303 See Other リダイレクトステータスレスポンスコードは、リダイレクト先が新しくアップロードされたリソースではなく、確認ページやアップロード進捗ページのような別なページであることを示します。このレスポンスコードはふつう、 PUT または POST の結果として返されます。リダイレクト先ページの表示には、常に GET が使用されます。
+305	3XX	Use Proxy 	
+307	3XX	Temporary Redirect	元のリクエストのメソッドと本文は、リダイレクトされたリクエストを行う際に再利用されます。使用されるメソッドを GET に変更したい場合は、代わりに 303 See Other を使用してください。これは PUT メソッドへのレスポンスで、アップロードされたリソースではないところで「XYZ のアップロードに成功しました」のような確認メッセージを表示したい場合に便利です。
+400	4XX	Bad Request	HyperText Transfer Protocol (HTTP) の 400 Bad Request レスポンスステータスコードは、何らかのクライアント側のエラーであると分かったために、サーバーがそのリクエストを処理しない (できない) ことを表します (例えば、リクエストの構文が正しくない、リクエストメッセージのフレーミングが無効、リクエスト経路に偽りがあるなど)。
+402	4XX	Payment Required	HTTP の 402 Payment Required は、将来使用するために予約されている標準外のクライアントエラーステータスレスポンスコードです。
+403	4XX	Forbidden	HTTP の 403 Forbidden クライアントエラーレスポンスコードは、サーバーがリクエストを理解したものの、認証が拒否されたことを示します。
+404	4XX	Not Found	HTTP 404 Not Found は、サーバーがリクエストされたリソースを見つけることができない時のクライアントエラーのレスポンスコードです。 404 ページにつながるリンクは、壊れたリンクまたは死んだリンクと呼ばれ、リンク腐敗の影響を受ける可能性があります。
+405	4XX	Method Not Allowed	HyperText Transfer Protocol (HTTP) の 405 Method Not Allowed レスポンスステータスコードは、リクエストメソッドをサーバー側で認識しているが、対象のリソースでは対応していないことを示します。
+406	4XX	Not Acceptable	HyperText Transfer Protocol (HTTP) の 406 Not Acceptable クライアントエラーレスポンスコードは、サーバーがリクエストの用意したコンテンツネゴシエーションヘッダーで定義された受付可能な値に一致するレスポンスを生成できず、サーバーが既定の表現方法で提供することを望まないことを表します。
+408	4XX	Request Timeout	HyperText Transfer Protocol (HTTP) 408 Request Timeout レスポンスステータスコードはサーバーがこの未使用のコネクションをシャットダウンすることを意味します。 クライアントからの以前のリクエストがなくても、一部のサーバーによってアイドル状態のコネクションで送信されます。
+409	4XX	Conflict	HTTP 409 Conflict はリクエストが現在のサーバーの状態と競合したことを示すステータスコード。
+410	4XX	Gone	HyperText Transfer Protocol (HTTP) の 410 Gone クライエントエラーレスポンスコードは、元のサーバーで利用できなくなっている対象リソースにアクセスしていることを示します。この状態は永久的です。
+411	4XX	Length Required	HyperText Transfer Protocol (HTTP) 411 Length Required クライアントエラーレスポンスコードは、サーバーが定義された Content-Length ヘッダーのないリクエストの受け入れを拒否することを示します。
+413	4XX	Payload Too Large	HTTP 413 Payload Too Large レスポンスステータスコードは、リクエストエンティティがサーバーによって定義された制限よりも大きいことを示します。サーバーは接続を閉じるか Retry-After ヘッダーフィールドを返します。
+414	4XX	URI Too Long	HTTP の 414 URI Too Long レスポンスステータスコードは、クライアントがリクエストした URL が、サーバーが解釈しようとするものよりも長いことを示します。
+415	4XX	Unsupported Media Type	HTTP 415 Unsupported Media Type クライアントエラーレスポンスコードは、ペイロードフォーマットがサポートされていないフォーマットであるため、サーバーがリクエストの受け入れを拒否することを示します。
+417	4XX	Expectation Failed	HTTP 417 Expectation Failed クライアントエラーレスポンスコードは、リクエストの Expect ヘッダーに期待された値が設定されていなかったことを示します。
+426	4XX	Upgrade Required	HTTP の 426 Upgrade Required クライアントエラーレスポンスコードは、サーバーが現在のプロトコルを使用してリクエストを実行することを拒否していることを示しますが、クライアントが別のプロトコルにアップグレードした後に発生する可能性があります。
+500	5XX	Internal Server Error	HyperText Transfer Protocol (HTTP) の 500 Internal Server Error サーバーエラーレスポンスコードは、サーバーがリクエストを実行を妨げる予期しない条件に遭遇したことを示します。
+501	5XX	Not Implemented	HyperText Transfer Protocol (HTTP) の 501 Not Implemented サーバーエラーレスポンスコードは、サーバーがリクエストを満たすのに必要な機能に対応していないことを示します。
+502	5XX	Bad Gateway	HyperText Transfer Protocol (HTTP) の 502 Bad Gateway サーバーエラーレスポンスコードは、ゲートウェイまたはプロキシとして機能しているサーバーが上流のサーバーから無効なレスポンスを受け取ったことを示しています。
+503	5XX	Service Unavailable	HyperText Transfer Protocol (HTTP) の 503 Service Unavailable サーバーエラーレスポンスコードで、サーバーがリクエストを処理する準備ができていないことを示します。
+504	5XX	Gateway Timeout	HyperText Transfer Protocol (HTTP) 504 Gateway Timeout サーバーエラーレスポンスコードは、サーバーがゲートウェイまたはプロキシとして機能しているときに、リクエストを完了するために必要な上流のサーバーからのレスポンスが時間内に得られなかったことを示します。
+505	5XX	HTTP Version Not Supported	HyperText Transfer Protocol (HTTP) 505 HTTP Version Not Supported レスポンスステータスコードは、リクエストで使用されている HTTP バージョンがサーバーによってサポートされていないことを示します。

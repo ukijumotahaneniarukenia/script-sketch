@@ -1,0 +1,36 @@
+Grp	Code	Name
+1XX	100	Continue
+1XX	101	Switching Protocols
+2XX	200	OK
+2XX	201	Created
+2XX	202	Accepted
+2XX	203	Non-Authoritative Information
+2XX	204	No Content
+2XX	205	Reset Content
+3XX	300	Multiple Choices
+3XX	301	Moved Permanently
+3XX	302	Found
+3XX	303	See Other
+3XX	305	Use Proxy
+3XX	307	Temporary Redirect
+4XX	400	Bad Request
+4XX	402	Payment Required
+4XX	403	Forbidden
+4XX	404	Not Found
+4XX	405	Method Not Allowed
+4XX	406	Not Acceptable
+4XX	408	Request Timeout
+4XX	409	Conflict
+4XX	410	Gone
+4XX	411	Length Required
+4XX	413	Payload Too Large
+4XX	414	URI Too Long
+4XX	415	Unsupported Media Type
+4XX	417	Expectation Failed
+4XX	426	Upgrade Required
+5XX	500	Internal Server Error
+5XX	501	Not Implemented
+5XX	502	Bad Gateway
+5XX	503	Service Unavailable
+5XX	504	Gateway Timeout
+5XX	505	HTTP Version Not Supported
