@@ -114,3 +114,22 @@ Reactはクラス単位かファンクション単位で管理できるが、his
 デフォでもち回れるプロパティを拡張するばあいは当該クラスでinterface切って継承する感じらしい。プロパティないなどのエラーはこれに帰着しそう
 
 ```
+
+
+デプロイ
+
+```
+$ cd my-app
+
+$ tar -zcvf myapp.tar.gz build/
+
+$ sudo mv myapp.tar.gz /var/www/html
+
+$ cd /var/www/html
+
+$ sudo tar xvf myapp.tar.gz
+
+$ sudo mv build/* .
+
+$ sudo rm -rf build myapp.tar.gz
+```
