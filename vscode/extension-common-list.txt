@@ -23,3 +23,4 @@ shardulm94.trailing-spaces
 vincaslt.highlight-matching-tag
 vscode-icons-team.vscode-icons
 wayou.vscode-todo-highlight
+TabNine.tabnine-vscode
