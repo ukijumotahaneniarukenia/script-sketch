@@ -1,0 +1,20 @@
+{
+  "login": "ログイン",
+  "welcome": "ようこそ",
+  "message": {
+    "hello": "こんにちは",
+    "goodbye": "さようなら"
+  },
+  "error": {
+    "required": "必須項目です。",
+    "minlength": "最低８文字以上です。"
+  },
+  "form": {
+    "password": "パスワード",
+    "email": "メールアドレス"
+  },
+  "button": {
+    "login": "ログイン",
+    "logout": "ログアウト"
+  }
+}

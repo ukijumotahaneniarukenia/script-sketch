@@ -1,0 +1,20 @@
+{
+  "login": "Login",
+  "welcome": "Welcome",
+  "message": {
+    "hello": "Hello",
+    "goodbye": "Good bye"
+  },
+  "error": {
+    "required": "Required",
+    "minlength": "At least 8 characters"
+  },
+  "form": {
+    "password": "Password",
+    "email": "E-mail"
+  },
+  "button": {
+    "login": "Login",
+    "logout": "Logout"
+  }
+}
