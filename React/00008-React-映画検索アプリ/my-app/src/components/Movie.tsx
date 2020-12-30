@@ -4,7 +4,7 @@ const DEFAULT_PLACEHOLDER_IMAGE =
   "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
 
 
-function Movie(props:any){
+function Movie(props: any) {
   const poster = props.movie.Poster === "N/A" ? DEFAULT_PLACEHOLDER_IMAGE : props.movie.Poster;//欠損値のデフォルトのアバタ設定
 
   return (

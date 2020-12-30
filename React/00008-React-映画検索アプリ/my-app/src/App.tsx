@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
-import logo from './logo.svg';
 import './App.css';
 
 import Header from "../src/components/Header";
@@ -34,7 +32,7 @@ function App() {
 
 
   //検索処理
-  function search(searchValue:any){
+  function search(searchValue: any) {
 
     setLoading(true);//ローディング中なので、trueに設定
     setErrorMessage(null);//検索エラーメッセージを初期化
@@ -54,24 +52,24 @@ function App() {
 
   return (
     <div className="App">
-     <Header text="HOOKED" />
-     <Search search={search} />
-     <p className="App-intro">Sharing a few of our favourite movies</p>
-     <div className="movies">
+      <Header text="HOOKED" />
+      <Search search={search} />
+      <p className="App-intro">Sharing a few of our favourite movies</p>
+      <div className="movies">
 
-       {loading && !errorMessage ? (//ローディング中かつエラーメッセージがない場合
-        <span>loading...</span>
+        {loading && !errorMessage ? (//ローディング中かつエラーメッセージがない場合
+          <span>loading...</span>
         ) : errorMessage ? (//エラーメッセージがある場合
-         <div className="errorMessage">{errorMessage}</div>
-       ) : (//ローディング中でない場合
-         movies.map((movie, index) => (
-          // console.log(movie)
-           <Movie movie={movie} />
-         ))
-       )}
-     </div>
-   </div>
- );
+          <div className="errorMessage">{errorMessage}</div>
+        ) : (//ローディング中でない場合
+              movies.map((movie, index) => (
+                // console.log(movie)
+                <Movie movie={movie} />
+              ))
+            )}
+      </div>
+    </div>
+  );
 }
 
 export default App;
