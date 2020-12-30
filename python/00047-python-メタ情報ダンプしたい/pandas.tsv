@@ -1,0 +1,431 @@
+ファンクション名	引数名	引数の属性	引数のデフォルト値	引数の型	戻り値型
+pandas.__getattr__	name	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.array	data	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Sequence[object]	<class 'pandas.core.dtypes.generic.ABCExtensionArray'>
+pandas.array	dtype	POSITIONAL_OR_KEYWORD	None	typing.Union[str, numpy.dtype, pandas.core.dtypes.base.ExtensionDtype, NoneType]	<class 'pandas.core.dtypes.generic.ABCExtensionArray'>
+pandas.array	copy	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	<class 'pandas.core.dtypes.generic.ABCExtensionArray'>
+pandas.bdate_range	start	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	end	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	periods	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	freq	POSITIONAL_OR_KEYWORD	B	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	tz	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	normalize	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	weekmask	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	holidays	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	closed	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.bdate_range	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.concat	objs	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[typing.Iterable[typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]], typing.Mapping[typing.Union[typing.Hashable, NoneType], typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]]]	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	axis	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	join	POSITIONAL_OR_KEYWORD	outer	<class 'inspect._empty'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	ignore_index	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	keys	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	levels	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	names	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	verify_integrity	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	sort	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.concat	copy	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	typing.Union[ForwardRef('DataFrame'), ForwardRef('Series')]
+pandas.crosstab	index	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	columns	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	rownames	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	colnames	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	aggfunc	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	margins	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.crosstab	margins_name	POSITIONAL_OR_KEYWORD	All	<class 'str'>	DataFrame
+pandas.crosstab	dropna	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	DataFrame
+pandas.crosstab	normalize	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.cut	x	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.cut	bins	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.cut	right	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	<class 'inspect._empty'>
+pandas.cut	labels	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.cut	retbins	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	<class 'inspect._empty'>
+pandas.cut	precision	POSITIONAL_OR_KEYWORD	3	<class 'int'>	<class 'inspect._empty'>
+pandas.cut	include_lowest	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	<class 'inspect._empty'>
+pandas.cut	duplicates	POSITIONAL_OR_KEYWORD	raise	<class 'str'>	<class 'inspect._empty'>
+pandas.date_range	start	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	end	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	periods	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	freq	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	tz	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	normalize	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	closed	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.date_range	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'pandas.core.indexes.datetimes.DatetimeIndex'>
+pandas.eval	expr	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	parser	POSITIONAL_OR_KEYWORD	pandas	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	engine	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	<class 'inspect._empty'>
+pandas.eval	truediv	POSITIONAL_OR_KEYWORD	<object object at 0x7f5b523ffa40>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	local_dict	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	global_dict	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	resolvers	POSITIONAL_OR_KEYWORD	()	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	level	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	target	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.eval	inplace	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.factorize	values	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	typing.Tuple[numpy.ndarray, typing.Union[numpy.ndarray, pandas.core.dtypes.generic.ABCIndex]]
+pandas.factorize	sort	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	typing.Tuple[numpy.ndarray, typing.Union[numpy.ndarray, pandas.core.dtypes.generic.ABCIndex]]
+pandas.factorize	na_sentinel	POSITIONAL_OR_KEYWORD	-1	<class 'int'>	typing.Tuple[numpy.ndarray, typing.Union[numpy.ndarray, pandas.core.dtypes.generic.ABCIndex]]
+pandas.factorize	size_hint	POSITIONAL_OR_KEYWORD	None	typing.Union[int, NoneType]	typing.Tuple[numpy.ndarray, typing.Union[numpy.ndarray, pandas.core.dtypes.generic.ABCIndex]]
+pandas.get_dummies	data	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	prefix	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	prefix_sep	POSITIONAL_OR_KEYWORD	_	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	dummy_na	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	sparse	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	drop_first	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.get_dummies	dtype	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.infer_freq	index	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	typing.Union[str, NoneType]
+pandas.infer_freq	warn	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	typing.Union[str, NoneType]
+pandas.interval_range	start	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.interval_range	end	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.interval_range	periods	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.interval_range	freq	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.interval_range	name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.interval_range	closed	POSITIONAL_OR_KEYWORD	right	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.isna	obj	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.isnull	obj	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.json_normalize	data	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[typing.Dict, typing.List[typing.Dict]]	DataFrame
+pandas.json_normalize	record_path	POSITIONAL_OR_KEYWORD	None	typing.Union[str, typing.List, NoneType]	DataFrame
+pandas.json_normalize	meta	POSITIONAL_OR_KEYWORD	None	typing.Union[str, typing.List[typing.Union[str, typing.List[str]]], NoneType]	DataFrame
+pandas.json_normalize	meta_prefix	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.json_normalize	record_prefix	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.json_normalize	errors	POSITIONAL_OR_KEYWORD	raise	typing.Union[str, NoneType]	DataFrame
+pandas.json_normalize	sep	POSITIONAL_OR_KEYWORD	.	<class 'str'>	DataFrame
+pandas.json_normalize	max_level	POSITIONAL_OR_KEYWORD	None	typing.Union[int, NoneType]	DataFrame
+pandas.melt	frame	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>	<class 'pandas.core.frame.DataFrame'>
+pandas.melt	id_vars	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.melt	value_vars	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.melt	var_name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.melt	value_name	POSITIONAL_OR_KEYWORD	value	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.melt	col_level	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.merge	left	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge	right	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge	how	POSITIONAL_OR_KEYWORD	inner	<class 'str'>	DataFrame
+pandas.merge	on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge	left_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge	right_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge	left_index	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge	right_index	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge	sort	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge	suffixes	POSITIONAL_OR_KEYWORD	('_x', '_y')	<class 'inspect._empty'>	DataFrame
+pandas.merge	copy	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	DataFrame
+pandas.merge	indicator	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge	validate	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	left	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	right	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	left_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	right_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	left_index	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge_asof	right_index	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.merge_asof	by	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	left_by	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	right_by	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	suffixes	POSITIONAL_OR_KEYWORD	('_x', '_y')	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	tolerance	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_asof	allow_exact_matches	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	DataFrame
+pandas.merge_asof	direction	POSITIONAL_OR_KEYWORD	backward	<class 'str'>	DataFrame
+pandas.merge_ordered	left	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	right	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	left_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	right_on	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	left_by	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	right_by	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	fill_method	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	suffixes	POSITIONAL_OR_KEYWORD	('_x', '_y')	<class 'inspect._empty'>	DataFrame
+pandas.merge_ordered	how	POSITIONAL_OR_KEYWORD	outer	<class 'str'>	DataFrame
+pandas.notna	obj	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.notnull	obj	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.period_range	start	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.period.PeriodIndex'>
+pandas.period_range	end	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.period.PeriodIndex'>
+pandas.period_range	periods	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.period.PeriodIndex'>
+pandas.period_range	freq	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.period.PeriodIndex'>
+pandas.period_range	name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.period.PeriodIndex'>
+pandas.pivot	data	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	DataFrame	DataFrame
+pandas.pivot	index	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot	values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	data	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	index	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	aggfunc	POSITIONAL_OR_KEYWORD	mean	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	fill_value	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	margins	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	dropna	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	margins_name	POSITIONAL_OR_KEYWORD	All	<class 'inspect._empty'>	DataFrame
+pandas.pivot_table	observed	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	DataFrame
+pandas.qcut	x	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.qcut	q	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.qcut	labels	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.qcut	retbins	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	<class 'inspect._empty'>
+pandas.qcut	precision	POSITIONAL_OR_KEYWORD	3	<class 'int'>	<class 'inspect._empty'>
+pandas.qcut	duplicates	POSITIONAL_OR_KEYWORD	raise	<class 'str'>	<class 'inspect._empty'>
+pandas.read_clipboard	sep	POSITIONAL_OR_KEYWORD	\s+	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_clipboard	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	<class 'inspect._empty'>
+pandas.read_csv	sep	POSITIONAL_OR_KEYWORD	,	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	delimiter	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	header	POSITIONAL_OR_KEYWORD	infer	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	names	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	usecols	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	squeeze	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	prefix	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	mangle_dupe_cols	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	dtype	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	engine	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	converters	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	true_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	false_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	skipinitialspace	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	skiprows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	skipfooter	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	nrows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	na_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	keep_default_na	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	na_filter	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	verbose	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	skip_blank_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	parse_dates	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	infer_datetime_format	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	keep_date_col	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	date_parser	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	dayfirst	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	cache_dates	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	iterator	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	compression	POSITIONAL_OR_KEYWORD	infer	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	thousands	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	decimal	POSITIONAL_OR_KEYWORD	.	<class 'str'>	<class 'inspect._empty'>
+pandas.read_csv	lineterminator	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	quotechar	POSITIONAL_OR_KEYWORD	"	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	quoting	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	doublequote	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	escapechar	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	comment	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	encoding	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	dialect	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	error_bad_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	warn_bad_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	delim_whitespace	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	low_memory	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	memory_map	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_csv	float_precision	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	io	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	sheet_name	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	header	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	names	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	usecols	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	squeeze	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	dtype	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	engine	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	converters	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	true_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	false_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	skiprows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	nrows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	na_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	keep_default_na	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	verbose	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	parse_dates	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	date_parser	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	thousands	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	comment	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	skipfooter	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	convert_float	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	mangle_dupe_cols	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_excel	kwds	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_feather	path	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_feather	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_feather	use_threads	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	<class 'inspect._empty'>
+pandas.read_fwf	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	<class 'inspect._empty'>
+pandas.read_fwf	colspecs	POSITIONAL_OR_KEYWORD	infer	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_fwf	widths	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_fwf	infer_nrows	POSITIONAL_OR_KEYWORD	100	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_fwf	kwds	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_gbq	query	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'str'>	DataFrame
+pandas.read_gbq	project_id	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.read_gbq	index_col	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.read_gbq	col_order	POSITIONAL_OR_KEYWORD	None	typing.Union[typing.List[str], NoneType]	DataFrame
+pandas.read_gbq	reauth	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.read_gbq	auth_local_webserver	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	DataFrame
+pandas.read_gbq	dialect	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.read_gbq	location	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.read_gbq	configuration	POSITIONAL_OR_KEYWORD	None	typing.Union[typing.Dict[str, typing.Any], NoneType]	DataFrame
+pandas.read_gbq	credentials	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.read_gbq	use_bqstorage_api	POSITIONAL_OR_KEYWORD	None	typing.Union[bool, NoneType]	DataFrame
+pandas.read_gbq	private_key	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.read_gbq	verbose	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	DataFrame
+pandas.read_gbq	progress_bar_type	POSITIONAL_OR_KEYWORD	None	typing.Union[str, NoneType]	DataFrame
+pandas.read_hdf	path_or_buf	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_hdf	key	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_hdf	mode	POSITIONAL_OR_KEYWORD	r	<class 'str'>	<class 'inspect._empty'>
+pandas.read_hdf	errors	POSITIONAL_OR_KEYWORD	strict	<class 'str'>	<class 'inspect._empty'>
+pandas.read_hdf	where	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_hdf	start	POSITIONAL_OR_KEYWORD	None	typing.Union[int, NoneType]	<class 'inspect._empty'>
+pandas.read_hdf	stop	POSITIONAL_OR_KEYWORD	None	typing.Union[int, NoneType]	<class 'inspect._empty'>
+pandas.read_hdf	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_hdf	iterator	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_hdf	chunksize	POSITIONAL_OR_KEYWORD	None	typing.Union[int, NoneType]	<class 'inspect._empty'>
+pandas.read_hdf	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	io	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	match	POSITIONAL_OR_KEYWORD	.+	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	flavor	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	header	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	skiprows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	attrs	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	parse_dates	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	thousands	POSITIONAL_OR_KEYWORD	,	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	encoding	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	decimal	POSITIONAL_OR_KEYWORD	.	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	converters	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	na_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	keep_default_na	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_html	displayed_only	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_orc	path	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	DataFrame
+pandas.read_orc	columns	POSITIONAL_OR_KEYWORD	None	typing.Union[typing.List[str], NoneType]	DataFrame
+pandas.read_orc	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	DataFrame
+pandas.read_parquet	path	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_parquet	engine	POSITIONAL_OR_KEYWORD	auto	<class 'str'>	<class 'inspect._empty'>
+pandas.read_parquet	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_parquet	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_pickle	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	<class 'inspect._empty'>
+pandas.read_pickle	compression	POSITIONAL_OR_KEYWORD	infer	typing.Union[str, NoneType]	<class 'inspect._empty'>
+pandas.read_sas	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sas	format	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sas	index	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sas	encoding	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sas	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sas	iterator	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_spss	path	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path]	<class 'pandas.core.frame.DataFrame'>
+pandas.read_spss	usecols	POSITIONAL_OR_KEYWORD	None	typing.Union[typing.Sequence[str], NoneType]	<class 'pandas.core.frame.DataFrame'>
+pandas.read_spss	convert_categoricals	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	<class 'pandas.core.frame.DataFrame'>
+pandas.read_sql	sql	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	con	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	coerce_float	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	params	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	parse_dates	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	sql	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	con	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	coerce_float	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	params	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	parse_dates	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_query	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	table_name	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	con	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	schema	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	coerce_float	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	parse_dates	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_sql_table	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	convert_dates	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	convert_categoricals	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	convert_missing	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	preserve_dtypes	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	columns	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	order_categoricals	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_stata	iterator	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	<class 'inspect._empty'>
+pandas.read_table	sep	POSITIONAL_OR_KEYWORD		<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	delimiter	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	header	POSITIONAL_OR_KEYWORD	infer	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	names	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	index_col	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	usecols	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	squeeze	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	prefix	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	mangle_dupe_cols	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	dtype	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	engine	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	converters	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	true_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	false_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	skipinitialspace	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	skiprows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	skipfooter	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	nrows	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	na_values	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	keep_default_na	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	na_filter	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	verbose	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	skip_blank_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	parse_dates	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	infer_datetime_format	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	keep_date_col	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	date_parser	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	dayfirst	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	cache_dates	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	iterator	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	chunksize	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	compression	POSITIONAL_OR_KEYWORD	infer	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	thousands	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	decimal	POSITIONAL_OR_KEYWORD	.	<class 'str'>	<class 'inspect._empty'>
+pandas.read_table	lineterminator	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	quotechar	POSITIONAL_OR_KEYWORD	"	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	quoting	POSITIONAL_OR_KEYWORD	0	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	doublequote	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	escapechar	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	comment	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	encoding	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	dialect	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	error_bad_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	warn_bad_lines	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	delim_whitespace	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	low_memory	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	memory_map	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.read_table	float_precision	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.set_eng_float_format	accuracy	POSITIONAL_OR_KEYWORD	3	<class 'int'>	None
+pandas.set_eng_float_format	use_eng_prefix	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	None
+pandas.show_versions	as_json	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.test	extra_args	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.timedelta_range	start	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.timedelta_range	end	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.timedelta_range	periods	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.timedelta_range	freq	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.timedelta_range	name	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.timedelta_range	closed	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'pandas.core.indexes.timedeltas.TimedeltaIndex'>
+pandas.to_datetime	arg	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	errors	POSITIONAL_OR_KEYWORD	raise	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	dayfirst	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	yearfirst	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	utc	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	format	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	exact	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	unit	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	infer_datetime_format	POSITIONAL_OR_KEYWORD	False	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	origin	POSITIONAL_OR_KEYWORD	unix	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_datetime	cache	POSITIONAL_OR_KEYWORD	True	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_numeric	arg	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_numeric	errors	POSITIONAL_OR_KEYWORD	raise	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_numeric	downcast	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_pickle	obj	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Any	<class 'inspect._empty'>
+pandas.to_pickle	filepath_or_buffer	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	typing.Union[str, pathlib.Path, typing.IO[~AnyStr]]	<class 'inspect._empty'>
+pandas.to_pickle	compression	POSITIONAL_OR_KEYWORD	infer	typing.Union[str, NoneType]	<class 'inspect._empty'>
+pandas.to_pickle	protocol	POSITIONAL_OR_KEYWORD	4	<class 'int'>	<class 'inspect._empty'>
+pandas.to_timedelta	arg	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_timedelta	unit	POSITIONAL_OR_KEYWORD	ns	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.to_timedelta	errors	POSITIONAL_OR_KEYWORD	raise	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.unique	values	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+pandas.value_counts	values	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	Series
+pandas.value_counts	sort	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	Series
+pandas.value_counts	ascending	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	Series
+pandas.value_counts	normalize	POSITIONAL_OR_KEYWORD	False	<class 'bool'>	Series
+pandas.value_counts	bins	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	Series
+pandas.value_counts	dropna	POSITIONAL_OR_KEYWORD	True	<class 'bool'>	Series
+pandas.wide_to_long	df	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>	<class 'pandas.core.frame.DataFrame'>
+pandas.wide_to_long	stubnames	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.wide_to_long	i	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.wide_to_long	j	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'pandas.core.frame.DataFrame'>
+pandas.wide_to_long	sep	POSITIONAL_OR_KEYWORD	<class 'str'>	<class 'pandas.core.frame.DataFrame'>	
+pandas.wide_to_long	suffix	POSITIONAL_OR_KEYWORD	\d+	<class 'str'>	<class 'pandas.core.frame.DataFrame'>

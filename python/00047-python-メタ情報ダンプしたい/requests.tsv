@@ -1,0 +1,27 @@
+ファンクション名	引数名	引数の属性	引数のデフォルト値	引数の型	戻り値型
+requests._check_cryptography	cryptography_version	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.check_compatibility	urllib3_version	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.check_compatibility	chardet_version	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.delete	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.delete	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.get	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.get	params	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.get	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.head	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.head	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.options	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.options	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.patch	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.patch	data	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.patch	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.post	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.post	data	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.post	json	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.post	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.put	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.put	data	POSITIONAL_OR_KEYWORD	None	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.put	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.request	method	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.request	url	POSITIONAL_OR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.request	kwargs	VAR_KEYWORD	<class 'inspect._empty'>	<class 'inspect._empty'>	<class 'inspect._empty'>
+requests.session					
