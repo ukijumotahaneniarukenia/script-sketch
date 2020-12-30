@@ -7,7 +7,7 @@ import CartColumns from './CartColumns'
 
 import EmptyCart from './EmptyCart'
 
-import {ProductConsumer} from '../../components/ProductContextWrapper'
+import { ProductConsumer } from '../../components/ProductContextWrapper'
 
 import CartList from './CartList'
 
@@ -18,24 +18,24 @@ import CartTotals from './CartTotals'
 
 //historyの機能はクラス単位でないと持てないのか
 
-export default function Cart(){
+export default function Cart() {
     return (
         <section>
             <ProductConsumer>
-                {(context:any)=>{
+                {(context: any) => {
                     console.log(context.history)
                     const cart = context.cart;
 
-                    if(cart.length>0){
+                    if (cart.length > 0) {
                         return (
                             <React.Fragment>
                                 <Title name="your" title="cart" />
                                 <CartColumns />
-                                <CartList value={context}/>
+                                <CartList value={context} />
                                 <CartTotals value={context} history={context.history} />
                             </React.Fragment>
                         )
-                    }else{
+                    } else {
                         return <EmptyCart />
                     }
 

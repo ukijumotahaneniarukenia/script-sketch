@@ -2,23 +2,23 @@ import React from 'react';
 
 import styled from 'styled-components'
 
-import {ProductConsumer} from '../components/ProductContextWrapper'
-import {ButtonContainer} from '../components/ButtonContainer'
+import { ProductConsumer } from '../components/ProductContextWrapper'
+import { ButtonContainer } from '../components/ButtonContainer'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Modal(){
+export default function Modal() {
     return (
         <ProductConsumer>
-            {(context:any)=>{
-                const {modalOpen,closeModal} = context
-                const {img,title,price} = context.modalProduct;
+            {(context: any) => {
+                const { modalOpen, closeModal } = context
+                const { img, title, price } = context.modalProduct;
 
-                if(!modalOpen){
+                if (!modalOpen) {
                     //追加されていないアイテムのモーダル画面は表示しない
                     return null;
-                }else{
-                    return(
+                } else {
+                    return (
                         <ModalContainer>
                             <div className="container">
                                 <div className="row">
@@ -27,19 +27,19 @@ export default function Modal(){
                                             item added to the cart
                                         </h5>
 
-                                        <img src={img} className="img-fluid" alt="product"/>
+                                        <img src={img} className="img-fluid" alt="product" />
 
                                         <h5>{title}</h5>
 
                                         <h5 className="text-muted">price : $ {price}</h5>
 
                                         <Link to="/">
-                                            <ButtonContainer onClick={()=>{closeModal()}}>
+                                            <ButtonContainer onClick={() => { closeModal() }}>
                                                 store
                                             </ButtonContainer>
                                         </Link>
                                         <Link to="/cart">
-                                            <ButtonContainer onClick={()=>{closeModal()}}>
+                                            <ButtonContainer onClick={() => { closeModal() }}>
                                                 got to cart
                                             </ButtonContainer>
                                         </Link>

@@ -1,14 +1,14 @@
 import React from 'react'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import PayPalButton from './PayPalButton'
 
-export default function CartTotals({value,history}:any) {
+export default function CartTotals({ value, history }: any) {
 
-    const {cartSubTotal,cartTax,cartTotal,clearCart} = value;
+    const { cartSubTotal, cartTax, cartTotal, clearCart } = value;
 
-    return(
+    return (
         <React.Fragment>
             <div className="container">
                 <div className="row">
@@ -17,7 +17,7 @@ export default function CartTotals({value,history}:any) {
                             <button
                                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                                 type="button"
-                                onClick={()=>clearCart()}
+                                onClick={() => clearCart()}
                             >
                                 clear cart
                             </button>
@@ -25,19 +25,19 @@ export default function CartTotals({value,history}:any) {
 
                         <h5>
                             <span className="text-title">
-                                substotal : 
+                                substotal :
                             </span>
                             <strong>$ {cartSubTotal} </strong>
                         </h5>
                         <h5>
                             <span className="text-title">
-                                tax : 
+                                tax :
                             </span>
                             <strong>$ {cartTax} </strong>
                         </h5>
                         <h5>
                             <span className="text-title">
-                                total : 
+                                total :
                             </span>
                             <strong>$ {cartTotal} </strong>
                         </h5>
@@ -46,7 +46,7 @@ export default function CartTotals({value,history}:any) {
                             total={cartTotal}
                             clearCart={clearCart}
                             history={history}
-                        /> 
+                        />
                     </div>
                 </div>
             </div>
