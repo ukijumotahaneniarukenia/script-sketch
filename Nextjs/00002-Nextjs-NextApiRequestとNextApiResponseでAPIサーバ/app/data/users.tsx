@@ -1,6 +1,6 @@
 import { User } from '../interfaces/User'
 
-export const userData: User[] = [
+export let userData: User[] = [
   { id: 'TZ3DQUO4GTiBKq5OkaJvDR7al7YREfjI', name: 'サウナ' },
   { id: '8lT0pahKUslDKXpGybuviJAxFei3nG3r', name: 'ヨメナ' },
   { id: 't0OwhfUTAeDqeLZ6Zg57WTApA742aO6a', name: 'ツバナ' },
@@ -22,3 +22,9 @@ export const userData: User[] = [
   { id: 'HwIPWrvm7plopeUBCNaCqaas9n01Pnbk', name: 'タカナ' },
   { id: 'vjH35nKOtiopav6pHAFRV6npkqaGVURm', name: 'メバナ' }
 ]
+
+const setUserData = (targetUserData: User[]) => {
+  userData = targetUserData
+}
+
+export default setUserData

@@ -2,20 +2,21 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { userData } from "../../../../data/users";
 
 const getUser = (request: NextApiRequest, response: NextApiResponse) => {
-
-  response.setHeader('Content-Type', 'application/json');
-
-  const httpMethod = request.method
-  console.log(httpMethod)
-  const userId = request.query.id
+  const userId = request.query.id;
 
   if (userId === null || userId === undefined) {
-    return response.status(405).json({ statusCode: 405, message: 'Invalid Query Parameter' });
+    return response
+      .status(405)
+      .json({ statusCode: 405, message: "Invalid Query Parameter" });
   }
-  const user = userData.filter((item) => {return item.id === userId})
+  const user = userData.filter((item) => {
+    return item.id === userId;
+  });
 
   if (user.length === 0) {
-    return response.status(404).json({ statusCode: 404, message: 'Not Found User' });
+    return response
+      .status(404)
+      .json({ statusCode: 404, message: "Not Found User" });
   }
 
   return response.status(200).json(user);
