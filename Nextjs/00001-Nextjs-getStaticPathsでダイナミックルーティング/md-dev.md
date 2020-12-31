@@ -1,9 +1,9 @@
 - https://github.com/vercel/next.js/blob/master/examples/with-typescript/tsconfig.json
 
 ```
-$ mkdir -p 00001-React-Nextjs-getStaticPathsでダイナミックルーティング
+$ mkdir -p 00001-Nextjs-getStaticPathsでダイナミックルーティング
 
-$ cd 00001-React-Nextjs-getStaticPathsでダイナミックルーティング
+$ cd 00001-Nextjs-getStaticPathsでダイナミックルーティング
 
 $ npx create-next-app app --use-npm --template typescript
 
