@@ -17,7 +17,7 @@ const deleteUser = (request: NextApiRequest, response: NextApiResponse) => {
 
   setUserDataList(newUserDataList);
 
-  return response.status(201).json({ statusCode: 201, message: "Success Delete" });
+  return response.status(204).json({ statusCode: 204, message: "Success Delete" });
 
 };
 

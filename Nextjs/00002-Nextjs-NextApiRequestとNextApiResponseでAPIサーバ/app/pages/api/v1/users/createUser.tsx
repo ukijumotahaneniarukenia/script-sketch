@@ -19,8 +19,8 @@ const createUser = (request: NextApiRequest, response: NextApiResponse) => {
   setUserDataList(newUserDataList);
 
   return response
-    .status(200)
-    .json({ statusCode: 200, message: "Success Create" });
+    .status(201)
+    .json({ statusCode: 201, message: "Success Create" });
 };
 
 export default createUser;

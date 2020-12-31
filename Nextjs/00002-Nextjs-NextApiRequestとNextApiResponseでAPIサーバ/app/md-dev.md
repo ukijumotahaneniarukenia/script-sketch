@@ -26,6 +26,13 @@ $ npm install --save urlencoded-body-parser
 
 $ curl -H "Content-Type: application/json" -X POST -s 'http://localhost:3000/api/v1/users/UNKO' -d '{"id":"UNKO","name":"うんこ"}'
 
+$ curl -H "Content-Type: application/json" -X PUT -s 'http://localhost:3000/api/v1/users/UNKO' -d '{"id":"UNKO","name":"うんこもりもり"}'
+
+$ curl -X DELETE -s 'http://localhost:3000/api/v1/users/vjH35nKOtiopav6pHAFRV6npkqaGVURm'
+
+$ curl -X DELETE -s 'http://localhost:3000/api/v1/users/vjH35nKOtiopav6pHAFRV6npkqaGVURmV'
+
+$ curl -H "Content-Type: application/json" -X PATCH -s 'http://localhost:3000/api/v1/users/UNKO' -d '{"id":"UNKO","name":"うんこもりもり"}'
 ```
 
 
