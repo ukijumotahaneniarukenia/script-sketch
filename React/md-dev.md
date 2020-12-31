@@ -16,6 +16,9 @@ VueのVuetify、ReactのMaterial-Uiのイメージ
 
 - https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
 
+Reduxのサンプル
+https://github.com/reduxjs/redux/blob/master/examples/shopping-cart/src/reducers/products.js
+
 #1. プロジェクトディレクトリを作成する
 
 #2. コンポーネントディレクトリを作成する
