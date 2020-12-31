@@ -7,7 +7,7 @@ type Props = {
   errors?: string;
 };
 
-const morimori = ({ item, errors }: Props) => {
+const UserDetailPage = ({ item, errors }: Props) => {
   if (errors) {
     return (
       <p>
@@ -23,7 +23,7 @@ const morimori = ({ item, errors }: Props) => {
   );
 };
 
-export default morimori;
+export default UserDetailPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Error: getStaticPaths is required for dynamic SSG pages and is missing for '/users/[id]'.

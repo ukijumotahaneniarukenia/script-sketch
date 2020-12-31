@@ -1,28 +1,18 @@
-import { GetStaticProps } from "next";
-import { User } from "../interfaces/User";
-import { userData } from "../data/users";
 import Link from "next/link";
 
-type Props = {
-  items: User[];
-};
-
-const unko = ({ items }: Props) => (
-  <ul>
-    {items.map((item) => (
-      <li key={item.id}>
-        <Link href="/users/[id]" as={`/users/${item.id}`}>
-          <a>
-            {item.id}: {item.name}
-          </a>
-        </Link>
-      </li>
-    ))}
-  </ul>
+const IndexPage = () => (
+  <div>
+    <h1>Hello Next.js 👋</h1>
+    <p>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
+      <div></div>
+      <Link href="/users">
+        <a>Users</a>
+      </Link>
+    </p>
+  </div>
 );
-export default unko;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const items: User[] = userData;
-  return { props: { items } };
-};
+export default IndexPage;
