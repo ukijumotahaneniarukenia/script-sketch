@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getUser from "../../../api/v1/users/getUser";
 import deleteUser from "../../../api/v1/users/deleteUser";
+import createUser from "../../../api/v1/users/createUser";
 
 const HttpMethodHandler = (
   request: NextApiRequest,
@@ -12,6 +13,9 @@ const HttpMethodHandler = (
   switch (httpMethod) {
     case "GET":
       getUser(request, response);
+      break;
+    case "POST":
+      createUser(request, response);
       break;
     case "DELETE":
       deleteUser(request, response);

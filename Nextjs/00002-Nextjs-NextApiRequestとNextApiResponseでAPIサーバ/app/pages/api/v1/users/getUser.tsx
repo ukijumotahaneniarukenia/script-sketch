@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { userData } from "../../../../data/users";
+import { userDataList } from "../../../../data/users";
 
 const getUser = (request: NextApiRequest, response: NextApiResponse) => {
   const userId = request.query.id;
@@ -9,7 +9,7 @@ const getUser = (request: NextApiRequest, response: NextApiResponse) => {
       .status(405)
       .json({ statusCode: 405, message: "Invalid Query Parameter" });
   }
-  const user = userData.filter((item) => {
+  const user = userDataList.filter((item) => {
     return item.id === userId;
   });
 

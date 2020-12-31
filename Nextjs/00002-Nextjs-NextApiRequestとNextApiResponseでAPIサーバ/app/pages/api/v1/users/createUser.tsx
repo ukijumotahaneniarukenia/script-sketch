@@ -2,7 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { userDataList } from "../../../../data/users";
 import setUserDataList from "../../../../data/users";
 
-const deleteUser = (request: NextApiRequest, response: NextApiResponse) => {
+const createUser = (request: NextApiRequest, response: NextApiResponse) => {
+  const newUserData = request.body;
+
   const userId = request.query.id;
 
   if (userId === null || userId === undefined) {
@@ -11,14 +13,14 @@ const deleteUser = (request: NextApiRequest, response: NextApiResponse) => {
       .json({ statusCode: 405, message: "Invalid Query Parameter" });
   }
 
-  const newUserDataList = userDataList.filter((item) => {
-    return item.id !== userId;
-  });
+  let newUserDataList = userDataList;
+  newUserDataList.push(newUserData);
 
   setUserDataList(newUserDataList);
 
-  return response.status(201).json({ statusCode: 201, message: "Success Delete" });
-
+  return response
+    .status(200)
+    .json({ statusCode: 200, message: "Success Create" });
 };
 
-export default deleteUser;
+export default createUser;
