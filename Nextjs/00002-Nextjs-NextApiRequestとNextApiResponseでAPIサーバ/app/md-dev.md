@@ -29,3 +29,20 @@ $ npm run dev
 
 $ curl -s 'http://localhost:3000/api/v1/users' | jq .
 ```
+
+
+```
+$ curl -s 'http://localhost:3000/api/v1/users/l2mbgGDcorvVMI6b3SZOERl6J93MmMd' | jq
+{
+  "statusCode": 404,
+  "message": "Not Found User"
+}
+
+$ curl -s 'http://localhost:3000/api/v1/users/l2mbgGDcorvVMI6b3SZOERl6J93MmMdV' | jq
+[
+  {
+    "id": "l2mbgGDcorvVMI6b3SZOERl6J93MmMdV",
+    "name": "クイナ"
+  }
+]
+```
