@@ -5,4 +5,6 @@ $ curl -fsSLO https://raw.githubusercontent.com/ukijumotahaneniarukenia/script-d
 
 $ cat test-big.xml | xq '' >test-big.json
 
+$ json2yaml test-big.json >test-big.yaml
+
 ```
