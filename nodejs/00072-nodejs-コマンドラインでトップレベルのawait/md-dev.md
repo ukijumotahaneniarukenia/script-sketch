@@ -49,3 +49,26 @@ $ node -e 'await Promise.resolve(console.log("うんこ"));' --experimental-modu
 $ node -e 'import("./a.js")' --experimental-modules --input-type=module --harmony-top-level-await
 うんこ
 ```
+
+ファイル拡張子でも制御していたりするので、以下のようにすることもあるかも
+
+```
+$ node json2object-nodejs 
+internal/process/esm_loader.js:74
+    internalBinding('errors').triggerUncaughtException(
+                              ^
+
+TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension "" for /home/aine/script-cmd/nodejs/14-15-3/json2object/json2object-nodejs
+    at Loader.defaultGetFormat [as _getFormat] (internal/modules/esm/get_format.js:71:15)
+    at Loader.getFormat (internal/modules/esm/loader.js:102:42)
+    at Loader.getModuleJob (internal/modules/esm/loader.js:231:31)
+    at async Loader.import (internal/modules/esm/loader.js:165:17)
+    at async Object.loadESM (internal/process/esm_loader.js:68:5) {
+  code: 'ERR_UNKNOWN_FILE_EXTENSION'
+}
+
+$ mv json2object-nodejs json2object-node.js
+
+$ node json2object-node.js 
+うんこ
+```
