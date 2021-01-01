@@ -42,7 +42,8 @@ $ mkdir -p 00001-React-ブログ
 
 $ cd 00001-React-ブログ/
 
-$ npx create-react-app app --use-npm --template javascript
+デフォはjavascript
+$ npx create-react-app app --use-npm
 
 or
 
