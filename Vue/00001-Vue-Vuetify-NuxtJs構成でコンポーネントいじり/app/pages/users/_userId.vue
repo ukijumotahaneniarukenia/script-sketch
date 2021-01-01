@@ -15,14 +15,26 @@
           <td class="text-right">{{ userData.userId }}</td>
           <td>{{ userData.name }}</td>
           <td class="text-right">{{ userData.dataId }}</td>
-          <v-btn
-            color="primary"
-            small
-            @click="moveDataPage(userData.userId, userData.dataId)"
-          >
-            <v-icon left>mdi-account-details</v-icon>
-            ネスト遷移
-          </v-btn>
+          <td>
+            <v-btn
+              color="primary"
+              small
+              @click="moveDataPage(userData.userId, userData.dataId)"
+            >
+              <v-icon left>mdi-account-details</v-icon>
+              ネスト遷移
+            </v-btn>
+          </td>
+          <td>
+            <v-btn
+              color="primary"
+              small
+              :to="`/datas/${userData.dataId}`"
+            >
+              <v-icon left>mdi-account-details</v-icon>
+              フラット遷移
+            </v-btn>
+          </td>
         </tr>
       </tbody>
     </template>

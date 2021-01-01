@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>/users/datas/{{ dataId }}</h1>
+    <h1>/datas/{{ dataId }}</h1>
     <p>Item</p>
     <p>{{ item }}</p>
     <p>UserId</p>
