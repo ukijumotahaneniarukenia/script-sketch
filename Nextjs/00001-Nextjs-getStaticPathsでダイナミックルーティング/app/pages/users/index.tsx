@@ -10,10 +10,10 @@ type Props = {
 const UserIndexPage = ({ items }: Props) => (
   <ul>
     {items.map((item) => (
-      <li key={item.id}>
-        <Link href="/users/[id]" as={`/users/${item.id}`}>
+      <li key={item.userId}>
+        <Link href="/users/[userId]" as={`/users/${item.userId}`}>
           <a>
-            {item.id}: {item.name}
+            {item.userId}: {item.name}
           </a>
         </Link>
       </li>
