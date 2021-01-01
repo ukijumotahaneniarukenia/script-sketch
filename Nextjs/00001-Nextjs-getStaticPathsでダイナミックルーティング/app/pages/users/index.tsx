@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import { User } from "../../interfaces/User";
-import { userData } from "../../data/users";
+import { userDataList } from "../../data/users";
 import Link from "next/link";
 
 type Props = {
@@ -23,6 +23,6 @@ const UserIndexPage = ({ items }: Props) => (
 export default UserIndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const items: User[] = userData;
+  const items: User[] = userDataList;
   return { props: { items } };
 };

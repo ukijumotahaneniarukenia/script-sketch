@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import { User } from "../../interfaces/User";
-import { userData } from "../../data/users";
+import { userDataList } from "../../data/users";
 
 type Props = {
   item: User;
@@ -28,7 +28,7 @@ export default UserDetailPage;
 export const getStaticPaths: GetStaticPaths = async () => {
   // Error: getStaticPaths is required for dynamic SSG pages and is missing for '/users/[id]'.
   // Read more: https://err.sh/next.js/invalid-getstaticpaths-value
-  const paths = userData.map((user) => ({
+  const paths = userDataList.map((user) => ({
     params: { id: user.id.toString() },
   }))
   return { paths, fallback: false }
@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const id = params?.id;
-    const item = userData.find((data) => data.id === id);
+    const item = userDataList.find((data) => data.id === id);
     return { props: { item } };
   } catch (err) {
     return { props: { errors: err.message } };

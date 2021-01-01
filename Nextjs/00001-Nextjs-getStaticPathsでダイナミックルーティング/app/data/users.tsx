@@ -1,6 +1,6 @@
 import { User } from '../interfaces/User'
 
-export const userData: User[] = [
+export const userDataList: User[] = [
   { id: 'TZ3DQUO4GTiBKq5OkaJvDR7al7YREfjI', name: 'サウナ' },
   { id: '8lT0pahKUslDKXpGybuviJAxFei3nG3r', name: 'ヨメナ' },
   { id: 't0OwhfUTAeDqeLZ6Zg57WTApA742aO6a', name: 'ツバナ' },
