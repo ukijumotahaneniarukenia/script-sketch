@@ -7,6 +7,7 @@
           <th class="text-left">Name</th>
           <th class="text-left" width="50">dataId</th>
           <th width="200"></th>
+          <!-- <th width="200"></th> -->
           <th width="200"></th>
         </tr>
       </thead>
@@ -25,6 +26,16 @@
               ネスト遷移
             </v-btn>
           </td>
+          <!-- <td>
+            <v-btn
+              color="primary"
+              small
+              @click="moveSpecailDataPage(userData.userId, userData.dataId)"
+            >
+              <v-icon left>mdi-account-details</v-icon>
+              スペシャルネスト遷移
+            </v-btn>
+          </td> -->
           <td>
             <v-btn
               color="primary"
@@ -51,6 +62,13 @@ export default {
       window.localStorage.setItem('morimori','もりもり')
       window.localStorage.setItem('moriougai','モリオウガイ')
       this.$router.push({ path: `datas/${targetDataId}`, query: { item: 'うんこ', 'userId': targetUserId }})
+    },
+    moveSpecailDataPage(targetUserId, targetDataId){
+      console.log('targetUserId:' ,targetUserId, 'targetDataId' ,targetDataId)
+      window.localStorage.setItem('unko','うんこ')
+      window.localStorage.setItem('morimori','もりもり')
+      window.localStorage.setItem('moriougai','モリオウガイ')
+      this.$router.push({ path: `${targetUserId}/datas/${targetDataId}`, query: { item: 'うんこ', 'userId': targetUserId }})
     }
   },
   data() {
