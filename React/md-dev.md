@@ -57,7 +57,7 @@ $ npm install @material-ui/core --save
 
 $ npm install @material-ui/icons --save
 
-$ mkdir -p app/src/components
+$ mkdir -p src/components
 ```
 
 - https://design-spice.com/2020/07/19/react-begginer/
