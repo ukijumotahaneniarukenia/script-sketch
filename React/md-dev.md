@@ -12,6 +12,8 @@ VueのVuetify、ReactのMaterial-Uiのイメージ
 
 - https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
 
+- https://www.carlrippon.com/typed-usestate-with-typescript/
+
 - https://www.creative-tim.com/templates/vuejs-free
 
 - https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
