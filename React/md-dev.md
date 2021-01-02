@@ -1,10 +1,24 @@
-- チュートリアル
+調査基準
 
-  - https://ja.reactjs.org/tutorial/tutorial.html
+#1. ルーティング設定・多言語対応等の仕組み（ダイナミックネストルーティングできるか）
 
-- アプリのチュートリアル
+#2. コンポーネントフレームワークの使いっぷり
 
-  - https://create-react-app.dev/docs/getting-started
+#3. 状態管理フレームワークの使いっぷり（オンメモリの場合）
+
+#4. テストフレームワークの使いっぷり（スクリプトレベルとE２Eレベル）
+
+#5. 言語レベルの操作感（作業ワークフローのハンディさ）
+
+#6. ビルド手順整備（webpack、npx、npm、tsconfig.json、package.json）
+
+#7. レスポンシブ対応（モバイルでも見やすいか）
+
+#8. データ永続化用のDB（firestore、realm、mongodb）
+
+#9. 認証周り（firebase）
+
+#10. エコシステム対応（PWA化、AMP化、Electron等）
 
 VueのVuetify、ReactのMaterial-Uiのイメージ
 
@@ -37,6 +51,8 @@ VueのVuetify、ReactのMaterial-Uiのイメージ
   - https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
   
   - https://www.codeinwp.com/blog/vue-ui-component-libraries/
+
+調査実施手順
 
 #1. プロジェクトディレクトリを作成する
 
@@ -74,5 +90,3 @@ $ npm install @material-ui/icons --save
 
 $ mkdir -p src/components
 ```
-
-- https://design-spice.com/2020/07/19/react-begginer/
