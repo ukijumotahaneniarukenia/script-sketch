@@ -19,7 +19,7 @@ export function App() {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/address-form">Contact</Link>
+            <Link to="/address-form">AddressForm</Link>
           </li>
           <li>
             <Link to="/privacy">Privacy</Link>
