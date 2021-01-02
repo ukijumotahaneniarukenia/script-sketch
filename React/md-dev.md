@@ -44,6 +44,13 @@ VueのVuetify、ReactのMaterial-Uiのイメージ
     
     - https://github.com/reduxjs/redux/blob/master/examples/shopping-cart/src/reducers/products.js
 
+
+- ルーティングフレームワーク
+
+  - react-router
+  
+    - https://reactrouter.com/web/example/url-params
+
 コンポーネントフレームワーク外観 CSSレベルかCSSかつJSレベルかの2つ
 
   - https://www.newgenapps.com/blog/best-frameworks-to-create-responsive-websites/
@@ -51,6 +58,7 @@ VueのVuetify、ReactのMaterial-Uiのイメージ
   - https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
   
   - https://www.codeinwp.com/blog/vue-ui-component-libraries/
+
 
 調査実施手順
 
