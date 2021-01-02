@@ -1,9 +1,9 @@
 - https://reactrouter.com/web/example/url-params
 
 ```
-mkdir -p 00005-React-ルーティングフレームワーク-ダイナミックネストルーティング
+mkdir -p 00006-React-ルーティングフレームワーク-クエリパラメータ
 
-cd 00005-React-ルーティングフレームワーク-ダイナミックネストルーティング
+cd 00006-React-ルーティングフレームワーク-クエリパラメータ
 
 npx create-react-app app --use-npm --template typescript
 
