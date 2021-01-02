@@ -8,20 +8,33 @@
 
 VueのVuetify、ReactのMaterial-Uiのイメージ
 
-- https://material-ui.com/
+- Vueのコンポーネントフレームワーク
 
-- https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
+  - Vuetify
 
-- https://www.carlrippon.com/typed-usestate-with-typescript/
+    - https://vuetifyjs.com/ja/components/alerts/
 
-- https://www.creative-tim.com/templates/vuejs-free
+- Reactのコンポーネントフレームワーク
 
-- https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
+  - react-bootstrap
 
-Reduxのサンプル
-- https://github.com/reduxjs/redux/blob/master/examples/shopping-cart/src/reducers/products.js
+    - https://github.com/react-bootstrap/react-bootstrap/blob/master/www/src/examples/Modal/Basic.js
 
-- https://www.newgenapps.com/blog/best-frameworks-to-create-responsive-websites/
+  - material-ui
+
+    - https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
+
+- Reactの状態管理フレームワーク
+
+  - Redux
+    
+    - https://github.com/reduxjs/redux/blob/master/examples/shopping-cart/src/reducers/products.js
+
+コンポーネントフレームワーク外観 CSSレベルかCSSかつJSレベルかの2つ
+
+  - https://www.newgenapps.com/blog/best-frameworks-to-create-responsive-websites/
+
+  - https://dev.to/davidepacilio/35-free-react-templates-and-themes-32ci
 
 #1. プロジェクトディレクトリを作成する
 
