@@ -4,7 +4,7 @@ export const bookDataList: Book[] = [
   {
     bookId: "tarN1QVVaBILOeh1SrXon6YBhTIA3tE4",
     author: "井上 隼人",
-    genre: "Essay",
+    genre: "Mystery",
     title: "Jacob Have I Loved",
     price: 73.4,
   },
@@ -25,7 +25,7 @@ export const bookDataList: Book[] = [
   {
     bookId: "AlG1M9x2RMxWdKrDLbEsiCfBVv4hNZtn",
     author: "田中 拓海",
-    genre: "Fiction in verse",
+    genre: "Mystery",
     title: "Everything is Illuminated",
     price: 29.18,
   },

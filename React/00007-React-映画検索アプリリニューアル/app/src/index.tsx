@@ -23,7 +23,6 @@ export function App() {
             <Home homeTitle="My Home Page"/>
           </Route>
           <Route path="/search">
-            {/* <Search searchTitle="My Search Page" /> */}
             <Search />
           </Route>
         </Switch>
