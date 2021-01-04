@@ -36,7 +36,7 @@ build :
 
 	sed -i '1i#!/usr/bin/env node' $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist/main.js
 
-	( cd ${PROJECT_DIR_NAME}/${APP_DIR_NAME} && find src -type f | grep -P '(ts|js)$$' | xargs node_modules/browserify/bin/cmd.js -o dist/bundle.js )
+	( cd ${PROJECT_DIR_NAME}/${APP_DIR_NAME} && find src lib -type f | grep -P '(ts|js)$$' | xargs node_modules/browserify/bin/cmd.js -o dist/bundle.js )
 
 	chmod 755 $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/dist/bundle.js
 
@@ -52,7 +52,7 @@ create :
 
 	( cd $(PROJECT_DIR_NAME)/$(APP_DIR_NAME) && npm init -y )
 
-	( cd $(PROJECT_DIR_NAME)/$(APP_DIR_NAME) && npm install webpack webpack-cli --save-dev )
+	( cd $(PROJECT_DIR_NAME)/$(APP_DIR_NAME) && npm install browserify webpack webpack-cli --save-dev )
 
 	cat $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json | jq '.+{"type":"module"}' | sponge $(PROJECT_DIR_NAME)/$(APP_DIR_NAME)/package.json
 
@@ -77,6 +77,8 @@ create :
 deploy :
 
 	./${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist/main.js
+
+	./${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist/bundle.js
 
 	#パス登録
 	find ${PROJECT_DIR_NAME}/${APP_DIR_NAME}/dist -type f | grep main.js | xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
