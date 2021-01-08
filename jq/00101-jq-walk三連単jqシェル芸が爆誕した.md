@@ -36,36 +36,35 @@ jq '
   walk(if type == "object" then to_entries else . end)
   |walk(if type=="object" and has("key") then .key |= snake2(.;"-") else . end)
   |walk(if (type == "object") then [.]|from_entries elif (type=="array") then mergeConcat(.;[])|flatten else . end)
+  |.[]
 ' b.json
 ```
 
 OUT
 
 ```
-[
-  {
-    "cast": [
-      {
-        "person": [
-          {
-            "roleName": "Mark Watney",
-            "canonicalName": "Matt Damon"
-          },
-          {
-            "roleName": "Melissa Lewis",
-            "canonicalName": "Jessica Chastain"
-          },
-          {
-            "roleName": "Annie Montrose",
-            "canonicalName": "Kristen Wiig"
-          }
-        ]
-      }
-    ],
-    "director": "Ridley Scott",
-    "releaseDate": "2015-10-02",
-    "mpaaRating": "PG-13",
-    "runningTime": 144
-  }
-]
+{
+  "cast": [
+    {
+      "person": [
+        {
+          "roleName": "Mark Watney",
+          "canonicalName": "Matt Damon"
+        },
+        {
+          "roleName": "Melissa Lewis",
+          "canonicalName": "Jessica Chastain"
+        },
+        {
+          "roleName": "Annie Montrose",
+          "canonicalName": "Kristen Wiig"
+        }
+      ]
+    }
+  ],
+  "director": "Ridley Scott",
+  "releaseDate": "2015-10-02",
+  "mpaaRating": "PG-13",
+  "runningTime": 144
+}
 ```
