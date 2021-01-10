@@ -3,3 +3,6 @@
 - https://doc.rust-lang.org/stable/cargo/getting-started/installation.html
 
 - https://github.com/sorami/ngram
+
+コマンドラインツール
+- https://link.medium.com/km3LFnI1Vcb
