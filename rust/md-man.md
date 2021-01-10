@@ -6,3 +6,6 @@
 
 コマンドラインツール
 - https://link.medium.com/km3LFnI1Vcb
+
+機能説明など
+- https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html

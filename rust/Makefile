@@ -44,7 +44,7 @@ create :
 
 deploy :
 	#パス登録
-	find 00001-rust-サンプルプロジェクト -type f | grep bin | xargs file | grep -P 'shared object'|awk -F ':' '$$0=$$1' | xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
+	find $(PROJECT_DIR_NAME) -type f | grep bin | xargs file | grep -P 'shared object'|awk -F ':' '$$0=$$1' | xargs -I@ echo cp @ ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} | bash
 
 	mv ${HOME}/.local/script-cmd/bin/${APP_NAME}-${LANG_NAME}-${LANG_VERSION} ${HOME}/.local/script-cmd/bin/${CMD_NAME}
 
