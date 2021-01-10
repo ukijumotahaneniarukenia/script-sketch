@@ -53,8 +53,6 @@ func main() {
 
 	for scanner.Scan() {
 
-		fmt.Println(scanner.Text())
-
 		list := strings.Split(scanner.Text(), "_")
 
 		var result = string("")
