@@ -2,30 +2,30 @@ fn main() {
     // https://doc.rust-lang.org/1.30.0/book/first-edition/loops.html#loops
 
     // 無限ループ
-    // loop {
-    //     println!("うんこ");
-    // }
+    loop {
+        println!("うんこ");
+    }
 
-    // while true { // warning: denote infinite loops with `loop { ... }`
-    //     println!("うんこ");
-    // }
+    while true { // warning: denote infinite loops with `loop { ... }`
+        println!("うんこ");
+    }
 
-    // let mut x: i32 = 5; // mut x: i32
-    // let mut done: bool = false; // mut done: bool
+    let mut x: i32 = 5; // mut x: i32
+    let mut done: bool = false; // mut done: bool
 
-    // while !done {
-    //     // x = x - 3;
+    while !done {
+        // x = x - 3;
 
-    //     // println!("{}", x);
+        // println!("{}", x);
 
-    //     x += x - 3; // >>> x = x + x -3
+        x += x - 3; // >>> x = x + x -3
 
-    //     println!("{}", x);
+        println!("{}", x);
 
-    //     if x % 5 == 0 {
-    //         done = true;
-    //     }
-    // }
+        if x % 5 == 0 {
+            done = true;
+        }
+    }
 
     for x in 0..10 {
         println!("{}", x); // x: i32
