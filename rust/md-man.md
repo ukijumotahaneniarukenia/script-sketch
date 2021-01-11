@@ -9,3 +9,11 @@
 
 機能説明など
 - https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html
+
+
+図書館ルール
+
+借用できるルールを定義する >>> 貸し与える
+
+使用が終わり返却されたら、リソースをフリーにする
+
