@@ -17,3 +17,9 @@
 
 使用が終わり返却されたら、リソースをフリーにする
 
+
+変数のライフタイムが重要
+
+- https://ifritjp.github.io/documents/rust/lifetime/
+
+「2. 変数の制約」の部分
