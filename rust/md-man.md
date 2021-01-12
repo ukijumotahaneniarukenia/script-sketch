@@ -1,3 +1,7 @@
+- https://imoz.jp/note/rust-functions.html
+
+- https://qiita.com/OMOIKANESAN/items/1ffc06ef6283befc4355
+
 - https://qiita.com/osanshouo/items/eaefa80e7298f09af7fc
 
 - https://doc.rust-lang.org/stable/cargo/getting-started/installation.html
