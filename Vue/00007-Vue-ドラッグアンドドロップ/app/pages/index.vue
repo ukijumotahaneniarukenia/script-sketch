@@ -12,15 +12,22 @@
         edit
       </b-button>
     </NuxtLink>
+    <NuxtLink to="/drag-and-drop/lesson01">
+      <b-button variant="outline-primary">
+        <b-icon-droplet-fill></b-icon-droplet-fill>
+        drag-and-drop
+      </b-button>
+    </NuxtLink>
+    <NuxtLink to="/drag-and-drop/lesson02">
+      <b-button variant="outline-primary">
+        <b-icon-droplet-fill></b-icon-droplet-fill>
+        drag-and-drop
+      </b-button>
+    </NuxtLink>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
 
 export default {
 
