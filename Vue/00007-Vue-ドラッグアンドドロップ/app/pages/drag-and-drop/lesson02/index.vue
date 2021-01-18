@@ -1,14 +1,15 @@
 <template>
   <div>
     <div>
+      <!-- スタイル等は一度レンダラ処理しないと描画されない -->
       <b-card
-        data-insert-html='<b-breadcrumb :items=\"items\"></b-breadcrumb>'
+        data-insert-html="<b-button variant='success'>Button</b-button>"
         draggable="true"
         @dragstart="dragstartHandler($event)"
         @dragend="dragendHandler($event)"
       >
-        <b-icon-clock-history></b-icon-clock-history>
-        <p>Breadcrumb</p>
+        <b-icon-plus-circle></b-icon-plus-circle>
+        <p>Button</p>
       </b-card>
       <b-card
         data-insert-html='<h1>HEADER GOES HERE</h1>'
@@ -40,6 +41,11 @@
 </template>
 
 <script>
+
+// https://developer.mozilla.org/ja/docs/Web/API/Element/insertAdjacentHTML
+
+
+
 import { v4 as uuidv4 } from "uuid";
 
 export default {
@@ -80,6 +86,7 @@ export default {
           let item = document.createElement("div");
           item.innerHTML = targetDomItem.targetPayload;
           item.firstElementChild.setAttribute("id", targetDomItem.targetDomId);
+          item.firstElementChild.classList.add("drop-item");
           targetDropDom.append(item.firstElementChild);
         });
       }
@@ -104,15 +111,15 @@ export default {
 </script>
 
 <style>
-div {
-  margin: 0em;
-  padding: 2em;
-}
 #source {
   color: blue;
   border: 1px solid black;
 }
 #target {
   border: 3px dashed black;
+}
+
+.drop-item {
+  display: inline-block;
 }
 </style>
