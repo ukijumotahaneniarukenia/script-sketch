@@ -44,7 +44,7 @@
 
 // https://developer.mozilla.org/ja/docs/Web/API/Element/insertAdjacentHTML
 
-
+// https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList/add
 
 import { v4 as uuidv4 } from "uuid";
 

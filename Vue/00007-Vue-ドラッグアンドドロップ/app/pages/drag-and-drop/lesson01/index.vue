@@ -31,6 +31,7 @@
           v-for="(list, index) in CategoryB"
           :key="index"
           draggable
+          @dragstart="dragList($event, list.id)"
         >
           {{ list.name }}
         </div>
@@ -47,6 +48,7 @@
           v-for="(list, index) in CategoryC"
           :key="index"
           draggable
+          @dragstart="dragList($event, list.id)"
         >
           {{ list.name }}
         </div>
@@ -90,23 +92,88 @@ export default {
     };
   },
   methods: {
+    dragstartHandler(event) {
+      console.log("dragStart");
+      const targetDomId = uuidv4();
+      event.target.setAttribute("id", targetDomId);
+      const targetPayload = event.target.getAttribute("data-insert-html");
+      let itemDataList = event.dataTransfer.items;
+      itemDataList.add(
+        '{"targetDomId":"' +
+          targetDomId +
+          '","targetPayload":"' +
+          targetPayload +
+          '"}',
+        "text/plain"
+      );
+    },
+    dropHandler(event) {
+      event.preventDefault();
+      console.log("Drop");
+      let targetDropDom = event.target;
+      console.log(targetDropDom);
+      let itemDataList = event.dataTransfer.items;
+      for (let i = 0; i < itemDataList.length; i++) {
+        console.log(itemDataList[i]);
+        console.log(itemDataList[i].kind);
+        console.log(itemDataList[i].type);
+        itemDataList[i].getAsString(targetDomInfo => {
+          const targetDomItem = JSON.parse(targetDomInfo);
+          console.log(targetDomItem.targetPayload);
+          let parser = new DOMParser();
+          let doc = parser.parseFromString(
+            targetDomItem.targetPayload,
+            "text/html"
+          );
+          let item = document.createElement("div");
+          item.innerHTML = targetDomItem.targetPayload;
+          item.firstElementChild.setAttribute("id", targetDomItem.targetDomId);
+          item.firstElementChild.classList.add("drop-item");
+          targetDropDom.append(item.firstElementChild);
+        });
+      }
+    },
+    dragoverHandler(event) {
+      event.preventDefault();
+      console.log("dragOver");
+      console.log(event.target);
+      event.dataTransfer.dropEffect = "move";
+    },
+    dragendHandler(event) {
+      console.log("dragEnd");
+      console.log(event.target);
+      let itemDataList = event.dataTransfer.items;
+      for (let i = 0; i < itemDataList.length; i++) {
+        itemDataList.remove(i);
+      }
+      itemDataList.clear();
+    },
     dropList(event, dropCategory) {
       console.log("dropList");
       console.log(event);
-      console.log(event.dataTransfer.items)
-      const dragId = event.dataTransfer.getData("itemId");
-      console.log(dragId);
-      const dragList = this.lists.find(list => list.id === dragId);
-      console.log(dragList);
-      dragList.category = dropCategory;
+      let targetList = event.dataTransfer.items;
+      console.log(targetList);
+      for (let index = 0; index < targetList.length; index++) {
+        const element = targetList[index];
+        console.log(element);
+        element.getAsString(targetItem => {
+          const targetItemId = JSON.parse(targetItem).itemId;
+          console.log(targetItemId);
+          const dragList = this.lists.find(
+            list => list.id === Number(targetItemId)
+          );
+          console.log(dragList);
+          dragList.category = dropCategory;
+        });
+      }
     },
-    dragList(event, dragId) {
+    dragList(event, targetItemId) {
       console.log("dragList");
-      let targetList = event.dataTransfer.items
+      let targetList = event.dataTransfer.items;
       console.log(event);
       console.log(targetList);
-      console.log(dragId);
-      event.dataTransfer.setData("itemId",dragId)
+      console.log(targetItemId);
+      targetList.add('{"itemId":"' + targetItemId + '"}', "text/plain");
       console.log(targetList);
     }
   },
