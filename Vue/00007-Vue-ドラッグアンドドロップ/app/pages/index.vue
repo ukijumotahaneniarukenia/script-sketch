@@ -24,6 +24,18 @@
         drag-and-drop
       </b-button>
     </NuxtLink>
+    <NuxtLink to="/drag-and-drop/lesson03">
+      <b-button variant="outline-primary">
+        <b-icon-droplet-fill></b-icon-droplet-fill>
+        drop item to iframe
+      </b-button>
+    </NuxtLink>
+    <NuxtLink to="/drag-and-drop/lesson03/preview">
+      <b-button variant="outline-primary">
+        <b-icon-box-arrow-up-right></b-icon-box-arrow-up-right>
+        iframe preview
+      </b-button>
+    </NuxtLink>
   </div>
 </template>
 
