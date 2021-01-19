@@ -36,6 +36,12 @@
         iframe preview
       </b-button>
     </NuxtLink>
+    <NuxtLink to="/hover-menu">
+      <b-button variant="outline-primary">
+        <b-icon-box-arrow-up-right></b-icon-box-arrow-up-right>
+        hover menu
+      </b-button>
+    </NuxtLink>
   </div>
 </template>
 
