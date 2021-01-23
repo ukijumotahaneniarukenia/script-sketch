@@ -2,6 +2,12 @@
   <div id="main-page">
     <div id="header-pane">
       <b-button
+        label="openTopSidebar"
+        type="is-info"
+        icon-left="check"
+        @click="openTopSidebar"
+      />
+      <b-button
         label="openLeftSidebar"
         type="is-info"
         icon-left="check"
@@ -17,6 +23,16 @@
     <div class="columns" style="margin: 0px">
       <div id="left-pane" class="column is-3" style="padding-top: 0px;padding-right: 0px;">Left Pane</div>
       <div id="right-pane" class="column is-9" style="padding-top: 0px;padding-right: 0px;">Right Pane</div>
+    </div>
+    <div id="top-side-bar">
+      <div style="position: relative;">
+        <a
+          class="delete is-large"
+          @click="closeTopSidebar"
+          style="position: absolute;top:5px;right:5px"
+        ></a>
+        トップサイドバー
+      </div>
     </div>
     <div id="left-side-bar">
       <div style="position: relative;">
@@ -45,6 +61,9 @@
 export default {
   data: function() {
     return {
+      topSideBarHeight: 500,
+      topSideBarTopOffset: 0,
+      bottomSideBarHeight: 300,
       leftSideBarWidth: 500,
       rightSideBarWidth: 700,
       leftPaneHeight: 2000,
@@ -65,6 +84,13 @@ export default {
       const leftSidebar = document.getElementById("left-side-bar");
       leftSidebar.style.top = window.scrollY + 'px';
     },
+    adjustTopSideBarTop() {
+      console.log("adjustTopSideBarTop")
+      const topSidebar = document.getElementById("top-side-bar");
+      topSidebar.style.setProperty("--move-to-y-offset-for-top-side-bar", window.scrollY + 'px');
+      console.log(window.getComputedStyle(topSidebar).getPropertyValue("--move-to-y-offset-for-top-side-bar"));
+      console.log(Number(window.getComputedStyle(topSidebar).getPropertyValue("--move-to-y-offset-for-top-side-bar").replace(/px/,"")));
+    },
     adjustRightSideBarTop() {
       const rightSidebar = document.getElementById("right-side-bar");
       rightSidebar.style.top = window.scrollY + 'px';
@@ -78,6 +104,24 @@ export default {
       const rightPane = document.getElementById("right-pane");
       rightPane.style.height = (window.innerHeight + targetScrollY) + 'px';
       rightPane.style.paddingBottom = (window.innerHeight + targetScrollY) + 'px'
+    },
+    openTopSidebar() {
+      console.log("openTopSidebar");
+      const targetDom = document.getElementById("top-side-bar");
+      targetDom.classList = ''
+      targetDom.classList.add("top-side-bar-open");
+      targetDom.style.setProperty("--move-to-y-for-top-side-bar", - (this.topSideBarHeight-(Number(window.getComputedStyle(targetDom).getPropertyValue("--move-to-y-offset-for-top-side-bar").replace(/px/,"")))) + 'px');
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-y-for-top-side-bar"));
+    },
+    closeTopSidebar() {
+      console.log("closeTopSidebar");
+      const targetDom = document.getElementById("top-side-bar");
+      targetDom.classList = ''
+      targetDom.classList.add("top-side-bar-close");
+      targetDom.style.setProperty("--move-to-y-start-for-top-side-bar", - this.topSideBarHeight + 'px');
+      targetDom.style.setProperty("--move-to-y-for-top-side-bar", - (this.topSideBarHeight-(Number(window.getComputedStyle(targetDom).getPropertyValue("--move-to-y-offset-for-top-side-bar").replace(/px/,"")))) + 'px');
+      // https://stackoverflow.com/questions/22677954/simple-javascript-getproperty-function-cannot-access-css-styles-even-though-it
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-y-for-top-side-bar"));
     },
     openLeftSidebar() {
       console.log("openLeftSidebar");
@@ -121,6 +165,7 @@ export default {
         console.log(window.innerWidth);
         console.log(window.innerHeight);
         console.log(window.document.body.scrollHeight);
+        this.adjustTopSideBarTop()
         this.adjustLeftSideBarTop()
         this.adjustRightSideBarTop()
         this.adjustLeftPaneHeight(window.scrollY)
@@ -128,18 +173,29 @@ export default {
       });
     },
     setUpSize() {
+      const topSidebar = document.getElementById("top-side-bar");
       const leftSidebar = document.getElementById("left-side-bar");
       const rightSidebar = document.getElementById("right-side-bar");
       const headerPane = document.getElementById("header-pane");
       const leftPane = document.getElementById("left-pane");
       const rightPane = document.getElementById("right-pane");
+
       headerPane.style.height = this.headerPaneHeight + 'px';
       leftPane.style.paddingBottom = (this.leftPaneHeight + this.headerPaneHeight) + 'px'
       rightPane.style.paddingBottom = (this.rightPaneHeight + this.headerPaneHeight) + 'px'
+
+      topSidebar.style.position = "absolute";
+      topSidebar.style.setProperty("--move-to-y-start-for-top-side-bar", - this.topSideBarHeight + 'px');
+      topSidebar.style.setProperty("--move-to-y-offset-for-top-side-bar", this.topSideBarTopOffset + 'px');
+      topSidebar.style.setProperty("--move-to-y-for-top-side-bar", - (this.topSideBarHeight-(Number(window.getComputedStyle(topSidebar).getPropertyValue("--move-to-y-offset-for-top-side-bar").replace(/px/,"")))) + 'px');
+      topSidebar.style.width = window.innerWidth + "px";
+      topSidebar.style.height = this.topSideBarHeight + "px";
+
       leftSidebar.style.position = "absolute";
       leftSidebar.style.setProperty("--move-to-x-for-left-side-bar", - this.leftSideBarWidth + 'px');
       leftSidebar.style.width = this.leftSideBarWidth + "px";
       leftSidebar.style.height = window.innerHeight + "px";
+
       rightSidebar.style.position = "absolute";
       rightSidebar.style.setProperty("--move-to-x-for-right-side-bar", -this.rightSideBarWidth + 'px');
       rightSidebar.style.width = this.rightSideBarWidth + "px";
@@ -183,6 +239,20 @@ export default {
 
 #right-pane {
   background-color: rgba(122, 172, 93, 0.986);
+}
+
+#top-side-bar {
+  position: absolute;
+  top: var(--move-to-y-for-top-side-bar);
+  background-color: #f3e886;
+}
+
+.top-side-bar-open {
+  animation: 0.5s move-to-down-for-top-side-bar forwards;
+}
+
+.top-side-bar-close {
+  animation: 0.5s move-to-up-for-top-side-bar forwards;
 }
 
 #left-side-bar {
@@ -251,21 +321,24 @@ export default {
   }
 }
 
-@keyframes move-to-down {
+@keyframes move-to-down-for-top-side-bar {
   0% {
-    transform: translateY(0px);
+    top: var(--move-to-y-for-top-side-bar);
   }
   100% {
-    transform: translateY(var(--move-to-y));
+    top: var(--move-to-y-offset-for-top-side-bar);
   }
 }
 
-@keyframes move-to-up {
+@keyframes move-to-up-for-top-side-bar {
   0% {
-    transform: translateY(var(--move-to-y));
+    top: var(--move-to-y-offset-for-top-side-bar);
+  }
+  95% {
+    top: var(--move-to-y-for-top-side-bar);
   }
   100% {
-    transform: translateY(0px);
+    top: var(--move-to-y-start-for-top-side-bar);
   }
 }
 </style>
