@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div id="target-drag-area" class="is-flex is-flex-wrap-wrap drag-area">
-      <div class="mini-box" v-for="itemIndex in gridDataList" :key="itemIndex">
+    <div id="unko" @click="unkoClick">unko</div>
+    <div class="is-flex is-justify-content-center">
+      <div id="target-drag-area" class="is-flex is-flex-wrap-wrap">
+        <div class="mini-box" v-for="itemIndex in gridDataList" :key="itemIndex">
+        </div>
       </div>
     </div>
     <div class="is-flex is-justify-content-center">
@@ -33,47 +36,32 @@ export default {
   },
   mounted() {
     this.initilaize();
-    this.setUp();
   },
   methods: {
+    unkoClick() {
+      const targetMiniBoxList = Array.from(document.querySelectorAll(".mini-box"))
+      for (let index = 0; index < targetMiniBoxList.length; index++) {
+        const targetMiniBox = targetMiniBoxList[index];
+        targetMiniBox.setAttribute("id","mini-box-"+index)
+        targetMiniBox.style.setProperty("--mini-box-height", this.miniBoxHeight + 'px')
+        targetMiniBox.style.setProperty("--mini-box-width", this.miniBoxwidth + 'px')
+      }
+      console.log("unkoClick")
+    },
     range(start, end) {
       return Array.from({ length: end - start + 1 }, (_, i) => end + i);
     },
     initilaize() {
       console.log("initilaize");
       const targetImageItem = document.getElementById("target-image");
+      const targetDragArea = document.getElementById("target-drag-area");
       const boxCount = Math.ceil(
         (targetImageItem.clientHeight * targetImageItem.clientWidth) / (this.miniBoxHeight * this.miniBoxwidth)
       );
       console.log(boxCount);
-      this.gridDataList =  this.range(1, boxCount)
+      this.gridDataList =  this.range(1, boxCount);
+      targetDragArea.style.setProperty("--drag-area-width", targetImageItem.clientWidth + 'px');
     },
-    setUp() {
-      const targetDragArea = document.getElementById("target-drag-area")
-      console.log(targetDragArea)
-      console.log(typeof(targetDragArea))
-      // console.log(targetDragArea.classList)
-      // targetDragArea.classList.add("mini-box-override")
-      // console.log(targetDragArea.classList)
-      let targetMiniBoxList = Array.from(document.getElementsByClassName("mini-box"))
-      for (let index = 0; index < targetMiniBoxList.length; index++) {
-        let targetMiniBox = targetMiniBoxList[index];
-        console.log(targetMiniBox)
-        targetMiniBox.setAttribute("id","mini-box-"+index)
-        // console.log(window.getComputedStyle(targetMiniBox).getPropertyValue("--mini-box-height"))
-        // console.log(window.getComputedStyle(targetMiniBox).getPropertyValue("--mini-box-width"))
-        // console.log(targetMiniBox.classList)
-        // targetMiniBox.classList.add("mini-box-override")
-        // console.log(targetMiniBox.classList)
-        // targetMiniBox.style.setProperty("--mini-box-height", this.miniBoxHeight + 'px')
-        // targetMiniBox.style.setProperty("--mini-box-width", this.miniBoxwidth + 'px')
-        // console.log(window.getComputedStyle(targetMiniBox).getPropertyValue("--mini-box-height"))
-        // console.log(window.getComputedStyle(targetMiniBox).getPropertyValue("--mini-box-width"))
-      }
-      const a = document.getElementById("mini-box-0")
-      console.log(a)
-      a.classList.add("mini-box-override")
-    }
   }
 };
 </script>
@@ -131,20 +119,16 @@ main .boxes.green div.selected {
   border: 2px solid rgba(0, 0, 0, 0.075);
 }
 
-.drag-area {
-  --mini-box-width: 20px;
-  width: 200px;
+#target-drag-area {
+  --drag-area-width: 200px;
+  width: var(--drag-area-width);
 }
 
-.mini-box-override {
+.mini-box {
   --mini-box-width: 20px;
   --mini-box-height: 20px;
   width: var(--mini-box-width);
   height: var(--mini-box-height);
-}
-.mini-box {
-  width: 20px;
-  height: 20px;
   background-color: #e4e4e4;
   border: 1px solid steelblue;
 }
