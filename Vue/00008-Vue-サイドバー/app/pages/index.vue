@@ -29,7 +29,7 @@
 export default {
   data: function() {
     return {
-      leftSideBarWidth: 300,
+      leftSideBarWidth: 500,
       leftPaneHeight: 2000,
       rightPaneHeight: 2000,
       headerPaneHeight: 100,
@@ -48,22 +48,22 @@ export default {
       const leftSidebar = document.getElementById("left-side-bar");
       leftSidebar.style.top = window.scrollY + 'px';
     },
-    adjustLeftPaneHeight() {
+    adjustLeftPaneHeight(targetScrollY) {
       const leftPane = document.getElementById("left-pane");
-      leftPane.style.height = window.document.body.scrollHeight + 'px';
-      leftPane.style.paddingBottom = window.document.body.scrollHeight + 'px'
+      leftPane.style.height = (window.innerHeight + targetScrollY) + 'px';
+      leftPane.style.paddingBottom = (window.innerHeight + targetScrollY) + 'px'
     },
-    adjustRightPaneHeight() {
+    adjustRightPaneHeight(targetScrollY) {
       const rightPane = document.getElementById("right-pane");
-      rightPane.style.height = window.document.body.scrollHeight + 'px';
-      rightPane.style.paddingBottom = window.document.body.scrollHeight + 'px'
+      rightPane.style.height = (window.innerHeight + targetScrollY) + 'px';
+      rightPane.style.paddingBottom = (window.innerHeight + targetScrollY) + 'px'
     },
     closeLeftSidebar() {
       console.log("closeLeftSidebar");
       const targetDom = document.getElementById("left-side-bar");
       targetDom.classList = ''
       targetDom.classList.add("left-side-bar-close");
-      // targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth);
+      targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth + 'px');
       console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x"));
     },
     openLeftSidebar() {
@@ -71,7 +71,7 @@ export default {
       const targetDom = document.getElementById("left-side-bar");
       targetDom.classList = ''
       targetDom.classList.add("left-side-bar-open");
-      // targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth);
+      targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth + 'px');
       console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x"));
     },
     detectWindowScroll() {
@@ -82,8 +82,8 @@ export default {
         console.log(window.innerHeight);
         console.log(window.document.body.scrollHeight);
         this.adjustLeftSideBarTop()
-        this.adjustLeftPaneHeight()
-        this.adjustRightPaneHeight()
+        this.adjustLeftPaneHeight(window.scrollY)
+        this.adjustRightPaneHeight(window.scrollY)
       });
     },
     setUpSize() {
@@ -96,7 +96,7 @@ export default {
       rightPane.style.paddingBottom = (this.rightPaneHeight + this.headerPaneHeight) + 'px'
       leftSidebar.style.left = -this.leftSideBarWidth + "px";
       leftSidebar.style.width = this.leftSideBarWidth + "px";
-      leftSidebar.style.height = window.document.body.scrollHeight + "px"; // ここをいい感じにしたい
+      leftSidebar.style.height = window.innerHeight + "px";
     },
     initialize: function() {
       console.log("initialize");
@@ -143,15 +143,14 @@ export default {
   top: 0px;
   left: 0px;
   background-color: #f3e886;
+  --move-to-x: 300px;
 }
 
 .left-side-bar-open {
-  --move-to-x: 300px;
   animation: 0.5s move-to-right forwards;
 }
 
 .left-side-bar-close {
-  --move-to-x: 300px;
   animation: 0.5s move-to-left forwards;
 }
 
