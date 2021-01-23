@@ -8,7 +8,7 @@
         @click="openTopSidebar"
       />
       <b-button
-        label="openBottomSidebar"
+        label="openBottomSidebar--Buggy-Difficulte"
         type="is-info"
         icon-left="check"
         @click="openBottomSidebar"
@@ -104,8 +104,7 @@ export default {
       console.log("adjustTopSideBar")
       const topSidebar = document.getElementById("top-side-bar");
       topSidebar.style.setProperty("--move-to-offset-y-for-top-side-bar", window.scrollY + 'px');
-      console.log(window.getComputedStyle(topSidebar).getPropertyValue("--move-to-offset-y-for-top-side-bar"));
-      console.log(Number(window.getComputedStyle(topSidebar).getPropertyValue("--move-to-offset-y-for-top-side-bar").replace(/px/,"")));
+      console.log(this.getCssPropsValue(topSidebar,"--move-to-offset-y-for-top-side-bar"))
     },
     adjustBottomSideBar() {
       console.log("adjustBottomSideBar")
@@ -115,6 +114,10 @@ export default {
         console.log("up scroll")
       } else {
         console.log("down scroll")
+        console.log(this.getCssPropsValue(bottomSidebar,"bottom") )
+        console.log(this.getCssPropsValue(bottomSidebar,"--move-to-offset-y-for-bottom-side-bar") - this.getCssPropsValue(bottomSidebar,"--move-to-previous-offset-y-for-bottom-side-bar"))
+        bottomSidebar.style.setProperty("bottom", this.getCssPropsValue(bottomSidebar,"bottom") - (this.getCssPropsValue(bottomSidebar,"--move-to-offset-y-for-bottom-side-bar")-this.getCssPropsValue(bottomSidebar,"--move-to-previous-offset-y-for-bottom-side-bar")) + 'px');
+        console.log(this.getCssPropsValue(bottomSidebar,"bottom"))
       }
       bottomSidebar.style.setProperty("--move-to-previous-offset-y-for-bottom-side-bar", this.getCssPropsValue(bottomSidebar,"--move-to-offset-y-for-bottom-side-bar") + 'px');
     },
@@ -139,22 +142,18 @@ export default {
     openBottomSidebar() {
       console.log("openBottomSidebar");
       const targetDom = document.getElementById("bottom-side-bar");
+      console.log(this.getCssPropsValue(targetDom,"bottom"))
       targetDom.classList = ''
       targetDom.classList.add("bottom-side-bar-open");
-      console.log(this.bottomSideBarHeight,this.getCssPropsValue(targetDom,"--move-to-offset-y-for-bottom-side-bar"))
-      targetDom.style.setProperty("--move-to-y-for-bottom-side-bar", - 300 + 'px');
-      console.log(this.getCssPropsValue(targetDom,"--move-to-y-for-bottom-side-bar"))
+      targetDom.style.setProperty("--move-to-y-for-bottom-side-bar", this.getCssPropsValue(targetDom,"bottom") + 'px');
     },
     closeBottomSidebar() {
       console.log("closeBottomSidebar");
       const targetDom = document.getElementById("bottom-side-bar");
+      console.log(this.getCssPropsValue(targetDom,"bottom"))
       targetDom.classList = ''
       targetDom.classList.add("bottom-side-bar-close");
-      targetDom.style.setProperty("--move-to-y-start-for-bottom-side-bar", - this.bottomSideBarHeight + 'px');
-      console.log(this.bottomSideBarHeight,this.getCssPropsValue(targetDom,"--move-to-offset-y-for-bottom-side-bar"))
-      targetDom.style.setProperty("--move-to-y-for-bottom-side-bar", - 300 + 'px');
-      // https://stackoverflow.com/questions/22677954/simple-javascript-getproperty-function-cannot-access-css-styles-even-though-it
-      console.log(this.getCssPropsValue(targetDom,"--move-to-y-for-bottom-side-bar"))
+      targetDom.style.setProperty("--move-to-y-for-bottom-side-bar", this.getCssPropsValue(targetDom,"bottom") + 'px');
     },
     openTopSidebar() {
       console.log("openTopSidebar");
@@ -304,9 +303,9 @@ export default {
 
 #bottom-side-bar {
   --move-to-previous-offset-y-for-bottom-side-bar: 0px;
+  opacity: 0;
   position: absolute;
   bottom: var(--move-to-y-for-bottom-side-bar);
-  /* bottom: 0px; */
   background-color: #f3e886;
 }
 
@@ -421,19 +420,23 @@ export default {
 
 @keyframes move-to-down-for-bottom-side-bar {
   0% {
-    bottom: var(--move-to-offset-y-for-bottom-side-bar);
+    opacity: 1;
+    bottom: 0px;
   }
   100% {
+    opacity: 0;
     bottom: var(--move-to-y-for-bottom-side-bar);
   }
 }
 
 @keyframes move-to-up-for-bottom-side-bar {
   0% {
+    opacity: 1;
     bottom: var(--move-to-y-for-bottom-side-bar);
   }
   100% {
-    bottom: var(--move-to-offset-y-for-bottom-side-bar);
+    opacity: 1;
+    bottom: 0px;
   }
 }
 </style>
