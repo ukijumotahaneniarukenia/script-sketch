@@ -7,6 +7,12 @@
         icon-left="check"
         @click="openLeftSidebar"
       />
+      <b-button
+        label="openRightSidebar"
+        type="is-info"
+        icon-left="check"
+        @click="openRightSidebar"
+      />
     </div>
     <div class="columns" style="margin: 0px">
       <div id="left-pane" class="column is-3" style="padding-top: 0px;padding-right: 0px;">Left Pane</div>
@@ -22,6 +28,16 @@
         レフトサイドバー
       </div>
     </div>
+    <div id="right-side-bar">
+      <div style="position: relative;">
+        <a
+          class="delete is-large"
+          @click="closeRightSidebar"
+          style="position: absolute;top:5px;right:5px"
+        ></a>
+        ライトサイドバー
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,6 +46,7 @@ export default {
   data: function() {
     return {
       leftSideBarWidth: 500,
+      rightSideBarWidth: 700,
       leftPaneHeight: 2000,
       rightPaneHeight: 2000,
       headerPaneHeight: 100,
@@ -48,6 +65,10 @@ export default {
       const leftSidebar = document.getElementById("left-side-bar");
       leftSidebar.style.top = window.scrollY + 'px';
     },
+    adjustRightSideBarTop() {
+      const rightSidebar = document.getElementById("right-side-bar");
+      rightSidebar.style.top = window.scrollY + 'px';
+    },
     adjustLeftPaneHeight(targetScrollY) {
       const leftPane = document.getElementById("left-pane");
       leftPane.style.height = (window.innerHeight + targetScrollY) + 'px';
@@ -58,21 +79,40 @@ export default {
       rightPane.style.height = (window.innerHeight + targetScrollY) + 'px';
       rightPane.style.paddingBottom = (window.innerHeight + targetScrollY) + 'px'
     },
-    closeLeftSidebar() {
-      console.log("closeLeftSidebar");
-      const targetDom = document.getElementById("left-side-bar");
-      targetDom.classList = ''
-      targetDom.classList.add("left-side-bar-close");
-      targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth + 'px');
-      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x"));
-    },
     openLeftSidebar() {
       console.log("openLeftSidebar");
       const targetDom = document.getElementById("left-side-bar");
       targetDom.classList = ''
       targetDom.classList.add("left-side-bar-open");
-      targetDom.style.setProperty("--move-to-x", this.leftSideBarWidth + 'px');
-      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x"));
+      targetDom.style.setProperty("--move-to-x-for-left-side-bar", - this.leftSideBarWidth + 'px');
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x-for-left-side-bar"));
+    },
+    closeLeftSidebar() {
+      console.log("closeLeftSidebar");
+      const targetDom = document.getElementById("left-side-bar");
+      targetDom.classList = ''
+      targetDom.classList.add("left-side-bar-close");
+      targetDom.style.setProperty("--move-to-x-for-left-side-bar", - this.leftSideBarWidth + 'px');
+      // https://stackoverflow.com/questions/22677954/simple-javascript-getproperty-function-cannot-access-css-styles-even-though-it
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x-for-left-side-bar"));
+    },
+    openRightSidebar() {
+      console.log("openRightSidebar");
+      const targetDom = document.getElementById("right-side-bar");
+      targetDom.classList = ''
+      targetDom.classList.add("right-side-bar-open");
+      targetDom.style.setProperty("--move-to-x-for-right-side-bar", -this.rightSideBarWidth + 'px');
+      // https://stackoverflow.com/questions/22677954/simple-javascript-getproperty-function-cannot-access-css-styles-even-though-it
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x-for-right-side-bar"));
+    },
+    closeRightSidebar() {
+      console.log("closeRightSidebar");
+      const targetDom = document.getElementById("right-side-bar");
+      targetDom.classList = ''
+      targetDom.classList.add("right-side-bar-close");
+      targetDom.style.setProperty("--move-to-x-for-right-side-bar", -this.rightSideBarWidth + 'px');
+      // https://stackoverflow.com/questions/22677954/simple-javascript-getproperty-function-cannot-access-css-styles-even-though-it
+      console.log(window.getComputedStyle(targetDom).getPropertyValue("--move-to-x-for-right-side-bar"));
     },
     detectWindowScroll() {
       window.addEventListener("scroll", event => {
@@ -82,21 +122,28 @@ export default {
         console.log(window.innerHeight);
         console.log(window.document.body.scrollHeight);
         this.adjustLeftSideBarTop()
+        this.adjustRightSideBarTop()
         this.adjustLeftPaneHeight(window.scrollY)
         this.adjustRightPaneHeight(window.scrollY)
       });
     },
     setUpSize() {
       const leftSidebar = document.getElementById("left-side-bar");
+      const rightSidebar = document.getElementById("right-side-bar");
       const headerPane = document.getElementById("header-pane");
       const leftPane = document.getElementById("left-pane");
       const rightPane = document.getElementById("right-pane");
       headerPane.style.height = this.headerPaneHeight + 'px';
       leftPane.style.paddingBottom = (this.leftPaneHeight + this.headerPaneHeight) + 'px'
       rightPane.style.paddingBottom = (this.rightPaneHeight + this.headerPaneHeight) + 'px'
-      leftSidebar.style.left = -this.leftSideBarWidth + "px";
+      leftSidebar.style.position = "absolute";
+      leftSidebar.style.setProperty("--move-to-x-for-left-side-bar", - this.leftSideBarWidth + 'px');
       leftSidebar.style.width = this.leftSideBarWidth + "px";
       leftSidebar.style.height = window.innerHeight + "px";
+      rightSidebar.style.position = "absolute";
+      rightSidebar.style.setProperty("--move-to-x-for-right-side-bar", -this.rightSideBarWidth + 'px');
+      rightSidebar.style.width = this.rightSideBarWidth + "px";
+      rightSidebar.style.height = window.innerHeight + "px";
     },
     initialize: function() {
       console.log("initialize");
@@ -141,34 +188,66 @@ export default {
 #left-side-bar {
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: var(--move-to-x-for-left-side-bar);
   background-color: #f3e886;
-  --move-to-x: 300px;
 }
 
 .left-side-bar-open {
-  animation: 0.5s move-to-right forwards;
+  animation: 0.5s move-to-right-for-left-side-bar forwards;
 }
 
 .left-side-bar-close {
-  animation: 0.5s move-to-left forwards;
+  animation: 0.5s move-to-left-for-left-side-bar forwards;
 }
 
-@keyframes move-to-right {
+#right-side-bar {
+  position: absolute;
+  top: 0px;
+  right: var(--move-to-x-for-right-side-bar);
+  background-color: #f3e886;
+}
+
+.right-side-bar-open {
+  animation: 0.5s move-to-left-for-right-side-bar forwards;
+}
+
+.right-side-bar-close {
+  animation: 0.5s move-to-right-for-right-side-bar forwards;
+}
+
+@keyframes move-to-right-for-left-side-bar {
   0% {
-    transform: translateX(0px);
+    left: var(--move-to-x-for-left-side-bar);
   }
   100% {
-    transform: translateX(var(--move-to-x));
+    left: 0px;
   }
 }
 
-@keyframes move-to-left {
+@keyframes move-to-left-for-left-side-bar {
   0% {
-    transform: translateX(var(--move-to-x));
+    left: 0px;
   }
   100% {
-    transform: translateX(0px);
+    left: var(--move-to-x-for-left-side-bar);
+  }
+}
+
+@keyframes move-to-right-for-right-side-bar {
+  0% {
+    right: 0px;
+  }
+  100% {
+    right: var(--move-to-x-for-right-side-bar);
+  }
+}
+
+@keyframes move-to-left-for-right-side-bar {
+  0% {
+    right: var(--move-to-x-for-right-side-bar);
+  }
+  100% {
+    right: 0px;
   }
 }
 
