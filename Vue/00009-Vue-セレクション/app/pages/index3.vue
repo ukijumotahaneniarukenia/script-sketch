@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div class="is-flex is-justify-content-center">
+    <div style="position: absolute;top:10px;left:10px;z-index: 5;opacity: 0.20;">
       <div id="target-drag-area" class="is-flex is-flex-wrap-wrap">
         <div
-          class="mini-box"
           v-for="itemIndex in gridDataList"
           :key="itemIndex"
+          :id="'mini-box-' + (itemIndex + 1)"
+          class="mini-box"
         ></div>
       </div>
     </div>
-    <div class="is-flex is-justify-content-center">
-      <figure style="margin: 50px">
-        <img id="target-image" src="/images/test.jpg" />
-      </figure>
+    <div>
+      <img id="target-image" src="/images/sample-640x427.jpg" style="position: absolute;top:10px;left:10px"/>
     </div>
+    <!-- <div>
+      <img id="target-image" src="/images/sample-1280x854.jpg" style="position: absolute;top:10px;left:10px"/>
+    </div> -->
   </div>
 </template>
 
@@ -23,10 +25,9 @@ import SelectionArea from "@simonwep/selection-js";
 export default {
   data: function() {
     return {
-      selectBoxSize: 0,
       defaultSelectBoxSize: 16,
-      boxSizeDataList: this.range(1, 100),
-      gridDataList: this.range(1, 100)
+      adjustBoxCount: 100,
+      gridDataList: []
     };
   },
   mounted() {
@@ -40,8 +41,6 @@ export default {
         boundaries: ["#target-drag-area"]
       })
         .on("start", ({ store, event }) => {
-          console.log(store);
-          console.log(event);
           if (!event.ctrlKey && !event.metaKey) {
             // Unselect all elements
             for (const el of store.stored) {
@@ -59,11 +58,6 @@ export default {
               changed: { added, removed }
             }
           }) => {
-            console.log({
-              store: {
-                changed: { added, removed }
-              }
-            });
             // Add a custom class to the elements that where selected.
             for (const el of added) {
               el.classList.add("selected");
@@ -76,7 +70,10 @@ export default {
             }
           }
         )
-        .on("stop", () => {
+        .on("stop", (dragInfo) => {
+          console.log(dragInfo)
+          console.log(dragInfo.store.selected)
+          console.log(dragInfo.store.stored)
           selection.keepSelection();
         });
     },
@@ -114,7 +111,7 @@ export default {
           (targerBoxSize * targerBoxSize)
       );
       console.log(boxCount);
-      this.gridDataList = this.range(1, boxCount);
+      this.gridDataList = this.range(1, boxCount+this.adjustBoxCount);
       targetDragArea.style.setProperty(
         "--drag-area-width",
         targetImageItem.clientWidth + "px"
@@ -157,12 +154,13 @@ body {
   width: var(--mini-box-width);
   height: var(--mini-box-height);
   background-color: #e3e3e3;
-  border: 1px solid #000000;
-  border-radius: 0.1em;
+   /* デバッグ用 */
+  /* border: 0.9px solid #000000;
+  border-radius: 0.1em; */
 }
 
 .selected {
-  background-color: #bbbbbb;
-  border: 1px solid #000000;
+  background-color: #000000;
+  border: 0.9px solid #000000;
 }
 </style>
