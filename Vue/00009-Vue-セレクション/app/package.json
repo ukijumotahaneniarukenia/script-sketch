@@ -9,7 +9,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@simonwep/selection-js": "^2.0.0",
     "core-js": "^3.8.2",
+    "dragselect": "^2.0.2",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4"
   },

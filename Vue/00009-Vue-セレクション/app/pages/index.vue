@@ -1,7 +1,18 @@
 <template>
   <div>
-    <div id="unko" @click="unkoClick">unko</div>
-    <div class="is-flex is-justify-content-center">
+    <button class="button is-info" @click="resetBoxSize">Reset Box Size</button>
+    <b-field label="Select Box Size">
+      <b-select id="select-box-size" v-model="selectBoxSize" placeholder="Select Box Size" @change="detectBoxSize">
+        <option
+          v-for="index in boxSizeDataList"
+          :key="index"
+          :value="index-99"
+        >
+          {{ index-99 }}
+        </option>
+      </b-select>
+    </b-field>
+    <div class="is-flex is-justify-content-center"  style="z-index: 5">
       <div id="target-drag-area" class="is-flex is-flex-wrap-wrap">
         <div class="mini-box" v-for="itemIndex in gridDataList" :key="itemIndex">
         </div>
@@ -9,58 +20,78 @@
     </div>
     <div class="is-flex is-justify-content-center">
       <figure style="margin: 50px">
-        <img id="target-image" src="/images/test.jpg" />
+        <img id="target-image" src="/images/test.jpg"/>
       </figure>
     </div>
-    <!-- <div class="columns is-gapless">
-      <div class="column" v-for="(itemRowList, itemRowKey) in gridDataList" :key="itemRowKey">
-        <div class="column" v-for="(itemData, itemColKey) in itemRowList" :key="itemColKey">
-          <div class="box">
-            {{itemData.itemName}}
-            {{itemRowKey + ',' + itemColKey}}
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script>
+
+import DragSelect from 'dragselect'
+
 export default {
   data: function() {
     return {
-      miniBoxHeight: 30,
-      miniBoxwidth: 30,
+      selectBoxSize:0,
+      defaultSelectBoxSize:16,
+      boxSizeDataList: this.range(1, 100),
       gridDataList: this.range(1, 100)
     };
   },
   mounted() {
-    this.initilaize();
+    this.initilaize(this.defaultSelectBoxSize);
+    this.detectBoxSize();
+    this.setDragArea()
   },
   methods: {
-    unkoClick() {
+    setDragArea() {
+      const dragSelect = new DragSelect({
+        selectables: document.getElementById('target-image')
+      });
+
+      dragSelect.subscribe('dragstart',(event)=>{
+        console.log(event)
+      })
+    },
+    detectBoxSize() {
+      const targetDom = document.getElementById("select-box-size")
+      console.log("detectBoxSize")
+      console.log(targetDom)
+      targetDom.addEventListener("change", (event) => {
+        console.log(event)
+        console.log(this.selectBoxSize)
+        this.resizeBoxSize(this.selectBoxSize)
+      })
+    },
+    resetBoxSize() {
+      this.resizeBoxSize(this.defaultSelectBoxSize)
+    },
+    resizeBoxSize(targerBoxSize) {
+      this.initilaize(targerBoxSize)
       const targetMiniBoxList = Array.from(document.querySelectorAll(".mini-box"))
       for (let index = 0; index < targetMiniBoxList.length; index++) {
         const targetMiniBox = targetMiniBoxList[index];
         targetMiniBox.setAttribute("id","mini-box-"+index)
-        targetMiniBox.style.setProperty("--mini-box-height", this.miniBoxHeight + 'px')
-        targetMiniBox.style.setProperty("--mini-box-width", this.miniBoxwidth + 'px')
+        targetMiniBox.style.setProperty("--mini-box-height", targerBoxSize + 'px')
+        targetMiniBox.style.setProperty("--mini-box-width", targerBoxSize + 'px')
       }
-      console.log("unkoClick")
+      console.log("resizeBoxSize")
     },
     range(start, end) {
       return Array.from({ length: end - start + 1 }, (_, i) => end + i);
     },
-    initilaize() {
+    initilaize(targerBoxSize) {
       console.log("initilaize");
       const targetImageItem = document.getElementById("target-image");
       const targetDragArea = document.getElementById("target-drag-area");
       const boxCount = Math.ceil(
-        (targetImageItem.clientHeight * targetImageItem.clientWidth) / (this.miniBoxHeight * this.miniBoxwidth)
+        (targetImageItem.clientHeight * targetImageItem.clientWidth) / (targerBoxSize * targerBoxSize)
       );
       console.log(boxCount);
       this.gridDataList =  this.range(1, boxCount);
       targetDragArea.style.setProperty("--drag-area-width", targetImageItem.clientWidth + 'px');
+      targetDragArea.style.setProperty("--drag-area-height", targetImageItem.clientHeight + 'px');
     },
   }
 };
@@ -121,12 +152,14 @@ main .boxes.green div.selected {
 
 #target-drag-area {
   --drag-area-width: 200px;
+  --drag-area-height: 200px;
   width: var(--drag-area-width);
+  height: var(--drag-area-height);
 }
 
 .mini-box {
-  --mini-box-width: 20px;
-  --mini-box-height: 20px;
+  --mini-box-width: 16px;
+  --mini-box-height: 16px;
   width: var(--mini-box-width);
   height: var(--mini-box-height);
   background-color: #e4e4e4;
