@@ -67,7 +67,7 @@ export default {
       // console.log(targetDom.contentDocument.head)
       // console.log(targetDom.contentDocument.body)
       // drop対象はbody全体
-      targetDom.contentDocument.body.addEventListener("drop", this.dropHandler);
+      targetDom.contentDocument.body.addEventListener("drop", (event) => {this.dropHandler("うんこ","もりもり","森鴎外",{unko:"うんこ"},[{unko:"うんこ"},{morimori:"もりもり"},{moriougai:"森鴎外"}],event)});
       targetDom.contentDocument.body.addEventListener("dragover", this.dragoverHandler);
 
       let mockPageStyleDom = document.createElement("style");
@@ -106,7 +106,9 @@ export default {
       );
       console.log(itemDataList)
     },
-    dropHandler(event) {
+    dropHandler(unko,morimori,moriougai,unkoObj,unkoList,event) {
+      console.log(unko,morimori,moriougai)
+      console.log(unkoObj,unkoList)
       event.preventDefault();
       event.stopPropagation();
       console.log("Drop");
