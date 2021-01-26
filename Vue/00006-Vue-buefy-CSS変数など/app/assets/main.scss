@@ -1,0 +1,34 @@
+@import "~bulma/sass/utilities/_all";
+
+@mixin hoge($color: #fff, $fSize: 16px) {
+  color: $color;
+  font-size: $fSize;
+}
+
+$bp-smartphone-portrait: 520px;
+$bp-tablet-portrait: 768px;
+$bp-laptop_s: 1000px;
+$bp-tablet-landscape: 1024px;
+$bp-laptop_m: 1366px;
+$bp-laptop_l: 1920px;
+
+// @media screen and (min-width: ($bp-smartphone-portrait)) {
+//   $sidebar-width: 200px;
+// }
+
+// @media screen and (min-width: ($bp-tablet-portrait)) {
+//   $sidebar-width: 500px;
+// }
+
+// @mixin pc($width: 768px) {
+//   @media screen and (min-width: ($bp-tablet-landscape)) {
+//     $sidebar-width: $width;
+//   }
+// }
+// $modal-content-width: 100px;
+
+// $sidebar-width: 100%;
+// $sidebar-mobile-breakpoint: 350px;
+// $sidebar-mobile-width: 400px;
+@import "~bulma";
+@import "~buefy/src/scss/buefy"
