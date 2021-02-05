@@ -1,10 +1,14 @@
 <template>
   <!-- https://stackoverflow.com/questions/52214243/how-to-set-start-position-of-draggable-div -->
-  <div id="my-modal">
-    <div id="my-modal-header">Click here to move</div>
-    <p>Move</p>
-    <p>this</p>
-    <p>DIV</p>
+  <div>
+    <div style="position: fixed; top: 10px; right: 10px; z-index: 2147483647">
+      <div id="my-modal">
+        <div id="my-modal-header">Click here to move</div>
+        <p>Move</p>
+        <p>this</p>
+        <p>DIV</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,8 +66,8 @@ export default {
         document.onmouseup = null;
         document.onmousemove = null;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
