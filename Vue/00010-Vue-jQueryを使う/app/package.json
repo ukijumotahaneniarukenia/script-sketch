@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "jquery": "^3.5.1",
+    "jquery.typist": "0.0.7",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4"
   },
