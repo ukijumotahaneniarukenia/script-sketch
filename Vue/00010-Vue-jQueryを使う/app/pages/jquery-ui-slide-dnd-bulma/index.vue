@@ -67,54 +67,24 @@
             </div>
           </div>
         </div>
+        <div id="main-area-workspace-content">
+          <div v-for="(slideItem, index) in slideItemList" :key="index" >
+            <div class="is-flex is-justify-content-center dummy-slide" style="margin: 5px">
+              <div class="file is-large is-boxed">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="resume">
+                  <span class="file-cta">
+                    <span class="icon"><i class="mdi mdi-cloud-upload" style="font-size: 32px;"></i></span>
+                    <div class="">
+                      Upload Image or Movie
+                    </div>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
-      <div>メインエリア</div>
     </div>
   </div>
 </template>
@@ -163,11 +133,13 @@ export default {
         materialSrcPath: this.dummySlideItemMaterialSrcPath
       }
       this.slideItemList.splice(0, 0, pushItem)
+      this.setUpDomHeight();
     },
     deleteSlide(targetSlideNumber) {
       console.log("deleteSlide")
       console.log(targetSlideNumber)
       this.slideItemList.splice(targetSlideNumber-1, 1)
+      this.setUpDomHeight();
     },
     addSlide(targetSlideNumber) {
       console.log("addSlide")
@@ -176,6 +148,7 @@ export default {
         materialSrcPath: this.dummySlideItemMaterialSrcPath
       }
       this.slideItemList.splice(targetSlideNumber, 0, pushItem)
+      this.setUpDomHeight();
     },
     detectResize() {
       window.addEventListener("resize", event => {
@@ -197,7 +170,7 @@ export default {
         const mainAreaDom = document.getElementById("main-area");
         sideBarDom.style.setProperty("--side-bar-margin-top", this.adjustHeigth + "px")
         sideBarDom.style.height =
-          this.getMaxHeight() + this.adjustHeigth + "px";
+          window.innerHeight + "px";
         mainAreaDom.style.height = this.getMaxHeight() + "px";
       });
     }
@@ -216,6 +189,8 @@ export default {
   margin-top: var(--side-bar-margin-top);
   padding-right: 0px;
   overflow-y: scroll;
+  position:sticky;
+  top:0px;
 }
 
 #main-area {
@@ -231,12 +206,14 @@ export default {
   height: 50px;
 }
 
-#main-area-workspace {
-  position: sticky;
-  top: 0px;
-}
-
 #main-area-workspace-header {
   background-color: cadetblue;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+
+.dummy-slide {
+  height: 500px;
 }
 </style>
