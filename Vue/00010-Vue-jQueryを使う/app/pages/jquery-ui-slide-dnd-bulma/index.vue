@@ -1,99 +1,121 @@
 <template>
-  <div class="columns">
-    <div id="side-bar" class="column is-3">
-      <div class="is-flex is-justify-content-center" style="margin:5px">
-        <button id="add-slide" type="button" class="button is-success" @click="addFirstSlide($event)">
-          <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
-        </button>
-      </div>
-      <div v-for="(slideItem, index) in slideItemList" :key="index" >
-        <div
-          class="card"
-          style="margin: 10px"
-          @mouseover="showDeleteSlideButton('delete-slide-button-' + (index + 1))"
-          @mouseleave="hideDeleteSlideButton('delete-slide-button-' + (index + 1))"
-        >
-          <div class="card-content">
-            <button
-              :id="'delete-slide-button-' + (index + 1)"
-              type="button"
-              class="button is-danger"
-              style="position: absolute;top:5px;right:5px;display:none;"
-              @click="deleteSlide(index + 1)"
-            >
-              <span class="icon"><i class="mdi mdi-minus" style="font-size: 32px;"></i></span>
-            </button>
-            <figure>
-              <img :id="'side-bar-slide-' + (index + 1)" :src="slideItem.materialSrcPath">
-            </figure>
-          </div>
-        </div>
-        <div class="is-flex is-justify-content-center" style="margin:5px">
-          <button id="add-slide" type="button" class="button is-success" @click="addSlide(index + 1)">
-            <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
-          </button>
-        </div>
+  <div>
+    <div id="select-edit-mode-modal" class="modal">
+      <div id="select-edit-mode-modal-card" class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Select Edit Mode</p>
+          <button class="delete" aria-label="close" @click="closeSelectEditModeModal"></button>
+        </header>
+        <section class="modal-card-body">
+
+        </section>
+        <footer class="modal-card-foot">
+          <p style="visibility: hidden">Dummy Modal Card Footer</p>
+        </footer>
       </div>
     </div>
-    <div id="main-area" class="column is-9">
-      <div id="main-area-header">
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <button class="button is-success" style="margin: 5px">Success</button>
-            <button class="button is-success" style="margin: 5px">Success</button>
-            <button class="button is-success" style="margin: 5px">Success</button>
-          </div>
+    <div class="columns">
+      <div id="side-bar" class="column is-3">
+        <div class="is-flex is-justify-content-center" style="margin:5px">
+          <b-tooltip label="add slide" position="is-right">
+            <button id="add-slide" type="button" class="button is-success" @click="addFirstSlide($event)">
+              <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
+            </button>
+          </b-tooltip>
+        </div>
+        <div v-for="(slideItem, index) in slideItemList" :key="index" >
+          <div
+            class="card"
+            style="margin: 10px"
+            @mouseover="showDeleteSlideButton('delete-slide-button-' + (index + 1))"
+            @mouseleave="hideDeleteSlideButton('delete-slide-button-' + (index + 1))"
+          >
+            <div class="card-content">
+              <b-tooltip label="delete slide" position="is-left" style="position: absolute;top:5px;right:5px;">
+                <button
+                  :id="'delete-slide-button-' + (index + 1)"
+                  type="button"
+                  class="button is-danger"
+                  @click="deleteSlide(index + 1)"
+                >
+                  <span class="icon"><i class="mdi mdi-minus" style="font-size: 32px;"></i></span>
+                </button>
+              </b-tooltip>
 
-          <div>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
+              <figure>
+                <img :id="'side-bar-slide-' + (index + 1)" :src="slideItem.materialSrcPath">
+              </figure>
+            </div>
           </div>
-
-          <div class="navbar-end">
-            <button class="button is-success" style="margin: 5px">Success</button>
-            <button class="button is-success" style="margin: 5px">Success</button>
-            <button class="button is-success" style="margin: 5px">Success</button>
+          <div class="is-flex is-justify-content-center" style="margin:5px">
+            <b-tooltip label="add slide" position="is-right">
+              <button id="add-slide" type="button" class="button is-success" @click="addSlide(index + 1)" data-tooltip="Tooltip Text">
+                <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
+              </button>
+            </b-tooltip>
           </div>
         </div>
       </div>
-      <div id="main-area-workspace">
-        <div id="main-area-workspace-header">
+      <div id="main-area" class="column is-9">
+        <div id="main-area-header">
           <div class="navbar-menu">
             <div class="navbar-start">
-              <button class="button is-info is-light" style="margin: 5px">Info</button>
-              <button class="button is-info is-light" style="margin: 5px">Info</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
+            </div>
+
+            <div>
               <button class="button is-info is-light" style="margin: 5px">Info</button>
             </div>
 
             <div class="navbar-end">
-              <button class="button is-info is-light" style="margin: 5px">Info</button>
-              <button class="button is-info is-light" style="margin: 5px">Info</button>
-              <button class="button is-info is-light" style="margin: 5px">Info</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
+              <button class="button is-success" style="margin: 5px">Success</button>
             </div>
           </div>
         </div>
-        <div id="main-area-workspace-content">
-          <div v-for="(slideItem, index) in slideItemList" :key="index" >
-            <div v-if="slideItem.materialSrcPath !== dummySlideItemMaterialSrcPath" style="position: relative;">
-              <img :id="'slide-' + (index + 1)" :src="slideItem.materialSrcPath">
-              <button id="select-edit-mode-button" type="button" class="button is-light" style="position: absolute;top: 50%;left:50%;transform: translate(-50%, -50%);"  @click="selectEditMode($event)">
-                <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
-              </button>
+        <div id="main-area-workspace">
+          <div id="main-area-workspace-header">
+            <div class="navbar-menu">
+              <div class="navbar-start">
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+              </div>
+
+              <div class="navbar-end">
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+                <button class="button is-info is-light" style="margin: 5px">Info</button>
+              </div>
             </div>
-            <div
-              v-if="slideItem.materialSrcPath === dummySlideItemMaterialSrcPath"
-              class="is-flex is-justify-content-center dummy-slide"
-              style="margin: 5px"
-            >
-              <div class="file is-large is-boxed">
-                <label class="file-label">
-                  <input :id="'detect-file-upload-' + (index + 1)" class="file-input" type="file" name="resume" @change="detectFileUpload($event)">
-                  <span class="file-cta">
-                    <span class="icon"><i class="mdi mdi-cloud-upload" style="font-size: 32px;"></i></span>
-                    <div class="">
-                      Upload Image or Movie
-                    </div>
-                  </span>
-                </label>
+          </div>
+          <div id="main-area-workspace-content">
+            <div v-for="(slideItem, index) in slideItemList" :key="index" >
+              <div v-if="slideItem.materialSrcPath !== dummySlideItemMaterialSrcPath" style="position: relative;">
+                <img :id="'slide-' + (index + 1)" :src="slideItem.materialSrcPath">
+                <button id="select-edit-mode-button" type="button" class="button is-light" style="position: absolute;top: 50%;left:50%;transform: translate(-50%, -50%);"  @click="selectEditMode($event)">
+                  <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
+                </button>
+              </div>
+              <div
+                v-if="slideItem.materialSrcPath === dummySlideItemMaterialSrcPath"
+                class="is-flex is-justify-content-center dummy-slide"
+                style="margin: 5px"
+              >
+                <div class="file is-large is-boxed">
+                  <label class="file-label">
+                    <input :id="'detect-file-upload-' + (index + 1)" class="file-input" type="file" name="resume" @change="detectFileUpload($event)">
+                    <span class="file-cta">
+                      <span class="icon"><i class="mdi mdi-cloud-upload" style="font-size: 32px;"></i></span>
+                      <div class="">
+                        Upload Image or Movie
+                      </div>
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +129,9 @@
 export default {
   data: function() {
     return {
+      previousScrollY: 0,
+      selectEditModeModalHeight: 600,
+      selectEditModeModalWidth: 800,
       dummySlideItemMaterialSrcPath : 'https://bulma.io/images/placeholders/640x480.png',
       adjustHeigth: 12,
       slideItemList: [
@@ -130,9 +155,28 @@ export default {
     this.detectResize();
   },
   methods: {
+    showAddFirstSlideTooltipContent(event) {
+      console.log("showAddFirstSlideTooltipContent")
+      console.log(event.target)
+      // const showAddFirstSlideTooltipContentDomId = event.target.id
+    },
+    setUpSelectEditModeModal() {
+      const selectEditModeModal = document.getElementById("select-edit-mode-modal-card")
+      selectEditModeModal.style.setProperty("--select-edit-mode-modal-card-height", this.selectEditModeModalHeight + "px")
+      selectEditModeModal.style.setProperty("--select-edit-mode-modal-card-width", this.selectEditModeModalWidth + "px")
+    },
+    closeSelectEditModeModal(){
+      const selectEditModeModalDom = document.getElementById("select-edit-mode-modal")
+      selectEditModeModalDom.classList.remove("is-active")
+      document.body.style.position = '';
+      window.scrollTo(0, this.previousScrollY)
+    },
     selectEditMode(event) {
       console.log("selectEditMode")
-      console.log(event)
+      const selectEditModeModalDom = document.getElementById("select-edit-mode-modal")
+      selectEditModeModalDom.classList.add("is-active")
+      this.previousScrollY = window.scrollY
+      document.body.style.position = 'fixed';
     },
     detectFileUpload(event) {
       console.log("detectFileUpload")
@@ -156,7 +200,10 @@ export default {
     hideDeleteSlideButton(targetDeleteSlideButtonDomId) {
       console.log("hideDeleteSlideButton")
       const targetDeleteSlideButtonDom = document.getElementById(targetDeleteSlideButtonDomId)
-      targetDeleteSlideButtonDom.style.display = 'none'
+      setTimeout(()=>{
+        // ツールチップとの競合を抑えるために遅らせ
+        targetDeleteSlideButtonDom.style.display = 'none'
+      }, 100)
     },
     addFirstSlide(event) {
       console.log("addFirstSlide")
@@ -259,5 +306,12 @@ export default {
 
 .dummy-slide {
   height: 1200px; /* 考えるところ */
+}
+
+#select-edit-mode-modal-card {
+  --select-edit-mode-modal-card-height : 800px;
+  --select-edit-mode-modal-card-width : 800px;
+  height: var(--select-edit-mode-modal-card-height);
+  width: var(--select-edit-mode-modal-card-width);
 }
 </style>
