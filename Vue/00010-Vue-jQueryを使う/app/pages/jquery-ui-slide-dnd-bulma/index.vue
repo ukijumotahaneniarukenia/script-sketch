@@ -24,7 +24,7 @@
               <span class="icon"><i class="mdi mdi-minus" style="font-size: 32px;"></i></span>
             </button>
             <figure>
-              <img src="https://bulma.io/images/placeholders/640x480.png">
+              <img :id="'side-bar-slide-' + (index + 1)" :src="slideItem.materialSrcPath">
             </figure>
           </div>
         </div>
@@ -69,10 +69,19 @@
         </div>
         <div id="main-area-workspace-content">
           <div v-for="(slideItem, index) in slideItemList" :key="index" >
-            <div class="is-flex is-justify-content-center dummy-slide" style="margin: 5px">
+            <div v-if="slideItem.materialSrcPath !== dummySlideItemMaterialSrcPath">
+              <figure>
+                <img :id="'slide-' + (index + 1)" :src="slideItem.materialSrcPath">
+              </figure>
+            </div>
+            <div
+              v-if="slideItem.materialSrcPath === dummySlideItemMaterialSrcPath"
+              class="is-flex is-justify-content-center dummy-slide"
+              style="margin: 5px"
+            >
               <div class="file is-large is-boxed">
                 <label class="file-label">
-                  <input class="file-input" type="file" name="resume">
+                  <input :id="'detect-file-upload-' + (index + 1)" class="file-input" type="file" name="resume" @change="detectFileUpload($event)">
                   <span class="file-cta">
                     <span class="icon"><i class="mdi mdi-cloud-upload" style="font-size: 32px;"></i></span>
                     <div class="">
@@ -116,6 +125,20 @@ export default {
     this.detectResize();
   },
   methods: {
+    detectFileUpload(event) {
+      console.log("detectFileUpload")
+      const targetInputDomId = event.target.id
+      const targetSlideNumber = Number(targetInputDomId.replace(/detect-file-upload-/,""))
+      const targetUploadFileList = Array.from(event.target.files)
+      targetUploadFileList.map(targetUploadFile => {
+        const pushItem = {
+          materialSrcPath: URL.createObjectURL(targetUploadFile),
+          fileType: targetUploadFile.type
+        }
+        this.slideItemList.splice(targetSlideNumber-1, 1, pushItem)
+        this.setUpDomHeight();
+      })
+    },
     showDeleteSlideButton(targetDeleteSlideButtonDomId) {
       console.log("showDeleteSlideButton")
       const targetDeleteSlideButtonDom = document.getElementById(targetDeleteSlideButtonDomId)
@@ -214,6 +237,6 @@ export default {
 }
 
 .dummy-slide {
-  height: 500px;
+  height: 1200px; /* 考えるところ */
 }
 </style>
