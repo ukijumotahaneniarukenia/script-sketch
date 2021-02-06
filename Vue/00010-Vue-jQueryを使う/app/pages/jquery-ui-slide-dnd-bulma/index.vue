@@ -44,6 +44,16 @@
             <button class="button is-success" style="margin: 5px">Success</button>
           </div>
 
+          <div>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+            <button class="button is-info is-light" style="margin: 5px">Info</button>
+          </div>
+
           <div class="navbar-end">
             <button class="button is-success" style="margin: 5px">Success</button>
             <button class="button is-success" style="margin: 5px">Success</button>
@@ -227,12 +237,13 @@ export default {
   top: 0px;
   background-color: darkgray;
   height: 50px;
+  z-index: 1;
 }
 
 #main-area-workspace-header {
   background-color: cadetblue;
   position: sticky;
-  top: 0px;
+  top: 50px; /* main-area-headerと同じ高さ */
   z-index: 1;
 }
 
