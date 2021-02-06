@@ -46,12 +46,6 @@
 
           <div>
             <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
-            <button class="button is-info is-light" style="margin: 5px">Info</button>
           </div>
 
           <div class="navbar-end">
@@ -79,10 +73,11 @@
         </div>
         <div id="main-area-workspace-content">
           <div v-for="(slideItem, index) in slideItemList" :key="index" >
-            <div v-if="slideItem.materialSrcPath !== dummySlideItemMaterialSrcPath">
-              <figure>
-                <img :id="'slide-' + (index + 1)" :src="slideItem.materialSrcPath">
-              </figure>
+            <div v-if="slideItem.materialSrcPath !== dummySlideItemMaterialSrcPath" style="position: relative;">
+              <img :id="'slide-' + (index + 1)" :src="slideItem.materialSrcPath">
+              <button id="select-edit-mode-button" type="button" class="button is-light" style="position: absolute;top: 50%;left:50%;transform: translate(-50%, -50%);"  @click="selectEditMode($event)">
+                <span class="icon"><i class="mdi mdi-plus" style="font-size: 32px;"></i></span>
+              </button>
             </div>
             <div
               v-if="slideItem.materialSrcPath === dummySlideItemMaterialSrcPath"
@@ -135,6 +130,10 @@ export default {
     this.detectResize();
   },
   methods: {
+    selectEditMode(event) {
+      console.log("selectEditMode")
+      console.log(event)
+    },
     detectFileUpload(event) {
       console.log("detectFileUpload")
       const targetInputDomId = event.target.id
