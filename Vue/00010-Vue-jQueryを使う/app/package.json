@@ -11,9 +11,14 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "jquery": "^3.5.1",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
     "jquery.typist": "0.0.7",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/jquery": "^3.5.5",
+    "@types/jqueryui": "^1.12.14"
+  }
 }

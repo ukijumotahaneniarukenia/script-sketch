@@ -25,6 +25,11 @@ export default {
           icon: "lightbulb",
           to: { name: "sketch-jquery" },
         },
+        {
+          title: "jquery-ui-dnd",
+          icon: "lightbulb",
+          to: { name: "jquery-ui-dnd" },
+        },
       ],
     };
   },

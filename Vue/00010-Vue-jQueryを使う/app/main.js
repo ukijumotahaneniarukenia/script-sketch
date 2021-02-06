@@ -3,5 +3,11 @@ import jQuery from 'jquery'
 global.jquery = jQuery
 global.$ = jQuery
 
+
 // jQueryの外部ライブラリを利用
 import typist from 'jquery.typist/dist/jquery.typist.min.js'
+
+
+// jQueryUIの外部ライブラリを利用
+import jQueryUI from 'jquery-ui'
+import jQueryUIDist from 'jquery-ui-dist/jquery-ui.min.js'
