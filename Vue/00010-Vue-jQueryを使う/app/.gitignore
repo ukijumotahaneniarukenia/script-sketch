@@ -1,5 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
+
+/static/images/*
+/static/videos/*
+
 # Logs
 /logs
 *.log
