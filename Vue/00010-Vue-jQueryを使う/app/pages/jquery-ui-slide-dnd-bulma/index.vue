@@ -6,8 +6,33 @@
           <p class="modal-card-title">Select Edit Mode</p>
           <button class="delete" aria-label="close" @click="closeSelectEditModeModal"></button>
         </header>
-        <section class="modal-card-body">
-
+        <section class="modal-card-body is-flex is-justify-content-center">
+          <div class="is-flex is-justify-content-center">
+            <div class="card is-flex is-justify-content-center" style="margin:10px">
+              <div class="card-content">
+                <p class="title" style="text-align: center">
+                  Text
+                </p>
+                <img :src="dummySelectEditModeMaterialSrcPath">
+              </div>
+            </div>
+            <div class="card is-flex is-justify-content-center" style="margin:10px">
+              <div class="card-content">
+                <p class="title" style="text-align: center">
+                  Zoom
+                </p>
+                <img :src="dummySelectEditModeMaterialSrcPath">
+              </div>
+            </div>
+            <div class="card is-flex is-justify-content-center" style="margin:10px">
+              <div class="card-content">
+                <p class="title" style="text-align: center">
+                  Movie
+                </p>
+                <img :src="dummySelectEditModeMaterialSrcPath">
+              </div>
+            </div>
+          </div>
         </section>
         <footer class="modal-card-foot">
           <p style="visibility: hidden">Dummy Modal Card Footer</p>
@@ -131,7 +156,8 @@ export default {
     return {
       previousScrollY: 0,
       selectEditModeModalHeight: 600,
-      selectEditModeModalWidth: 800,
+      selectEditModeModalWidth: 1200,
+      dummySelectEditModeMaterialSrcPath : 'https://bulma.io/images/placeholders/256x256.png',
       dummySlideItemMaterialSrcPath : 'https://bulma.io/images/placeholders/640x480.png',
       adjustHeigth: 12,
       slideItemList: [
@@ -153,6 +179,7 @@ export default {
   mounted() {
     this.setUpDomHeight();
     this.detectResize();
+    this.setUpSelectEditModeModal();
   },
   methods: {
     showAddFirstSlideTooltipContent(event) {
