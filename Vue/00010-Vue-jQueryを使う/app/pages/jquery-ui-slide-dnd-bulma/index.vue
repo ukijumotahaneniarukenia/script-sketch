@@ -172,7 +172,8 @@ export default {
       console.log("deleteSlide")
       console.log(targetSlideNumber)
       this.slideItemList.splice(targetSlideNumber-1, 1)
-      this.setUpDomHeight();
+      this.setUpDomHeightAfterDeleteSlideHook();
+      // メイン側でのスクロール量の調節
     },
     addSlide(targetSlideNumber) {
       console.log("addSlide")
@@ -196,6 +197,16 @@ export default {
         document.body.clientHeight,
         window.innerHeight
       );
+    },
+    setUpDomHeightAfterDeleteSlideHook() {
+      this.$nextTick(() => {
+        const sideBarDom = document.getElementById("side-bar");
+        const mainAreaDom = document.getElementById("main-area");
+        sideBarDom.style.setProperty("--side-bar-margin-top", this.adjustHeigth + "px")
+        sideBarDom.style.height =
+          window.innerHeight + "px";
+        mainAreaDom.style.height = window.innerHeight + (this.adjustHeigth) + "px";
+      });
     },
     setUpDomHeight() {
       this.$nextTick(() => {
