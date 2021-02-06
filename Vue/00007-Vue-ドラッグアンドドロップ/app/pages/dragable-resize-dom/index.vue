@@ -14,14 +14,63 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+    }
+  },
   mounted() {
-    this.makeResizableDiv('.resizable');
+    // 挙動調整が必要
+    window.localStorage.setItem("isResizeMode", false)
+    this.makeResizableDiv(".resizable");
+    this.dragElement(document.querySelector(".resizable"));
   },
   methods: {
+    dragElement(targetElement) {
+      let moveX = 0
+      let moveY = 0
+      let prevClientX = 0
+      let prevClientY = 0
+      targetElement.onmousedown = dragStart;
+
+      function dragStart(event) {
+        console.log("dragStart");
+        event = event || window.event;
+        event.preventDefault();
+        prevClientX = event.clientX;
+        prevClientY = event.clientY;
+        document.onmouseup = dragEnd;
+        document.onmousemove = dragOver;
+      }
+
+      function dragOver(event) {
+        console.log("dragOver");
+        if (window.localStorage.getItem("isResizeMode") === "true") {
+          return
+        }
+        event = event || window.event;
+        event.preventDefault();
+        moveX = prevClientX - event.clientX;
+        moveY = prevClientY - event.clientY;
+        prevClientX = event.clientX;
+        prevClientY = event.clientY;
+        targetElement.style.top = targetElement.offsetTop - moveY + "px";
+        targetElement.style.left = targetElement.offsetLeft - moveX + "px";
+      }
+
+      function dragEnd() {
+        console.log("dragEnd");
+        window.localStorage.setItem("isResizeMode",false)
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    },
     makeResizableDiv(targetDomSelector) {
+      console.log("makeResizableDiv")
       // クロージャ イベント発火時の間、前回の座標をもとにした実装はよく利用される
       const targetDom = document.querySelector(targetDomSelector);
-      const resizerItemList = document.querySelectorAll(targetDomSelector + " .resizer-item");
+      const resizerItemList = document.querySelectorAll(
+        targetDomSelector + " .resizer-item"
+      );
       const minimumSize = 20;
       let originalWidth = 0;
       let originalHeight = 0;
@@ -35,12 +84,14 @@ export default {
         currentResizer.addEventListener("mousedown", function (e) {
           e.preventDefault();
           originalWidth = parseFloat(
-            window.getComputedStyle(targetDom, null)
+            window
+              .getComputedStyle(targetDom, null)
               .getPropertyValue("width")
               .replace("px", "")
           );
           originalHeight = parseFloat(
-            window.getComputedStyle(targetDom, null)
+            window
+              .getComputedStyle(targetDom, null)
               .getPropertyValue("height")
               .replace("px", "")
           );
@@ -48,12 +99,13 @@ export default {
           originalY = targetDom.getBoundingClientRect().top;
           originalMouseX = e.pageX;
           originalMouseY = e.pageY;
-          console.log(e.pageX, e.pageY)
           window.addEventListener("mousemove", resize); // ドラッグオーバーしている間はリサイズ
-          window.addEventListener("mouseup", stopResize);  // 対象要素のマウスクリックアップ時にリサイズをストップ
+          window.addEventListener("mouseup", stopResize); // 対象要素のマウスクリックアップ時にリサイズをストップ
         });
 
         function resize(e) {
+          console.log("resize")
+          window.localStorage.setItem("isResizeMode",true)
           if (currentResizer.classList.contains("bottom-right")) {
             const width = originalWidth + (e.pageX - originalMouseX);
             const height = originalHeight + (e.pageY - originalMouseY);
@@ -96,12 +148,14 @@ export default {
             if (height > minimumSize) {
               targetDom.style.height = height + "px";
               targetDom.style.top =
-                originalY  +(e.pageY - originalMouseY) + "px";
+                originalY + (e.pageY - originalMouseY) + "px";
             }
           }
         }
 
         function stopResize() {
+          console.log("stopResize")
+          window.localStorage.setItem("isResizeMode",false)
           window.removeEventListener("mousemove", resize);
         }
       }
