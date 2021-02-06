@@ -26,9 +26,14 @@ export default {
           to: { name: "sketch-jquery" },
         },
         {
-          title: "jquery-ui-dnd",
+          title: "jquery-ui-slide-dnd",
           icon: "lightbulb",
-          to: { name: "jquery-ui-dnd" },
+          to: { name: "jquery-ui-slide-dnd" },
+        },
+        {
+          title: "jquery-ui-slide-dnd-bulma",
+          icon: "lightbulb",
+          to: { name: "jquery-ui-slide-dnd-bulma" },
         },
       ],
     };

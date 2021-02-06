@@ -1,17 +1,22 @@
 <template>
   <div>
+    <!-- https://css-tricks.com/draggable-elements-push-others-way/ -->
     <div class="all-slides">
       <h2 class="slides-title">Slides</h2>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
-      <div class="slide">Slide</div>
+      <div class="slide">Slide１</div>
+      <div class="slide">Slide２</div>
+      <div class="slide">Slide３</div>
+      <div class="slide">Slide４</div>
+      <div class="slide">Slide５</div>
+      <div class="slide">Slide６</div>
+      <div class="slide">Slide７</div>
+      <div class="slide">Slide８</div>
+      <div class="slide">Slide９</div>
+      <div class="slide">Slide１１</div>
+      <div class="slide">Slide１２</div>
+      <div class="slide">Slide１３</div>
+      <div class="slide">Slide１４</div>
+      <div class="slide">Slide１５</div>
     </div>
     <div class="cloned-slides" id="cloned-slides"></div>
   </div>
@@ -20,7 +25,7 @@
 <script>
 export default {
   mounted() {
-    this.initilaize()
+    this.initilaize();
   },
   methods: {
     initilaize() {
@@ -28,10 +33,10 @@ export default {
       // Some of this code is this fiddle http://jsfiddle.net/dNfsJ/ thx to AJ for finding it for me.
 
       $(".slide").each(function(i) {
-        var item = $(this);
-        var item_clone = item.clone();
+        let item = $(this);
+        let item_clone = item.clone();
         item.data("clone", item_clone);
-        var position = item.position();
+        let position = item.position();
         item_clone
           .css({
             left: position.left,
@@ -59,9 +64,9 @@ export default {
 
         stop: function(e, ui) {
           $(".all-slides .slide.exclude-me").each(function() {
-            var item = $(this);
-            var clone = item.data("clone");
-            var position = item.position();
+            let item = $(this);
+            let clone = item.data("clone");
+            let position = item.position();
 
             clone.css("left", position.left);
             clone.css("top", position.top);
@@ -71,8 +76,8 @@ export default {
           });
 
           $(".all-slides .slide").each(function() {
-            var item = $(this);
-            var clone = item.data("clone");
+            let item = $(this);
+            let clone = item.data("clone");
 
             clone.attr("data-pos", item.index());
           });
@@ -83,10 +88,10 @@ export default {
 
         change: function(e, ui) {
           $(".all-slides .slide:not(.exclude-me)").each(function() {
-            var item = $(this);
-            var clone = item.data("clone");
+            let item = $(this);
+            let clone = item.data("clone");
             clone.stop(true, false);
-            var position = item.position();
+            let position = item.position();
             clone.animate(
               {
                 left: position.left,
@@ -103,7 +108,6 @@ export default {
 </script>
 
 <style>
-
 .all-slides {
   background: #e3e7ed;
   counter-reset: slides;
