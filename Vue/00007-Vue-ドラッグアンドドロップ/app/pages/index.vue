@@ -1,56 +1,60 @@
 <template>
   <div>
-    <NuxtLink to="/">
-      <b-button variant="outline-primary">
-        <b-icon-house></b-icon-house>
-        home
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/edit">
-      <b-button variant="outline-primary">
-        <b-icon-pencil></b-icon-pencil>
-        edit
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/drag-and-drop/lesson01">
-      <b-button variant="outline-primary">
-        <b-icon-droplet-fill></b-icon-droplet-fill>
-        drag-and-drop
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/drag-and-drop/lesson02">
-      <b-button variant="outline-primary">
-        <b-icon-droplet-fill></b-icon-droplet-fill>
-        drag-and-drop
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/drag-and-drop/lesson03">
-      <b-button variant="outline-primary">
-        <b-icon-droplet-fill></b-icon-droplet-fill>
-        drop item to iframe
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/drag-and-drop/lesson03/preview">
-      <b-button variant="outline-primary">
-        <b-icon-box-arrow-up-right></b-icon-box-arrow-up-right>
-        iframe preview
-      </b-button>
-    </NuxtLink>
-    <NuxtLink to="/hover-menu">
-      <b-button variant="outline-primary">
-        <b-icon-box-arrow-up-right></b-icon-box-arrow-up-right>
-        hover menu
-      </b-button>
-    </NuxtLink>
+    <div v-for="(routeInfo, index) in routingList" :key="index" style="margin: 5px">
+      <NuxtLink :to="routeInfo.routePath">
+        <b-button variant="outline-primary">
+          {{ routeInfo.displayRoutePathName }}
+        </b-button>
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
-
-
-}
+  data: function () {
+    return {
+      routingList: [
+        {
+          routePath: "/",
+          displayRoutePathName: "home",
+        },
+        {
+          routePath: "/drag-and-drop",
+          displayRoutePathName: "drag-and-drop",
+        },
+        {
+          routePath: "/drag-and-drop-component",
+          displayRoutePathName: "drag-and-drop-component",
+        },
+        {
+          routePath: "/drag-and-drop-iframe",
+          displayRoutePathName: "drag-and-drop-iframe",
+        },
+        {
+          routePath: "/drag-and-drop-slide",
+          displayRoutePathName: "drag-and-drop-slide",
+        },
+        {
+          routePath: "/dragable-resize-dom",
+          displayRoutePathName: "dragable-resize-dom",
+        },
+        {
+          routePath: "/hover-menu",
+          displayRoutePathName: "hover-menu",
+        },
+        {
+          routePath: "/iframe",
+          displayRoutePathName: "iframe",
+        },
+        {
+          routePath: "/resize-dom",
+          displayRoutePathName: "resize-dom",
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
