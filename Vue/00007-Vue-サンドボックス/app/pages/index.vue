@@ -51,6 +51,10 @@ export default {
           routePath: "/resize-dom",
           displayRoutePathName: "resize-dom",
         },
+        {
+          routePath: "/css-variable",
+          displayRoutePathName: "css-variable",
+        },
       ],
     };
   },
