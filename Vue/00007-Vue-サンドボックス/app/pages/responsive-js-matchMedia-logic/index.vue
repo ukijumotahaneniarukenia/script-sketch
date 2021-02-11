@@ -24,7 +24,14 @@ export default {
     };
   },
   mounted() {
-    this.detectViewport();
+    // Not working
+    // https://gist.github.com/jakub-g/5286483ff5f29e8fdd9f#user-content-domcontentloaded-vs-load
+    // document.addEventListener("DOMContentLoaded", (event) => {
+    //   this.detectViewport(event);
+    // });
+    window.addEventListener("load", (event) => {
+      this.detectViewport(event);
+    });
     window.addEventListener("resize", (event) => {
       this.detectViewport(event);
     });
