@@ -32,8 +32,19 @@ export default {
     window.addEventListener("resize", (event) => {
       this.detectViewport(event);
     });
+    this.catchUserAgent()
   },
   methods: {
+    catchUserAgent() {
+      // https://www.site-convert.com/archives/2188
+      // https://github.com/faisalman/ua-parser-js
+      console.log(navigator)
+      console.log(navigator.userAgent)
+      navigator.mediaDevices.enumerateDevices().then(item => {
+        // https://developer.mozilla.org/ja/docs/Web/API/MediaDevices/ondevicechange
+        console.log(item)
+      })
+    },
     detectViewport(event) {
       console.log("detectViewport")
       console.log(event)
