@@ -20,6 +20,10 @@ export default {
           displayRoutePathName: "home",
         },
         {
+          routePath: "/responsive-css-media-query-logic",
+          displayRoutePathName: "responsive-css-media-query-logic",
+        },
+        {
           routePath: "/drag-and-drop",
           displayRoutePathName: "drag-and-drop",
         },
