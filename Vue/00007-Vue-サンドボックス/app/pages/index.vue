@@ -20,6 +20,10 @@ export default {
           displayRoutePathName: "home",
         },
         {
+          routePath: "/responsive-js-matchMedia-logic",
+          displayRoutePathName: "responsive-js-matchMedia-logic",
+        },
+        {
           routePath: "/responsive-css-media-query-logic",
           displayRoutePathName: "responsive-css-media-query-logic",
         },
