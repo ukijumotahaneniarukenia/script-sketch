@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../common-inherit.css" />
+    <title>Document</title>
+    <style>
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        width: 100vw;
+        /* 縦長画像の場合は切り替え */
+        /* height: 100vh; */
+        max-height: 100%;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!-- クロッパーなどで異なる画像の差し替えが可能 便利 -->
+      <picture>
+        <source
+          media="(max-width: 320px)"
+          srcset="./nasa-cropped-1227w-1164h.png"
+        />
+        <source
+          media="(max-width: 780px)"
+          srcset="./nasa-portrait-2114w-3594h.png"
+        />
+        <img src="./nasa-landscape-1200w-799h.jpg" alt="" />
+      </picture>
+    </div>
+  </body>
+</html>
