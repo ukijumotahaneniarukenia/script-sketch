@@ -20,6 +20,10 @@ export default {
           displayRoutePathName: "home",
         },
         {
+          routePath: "/mouse-zoom",
+          displayRoutePathName: "mouse-zoom",
+        },
+        {
           routePath: "/responsive-css-content-pseudo",
           displayRoutePathName: "responsive-css-content-pseudo",
         },
