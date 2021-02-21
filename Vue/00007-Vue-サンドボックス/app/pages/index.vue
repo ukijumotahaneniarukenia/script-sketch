@@ -20,6 +20,10 @@ export default {
           displayRoutePathName: "home",
         },
         {
+          routePath: "/hover-sidebar",
+          displayRoutePathName: "hover-sidebar",
+        },
+        {
           routePath: "/mouse-zoom",
           displayRoutePathName: "mouse-zoom",
         },
