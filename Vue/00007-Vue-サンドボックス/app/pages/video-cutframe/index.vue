@@ -27,69 +27,6 @@ export default {
         this.extractFrames(this.uploadFile);
       });
     },
-    // クロージャじゃないとだめ
-    // saveFrame(blob) {
-    //   this.frameCutList.push(blob);
-    // },
-    // drawFrame(targetCanvasDom, targetVideoDom) {
-    //   // targetVideoDom.pause();
-    //   // ctx.drawImage(targetVideoDom, 0, 0);
-    //   // // https://developer.mozilla.org/ja/docs/Web/API/HTMLCanvasElement/toBlob
-    //   // // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
-    //   // canvas.toBlob((blob) => {console.log(blob)}, "image/jpeg");
-    //   // pro.innerHTML =
-    //   //   ((this.currentTime / this.duration) * 100).toFixed(2) + " %";
-    //   // if (this.currentTime < this.duration) {
-    //   //   this.play();
-    //   // }
-    // },
-    // setUpVideo(targetFile) {
-    //   let video = document.createElement("video");
-    //   let canvas = document.createElement("canvas");
-    //   video.muted = true;
-    //   video.src = URL.createObjectURL(targetFile);
-    //   video.play();
-    //   // ビデオタグのsrc属性が変更されると、loadedmetadataイベントが発火する
-    //   function dressUpCanvasContext(targetCanvasDom, targetVideoDom) {
-    //     // timeupdateイベント発火時にpause＆playする
-    //     // https://developer.mozilla.org/ja/docs/Web/API/HTMLMediaElement/timeupdate_event
-    //     console.log("dressUpCanvasContext", targetCanvasDom, targetVideoDom);
-    //     targetVideoDom.pause();
-    //     console.log(targetVideoDom.currentTime, targetVideoDom.duration);
-    //     if (targetVideoDom.currentTime < targetVideoDom.duration) {
-    //       targetVideoDom.play();
-    //     }
-    //   }
-    //   function setUpCanvas(targetVideoDom) {
-    //     canvas.width = targetVideoDom.videoWidth;
-    //     canvas.height = targetVideoDom.videoHeight;
-    //     console.log("setUpCanvas", targetVideoDom, canvas);
-    //   }
-    //   video.addEventListener(
-    //     "loadedmetadata",
-    //     (event) => {
-    //       console.log("loadedmetadata", event);
-    //       setUpCanvas(video);
-    //     },
-    //     false
-    //   );
-    //   // ビデオを再生すると timeupdateイベントが複数回発火し
-    //   video.addEventListener(
-    //     "timeupdate",
-    //     (event) => {
-    //       console.log("timeupdate", event);
-    //       dressUpCanvasContext(canvas, video);
-    //     },
-    //     false
-    //   );
-    //   video.addEventListener(
-    //     "ended",
-    //     (event) => {
-    //       console.log("ended", event);
-    //     },
-    //     false
-    //   );
-    // },
     extractFrames(targetFile) {
       let video = document.createElement("video");
       let array = [];
@@ -97,25 +34,24 @@ export default {
       let ctx = canvas.getContext("2d");
       let pro = document.querySelector("#progress");
 
-      function initCanvas(event, targetVideoDom) {
+      function initCanvas(event) {
         console.log("initCanvas", event)
-        canvas.width = targetVideoDom.videoWidth;
-        canvas.height = targetVideoDom.videoHeight;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
       }
 
-      function drawFrame(event) {
-        this.pause();
-        ctx.drawImage(this, 0, 0);
-        /* 
-    this will save as a Blob, less memory consumptive than toDataURL
-    a polyfill can be found at
-    https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
-    */
-        canvas.toBlob(saveFrame, "image/jpeg");
+      function drawFrame(event, targetVideoDom, targetCanvasDom, targetCanvasContext) {
+        console.log("drawFrame", event)
+        targetVideoDom.pause();
+        targetCanvasContext.drawImage(targetVideoDom, 0, 0);
+        // https://developer.mozilla.org/ja/docs/Web/API/HTMLCanvasElement/toBlob
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
+        // これ便利 toData
+        targetCanvasDom.toBlob((blob) => {console.log("blob",blob)}, "image/jpeg");
         pro.innerHTML =
-          ((this.currentTime / this.duration) * 100).toFixed(2) + " %";
-        if (this.currentTime < this.duration) {
-          this.play();
+          ((targetVideoDom.currentTime / targetVideoDom.duration) * 100).toFixed(2) + " %";
+        if (targetVideoDom.currentTime < targetVideoDom.duration) {
+          targetVideoDom.play();
         }
       }
 
@@ -142,9 +78,20 @@ export default {
 
       video.muted = true;
 
-      video.addEventListener("loadedmetadata", (event)=>{initCanvas(event, video)}, false);
-      video.addEventListener("timeupdate", (event) => {drawFrame(event)}, false);
-      video.addEventListener("ended", onend, false);
+      video.addEventListener("loadedmetadata", (event)=>{
+        initCanvas(event)
+        // console.log(canvas)
+        }
+        , false
+      );
+      // クロージャじゃないとだめ
+      // timeupdateイベント発火時にpause＆playする
+      // https://developer.mozilla.org/ja/docs/Web/API/HTMLMediaElement/timeupdate_event
+      video.addEventListener("timeupdate", (event) => {
+        drawFrame(event, video, canvas, ctx)
+        }, false
+      );
+      // video.addEventListener("ended", onend, false);
 
       video.src = URL.createObjectURL(targetFile);
       video.play();
