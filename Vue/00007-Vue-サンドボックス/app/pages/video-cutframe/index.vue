@@ -5,7 +5,10 @@
       <input type="file" accept="video/*" @change="detectUploadFile($event)" />
       <p id="progress"></p>
     </div>
-    <div>frameCutList: {{ frameCutList.length }}</div>
+    <div id="result-area">
+      <div id="result-area-name">frameCutList</div>
+      <div id="result-area-value"></div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +37,6 @@ export default {
       let canvas = document.createElement("canvas");
       let canvasContext = canvas.getContext("2d");
       let pro = document.querySelector("#progress");
-
       video.muted = true;
       video.src = URL.createObjectURL(targetFile);
       video.play(); // イベントリスナ登録処理がデフォルトで先に行われることの証拠
@@ -111,6 +113,7 @@ export default {
         "ended",
         event => {
           onend(event, video);
+          document.getElementById("result-area-value").innerText = array.length;
         },
         false
       );
