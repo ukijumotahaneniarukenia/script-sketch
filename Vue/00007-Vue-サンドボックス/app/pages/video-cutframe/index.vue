@@ -2,7 +2,7 @@
   <!-- https://stackoverflow.com/questions/32699721/javascript-extract-video-frames-reliably -->
   <div>
     <div>
-      <input type="file" accept="video/*" @change="detectUploadFile($event)"/>
+      <input type="file" accept="video/*" @change="detectUploadFile($event)" />
       <p id="progress"></p>
     </div>
   </div>
@@ -15,50 +15,95 @@ import { saveAs } from "file-saver";
 export default {
   data() {
     return {
-      uploadFile: {}
-    }
+      frameCutList: [],
+      uploadFile: {},
+    };
   },
   methods: {
     detectUploadFile(event) {
-      const targetUploadFileList = Array.from(event.target.files)
-      targetUploadFileList.map(item => {
-        this.uploadFile = item
-        this.setUpVideo(this.uploadFile)
-      })
+      const targetUploadFileList = Array.from(event.target.files);
+      targetUploadFileList.map((item) => {
+        this.uploadFile = item;
+        this.extractFrames(this.uploadFile);
+      });
     },
-    setUpCanvas(targetVideoDom) {
-      let canvas = document.createElement("canvas");
-      canvas.width = targetVideoDom.videoWidth;
-      canvas.height = targetVideoDom.videoHeight;
-      console.log("setUpCanvas", targetVideoDom, canvas)
-    },
-    setUpVideo(targetFile) {
-      let video = document.createElement("video");
-      video.muted = true;
-      video.src = URL.createObjectURL(targetFile);
-      video.play();
-      // ビデオタグのsrc属性が変更されると、loadedmetadataイベントが発火する
-      video.addEventListener("loadedmetadata", (event)=>{
-        console.log("loadedmetadata",event)
-        this.setUpCanvas(video)
-      }, false);
-      // ビデオを再生すると timeupdateイベントが複数回発火し
-      video.addEventListener("timeupdate", (event)=>{console.log("timeupdate",event)}, false);
-      video.addEventListener("ended", (event)=>{console.log("ended",event)}, false);
-    },
-    extractFrames() {
+    // クロージャじゃないとだめ
+    // saveFrame(blob) {
+    //   this.frameCutList.push(blob);
+    // },
+    // drawFrame(targetCanvasDom, targetVideoDom) {
+    //   // targetVideoDom.pause();
+    //   // ctx.drawImage(targetVideoDom, 0, 0);
+    //   // // https://developer.mozilla.org/ja/docs/Web/API/HTMLCanvasElement/toBlob
+    //   // // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
+    //   // canvas.toBlob((blob) => {console.log(blob)}, "image/jpeg");
+    //   // pro.innerHTML =
+    //   //   ((this.currentTime / this.duration) * 100).toFixed(2) + " %";
+    //   // if (this.currentTime < this.duration) {
+    //   //   this.play();
+    //   // }
+    // },
+    // setUpVideo(targetFile) {
+    //   let video = document.createElement("video");
+    //   let canvas = document.createElement("canvas");
+    //   video.muted = true;
+    //   video.src = URL.createObjectURL(targetFile);
+    //   video.play();
+    //   // ビデオタグのsrc属性が変更されると、loadedmetadataイベントが発火する
+    //   function dressUpCanvasContext(targetCanvasDom, targetVideoDom) {
+    //     // timeupdateイベント発火時にpause＆playする
+    //     // https://developer.mozilla.org/ja/docs/Web/API/HTMLMediaElement/timeupdate_event
+    //     console.log("dressUpCanvasContext", targetCanvasDom, targetVideoDom);
+    //     targetVideoDom.pause();
+    //     console.log(targetVideoDom.currentTime, targetVideoDom.duration);
+    //     if (targetVideoDom.currentTime < targetVideoDom.duration) {
+    //       targetVideoDom.play();
+    //     }
+    //   }
+    //   function setUpCanvas(targetVideoDom) {
+    //     canvas.width = targetVideoDom.videoWidth;
+    //     canvas.height = targetVideoDom.videoHeight;
+    //     console.log("setUpCanvas", targetVideoDom, canvas);
+    //   }
+    //   video.addEventListener(
+    //     "loadedmetadata",
+    //     (event) => {
+    //       console.log("loadedmetadata", event);
+    //       setUpCanvas(video);
+    //     },
+    //     false
+    //   );
+    //   // ビデオを再生すると timeupdateイベントが複数回発火し
+    //   video.addEventListener(
+    //     "timeupdate",
+    //     (event) => {
+    //       console.log("timeupdate", event);
+    //       dressUpCanvasContext(canvas, video);
+    //     },
+    //     false
+    //   );
+    //   video.addEventListener(
+    //     "ended",
+    //     (event) => {
+    //       console.log("ended", event);
+    //     },
+    //     false
+    //   );
+    // },
+    extractFrames(targetFile) {
       let video = document.createElement("video");
       let array = [];
       let canvas = document.createElement("canvas");
       let ctx = canvas.getContext("2d");
       let pro = document.querySelector("#progress");
 
-      function initCanvas(e) {
-        canvas.width = this.videoWidth;
-        canvas.height = this.videoHeight;
+      function initCanvas(event, targetVideoDom) {
+        console.log("initCanvas", event)
+        canvas.width = targetVideoDom.videoWidth;
+        canvas.height = targetVideoDom.videoHeight;
       }
 
-      function drawFrame(e) {
+      function drawFrame(event) {
         this.pause();
         ctx.drawImage(this, 0, 0);
         /* 
@@ -78,11 +123,11 @@ export default {
         array.push(blob);
       }
 
-      function revokeURL(e) {
+      function revokeURL(event) {
         URL.revokeObjectURL(this.src);
       }
 
-      function onend(e) {
+      function onend(event) {
         let img;
         // do whatever with the frames
         for (let i = 0; i < array.length; i++) {
@@ -97,11 +142,11 @@ export default {
 
       video.muted = true;
 
-      video.addEventListener("loadedmetadata", initCanvas, false);
-      video.addEventListener("timeupdate", drawFrame, false);
+      video.addEventListener("loadedmetadata", (event)=>{initCanvas(event, video)}, false);
+      video.addEventListener("timeupdate", (event) => {drawFrame(event)}, false);
       video.addEventListener("ended", onend, false);
 
-      video.src = URL.createObjectURL(this.files[0]);
+      video.src = URL.createObjectURL(targetFile);
       video.play();
     },
   },
