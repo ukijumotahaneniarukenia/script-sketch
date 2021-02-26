@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input type="file" accept="video/*" />
+      <p id="progress"></p>
+    </div>
+    <script>
+      document
+        .querySelector("input")
+        .addEventListener("change", extractFrames, false);
+
+      function extractFrames() {
+        var video = document.createElement("video");
+        var array = [];
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        var pro = document.querySelector("#progress");
+
+        function initCanvas(e) {
+          canvas.width = this.videoWidth;
+          canvas.height = this.videoHeight;
+        }
+
+        function drawFrame(e) {
+          this.pause();
+          ctx.drawImage(this, 0, 0);
+          /* 
+    this will save as a Blob, less memory consumptive than toDataURL
+    a polyfill can be found at
+    https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
+    */
+          canvas.toBlob(saveFrame, "image/jpeg");
+          pro.innerHTML =
+            ((this.currentTime / this.duration) * 100).toFixed(2) + " %";
+          if (this.currentTime < this.duration) {
+            this.play();
+          }
+        }
+
+        function saveFrame(blob) {
+          array.push(blob);
+        }
+
+        function revokeURL(e) {
+          URL.revokeObjectURL(this.src);
+        }
+
+        function onend(e) {
+          var img;
+          // do whatever with the frames
+          for (var i = 0; i < array.length; i++) {
+            img = new Image();
+            img.onload = revokeURL;
+            img.src = URL.createObjectURL(array[i]);
+            document.body.appendChild(img);
+          }
+          // we don't need the video's objectURL anymore
+          URL.revokeObjectURL(this.src);
+        }
+
+        video.muted = true;
+
+        video.addEventListener("loadedmetadata", initCanvas, false);
+        video.addEventListener("timeupdate", drawFrame, false);
+        video.addEventListener("ended", onend, false);
+
+        video.src = URL.createObjectURL(this.files[0]);
+        video.play();
+      }
+    </script>
+  </body>
+</html>
