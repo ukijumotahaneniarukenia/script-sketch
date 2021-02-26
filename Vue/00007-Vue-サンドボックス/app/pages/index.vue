@@ -20,6 +20,10 @@ export default {
           displayRoutePathName: "home",
         },
         {
+          routePath: "/video-cutframe",
+          displayRoutePathName: "video-cutframe",
+        },
+        {
           routePath: "/hover-sidebar",
           displayRoutePathName: "hover-sidebar",
         },
