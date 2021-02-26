@@ -1,0 +1,7 @@
+aaron-bond.better-comments
+CoenraadS.bracket-pair-colorizer
+eamodio.gitlens
+esbenp.prettier-vscode
+IBM.output-colorizer
+ICS.japanese-proofreading
+octref.vetur
