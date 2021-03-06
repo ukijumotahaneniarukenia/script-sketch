@@ -1,26 +1,8 @@
+- https://qiita.com/tomoyukilabs/items/54bd151aba7d3edf8946
+- https://qiita.com/tomoyukilabs/items/c4eb7a829baac880797c
+- https://qiita.com/tomoyukilabs/items/57ba8a982ab372611669
+
 ```
-$ cat test.mp4 | ffprobe -hide_banner -v error -print_format json -show_streams -loglevel quiet -i - | jq '' > test-metadump.json
-
-動画のビットレート
-
-$ cat test-metadump.json | jq '."streams"[0]."bit_rate"'
-"15025623"
-
-フレームレート
-
-$ cat test-metadump.json | jq '."streams"[0]."r_frame_rate"'
-"25/1"
-
-キーフレーム間隔
-
-$ cat test-metadump.json | jq '."streams"[0]."avg_frame_rate"'
-"25/1"
-
-音声のビットレート
-
-$ cat test-metadump.json | jq '."streams"[1]."bit_rate"'
-"2284"
-
 ffmpeg -i [入力ファイル名] \
     -vcodec libx264 -vb [動画のビットレート] -r [フレームレート] -x264opts no-scenecut -g [キーフレーム間隔] \
     -acodec aac -strict experimental -ac 2 -ab [音声のビットレート] \
